@@ -4,14 +4,16 @@
 
 ---
 
-# Introduction to Java and Java Technology (всего 1 час / из них 0,5 часа практики) 
+# Introduction to Java and Java Technology (1/0.5) 
 - Introduction to Java. Benefits. 
 - JDK, JVM. 
 - Java 2 (Java EE / SE / ME) 
 - Tools: java, javac, javadoc
+
 ## Lab: Installing JDK, Tuning Environmental Variables
 - Install JDK from http://www.oracle.com/technetwork/java/javase/downloads/index.html
 - Set $JAVA_HOME and $PATH
+
 ### DoD
 ```java
 $ javac -version
@@ -25,10 +27,12 @@ $ java -version
 - Classpath
 - Packages
 - JARs
+
 ## Lab: developing simple java app
 - Main and Printer classes
 - Different packages
 - One of them in JAR
+
 ### DoD
 ```java
 $ Hello, world! 
@@ -39,6 +43,7 @@ $ Hello, world!
 - Repos
 - Commits
 - Shortly about branches, conflicts and merges
+
 ## Lab: Setting Up Git
 - Install [Git] (https://git-scm.com/download/win) and in case of Windows [TortoiseGit] (https://tortoisegit.org)
 - Create account at [Github] (http://github.com/): _teamXX_
@@ -61,7 +66,9 @@ $ git push
 - Plugins
 - pom.xml
 - Dependencies and binary repositories
+
 ## Demo: Project Creating with Archetype Plugin
+
 ## Lab: Setting Up Maven
 - Install [Maven] (https://maven.apache.org/download.cgi)
 - Set $M2_HOME
@@ -69,6 +76,7 @@ $ git push
 - Move your old codebase to this project
 - Make it build
 - Take your last app under version control and push it
+
 ### DoD
 ```java
 $ ls teamXX
