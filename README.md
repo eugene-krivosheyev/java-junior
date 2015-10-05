@@ -56,6 +56,7 @@ $ git add .
 $ git commit -m “…”
 $ git push
 ```
+
 ### DoD
 - Trainer see all the forks in github
 - Trainer can locate every teammate by its team repo
@@ -97,12 +98,14 @@ $ git push
 - Debugging
 - Hotkeys
 - Git operations
+
 ## Lab: Installing, the first application compile, run, debugging
 - Download and install [IDEA] (https://www.jetbrains.com/idea/?fromMenu) with trial corporate license
 - Open our maven project
 - Change <artifactId> in pom.xml to _teamXX_
 - Build with maven
 - Push
+
 ### DoD
 - Trainer can see your team in pom.xml
 
