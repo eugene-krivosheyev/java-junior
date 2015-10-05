@@ -20,6 +20,8 @@ $ javac -version
 $ java -version
 ```
 
+---
+
 # Structure of Java-based applications (3/1)
 - Classes and *.class files
 - Java app definition
@@ -37,6 +39,8 @@ $ java -version
 ```java
 $ Hello, world! 
 ```
+
+---
 
 # Development infrastructure: Git (1.5/0.5)
 - Intro to GIT
@@ -61,6 +65,8 @@ $ git push
 - Trainer see all the forks in github
 - Trainer can locate every teammate by its team repo
 
+---
+
 # Development infrastructure: Maven (1.5/0.5)
 - Intro to Maven: build tool and dependency management
 - Build lifecycle, goals
@@ -73,7 +79,7 @@ $ git push
 ## Lab: Setting Up Maven
 - Install [Maven] (https://maven.apache.org/download.cgi)
 - Set $M2_HOME
-- Create simple project with archetype plugin
+- Analyse our project: *tree* and *pom.xml*
 - Move your old codebase to this project
 - Make it build
 - Take your last app under version control and push it
@@ -91,6 +97,8 @@ $ git commit -m
 $ git push
 ```
 
+---
+
 # JetBrains IDEA (1/0,5)
 - Opening Maven projects
 - Running java apps
@@ -103,12 +111,71 @@ $ git push
 - Download and install [IDEA] (https://www.jetbrains.com/idea/?fromMenu) with trial corporate license
 - Open our maven project
 - Change <artifactId> in pom.xml to _teamXX_
-- Build with maven
+- Build project with maven from IDEA
 - Push
 
 ### DoD
 - Trainer can see your team in pom.xml
 
+---
+
+# Java Syntax for Procedure Style (8/3)
+- Intro to procedure style
+- Java Dictionary for naming
+
+## Variable scopes
+- Local variables
+- Class variables and methods, static import
+- Instance variables and methods: later
+
+## Method’s parameters and Overloading
+- As local variables
+- Method overloading
+
+## Course Project Iteration 01: The Rise of Logger Library
+- Read and analyse specification for this iteration in *src/test*
+- Uncomment @Ignore annotation for specification cases
+- Implement Logger Library
+
+### DoD
+- All specifications runs are green
+
+!!!!!!!!!!  
+TODO  
+!!!!!!!!!!
+
+## Primitives
+- Primitive variable declaration and initialization
+- Primitive types
+- Primitive types casting
+- Types Overflow
+
+## References
+- Reference types in Java
+- Reference variables declaration and initialization
+- Garbage collector
+
+## Arrays
+- Arrays declaration
+- Multi-dimentional arrays
+
+## Operators
+- Arithmetic
+- Bitwise
+- Logical and Ternary
+
+## Controlling execution
+- if/switch
+- for/do/while/foreach
+
+## Varargs
+- Declaraion
+- Using
+- Constraints
+
+---
+
+# Java Syntax for OOP
 
 
 
