@@ -123,6 +123,12 @@ $ git push
 - Intro to procedure style
 - Java Dictionary for naming
 
+## Class Method Declaration
+- Return type
+- Static modifier 
+- Name
+- Parameters
+ 
 ## Variable scopes
 - Local variables
 - Class variables and methods, static import
@@ -132,46 +138,74 @@ $ git push
 - As local variables
 - Method overloading
 
-## Course Project Iteration 01: The Rise of Logger Library
-- Read and analyse specification for this iteration in *src/test*
-- Uncomment @Ignore annotation for specification cases
-- Implement Logger Library
-
-### DoD
-- All specifications runs are green
-
-!!!!!!!!!!  
-TODO  
-!!!!!!!!!!
-
 ## Primitives
 - Primitive variable declaration and initialization
 - Primitive types
+- Primitive types literal values
 - Primitive types casting
 - Types Overflow
 
 ## References
 - Reference types in Java
 - Reference variables declaration and initialization
+- Heap and stack
 - Garbage collector
 
-## Arrays
-- Arrays declaration
-- Multi-dimentional arrays
+## Strings
+- String type
+- String literal values
+- String concatenation
+
+## Course Project Iteration 01: The Rise of Logger Library
+- Read and analyse specification as tests for this iteration in *src/test*
+- Uncomment specification cases
+- Implement features needed
+
+### DoD
+- All given specifications runs are green
+- Code reuse and minimum code duplication
+- Code style
 
 ## Operators
 - Arithmetic
 - Bitwise
-- Logical and Ternary
+- Logical (lazy and eager) 
+- Compare and Ternary
+- Object references and equality
 
 ## Controlling execution
 - if/switch
 - for/do/while/foreach
 
+## Course Project Iteration 02: Logger Library
+- Read and analyse specification as tests for this iteration in *src/test*
+- Uncomment specification cases
+- Implement features needed
+
+### DoD
+- All given specifications runs are green
+- Code reuse and minimum code duplication
+- Code style
+
+## Arrays
+- Arrays declaration
+- Array literals
+- Multi-dimentional arrays
+
 ## Varargs
 - Declaraion
 - Using
 - Constraints
+
+## Course Project Iteration 03: Logger Library
+- Read and analyse specification as tests for this iteration in *src/test*
+- Uncomment specification cases
+- Implement features needed
+
+### DoD
+- All given specifications runs are green
+- Code reuse and minimum code duplication
+- Code style
 
 ---
 
