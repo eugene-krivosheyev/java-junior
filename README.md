@@ -461,11 +461,13 @@ assertMessageEquals("3")
 
 ---
 
-# Generics (1/0)
+# Generics (2/0.5)
 - Generics as design style
 - Type safety
 - Generic classes
 - Generic methods
+
+## Demo: Type safety for sorting with anonymous implementaion of comparator
 
 ---
 
@@ -632,4 +634,4 @@ assertMessageEquals("3")
 
 ---
 
-# Buffer (13)
+# Buffer (12)
