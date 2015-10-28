@@ -1,3 +1,4 @@
+﻿Павел Серегин
 
 Программа подготовки Java Junior Developer  
 80 hr. course + 24 hr. project = 104 hr.
