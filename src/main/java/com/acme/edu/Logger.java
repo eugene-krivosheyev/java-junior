@@ -17,14 +17,19 @@ public class Logger {
      */
     public static void log(int message) {
 
-        if (message==0) {
+        if (message == 0) {
             if (value>0) {
                 print(PRIMITIVE + value);
                 value=0;
             }
             print(PRIMITIVE + message);
         }
+        if (message >=10) {
+            print("primitive: " + message);
+            return;
+        }
         value+=message;
+
     }
 
     /**
@@ -32,7 +37,6 @@ public class Logger {
      *
      * @param message
      */
-
     public static void log(boolean message) {
         print(PRIMITIVE + message);
         value = 0;

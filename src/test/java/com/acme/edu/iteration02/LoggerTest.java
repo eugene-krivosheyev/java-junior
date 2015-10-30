@@ -48,7 +48,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-/*
+
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
@@ -61,15 +61,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "str 1"+ SEP +
-            "10"+ SEP +
-            Integer.MAX_VALUE + SEP +
-            "str 2"+ SEP +
-            "0" + SEP
+            "string: str 1"+ SEP +
+            "primitive: 10"+ SEP +
+            "primitive: " + Integer.MAX_VALUE + SEP +
+            "string: str 2"+ SEP +
+            "primitive: 0" + SEP
         );
         //endregion
     }
-
+/*
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
