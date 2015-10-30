@@ -25,7 +25,7 @@ public class Logger {
             print(PRIMITIVE + message);
         }
         if (message >=10) {
-            print("primitive: " + message);
+            print(PRIMITIVE + message);
             return;
         }
         value+=message;
@@ -58,7 +58,7 @@ public class Logger {
      * @param message
      */
     public static void log(String message) {
-        if (value>0) print("primitive: " + value);
+        if (value>0) print(PRIMITIVE + value);
         print(STRING + message);
         value = 0;
     }
