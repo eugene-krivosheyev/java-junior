@@ -8,4 +8,4 @@ dependency-reduced-pom.xml
 buildNumber.properties
 javajunior.iml
 .idea
-
+.DS_Store

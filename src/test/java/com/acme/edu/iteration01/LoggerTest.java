@@ -2,6 +2,7 @@ package com.acme.edu.iteration01;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,6 +13,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Before
     public void setUpSystemOut() throws IOException {
         captureSysout();
+    }
+
+    @After
+    public void tearDown() {
+        resetOut();
     }
     //endregion
 
