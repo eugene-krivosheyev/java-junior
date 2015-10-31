@@ -1,11 +1,25 @@
 package com.acme.edu;
 
 public class Logger {
-    public static void log(int message) {
-        System.out.println("primitive: " + message);
+    private LoggerFilter filter;
+    private Saver saver;
+
+    //DI
+    public Logger(LoggerFilter filter, Saver saver) {
+        this.filter = filter;
+        this.saver = saver;
     }
 
-    public static void log(byte message) {
-        System.out.println("primitive: " + message);
+    public void log(int message) {
+        if (filter.filter(message)) {
+            saver.save(message);
+        }
     }
 }
+
+
+
+
+
+
+
