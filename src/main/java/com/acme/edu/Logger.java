@@ -9,7 +9,9 @@ public class Logger {
     private static final String REFERENCE = "reference: ";
     private static final String PRIMITIVE = "primitive: ";
     private static final String PRIMITIVES_ARRAY = "primitives array: ";
-    private static boolean flag;
+    public static final String PRIMITIVES_MATRIX = "primitives matrix: ";
+    private static final String SEP = System.lineSeparator();
+    private static boolean flag = false;
     private static String lastStr = "str 1";
     private static int countInt = 0;
     private static int countStr = 0;
@@ -54,6 +56,7 @@ public class Logger {
             print(Logger.PRIMITIVE + message);
         } else if (message == 0) {
             print(Logger.PRIMITIVE + message);
+            flag = false;
         } else {
             checkedMax(message);
             countInt += message;
@@ -67,7 +70,7 @@ public class Logger {
      * @param message print parameter String
      */
     public static void log(String message) {
-        Logger.flag = true;
+        flag = true;
         if (countInt != 0) {
             print(PRIMITIVE + countInt);
             countInt = 0;
@@ -111,14 +114,33 @@ public class Logger {
     }
 
     //iteration03
-    public static void log(int[] mas){
+
+    /**
+     * Concatenation of symbols and array elements
+     * @param arr print array
+     */
+    public static void log(int[] arr){
         StringBuilder sb = new StringBuilder();
-        sb.append("{" + mas[0]);
-        for (int i = 1; i < mas.length; i++) {
-            sb.append(", " + mas[i]);
+        sb.append("{" + arr[0]);
+        for (int i = 1; i < arr.length; i++) {
+            sb.append(", " + arr[i]);
         }
         sb.append("}");
         print(PRIMITIVES_ARRAY + sb.toString());
+    }
+
+    public static void log(int[][] matrix){
+        StringBuilder sb = new StringBuilder();
+        sb.append("{" + SEP);
+        for (int i = 0; i < matrix.length; i++) {
+            sb.append("{" + matrix[i][0]);
+            for (int j = 1; j < matrix[0].length; j++) {
+                sb.append(", " + matrix[i][j]);
+            }
+            sb.append("}" + SEP);
+        }
+        sb.append("}");
+        print(PRIMITIVES_MATRIX + sb.toString());
     }
 
     private static void close() {
@@ -130,6 +152,5 @@ public class Logger {
             print(Logger.STRING + Logger.lastStr);
             Logger.countStr = 0;
         }
-
     }
 }
