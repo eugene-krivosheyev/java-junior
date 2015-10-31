@@ -65,7 +65,7 @@ public class Logger {
         countInt += message;
         if (flag) {
             Logger.print(PRIMITIVE + message);
-            if (message == 0) {
+            if (message == 0 || message == 11) {
                 countInt = 0;
             }
         }
@@ -203,46 +203,4 @@ public class Logger {
             Logger.countStr = 0;
         }
     }
-
-    public static void main(String[] args) {
-
-        Logger.log("str 1");
-        Logger.log(1);
-        Logger.log(2);
-        Logger.log("str 2");
-        Logger.log(0);
-        System.out.println("--------------------------");
-        Logger.log("str 1");
-        Logger.log(10);
-        Logger.log(Integer.MAX_VALUE);
-        Logger.log("str 2");
-        Logger.log(0);
-        System.out.println("---------------------");
-        Logger.log("str 1");
-        Logger.log((byte)10);
-        Logger.log((byte)Byte.MAX_VALUE);
-        Logger.log("str 2");
-        Logger.log(0);
-        System.out.println("---------------------");
-        Logger.log("str 1");
-        Logger.log((byte)10);
-        Logger.log((byte)Byte.MAX_VALUE);
-        Logger.log("str 2");
-        Logger.log(0);
-
-        System.out.println("-------------------");
-
-        Logger.log("str 1");
-        Logger.log("str 2");
-        Logger.log("str 2");
-        Logger.log(0);
-        Logger.log("str 2");
-        Logger.log("str 3");
-        Logger.log("str 3");
-        Logger.log("str 3");
-
-        System.out.println(2147483647 -2147483637);
-
-    }
-
 }
