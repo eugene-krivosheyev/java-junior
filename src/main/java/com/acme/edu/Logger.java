@@ -147,6 +147,15 @@ public class Logger {
 
     }
 
+    /**
+     *Print list of arguments
+     * @param elements array arguments
+     */
+    public static void log(String...  elements){
+        for (int i = 0; i < elements.length; i++) {
+            print(elements[i]);
+        }
+    }
 
     private static void print(String massege) {
         System.out.println(massege);

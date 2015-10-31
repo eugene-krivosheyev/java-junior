@@ -73,7 +73,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-/*
+
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
@@ -84,7 +84,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("str1" + SEP + "string 2" + SEP + "str 3");
         //endregion
     }
-
+/*
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
