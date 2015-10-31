@@ -1,5 +1,10 @@
 package com.acme.edu;
 
+
+/**
+ * Log method overload
+ * Type conversion
+ */
 public class Logger {
 
     //region constants
@@ -148,13 +153,26 @@ public class Logger {
     }
 
     /**
-     *Print list of arguments
+     *Print list of arguments type String
      * @param elements array arguments
      */
     public static void log(String...  elements){
         for (int i = 0; i < elements.length; i++) {
             print(elements[i]);
         }
+    }
+
+    /**
+     *Print of argument type Integer
+     * @param elements array arguments
+     */
+    public static void log(Integer... elements){
+        int result = 0;
+
+        for (int i = 0; i < elements.length; i++) {
+            result += elements[i];
+        }
+        print(""+result);
     }
 
     private static void print(String massege) {
