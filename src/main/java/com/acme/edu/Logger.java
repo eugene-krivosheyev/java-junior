@@ -9,7 +9,8 @@ public class Logger {
     private static final String REFERENCE = "reference: ";
     private static final String PRIMITIVE = "primitive: ";
     private static final String PRIMITIVES_ARRAY = "primitives array: ";
-    public static final String PRIMITIVES_MATRIX = "primitives matrix: ";
+    private static final String PRIMITIVES_MATRIX = "primitives matrix: ";
+    private static final String PRIMITIVES_MULTIMATRIX = "primitives multimatrix: ";
     private static final String SEP = System.lineSeparator();
     private static boolean flag = false;
     private static String lastStr = "str 1";
@@ -93,26 +94,6 @@ public class Logger {
         }
     }
 
-    /**
-     * Prints a String and then terminate the line.
-     * @param massege print String
-     */
-    private static void print(String massege) {
-        System.out.println(massege);
-    }
-
-
-    private static void checkedMax(int message) {
-        if (message == Integer.MAX_VALUE) {
-            print(Logger.PRIMITIVE + Logger.countInt);
-            Logger.countInt = 0;
-        }
-        if (message == Byte.MAX_VALUE) {
-            print(Logger.PRIMITIVE + Logger.countInt);
-            Logger.countInt = 0;
-        }
-    }
-
     //iteration03
 
     /**
@@ -129,6 +110,10 @@ public class Logger {
         print(PRIMITIVES_ARRAY + sb.toString());
     }
 
+    /**
+     * Concatenation of symbols and array elements
+     * @param matrix print the array in the array
+     */
     public static void log(int[][] matrix){
         StringBuilder sb = new StringBuilder();
         sb.append("{" + SEP);
@@ -141,6 +126,41 @@ public class Logger {
         }
         sb.append("}");
         print(PRIMITIVES_MATRIX + sb.toString());
+    }
+
+    /**
+     * Concatenation of symbols and array element
+     * @param multiMatrix print miltiMatrix
+     */
+    public static void log(int[][][][] multiMatrix){
+        StringBuilder sb = new StringBuilder();
+        sb.append("{" + SEP);
+        for (int i = 0; i < 3; i++) {
+            sb.append("{" + SEP);
+        }
+        sb.append(multiMatrix[0][0][0][0] + SEP);
+        for (int i = 0; i < 3; i++) {
+            sb.append("}" + SEP);
+        }
+        sb.append("}");
+        print(PRIMITIVES_MULTIMATRIX + sb.toString());
+
+    }
+
+
+    private static void print(String massege) {
+        System.out.println(massege);
+    }
+
+    private static void checkedMax(int message) {
+        if (message == Integer.MAX_VALUE) {
+            print(Logger.PRIMITIVE + Logger.countInt);
+            Logger.countInt = 0;
+        }
+        if (message == Byte.MAX_VALUE) {
+            print(Logger.PRIMITIVE + Logger.countInt);
+            Logger.countInt = 0;
+        }
     }
 
     private static void close() {
