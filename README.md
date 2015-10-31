@@ -218,6 +218,15 @@ $ git push
 
 ---
 
+# Procedure style recap (1/0)
+- Subject of procedural design
+- Reuse
+- Procedure generalization
+- Inner quality attributes
+- Metrics: cyclomatic complexity
+
+---
+
 # OOAD recap (1.5/0.5)
 - Programming styles and paradigms
 - Procedure stype vs OOAD
@@ -634,4 +643,4 @@ assertMessageEquals("3")
 
 ---
 
-# Buffer (12)
+# Buffer (11)
