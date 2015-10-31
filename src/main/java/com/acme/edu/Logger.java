@@ -7,7 +7,7 @@ package com.acme.edu;
  */
 public class Logger {
 
-    //region constants
+    //region fields
 
     private static final String CHAR = "char: ";
     private static final String STRING = "string: ";
@@ -17,11 +17,14 @@ public class Logger {
     private static final String PRIMITIVES_MATRIX = "primitives matrix: ";
     private static final String PRIMITIVES_MULTIMATRIX = "primitives multimatrix: ";
     private static final String SEP = System.lineSeparator();
-    private static boolean flag = false;
+    private static boolean flag = true;
     private static String lastStr = "str 1";
     private static int countInt = 0;
     private static int countStr = 0;
     //endregion
+
+    private Logger() {
+    }
 
     /**
      * Call method "print" with using parameter type boolean
@@ -55,17 +58,16 @@ public class Logger {
      * @param message print parameter int
      */
     public static void log(int message) {
-        if (!lastStr.isEmpty()) {
-            close();
-        }
-        if (!Logger.flag) {
-            print(Logger.PRIMITIVE + message);
-        } else if (message == 0) {
-            print(Logger.PRIMITIVE + message);
-            flag = false;
-        } else {
-            checkedMax(message);
-            countInt += message;
+
+        close();
+
+        checkedMax(message);
+        countInt += message;
+        if (flag) {
+            Logger.print(PRIMITIVE + message);
+            if (message == 0) {
+                countInt = 0;
+            }
         }
     }
 
@@ -76,13 +78,16 @@ public class Logger {
      * @param message print parameter String
      */
     public static void log(String message) {
-        flag = true;
-        if (countInt != 0) {
-            print(PRIMITIVE + countInt);
+        flag = false;
+
+        if (Logger.countInt == 1){
+            flag = true;
+        } else if (Logger.countInt > 1){
+            print(Logger.PRIMITIVE + countInt);
+            flag = true;
             countInt = 0;
         }
 
-        //логика для теста shouldLogSameSubsequentStringsWithoutRepeat()
         if (message.equals(lastStr)) {
             countStr++;
         } else if (countStr == 1) {
@@ -90,11 +95,8 @@ public class Logger {
             lastStr = message;
         } else if (countStr == 0) {
             print(STRING + message);
-        } else {
-            close();
-            countStr = 0;
         }
-        if (countStr > 2) {
+        if (countStr > 2){
             close();
         }
     }
@@ -157,8 +159,8 @@ public class Logger {
      * @param elements array arguments
      */
     public static void log(String...  elements){
-        for (int i = 0; i < elements.length; i++) {
-            print(elements[i]);
+        for (String str : elements) {
+            print(str);
         }
     }
 
@@ -168,9 +170,8 @@ public class Logger {
      */
     public static void log(Integer... elements){
         int result = 0;
-
-        for (int i = 0; i < elements.length; i++) {
-            result += elements[i];
+        for (Integer element :elements) {
+            result += element;
         }
         print(""+result);
     }
@@ -179,14 +180,15 @@ public class Logger {
         System.out.println(massege);
     }
 
-    private static void checkedMax(int message) {
-        if (message == Integer.MAX_VALUE) {
-            print(Logger.PRIMITIVE + Logger.countInt);
-            Logger.countInt = 0;
+    private static void checkedMax(int count){
+        if (count == Integer.MAX_VALUE){
+            print(PRIMITIVE + countInt);
+            countInt = 0;
         }
-        if (message == Byte.MAX_VALUE) {
-            print(Logger.PRIMITIVE + Logger.countInt);
-            Logger.countInt = 0;
+
+        if (count == Byte.MAX_VALUE){
+            print(PRIMITIVE + countInt);
+            countInt = 0;
         }
     }
 
@@ -194,10 +196,12 @@ public class Logger {
         if (Logger.countStr > 1) {
             print(String.format("%s%s (x%d)", Logger.STRING, Logger.lastStr, Logger.countStr));
             Logger.countStr = 0;
+            flag = true;
         }
         if (Logger.countStr == 1) {
             print(Logger.STRING + Logger.lastStr);
             Logger.countStr = 0;
         }
     }
+
 }
