@@ -8,6 +8,7 @@ public class Logger {
     private static final String STRING = "string: ";
     private static final String REFERENCE = "reference: ";
     private static final String PRIMITIVE = "primitive: ";
+    private static final String PRIMITIVES_ARRAY = "primitives array: ";
     private static boolean flag;
     private static String lastStr = "str 1";
     private static int countInt = 0;
@@ -107,6 +108,17 @@ public class Logger {
             print(Logger.PRIMITIVE + Logger.countInt);
             Logger.countInt = 0;
         }
+    }
+
+    //iteration03
+    public static void log(int[] mas){
+        StringBuilder sb = new StringBuilder();
+        sb.append("{" + mas[0]);
+        for (int i = 1; i < mas.length; i++) {
+            sb.append(", " + mas[i]);
+        }
+        sb.append("}");
+        print(PRIMITIVES_ARRAY + sb.toString());
     }
 
     private static void close() {
