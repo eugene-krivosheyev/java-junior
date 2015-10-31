@@ -204,4 +204,45 @@ public class Logger {
         }
     }
 
+    public static void main(String[] args) {
+
+        Logger.log("str 1");
+        Logger.log(1);
+        Logger.log(2);
+        Logger.log("str 2");
+        Logger.log(0);
+        System.out.println("--------------------------");
+        Logger.log("str 1");
+        Logger.log(10);
+        Logger.log(Integer.MAX_VALUE);
+        Logger.log("str 2");
+        Logger.log(0);
+        System.out.println("---------------------");
+        Logger.log("str 1");
+        Logger.log((byte)10);
+        Logger.log((byte)Byte.MAX_VALUE);
+        Logger.log("str 2");
+        Logger.log(0);
+        System.out.println("---------------------");
+        Logger.log("str 1");
+        Logger.log((byte)10);
+        Logger.log((byte)Byte.MAX_VALUE);
+        Logger.log("str 2");
+        Logger.log(0);
+
+        System.out.println("-------------------");
+
+        Logger.log("str 1");
+        Logger.log("str 2");
+        Logger.log("str 2");
+        Logger.log(0);
+        Logger.log("str 2");
+        Logger.log("str 3");
+        Logger.log("str 3");
+        Logger.log("str 3");
+
+        System.out.println(2147483647 -2147483637);
+
+    }
+
 }
