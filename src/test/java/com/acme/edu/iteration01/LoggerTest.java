@@ -12,6 +12,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
+        resetOut();
         captureSysout();
     }
 
