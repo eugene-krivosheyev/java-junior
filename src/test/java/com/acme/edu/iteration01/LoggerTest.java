@@ -17,13 +17,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         resetOut();
         captureSysout();
     }
-    //endregion
-
 
     @After
     public void tearDown() {
         resetOut();
     }
+    //endregion
 
     @Test
     public void shouldLogInteger() throws IOException {

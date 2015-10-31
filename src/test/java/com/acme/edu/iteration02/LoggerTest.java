@@ -23,11 +23,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void tearDown() {
         resetOut();
     }
-
     //endregion
 
-
-//    TODO: implement Logger solution to match specification as tests
 
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
@@ -90,7 +87,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-/*
+
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
         //region when
@@ -106,13 +103,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "str 1"+ SEP +
-            "str 2 (x2)"+ SEP +
-            "0"+ SEP +
-            "str 2"+ SEP +
-            "str 3 (x3)"+ SEP
+            "string: str 1" + SEP +
+            "string: str 2 (x2)" + SEP +
+            "primitive: 0" + SEP +
+            "string: str 2" + SEP +
+            "string: str 3 (x3)"+ SEP
         );
         //endregion
     }
-  */
 }
