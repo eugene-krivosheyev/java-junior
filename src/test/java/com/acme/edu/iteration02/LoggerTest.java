@@ -2,22 +2,29 @@ package com.acme.edu.iteration02;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+
+    private static final String SEP = System.lineSeparator();
+
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
+        resetOut();
         captureSysout();
+    }
+
+    @After
+    public void tearDown() {
+        resetOut();
     }
     //endregion
 
-
-    /*
-    TODO: implement Logger solution to match specification as tests
 
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
@@ -31,10 +38,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "3\n" +
-            "str 2\n" +
-            "0\n"
+                "string: str 1" + SEP +
+                        "primitive: 3" + SEP +
+                        "string: str 2" + SEP +
+                        "primitive: 0" + SEP
         );
         //endregion
     }
@@ -51,11 +58,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "10\n" +
-            Integer.MAX_VALUE + "\n" +
-            "str 2\n" +
-            "0\n"
+            "string: str 1"+ SEP +
+            "primitive: 10"+ SEP +
+            "primitive: " + Integer.MAX_VALUE + SEP +
+            "string: str 2"+ SEP +
+            "primitive: 0" + SEP
         );
         //endregion
     }
@@ -72,11 +79,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "10\n" +
-            Byte.MAX_VALUE + "\n" +
-            "str 2\n" +
-            "0\n"
+            "string: str 1"+ SEP +
+            "primitive: 10"+ SEP +
+            "primitive: " + Byte.MAX_VALUE + SEP +
+            "string: str 2"+ SEP +
+            "primitive: 0" + SEP
         );
         //endregion
     }
@@ -96,14 +103,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "str 2 (x2)\n" +
-            "0\n" +
-            "str 2\n" +
-            "str 3 (x3)\n"
+            "string: str 1" + SEP +
+            "string: str 2 (x2)" + SEP +
+            "primitive: 0" + SEP +
+            "string: str 2" + SEP +
+            "string: str 3 (x3)"+ SEP
         );
         //endregion
     }
-
-    */
 }
