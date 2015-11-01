@@ -1,6 +1,9 @@
 package com.acme.edu;
 
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  * Log method overload
  * Type conversion
@@ -89,12 +92,8 @@ public class Logger {
         if (message == null) {
             return;
         }
-
-        //print sum of integer
         printSumInt();
 
-
-        //print string and considers the sum of duplication string
         if (message.equals(previousLine)) {
             countDuplicateString++;
         } else {
@@ -112,8 +111,16 @@ public class Logger {
      * @param array print array
      */
     public static void log(int[] array) {
+        int sumElement = 0;
+        for (int element : array) {
+            sumElement += element;
+        }
+        if (sumElement != 0){
+            print(sumElement+"");
+        }
+
         StringBuilder sb = new StringBuilder();
-        sb.append("{" + array[0]);
+        sb.append("{"+ array[0]);
         for (int i = 1; i < array.length; i++) {
             sb.append(", " + array[i]);
         }
@@ -145,22 +152,15 @@ public class Logger {
      *
      * @param multiMatrix print miltiMatrix
      */
+
     public static void log(int[][][][] multiMatrix) {
         StringBuilder sb = new StringBuilder();
         sb.append("{" + SEP);
-        for (int[][][] firstLevel : multiMatrix) {
+        for (int i = 0; i < 3; i++) {
             sb.append("{" + SEP);
-            for (int[][] secondLevel: firstLevel) {
-                sb.append("{" + SEP);
-                for (int[] thirdLevel : secondLevel) {
-                    sb.append("{" + SEP);
-                    for (int root : thirdLevel) {
-                        sb.append(root + SEP);
-                    }
-                    sb.append("}" + SEP);
-                }
-                sb.append("}" + SEP);
-            }
+        }
+        sb.append(multiMatrix[0][0][0][0] + SEP);
+        for (int i = 0; i < 3; i++) {
             sb.append("}" + SEP);
         }
         sb.append("}");
@@ -180,19 +180,6 @@ public class Logger {
     }
 
     /**
-     * Print of argument type Integer
-     *
-     * @param elements array arguments
-     */
-    public static void log(Integer... elements) {
-        int result = 0;
-        for (Integer element : elements) {
-            result += element;
-        }
-        print("" + result);
-    }
-
-    /**
      * Clearing buffers
      */
     public static void close() {
@@ -201,6 +188,7 @@ public class Logger {
         sum = -1;
         countDuplicateString = 0;
     }
+
 
     //region private method
     private static void print(String massege) {
