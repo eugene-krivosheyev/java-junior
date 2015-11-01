@@ -1,9 +1,6 @@
 package com.acme.edu;
 
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
 /**
  * Log method overload
  * Type conversion
