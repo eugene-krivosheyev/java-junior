@@ -26,8 +26,10 @@ public class Logger {
     }
 
     //
+
     /**
      * Prints an boolean and prefix of the "primitive: "
+     *
      * @param message The <code>primitive: boolean</code> to be printed.
      */
     public static void log(boolean message) {
@@ -36,6 +38,7 @@ public class Logger {
 
     /**
      * Prints an char and prefix of the "char: "
+     *
      * @param message The <code>char: char</code> to be printed.
      */
     public static void log(char message) {
@@ -44,10 +47,10 @@ public class Logger {
 
     /**
      * Prints an Object and prefix of the "reference: "
+     *
      * @param message The <code>reference: Object</code> to be printed.
      */
-    public static void log(Object message)
-    {
+    public static void log(Object message) {
         print(Logger.REFERENCE + message);
     }
 
@@ -56,34 +59,34 @@ public class Logger {
      * If no duplicates, prints one line.
      * Considers the sum of consecutive integers,
      * If numbers are not consecutive, print the input value.
+     *
      * @param message The <code>primitive: int</code> to be printed.
      */
-    public static void log(int message)
-    {
-        if (countDuplicateString >= 1){
+    public static void log(int message) {
+        if (countDuplicateString >= 1) {
             printDuplicateString();
         }
 
-        if (sum == -1){
+        if (sum == -1) {
             print(PRIMITIVE + message);
-        }else{
-            if (checkMax(message) && message !=0) {
-                sum += message;
-            }else{
-                print(PRIMITIVE + message);
-                sum = -1;
-            }
+        } else if (checkMax(message) && message != 0) {
+            sum += message;
+        } else {
+            print(PRIMITIVE + message);
+            sum = -1;
         }
+
     }
 
     /**
      * Print the sum of consecutive integers and prefix of the "primitive: "
      * Print string and considers the sum of duplication string and prefix of the "string: "
      * if you enter "null", the method will fail.
+     *
      * @param message If the input parameters are duplicated, The <code>string: String (x2)</code> to be printed.
      */
     public static void log(String message) {
-        if (message == null){
+        if (message == null) {
             return;
         }
 
@@ -92,9 +95,9 @@ public class Logger {
 
 
         //print string and considers the sum of duplication string
-        if (message.equals(previousLine)){
+        if (message.equals(previousLine)) {
             countDuplicateString++;
-        }else{
+        } else {
             printDuplicateString();
             previousLine = message;
             countDuplicateString = 1;
@@ -105,13 +108,14 @@ public class Logger {
 
     /**
      * Concatenation of symbols and array elements
-     * @param arr print array
+     *
+     * @param array print array
      */
-    public static void log(int[] arr){
+    public static void log(int[] array) {
         StringBuilder sb = new StringBuilder();
-        sb.append("{" + arr[0]);
-        for (int i = 1; i < arr.length; i++) {
-            sb.append(", " + arr[i]);
+        sb.append("{" + array[0]);
+        for (int i = 1; i < array.length; i++) {
+            sb.append(", " + array[i]);
         }
         sb.append("}");
         print(PRIMITIVES_ARRAY + sb.toString());
@@ -119,9 +123,10 @@ public class Logger {
 
     /**
      * Concatenation of symbols and array elements
+     *
      * @param matrix print the array in the array
      */
-    public static void log(int[][] matrix){
+    public static void log(int[][] matrix) {
         StringBuilder sb = new StringBuilder();
         sb.append("{" + SEP);
         for (int i = 0; i < matrix.length; i++) {
@@ -137,16 +142,25 @@ public class Logger {
 
     /**
      * Concatenation of symbols and array element
+     *
      * @param multiMatrix print miltiMatrix
      */
-    public static void log(int[][][][] multiMatrix){
+    public static void log(int[][][][] multiMatrix) {
         StringBuilder sb = new StringBuilder();
         sb.append("{" + SEP);
-        for (int i = 0; i < 3; i++) {
+        for (int[][][] firstLevel : multiMatrix) {
             sb.append("{" + SEP);
-        }
-        sb.append(multiMatrix[0][0][0][0] + SEP);
-        for (int i = 0; i < 3; i++) {
+            for (int[][] secondLevel: firstLevel) {
+                sb.append("{" + SEP);
+                for (int[] thirdLevel : secondLevel) {
+                    sb.append("{" + SEP);
+                    for (int root : thirdLevel) {
+                        sb.append(root + SEP);
+                    }
+                    sb.append("}" + SEP);
+                }
+                sb.append("}" + SEP);
+            }
             sb.append("}" + SEP);
         }
         sb.append("}");
@@ -155,37 +169,38 @@ public class Logger {
     }
 
     /**
-     *Print list of arguments type String
+     * Print list of arguments type String
+     *
      * @param elements array arguments
      */
-    public static void log(String...  elements){
+    public static void log(String... elements) {
         for (String str : elements) {
             print(str);
         }
     }
 
     /**
-     *Print of argument type Integer
+     * Print of argument type Integer
+     *
      * @param elements array arguments
      */
-    public static void log(Integer... elements){
+    public static void log(Integer... elements) {
         int result = 0;
-        for (Integer element :elements) {
+        for (Integer element : elements) {
             result += element;
         }
-        print(""+result);
+        print("" + result);
     }
 
     /**
      * Clearing buffers
      */
-    public static void close(){
+    public static void close() {
         printDuplicateString();
         previousLine = "";
         sum = -1;
         countDuplicateString = 0;
     }
-
 
     //region private method
     private static void print(String massege) {
@@ -193,10 +208,10 @@ public class Logger {
     }
 
     private static void printDuplicateString() {
-        if (countDuplicateString > 1){
+        if (countDuplicateString > 1) {
             print(String.format("%s%s (x%d)", STRING, previousLine, countDuplicateString));
         }
-        if (countDuplicateString == 1){
+        if (countDuplicateString == 1) {
             print(STRING + previousLine);
         }
         countDuplicateString = 0;
@@ -206,19 +221,19 @@ public class Logger {
     private static void printSumInt() {
         if (sum == -1) {
             sum = 0;
-        }else if (countDuplicateString == 0 ){
+        } else if (countDuplicateString == 0) {
             print(PRIMITIVE + sum);
-        }else{
+        } else {
             sum = -1;
         }
     }
 
-    private static boolean checkMax(int message){
-        if (message == Integer.MAX_VALUE || message == Byte.MAX_VALUE){
+    private static boolean checkMax(int message) {
+        if (message == Integer.MAX_VALUE || message == Byte.MAX_VALUE) {
             print(PRIMITIVE + sum);
             sum = 0;
         }
-        if (message + sum < 0){
+        if (message + sum < 0) {
             print(PRIMITIVE + sum);
             sum = -1;
             return false;
