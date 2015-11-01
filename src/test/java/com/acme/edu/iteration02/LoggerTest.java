@@ -34,6 +34,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(2);
         Logger.log("str 2");
         Logger.log(0);
+        Logger.close();
         //endregion
 
         //region then
@@ -54,15 +55,16 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(Integer.MAX_VALUE);
         Logger.log("str 2");
         Logger.log(0);
+        Logger.close();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "string: str 1"+ SEP +
-            "primitive: 10"+ SEP +
-            "primitive: " + Integer.MAX_VALUE + SEP +
-            "string: str 2"+ SEP +
-            "primitive: 0" + SEP
+                "string: str 1" + SEP +
+                        "primitive: 10" + SEP +
+                        "primitive: " + Integer.MAX_VALUE + SEP +
+                        "string: str 2" + SEP +
+                        "primitive: 0" + SEP
         );
         //endregion
     }
@@ -75,6 +77,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log((byte)Byte.MAX_VALUE);
         Logger.log("str 2");
         Logger.log(0);
+        Logger.close();
         //endregion
 
         //region then
@@ -99,6 +102,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 3");
         Logger.log("str 3");
         Logger.log("str 3");
+        Logger.close();
         //endregion
 
         //region then
@@ -111,5 +115,4 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-
 }

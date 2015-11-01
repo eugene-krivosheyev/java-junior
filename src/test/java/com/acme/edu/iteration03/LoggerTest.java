@@ -112,4 +112,5 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains(String.valueOf(11));
         //endregion
     }
+
 }

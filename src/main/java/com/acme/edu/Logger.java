@@ -17,10 +17,9 @@ public class Logger {
     private static final String PRIMITIVES_MATRIX = "primitives matrix: ";
     private static final String PRIMITIVES_MULTIMATRIX = "primitives multimatrix: ";
     private static final String SEP = System.lineSeparator();
-    private static boolean flag = true;
-    private static String lastStr = "str 1";
-    private static int countInt = 0;
-    private static int countStr = 0;
+    private static String previousLine = "";
+    private static int sum = -1;
+    private static int countDuplicateString = 0;
     //endregion
 
     private Logger() {
@@ -57,16 +56,20 @@ public class Logger {
      * Call method checkedMAX
      * @param message print parameter int
      */
-    public static void log(int message) {
+    public static void log(int message)
+    {
+        if (countDuplicateString >= 1){
+            printDuplicateString();
+        }
 
-        close();
-
-        checkedMax(message);
-        countInt += message;
-        if (flag) {
-            Logger.print(PRIMITIVE + message);
-            if (message == 0 || message == 11) {
-                countInt = 0;
+        if (sum == -1){
+            print(PRIMITIVE + message);
+        }else{
+            if (checkMax(message) && message !=0) {
+                sum += message;
+            }else{
+                print(PRIMITIVE + message);
+                sum = -1;
             }
         }
     }
@@ -78,26 +81,21 @@ public class Logger {
      * @param message print parameter String
      */
     public static void log(String message) {
-        flag = false;
-
-        if (Logger.countInt == 1){
-            flag = true;
-        } else if (Logger.countInt > 1){
-            print(Logger.PRIMITIVE + countInt);
-            flag = true;
-            countInt = 0;
+        if (message == null){
+            return;
         }
 
-        if (message.equals(lastStr)) {
-            countStr++;
-        } else if (countStr == 1) {
-            print(STRING + lastStr);
-            lastStr = message;
-        } else if (countStr == 0) {
-            print(STRING + message);
-        }
-        if (countStr > 2){
-            close();
+        //print sum of integer
+        printSumInt();
+
+
+        //print string and count duplication string
+        if (message.equals(previousLine)){
+            countDuplicateString++;
+        }else{
+            printDuplicateString();
+            previousLine = message;
+            countDuplicateString = 1;
         }
     }
 
@@ -176,31 +174,51 @@ public class Logger {
         print(""+result);
     }
 
+    /**
+     * Clear buffers
+     */
+    public static void close(){
+        printDuplicateString();
+        previousLine = "";
+        sum = -1;
+        countDuplicateString = 0;
+    }
+
     private static void print(String massege) {
         System.out.println(massege);
     }
 
-    private static void checkedMax(int count){
-        if (count == Integer.MAX_VALUE){
-            print(PRIMITIVE + countInt);
-            countInt = 0;
+    private static void printDuplicateString() {
+        if (countDuplicateString > 1){
+            print(String.format("%s%s (x%d)", STRING, previousLine, countDuplicateString));
         }
+        if (countDuplicateString == 1){
+            print(STRING + previousLine);
+        }
+        countDuplicateString = 0;
+        previousLine = "";
+    }
 
-        if (count == Byte.MAX_VALUE){
-            print(PRIMITIVE + countInt);
-            countInt = 0;
+    private static void printSumInt() {
+        if (sum == -1) {
+            sum = 0;
+        }else if (countDuplicateString == 0 ){
+            print(PRIMITIVE + sum);
+        }else{
+            sum = -1;
         }
     }
 
-    private static void close() {
-        if (Logger.countStr > 1) {
-            print(String.format("%s%s (x%d)", Logger.STRING, Logger.lastStr, Logger.countStr));
-            Logger.countStr = 0;
-            flag = true;
+    private static boolean checkMax(int message){
+        if (message == Integer.MAX_VALUE || message == Byte.MAX_VALUE){
+            print(PRIMITIVE + sum);
+            sum = 0;
         }
-        if (Logger.countStr == 1) {
-            print(Logger.STRING + Logger.lastStr);
-            Logger.countStr = 0;
+        if (message + sum < 0){
+            print(PRIMITIVE + sum);
+            sum = -1;
+            return false;
         }
+        return true;
     }
 }
