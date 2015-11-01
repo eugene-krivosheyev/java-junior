@@ -25,25 +25,26 @@ public class Logger {
     private Logger() {
     }
 
+    //
     /**
-     * Call method "print" with using parameter type boolean
-     * @param message print parameter boolean
+     * Prints an boolean and prefix of the "primitive: "
+     * @param message The <code>primitive: boolean</code> to be printed.
      */
     public static void log(boolean message) {
         print(Logger.PRIMITIVE + message);
     }
 
     /**
-     * Call method "print" with using parameter type char
-     * @param message print parameter char
+     * Prints an char and prefix of the "char: "
+     * @param message The <code>char: char</code> to be printed.
      */
     public static void log(char message) {
         print(Logger.CHAR + message);
     }
 
     /**
-     * Call method "print" with using parameter type Object
-     * @param message print parameter Object
+     * Prints an Object and prefix of the "reference: "
+     * @param message The <code>reference: Object</code> to be printed.
      */
     public static void log(Object message)
     {
@@ -51,10 +52,11 @@ public class Logger {
     }
 
     /**
-     * Call method "close"
-     * Call method "print" with using parameter type int
-     * Call method checkedMAX
-     * @param message print parameter int
+     * Print duplicate rows.
+     * If no duplicates, prints one line.
+     * Considers the sum of consecutive integers,
+     * If numbers are not consecutive, print the input value.
+     * @param message The <code>primitive: int</code> to be printed.
      */
     public static void log(int message)
     {
@@ -75,10 +77,10 @@ public class Logger {
     }
 
     /**
-     * Sets the value of flag to true
-     * Call method "print" with using parameter type String
-     * Call method "close"
-     * @param message print parameter String
+     * Print the sum of consecutive integers and prefix of the "primitive: "
+     * Print string and considers the sum of duplication string and prefix of the "string: "
+     * if you enter "null", the method will fail.
+     * @param message If the input parameters are duplicated, The <code>string: String (x2)</code> to be printed.
      */
     public static void log(String message) {
         if (message == null){
@@ -89,7 +91,7 @@ public class Logger {
         printSumInt();
 
 
-        //print string and count duplication string
+        //print string and considers the sum of duplication string
         if (message.equals(previousLine)){
             countDuplicateString++;
         }else{
@@ -175,7 +177,7 @@ public class Logger {
     }
 
     /**
-     * Clear buffers
+     * Clearing buffers
      */
     public static void close(){
         printDuplicateString();
@@ -184,6 +186,8 @@ public class Logger {
         countDuplicateString = 0;
     }
 
+
+    //region private method
     private static void print(String massege) {
         System.out.println(massege);
     }
@@ -221,4 +225,5 @@ public class Logger {
         }
         return true;
     }
+    //endregion
 }
