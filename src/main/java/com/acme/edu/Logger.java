@@ -179,7 +179,7 @@ public class Logger implements LoggerState{
         SUM_INTEGERS(new IntState()),         //Суммирование целых чисел
         SIMPLE_PRINT(new SimplePrintState()); //Простой вывод чисел
 
-        private LoggerState loggerState;
+        LoggerState loggerState = null;
 
         LoggerStateHolder(SimplePrintState simplePrintState) {
             this.loggerState = simplePrintState;
@@ -193,7 +193,7 @@ public class Logger implements LoggerState{
              this.loggerState = stringState;
         }
 
-        public LoggerState getLoggerState() {
+        LoggerState getLoggerState() {
             return loggerState;
         }
     }
