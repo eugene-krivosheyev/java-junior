@@ -8,7 +8,7 @@ package com.acme.edu;
  * @version 1.1 2 Nov 2015
  * @author Pavel Seregin
  */
-public class Logger implements LoggerState{
+public class Logger{
 
     //region fields
 
@@ -53,7 +53,6 @@ public class Logger implements LoggerState{
      *
      * @param message If the input parameters are duplicated, The <code>string: String (x2)</code> to be printed.
      */
-    @Override
     public void log(String message) {
         if (state != LoggerStateHolder.STRING_REPEAITING){
             state.getLoggerState().flush();
@@ -168,33 +167,8 @@ public class Logger implements LoggerState{
     /**
      * Clearing buffers
      */
-    @Override
     public void flush() {
         state.getLoggerState().flush();
     }
 
-
-    enum LoggerStateHolder{
-        STRING_REPEAITING(new StringState()), //Подсчет повторяющихся строк
-        SUM_INTEGERS(new IntState()),         //Суммирование целых чисел
-        SIMPLE_PRINT(new SimplePrintState()); //Простой вывод чисел
-
-        LoggerState loggerState = null;
-
-        LoggerStateHolder(SimplePrintState simplePrintState) {
-            this.loggerState = simplePrintState;
-        }
-
-        LoggerStateHolder(IntState intState) {
-            this.loggerState = intState;
-        }
-
-        LoggerStateHolder(StringState stringState) {
-             this.loggerState = stringState;
-        }
-
-        LoggerState getLoggerState() {
-            return loggerState;
-        }
-    }
 }
