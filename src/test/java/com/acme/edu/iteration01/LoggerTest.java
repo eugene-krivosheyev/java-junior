@@ -1,6 +1,5 @@
 package com.acme.edu.iteration01;
 
-import com.acme.edu.IntState;
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
@@ -32,6 +31,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         logger.log(1);
         logger.log(0);
+        logger.flush();
         //endregion
 
         //region then
@@ -45,6 +45,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         logger.log((byte) 1);
         logger.log((byte) 0);
+        logger.flush();
         //endregion
 
         //region then
@@ -59,6 +60,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log('a');
         Logger.log('b');
+        logger.flush();
         //endregion
 
         //region then
@@ -88,6 +90,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         logger.log(true);
         logger.log(false);
+        logger.flush();
         //endregion
 
         //region then
@@ -101,6 +104,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogReference() throws IOException {
         //region when
         logger.log(new Object());
+        logger.flush();
         //endregion
 
         //region then
@@ -108,5 +112,4 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("@");
         //endregion
     }
-
 }

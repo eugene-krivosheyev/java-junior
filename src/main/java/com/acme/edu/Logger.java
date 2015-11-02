@@ -25,8 +25,7 @@ public class Logger {
     private static String previousLine = "";
     private static int sum = -1;
     private static int countDuplicateString = 0;
-
-    private State state = State.SIMPLE_PRINT;
+    private LoggerStateHolder state = LoggerStateHolder.SIMPLE_PRINT;
     //endregion
 
     public Logger() {
@@ -70,11 +69,19 @@ public class Logger {
      * @param message The <code>primitive: int</code> to be printed.
      */
     public void log(int message) {
-        if (state != State.SIMPLE_PRINT ){
-            state.getSimplePrintState().flush();
+
+        if (state != LoggerStateHolder.SIMPLE_PRINT){
+            if (state == LoggerStateHolder.SUM_INTEGERS){
+                state.loggerState.log(String.valueOf(message));
+            }else {
+                state.getLoggerState().flush();
+                state = LoggerStateHolder.SUM_INTEGERS;
+                state.loggerState.log(String.valueOf(message));
+            }
         }else{
-            state.getSimplePrintState().print(PRIMITIVE + message);
+            state.getLoggerState().log(String.valueOf(message));
         }
+
     }
 
     /**
@@ -84,18 +91,13 @@ public class Logger {
      *
      * @param message If the input parameters are duplicated, The <code>string: String (x2)</code> to be printed.
      */
-    public static void log(String message) {
-        if (message == null) {
-            return;
-        }
-        printSumInt();
-
-        if (message.equals(previousLine)) {
-            countDuplicateString++;
-        } else {
-            printDuplicateString();
-            previousLine = message;
-            countDuplicateString = 1;
+    public void log(String message) {
+        if (state != LoggerStateHolder.STRING_CONCATE){
+            state.getLoggerState().flush();
+            state = LoggerStateHolder.STRING_CONCATE;
+            state.loggerState.log(message);
+        }else{
+            state.getLoggerState().log(message);
         }
     }
 
@@ -175,7 +177,10 @@ public class Logger {
     /**
      * Clearing buffers
      */
-    public static void flush() {
+    public void flush() {
+        state.getLoggerState().flush();
+      //  state.getIntState().flush();
+
         printDuplicateString();
         previousLine = "";
         sum = -1;
@@ -222,28 +227,28 @@ public class Logger {
     }
     //endregion
 
-    enum State{
+    enum LoggerStateHolder{
         STRING_CONCATE(new StringState()),
         SUM_INTEGERS(new IntState()),
         SIMPLE_PRINT(new SimplePrintState());
         //    BUFFER
 
-        private SimplePrintState simplePrintState;
+        private LoggerState loggerState;
 
-        State(SimplePrintState simplePrintState) {
-            this.simplePrintState = simplePrintState;
+        LoggerStateHolder(SimplePrintState simplePrintState) {
+            this.loggerState = simplePrintState;
         }
 
-        public SimplePrintState getSimplePrintState() {
-            return simplePrintState;
+        LoggerStateHolder(IntState intState) {
+            this.loggerState = intState;
         }
 
-        State(IntState intState) {
-
+        LoggerStateHolder(StringState stringState) {
+             this.loggerState = stringState;
         }
 
-        State(StringState stringState) {
-
+        public LoggerState getLoggerState() {
+            return loggerState;
         }
     }
 }

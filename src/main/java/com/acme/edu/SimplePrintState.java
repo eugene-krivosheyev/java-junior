@@ -5,19 +5,24 @@ package com.acme.edu;
  */
 public class SimplePrintState implements LoggerState{
 
-    String buffer;
+    private static final String PRIMITIVE = "primitive: ";
+
+    int buffer = 0;
     @Override
     public void print(String massege) {
-        System.out.println(massege);
+        System.out.println(PRIMITIVE + massege);
     }
 
     @Override
     public void log(String message) {
-
+        print(message);
     }
 
     @Override
     public void flush() {
-
+        if (buffer != 0){
+            print(String.valueOf(buffer));
+            buffer = 0;
+        }
     }
 }

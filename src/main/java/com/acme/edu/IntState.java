@@ -5,20 +5,22 @@ package com.acme.edu;
  */
 public class IntState implements LoggerState{
 
-    String buffer;
+    private static final String PRIMITIVE = "primitive: ";
+    int buffer = 0;
 
     @Override
-    public void print(String massege) {
-
+    public void print(String message) {
+        System.out.println(PRIMITIVE + message);
     }
 
     @Override
-    public void log(String buffer) {
-
+    public void log(String message) {
+        buffer += Integer.parseInt(message);
     }
 
     @Override
     public void flush() {
-
+            print(String.valueOf(buffer));
+            buffer = 0;
     }
 }
