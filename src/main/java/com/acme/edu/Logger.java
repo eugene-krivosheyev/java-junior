@@ -53,6 +53,7 @@ public class Logger implements LoggerState{
      *
      * @param message If the input parameters are duplicated, The <code>string: String (x2)</code> to be printed.
      */
+    @Override
     public void log(String message) {
         if (state != LoggerStateHolder.STRING_REPEAITING){
             state.getLoggerState().flush();
@@ -167,6 +168,7 @@ public class Logger implements LoggerState{
     /**
      * Clearing buffers
      */
+    @Override
     public void flush() {
         state.getLoggerState().flush();
     }

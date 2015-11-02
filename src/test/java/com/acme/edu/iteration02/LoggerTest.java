@@ -162,4 +162,39 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+    @Test
+    public void shouldLogSameSubsequentStringsWithoutMultiRepeat() throws IOException {
+        //region when
+        logger.log("str 1");
+        logger.log("str 2");
+        logger.log("str 2");
+        logger.log("str 3");
+        logger.log("str 2");
+        logger.log(1);
+        logger.log(2);
+        logger.log(4);
+        logger.log(8);
+        logger.log(16);
+        logger.log("str 2");
+        logger.log(0);
+        logger.log("str 2");
+        logger.log("str 3");
+        logger.log("str 3");
+        logger.log("str 3");
+        logger.flush();
+        //endregion
+
+        //region then
+        assertSysoutEquals(
+                "string: str 1" + SEP +
+                        "string: str 2 (x2)" + SEP +
+                        "string: str 3" + SEP +
+                        "string: str 2" + SEP +
+                        "primitive: 31" + SEP +
+                        "string: str 2" + SEP +
+                        "primitive: 0" + SEP +
+                        "string: str 2" + SEP +
+                        "string: str 3 (x3)" + SEP
+        );
+    }
 }

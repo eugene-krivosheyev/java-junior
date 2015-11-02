@@ -17,7 +17,7 @@ public class StringState extends Printer implements LoggerState {
         if (previousLine.equals(message)){
             buffer++;
         }else if (previousLine != ""){
-            Printer.print(STRING + previousLine);
+            flush();
         }
         previousLine = message;
     }

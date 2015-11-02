@@ -17,5 +17,6 @@ public class SimplePrintState extends Printer implements LoggerState{
 
     @Override
     public void flush() {
+        return;
     }
 }
