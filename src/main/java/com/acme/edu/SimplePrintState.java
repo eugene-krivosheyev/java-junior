@@ -3,25 +3,20 @@ package com.acme.edu;
 /**
  * Created by Павел on 02.11.2015.
  */
-public class SimplePrintState implements LoggerState{
+public class SimplePrintState extends Printer implements LoggerState{
 
     private static final String PRIMITIVE = "primitive: ";
-
-    int buffer = 0;
-    @Override
-    public void print(String massege) {
-        System.out.println(PRIMITIVE + massege);
-    }
+    private int buffer = 0;
 
     @Override
     public void log(String message) {
-        print(message);
+        Printer.print(PRIMITIVE +message);
     }
 
     @Override
     public void flush() {
         if (buffer != 0){
-            print(String.valueOf(buffer));
+            Printer.print(PRIMITIVE + String.valueOf(buffer));
             buffer = 0;
         }
     }

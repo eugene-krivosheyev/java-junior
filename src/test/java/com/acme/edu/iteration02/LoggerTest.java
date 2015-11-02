@@ -48,14 +48,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-/*
+
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
-        Logger.log("str 1");
+        logger.log("str 1");
         logger.log(10);
         logger.log(Integer.MAX_VALUE);
-        Logger.log("str 2");
+        logger.log("str 2");
         logger.log(0);
         logger.flush();
         //endregion
@@ -74,10 +74,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
-        Logger.log("str 1");
+        logger.log("str 1");
         logger.log((byte)10);
         logger.log((byte)Byte.MAX_VALUE);
-        Logger.log("str 2");
+        logger.log("str 2");
         logger.log(0);
         logger.flush();
         //endregion
@@ -96,15 +96,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
         //region when
-        Logger.log("str 1");
-        Logger.log("str 2");
-        Logger.log("str 2");
+        logger.log("str 1");
+        logger.log("str 2");
+        logger.log("str 2");
         logger.log(0);
-        Logger.log("str 2");
-        Logger.log("str 3");
-        Logger.log("str 3");
-        Logger.log("str 3");
-        Logger.flush();
+        logger.log("str 2");
+        logger.log("str 3");
+        logger.log("str 3");
+        logger.log("str 3");
+        logger.flush();
         //endregion
 
         //region then
@@ -117,5 +117,5 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-*/
+
 }

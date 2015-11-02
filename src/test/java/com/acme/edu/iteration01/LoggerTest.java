@@ -58,8 +58,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogChar() throws IOException {
         //region when
-        Logger.log('a');
-        Logger.log('b');
+        logger.log('a');
+        logger.log('b');
         logger.flush();
         //endregion
 

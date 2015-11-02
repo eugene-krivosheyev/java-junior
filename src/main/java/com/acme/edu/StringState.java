@@ -3,22 +3,18 @@ package com.acme.edu;
 /**
  * Created by Павел on 02.11.2015.
  */
-public class StringState implements LoggerState {
+public class StringState extends Printer implements LoggerState {
 
     private static final String STRING = "string: ";
     private static String previousLine = "";
-    int buffer = 1;
-    @Override
-    public void print(String message) {
-        System.out.println(message);
-    }
+    private int buffer = 1;
 
     @Override
     public void log(String message) {
         if (previousLine.equals(message)){
             buffer++;
         }else if (previousLine != ""){
-            print(STRING + previousLine);
+            Printer.print(STRING + previousLine);
         }
         previousLine = message;
     }
@@ -26,9 +22,9 @@ public class StringState implements LoggerState {
     @Override
     public void flush() {
         if (buffer == 1){
-            print(STRING + previousLine);
+            Printer.print(STRING + previousLine);
         }else if(buffer > 1 ){
-            print(String.format("%s%s (x%d)", STRING, previousLine, buffer));
+            Printer.print(String.format("%s%s (x%d)", STRING, previousLine, buffer));
         }
         buffer = 1;
         previousLine = "";

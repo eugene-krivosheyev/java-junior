@@ -13,51 +13,16 @@ public class Logger {
     //region fields
 
     private static final String CHAR = "char: ";
-    private static final String STRING = "string: ";
     private static final String REFERENCE = "reference: ";
     private static final String PRIMITIVE = "primitive: ";
     private static final String PRIMITIVES_ARRAY = "primitives array: ";
     private static final String PRIMITIVES_MATRIX = "primitives matrix: ";
     private static final String PRIMITIVES_MULTIMATRIX = "primitives multimatrix: ";
     private static final String SEP = System.lineSeparator();
-    private static String buffer;
-    private static Enum anEnum;
-    private static String previousLine = "";
-    private static int sum = -1;
-    private static int countDuplicateString = 0;
     private LoggerStateHolder state = LoggerStateHolder.SIMPLE_PRINT;
     //endregion
 
     public Logger() {
-    }
-
-    //
-
-    /**
-     * Prints an boolean and prefix of the "primitive: "
-     *
-     * @param message The <code>primitive: boolean</code> to be printed.
-     */
-    public static void log(boolean message) {
-        print(Logger.PRIMITIVE + message);
-    }
-
-    /**
-     * Prints an char and prefix of the "char: "
-     *
-     * @param message The <code>char: char</code> to be printed.
-     */
-    public static void log(char message) {
-        print(Logger.CHAR + message);
-    }
-
-    /**
-     * Prints an Object and prefix of the "reference: "
-     *
-     * @param message The <code>reference: Object</code> to be printed.
-     */
-    public static void log(Object message) {
-        print(Logger.REFERENCE + message);
     }
 
     /**
@@ -70,18 +35,15 @@ public class Logger {
      */
     public void log(int message) {
 
-        if (state != LoggerStateHolder.SIMPLE_PRINT){
-            if (state == LoggerStateHolder.SUM_INTEGERS){
-                state.loggerState.log(String.valueOf(message));
-            }else {
-                state.getLoggerState().flush();
-                state = LoggerStateHolder.SUM_INTEGERS;
-                state.loggerState.log(String.valueOf(message));
-            }
+        if (state == LoggerStateHolder.SUM_INTEGERS) {
+            state.loggerState.log(String.valueOf(message));
+        } else if (state == LoggerStateHolder.STRING_REPEAITING){
+            state.getLoggerState().flush();
+            state = LoggerStateHolder.SUM_INTEGERS;
+            state.loggerState.log(String.valueOf(message));
         }else{
             state.getLoggerState().log(String.valueOf(message));
         }
-
     }
 
     /**
@@ -92,22 +54,50 @@ public class Logger {
      * @param message If the input parameters are duplicated, The <code>string: String (x2)</code> to be printed.
      */
     public void log(String message) {
-        if (state != LoggerStateHolder.STRING_CONCATE){
+        if (state != LoggerStateHolder.STRING_REPEAITING){
             state.getLoggerState().flush();
-            state = LoggerStateHolder.STRING_CONCATE;
+            state = LoggerStateHolder.STRING_REPEAITING;
             state.loggerState.log(message);
         }else{
             state.getLoggerState().log(message);
         }
     }
 
+    //для методов ниже рефакторинг пока что не производился
+
+    /**
+     * Prints an boolean and prefix of the "primitive: "
+     *
+     * @param message The <code>primitive: boolean</code> to be printed.
+     */
+    public void log(boolean message) {
+        print(Logger.PRIMITIVE + message);
+    }
+
+    /**
+     * Prints an char and prefix of the "char: "
+     *
+     * @param message The <code>char: char</code> to be printed.
+     */
+    public void log(char message) {
+        print(Logger.CHAR + message);
+    }
+
+    /**
+     * Prints an Object and prefix of the "reference: "
+     *
+     * @param message The <code>reference: Object</code> to be printed.
+     */
+    public void log(Object message) {
+        print(Logger.REFERENCE + message);
+    }
 
     /**
      * Concatenation of symbols and array elements
      *
      * @param array print array
      */
-    public static void log(int[] array) {
+    public void log(int[] array) {
         int sumElement = 0;
         for (int element : array) {
             sumElement += element;
@@ -130,7 +120,7 @@ public class Logger {
      *
      * @param matrix print the array in the array
      */
-    public static void log(int[][] matrix) {
+    public void log(int[][] matrix) {
         StringBuilder sb = new StringBuilder();
         sb.append("{" + SEP);
         for (int i = 0; i < matrix.length; i++) {
@@ -149,7 +139,7 @@ public class Logger {
      *
      * @param multiMatrix print miltiMatrix
      */
-    public static void log(int[][][][] multiMatrix) {
+    public void log(int[][][][] multiMatrix) {
         StringBuilder sb = new StringBuilder();
         sb.append("{" + SEP);
         for (int i = 0; i < 3; i++) {
@@ -168,7 +158,7 @@ public class Logger {
      * Print list of arguments type String
      * @param elements The <code>String...</code> to be printed.
      */
-    public static void log(String... elements) {
+    public void log(String... elements) {
         for (String str : elements) {
             print(str);
         }
@@ -179,59 +169,19 @@ public class Logger {
      */
     public void flush() {
         state.getLoggerState().flush();
-      //  state.getIntState().flush();
-
-        printDuplicateString();
-        previousLine = "";
-        sum = -1;
-        countDuplicateString = 0;
     }
 
     //region private method
-    private static void print(String massege) {
+    private  void print(String massege) {
         System.out.println(massege);
     }
 
-    private static void printDuplicateString() {
-        if (countDuplicateString > 1) {
-            print(String.format("%s%s (x%d)", STRING, previousLine, countDuplicateString));
-        }
-        if (countDuplicateString == 1) {
-            print(STRING + previousLine);
-        }
-        countDuplicateString = 0;
-        previousLine = "";
-    }
-
-    private static void printSumInt() {
-        if (sum == -1) {
-            sum = 0;
-        } else if (countDuplicateString == 0) {
-            print(PRIMITIVE + sum);
-        } else {
-            sum = -1;
-        }
-    }
-
-    private static boolean checkMax(int message) {
-        if (message == Integer.MAX_VALUE || message == Byte.MAX_VALUE) {
-            print(PRIMITIVE + sum);
-            sum = 0;
-        }
-        if (message + sum < 0) {
-            print(PRIMITIVE + sum);
-            sum = -1;
-            return false;
-        }
-        return true;
-    }
     //endregion
 
     enum LoggerStateHolder{
-        STRING_CONCATE(new StringState()),
-        SUM_INTEGERS(new IntState()),
-        SIMPLE_PRINT(new SimplePrintState());
-        //    BUFFER
+        STRING_REPEAITING(new StringState()), //Подсчет повторяющихся строк
+        SUM_INTEGERS(new IntState()),         //Суммирование целых чисел
+        SIMPLE_PRINT(new SimplePrintState()); //Простой вывод чисел
 
         private LoggerState loggerState;
 
