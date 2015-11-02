@@ -72,6 +72,28 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
+    public void shouldLogCorrectlyIntegerOverflowWhenPreviousInteger() {
+        //region when
+        logger.log("str 1");
+        logger.log(-10);
+        logger.log(Integer.MIN_VALUE);
+        logger.log("str 2");
+        logger.log(0);
+        logger.flush();
+        //endregion
+
+        //region then
+        assertSysoutEquals(
+                "string: str 1" + SEP +
+                        "primitive: -10" + SEP +
+                        "primitive: " + Integer.MIN_VALUE + SEP +
+                        "string: str 2" + SEP +
+                        "primitive: 0" + SEP
+        );
+        //endregion
+    }
+
+    @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
         logger.log("str 1");
@@ -89,6 +111,28 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
             "primitive: " + Byte.MAX_VALUE + SEP +
             "string: str 2"+ SEP +
             "primitive: 0" + SEP
+        );
+        //endregion
+    }
+
+    @Test
+    public void shouldLogCorrectlyByteOverflowWhenPreviousByte() {
+        //region when
+        logger.log("str 1");
+        logger.log((byte)-10);
+        logger.log((byte)Byte.MIN_VALUE);
+        logger.log("str 2");
+        logger.log(0);
+        logger.flush();
+        //endregion
+
+        //region then
+        assertSysoutEquals(
+                "string: str 1"+ SEP +
+                        "primitive: -10"+ SEP +
+                        "primitive: " + Byte.MIN_VALUE + SEP +
+                        "string: str 2"+ SEP +
+                        "primitive: 0" + SEP
         );
         //endregion
     }

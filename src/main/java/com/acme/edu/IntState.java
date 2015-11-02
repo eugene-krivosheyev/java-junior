@@ -21,10 +21,14 @@ public class IntState extends Printer implements LoggerState{
     }
 
     private void checkMaxAndOverFlow(int message) {
-        if (message == Integer.MAX_VALUE || message == Byte.MAX_VALUE) {
+        if (message == Integer.MAX_VALUE || message == Byte.MAX_VALUE || message == Integer.MIN_VALUE || message == Byte.MIN_VALUE) {
             flush();
         }
-        if (message + buffer < 0){
+
+        if ((long)message + buffer  > Integer.MAX_VALUE ){
+            flush();
+        }
+        if ((long)message + buffer  < Integer.MIN_VALUE ){
             flush();
         }
     }

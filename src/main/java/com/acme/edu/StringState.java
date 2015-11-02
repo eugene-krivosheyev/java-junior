@@ -11,6 +11,9 @@ public class StringState extends Printer implements LoggerState {
 
     @Override
     public void log(String message) {
+        if (message == null){
+            return;
+        }
         if (previousLine.equals(message)){
             buffer++;
         }else if (previousLine != ""){

@@ -8,7 +8,7 @@ package com.acme.edu;
  * @version 1.1 2 Nov 2015
  * @author Pavel Seregin
  */
-public class Logger {
+public class Logger implements LoggerState{
 
     //region fields
 
@@ -71,7 +71,7 @@ public class Logger {
      * @param message The <code>primitive: boolean</code> to be printed.
      */
     public void log(boolean message) {
-        print(Logger.PRIMITIVE + message);
+        Printer.print(Logger.PRIMITIVE + message);
     }
 
     /**
@@ -80,7 +80,7 @@ public class Logger {
      * @param message The <code>char: char</code> to be printed.
      */
     public void log(char message) {
-        print(Logger.CHAR + message);
+        Printer.print(Logger.CHAR + message);
     }
 
     /**
@@ -89,7 +89,7 @@ public class Logger {
      * @param message The <code>reference: Object</code> to be printed.
      */
     public void log(Object message) {
-        print(Logger.REFERENCE + message);
+        Printer.print(Logger.REFERENCE + message);
     }
 
     /**
@@ -103,7 +103,7 @@ public class Logger {
             sumElement += element;
         }
         if (sumElement != 0){
-            print(sumElement+"");
+            Printer.print(sumElement + "");
         }
 
         StringBuilder sb = new StringBuilder();
@@ -112,7 +112,7 @@ public class Logger {
             sb.append(", " + array[i]);
         }
         sb.append("}");
-        print(PRIMITIVES_ARRAY + sb.toString());
+        Printer.print(PRIMITIVES_ARRAY + sb.toString());
     }
 
     /**
@@ -131,7 +131,7 @@ public class Logger {
             sb.append("}" + SEP);
         }
         sb.append("}");
-        print(PRIMITIVES_MATRIX + sb.toString());
+        Printer.print(PRIMITIVES_MATRIX + sb.toString());
     }
 
     /**
@@ -150,7 +150,7 @@ public class Logger {
             sb.append("}" + SEP);
         }
         sb.append("}");
-        print(PRIMITIVES_MULTIMATRIX + sb.toString());
+        Printer.print(PRIMITIVES_MULTIMATRIX + sb.toString());
 
     }
 
@@ -160,7 +160,7 @@ public class Logger {
      */
     public void log(String... elements) {
         for (String str : elements) {
-            print(str);
+            Printer.print(str);
         }
     }
 
@@ -171,12 +171,6 @@ public class Logger {
         state.getLoggerState().flush();
     }
 
-    //region private method
-    private  void print(String massege) {
-        System.out.println(massege);
-    }
-
-    //endregion
 
     enum LoggerStateHolder{
         STRING_REPEAITING(new StringState()), //Подсчет повторяющихся строк
