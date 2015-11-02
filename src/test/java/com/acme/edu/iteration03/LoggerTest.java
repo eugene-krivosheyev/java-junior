@@ -25,7 +25,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-
+/*
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
@@ -66,7 +66,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutEquals(
             "primitives multimatrix: {" + SEP +
                 "{"+ SEP + "{"+ SEP + "{"+ SEP +
-                    "0" + SEP +
+                    "0"  + SEP +
                 "}"+ SEP + "}"+ SEP + "}"+ SEP +
             "}"+ SEP
         );
@@ -111,5 +111,5 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains(String.valueOf(11));
         //endregion
     }
-
+*/
 }

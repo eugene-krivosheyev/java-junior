@@ -1,9 +1,12 @@
 package com.acme.edu;
 
 
+
 /**
- * Log method overload
+ * Class Log method overload
  * Type conversion
+ * @version 1.1 2 Nov 2015
+ * @author Pavel Seregin
  */
 public class Logger {
 
@@ -17,12 +20,16 @@ public class Logger {
     private static final String PRIMITIVES_MATRIX = "primitives matrix: ";
     private static final String PRIMITIVES_MULTIMATRIX = "primitives multimatrix: ";
     private static final String SEP = System.lineSeparator();
+    private static String buffer;
+    private static Enum anEnum;
     private static String previousLine = "";
     private static int sum = -1;
     private static int countDuplicateString = 0;
+
+    private State state = State.SIMPLE_PRINT;
     //endregion
 
-    private Logger() {
+    public Logger() {
     }
 
     //
@@ -62,20 +69,12 @@ public class Logger {
      *
      * @param message The <code>primitive: int</code> to be printed.
      */
-    public static void log(int message) {
-        if (countDuplicateString >= 1) {
-            printDuplicateString();
+    public void log(int message) {
+        if (state != State.SIMPLE_PRINT ){
+            state.getSimplePrintState().flush();
+        }else{
+            state.getSimplePrintState().print(PRIMITIVE + message);
         }
-
-        if (sum == -1) {
-            print(PRIMITIVE + message);
-        } else if (checkMax(message) && message != 0) {
-            sum += message;
-        } else {
-            print(PRIMITIVE + message);
-            sum = -1;
-        }
-
     }
 
     /**
@@ -100,7 +99,6 @@ public class Logger {
         }
     }
 
-    //iteration03
 
     /**
      * Concatenation of symbols and array elements
@@ -149,7 +147,6 @@ public class Logger {
      *
      * @param multiMatrix print miltiMatrix
      */
-
     public static void log(int[][][][] multiMatrix) {
         StringBuilder sb = new StringBuilder();
         sb.append("{" + SEP);
@@ -167,8 +164,7 @@ public class Logger {
 
     /**
      * Print list of arguments type String
-     *
-     * @param elements array arguments
+     * @param elements The <code>String...</code> to be printed.
      */
     public static void log(String... elements) {
         for (String str : elements) {
@@ -179,13 +175,12 @@ public class Logger {
     /**
      * Clearing buffers
      */
-    public static void close() {
+    public static void flush() {
         printDuplicateString();
         previousLine = "";
         sum = -1;
         countDuplicateString = 0;
     }
-
 
     //region private method
     private static void print(String massege) {
@@ -226,4 +221,29 @@ public class Logger {
         return true;
     }
     //endregion
+
+    enum State{
+        STRING_CONCATE(new StringState()),
+        SUM_INTEGERS(new IntState()),
+        SIMPLE_PRINT(new SimplePrintState());
+        //    BUFFER
+
+        private SimplePrintState simplePrintState;
+
+        State(SimplePrintState simplePrintState) {
+            this.simplePrintState = simplePrintState;
+        }
+
+        public SimplePrintState getSimplePrintState() {
+            return simplePrintState;
+        }
+
+        State(IntState intState) {
+
+        }
+
+        State(StringState stringState) {
+
+        }
+    }
 }

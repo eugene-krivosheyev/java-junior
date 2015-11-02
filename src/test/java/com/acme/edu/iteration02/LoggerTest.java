@@ -11,10 +11,12 @@ import java.io.IOException;
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private static final String SEP = System.lineSeparator();
+    private Logger logger;
 
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
+        logger = new Logger();
         resetOut();
         captureSysout();
     }
@@ -30,11 +32,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
         Logger.log("str 1");
-        Logger.log(1);
-        Logger.log(2);
+        logger.log(1);
+        logger.log(2);
         Logger.log("str 2");
-        Logger.log(0);
-        Logger.close();
+        logger.log(0);
+        logger.flush();
         //endregion
 
         //region then
@@ -51,11 +53,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
         Logger.log("str 1");
-        Logger.log(10);
-        Logger.log(Integer.MAX_VALUE);
+        logger.log(10);
+        logger.log(Integer.MAX_VALUE);
         Logger.log("str 2");
-        Logger.log(0);
-        Logger.close();
+        logger.log(0);
+        logger.flush();
         //endregion
 
         //region then
@@ -73,11 +75,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
         Logger.log("str 1");
-        Logger.log((byte)10);
-        Logger.log((byte)Byte.MAX_VALUE);
+        logger.log((byte)10);
+        logger.log((byte)Byte.MAX_VALUE);
         Logger.log("str 2");
-        Logger.log(0);
-        Logger.close();
+        logger.log(0);
+        logger.flush();
         //endregion
 
         //region then
@@ -97,12 +99,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 1");
         Logger.log("str 2");
         Logger.log("str 2");
-        Logger.log(0);
+        logger.log(0);
         Logger.log("str 2");
         Logger.log("str 3");
         Logger.log("str 3");
         Logger.log("str 3");
-        Logger.close();
+        Logger.flush();
         //endregion
 
         //region then
@@ -115,4 +117,5 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
+
 }
