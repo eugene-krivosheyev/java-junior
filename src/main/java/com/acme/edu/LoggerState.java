@@ -11,6 +11,11 @@ interface LoggerState{
     String PRIMITIVES_ARRAY = "primitives array: ";
     String PRIMITIVES_MATRIX = "primitives matrix: ";
     String PRIMITIVES_MULTIMATRIX = "primitives multimatrix: ";
+    String SEP = System.lineSeparator();
+    void log(int[] array);
+    void log(int[][] matrix);
+    void log(int[][][][] multiMatrix);
+    void log(String... elements);
     void log(String message);
     void flush();
 }
