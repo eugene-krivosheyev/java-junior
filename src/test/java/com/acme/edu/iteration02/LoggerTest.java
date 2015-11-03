@@ -1,10 +1,12 @@
 package com.acme.edu.iteration02;
 
+
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import java.io.IOException;
 
@@ -165,7 +167,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogSameSubsequentStringsWithoutMultiRepeat() throws IOException {
         //region when
-        logger.log("str 1");
+        logger.log("");
         logger.log("str 2");
         logger.log("str 2");
         logger.log("str 3");
@@ -186,7 +188,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-                "string: str 1" + SEP +
                         "string: str 2 (x2)" + SEP +
                         "string: str 3" + SEP +
                         "string: str 2" + SEP +

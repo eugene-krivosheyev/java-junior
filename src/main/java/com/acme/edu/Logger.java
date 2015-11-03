@@ -8,18 +8,12 @@ package com.acme.edu;
  * @version 1.1 2 Nov 2015
  * @author Pavel Seregin
  */
-public class Logger{
+public class Logger implements LoggerState {
 
     //region fields
-
-    private static final String CHAR = "char: ";
-    private static final String REFERENCE = "reference: ";
-    private static final String PRIMITIVE = "primitive: ";
-    private static final String PRIMITIVES_ARRAY = "primitives array: ";
-    private static final String PRIMITIVES_MATRIX = "primitives matrix: ";
-    private static final String PRIMITIVES_MULTIMATRIX = "primitives multimatrix: ";
+    Printer printer = new Printer();
     private static final String SEP = System.lineSeparator();
-    private LoggerStateHolder state = LoggerStateHolder.SIMPLE_PRINT;
+    private LoggerStateHolder state = LoggerStateHolder.STRING_REPEAITING;
     //endregion
 
     public Logger() {
@@ -53,8 +47,9 @@ public class Logger{
      *
      * @param message If the input parameters are duplicated, The <code>string: String (x2)</code> to be printed.
      */
+    @Override
     public void log(String message) {
-        if (state != LoggerStateHolder.STRING_REPEAITING){
+        if (state != LoggerStateHolder.STRING_REPEAITING ){
             state.getLoggerState().flush();
             state = LoggerStateHolder.STRING_REPEAITING;
             state.loggerState.log(message);
@@ -71,7 +66,7 @@ public class Logger{
      * @param message The <code>primitive: boolean</code> to be printed.
      */
     public void log(boolean message) {
-        Printer.print(Logger.PRIMITIVE + message);
+        printer.print(Logger.PRIMITIVE + message);
     }
 
     /**
@@ -80,7 +75,7 @@ public class Logger{
      * @param message The <code>char: char</code> to be printed.
      */
     public void log(char message) {
-        Printer.print(Logger.CHAR + message);
+        printer.print(Logger.CHAR + message);
     }
 
     /**
@@ -89,7 +84,7 @@ public class Logger{
      * @param message The <code>reference: Object</code> to be printed.
      */
     public void log(Object message) {
-        Printer.print(Logger.REFERENCE + message);
+        printer.print(Logger.REFERENCE + message);
     }
 
     /**
@@ -103,7 +98,7 @@ public class Logger{
             sumElement += element;
         }
         if (sumElement != 0){
-            Printer.print(sumElement + "");
+            printer.print(sumElement + "");
         }
 
         StringBuilder sb = new StringBuilder();
@@ -112,7 +107,7 @@ public class Logger{
             sb.append(", " + array[i]);
         }
         sb.append("}");
-        Printer.print(PRIMITIVES_ARRAY + sb.toString());
+        printer.print(PRIMITIVES_ARRAY + sb.toString());
     }
 
     /**
@@ -131,7 +126,7 @@ public class Logger{
             sb.append("}" + SEP);
         }
         sb.append("}");
-        Printer.print(PRIMITIVES_MATRIX + sb.toString());
+        printer.print(PRIMITIVES_MATRIX + sb.toString());
     }
 
     /**
@@ -150,7 +145,7 @@ public class Logger{
             sb.append("}" + SEP);
         }
         sb.append("}");
-        Printer.print(PRIMITIVES_MULTIMATRIX + sb.toString());
+        printer.print(PRIMITIVES_MULTIMATRIX + sb.toString());
 
     }
 
@@ -160,13 +155,14 @@ public class Logger{
      */
     public void log(String... elements) {
         for (String str : elements) {
-            Printer.print(str);
+            printer.print(str);
         }
     }
 
     /**
      * Clearing buffers
      */
+    @Override
     public void flush() {
         state.getLoggerState().flush();
     }

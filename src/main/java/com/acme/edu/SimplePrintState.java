@@ -3,18 +3,17 @@ package com.acme.edu;
 /**
  * Created by Павел on 02.11.2015.
  */
-public class SimplePrintState extends Printer implements LoggerState{
-
-    private static final String PRIMITIVE = "primitive: ";
-
+public class SimplePrintState implements LoggerState{
+    Printer printer = new Printer();
     @Override
     public void log(String message) {
         if (message == null){
             return;
         }
-        Printer.print(PRIMITIVE +message);
+        printer.print(PRIMITIVE +message);
     }
 
+    //Утечка абстракции
     @Override
     public void flush() {
         return;

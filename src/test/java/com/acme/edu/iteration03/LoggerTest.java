@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private static final String SEP = System.lineSeparator();

@@ -4,8 +4,7 @@ package com.acme.edu;
  * Created by Павел on 02.11.2015.
  */
 public class IntState extends Printer implements LoggerState{
-
-    private static final String PRIMITIVE = "primitive: ";
+    Printer printer = new Printer();
     private int buffer = 0;
 
     @Override
@@ -16,7 +15,7 @@ public class IntState extends Printer implements LoggerState{
 
     @Override
     public void flush() {
-            Printer.print(PRIMITIVE + String.valueOf(buffer));
+            printer.print(PRIMITIVE + String.valueOf(buffer));
             buffer = 0;
     }
 
