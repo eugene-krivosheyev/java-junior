@@ -4,7 +4,11 @@ package com.acme.edu;
  * Created by Павел on 02.11.2015.
  */
 public class SimplePrintState implements LoggerState{
-    Printer printer = new Printer();
+    Printer printer;
+
+    public SimplePrintState(Printer mock) {
+        this.printer = mock;
+    }
 
     /**
      * Concatenation of symbols and array elements
@@ -81,9 +85,9 @@ public class SimplePrintState implements LoggerState{
 
     @Override
     public void log(String message) {
+
     }
 
-    //Утечка абстракции
     @Override
     public void flush() {
     }

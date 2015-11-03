@@ -4,8 +4,12 @@ package com.acme.edu;
  * Created by Павел on 02.11.2015.
  */
 public class IntState extends Printer implements LoggerState{
-    Printer printer = new Printer();
+    Printer printer;
     private int buffer = 0;
+
+    public IntState(Printer mock) {
+        this.printer = mock;
+    }
 
     @Override
     public void log(String message) {
@@ -34,17 +38,21 @@ public class IntState extends Printer implements LoggerState{
 
     @Override
     public void log(int[] array) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void log(int[][] matrix) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void log(int[][][][] multiMatrix) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void log(String... elements) {
+        throw new UnsupportedOperationException();
     }
 }

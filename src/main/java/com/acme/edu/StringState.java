@@ -4,9 +4,13 @@ package com.acme.edu;
  * Created by Павел on 02.11.2015.
  */
 public class StringState implements LoggerState {
-    Printer printer = new Printer();
+    Printer printer;
     private static String previousLine = "";
     private int buffer = 1;
+
+    public StringState(Printer mock) {
+        this.printer = mock;
+    }
 
     @Override
     public void log(String message) {
@@ -34,6 +38,7 @@ public class StringState implements LoggerState {
 
     @Override
     public void log(int[] array) {
+
     }
 
     @Override

@@ -3,11 +3,12 @@ package com.acme.edu;
 /**
  * Created by Павел on 03.11.2015.
  */
+//отрефакторить в фабрику!!!!
 public enum LoggerStateHolder {
 
-    STRING_REPEAITING(new StringState()), //Подсчет повторяющихся строк
-    SUM_INTEGERS(new IntState()),         //Суммирование целых чисел
-    SIMPLE_PRINT(new SimplePrintState()); //Простой вывод
+    STRING_REPEAITING(new StringState(null)), //Подсчет повторяющихся строк
+    SUM_INTEGERS(new IntState(null)),         //Суммирование целых чисел
+    SIMPLE_PRINT(new SimplePrintState(null)); //Простой вывод чисел
 
     LoggerState loggerState = null;
 
