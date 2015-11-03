@@ -34,21 +34,17 @@ public class StringState implements LoggerState {
 
     @Override
     public void log(int[] array) {
-        return;
     }
 
     @Override
     public void log(int[][] matrix) {
-        return;
     }
 
     @Override
     public void log(int[][][][] multiMatrix) {
-        return;
     }
 
     @Override
     public void log(String... elements) {
-        return;
     }
 }

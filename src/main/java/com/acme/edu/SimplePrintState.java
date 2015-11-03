@@ -8,9 +8,9 @@ public class SimplePrintState implements LoggerState{
 
     /**
      * Concatenation of symbols and array elements
-     *
      * @param array print array
      */
+    @Override
     public void log(int[] array) {
         int sumElement = 0;
         for (int element : array) {
@@ -31,9 +31,9 @@ public class SimplePrintState implements LoggerState{
 
     /**
      * Concatenation of symbols and array elements
-     *
      * @param matrix print the array in the array
      */
+    @Override
     public void log(int[][] matrix) {
         StringBuilder sb = new StringBuilder();
         sb.append("{" + SEP);
@@ -50,9 +50,9 @@ public class SimplePrintState implements LoggerState{
 
     /**
      * Concatenation of symbols and array element
-     *
      * @param multiMatrix print miltiMatrix
      */
+    @Override
     public void log(int[][][][] multiMatrix) {
         StringBuilder sb = new StringBuilder();
         sb.append("{" + SEP);
@@ -72,6 +72,7 @@ public class SimplePrintState implements LoggerState{
      * Print list of arguments type String
      * @param elements The <code>String...</code> to be printed.
      */
+    @Override
     public void log(String... elements) {
         for (String str : elements) {
             printer.print(str);
@@ -80,13 +81,11 @@ public class SimplePrintState implements LoggerState{
 
     @Override
     public void log(String message) {
-        return;
     }
 
     //Утечка абстракции
     @Override
     public void flush() {
-        return;
     }
 
 }

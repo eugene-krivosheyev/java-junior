@@ -22,7 +22,6 @@ public class Logger implements LoggerState {
      * If no duplicates, prints one line.
      * Considers the sum of consecutive integers,
      * If numbers are not consecutive, print the input value.
-     *
      * @param message The <code>primitive: int</code> to be printed.
      */
     public void log(int message) {
@@ -58,7 +57,6 @@ public class Logger implements LoggerState {
 
     /**
      * Prints an boolean and prefix of the "primitive: "
-     *
      * @param message The <code>primitive: boolean</code> to be printed.
      */
     public void log(boolean message) {
@@ -88,6 +86,7 @@ public class Logger implements LoggerState {
      *
      * @param array print array
      */
+    @Override
     public void log(int[] array) {
         state = LoggerStateHolder.SIMPLE_PRINT;
         state.getLoggerState().log(array);
@@ -97,6 +96,7 @@ public class Logger implements LoggerState {
      * Concatenation of symbols and array elements
      * @param matrix print the array in the array
      */
+    @Override
     public void log(int[][] matrix) {
         state = LoggerStateHolder.SIMPLE_PRINT;
         state.getLoggerState().log(matrix);
@@ -106,6 +106,7 @@ public class Logger implements LoggerState {
      * Concatenation of symbols and array element
      * @param multiMatrix print miltiMatrix
      */
+    @Override
     public void log(int[][][][] multiMatrix) {
         state = LoggerStateHolder.SIMPLE_PRINT;
         state.getLoggerState().log(multiMatrix);
@@ -115,6 +116,7 @@ public class Logger implements LoggerState {
      * Print list of arguments type String
      * @param elements The <code>String...</code> to be printed.
      */
+    @Override
     public void log(String... elements) {
         state = LoggerStateHolder.SIMPLE_PRINT;
         state.getLoggerState().log(elements);
