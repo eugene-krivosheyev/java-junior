@@ -15,6 +15,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
+    /*
     @Test
     public void shouldLogInteger() throws IOException {
         //region when
