@@ -61,7 +61,7 @@ public class StringState implements LoggerState {
      */
     @Override
     public void log(int[] array) {
-        throw new UnsupportedOperationException();
+        return;
     }
 
     /**

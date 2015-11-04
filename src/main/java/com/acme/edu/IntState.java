@@ -64,7 +64,8 @@ public class IntState extends Printer implements LoggerState{
      */
     @Override
     public void log(int[] array) {
-        throw new UnsupportedOperationException();
+
+        return;
     }
 
     /**
@@ -73,7 +74,7 @@ public class IntState extends Printer implements LoggerState{
      */
     @Override
     public void log(int[][] matrix) {
-        throw new UnsupportedOperationException();
+        return;
     }
 
     /**

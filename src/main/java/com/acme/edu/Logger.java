@@ -10,7 +10,7 @@ public class Logger implements LoggerState {
 
     //region fields
     Printer printer;
-    Factory factory = new Factory();
+    Factory factory;
     //endregion
 
     //region constructor
@@ -20,6 +20,11 @@ public class Logger implements LoggerState {
      */
     public Logger(Printer printer) {
         this.printer = printer;
+    }
+
+    public Logger(Printer printer, Factory factory){
+        this.printer = printer;
+        this.factory = factory;
     }
     //endregion
 
@@ -77,6 +82,7 @@ public class Logger implements LoggerState {
     public void log(String message) {
         if (factory.getState() == LoggerStateHolder.SIMPLE_PRINT){
             factory.setStringState();
+            factory.loggerState.log(message);
         }else if (factory.getState() != LoggerStateHolder.STRING_REPEAITING ){
             factory.loggerState.flush();
             factory.setStringState();

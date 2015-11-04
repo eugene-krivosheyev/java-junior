@@ -1,5 +1,8 @@
 package com.acme.edu;
 
+/**
+ * Contains prefix and behavior of logger
+ */
 public interface LoggerState{
 
     //region constants

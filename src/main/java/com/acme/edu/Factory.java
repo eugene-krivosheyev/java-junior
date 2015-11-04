@@ -6,10 +6,23 @@ package com.acme.edu;
 public class Factory {
 
     //region fields
+
+    private IntState intState;
+    private StringState stringState;
+    private SimplePrintState simplePrintState;
     /**
      * switch States
      */
-    LoggerState loggerState =  new StringState(new Printer());
+    public LoggerState loggerState;
+    //endregion
+
+
+    //region constructor
+    public Factory(IntState intState, StringState stringState, SimplePrintState simplePrintState) {
+        this.intState = intState;
+        this.stringState = stringState;
+        this.simplePrintState = simplePrintState;
+    }
     //endregion
 
     //region setter
@@ -18,7 +31,7 @@ public class Factory {
      * The sum of integers
      */
     public void setIntState() {
-        this.loggerState = new IntState(new Printer());
+        this.loggerState = intState;
     }
 
     /**
@@ -26,7 +39,7 @@ public class Factory {
      * Counting duplicate rows
      */
     public void setStringState() {
-        this.loggerState = new StringState(new Printer());
+        this.loggerState = stringState;
     }
 
     /**
@@ -34,7 +47,7 @@ public class Factory {
      * Easy printing
      */
     public void setSimplePrintState() {
-        this.loggerState = new SimplePrintState(new Printer());
+        this.loggerState = simplePrintState;
     }
     //endregion
 
