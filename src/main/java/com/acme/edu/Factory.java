@@ -1,7 +1,7 @@
 package com.acme.edu;
 
 /**
- * Created by Павел on 04.11.2015.
+ * Factory conditions
  */
 public class Factory {
 
@@ -9,7 +9,7 @@ public class Factory {
     /**
      * switch States
      */
-    public LoggerState loggerState =  new StringState(new Printer());
+    LoggerState loggerState =  new StringState(new Printer());
     //endregion
 
     //region setter

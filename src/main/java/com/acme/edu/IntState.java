@@ -11,18 +11,31 @@ public class IntState extends Printer implements LoggerState{
     //endregion
 
     //region constructor
+
+    /**
+     * Setting the object Printer
+     * @param printer
+     */
     public IntState(Printer printer) {
         this.printer = printer;
     }
     //endregion
 
     //region methods
+
+    /**
+     * Finds the sum of integers
+     * @param message
+     */
     @Override
     public void log(String message) {
         checkMaxAndOverFlow(Integer.parseInt(message));
         buffer += Integer.parseInt(message);
     }
 
+    /**
+     * Clearing buffers
+     */
     @Override
     public void flush() {
             printer.print(PRIMITIVE + String.valueOf(buffer));
@@ -44,21 +57,38 @@ public class IntState extends Printer implements LoggerState{
     //endregion
 
     //region leak abstractions
+
+    /**
+     * Leak abstractions
+     * @param array
+     */
     @Override
     public void log(int[] array) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Leak abstractions
+     * @param matrix
+     */
     @Override
     public void log(int[][] matrix) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Leak abstractions
+     * @param multiMatrix
+     */
     @Override
     public void log(int[][][][] multiMatrix) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Leak abstractions
+     * @param elements
+     */
     @Override
     public void log(String... elements) {
         throw new UnsupportedOperationException();

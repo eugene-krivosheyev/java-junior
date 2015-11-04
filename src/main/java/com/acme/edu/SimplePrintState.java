@@ -9,7 +9,12 @@ public class SimplePrintState implements LoggerState{
     private Printer printer;
     //endregion
 
+
     //region constructor
+    /**
+     * Setting the object Printer
+     * @param printer
+     */
     public SimplePrintState(Printer printer) {
         this.printer = printer;
     }
@@ -91,13 +96,22 @@ public class SimplePrintState implements LoggerState{
     //endregion
 
     //region leak abstractions
+
+    /**
+     * Leak abstractions
+     * @param message
+     */
     @Override
     public void log(String message) {
-
+        throw new UnsupportedOperationException();
     }
 
+    /**
+     * Leak abstractions
+     */
     @Override
     public void flush() {
+        throw new UnsupportedOperationException();
     }
     //endregion
 

@@ -49,7 +49,6 @@ public class Logger implements LoggerState {
 
     /**
      * Prints an char and prefix of the "char: "
-     *
      * @param message The <code>char: char</code> to be printed.
      */
     public void log(char message) {
@@ -58,7 +57,6 @@ public class Logger implements LoggerState {
 
     /**
      * Prints an Object and prefix of the "reference: "
-     *
      * @param message The <code>reference: Object</code> to be printed.
      */
     public void log(Object message) {
@@ -133,5 +131,4 @@ public class Logger implements LoggerState {
         factory.loggerState.flush();
     }
     //endregion
-
 }

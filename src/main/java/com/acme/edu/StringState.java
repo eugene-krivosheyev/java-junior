@@ -12,12 +12,22 @@ public class StringState implements LoggerState {
     //endregion
 
     //region constructor
+    /**
+     * Setting the object Printer
+     * @param printer
+     */
     public StringState(Printer printer) {
         this.printer = printer;
     }
     //endregion
 
     //region methods
+
+    /**
+     * Counts the number of duplicate rows in a buffer.
+     * If there are no duplicates, then the buffer is reset.
+     * @param message
+     */
     @Override
     public void log(String message) {
         if (message.isEmpty()){
@@ -31,6 +41,9 @@ public class StringState implements LoggerState {
         previousLine = message;
     }
 
+    /**
+     * Clearing buffers
+     */
     @Override
     public void flush() {
         if (buffer == 1 && !previousLine.isEmpty()){
@@ -44,21 +57,41 @@ public class StringState implements LoggerState {
     //endregion
 
     //region leak abstractions
+
+    /**
+     * Leak abstractions
+     * @param array
+     */
     @Override
     public void log(int[] array) {
-
+        throw new UnsupportedOperationException();
     }
 
+    /**
+     * Leak abstractions
+     * @param matrix
+     */
     @Override
     public void log(int[][] matrix) {
+        throw new UnsupportedOperationException();
     }
 
+    /**
+     * Leak abstractions
+     * @param multiMatrix
+     */
     @Override
     public void log(int[][][][] multiMatrix) {
+        throw new UnsupportedOperationException();
     }
 
+    /**
+     * Leak abstractions
+     * @param elements
+     */
     @Override
     public void log(String... elements) {
+        throw new UnsupportedOperationException();
     }
     //endregion
 }

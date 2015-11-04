@@ -1,7 +1,7 @@
 package com.acme.edu;
 
 /**
- * Created by Павел on 02.11.2015.
+ * The output in the console
  */
 public class Printer implements Printable{
     @Override

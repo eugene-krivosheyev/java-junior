@@ -1,9 +1,8 @@
 package com.acme.edu;
 
 /**
- * Created by Павел on 03.11.2015.
+ * The names of States
  */
-
 public enum LoggerStateHolder {
 
     STRING_REPEAITING,    //Подсчет повторяющихся строк
