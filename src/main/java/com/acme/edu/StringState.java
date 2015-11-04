@@ -30,9 +30,6 @@ public class StringState implements LoggerState {
      */
     @Override
     public void log(String message) {
-        if (message.isEmpty()){
-            return;
-        }
         if (previousLine.equals(message)){
             buffer++;
         }else if (previousLine != ""){
@@ -91,7 +88,7 @@ public class StringState implements LoggerState {
      */
     @Override
     public void log(String... elements) {
-        throw new UnsupportedOperationException();
+        return;
     }
     //endregion
 }

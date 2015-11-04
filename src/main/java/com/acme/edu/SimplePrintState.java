@@ -33,15 +33,16 @@ public class SimplePrintState implements LoggerState{
         }
         if (sumElement != 0){
             printer.print(sumElement + "");
-        }
+        }else {
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("{"+ array[0]);
-        for (int i = 1; i < array.length; i++) {
-            sb.append(", " + array[i]);
+            StringBuilder sb = new StringBuilder();
+            sb.append("{" + array[0]);
+            for (int i = 1; i < array.length; i++) {
+                sb.append(", " + array[i]);
+            }
+            sb.append("}");
+            printer.print(PRIMITIVES_ARRAY + sb.toString());
         }
-        sb.append("}");
-        printer.print(PRIMITIVES_ARRAY + sb.toString());
     }
 
     /**

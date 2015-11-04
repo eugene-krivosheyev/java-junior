@@ -1,6 +1,6 @@
 package com.acme.edu;
 
-interface LoggerState{
+public interface LoggerState{
 
     //region constants
     String CHAR = "char: ";
@@ -14,11 +14,40 @@ interface LoggerState{
     //endregion
 
     //region operations
+
+    /**
+     * Operations on the array
+     * @param array
+     */
     void log(int[] array);
+
+    /**
+     * Operations on the matrix
+     * @param matrix
+     */
     void log(int[][] matrix);
+
+    /**
+     * Operations on the multiMatrix
+     * @param multiMatrix
+     */
     void log(int[][][][] multiMatrix);
+
+    /**
+     * Operations on the list of arguments type String
+     * @param elements
+     */
     void log(String... elements);
+
+    /**
+     * Print message
+     * @param message
+     */
     void log(String message);
+
+    /**
+     * Clearing buffers
+     */
     void flush();
     //endregion
 }

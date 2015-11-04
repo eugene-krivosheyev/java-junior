@@ -14,6 +14,10 @@ public class Logger implements LoggerState {
     //endregion
 
     //region constructor
+    /**
+     * Setting the object Printer
+     * @param printer
+     */
     public Logger(Printer printer) {
         this.printer = printer;
     }
@@ -84,7 +88,6 @@ public class Logger implements LoggerState {
 
     /**
      * Concatenation of symbols and array elements
-     *
      * @param array print array
      */
     @Override
