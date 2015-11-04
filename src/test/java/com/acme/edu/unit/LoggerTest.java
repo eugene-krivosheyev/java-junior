@@ -4,10 +4,8 @@ import com.acme.edu.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 
@@ -19,6 +17,7 @@ public class LoggerTest {
     private IntState sutIntState;
     private SimplePrintState sutSimplePrintState;
     private StringState sutStringState;
+
     //region given
     @Before
     public void setUpSystemOut() throws IOException {

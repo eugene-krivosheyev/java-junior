@@ -4,12 +4,18 @@ package com.acme.edu;
  * Created by Павел on 02.11.2015.
  */
 public class SimplePrintState implements LoggerState{
-    Printer printer;
 
-    public SimplePrintState(Printer mock) {
-        this.printer = mock;
+    //region fields
+    private Printer printer;
+    //endregion
+
+    //region constructor
+    public SimplePrintState(Printer printer) {
+        this.printer = printer;
     }
+    //endregion
 
+    //region methods
     /**
      * Concatenation of symbols and array elements
      * @param array print array
@@ -82,7 +88,9 @@ public class SimplePrintState implements LoggerState{
             printer.print(str);
         }
     }
+    //endregion
 
+    //region leak abstractions
     @Override
     public void log(String message) {
 
@@ -91,5 +99,6 @@ public class SimplePrintState implements LoggerState{
     @Override
     public void flush() {
     }
+    //endregion
 
 }

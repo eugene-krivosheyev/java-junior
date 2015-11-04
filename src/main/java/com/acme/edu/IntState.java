@@ -4,13 +4,19 @@ package com.acme.edu;
  * Created by Павел on 02.11.2015.
  */
 public class IntState extends Printer implements LoggerState{
-    Printer printer;
+
+    //region fields
+    private Printer printer;
     private int buffer = 0;
+    //endregion
 
-    public IntState(Printer mock) {
-        this.printer = mock;
+    //region constructor
+    public IntState(Printer printer) {
+        this.printer = printer;
     }
+    //endregion
 
+    //region methods
     @Override
     public void log(String message) {
         checkMaxAndOverFlow(Integer.parseInt(message));
@@ -24,7 +30,7 @@ public class IntState extends Printer implements LoggerState{
     }
 
     private void checkMaxAndOverFlow(int message) {
-        if (message == Integer.MAX_VALUE || message == Byte.MAX_VALUE || message == Integer.MIN_VALUE || message == Byte.MIN_VALUE) {
+        if (message == Integer.MAX_VALUE || message == Integer.MIN_VALUE) {
             flush();
         }
 
@@ -35,7 +41,9 @@ public class IntState extends Printer implements LoggerState{
             flush();
         }
     }
+    //endregion
 
+    //region leak abstractions
     @Override
     public void log(int[] array) {
         throw new UnsupportedOperationException();
@@ -55,4 +63,5 @@ public class IntState extends Printer implements LoggerState{
     public void log(String... elements) {
         throw new UnsupportedOperationException();
     }
+    //endregion
 }

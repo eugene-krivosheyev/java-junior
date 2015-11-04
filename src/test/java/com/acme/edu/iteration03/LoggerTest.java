@@ -1,6 +1,7 @@
 package com.acme.edu.iteration03;
 
 import com.acme.edu.Logger;
+import com.acme.edu.Printer;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
@@ -16,7 +17,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
-        logger = new Logger();
+        logger = new Logger(new Printer());
         resetOut();
         captureSysout();
     }

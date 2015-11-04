@@ -9,14 +9,17 @@ package com.acme.edu;
 public class Logger implements LoggerState {
 
     //region fields
-    Printer printer = new Printer();
-
-    private LoggerStateHolder state = LoggerStateHolder.STRING_REPEAITING;
+    Printer printer;
+    Factory factory = new Factory();
     //endregion
 
-    public Logger() {
+    //region constructor
+    public Logger(Printer printer) {
+        this.printer = printer;
     }
+    //endregion
 
+    //region methods
     /**
      * Print duplicate rows.
      * If no duplicates, prints one line.
@@ -25,33 +28,14 @@ public class Logger implements LoggerState {
      * @param message The <code>primitive: int</code> to be printed.
      */
     public void log(int message) {
-        if (state == LoggerStateHolder.SIMPLE_PRINT){
-            state = LoggerStateHolder.SUM_INTEGERS;
-        }else if (state == LoggerStateHolder.SUM_INTEGERS) {
-            state.loggerState.log(String.valueOf(message));
-        } else if (state == LoggerStateHolder.STRING_REPEAITING){
-            state.getLoggerState().flush();
-            state = LoggerStateHolder.SUM_INTEGERS;
-            state.loggerState.log(String.valueOf(message));
-        }
-    }
-
-    /**
-     * Print the sum of consecutive integers and prefix of the "primitive: "
-     * Print string and considers the sum of duplication string and prefix of the "string: "
-     * if you enter "null", the method will fail.
-     * @param message If the input parameters are duplicated, The <code>string: String (x2)</code> to be printed.
-     */
-    @Override
-    public void log(String message) {
-        if (state == LoggerStateHolder.SIMPLE_PRINT){
-            state = LoggerStateHolder.STRING_REPEAITING;
-        }else if (state != LoggerStateHolder.STRING_REPEAITING ){
-            state.getLoggerState().flush();
-            state = LoggerStateHolder.STRING_REPEAITING;
-            state.loggerState.log(message);
-        }else{
-            state.getLoggerState().log(message);
+        if (factory.getState() == LoggerStateHolder.SIMPLE_PRINT){
+            factory.setIntState();
+        }else if (factory.getState() == LoggerStateHolder.SUM_INTEGERS) {
+            factory.loggerState.log(String.valueOf(message));
+        }else if (factory.getState() == LoggerStateHolder.STRING_REPEAITING){
+            factory.loggerState.flush();
+            factory.setIntState();
+            factory.loggerState.log(String.valueOf(message));
         }
     }
 
@@ -82,14 +66,33 @@ public class Logger implements LoggerState {
     }
 
     /**
+     * Print the sum of consecutive integers and prefix of the "primitive: "
+     * Print string and considers the sum of duplication string and prefix of the "string: "
+     * if you enter "null", the method will fail.
+     * @param message If the input parameters are duplicated, The <code>string: String (x2)</code> to be printed.
+     */
+    @Override
+    public void log(String message) {
+        if (factory.getState() == LoggerStateHolder.SIMPLE_PRINT){
+            factory.setStringState();
+        }else if (factory.getState() != LoggerStateHolder.STRING_REPEAITING ){
+            factory.loggerState.flush();
+            factory.setStringState();
+            factory.loggerState.log(message);
+        }else{
+            factory.loggerState.log(message);
+        }
+    }
+
+    /**
      * Concatenation of symbols and array elements
      *
      * @param array print array
      */
     @Override
     public void log(int[] array) {
-        state = LoggerStateHolder.SIMPLE_PRINT;
-        state.getLoggerState().log(array);
+        factory.setSimplePrintState();
+        factory.loggerState.log(array);
     }
 
     /**
@@ -98,8 +101,8 @@ public class Logger implements LoggerState {
      */
     @Override
     public void log(int[][] matrix) {
-        state = LoggerStateHolder.SIMPLE_PRINT;
-        state.getLoggerState().log(matrix);
+        factory.setSimplePrintState();
+        factory.loggerState.log(matrix);
     }
 
     /**
@@ -108,8 +111,8 @@ public class Logger implements LoggerState {
      */
     @Override
     public void log(int[][][][] multiMatrix) {
-        state = LoggerStateHolder.SIMPLE_PRINT;
-        state.getLoggerState().log(multiMatrix);
+        factory.setSimplePrintState();
+        factory.loggerState.log(multiMatrix);
     }
 
     /**
@@ -118,8 +121,8 @@ public class Logger implements LoggerState {
      */
     @Override
     public void log(String... elements) {
-        state = LoggerStateHolder.SIMPLE_PRINT;
-        state.getLoggerState().log(elements);
+        factory.setSimplePrintState();
+        factory.loggerState.log(elements);
     }
 
     /**
@@ -127,7 +130,8 @@ public class Logger implements LoggerState {
      */
     @Override
     public void flush() {
-        state.getLoggerState().flush();
+        factory.loggerState.flush();
     }
+    //endregion
 
 }

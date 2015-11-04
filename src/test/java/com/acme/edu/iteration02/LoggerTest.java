@@ -2,13 +2,13 @@ package com.acme.edu.iteration02;
 
 
 import com.acme.edu.Logger;
+import com.acme.edu.Printer;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Ignore;
 
-@Ignore
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private static final String SEP = System.lineSeparator();
@@ -17,7 +17,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
     public void setUpSystemOut(){
-        logger = new Logger();
+        logger = new Logger(new Printer());
         resetOut();
         captureSysout();
     }
@@ -89,50 +89,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
                         "primitive: -10" + SEP +
                         "primitive: " + Integer.MIN_VALUE + SEP +
                         "string: str 2" + SEP +
-                        "primitive: 0" + SEP
-        );
-        //endregion
-    }
-
-    @Test
-    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
-        //region when
-        logger.log("str 1");
-        logger.log((byte)10);
-        logger.log((byte)Byte.MAX_VALUE);
-        logger.log("str 2");
-        logger.log(0);
-        logger.flush();
-        //endregion
-
-        //region then
-        assertSysoutEquals(
-            "string: str 1"+ SEP +
-            "primitive: 10"+ SEP +
-            "primitive: " + Byte.MAX_VALUE + SEP +
-            "string: str 2"+ SEP +
-            "primitive: 0" + SEP
-        );
-        //endregion
-    }
-
-    @Test
-    public void shouldLogCorrectlyByteOverflowWhenPreviousByte() {
-        //region when
-        logger.log("str 1");
-        logger.log((byte)-10);
-        logger.log((byte)Byte.MIN_VALUE);
-        logger.log("str 2");
-        logger.log(0);
-        logger.flush();
-        //endregion
-
-        //region then
-        assertSysoutEquals(
-                "string: str 1"+ SEP +
-                        "primitive: -10"+ SEP +
-                        "primitive: " + Byte.MIN_VALUE + SEP +
-                        "string: str 2"+ SEP +
                         "primitive: 0" + SEP
         );
         //endregion

@@ -4,14 +4,20 @@ package com.acme.edu;
  * Created by Павел on 02.11.2015.
  */
 public class StringState implements LoggerState {
-    Printer printer;
+
+    //region fiends
+    private Printer printer;
     private static String previousLine = "";
     private int buffer = 1;
+    //endregion
 
-    public StringState(Printer mock) {
-        this.printer = mock;
+    //region constructor
+    public StringState(Printer printer) {
+        this.printer = printer;
     }
+    //endregion
 
+    //region methods
     @Override
     public void log(String message) {
         if (message.isEmpty()){
@@ -35,7 +41,9 @@ public class StringState implements LoggerState {
         buffer = 1;
         previousLine = "";
     }
+    //endregion
 
+    //region leak abstractions
     @Override
     public void log(int[] array) {
 
@@ -52,4 +60,5 @@ public class StringState implements LoggerState {
     @Override
     public void log(String... elements) {
     }
+    //endregion
 }
