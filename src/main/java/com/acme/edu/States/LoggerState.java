@@ -22,7 +22,7 @@ public interface LoggerState{
      * Print message
      * @param message
      */
-    void log(String message) throws LogException, com.acme.edu.IllegalArgumentException;
+    void log(String message) throws LogException;
 
     /**
      * Clearing buffers

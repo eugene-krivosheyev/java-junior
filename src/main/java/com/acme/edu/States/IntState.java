@@ -2,7 +2,7 @@ package com.acme.edu.states;
 
 import com.acme.edu.LogException;
 import com.acme.edu.printer.Printable;
-import javafx.fxml.LoadException;
+import com.acme.edu.printer.PrinterException;
 
 /**
  * Created by Павел on 02.11.2015.
@@ -46,10 +46,10 @@ public class IntState implements LoggerState {
     public void flush() throws LogException {
         try {
             printer.print(PRIMITIVE + String.valueOf(buffer));
-        } catch (LoadException e) {
+            buffer = 0;
+        } catch (PrinterException e) {
             throw new LogException(e);
         }
-        buffer = 0;
     }
 
     private void checkMaxAndOverFlow(int message) throws LogException {

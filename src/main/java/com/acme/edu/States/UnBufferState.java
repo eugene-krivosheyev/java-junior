@@ -2,6 +2,7 @@ package com.acme.edu.states;
 
 import com.acme.edu.LogException;
 import com.acme.edu.printer.Printable;
+import com.acme.edu.printer.PrinterException;
 import javafx.fxml.LoadException;
 
 /**
@@ -37,25 +38,21 @@ public class UnBufferState implements LoggerState {
         for (int element : array) {
             sumElement += element;
         }
-        if (sumElement != 0) {
-            try {
-                printer.print(sumElement + "");
-            }catch (LoadException e){
-                throw new LogException(e);
-            }
-        } else {
 
-            StringBuilder sb = new StringBuilder();
-            sb.append("{" + array[0]);
-            for (int i = 1; i < array.length; i++) {
-                sb.append(", " + array[i]);
-            }
-            sb.append("}");
-            try {
+        try {
+            if (sumElement != 0) {
+                printer.print(sumElement + "");
+            } else {
+                StringBuilder sb = new StringBuilder();
+                sb.append("{" + array[0]);
+                for (int i = 1; i < array.length; i++) {
+                    sb.append(", " + array[i]);
+                }
+                sb.append("}");
                 printer.print(PRIMITIVES_ARRAY + sb.toString());
-            } catch (LoadException e) {
-                throw new LogException(e);
             }
+        } catch (PrinterException e) {
+            throw new LogException(e);
         }
     }
 
@@ -78,7 +75,7 @@ public class UnBufferState implements LoggerState {
         sb.append("}");
         try {
             printer.print(PRIMITIVES_MATRIX + sb.toString());
-        } catch (LoadException e) {
+        } catch (PrinterException e) {
             throw new LogException(e);
         }
     }
@@ -88,7 +85,7 @@ public class UnBufferState implements LoggerState {
      *
      * @param multiMatrix print miltiMatrix
      */
-    public void log(int[][][][] multiMatrix) throws LogException{
+    public void log(int[][][][] multiMatrix) throws LogException {
         StringBuilder sb = new StringBuilder();
         sb.append("{" + SEP);
         for (int i = 0; i < 3; i++) {
@@ -101,7 +98,7 @@ public class UnBufferState implements LoggerState {
         sb.append("}");
         try {
             printer.print(PRIMITIVES_MULTIMATRIX + sb.toString());
-        }catch (LoadException e){
+        } catch (PrinterException e) {
             throw new LogException(e);
         }
     }
@@ -113,13 +110,14 @@ public class UnBufferState implements LoggerState {
      */
     //отрефакторить!!!
     public void log(String... elements) throws LogException {
-        for (String str : elements) {
-            try {
+        try {
+            for (String str : elements) {
                 printer.print(str);
-            } catch (LoadException e) {
-                throw new LogException(e);
             }
+        }catch (PrinterException e){
+            throw new LogException(e);
         }
+
     }
 
     /**
@@ -131,7 +129,7 @@ public class UnBufferState implements LoggerState {
     public void log(String message) throws LogException {
         try {
             printer.print(message);
-        } catch (LoadException e) {
+        } catch (PrinterException e) {
             throw new LogException(e);
         }
     }

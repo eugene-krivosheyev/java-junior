@@ -2,7 +2,7 @@ package com.acme.edu.states;
 
 import com.acme.edu.LogException;
 import com.acme.edu.printer.Printable;
-import javafx.fxml.LoadException;
+import com.acme.edu.printer.PrinterException;
 
 /**
  * Created by Павел on 02.11.2015.
@@ -47,18 +47,16 @@ public class StringState implements LoggerState {
      */
     @Override
     public void flush() throws LogException {
-        if (buffer == 1 && !previousLine.isEmpty()){
-            try {
+        try {
+            if (buffer == 1 && !previousLine.isEmpty()) {
                 printer.print(STRING + previousLine);
-            }catch (LoadException e){
-                throw new LogException(e);
-            }
-        }else if(buffer > 1 ){
-            try {
+
+            } else if (buffer > 1) {
                 printer.print(String.format("%s%s (x%d)", STRING, previousLine, buffer));
-            }catch (LoadException e){
-                throw new LogException(e);
+
             }
+        }catch (PrinterException e){
+            throw new LogException(e);
         }
         buffer = 1;
         previousLine = "";

@@ -37,7 +37,7 @@ public class Logger implements LoggerState {
      * If numbers are not consecutive, print the input value.
      * @param message The <code>primitive: int</code> to be printed.
      */
-    public void log(int message) throws LogException, IllegalArgumentException {
+    public void log(int message) throws LogException {
         if (state != factory.getIntState()){
             state.flush();
             state  = factory.getIntState();
@@ -54,7 +54,7 @@ public class Logger implements LoggerState {
      * @param message If the input parameters are duplicated, The <code>string: String (x2)</code> to be printed.
      */
     @Override
-    public void log(String message) throws LogException, IllegalArgumentException {
+    public void log(String message) throws LogException {
         if (message == null || message.isEmpty()){
             throw new LogException(new IllegalArgumentException());
         }
@@ -91,7 +91,7 @@ public class Logger implements LoggerState {
      */
     public void log(Object message) throws LogException{
         if (message == null){
-            throw new LogException( new IllegalArgumentException());
+            throw new LogException(new IllegalArgumentException());
         }
         factory.getUnBufferState().log(REFERENCE + String.valueOf(message));
     }
