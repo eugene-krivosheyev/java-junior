@@ -1,6 +1,6 @@
 package com.acme.edu.states;
 
-import com.acme.edu.exceptions.*;
+import com.acme.edu.*;
 
 /**
  * Contains prefix and behavior of logger
@@ -22,7 +22,7 @@ public interface LoggerState{
      * Print message
      * @param message
      */
-    void log(String message) throws LogException, com.acme.edu.exceptions.IllegalArgumentException;
+    void log(String message) throws LogException, com.acme.edu.IllegalArgumentException;
 
     /**
      * Clearing buffers

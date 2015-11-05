@@ -1,4 +1,4 @@
-package com.acme.edu.exceptions;
+package com.acme.edu;
 
 /**
  * Created by Павел on 05.11.2015.

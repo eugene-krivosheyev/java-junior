@@ -1,6 +1,7 @@
 package com.acme.edu.unit;
 
 import com.acme.edu.*;
+import com.acme.edu.IllegalArgumentException;
 import com.acme.edu.states.IntState;
 import com.acme.edu.states.StringState;
 import com.acme.edu.states.UnBufferState;
@@ -32,7 +33,7 @@ public class LoggerTest {
 
 
     @Test
-    public void shouldLogIntegersWhenSetIntState() {
+    public void shouldLogIntegersWhenSetIntState() throws IllegalArgumentException, LogException {
 
         //region given
         when(stub.getIntState()).thenReturn(intState);
@@ -49,7 +50,7 @@ public class LoggerTest {
 
     }
     @Test
-    public void shouldLogRepeatingStringsWhenSetStringState() {
+    public void shouldLogRepeatingStringsWhenSetStringState() throws IllegalArgumentException, LogException {
 
         //region given
         when(stub.getStringState()).thenReturn(stringState);
@@ -69,7 +70,7 @@ public class LoggerTest {
     }
 
     @Test
-    public void shouldLogArrayAndMatrixWhenSetUnBufferState() {
+    public void shouldLogArrayAndMatrixWhenSetUnBufferState() throws LogException {
 
         //region given
         int[][] dummy = new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}};
@@ -88,7 +89,7 @@ public class LoggerTest {
         //endregion
     }
     @Test
-    public void shouldLogMultiMatrixWhenSetUnBufferState() {
+    public void shouldLogMultiMatrixWhenSetUnBufferState() throws LogException {
         //region given
         int[][][][] dummy =  new int[][][][]{{{{0}}}};
         when(stub.getUnBufferState()).thenReturn(unBufferState);
@@ -104,7 +105,7 @@ public class LoggerTest {
     }
 
     @Test
-    public void shouldLogCharBooleanObjectWhenSetUnBufferState() {
+    public void shouldLogCharBooleanObjectWhenSetUnBufferState() throws LogException {
 
         //region given
         Object dummy = new Object();

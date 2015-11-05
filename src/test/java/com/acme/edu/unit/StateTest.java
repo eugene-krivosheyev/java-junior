@@ -31,7 +31,7 @@ public class StateTest {
     }
 
     @Test
-    public void shouldLogSequentWhenPrintSum() {
+    public void shouldLogSequentWhenPrintSum() throws Exception {
 
         //region given
         sut = new IntState(printerMock);
@@ -48,7 +48,7 @@ public class StateTest {
     }
 
     @Test
-    public void shouldLogIntegerMinAndMaxWhenPrintIntegerMinAndMax() {
+    public void shouldLogIntegerMinAndMaxWhenPrintIntegerMinAndMax() throws Exception{
 
         //region given
         sut = new IntState(printerMock);
@@ -79,7 +79,7 @@ public class StateTest {
     }
 
     @Test
-    public void shouldLogStringWhenPrintCountDuplicateString() {
+    public void shouldLogStringWhenPrintCountDuplicateString() throws Exception{
 
         //region given
         sut = new StringState(printerMock);
@@ -105,7 +105,7 @@ public class StateTest {
     }
 
     @Test
-    public void shouldEmptyStringWhenPrintEmpty() {
+    public void shouldEmptyStringWhenPrintEmpty() throws Exception{
 
         //region given
         sut = new StringState(printerMock);
@@ -126,7 +126,7 @@ public class StateTest {
     }
 
     @Test
-    public void shouldLogArrayAndMatrixWhenPrintArrayAndMatrix() {
+    public void shouldLogArrayAndMatrixWhenPrintArrayAndMatrix() throws Exception{
 
         //region given
         sutUnBufferState = new UnBufferState(printerMock);
@@ -157,7 +157,7 @@ public class StateTest {
     }
 
     @Test
-    public void shouldLogVarArgWhenPrintVarArg() {
+    public void shouldLogVarArgWhenPrintVarArg() throws Exception{
 
         //region given
         sutUnBufferState = new UnBufferState(printerMock);

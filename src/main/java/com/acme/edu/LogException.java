@@ -1,4 +1,4 @@
-package com.acme.edu.exceptions;
+package com.acme.edu;
 
 
 /**

@@ -1,7 +1,5 @@
 package com.acme.edu;
 
-import com.acme.edu.exceptions.*;
-import com.acme.edu.exceptions.IllegalArgumentException;
 import com.acme.edu.printer.Printer;
 import com.acme.edu.states.LoggerState;
 import com.acme.edu.states.StringState;
