@@ -2,6 +2,10 @@ package com.acme.edu.iteration02;
 
 
 import com.acme.edu.*;
+import com.acme.edu.printer.Printer;
+import com.acme.edu.states.IntState;
+import com.acme.edu.states.StringState;
+import com.acme.edu.states.UnBufferState;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;

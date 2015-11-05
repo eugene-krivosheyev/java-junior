@@ -1,5 +1,9 @@
 package com.acme.edu;
 
+import com.acme.edu.states.IntState;
+import com.acme.edu.states.StringState;
+import com.acme.edu.states.UnBufferState;
+
 /**
  * Factory conditions
  */
@@ -27,16 +31,14 @@ public class Factory {
     //endregion
 
     /**
-     *
-     * @return IntState
+     * @return IntState - the sum of integers
      */
     public IntState getIntState() {
         return intState;
     }
 
     /**
-     *
-     * @return StringState
+     * @return StringState - duplicate rows
      */
     public StringState getStringState() {
         return stringState;

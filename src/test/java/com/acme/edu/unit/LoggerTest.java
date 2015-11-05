@@ -1,6 +1,9 @@
 package com.acme.edu.unit;
 
 import com.acme.edu.*;
+import com.acme.edu.states.IntState;
+import com.acme.edu.states.StringState;
+import com.acme.edu.states.UnBufferState;
 import org.junit.Before;
 import org.junit.Test;
 

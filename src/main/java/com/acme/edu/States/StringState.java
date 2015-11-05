@@ -1,4 +1,8 @@
-package com.acme.edu;
+package com.acme.edu.states;
+
+import com.acme.edu.exceptions.LogException;
+import com.acme.edu.printer.Printable;
+import javafx.fxml.LoadException;
 
 /**
  * Created by Павел on 02.11.2015.
@@ -29,7 +33,7 @@ public class StringState implements LoggerState {
      * @param message
      */
     @Override
-    public void log(String message) {
+    public void log(String message) throws LogException {
         if (previousLine.equals(message)){
             buffer++;
         }else if (previousLine != ""){
@@ -42,11 +46,19 @@ public class StringState implements LoggerState {
      * Clearing buffers
      */
     @Override
-    public void flush() {
+    public void flush() throws LogException {
         if (buffer == 1 && !previousLine.isEmpty()){
-            printer.print(STRING + previousLine);
+            try {
+                printer.print(STRING + previousLine);
+            }catch (LoadException e){
+                throw new LogException(e);
+            }
         }else if(buffer > 1 ){
-            printer.print(String.format("%s%s (x%d)", STRING, previousLine, buffer));
+            try {
+                printer.print(String.format("%s%s (x%d)", STRING, previousLine, buffer));
+            }catch (LoadException e){
+                throw new LogException(e);
+            }
         }
         buffer = 1;
         previousLine = "";

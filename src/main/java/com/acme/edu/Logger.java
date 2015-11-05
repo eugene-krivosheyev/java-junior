@@ -1,5 +1,11 @@
 package com.acme.edu;
 
+import com.acme.edu.exceptions.*;
+import com.acme.edu.exceptions.IllegalArgumentException;
+import com.acme.edu.printer.Printer;
+import com.acme.edu.states.LoggerState;
+import com.acme.edu.states.StringState;
+
 /**
  * Class Log method overload
  * Type conversion
@@ -33,7 +39,7 @@ public class Logger implements LoggerState {
      * If numbers are not consecutive, print the input value.
      * @param message The <code>primitive: int</code> to be printed.
      */
-    public void log(int message) {
+    public void log(int message) throws LogException, IllegalArgumentException {
         if (state != factory.getIntState()){
             state.flush();
             state  = factory.getIntState();
@@ -50,7 +56,11 @@ public class Logger implements LoggerState {
      * @param message If the input parameters are duplicated, The <code>string: String (x2)</code> to be printed.
      */
     @Override
-    public void log(String message) {
+    public void log(String message) throws LogException, IllegalArgumentException {
+        if (message == null || message.isEmpty()){
+            throw new LogException(new IllegalArgumentException());
+        }
+
         if (state != factory.getStringState()){
             state.flush();
             state  = factory.getStringState();
@@ -64,7 +74,7 @@ public class Logger implements LoggerState {
      * Prints an boolean and prefix of the "primitive: "
      * @param message The <code>primitive: boolean</code> to be printed.
      */
-    public void log(boolean message) {
+    public void log(boolean message) throws LogException {
         factory.getUnBufferState().log(PRIMITIVE + String.valueOf(message));
     }
 
@@ -72,7 +82,7 @@ public class Logger implements LoggerState {
      * Prints an char and prefix of the "char: "
      * @param message The <code>char: char</code> to be printed.
      */
-    public void log(char message) {
+    public void log(char message) throws LogException {
         factory.getUnBufferState().log(CHAR + String.valueOf(message));
     }
 
@@ -81,7 +91,10 @@ public class Logger implements LoggerState {
      *
      * @param message The <code>reference: Object</code> to be printed.
      */
-    public void log(Object message) {
+    public void log(Object message) throws LogException{
+        if (message == null){
+            throw new LogException( new IllegalArgumentException());
+        }
         factory.getUnBufferState().log(REFERENCE + String.valueOf(message));
     }
 
@@ -89,7 +102,10 @@ public class Logger implements LoggerState {
      * Concatenation of symbols and array elements
      * @param array print array
      */
-    public void log(int[] array) {
+    public void log(int[] array) throws LogException {
+        if (array == null){
+            throw new LogException(new IllegalArgumentException());
+        }
         factory.getUnBufferState().log(array);
     }
 
@@ -97,7 +113,10 @@ public class Logger implements LoggerState {
      * Concatenation of symbols and array elements
      * @param matrix print the array in the array
      */
-    public void log(int[][] matrix) {
+    public void log(int[][] matrix) throws LogException {
+        if (matrix == null){
+            throw new LogException(new IllegalArgumentException());
+        }
         factory.getUnBufferState().log(matrix);
     }
 
@@ -106,7 +125,10 @@ public class Logger implements LoggerState {
      *
      * @param multiMatrix print miltiMatrix
      */
-    public void log(int[][][][] multiMatrix) {
+    public void log(int[][][][] multiMatrix) throws LogException {
+        if (multiMatrix == null){
+            throw new LogException(new IllegalArgumentException());
+        }
         factory.getUnBufferState().log(multiMatrix);
     }
 
@@ -115,7 +137,10 @@ public class Logger implements LoggerState {
      *
      * @param elements The <code>String...</code> to be printed.
      */
-    public void log(String... elements) {
+    public void log(String... elements) throws LogException {
+        if (elements.length == 0){
+            throw new LogException(new IllegalArgumentException());
+        }
         factory.getUnBufferState().log(elements);
     }
 
@@ -123,7 +148,7 @@ public class Logger implements LoggerState {
      * Clearing buffers
      */
     @Override
-    public void flush() {
+    public void flush() throws LogException {
         state.flush();
     }
     //endregion

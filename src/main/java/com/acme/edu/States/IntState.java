@@ -1,9 +1,13 @@
-package com.acme.edu;
+package com.acme.edu.states;
+
+import com.acme.edu.exceptions.LogException;
+import com.acme.edu.printer.Printable;
+import javafx.fxml.LoadException;
 
 /**
  * Created by Павел on 02.11.2015.
  */
-public class IntState implements LoggerState{
+public class IntState implements LoggerState {
 
     //region fields
     private Printable printer;
@@ -11,8 +15,10 @@ public class IntState implements LoggerState{
     //endregion
 
     //region constructor
+
     /**
      * Setting the object Printer
+     *
      * @param printer
      */
     public IntState(Printable printer) {
@@ -21,12 +27,14 @@ public class IntState implements LoggerState{
     //endregion
 
     //region methods
+
     /**
      * Finds the sum of integers
+     *
      * @param message
      */
     @Override
-    public void log(String message) {
+    public void log(String message) throws LogException {
         checkMaxAndOverFlow(Integer.parseInt(message));
         buffer += Integer.parseInt(message);
     }
@@ -35,20 +43,24 @@ public class IntState implements LoggerState{
      * Clearing buffers
      */
     @Override
-    public void flush() {
+    public void flush() throws LogException {
+        try {
             printer.print(PRIMITIVE + String.valueOf(buffer));
-            buffer = 0;
+        } catch (LoadException e) {
+            throw new LogException(e);
+        }
+        buffer = 0;
     }
 
-    private void checkMaxAndOverFlow(int message) {
+    private void checkMaxAndOverFlow(int message) throws LogException {
         if (message == Integer.MAX_VALUE || message == Integer.MIN_VALUE) {
             flush();
         }
 
-        if ((long)message + buffer  > Integer.MAX_VALUE ){
+        if ((long) message + buffer > Integer.MAX_VALUE) {
             flush();
         }
-        if ((long)message + buffer  < Integer.MIN_VALUE ){
+        if ((long) message + buffer < Integer.MIN_VALUE) {
             flush();
         }
     }
