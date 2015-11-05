@@ -1,7 +1,7 @@
 package com.acme.edu.iteration01;
 
 import com.acme.edu.*;
-import com.acme.edu.IllegalArgumentException;
+import com.acme.edu.exception.LogException;
 import com.acme.edu.printer.Printer;
 import com.acme.edu.states.IntState;
 import com.acme.edu.states.StringState;
@@ -33,7 +33,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test
-    public void shouldLogInteger() throws LogException, IllegalArgumentException {
+    public void shouldLogInteger() throws LogException{
         //region when
         logger.log(1);
         logger.log(0);
@@ -47,7 +47,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogByte() throws IOException, IllegalArgumentException, LogException {
+    public void shouldLogByte() throws LogException {
         //region when
         logger.log((byte) 1);
         logger.log((byte) 0);
@@ -61,7 +61,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogChar() throws IOException, LogException {
+    public void shouldLogChar() throws LogException {
         //region when
         logger.log('a');
         logger.log('b');
@@ -76,7 +76,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogString() throws IOException, IllegalArgumentException, LogException {
+    public void shouldLogString() throws LogException {
         //region when
         logger.log("test string 1");
         logger.log("other str");
@@ -91,7 +91,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogBoolean() throws IOException, LogException {
+    public void shouldLogBoolean() throws LogException {
         //region when
         logger.log(true);
         logger.log(false);
@@ -106,7 +106,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogReference() throws IOException, LogException {
+    public void shouldLogReference() throws LogException {
         //region when
         logger.log(new Object());
         logger.flush();

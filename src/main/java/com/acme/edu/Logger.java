@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import com.acme.edu.exception.*;
+import com.acme.edu.exception.IllegalArgumentException;
 import com.acme.edu.printer.Printer;
 import com.acme.edu.states.LoggerState;
 import com.acme.edu.states.StringState;
@@ -56,7 +58,7 @@ public class Logger implements LoggerState {
     @Override
     public void log(String message) throws LogException {
         if (message == null || message.isEmpty()){
-            throw new LogException(new IllegalArgumentException());
+            throw new LogException(new com.acme.edu.exception.IllegalArgumentException());
         }
 
         if (state != factory.getStringState()){

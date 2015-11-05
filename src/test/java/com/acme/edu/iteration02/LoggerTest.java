@@ -2,7 +2,7 @@ package com.acme.edu.iteration02;
 
 
 import com.acme.edu.*;
-import com.acme.edu.IllegalArgumentException;
+import com.acme.edu.exception.LogException;
 import com.acme.edu.printer.Printer;
 import com.acme.edu.states.IntState;
 import com.acme.edu.states.StringState;
@@ -34,7 +34,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogSequentIntegersAsSum() throws IllegalArgumentException, LogException {
+    public void shouldLogSequentIntegersAsSum() throws LogException {
         //region when
         logger.log("str 1");
         logger.log(1);
@@ -55,7 +55,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws IllegalArgumentException, LogException {
+    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws LogException {
         //region when
         logger.log("str 1");
         logger.log(10);
@@ -77,7 +77,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogCorrectlyIntegerOverflowWhenPreviousInteger() throws IllegalArgumentException, LogException {
+    public void shouldLogCorrectlyIntegerOverflowWhenPreviousInteger() throws  LogException {
         //region when
         logger.log("str 1");
         logger.log(-10);
@@ -99,7 +99,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogSameSubsequentStringsWithoutRepeat() throws IllegalArgumentException, LogException {
+    public void shouldLogSameSubsequentStringsWithoutRepeat() throws LogException {
         //region when
         logger.log("str 1");
         logger.log("str 2");
@@ -124,7 +124,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogSameSubsequentStringsWithoutMultiRepeat() throws IllegalArgumentException, LogException {
+    public void shouldLogSameSubsequentStringsWithoutMultiRepeat() throws LogException {
         //region when
         logger.log();
         logger.log("str 2");

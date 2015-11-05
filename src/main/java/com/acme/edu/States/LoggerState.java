@@ -1,6 +1,6 @@
 package com.acme.edu.states;
 
-import com.acme.edu.*;
+import com.acme.edu.exception.LogException;
 
 /**
  * Contains prefix and behavior of logger

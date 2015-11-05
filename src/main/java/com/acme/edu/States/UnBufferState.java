@@ -1,9 +1,8 @@
 package com.acme.edu.states;
 
-import com.acme.edu.LogException;
+import com.acme.edu.exception.LogException;
 import com.acme.edu.printer.Printable;
-import com.acme.edu.printer.PrinterException;
-import javafx.fxml.LoadException;
+import com.acme.edu.exception.PrinterException;
 
 /**
  * Created by Павел on 02.11.2015.

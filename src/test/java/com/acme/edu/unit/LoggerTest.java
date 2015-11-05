@@ -1,7 +1,7 @@
 package com.acme.edu.unit;
 
 import com.acme.edu.*;
-import com.acme.edu.IllegalArgumentException;
+import com.acme.edu.exception.LogException;
 import com.acme.edu.states.IntState;
 import com.acme.edu.states.StringState;
 import com.acme.edu.states.UnBufferState;
@@ -33,7 +33,7 @@ public class LoggerTest {
 
 
     @Test
-    public void shouldLogIntegersWhenSetIntState() throws IllegalArgumentException, LogException {
+    public void shouldLogIntegersWhenSetIntState() throws LogException {
 
         //region given
         when(stub.getIntState()).thenReturn(intState);
@@ -50,7 +50,7 @@ public class LoggerTest {
 
     }
     @Test
-    public void shouldLogRepeatingStringsWhenSetStringState() throws IllegalArgumentException, LogException {
+    public void shouldLogRepeatingStringsWhenSetStringState() throws LogException {
 
         //region given
         when(stub.getStringState()).thenReturn(stringState);

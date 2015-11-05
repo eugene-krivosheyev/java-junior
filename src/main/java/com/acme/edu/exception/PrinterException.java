@@ -1,4 +1,4 @@
-package com.acme.edu.printer;
+package com.acme.edu.exception;
 
 
 /**

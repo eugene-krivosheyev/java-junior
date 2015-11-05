@@ -1,7 +1,6 @@
 package com.acme.edu.printer;
 
-
-import com.acme.edu.LogException;
+import com.acme.edu.exception.PrinterException;
 
 /**
  * The output in the console
