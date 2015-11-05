@@ -6,7 +6,7 @@ package com.acme.edu;
 public class StringState implements LoggerState {
 
     //region fiends
-    private Printer printer;
+    private Printable printer;
     private static String previousLine = "";
     private int buffer = 1;
     //endregion
@@ -16,7 +16,7 @@ public class StringState implements LoggerState {
      * Setting the object Printer
      * @param printer
      */
-    public StringState(Printer printer) {
+    public StringState(Printable printer) {
         this.printer = printer;
     }
     //endregion
@@ -50,45 +50,6 @@ public class StringState implements LoggerState {
         }
         buffer = 1;
         previousLine = "";
-    }
-    //endregion
-
-    //region leak abstractions
-
-    /**
-     * Leak abstractions
-     * @param array
-     */
-    @Override
-    public void log(int[] array) {
-        return;
-    }
-
-    /**
-     * Leak abstractions
-     * @param matrix
-     */
-    @Override
-    public void log(int[][] matrix) {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Leak abstractions
-     * @param multiMatrix
-     */
-    @Override
-    public void log(int[][][][] multiMatrix) {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Leak abstractions
-     * @param elements
-     */
-    @Override
-    public void log(String... elements) {
-        return;
     }
     //endregion
 }

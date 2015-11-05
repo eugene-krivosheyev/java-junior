@@ -16,32 +16,6 @@ public interface LoggerState{
     String SEP = System.lineSeparator();
     //endregion
 
-    //region operations
-
-    /**
-     * Operations on the array
-     * @param array
-     */
-    void log(int[] array);
-
-    /**
-     * Operations on the matrix
-     * @param matrix
-     */
-    void log(int[][] matrix);
-
-    /**
-     * Operations on the multiMatrix
-     * @param multiMatrix
-     */
-    void log(int[][][][] multiMatrix);
-
-    /**
-     * Operations on the list of arguments type String
-     * @param elements
-     */
-    void log(String... elements);
-
     /**
      * Print message
      * @param message

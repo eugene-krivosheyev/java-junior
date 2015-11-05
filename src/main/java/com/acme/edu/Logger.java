@@ -3,32 +3,29 @@ package com.acme.edu;
 /**
  * Class Log method overload
  * Type conversion
- * @version 1.1 2 Nov 2015
+ *
  * @author Pavel Seregin
+ * @version 1.1 2 Nov 2015
  */
 public class Logger implements LoggerState {
 
     //region fields
-    Printer printer;
     Factory factory;
+    private LoggerState state = new StringState(new Printer());
     //endregion
 
     //region constructor
     /**
-     * Setting the object Printer
-     * @param printer
+     * Setting the object Factory
+     * @param factory
      */
-    public Logger(Printer printer) {
-        this.printer = printer;
-    }
-
-    public Logger(Printer printer, Factory factory){
-        this.printer = printer;
+    public Logger(Factory factory) {
         this.factory = factory;
     }
     //endregion
 
     //region methods
+
     /**
      * Print duplicate rows.
      * If no duplicates, prints one line.
@@ -37,39 +34,13 @@ public class Logger implements LoggerState {
      * @param message The <code>primitive: int</code> to be printed.
      */
     public void log(int message) {
-        if (factory.getState() == LoggerStateHolder.SIMPLE_PRINT){
-            factory.setIntState();
-        }else if (factory.getState() == LoggerStateHolder.SUM_INTEGERS) {
-            factory.loggerState.log(String.valueOf(message));
-        }else if (factory.getState() == LoggerStateHolder.STRING_REPEAITING){
-            factory.loggerState.flush();
-            factory.setIntState();
-            factory.loggerState.log(String.valueOf(message));
+        if (state != factory.getIntState()){
+            state.flush();
+            state  = factory.getIntState();
+            state.log(String.valueOf(message));
+        }else{
+            state.log(String.valueOf(message));
         }
-    }
-
-    /**
-     * Prints an boolean and prefix of the "primitive: "
-     * @param message The <code>primitive: boolean</code> to be printed.
-     */
-    public void log(boolean message) {
-        printer.print(Logger.PRIMITIVE + message);
-    }
-
-    /**
-     * Prints an char and prefix of the "char: "
-     * @param message The <code>char: char</code> to be printed.
-     */
-    public void log(char message) {
-        printer.print(Logger.CHAR + message);
-    }
-
-    /**
-     * Prints an Object and prefix of the "reference: "
-     * @param message The <code>reference: Object</code> to be printed.
-     */
-    public void log(Object message) {
-        printer.print(Logger.REFERENCE + message);
     }
 
     /**
@@ -80,56 +51,72 @@ public class Logger implements LoggerState {
      */
     @Override
     public void log(String message) {
-        if (factory.getState() == LoggerStateHolder.SIMPLE_PRINT){
-            factory.setStringState();
-            factory.loggerState.log(message);
-        }else if (factory.getState() != LoggerStateHolder.STRING_REPEAITING ){
-            factory.loggerState.flush();
-            factory.setStringState();
-            factory.loggerState.log(message);
+        if (state != factory.getStringState()){
+            state.flush();
+            state  = factory.getStringState();
+            state.log(message);
         }else{
-            factory.loggerState.log(message);
+            state.log(message);
         }
+    }
+
+    /**
+     * Prints an boolean and prefix of the "primitive: "
+     * @param message The <code>primitive: boolean</code> to be printed.
+     */
+    public void log(boolean message) {
+        factory.getUnBufferState().log(PRIMITIVE + String.valueOf(message));
+    }
+
+    /**
+     * Prints an char and prefix of the "char: "
+     * @param message The <code>char: char</code> to be printed.
+     */
+    public void log(char message) {
+        factory.getUnBufferState().log(CHAR + String.valueOf(message));
+    }
+
+    /**
+     * Prints an Object and prefix of the "reference: "
+     *
+     * @param message The <code>reference: Object</code> to be printed.
+     */
+    public void log(Object message) {
+        factory.getUnBufferState().log(REFERENCE + String.valueOf(message));
     }
 
     /**
      * Concatenation of symbols and array elements
      * @param array print array
      */
-    @Override
     public void log(int[] array) {
-        factory.setSimplePrintState();
-        factory.loggerState.log(array);
+        factory.getUnBufferState().log(array);
     }
 
     /**
      * Concatenation of symbols and array elements
      * @param matrix print the array in the array
      */
-    @Override
     public void log(int[][] matrix) {
-        factory.setSimplePrintState();
-        factory.loggerState.log(matrix);
+        factory.getUnBufferState().log(matrix);
     }
 
     /**
      * Concatenation of symbols and array element
+     *
      * @param multiMatrix print miltiMatrix
      */
-    @Override
     public void log(int[][][][] multiMatrix) {
-        factory.setSimplePrintState();
-        factory.loggerState.log(multiMatrix);
+        factory.getUnBufferState().log(multiMatrix);
     }
 
     /**
      * Print list of arguments type String
+     *
      * @param elements The <code>String...</code> to be printed.
      */
-    @Override
     public void log(String... elements) {
-        factory.setSimplePrintState();
-        factory.loggerState.log(elements);
+        factory.getUnBufferState().log(elements);
     }
 
     /**
@@ -137,7 +124,7 @@ public class Logger implements LoggerState {
      */
     @Override
     public void flush() {
-        factory.loggerState.flush();
+        state.flush();
     }
     //endregion
 }

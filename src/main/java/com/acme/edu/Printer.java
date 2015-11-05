@@ -3,7 +3,7 @@ package com.acme.edu;
 /**
  * The output in the console
  */
-public class Printer implements Printable{
+public class Printer implements Printable {
     @Override
     /**
      * print to console

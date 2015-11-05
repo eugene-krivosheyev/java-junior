@@ -9,61 +9,44 @@ public class Factory {
 
     private IntState intState;
     private StringState stringState;
-    private SimplePrintState simplePrintState;
-    /**
-     * switch States
-     */
-    public LoggerState loggerState;
-    //endregion
-
+    private UnBufferState unBufferState;
 
     //region constructor
-    public Factory(IntState intState, StringState stringState, SimplePrintState simplePrintState) {
+
+    /**
+     * Initialization States
+     * @param intState
+     * @param stringState
+     * @param unBufferState
+     */
+    public Factory(IntState intState, StringState stringState, UnBufferState unBufferState) {
         this.intState = intState;
         this.stringState = stringState;
-        this.simplePrintState = simplePrintState;
+        this.unBufferState = unBufferState;
     }
     //endregion
 
-    //region setter
     /**
-     * Set the state: SUM_INTEGERS;
-     * The sum of integers
+     *
+     * @return IntState
      */
-    public void setIntState() {
-        this.loggerState = intState;
+    public IntState getIntState() {
+        return intState;
     }
 
     /**
-     * Set the state: STRING_REPEAITING;
-     * Counting duplicate rows
+     *
+     * @return StringState
      */
-    public void setStringState() {
-        this.loggerState = stringState;
+    public StringState getStringState() {
+        return stringState;
     }
 
     /**
-     * Set the state: SIMPLE_PRINT;
-     * Easy printing
+     *
+     * @return State without buffer
      */
-    public void setSimplePrintState() {
-        this.loggerState = simplePrintState;
+    public UnBufferState getUnBufferState() {
+        return unBufferState;
     }
-    //endregion
-
-    //region getter
-    /**
-     * Returns one of the States
-     * @return state
-     */
-    public LoggerStateHolder getState(){
-        if (loggerState instanceof IntState){
-            return LoggerStateHolder.SUM_INTEGERS;
-        }else if (loggerState instanceof StringState){
-            return LoggerStateHolder.STRING_REPEAITING;
-        }else{
-            return LoggerStateHolder.SIMPLE_PRINT;
-        }
-    }
-    //endregion
 }

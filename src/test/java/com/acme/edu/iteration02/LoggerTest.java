@@ -1,9 +1,7 @@
 package com.acme.edu.iteration02;
 
 
-import com.acme.edu.Logger;
-import com.acme.edu.Printer;
-import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -18,7 +16,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
     public void setUpSystemOut(){
-        logger = new Logger(new Printer());
+        logger = new Logger(new Factory(new IntState(new Printer()), new StringState(new Printer()), new UnBufferState(new Printer())));
         resetOut();
         captureSysout();
     }
@@ -123,7 +121,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogSameSubsequentStringsWithoutMultiRepeat(){
         //region when
-        logger.log("");
+        logger.log();
         logger.log("str 2");
         logger.log("str 2");
         logger.log("str 3");

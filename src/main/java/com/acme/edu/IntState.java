@@ -3,26 +3,24 @@ package com.acme.edu;
 /**
  * Created by Павел on 02.11.2015.
  */
-public class IntState extends Printer implements LoggerState{
+public class IntState implements LoggerState{
 
     //region fields
-    private Printer printer;
+    private Printable printer;
     private int buffer = 0;
     //endregion
 
     //region constructor
-
     /**
      * Setting the object Printer
      * @param printer
      */
-    public IntState(Printer printer) {
+    public IntState(Printable printer) {
         this.printer = printer;
     }
     //endregion
 
     //region methods
-
     /**
      * Finds the sum of integers
      * @param message
@@ -53,46 +51,6 @@ public class IntState extends Printer implements LoggerState{
         if ((long)message + buffer  < Integer.MIN_VALUE ){
             flush();
         }
-    }
-    //endregion
-
-    //region leak abstractions
-
-    /**
-     * Leak abstractions
-     * @param array
-     */
-    @Override
-    public void log(int[] array) {
-
-        return;
-    }
-
-    /**
-     * Leak abstractions
-     * @param matrix
-     */
-    @Override
-    public void log(int[][] matrix) {
-        return;
-    }
-
-    /**
-     * Leak abstractions
-     * @param multiMatrix
-     */
-    @Override
-    public void log(int[][][][] multiMatrix) {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Leak abstractions
-     * @param elements
-     */
-    @Override
-    public void log(String... elements) {
-        throw new UnsupportedOperationException();
     }
     //endregion
 }

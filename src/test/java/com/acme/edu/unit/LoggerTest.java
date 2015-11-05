@@ -6,69 +6,118 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Павел on 04.11.2015.
  */
 public class LoggerTest {
-    private Factory factory;
-    private Printer printer;
+    private Factory stub;
     private Logger sut;
     private IntState intState;
     private StringState stringState;
-    private SimplePrintState simplePrintState;
+    private UnBufferState unBufferState;
 
     @Before
     public void setUp() throws IOException {
-        printer = mock(Printer.class);
         intState = mock(IntState.class);
-        simplePrintState = mock(SimplePrintState.class);
+        unBufferState = mock(UnBufferState.class);
         stringState = mock(StringState.class);
-
-        factory = new Factory(intState, stringState, simplePrintState);
-        sut = new Logger(printer, factory);
+        stub = mock(Factory.class);
+        sut = new Logger(stub);
     }
 
+
     @Test
-    public void shouldLogCountOfCallsWhenSetOtherState() {
+    public void shouldLogIntegersWhenSetIntState() {
 
         //region given
-        factory.setSimplePrintState();
+        when(stub.getIntState()).thenReturn(intState);
         //endregion
 
         //region when
-        sut.log("str 1", "str 2");
-        sut.log(new int[]{1, 2, 3});
-        sut.log("string 1");
         sut.log(1);
         sut.log(1);
-        //region end
+        //endregion
 
         //region then
-        factory.setSimplePrintState();
-        verify(factory.loggerState, times(1)).log("str 1", "str 2");
-        verify(factory.loggerState, times(1)).log(new int[]{1, 2, 3});
-        factory.setStringState();
-        verify(factory.loggerState, times(1)).log("string 1");
-        factory.setIntState();
-        verify(factory.loggerState, times(2)).log("1");
-        //region end
+        verify(stub.getIntState(), times(2)).log("1");
+        //endregion
 
     }
     @Test
-    public void shouldLogCountOfCallsWhenSetIntState() {
+    public void shouldLogRepeatingStringsWhenSetStringState() {
+
+        //region given
+        when(stub.getStringState()).thenReturn(stringState);
+        //endregion
 
         //region when
         sut.log("str 1");
         sut.log("str 1");
         sut.log("str 1");
+        sut.flush();
         //endregion
 
         //region then
-        verify(factory.loggerState, times(3)).log("str 1");
+        verify(stub.getStringState(), times(3)).log("str 1");
+        verify(stub.getStringState(), times(1)).flush();
+        //endregion
+    }
+
+    @Test
+    public void shouldLogArrayAndMatrixWhenSetUnBufferState() {
+
+        //region given
+        int[][] dummy = new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}};
+        int[] dummyArray = new int[]{-1, 0, 1};
+        when(stub.getUnBufferState()).thenReturn(unBufferState);
+        //endregion
+
+        //region when
+        sut.log(dummyArray);
+        sut.log(dummy);
+        //endregion
+
+        //region then
+        verify(stub.getUnBufferState(), times(1)).log(dummyArray);
+        verify(stub.getUnBufferState(), times(1)).log(dummy);
+        //endregion
+    }
+    @Test
+    public void shouldLogMultiMatrixWhenSetUnBufferState() {
+        //region given
+        int[][][][] dummy =  new int[][][][]{{{{0}}}};
+        when(stub.getUnBufferState()).thenReturn(unBufferState);
+        //endregion
+
+        //region when
+        sut.log(dummy);
+        //endregion
+
+        //region then
+        verify(stub.getUnBufferState(), times(1)).log(dummy);
+        //endregion
+    }
+
+    @Test
+    public void shouldLogCharBooleanObjectWhenSetUnBufferState() {
+
+        //region given
+        Object dummy = new Object();
+        when(stub.getUnBufferState()).thenReturn(unBufferState);
+        //endregion
+
+        //region when
+        sut.log('t');
+        sut.log(true);
+        sut.log(dummy);
+        //endregion
+
+        //region then
+        verify(stub.getUnBufferState(), times(1)).log("char: " + String.valueOf("t"));
+        verify(stub.getUnBufferState(), times(1)).log("primitive: " + String.valueOf(true));
+        verify(stub.getUnBufferState(), times(1)).log("reference: " + String.valueOf(dummy));
         //endregion
     }
 }

@@ -3,19 +3,18 @@ package com.acme.edu;
 /**
  * Created by Павел on 02.11.2015.
  */
-public class SimplePrintState implements LoggerState{
+public class UnBufferState implements LoggerState{
 
     //region fields
-    private Printer printer;
+    private Printable printer;
     //endregion
-
 
     //region constructor
     /**
      * Setting the object Printer
      * @param printer
      */
-    public SimplePrintState(Printer printer) {
+    public UnBufferState(Printable printer) {
         this.printer = printer;
     }
     //endregion
@@ -25,7 +24,6 @@ public class SimplePrintState implements LoggerState{
      * Concatenation of symbols and array elements
      * @param array print array
      */
-    @Override
     public void log(int[] array) {
         int sumElement = 0;
         for (int element : array) {
@@ -49,7 +47,7 @@ public class SimplePrintState implements LoggerState{
      * Concatenation of symbols and array elements
      * @param matrix print the array in the array
      */
-    @Override
+    //отрефакторить!!!
     public void log(int[][] matrix) {
         StringBuilder sb = new StringBuilder();
         sb.append("{" + SEP);
@@ -66,9 +64,9 @@ public class SimplePrintState implements LoggerState{
 
     /**
      * Concatenation of symbols and array element
+     *
      * @param multiMatrix print miltiMatrix
      */
-    @Override
     public void log(int[][][][] multiMatrix) {
         StringBuilder sb = new StringBuilder();
         sb.append("{" + SEP);
@@ -81,30 +79,27 @@ public class SimplePrintState implements LoggerState{
         }
         sb.append("}");
         printer.print(PRIMITIVES_MULTIMATRIX + sb.toString());
-
     }
 
     /**
      * Print list of arguments type String
+     *
      * @param elements The <code>String...</code> to be printed.
      */
-    @Override
+    //отрефакторить!!!
     public void log(String... elements) {
         for (String str : elements) {
             printer.print(str);
         }
     }
-    //endregion
-
-    //region leak abstractions
 
     /**
-     * Leak abstractions
-     * @param message
+     * Print message
+     * @param
      */
     @Override
     public void log(String message) {
-        throw new UnsupportedOperationException();
+        printer.print(message);
     }
 
     /**
@@ -112,7 +107,7 @@ public class SimplePrintState implements LoggerState{
      */
     @Override
     public void flush() {
-        throw new UnsupportedOperationException();
+        return;
     }
     //endregion
 

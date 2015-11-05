@@ -16,6 +16,7 @@ public class StateTest {
 
     private Printer printerMock;
     private LoggerState sut;
+    private UnBufferState sutUnBufferState;
     private static final String SEP = System.lineSeparator();
 
     //region given
@@ -108,7 +109,7 @@ public class StateTest {
 
         //region when
         sut.log("str 1");
-        sut.log();
+        sut.log("");
         sut.log("str 2");
         sut.flush();
         //endregion
@@ -124,14 +125,14 @@ public class StateTest {
     public void shouldLogArrayAndMatrixWhenPrintArrayAndMatrix() {
 
         //region given
-        sut = new SimplePrintState(printerMock);
+        sutUnBufferState = new UnBufferState(printerMock);
         //endregion
 
         //region when
-        sut.log(new int[]{-1, 0, 1});
-        sut.log(new int[]{-1, 0, 1, 3});
-        sut.log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
-        sut.log(new int[][][][]{{{{0}}}});
+        sutUnBufferState.log(new int[]{-1, 0, 1});
+        sutUnBufferState.log(new int[]{-1, 0, 1, 3});
+        sutUnBufferState.log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        sutUnBufferState.log(new int[][][][]{{{{0}}}});
         //endregion
 
         //region then
@@ -155,11 +156,11 @@ public class StateTest {
     public void shouldLogVarArgWhenPrintVarArg() {
 
         //region given
-        sut = new SimplePrintState(printerMock);
+        sutUnBufferState = new UnBufferState(printerMock);
         //endregion
 
         //region when
-        sut.log("str1", "string 2", "str 3", "", "string 5");
+        sutUnBufferState.log("str1", "string 2", "str 3", "", "string 5");
 
         //endregion
 
@@ -171,4 +172,5 @@ public class StateTest {
 
         //endregion
     }
+
 }
