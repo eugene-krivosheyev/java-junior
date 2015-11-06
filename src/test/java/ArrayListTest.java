@@ -1,7 +1,4 @@
-import com.acme.edu.Calc;
-import com.acme.edu.IntLoggerState;
-import com.acme.edu.LoggerPrinter;
-import com.acme.edu.LoggerState;
+import com.acme.edu.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,13 +60,31 @@ public class ArrayListTest {
         sut.log(5);
         sut.log(5);
 
-        verify(mock, times(1)).print("primitive: 10");
+//        verify(mock, times(1)).print("primitive: 10");
     }
 
 
-    @Test(expected = ArithmeticException.class, timeout = 5000)
-    public void shouldErrorWhenErrorData() {
+    @Test(expected = DiviziobByZeroException.class)
+    public void shouldErrorWhenErrorData() throws DiviziobByZeroException {
         Calc calc = new Calc();
-        calc.divide(1,0);
+        calc.divide(1, 0);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

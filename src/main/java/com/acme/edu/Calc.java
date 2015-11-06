@@ -1,10 +1,10 @@
 package com.acme.edu;
 
-/**
- * Created by eugene on 03.11.15.
- */
-public class Calc {
-    public void divide(int i, int i1) {
+import java.sql.SQLException;
 
+public class Calc {
+    public double divide(int i, int i1) throws DiviziobByZeroException {
+        if (i1 == 0) throw new DiviziobByZeroException("");
+        return ((double) i)/i1;
     }
 }
