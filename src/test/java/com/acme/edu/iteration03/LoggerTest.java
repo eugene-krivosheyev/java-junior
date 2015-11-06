@@ -1,25 +1,32 @@
 package com.acme.edu.iteration03;
 
 import com.acme.edu.*;
-import com.acme.edu.printer.Printer;
+import com.acme.edu.logger.Factory;
+import com.acme.edu.logger.LogException;
+import com.acme.edu.logger.Logger;
+import com.acme.edu.printer.ConsolePrinter;
+import com.acme.edu.printer.FilePrinter;
+import com.acme.edu.printer.PrinterException;
 import com.acme.edu.states.IntState;
 import com.acme.edu.states.StringState;
 import com.acme.edu.states.UnBufferState;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import java.io.IOException;
 
-@Ignore
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private static final String SEP = System.lineSeparator();
     private Logger logger;
     //region given
     @Before
-    public void setUpSystemOut() throws IOException {
-        logger = new Logger(new Factory(new IntState(new Printer()), new StringState(new Printer()), new UnBufferState(new Printer())));
+    public void setUpSystemOut() throws PrinterException {
+        ConsolePrinter consolePrinter = new ConsolePrinter();
+        FilePrinter filePrinter = new FilePrinter("out.txt", "UTF-8");
+        logger = new Logger(new Factory(new IntState(consolePrinter, filePrinter),
+                                        new StringState(consolePrinter, filePrinter),
+                                        new UnBufferState(consolePrinter, filePrinter)));
         resetOut();
         captureSysout();
     }
@@ -32,67 +39,65 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogIntegersArray() throws Exception {
+    public void shouldLogIntegersArray() throws LogException {
         //region when
         logger.log(new int[] {-1, 0, 1});
+        logger.flush();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "primitives array: {-1, 0, 1}" + SEP
+                "primitive: 0" + SEP
         );
         //endregion
     }
 
     @Test
-    public void shouldLogIntegersMatrix() throws Exception {
+    public void shouldLogIntegersMatrix() throws LogException {
         //region when
         logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        logger.flush();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "primitives matrix: {" + SEP +
-                "{-1, 0, 1}" + SEP +
-                "{1, 2, 3}" + SEP +
-                "{-1, -2, -3}" + SEP +
-            "}" + SEP
+                "primitive: 0" + SEP
         );
         //endregion
     }
 
     @Test
-    public void shouldLogIntegersMulitidimentionalArray() throws Exception {
+    public void shouldLogIntegersMulitidimentionalArray() throws LogException {
         //region when
         logger.log(new int[][][][] {{{{0}}}});
+        logger.flush();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "primitives multimatrix: {" + SEP +
-                "{"+ SEP + "{"+ SEP + "{"+ SEP +
-                    "0" + SEP +
-                "}"+ SEP + "}"+ SEP + "}"+ SEP +
-            "}"+ SEP
+                "primitive: 0" + SEP
+
         );
         //endregion
     }
 
     @Test
-    public void shouldLogStringsWithOneMethodCall() throws Exception {
+    public void shouldLogStringsWithOneMethodCall() throws LogException {
         //region when
         logger.log("str1", "string 2", "str 3");
+        logger.flush();
         //endregion
 
         //region then
-        assertSysoutContains("str1" + SEP + "string 2" + SEP + "str 3");
+        assertSysoutContains("string: str1" + SEP + "string: string 2" + SEP + "string: str 3");
         //endregion
     }
 
     @Test
-    public void shouldLogIntegersWithOneMethodCall() throws Exception {
+    public void shouldLogIntegersWithOneMethodCall() throws LogException {
         //region when
-        logger.log(new int[] {-1, 0, 1, 3});
+        logger.log(-1, 0, 1, 3);
+        logger.flush();
         //endregion
 
         //region then
@@ -101,7 +106,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-     public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws Exception{
+     public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws LogException{
         //region when
         logger.log(1);
         logger.log("str");
@@ -119,7 +124,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-     public void shouldCorrectDealWithIntegerOverflow() throws Exception {
+     public void shouldCorrectDealWithIntegerOverflow() throws LogException {
         //region when
         logger.log(1);
         logger.log("str");

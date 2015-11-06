@@ -2,8 +2,13 @@ package com.acme.edu.iteration02;
 
 
 import com.acme.edu.*;
-import com.acme.edu.exception.LogException;
-import com.acme.edu.printer.Printer;
+import com.acme.edu.logger.LogException;
+import com.acme.edu.logger.Factory;
+import com.acme.edu.logger.Logger;
+import com.acme.edu.printer.ConsolePrinter;
+import com.acme.edu.printer.FilePrinter;
+import com.acme.edu.printer.Printable;
+import com.acme.edu.printer.PrinterException;
 import com.acme.edu.states.IntState;
 import com.acme.edu.states.StringState;
 import com.acme.edu.states.UnBufferState;
@@ -12,7 +17,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore
+
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private static final String SEP = System.lineSeparator();
@@ -20,8 +25,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     //region given
     @Before
-    public void setUpSystemOut(){
-        logger = new Logger(new Factory(new IntState(new Printer()), new StringState(new Printer()), new UnBufferState(new Printer())));
+    public void setUpSystemOut() throws PrinterException {
+        ConsolePrinter consolePrinter = new ConsolePrinter();
+        FilePrinter filePrinter = new FilePrinter("out.txt", "UTF-8");
+        logger = new Logger(new Factory(new IntState(consolePrinter, filePrinter),
+                                        new StringState(consolePrinter, filePrinter),
+                                        new UnBufferState(consolePrinter, filePrinter)));
         resetOut();
         captureSysout();
     }
@@ -126,16 +135,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogSameSubsequentStringsWithoutMultiRepeat() throws LogException {
         //region when
-        logger.log();
         logger.log("str 2");
         logger.log("str 2");
         logger.log("str 3");
         logger.log("str 2");
         logger.log(1);
         logger.log(2);
-        logger.log(4);
-        logger.log(8);
-        logger.log(16);
         logger.log("str 2");
         logger.log(0);
         logger.log("str 2");
@@ -150,7 +155,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
                         "string: str 2 (x2)" + SEP +
                         "string: str 3" + SEP +
                         "string: str 2" + SEP +
-                        "primitive: 31" + SEP +
+                        "primitive: 3" + SEP +
                         "string: str 2" + SEP +
                         "primitive: 0" + SEP +
                         "string: str 2" + SEP +

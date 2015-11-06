@@ -1,7 +1,5 @@
 package com.acme.edu.printer;
 
-import com.acme.edu.exception.PrinterException;
-
 /**
  * Data output
  */

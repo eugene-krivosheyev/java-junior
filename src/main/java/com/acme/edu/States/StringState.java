@@ -1,8 +1,7 @@
 package com.acme.edu.states;
 
-import com.acme.edu.exception.LogException;
 import com.acme.edu.printer.Printable;
-import com.acme.edu.exception.PrinterException;
+import com.acme.edu.printer.PrinterException;
 
 /**
  * Created by Павел on 02.11.2015.
@@ -10,17 +9,19 @@ import com.acme.edu.exception.PrinterException;
 public class StringState implements LoggerState {
 
     //region fiends
-    private Printable printer;
+    private Printable printer[];
     private static String previousLine = "";
     private int buffer = 1;
     //endregion
 
     //region constructor
+
     /**
      * Setting the object Printer
+     *
      * @param printer
      */
-    public StringState(Printable printer) {
+    public StringState(Printable... printer) {
         this.printer = printer;
     }
     //endregion
@@ -30,13 +31,14 @@ public class StringState implements LoggerState {
     /**
      * Counts the number of duplicate rows in a buffer.
      * If there are no duplicates, then the buffer is reset.
+     *
      * @param message
      */
     @Override
-    public void log(String message) throws LogException {
-        if (previousLine.equals(message)){
+    public void log(String message) throws StateException{
+        if (previousLine.equals(message)) {
             buffer++;
-        }else if (previousLine != ""){
+        } else if (previousLine != "") {
             flush();
         }
         previousLine = message;
@@ -46,17 +48,19 @@ public class StringState implements LoggerState {
      * Clearing buffers
      */
     @Override
-    public void flush() throws LogException {
+    public void flush() throws StateException{
         try {
             if (buffer == 1 && !previousLine.isEmpty()) {
-                printer.print(STRING + previousLine);
-
+                for (Printable printable : printer) {
+                    printable.print(STRING + previousLine);
+                }
             } else if (buffer > 1) {
-                printer.print(String.format("%s%s (x%d)", STRING, previousLine, buffer));
-
+                for (Printable printable : printer) {
+                    printable.print(String.format("%s%s (x%d)", STRING, previousLine, buffer));
+                }
             }
-        }catch (PrinterException e){
-            throw new LogException(e);
+        } catch (PrinterException e) {
+            throw new StateException(e);
         }
         buffer = 1;
         previousLine = "";

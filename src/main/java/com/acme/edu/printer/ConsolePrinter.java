@@ -1,17 +1,15 @@
 package com.acme.edu.printer;
 
-import com.acme.edu.exception.PrinterException;
-
 /**
  * The output in the console
  */
-public class Printer implements Printable {
-    @Override
+public class ConsolePrinter implements Printable {
+
     /**
      * print to console
      * @param message The <code>String</code> to be printed.
      */
-
+    @Override
     public void print(String message) throws PrinterException {
         System.out.println(message);
     }

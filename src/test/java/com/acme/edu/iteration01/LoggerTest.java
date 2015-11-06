@@ -1,8 +1,13 @@
 package com.acme.edu.iteration01;
 
 import com.acme.edu.*;
-import com.acme.edu.exception.LogException;
-import com.acme.edu.printer.Printer;
+import com.acme.edu.logger.LogException;
+import com.acme.edu.logger.Factory;
+import com.acme.edu.logger.Logger;
+import com.acme.edu.printer.ConsolePrinter;
+import com.acme.edu.printer.FilePrinter;
+import com.acme.edu.printer.Printable;
+import com.acme.edu.printer.PrinterException;
 import com.acme.edu.states.IntState;
 import com.acme.edu.states.StringState;
 import com.acme.edu.states.UnBufferState;
@@ -10,18 +15,22 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+
 import java.io.*;
 
-@Ignore
+
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private static final String SEP = System.lineSeparator();
     private Logger logger;
 
     //region given
     @Before
-    public void setUpSystemOut() throws IOException {
-        logger = new Logger(new Factory(new IntState(new Printer()), new StringState(new Printer()), new UnBufferState(new Printer())));
-
+    public void setUpSystemOut() throws PrinterException {
+        ConsolePrinter consolePrinter = new ConsolePrinter();
+        FilePrinter filePrinter = new FilePrinter("out.txt", "UTF-8");
+        logger = new Logger(new Factory(new IntState(consolePrinter, filePrinter),
+                                        new StringState(consolePrinter, filePrinter),
+                                        new UnBufferState(consolePrinter, filePrinter)));
         resetOut();
         captureSysout();
     }
@@ -33,7 +42,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test
-    public void shouldLogInteger() throws LogException{
+    public void shouldLogInteger() throws LogException {
         //region when
         logger.log(1);
         logger.log(0);

@@ -1,4 +1,4 @@
-package com.acme.edu;
+package com.acme.edu.logger;
 
 import com.acme.edu.states.IntState;
 import com.acme.edu.states.StringState;
