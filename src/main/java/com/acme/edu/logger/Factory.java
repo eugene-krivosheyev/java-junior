@@ -1,6 +1,7 @@
 package com.acme.edu.logger;
 
 import com.acme.edu.states.IntState;
+import com.acme.edu.states.LoggerState;
 import com.acme.edu.states.StringState;
 import com.acme.edu.states.UnBufferState;
 
@@ -14,19 +15,16 @@ public class Factory {
     private IntState intState;
     private StringState stringState;
     private UnBufferState unBufferState;
-
+    private LoggerState currentState = null;
     //region constructor
 
     /**
      * Initialization States
-     * @param intState
-     * @param stringState
-     * @param unBufferState
      */
-    public Factory(IntState intState, StringState stringState, UnBufferState unBufferState) {
-        this.intState = intState;
-        this.stringState = stringState;
-        this.unBufferState = unBufferState;
+    public Factory() {
+        this.intState = new IntState();
+        this.stringState = new StringState();
+        this.unBufferState = new UnBufferState();
     }
     //endregion
 
@@ -45,10 +43,10 @@ public class Factory {
     }
 
     /**
-     *
      * @return State without buffer
      */
     public UnBufferState getUnBufferState() {
         return unBufferState;
     }
+
 }

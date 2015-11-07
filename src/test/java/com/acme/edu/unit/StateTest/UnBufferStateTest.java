@@ -1,10 +1,8 @@
 package com.acme.edu.unit.StateTest;
 
-import com.acme.edu.logger.LogException;
 import com.acme.edu.printer.ConsolePrinter;
 import com.acme.edu.printer.FilePrinter;
 import com.acme.edu.states.LoggerState;
-import com.acme.edu.states.StringState;
 import com.acme.edu.states.UnBufferState;
 import org.junit.After;
 import org.junit.Before;
@@ -29,6 +27,7 @@ public class UnBufferStateTest {
         consolePrinterMock = mock(ConsolePrinter.class);
         filePrinterMock = mock(FilePrinter.class);
         sut = new UnBufferState(consolePrinterMock, filePrinterMock);
+
     }
     @After
     public void tearDown() {

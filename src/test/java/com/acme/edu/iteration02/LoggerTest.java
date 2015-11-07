@@ -1,16 +1,13 @@
 package com.acme.edu.iteration02;
 
 
-import com.acme.edu.*;
-import com.acme.edu.logger.LogException;
+import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.logger.Factory;
+import com.acme.edu.logger.LogException;
 import com.acme.edu.logger.Logger;
 import com.acme.edu.printer.ConsolePrinter;
 import com.acme.edu.printer.FilePrinter;
 import com.acme.edu.printer.PrinterException;
-import com.acme.edu.states.IntState;
-import com.acme.edu.states.StringState;
-import com.acme.edu.states.UnBufferState;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -22,20 +19,19 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private static final String SEP = System.lineSeparator();
     private Logger logger;
     private FilePrinter filePrinter;
+    private ConsolePrinter consolePrinter;
     //region given
     @Before
     public void setUpSystemOut() throws PrinterException {
-        ConsolePrinter consolePrinter = new ConsolePrinter();
+        consolePrinter = new ConsolePrinter();
         filePrinter = new FilePrinter("out.txt", "UTF-8");
-        logger = new Logger(new Factory(new IntState(consolePrinter, filePrinter),
-                                        new StringState(consolePrinter, filePrinter),
-                                        new UnBufferState(consolePrinter, filePrinter)));
+        logger = new Logger(new Factory(), consolePrinter, filePrinter);
         resetOut();
         captureSysout();
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() throws PrinterException {
         resetOut();
         filePrinter.closeStream();
     }

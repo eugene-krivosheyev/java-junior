@@ -1,5 +1,6 @@
 package com.acme.edu.logger;
 
+import com.acme.edu.printer.Printable;
 import com.acme.edu.states.LoggerState;
 import com.acme.edu.states.StateException;
 
@@ -11,10 +12,10 @@ import com.acme.edu.states.StateException;
  * @author Pavel Seregin
  * @version 1.1 2 Nov 2015
  */
-public class Logger implements LoggerState {
+public class Logger{
 
     //region fields
-    Factory factory;
+    private Factory factory;
     private LoggerState state = null;
     //endregion
 
@@ -24,7 +25,8 @@ public class Logger implements LoggerState {
      *
      * @param factory
      */
-    public Logger(Factory factory) {
+    public Logger(Factory factory, Printable... printables) {
+        LoggerState.printers = printables;
         this.factory = factory;
     }
     //endregion
@@ -35,24 +37,13 @@ public class Logger implements LoggerState {
      * If no duplicates, prints one line.
      * Considers the sum of consecutive integers,
      * If numbers are not consecutive, print the input value.
-     *
      * @param message The <code>primitive: int</code> to be printed.
      */
     public void log(int message) throws LogException{
         if (state == null){
             state = factory.getIntState();
         }
-        try {
-            if (state != factory.getIntState()) {
-                state.flush();
-                state = factory.getIntState();
-                state.log(String.valueOf(message));
-            } else {
-                state.log(String.valueOf(message));
-            }
-        } catch (StateException e) {
-            throw new LogException(e);
-        }
+        checkStateInt(message);
     }
 
     /**
@@ -62,7 +53,6 @@ public class Logger implements LoggerState {
      *
      * @param message If the input parameters are duplicated, The <code>string: String (x2)</code> to be printed.
      */
-    @Override
     public void log(String message) throws LogException{
         if (message == null || message.isEmpty()){
             throw new LogException(new IllegalArgumentException());
@@ -70,17 +60,7 @@ public class Logger implements LoggerState {
         if (state == null){
             state = factory.getStringState();
         }
-        try {
-            if (state != factory.getStringState()) {
-                state.flush();
-                state = factory.getStringState();
-                state.log(message);
-            } else {
-                state.log(message);
-            }
-        } catch (StateException e) {
-            throw new LogException(e);
-        }
+        checkStateString(message);
     }
 
     /**
@@ -90,7 +70,7 @@ public class Logger implements LoggerState {
     public void log(boolean message) throws LogException {
         try {
             state = factory.getUnBufferState();
-            factory.getUnBufferState().log(PRIMITIVE + String.valueOf(message));
+            factory.getUnBufferState().log(LoggerState.PRIMITIVE + String.valueOf(message));
         } catch (StateException e) {
             throw new LogException(e);
         }
@@ -103,7 +83,7 @@ public class Logger implements LoggerState {
     public void log(char message) throws LogException{
         try {
             state = factory.getUnBufferState();
-            factory.getUnBufferState().log(CHAR + String.valueOf(message));
+            factory.getUnBufferState().log(LoggerState.CHAR + String.valueOf(message));
         } catch (StateException e) {
             throw new LogException(e);
         }
@@ -119,7 +99,7 @@ public class Logger implements LoggerState {
         }
         try {
             state = factory.getUnBufferState();
-            factory.getUnBufferState().log(REFERENCE + String.valueOf(message));
+            factory.getUnBufferState().log(LoggerState.REFERENCE + String.valueOf(message));
         } catch (StateException e) {
             throw new LogException(e);
         }
@@ -183,11 +163,38 @@ public class Logger implements LoggerState {
     /**
      * Clearing buffers
      */
-    @Override
     public void flush() throws LogException {
         try {
             state.flush();
         }catch (StateException e){
+            throw new LogException(e);
+        }
+    }
+
+    private void checkStateInt(int message) throws LogException {
+        try {
+            if (state != factory.getIntState()) {
+                state.flush();
+                state = factory.getIntState();
+                state.log(String.valueOf(message));
+            } else {
+                state.log(String.valueOf(message));
+            }
+        } catch (StateException e) {
+            throw new LogException(e);
+        }
+    }
+
+    private void checkStateString(String message) throws LogException {
+        try {
+            if (state != factory.getStringState()) {
+                state.flush();
+                state = factory.getStringState();
+                state.log(message);
+            } else {
+                state.log(message);
+            }
+        } catch (StateException e) {
             throw new LogException(e);
         }
     }

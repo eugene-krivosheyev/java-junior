@@ -2,8 +2,6 @@ package com.acme.edu.unit.LoggerTest;
 
 import com.acme.edu.logger.Factory;
 import com.acme.edu.logger.Logger;
-import com.acme.edu.printer.ConsolePrinter;
-import com.acme.edu.printer.FilePrinter;
 import com.acme.edu.states.IntState;
 import com.acme.edu.states.StringState;
 import com.acme.edu.states.UnBufferState;
@@ -24,16 +22,12 @@ public class LoggerTest {
     private IntState intState;
     private StringState stringState;
     private UnBufferState unBufferState;
-    private ConsolePrinter consolePrinter;
-    private FilePrinter filePrinter;
 
     @Before
     public void setUp() throws IOException {
         intState = mock(IntState.class);
         unBufferState = mock(UnBufferState.class);
         stringState = mock(StringState.class);
-        consolePrinter = mock(ConsolePrinter.class);
-        filePrinter = mock(FilePrinter.class);
         stub = mock(Factory.class);
         sut = new Logger(stub);
     }

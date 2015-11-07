@@ -12,20 +12,28 @@ public class FilePrinter implements Printable {
     //region fields
     private int buffer = 0;
     private static final int SIZE_BUFFER = 50;
-    private PrintWriter printWriter;
+    private StringBuilder stringBuilder = new StringBuilder();
+    private OutputStreamWriter printWriter;
     //endregion
 
     //region constructor
+
+    /**
+     * Initialize the stream to write
+     * @param fileName the name of the file to which to write
+     * @param encoding encoding to write data
+     * @throws PrinterException check the character set and the file exists
+     */
     public FilePrinter(String fileName, String encoding) throws PrinterException {
         try {
-            this.printWriter = new PrintWriter(
-                                    new BufferedWriter(
-                                        new OutputStreamWriter(
-                                            new FileOutputStream(fileName, true), encoding)));
+            this.printWriter = new OutputStreamWriter(
+                                            new FileOutputStream(fileName, true), encoding);
         } catch (FileNotFoundException e) {
-            throw new PrinterException("file not found", e);
+            printerException.addSuppressed(e);
+            throw printerException;
         } catch (UnsupportedEncodingException e) {
-            throw new PrinterException("Unsupported encoding", e);
+            printerException.addSuppressed(e);
+            throw printerException;
         }
     }
     //endregion
@@ -38,19 +46,32 @@ public class FilePrinter implements Printable {
      */
     @Override
     public void print(String message) throws PrinterException {
-        printWriter.write(message + LoggerState.SEP);
+        stringBuilder.append(message + LoggerState.SEP);
+
         if (buffer < SIZE_BUFFER) {
             buffer++;
         } else {
-            printWriter.flush();
-            buffer = 0;
+            try {
+                printWriter.write(stringBuilder.toString());
+                stringBuilder.setLength(0);
+                buffer = 0;
+            }catch (IOException e){
+                printerException.addSuppressed(e);
+                throw printerException;
+            }
         }
     }
 
     /**
      * To close the stream writing to file
      */
-    public void closeStream(){
-        printWriter.close();
+    public void closeStream() throws PrinterException {
+        try {
+            printWriter.write(stringBuilder.toString());
+            printWriter.close();
+        }catch (IOException e){
+            printerException.addSuppressed(e);
+            throw printerException;
+        }
     }
 }

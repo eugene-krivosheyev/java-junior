@@ -6,43 +6,36 @@ import com.acme.edu.printer.PrinterException;
 /**
  * Created by Павел on 02.11.2015.
  */
-public class UnBufferState implements LoggerState {
-
-    //region fields
-    private Printable[] printer;
-    //endregion
+public class UnBufferState extends LoggerState {
 
     //region constructor
-    /**
-     * Setting the object Printer
-     *
-     * @param printer
-     */
-    public UnBufferState(Printable... printer) {
-        this.printer = printer;
+    //for testability
+    public UnBufferState(Printable... printers) {
+        super(printers);
     }
-    //endregion
 
+    //endregion
     /**
      * Print message
+     *
      * @param
      */
     @Override
-    public void log(String message) throws StateException {
-        try {
-            for (Printable printable : printer) {
+    public void log(String message) throws StateException{
+        for (Printable printable : getPrinters()) {
+            try {
                 printable.print(message);
+            }catch (PrinterException e){
+                throw new StateException(e);
             }
-        }catch (PrinterException e){
-            throw new StateException(e);
         }
     }
 
     /**
-     * Leak abstractions
+     * Leak abstraction
      */
     @Override
-    public void flush(){
+    public void flush() {
         return;
     }
     //endregion
