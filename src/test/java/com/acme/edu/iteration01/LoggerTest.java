@@ -18,16 +18,16 @@ import org.junit.Test;
 
 import java.io.*;
 
-
+@Ignore
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private static final String SEP = System.lineSeparator();
     private Logger logger;
-
+    private FilePrinter filePrinter;
     //region given
     @Before
     public void setUpSystemOut() throws PrinterException {
         ConsolePrinter consolePrinter = new ConsolePrinter();
-        FilePrinter filePrinter = new FilePrinter("out.txt", "UTF-8");
+        filePrinter = new FilePrinter("out.txt", "UTF-8");
         logger = new Logger(new Factory(new IntState(consolePrinter, filePrinter),
                                         new StringState(consolePrinter, filePrinter),
                                         new UnBufferState(consolePrinter, filePrinter)));
@@ -38,6 +38,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @After
     public void tearDown() {
         resetOut();
+        filePrinter.closeStream();
     }
     //endregion
 

@@ -54,7 +54,7 @@ public class StringState implements LoggerState {
                 for (Printable printable : printer) {
                     printable.print(STRING + previousLine);
                 }
-            } else if (buffer > 1) {
+            }else{
                 for (Printable printable : printer) {
                     printable.print(String.format("%s%s (x%d)", STRING, previousLine, buffer));
                 }

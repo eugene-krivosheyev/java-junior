@@ -43,6 +43,12 @@
       <artifactId>mockito-all</artifactId>
       <version>1.10.19</version>
     </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>1.4</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
 </project>

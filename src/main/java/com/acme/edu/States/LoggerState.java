@@ -12,6 +12,7 @@ public interface LoggerState{
     String STRING = "string: ";
     String REFERENCE = "reference: ";
     String PRIMITIVE = "primitive: ";
+    String SEP = System.lineSeparator();
     //endregion
 
     /**

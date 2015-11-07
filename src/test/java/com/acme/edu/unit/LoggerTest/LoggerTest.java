@@ -1,4 +1,4 @@
-package com.acme.edu.unit;
+package com.acme.edu.unit.LoggerTest;
 
 import com.acme.edu.logger.Factory;
 import com.acme.edu.logger.Logger;
@@ -8,17 +8,16 @@ import com.acme.edu.states.IntState;
 import com.acme.edu.states.StringState;
 import com.acme.edu.states.UnBufferState;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
-import static org.junit.Assert.assertEquals;
+
 import static org.mockito.Mockito.*;
 
 /**
  * Created by Павел on 04.11.2015.
  */
-@Ignore
+
 public class LoggerTest {
     private Factory stub;
     private Logger sut;
@@ -79,39 +78,79 @@ public class LoggerTest {
     }
 
     @Test
-    public void shouldLogArrayAndMatrixWhenSetUnBufferState() throws Exception {
+    public void shouldLogArrayAndMatrix() throws Exception {
 
         //region given
         int[][] dummy = new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}};
         int[] dummyArray = new int[]{-1, 0, 1};
-        when(stub.getUnBufferState()).thenReturn(unBufferState);
+        when(stub.getIntState()).thenReturn(intState);
         //endregion
 
         //region when
+        sut.log(dummy);
         sut.log(dummyArray);
-        sut.log(dummy);
         //endregion
 
         //region then
-//        verify(stub.getUnBufferState(), times(1)).log(dummyArray);
-//        verify(stub.getUnBufferState(), times(1)).log(dummy);
+        verify(stub.getIntState(), times(3)).log("-1");
+        verify(stub.getIntState(), times(3)).log("1");
+        verify(stub.getIntState(), times(2)).log("0");
+        verify(stub.getIntState(), times(1)).log("2");
+        verify(stub.getIntState(), times(1)).log("-2");
+        verify(stub.getIntState(), times(1)).log("3");
         //endregion
     }
-    @Test
-    public void shouldLogMultiMatrixWhenSetUnBufferState() throws Exception {
-        //region given
-        int[][][][] dummy =  new int[][][][]{{{{0}}}};
-        when(stub.getUnBufferState()).thenReturn(unBufferState);
-        //endregion
 
-        //region when
-        sut.log(dummy);
-        //endregion
 
-        //region then
-        //verify(stub.getUnBufferState(), times(1)).log(dummy);
-        //endregion
-    }
+        @Test
+        public void shouldLogMultiMatrix() throws Exception {
+            //region given
+            int[][][][] dummy =  new int[][][][]{{{{0}}}};
+            when(stub.getIntState()).thenReturn(intState);
+            //endregion
+
+            //region when
+            sut.log(dummy);
+            //endregion
+
+            //region then
+            verify(stub.getIntState(), times(1)).log("0");
+            //endregion
+        }
+
+        @Test
+        public void shouldLogVarArgInteger() throws Exception {
+            //region given
+            when(stub.getIntState()).thenReturn(intState);
+            //endregion
+
+            //region when
+            sut.log(1,1,1,2,-3,-1,-1);
+            //endregion
+
+            //region then
+            verify(stub.getIntState(), times(3)).log("1");
+            verify(stub.getIntState(), times(2)).log("-1");
+            verify(stub.getIntState(), times(1)).log("2");
+            verify(stub.getIntState(), times(1)).log("-3");
+            //endregion
+        }
+
+        @Test
+        public void shouldLogVarArgString() throws Exception {
+            //region given
+            when(stub.getStringState()).thenReturn(stringState);
+            //endregion
+
+            //region when
+            sut.log("str 1", "str 1", "str 2");
+            //endregion
+
+            //region then
+            verify(stub.getStringState(), times(2)).log("str 1");
+            verify(stub.getStringState(), times(1)).log("str 2");
+            //endregion
+        }
 
     @Test
     public void shouldLogCharBooleanObjectWhenSetUnBufferState() throws Exception {
