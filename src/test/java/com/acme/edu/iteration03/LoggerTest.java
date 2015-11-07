@@ -32,7 +32,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @After
     public void tearDown() throws PrinterException {
         resetOut();
-        filePrinter.closeStream();
     }
     //endregion
 

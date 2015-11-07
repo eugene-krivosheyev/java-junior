@@ -8,9 +8,7 @@ import java.io.*;
 public class FilePrinter implements Printable {
 
     //region fields
-    private static final String SEP = System.lineSeparator();
     private int buffer = 0;
-    private static final int SIZE_BUFFER = 50;
     private StringBuilder stringBuilder = new StringBuilder();
     private OutputStreamWriter printWriter;
     //endregion
@@ -27,10 +25,10 @@ public class FilePrinter implements Printable {
         try {
             this.printWriter = new OutputStreamWriter(new FileOutputStream(fileName, true), encoding);
         } catch (FileNotFoundException e) {
-            printerException.addSuppressed(e);
+            printerException.listExciption.add(e);
             throw printerException;
         } catch (UnsupportedEncodingException e) {
-            printerException.addSuppressed(e);
+            printerException.listExciption.add(e);
             throw printerException;
         }
     }
@@ -50,25 +48,13 @@ public class FilePrinter implements Printable {
         } else {
             try {
                 printWriter.write(stringBuilder.toString());
+                printWriter.flush();
                 stringBuilder.setLength(0);
                 buffer = 0;
             }catch (IOException e){
-                printerException.addSuppressed(e);
+                printerException.listExciption.add(e);
                 throw printerException;
             }
-        }
-    }
-
-    /**
-     * To close the stream writing to file
-     */
-    public void closeStream() throws PrinterException {
-        try {
-            printWriter.write(stringBuilder.toString());
-            printWriter.close();
-        }catch (IOException e){
-            printerException.addSuppressed(e);
-            throw printerException;
         }
     }
 }

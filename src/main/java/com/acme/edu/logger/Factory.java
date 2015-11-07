@@ -1,7 +1,6 @@
 package com.acme.edu.logger;
 
 import com.acme.edu.states.IntState;
-import com.acme.edu.states.LoggerState;
 import com.acme.edu.states.StringState;
 import com.acme.edu.states.UnBufferState;
 
@@ -15,7 +14,6 @@ public class Factory {
     private IntState intState;
     private StringState stringState;
     private UnBufferState unBufferState;
-    private LoggerState currentState = null;
     //region constructor
 
     /**

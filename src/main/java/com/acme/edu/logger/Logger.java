@@ -28,8 +28,8 @@ public class Logger{
      * @param factory
      */
     public Logger(Factory factory, Printable... printables) {
-        LoggerState.printers = printables;
         this.factory = factory;
+        LoggerState.printers = printables;
     }
     //endregion
 
@@ -70,12 +70,7 @@ public class Logger{
      * @param message The <code>primitive: boolean</code> to be printed.
      */
     public void log(boolean message) throws LogException {
-        try {
-            state = factory.getUnBufferState();
-            factory.getUnBufferState().log(String.valueOf(message));
-        } catch (StateException e) {
-            throw new LogException(e);
-        }
+        checkStateUnBuffer(String.valueOf(message));
     }
 
     /**
@@ -83,12 +78,7 @@ public class Logger{
      * @param message The <code>char: char</code> to be printed.
      */
     public void log(char message) throws LogException{
-        try {
-            state = factory.getUnBufferState();
-            factory.getUnBufferState().log(CHAR + String.valueOf(message));
-        } catch (StateException e) {
-            throw new LogException(e);
-        }
+        checkStateUnBuffer(CHAR + String.valueOf(message));
     }
 
     /**
@@ -96,15 +86,7 @@ public class Logger{
      * @param message The <code>reference: Object</code> to be printed.
      */
     public void log(Object message) throws LogException {
-        if (message == null){
-            throw new LogException(new IllegalArgumentException());
-        }
-        try {
-            state = factory.getUnBufferState();
-            factory.getUnBufferState().log(REFERENCE + String.valueOf(message));
-        } catch (StateException e) {
-            throw new LogException(e);
-        }
+        checkStateUnBuffer(REFERENCE + String.valueOf(message));
     }
 
 
@@ -179,7 +161,7 @@ public class Logger{
                 state.flush();
                 state = factory.getIntState();
                 state.log(String.valueOf(message));
-            } else {
+            } else  {
                 state.log(String.valueOf(message));
             }
         } catch (StateException e) {
@@ -192,6 +174,23 @@ public class Logger{
             if (state != factory.getStringState()) {
                 state.flush();
                 state = factory.getStringState();
+                state.log(message);
+            } else {
+                state.log(message);
+            }
+        } catch (StateException e) {
+            throw new LogException(e);
+        }
+    }
+
+    private void checkStateUnBuffer(String message) throws LogException {
+        if (state == null){
+            state = factory.getUnBufferState();
+        }
+        try {
+            if (state != factory.getUnBufferState()) {
+                state.flush();
+                state = factory.getUnBufferState();
                 state.log(message);
             } else {
                 state.log(message);

@@ -4,6 +4,12 @@ package com.acme.edu.printer;
  * Data output
  */
 public interface Printable {
+
+    //region fields
+    String SEP = System.lineSeparator();
+    int SIZE_BUFFER = 50;
+    //endregion
+
     /**
      * print to console
      * @param message

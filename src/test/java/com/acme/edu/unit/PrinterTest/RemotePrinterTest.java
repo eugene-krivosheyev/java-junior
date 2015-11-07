@@ -1,8 +1,11 @@
 package com.acme.edu.unit.PrinterTest;
 
-import com.acme.edu.printer.FilePrinter;
+import com.acme.edu.Server.Server;
+import com.acme.edu.Server.ServerException;
 import com.acme.edu.printer.PrinterException;
+import com.acme.edu.printer.RemotePrinter;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -14,35 +17,38 @@ import static org.apache.commons.io.FileUtils.readFileToString;
 /**
  * Created by Павел on 07.11.2015.
  */
-public class FilePrinterTest {
+@Ignore
+public class RemotePrinterTest {
     static final String SEP = System.lineSeparator();
-    private FilePrinter sut;
+    private Server sutServer;
+    private RemotePrinter remotePrinter;
     private String fileName = "out.txt";
-    private String encoding = "UTF-8";
 
     @Before
-    public void setUp() throws IOException, PrinterException {
+    public void setUp() throws IOException, PrinterException, ServerException {
         File file = new File(fileName);
         file.delete();
+        sutServer = new Server(6666);
+        sutServer.startServer();
     }
 
     @Test
-    public void shouldPrintStringToFile() throws PrinterException, IOException {
+    public void shouldPrintToFileRemote() throws IOException, PrinterException {
         //region
         String dummy = "test string";
         StringBuilder sb = new StringBuilder();
-        sut = new FilePrinter(fileName, encoding);
+        remotePrinter = new RemotePrinter("127.0.0.1", 6666);
         //endregion
 
         //region when
         for (int i = 0; i < 51; i++) {
-            sut.print(dummy);
             sb.append(dummy + SEP);
+            remotePrinter.print(dummy);
         }
         //endregion
 
         //region then
-        assertEquals(sb.toString(), readFileToString(new File(fileName)));
+        assertEquals(sb.toString(), readFileToString(new File("serverOut.txt")));
         //endregion
     }
 }

@@ -2,6 +2,7 @@ package com.acme.edu.unit.StateTest;
 
 import com.acme.edu.printer.ConsolePrinter;
 import com.acme.edu.printer.FilePrinter;
+import com.acme.edu.printer.RemotePrinter;
 import com.acme.edu.states.IntState;
 import com.acme.edu.states.LoggerState;
 import org.junit.Before;
@@ -17,13 +18,16 @@ import static org.mockito.Mockito.*;
 public class IntStateTest {
     private ConsolePrinter consolePrinterMock;
     private FilePrinter filePrinterMock;
+    private RemotePrinter remotePrinter;
     private LoggerState sut;
 
     @Before
     public void setUp() throws IOException {
         consolePrinterMock = mock(ConsolePrinter.class);
         filePrinterMock = mock(FilePrinter.class);
-        sut = new IntState(consolePrinterMock, filePrinterMock);
+        remotePrinter = mock(RemotePrinter.class);
+
+        sut = new IntState(consolePrinterMock, filePrinterMock, remotePrinter);
     }
 
     @Test
@@ -41,6 +45,8 @@ public class IntStateTest {
         //file
         verify(filePrinterMock).print("primitive: 0");
         //endregion
+
+        verify(remotePrinter).print("primitive: 0");
     }
 
     @Test

@@ -11,17 +11,17 @@ public abstract class LoggerState{
     /**
      * An array of types of printing
      */
-    public static Printable[] printers = null;
+    public static Printable[] printers;
     static final String STRING = "string: ";
     static final String PRIMITIVE = "primitive: ";
     //endregion
 
     /**
      * Initialization of types of printing
-     * @param VarargPrinters
+     * @param varargPrinters
      */
-    public LoggerState(Printable[] VarargPrinters) {
-        printers = VarargPrinters;
+    public LoggerState(Printable[] varargPrinters) {
+        this.printers = varargPrinters;
     }
 
     /**
