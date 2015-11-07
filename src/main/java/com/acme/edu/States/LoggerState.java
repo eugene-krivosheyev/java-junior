@@ -8,25 +8,28 @@ import com.acme.edu.printer.Printable;
 public abstract class LoggerState{
 
     //region constants
-    public static String CHAR = "char: ";
-    public static String STRING = "string: ";
-    public static String REFERENCE = "reference: ";
-    public static String PRIMITIVE = "primitive: ";
-    public static String SEP = System.lineSeparator();
-
+    /**
+     * An array of types of printing
+     */
     public static Printable[] printers = null;
+    static final String STRING = "string: ";
+    static final String PRIMITIVE = "primitive: ";
+    //endregion
 
+    /**
+     * Initialization of types of printing
+     * @param VarargPrinters
+     */
     public LoggerState(Printable[] VarargPrinters) {
         printers = VarargPrinters;
     }
 
-    public LoggerState(){}
-
+    /**
+     * @return array types printer
+     */
     public Printable[] getPrinters() {
         return printers;
     }
-
-    //endregion
 
     /**
      * Print message

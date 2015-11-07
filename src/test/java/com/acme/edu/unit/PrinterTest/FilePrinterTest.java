@@ -2,7 +2,6 @@ package com.acme.edu.unit.PrinterTest;
 
 import com.acme.edu.printer.FilePrinter;
 import com.acme.edu.printer.PrinterException;
-import com.acme.edu.states.LoggerState;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,6 +15,7 @@ import static org.apache.commons.io.FileUtils.readFileToString;
  * Created by Павел on 07.11.2015.
  */
 public class FilePrinterTest {
+    static final String SEP = System.lineSeparator();
     private FilePrinter sut;
     private String fileName = "out.txt";
     private String encoding = "UTF-8";
@@ -37,7 +37,7 @@ public class FilePrinterTest {
         //region when
         for (int i = 0; i < 100; i++) {
             sut.print(dummy);
-            sb.append(dummy + LoggerState.SEP);
+            sb.append(dummy + SEP);
         }
         sut.closeStream();
         //endregion

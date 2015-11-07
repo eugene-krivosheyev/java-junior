@@ -167,7 +167,7 @@ public class LoggerTest {
 
         //region then
         verify(stub.getUnBufferState(), times(1)).log("char: " + String.valueOf("t"));
-        verify(stub.getUnBufferState(), times(1)).log("primitive: " + String.valueOf(true));
+        verify(stub.getUnBufferState(), times(1)).log(String.valueOf(true));
         verify(stub.getUnBufferState(), times(1)).log("reference: " + String.valueOf(dummy));
         //endregion
     }

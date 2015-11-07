@@ -15,6 +15,8 @@ import com.acme.edu.states.StateException;
 public class Logger{
 
     //region fields
+    private static final String CHAR = "char: ";
+    private static final String REFERENCE = "reference: ";
     private Factory factory;
     private LoggerState state = null;
     //endregion
@@ -70,7 +72,7 @@ public class Logger{
     public void log(boolean message) throws LogException {
         try {
             state = factory.getUnBufferState();
-            factory.getUnBufferState().log(LoggerState.PRIMITIVE + String.valueOf(message));
+            factory.getUnBufferState().log(String.valueOf(message));
         } catch (StateException e) {
             throw new LogException(e);
         }
@@ -83,7 +85,7 @@ public class Logger{
     public void log(char message) throws LogException{
         try {
             state = factory.getUnBufferState();
-            factory.getUnBufferState().log(LoggerState.CHAR + String.valueOf(message));
+            factory.getUnBufferState().log(CHAR + String.valueOf(message));
         } catch (StateException e) {
             throw new LogException(e);
         }
@@ -99,7 +101,7 @@ public class Logger{
         }
         try {
             state = factory.getUnBufferState();
-            factory.getUnBufferState().log(LoggerState.REFERENCE + String.valueOf(message));
+            factory.getUnBufferState().log(REFERENCE + String.valueOf(message));
         } catch (StateException e) {
             throw new LogException(e);
         }

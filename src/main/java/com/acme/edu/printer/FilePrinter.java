@@ -1,7 +1,5 @@
 package com.acme.edu.printer;
 
-import com.acme.edu.states.LoggerState;
-
 import java.io.*;
 
 /**
@@ -10,6 +8,7 @@ import java.io.*;
 public class FilePrinter implements Printable {
 
     //region fields
+    private static final String SEP = System.lineSeparator();
     private int buffer = 0;
     private static final int SIZE_BUFFER = 50;
     private StringBuilder stringBuilder = new StringBuilder();
@@ -26,8 +25,7 @@ public class FilePrinter implements Printable {
      */
     public FilePrinter(String fileName, String encoding) throws PrinterException {
         try {
-            this.printWriter = new OutputStreamWriter(
-                                            new FileOutputStream(fileName, true), encoding);
+            this.printWriter = new OutputStreamWriter(new FileOutputStream(fileName, true), encoding);
         } catch (FileNotFoundException e) {
             printerException.addSuppressed(e);
             throw printerException;
@@ -46,8 +44,7 @@ public class FilePrinter implements Printable {
      */
     @Override
     public void print(String message) throws PrinterException {
-        stringBuilder.append(message + LoggerState.SEP);
-
+        stringBuilder.append(message + SEP);
         if (buffer < SIZE_BUFFER) {
             buffer++;
         } else {

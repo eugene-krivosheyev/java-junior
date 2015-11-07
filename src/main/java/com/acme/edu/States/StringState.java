@@ -15,6 +15,10 @@ public class StringState extends LoggerState {
 
     //region constructor
     //for testability
+    /**
+     * Initialization of types of printing
+     * @param printers vararg types printers
+     */
     public StringState(Printable... printers) {
         super(printers);
     }

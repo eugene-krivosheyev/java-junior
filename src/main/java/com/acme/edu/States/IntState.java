@@ -14,6 +14,11 @@ public class IntState extends LoggerState {
 
     //region constructor
     ///for testability
+
+    /**
+     * Initialization of types of printing
+     * @param printers vararg types printers
+     */
     public IntState(Printable... printers) {
         super(printers);
     }
@@ -23,7 +28,6 @@ public class IntState extends LoggerState {
     //region methods
     /**
      * Finds the sum of integers
-     *
      * @param message
      */
     @Override

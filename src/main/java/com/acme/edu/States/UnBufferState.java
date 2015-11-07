@@ -10,6 +10,10 @@ public class UnBufferState extends LoggerState {
 
     //region constructor
     //for testability
+    /**
+     * Initialization of types of printing
+     * @param printers vararg types printers
+     */
     public UnBufferState(Printable... printers) {
         super(printers);
     }
