@@ -58,22 +58,27 @@ public class LoggerTest {
     }
 
     @Test
-    public void shouldLogRepeatingStringsWhenSetStringState() throws Exception{
+    public void shouldChangeStatesWhenToEnterStringsAndIntegers() throws Exception{
 
         //region given
         when(stub.getStringState()).thenReturn(stringState);
+        when(stub.getIntState()).thenReturn(intState);
         //endregion
 
         //region when
         sut.log("str 1");
         sut.log("str 1");
         sut.log("str 1");
-        sut.flush();
+        sut.log(0);
+        sut.log("str 2");
+        sut.log("str 2");
+        sut.log("str 2");
         //endregion
 
         //region then
         verify(stub.getStringState(), times(3)).log("str 1");
-        verify(stub.getStringState(), times(1)).flush();
+        verify(stub.getIntState(), times(1)).log("0");
+        verify(stub.getStringState(), times(3)).log("str 2");
         //endregion
     }
 
@@ -173,4 +178,23 @@ public class LoggerTest {
         //endregion
     }
 
+    @Test
+    public void shouldFlushBufferOtherStatesWhenSetOtherStates() throws Exception {
+
+        //region given
+        when(stub.getIntState()).thenReturn(intState);
+        when(stub.getStringState()).thenReturn(stringState);
+        //endregion
+
+        //region when
+        sut.log("str 1");
+        sut.log(0);
+        sut.log("str 2");
+        //endregion
+
+        //region then
+        verify(stub.getIntState(), times(1)).flush();
+        verify(stub.getStringState(), times(1)).flush();
+        //endregion
+    }
 }

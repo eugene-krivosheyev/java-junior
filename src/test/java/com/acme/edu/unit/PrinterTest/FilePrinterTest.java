@@ -1,4 +1,4 @@
-package com.acme.edu.unit.ExceptionTest;
+package com.acme.edu.unit.PrinterTest;
 
 import com.acme.edu.printer.FilePrinter;
 import com.acme.edu.printer.PrinterException;
@@ -28,14 +28,22 @@ public class FilePrinterTest {
 
     @Test
     public void shouldWhen() throws PrinterException, IOException {
+        //region
         String dummy = "test string";
         StringBuilder sb = new StringBuilder();
         sut = new FilePrinter(fileName, encoding);
+        //endregion
+
+        //region when
         for (int i = 0; i < 100; i++) {
             sut.print(dummy);
             sb.append(dummy + LoggerState.SEP);
         }
         sut.closeStream();
+        //endregion
+
+        //region then
         assertEquals(sb.toString(), readFileToString(new File("out.txt")));
+        //endregion
     }
 }

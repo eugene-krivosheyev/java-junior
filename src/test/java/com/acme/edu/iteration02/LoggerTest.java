@@ -7,7 +7,6 @@ import com.acme.edu.logger.Factory;
 import com.acme.edu.logger.Logger;
 import com.acme.edu.printer.ConsolePrinter;
 import com.acme.edu.printer.FilePrinter;
-import com.acme.edu.printer.Printable;
 import com.acme.edu.printer.PrinterException;
 import com.acme.edu.states.IntState;
 import com.acme.edu.states.StringState;

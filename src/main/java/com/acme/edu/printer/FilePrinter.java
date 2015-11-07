@@ -38,11 +38,10 @@ public class FilePrinter implements Printable {
      */
     @Override
     public void print(String message) throws PrinterException {
+        printWriter.write(message + LoggerState.SEP);
         if (buffer < SIZE_BUFFER) {
-            printWriter.write(message + LoggerState.SEP);
             buffer++;
         } else {
-            printWriter.write(message + LoggerState.SEP);
             printWriter.flush();
             buffer = 0;
         }
