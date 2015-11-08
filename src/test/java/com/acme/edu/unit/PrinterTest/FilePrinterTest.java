@@ -47,14 +47,7 @@ public class FilePrinterTest {
     }
 
     @Test (expected = PrinterException.class)
-    public void shouldLogPrinterExceptionWhenFileNotFound() throws PrinterException, IOException {
-        //region
-        new FilePrinter("??", encoding);
-        //endregion
-    }
-
-    @Test (expected = PrinterException.class)
-    public void shouldLogPrinterExceptionWhenFileUnsupportedEncoding() throws PrinterException, IOException {
+    public void shouldLogPrinterExceptionWhenFileUnsupportedEncoding() throws PrinterException {
         //region
         new FilePrinter(fileName, "???");
         //endregion
