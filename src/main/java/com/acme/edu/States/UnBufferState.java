@@ -1,5 +1,6 @@
 package com.acme.edu.states;
 
+import com.acme.edu.logger.LoggerState;
 import com.acme.edu.printer.Printable;
 import com.acme.edu.printer.PrinterException;
 
@@ -26,13 +27,11 @@ public class UnBufferState extends LoggerState {
      */
     @Override
     public void log(String message) throws StateException{
-        for (Printable printable : getPrinters()) {
             try {
-                printable.print(message);
+                printState(message);
             }catch (PrinterException e){
                 throw new StateException(e);
             }
-        }
     }
 
     /**

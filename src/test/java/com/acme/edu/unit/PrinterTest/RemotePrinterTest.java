@@ -10,9 +10,12 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.ServerSocket;
 
-import static junit.framework.TestCase.assertEquals;
 import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Павел on 07.11.2015.
@@ -20,35 +23,37 @@ import static org.apache.commons.io.FileUtils.readFileToString;
 @Ignore
 public class RemotePrinterTest {
     static final String SEP = System.lineSeparator();
-    private Server sutServer;
-    private RemotePrinter remotePrinter;
+    private Server mock;
+    private RemotePrinter sut;
+    private ServerSocket serverSocket;
     private String fileName = "out.txt";
 
     @Before
     public void setUp() throws IOException, PrinterException, ServerException {
+        sut = new RemotePrinter("127.0.0.1",6666);
+        mock = mock(Server.class);
+        when(mock.getSereverSocket()).thenReturn(new ServerSocket(6666));
         File file = new File(fileName);
         file.delete();
-        sutServer = new Server(6666);
-        sutServer.startServer();
+
     }
 
     @Test
-    public void shouldPrintToFileRemote() throws IOException, PrinterException {
+    public void shouldPrintToFileRemote() throws IOException, PrinterException, ServerException, InterruptedException {
         //region
         String dummy = "test string";
-        StringBuilder sb = new StringBuilder();
-        remotePrinter = new RemotePrinter("127.0.0.1", 6666);
+        Thread thread = new Thread(new Server(6666));
+        thread.start();
         //endregion
 
         //region when
-        for (int i = 0; i < 51; i++) {
-            sb.append(dummy + SEP);
-            remotePrinter.print(dummy);
-        }
+        Thread.sleep(2000);
+            sut.print(dummy);
         //endregion
 
         //region then
-        assertEquals(sb.toString(), readFileToString(new File("serverOut.txt")));
+
+        assertEquals("", readFileToString(new File("serverOut.txt")));
         //endregion
     }
 }

@@ -13,7 +13,7 @@ public class RemotePrinter implements Printable {
     private String host;
     private int port;
     private int buffer = 0;
-    private DataOutputStream dataOutputStreams;
+    private DataOutputStream dos;
     private StringBuilder stringBuilder = new StringBuilder();
     //endregion
 
@@ -36,20 +36,34 @@ public class RemotePrinter implements Printable {
     @Override
     public void print(String message) throws PrinterException {
         stringBuilder.append(message + SEP);
-        if (buffer < SIZE_BUFFER) {
-            buffer++;
-        } else {
-            buffer = 0;
-            try (
-                    Socket socket = new Socket(host, port)
-            ) {
-                dataOutputStreams = new DataOutputStream(socket.getOutputStream());
-                dataOutputStreams.writeUTF(stringBuilder.toString());
+        if (checkBuffer()) {
+            try (Socket socket = getSocket()) {
+                dos = getStream(socket);
+                dos.writeUTF(stringBuilder.toString());
+                dos.close();
                 stringBuilder.setLength(0);
             } catch (IOException e) {
                 printerException.listExciption.add(e);
                 throw printerException;
             }
         }
+    }
+
+    private boolean checkBuffer(){
+        if (buffer < SIZE_BUFFER) {
+            buffer++;
+            return false;
+        } else {
+            buffer = 0;
+            return true;
+        }
+    }
+
+    public Socket getSocket() throws IOException {
+        return new Socket(host, port);
+    }
+
+    private DataOutputStream getStream(Socket socket) throws IOException {
+        return new DataOutputStream(socket.getOutputStream());
     }
 }

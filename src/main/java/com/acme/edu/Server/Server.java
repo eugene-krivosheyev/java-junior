@@ -7,11 +7,12 @@ import java.net.Socket;
 /**
  * Created by Павел on 07.11.2015.
  */
-public class Server {
+public class Server implements Runnable {
     //region fields
-    private int port;
-    private DataInputStream dataInputStream;
-    private OutputStreamWriter osw;
+    private static int port;
+    private static final String FILE_MESSAGES = "serverOut.txt";
+    private static final String FILE_OBJECTS = "objects.txt";
+    private static DataInputStream dataInputStream;
     //endregion
 
     public Server(int port) throws IOException {
@@ -19,39 +20,56 @@ public class Server {
     }
 
     public void startServer() throws ServerException {
-        try {
-            ServerSocket serverSocket = new ServerSocket(port);
+        try (ServerSocket serverSocket = getSereverSocket()) {
             while (true) {
-                System.out.println("test");
+                serverSocket.setSoTimeout(12_000);
                 Socket client = serverSocket.accept();
                 dataInputStream = new DataInputStream(client.getInputStream());
                 writeToFile(dataInputStream.readUTF());
+                dataInputStream.close();
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             serializeException(e);
         }
     }
 
-    private void writeToFile(String message) throws ServerException{
+    private void writeToFile(String message) {
         try {
-            osw = new OutputStreamWriter(new FileOutputStream("serverOut.txt", true), "UTF-8");
-            osw.write(message);
-        }catch (FileNotFoundException | UnsupportedEncodingException e){
-            System.out.println("1");
+            FileWriter fw = new FileWriter(FILE_MESSAGES, true);
+            fw.write(message);
+            fw.close();
+        } catch (FileNotFoundException | UnsupportedEncodingException e) {
             serializeException(e);
-        } catch (IOException e){
+        } catch (IOException e) {
             serializeException(e);
         }
     }
 
-    private void serializeException(Exception e){
-        try{
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("objects.dat"));
-        out.writeObject(e);
-        out.close();
-        }catch (IOException ex){
-            ex.getStackTrace();
+    private void serializeException(Exception e) {
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE_OBJECTS));
+            out.writeObject(e);
+            out.close();
+        } catch (IOException ex) {
+            serializeException(ex);
         }
         //отправить эксепшн на клиент???
+    }
+    public ServerSocket getSereverSocket(){
+        try {
+            return new ServerSocket(6666);
+        } catch (IOException e) {
+            serializeException(e);
+            return null;
+        }
+    }
+
+    @Override
+    public void run() {
+        try {
+            startServer();
+        } catch (ServerException e) {
+            serializeException(e);
+        }
     }
 }

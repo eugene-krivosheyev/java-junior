@@ -1,5 +1,6 @@
 package com.acme.edu.states;
 
+import com.acme.edu.logger.LoggerState;
 import com.acme.edu.printer.Printable;
 import com.acme.edu.printer.PrinterException;
 
@@ -49,23 +50,18 @@ public class StringState extends LoggerState {
     public void flush() throws StateException {
 
         if (buffer == 1 && !previousLine.isEmpty()) {
-            for (Printable printable : getPrinters()) {
                 try {
-                    printable.print(STRING + previousLine);
+                    printState(STRING + previousLine);
                 } catch (PrinterException e) {
                     throw new StateException(e);
                 }
-            }
         } else {
-            for (Printable printable : getPrinters()) {
                 try {
-                    printable.print(String.format("%s%s (x%d)", STRING, previousLine, buffer));
+                    printState(String.format("%s%s (x%d)", STRING, previousLine, buffer));
                 } catch (PrinterException e) {
                     throw new StateException(e);
                 }
-            }
         }
-
         buffer = 1;
         previousLine = "";
     }
