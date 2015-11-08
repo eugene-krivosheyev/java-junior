@@ -31,7 +31,7 @@ public class FilePrinterTest {
         //region
         String dummy = "test string";
         StringBuilder sb = new StringBuilder();
-        sut = new FilePrinter("out.txt", encoding);
+        sut = new FilePrinter(fileName, encoding);
         //endregion
 
         //region when
@@ -49,14 +49,14 @@ public class FilePrinterTest {
     @Test (expected = PrinterException.class)
     public void shouldLogPrinterExceptionWhenFileNotFound() throws PrinterException, IOException {
         //region
-        sut = new FilePrinter("??  /", encoding);
+        new FilePrinter("??", encoding);
         //endregion
     }
 
     @Test (expected = PrinterException.class)
     public void shouldLogPrinterExceptionWhenFileUnsupportedEncoding() throws PrinterException, IOException {
         //region
-        sut = new FilePrinter("out.txt", "???");
+        new FilePrinter(fileName, "???");
         //endregion
     }
 }

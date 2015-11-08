@@ -7,10 +7,10 @@ import java.net.Socket;
 /**
  * Created by Павел on 07.11.2015.
  */
-public class Server implements Runnable {
+public class Server{
     //region fields
     private int port;
-    private final String FILE_MESSAGES = "serverOut.txt";
+    private static final String FILE_MESSAGES = "serverOut.txt";
     private Socket client;
     private DataInputStream dataInputStream;
     //endregion
@@ -55,20 +55,5 @@ public class Server implements Runnable {
         ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());
         out.writeObject(e);
         out.close();
-    }
-
-    /**
-     * Start server.
-     * For multiThreading
-     */
-    @Override
-    public void run() {
-        try {
-            startServer();
-        } catch (ServerException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
