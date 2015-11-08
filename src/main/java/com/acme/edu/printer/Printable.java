@@ -8,6 +8,10 @@ public interface Printable {
     //region fields
     String SEP = System.lineSeparator();
     int SIZE_BUFFER = 50;
+    /**
+     * The exception to all the printers, accumulates different types of exceptions
+     */
+    PrinterException printerException = new PrinterException();
     //endregion
 
     /**
@@ -15,9 +19,4 @@ public interface Printable {
      * @param message
      */
     void print(String message) throws PrinterException;
-
-    /**
-     * The exception to all the printers, accumulates different types of exceptions
-     */
-    PrinterException printerException = new PrinterException();
 }

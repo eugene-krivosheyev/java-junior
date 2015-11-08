@@ -1,4 +1,4 @@
-package com.acme.edu.Server;
+package com.acme.edu.server;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -9,21 +9,27 @@ import java.net.Socket;
  */
 public class Server implements Runnable {
     //region fields
-    private static int port;
+    private int port;
     private static final String FILE_MESSAGES = "serverOut.txt";
     private static final String FILE_OBJECTS = "objects.txt";
-    private static DataInputStream dataInputStream;
+    private Socket client;
+    private DataInputStream dataInputStream;
     //endregion
 
+    /**
+     * Initialize number port
+     * @param port the port number
+     * @throws IOException
+     */
     public Server(int port) throws IOException {
         this.port = port;
     }
 
     public void startServer() throws ServerException {
-        try (ServerSocket serverSocket = getSereverSocket()) {
-            while (true) {
+        try (ServerSocket serverSocket = new ServerSocket(6666)) {
+            while(true) {
                 serverSocket.setSoTimeout(12_000);
-                Socket client = serverSocket.accept();
+                client = serverSocket.accept();
                 dataInputStream = new DataInputStream(client.getInputStream());
                 writeToFile(dataInputStream.readUTF());
                 dataInputStream.close();
@@ -47,23 +53,18 @@ public class Server implements Runnable {
 
     private void serializeException(Exception e) {
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE_OBJECTS));
+            ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());
             out.writeObject(e);
             out.close();
         } catch (IOException ex) {
             serializeException(ex);
         }
-        //отправить эксепшн на клиент???
-    }
-    public ServerSocket getSereverSocket(){
-        try {
-            return new ServerSocket(6666);
-        } catch (IOException e) {
-            serializeException(e);
-            return null;
-        }
     }
 
+    /**
+     * Start server.
+     * For multiThreading
+     */
     @Override
     public void run() {
         try {

@@ -1,7 +1,7 @@
 package com.acme.edu.unit.PrinterTest;
 
-import com.acme.edu.Server.Server;
-import com.acme.edu.Server.ServerException;
+import com.acme.edu.server.Server;
+import com.acme.edu.server.ServerException;
 import com.acme.edu.printer.PrinterException;
 import com.acme.edu.printer.RemotePrinter;
 import org.junit.Before;
@@ -32,7 +32,7 @@ public class RemotePrinterTest {
     public void setUp() throws IOException, PrinterException, ServerException {
         sut = new RemotePrinter("127.0.0.1",6666);
         mock = mock(Server.class);
-        when(mock.getSereverSocket()).thenReturn(new ServerSocket(6666));
+        when(mock.getServerSocket()).thenReturn(new ServerSocket(6666));
         File file = new File(fileName);
         file.delete();
 

@@ -1,7 +1,7 @@
 package com.acme.edu.unit.Server;
 
-import com.acme.edu.Server.Server;
-import com.acme.edu.Server.ServerException;
+import com.acme.edu.server.Server;
+import com.acme.edu.server.ServerException;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.logger.LogException;
 import com.acme.edu.printer.PrinterException;
@@ -51,7 +51,7 @@ public class serverTest extends Thread implements SysoutCaptureAndAssertionAbili
     public void shouldLogInteger() throws LogException, IOException, PrinterException, ServerException {
 
         //region when
-        when(mock.getSereverSocket()).thenReturn(serverSocket);
+        when(mock.getServerSocket()).thenReturn(serverSocket);
         String dummy = "test string";
         StringBuilder sb = new StringBuilder();
         mock.startServer();

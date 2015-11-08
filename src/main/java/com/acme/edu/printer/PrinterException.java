@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Павел on 06.11.2015.
  */
 public class PrinterException extends Exception {
-    List<Throwable> listExciption = new ArrayList<>();
+    transient List<Throwable> listExciption = new ArrayList<>();
     /**
      *
      * @param message the message that encountered the exception

@@ -1,4 +1,4 @@
-package com.acme.edu.Server;
+package com.acme.edu.server;
 
 import java.io.Serializable;
 
