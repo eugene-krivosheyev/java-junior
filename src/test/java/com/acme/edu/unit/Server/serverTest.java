@@ -51,7 +51,6 @@ public class serverTest extends Thread implements SysoutCaptureAndAssertionAbili
     public void shouldLogInteger() throws LogException, IOException, PrinterException, ServerException {
 
         //region when
-        when(mock.getServerSocket()).thenReturn(serverSocket);
         String dummy = "test string";
         StringBuilder sb = new StringBuilder();
         mock.startServer();

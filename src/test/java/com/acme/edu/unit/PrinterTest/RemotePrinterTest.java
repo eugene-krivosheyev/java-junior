@@ -32,7 +32,6 @@ public class RemotePrinterTest {
     public void setUp() throws IOException, PrinterException, ServerException {
         sut = new RemotePrinter("127.0.0.1",6666);
         mock = mock(Server.class);
-        when(mock.getServerSocket()).thenReturn(new ServerSocket(6666));
         File file = new File(fileName);
         file.delete();
 
