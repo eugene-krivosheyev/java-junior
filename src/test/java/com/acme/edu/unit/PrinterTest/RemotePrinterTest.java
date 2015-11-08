@@ -41,8 +41,6 @@ public class RemotePrinterTest {
     public void shouldPrintToFileRemote() throws IOException, PrinterException, ServerException, InterruptedException {
         //region
         String dummy = "test string";
-        Thread thread = new Thread(new Server(6666));
-        thread.start();
         //endregion
 
         //region when
