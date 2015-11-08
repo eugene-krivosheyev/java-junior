@@ -7,7 +7,17 @@ import java.io.Serializable;
  */
 public class ServerException extends Exception implements Serializable {
 
+    /**
+     * Different exceptions occur when the server is running
+     * @param cause type Exception
+     */
     public ServerException(Throwable cause) {
         super(cause);
+    }
+
+    /**
+     * An empty constructor
+     */
+    public ServerException() {
     }
 }

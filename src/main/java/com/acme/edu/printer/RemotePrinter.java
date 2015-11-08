@@ -13,8 +13,6 @@ import java.net.Socket;
 public class RemotePrinter implements Printable {
 
     //region fields
-    private String host;
-    private int port;
     private int buffer = 0;
     private Socket server;
     private DataOutputStream dos;
@@ -28,8 +26,6 @@ public class RemotePrinter implements Printable {
      * @param port for example 1500
      */
     public RemotePrinter(String host, int port) throws PrinterException {
-        this.host = host;
-        this.port = port;
         try {
             server = new Socket(host,port);
         } catch (IOException e) {

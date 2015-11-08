@@ -1,11 +1,11 @@
 package com.acme.edu.unit.Server;
 
-import com.acme.edu.server.Server;
-import com.acme.edu.server.ServerException;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.logger.LogException;
 import com.acme.edu.printer.PrinterException;
 import com.acme.edu.printer.RemotePrinter;
+import com.acme.edu.server.Server;
+import com.acme.edu.server.ServerException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -18,7 +18,6 @@ import java.net.ServerSocket;
 import static junit.framework.TestCase.assertEquals;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by Павел on 08.11.2015.
@@ -53,7 +52,6 @@ public class serverTest extends Thread implements SysoutCaptureAndAssertionAbili
         //region when
         String dummy = "test string";
         StringBuilder sb = new StringBuilder();
-        mock.startServer();
 
         for (int i = 0; i < 51; i++) {
             sut.print(dummy);

@@ -191,4 +191,25 @@ public class LoggerTest {
         verify(stub.getStringState(), times(1)).flush();
         //endregion
     }
+
+    @Test
+    public void shouldFlushBufferOtherStatesWhenBooleanAfterString() throws Exception {
+
+        //region given
+        when(stub.getIntState()).thenReturn(intState);
+        when(stub.getStringState()).thenReturn(stringState);
+        //endregion
+
+        //region when
+        sut.log("str 1");
+        sut.log(0);
+        sut.log("str 2");
+
+        //endregion
+
+        //region then
+        verify(stub.getIntState(), times(1)).flush();
+        verify(stub.getStringState(), times(1)).flush();
+        //endregion
+    }
 }

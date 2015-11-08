@@ -6,6 +6,12 @@ package com.acme.edu.states;
 public class StateException extends Exception{
 
     /**
+     * Empty constructor
+     */
+    public StateException() {
+    }
+
+    /**
      * Exception for states
      * @param cause
      */

@@ -24,10 +24,10 @@ public class FilePrinter implements Printable {
     public FilePrinter(String fileName, String encoding) throws PrinterException {
         try {
             this.printWriter = new OutputStreamWriter(new FileOutputStream(fileName, true), encoding);
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | UnsupportedEncodingException e) {
             printerException.listExciption.add(e);
             throw printerException;
-        } catch (UnsupportedEncodingException e) {
+        }catch (NullPointerException e){
             printerException.listExciption.add(e);
             throw printerException;
         }

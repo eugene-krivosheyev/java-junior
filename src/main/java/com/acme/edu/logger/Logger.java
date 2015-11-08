@@ -85,6 +85,9 @@ public class Logger{
      * @param message The <code>reference: Object</code> to be printed.
      */
     public void log(Object message) throws LogException {
+        if (message == null){
+            throw new LogException("Object is null");
+        }
         checkStateUnBuffer(REFERENCE + String.valueOf(message));
     }
 
@@ -94,8 +97,8 @@ public class Logger{
      * @param matrix print the array in the array
      */
     public void log(int[][] matrix) throws LogException{
-        if (matrix.length == 0){
-            throw new LogException(new IllegalArgumentException());
+        if (matrix == null || matrix.length == 0){
+            throw new LogException("incorrect matrix", new IllegalArgumentException());
         }
         for (int[] element : matrix) {
             log(element);
@@ -107,7 +110,7 @@ public class Logger{
      * @param multiMatrix print miltiMatrix
      */
     public void log(int[][][][] multiMatrix) throws LogException{
-        if (multiMatrix.length == 0){
+        if (multiMatrix == null || multiMatrix.length == 0){
             throw new LogException(new IllegalArgumentException());
         }
         for (int[][][] firstLevel : multiMatrix) {
@@ -135,7 +138,7 @@ public class Logger{
      * @param elements The <code>Integer...</code> to be printed.
      */
     public void log(int... elements) throws LogException{
-        if (elements.length == 0){
+        if (elements == null || elements.length == 0){
             throw new LogException(new IllegalArgumentException());
         }
         for (int element : elements) {
