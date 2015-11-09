@@ -15,9 +15,4 @@ public class ServerException extends Exception implements Serializable {
         super(cause);
     }
 
-    /**
-     * An empty constructor
-     */
-    public ServerException() {
-    }
 }

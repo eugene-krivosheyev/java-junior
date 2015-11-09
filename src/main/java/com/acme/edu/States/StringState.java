@@ -10,7 +10,7 @@ import com.acme.edu.printer.PrinterException;
 public class StringState extends LoggerState {
 
     //region fiends
-    private static String previousLine = "";
+    private String previousLine = "";
     private int buffer = 1;
     //endregion
 
@@ -34,7 +34,7 @@ public class StringState extends LoggerState {
      * @param message
      */
     @Override
-    public void log(String message) throws StateException {
+    public void log(String message) throws PrinterException {
         if (previousLine.equals(message)) {
             buffer++;
         } else if (previousLine != "") {
@@ -47,20 +47,12 @@ public class StringState extends LoggerState {
      * Clearing buffers
      */
     @Override
-    public void flush() throws StateException {
+    public void flush() throws PrinterException {
 
         if (buffer == 1 && !previousLine.isEmpty()) {
-                try {
-                    printState(STRING + previousLine);
-                } catch (PrinterException e) {
-                    throw new StateException(e);
-                }
+            printState(STRING + previousLine);
         } else {
-                try {
-                    printState(String.format("%s%s (x%d)", STRING, previousLine, buffer));
-                } catch (PrinterException e) {
-                    throw new StateException(e);
-                }
+            printState(String.format("%s%s (x%d)", STRING, previousLine, buffer));
         }
         buffer = 1;
         previousLine = "";

@@ -27,14 +27,18 @@ public class Server{
 
 
     private void startServer() throws ServerException, IOException {
-        try (ServerSocket serverSocket = new ServerSocket(port)) {
+        try (ServerSocket serverSocket = new ServerSocket(port);
+             Socket client = serverSocket.accept()) {
             serverSocket.setSoTimeout(10000);
-            client = serverSocket.accept();
-            dataInputStream = new DataInputStream(client.getInputStream());
+            dataInputStream = new DataInputStream(client.getInputStream()); //закрывается ли getInputStream
             writeToFile(dataInputStream.readUTF());
-            dataInputStream.close();
+
         } catch (IOException e) {
             serializeException(e);
+        }finally {
+            if (dataInputStream != null){
+                dataInputStream.close();
+            }
         }
     }
 

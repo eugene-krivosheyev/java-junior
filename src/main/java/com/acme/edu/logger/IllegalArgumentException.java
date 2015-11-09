@@ -3,12 +3,9 @@ package com.acme.edu.logger;
 /**
  * Created by Павел on 05.11.2015.
  */
-public class IllegalArgumentException extends Exception {
+public class IllegalArgumentException extends LogException {
 
-    /**
-     * Inappropriate argument or an argument of the wrong type.
-     */
-    public IllegalArgumentException() {
+    public IllegalArgumentException(String message) {
+        super(message);
     }
-
 }

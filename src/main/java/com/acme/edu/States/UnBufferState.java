@@ -20,18 +20,15 @@ public class UnBufferState extends LoggerState {
     }
 
     //endregion
+
     /**
      * Print message
      *
      * @param
      */
     @Override
-    public void log(String message) throws StateException{
-            try {
-                printState(message);
-            }catch (PrinterException e){
-                throw new StateException(e);
-            }
+    public void log(String message) throws PrinterException {
+        printState(message);
     }
 
     /**
@@ -39,7 +36,7 @@ public class UnBufferState extends LoggerState {
      */
     @Override
     public void flush() {
-        return;
+
     }
     //endregion
 

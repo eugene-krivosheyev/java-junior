@@ -1,9 +1,9 @@
 package com.acme.edu.unit.PrinterTest;
 
-import com.acme.edu.server.Server;
-import com.acme.edu.server.ServerException;
 import com.acme.edu.printer.PrinterException;
 import com.acme.edu.printer.RemotePrinter;
+import com.acme.edu.server.Server;
+import com.acme.edu.server.ServerException;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -15,7 +15,6 @@ import java.net.ServerSocket;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by Павел on 07.11.2015.
@@ -30,7 +29,7 @@ public class RemotePrinterTest {
 
     @Before
     public void setUp() throws IOException, PrinterException, ServerException {
-        sut = new RemotePrinter("127.0.0.1",6666);
+        sut = new RemotePrinter("127.0.0.1",6666, "UTF-8");
         mock = mock(Server.class);
         File file = new File(fileName);
         file.delete();

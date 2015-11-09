@@ -23,13 +23,6 @@ public class LogException extends Exception {
     }
 
     /**
-     * Empty constrictor
-     */
-
-    public LogException() {
-    }
-
-    /**
      * Incorrect data
      * @param cause The <code>Throwable </code> be printed to the console.
      */

@@ -15,8 +15,10 @@ public class IntState extends LoggerState {
 
     //region constructor
     ///for testability
+
     /**
      * Initialization of types of printing
+     *
      * @param printers vararg types printers
      */
     public IntState(Printable... printers) {
@@ -28,10 +30,11 @@ public class IntState extends LoggerState {
     //region methods
     /**
      * Finds the sum of integers
+     *
      * @param message
      */
     @Override
-    public void log(String message) throws StateException {
+    public void log(String message) throws PrinterException {
         checkMaxAndOverFlow(Integer.parseInt(message));
         buffer += Integer.parseInt(message);
     }
@@ -40,16 +43,12 @@ public class IntState extends LoggerState {
      * Clearing buffers
      */
     @Override
-    public void flush() throws StateException {
-            try {
-                printState(PRIMITIVE + String.valueOf(buffer));
-            } catch (PrinterException e) {
-                throw new StateException(e);
-            }
+    public void flush() throws PrinterException {
+        printState(PRIMITIVE + String.valueOf(buffer));
         buffer = 0;
     }
 
-    private void checkMaxAndOverFlow(int message) throws StateException {
+    private void checkMaxAndOverFlow(int message) throws PrinterException {
         if (message == Integer.MAX_VALUE
                 || message == Integer.MIN_VALUE
                 || (long) message + buffer > Integer.MAX_VALUE

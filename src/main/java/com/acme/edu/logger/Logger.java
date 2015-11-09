@@ -1,7 +1,7 @@
 package com.acme.edu.logger;
 
 import com.acme.edu.printer.Printable;
-import com.acme.edu.states.StateException;
+import com.acme.edu.printer.PrinterException;
 
 
 /**
@@ -56,7 +56,7 @@ public class Logger{
      */
     public void log(String message) throws LogException{
         if (message == null || message.isEmpty()){
-            throw new LogException(new IllegalArgumentException());
+            throw new IllegalArgumentException("");
         }
         if (state == null){
             state = factory.getStringState();
@@ -98,7 +98,7 @@ public class Logger{
      */
     public void log(int[][] matrix) throws LogException{
         if (matrix == null || matrix.length == 0){
-            throw new LogException("incorrect matrix", new IllegalArgumentException());
+            throw new IllegalArgumentException("");
         }
         for (int[] element : matrix) {
             log(element);
@@ -111,7 +111,7 @@ public class Logger{
      */
     public void log(int[][][][] multiMatrix) throws LogException{
         if (multiMatrix == null || multiMatrix.length == 0){
-            throw new LogException(new IllegalArgumentException());
+            throw new IllegalArgumentException("");
         }
         for (int[][][] firstLevel : multiMatrix) {
             for (int[][] secondLevel : firstLevel) {
@@ -126,7 +126,7 @@ public class Logger{
      */
     public void log(String... elements) throws LogException{
         if (elements.length == 0){
-            throw new LogException(new IllegalArgumentException());
+            throw new IllegalArgumentException("");
         }
         for (String element : elements) {
             log(element);
@@ -139,7 +139,7 @@ public class Logger{
      */
     public void log(int... elements) throws LogException{
         if (elements == null || elements.length == 0){
-            throw new LogException(new IllegalArgumentException());
+            throw new IllegalArgumentException("");
         }
         for (int element : elements) {
             log(element);
@@ -152,7 +152,7 @@ public class Logger{
     public void flush() throws LogException {
         try {
             state.flush();
-        }catch (StateException e){
+        }catch (PrinterException e){
             throw new LogException(e);
         }
     }
@@ -166,7 +166,7 @@ public class Logger{
             } else  {
                 state.log(String.valueOf(message));
             }
-        } catch (StateException e) {
+        } catch (PrinterException e) {
             throw new LogException(e);
         }
     }
@@ -180,7 +180,7 @@ public class Logger{
             } else {
                 state.log(message);
             }
-        } catch (StateException e) {
+        } catch (PrinterException e) {
             throw new LogException(e);
         }
     }
@@ -197,7 +197,7 @@ public class Logger{
             } else {
                 state.log(message);
             }
-        } catch (StateException e) {
+        } catch (PrinterException e) {
             throw new LogException(e);
         }
     }
