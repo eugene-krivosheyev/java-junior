@@ -1,32 +1,39 @@
 package com.acme.edu;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.util.*;
 
 public class ReflectionDemo {
     public static void main(String[] args) {
-        //Reflection: Introspection + Byte manipulation (ASM)
+        List<String> list = new LinkedList<>();
+        Collections.sort(list, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return 0;
+            }
+        });
 
-        try {
-            //Получение мета-информации
-            Class clazz = Class.forName("com.acme.edu.LoggerState");
-            //LoggerState.class //ClassNotDefFoundError
-            //new LoggerState().getClass();
-
-            clazz.getMethods()[0].getParameterTypes();
-            clazz.getAnnotations();
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
+        Queue queue = new Queue();
+        queue.<String>sort();
     }
 }
 
-@SuppressWarnings("unchecked")
-class AnnotDemo {
-    @Override
-    @Deprecated
-    public String toString() {
-        return super.toString();
-    }
+class Queue<T extends Object & Serializable> {
+    private List<T> list;
+
+    public T getHead() {return null;}
+    public void add(T elem) {}
+    public <P> P map(P e) { return null; }
+    public <V> V sort() { V v; return null;}
+}
+
+class StringQueue extends Queue<String> {
+
+}
+
+class A {
+    public void a() {}
+}
+class B extends A {
+    public void b() {}
 }
