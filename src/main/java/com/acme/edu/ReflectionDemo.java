@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import java.util.Date;
+
 public class ReflectionDemo {
     public static void main(String[] args) {
         //Reflection: Introspection + Byte manipulation (ASM)
@@ -17,5 +19,14 @@ public class ReflectionDemo {
             e.printStackTrace();
         }
 
+    }
+}
+
+@SuppressWarnings("unchecked")
+class AnnotDemo {
+    @Override
+    @Deprecated
+    public String toString() {
+        return super.toString();
     }
 }
