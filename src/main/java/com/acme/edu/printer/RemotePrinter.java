@@ -17,7 +17,7 @@ public class RemotePrinter implements Printable{
     private int buffer = 0;
     private Socket server;
     private String encoding;
-    private List<String> bufferMessages = new ArrayList<>(50);
+    private List<String> bufferMessages = new ArrayList<>(SIZE_BUFFER);
     private BufferedWriter bufferWriterMessage;
     private ObjectInputStream serverMessage;
     //private DataOutputStream dos;

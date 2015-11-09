@@ -1,15 +1,19 @@
 package com.acme.edu.printer;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Павел on 06.11.2015.
  */
 public class FilePrinter implements Printable {
 
+    //for me: реюз общие методы и поля в абстрактный класс. Для классов FilePrinter и RemotePrinter!!!
+
     //region fields
     private int buffer = 0;
-    private StringBuilder stringBuilder = new StringBuilder();
+    private List<String> bufferMessages = new ArrayList<>(SIZE_BUFFER);
     private OutputStreamWriter printWriter;
     //endregion
 
@@ -42,14 +46,14 @@ public class FilePrinter implements Printable {
      */
     @Override
     public void print(String message) throws PrinterException {
-        stringBuilder.append(message + SEP);
+        bufferMessages.add(message + SEP);
         if (buffer < SIZE_BUFFER) {
             buffer++;
         } else {
             try {
-                printWriter.write(stringBuilder.toString());
+                printWriter.write(bufferMessages.toString());
                 printWriter.flush();
-                stringBuilder.setLength(0);
+                bufferMessages.clear();
                 buffer = 0;
             }catch (IOException e){
                 printerException.listExciption.add(e);

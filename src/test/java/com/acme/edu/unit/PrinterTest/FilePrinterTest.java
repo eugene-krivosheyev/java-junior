@@ -7,9 +7,11 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import static junit.framework.TestCase.assertEquals;
 import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Павел on 07.11.2015.
@@ -30,19 +32,19 @@ public class FilePrinterTest {
     public void shouldPrintStringToFile() throws PrinterException, IOException {
         //region
         String dummy = "test string";
-        StringBuilder sb = new StringBuilder();
+        List<String> listMessages = new ArrayList<>();
         sut = new FilePrinter(fileName, encoding);
         //endregion
 
         //region when
         for (int i = 0; i < 51; i++) {
             sut.print(dummy);
-            sb.append(dummy + SEP);
+            listMessages.add(dummy + SEP);
         }
         //endregion
 
         //region then
-        assertEquals(sb.toString(), readFileToString(new File(fileName)));
+        assertEquals(listMessages.toString(), readFileToString(new File(fileName)));
         //endregion
     }
 
