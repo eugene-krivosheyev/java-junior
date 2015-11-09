@@ -2,7 +2,7 @@ package com.acme.edu.unit.StateTest;
 
 import com.acme.edu.printer.ConsolePrinter;
 import com.acme.edu.printer.FilePrinter;
-import com.acme.edu.logger.LoggerState;
+import com.acme.edu.states.LoggerState;
 import com.acme.edu.states.StringState;
 import org.junit.Before;
 import org.junit.Test;

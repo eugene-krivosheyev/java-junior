@@ -1,13 +1,11 @@
 package com.acme.edu.printer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
 /**
  * Created by Павел on 06.11.2015.
  */
 public class PrinterException extends Exception {
-    transient List<Throwable> listExciption = new ArrayList<>();
     /**
      *
      * @param message the message that encountered the exception
@@ -17,10 +15,15 @@ public class PrinterException extends Exception {
         super(message, cause);
     }
 
+    public PrinterException(Throwable cause) {
+        super(cause);
+    }
+
     /**
      * An empty constructor
+     * @param e
      */
-    public PrinterException() {
+    public PrinterException(IOException e) {
         super();
     }
 }

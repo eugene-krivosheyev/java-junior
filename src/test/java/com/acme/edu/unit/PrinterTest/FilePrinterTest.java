@@ -37,7 +37,7 @@ public class FilePrinterTest {
         //endregion
 
         //region when
-        for (int i = 0; i < 51; i++) {
+        for (int i = 0; i < 50; i++) {
             sut.print(dummy);
             listMessages.add(dummy + SEP);
         }
@@ -51,7 +51,14 @@ public class FilePrinterTest {
     @Test (expected = PrinterException.class)
     public void shouldLogPrinterExceptionWhenFileUnsupportedEncoding() throws PrinterException {
         //region
-        new FilePrinter(fileName, "???");
+        sut = new FilePrinter(fileName, "???");
+        String dummy = "test string";
+        //endregion
+
+        //region when
+        for (int i = 0; i < 50; i++) {
+            sut.print(dummy);
+        }
         //endregion
     }
 }

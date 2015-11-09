@@ -2,120 +2,83 @@ package com.acme.edu.printer;
 
 import com.acme.edu.server.ServerException;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by Павел on 07.11.2015.
  */
-public class RemotePrinter implements Printable{
+public class RemotePrinter extends PrinterManager {
 
     //region fields
-    private int buffer = 0;
-    private Socket server;
+    private String host;
+    private int port;
     private String encoding;
     private List<String> bufferMessages = new ArrayList<>(SIZE_BUFFER);
-    private BufferedWriter bufferWriterMessage;
-    private ObjectInputStream serverMessage;
     //private DataOutputStream dos;
 
     //endregion
 
     /**
-     * Initialize hoost and number port
+     * Initialize host and number port
+     *
      * @param host for example 127.0.0.1
      * @param port for example 1500
      */
     public RemotePrinter(String host, int port, String encoding) throws PrinterException {
         this.encoding = encoding;
-        try {
-            server = new Socket(host,port);
-        } catch (IOException e) {
-            printerException.listExciption.add(e);
-            throw printerException;
-        }
+        this.host = host;
+        this.port = port;
     }
 
     /**
      * The accumulation buffer and flush buffer.
      * Remote printing on server
+     *
      * @param message
      * @throws PrinterException
      */
     @Override
     public void print(String message) throws PrinterException {
         bufferMessages.add(message + SEP);
-        if (checkBuffer()) {
+        if (checkBuffer(bufferMessages)) {
+            sortBuffer(bufferMessages); //сортировка буфера
             sendMessage();
         }
     }
 
-    private boolean checkBuffer(){
-        if (buffer < SIZE_BUFFER) {
-            buffer++;
-            return false;
-        } else {
-            buffer = 0;
-            return true;
-        }
-    }
-
-    private void sortBuffer(){
-        Collections.sort(bufferMessages, (o1, o2) -> {
-            if (o1.contains("ERROR"))
-                return -1;
-            else if (o1.equals(o2))
-                return 0;
-            else return 1;
-        });
-    }
-
-    private void deserializationException() throws PrinterException{
-        try {
-            serverMessage = new ObjectInputStream(server.getInputStream());
-            printerException.listExciption.add((ServerException) serverMessage.readObject());
-        } catch (IOException  | ClassNotFoundException e) {
-            printerException.listExciption.add(e);
-            throw printerException;
-        } finally {
-            if (serverMessage != null){
-                try {
-                    serverMessage.close();
-                } catch (IOException e) {
-                    printerException.listExciption.add(e);
-                    throw printerException;
-                }
-            }
-        }
-    }
-
     private void sendMessage() throws PrinterException {
-        try (Socket socket = server) {
-            bufferWriterMessage = new BufferedWriter(new OutputStreamWriter(server.getOutputStream(), encoding));
-            sortBuffer(); //сортировка буфера
+        try (Socket socket = new Socket(host, port);
+             BufferedWriter bufferWriterMessage = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(),encoding))) {
             bufferWriterMessage.write(bufferMessages.toString());
             bufferWriterMessage.flush();
             bufferMessages.clear();
-
-            if (socket.getInputStream().available() > 0){
-                deserializationException();
-            }
-
+            getMessage(socket);
         } catch (IOException e) {
-            printerException.listExciption.add(e);
-            throw printerException;
-        } finally {
-            if (bufferWriterMessage != null){
-                try {
-                    bufferWriterMessage.close();
-                } catch (IOException e) {
-                    printerException.listExciption.add(e);
-                    throw printerException;
-                }
+            throw new PrinterException(e);
+        }
+    }
+
+    private void getMessage(Socket socket) throws PrinterException {
+        try {
+            if (socket.getInputStream().available() > 0) {
+                deserializationException(socket);
             }
+        } catch (IOException e) {
+            throw new PrinterException(e);
+        }
+    }
+
+    private void deserializationException(Socket socket) throws PrinterException {
+        try(ObjectInputStream serverMessage = new ObjectInputStream(socket.getInputStream())) {
+            throw (ServerException) serverMessage.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new PrinterException(e);
         }
     }
 }

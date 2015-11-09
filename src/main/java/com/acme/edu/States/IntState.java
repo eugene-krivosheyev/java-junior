@@ -1,7 +1,6 @@
 package com.acme.edu.states;
 
-import com.acme.edu.logger.LoggerState;
-import com.acme.edu.printer.Printable;
+import com.acme.edu.printer.PrinterManager;
 import com.acme.edu.printer.PrinterException;
 
 /**
@@ -21,7 +20,7 @@ public class IntState extends LoggerState {
      *
      * @param printers vararg types printers
      */
-    public IntState(Printable... printers) {
+    public IntState(PrinterManager... printers) {
         super(printers);
     }
     //endregion
@@ -30,7 +29,6 @@ public class IntState extends LoggerState {
     //region methods
     /**
      * Finds the sum of integers
-     *
      * @param message
      */
     @Override

@@ -1,7 +1,6 @@
 package com.acme.edu.states;
 
-import com.acme.edu.logger.LoggerState;
-import com.acme.edu.printer.Printable;
+import com.acme.edu.printer.PrinterManager;
 import com.acme.edu.printer.PrinterException;
 
 /**
@@ -15,7 +14,7 @@ public class UnBufferState extends LoggerState {
      * Initialization of types of printing
      * @param printers vararg types printers
      */
-    public UnBufferState(Printable... printers) {
+    public UnBufferState(PrinterManager... printers) {
         super(printers);
     }
 

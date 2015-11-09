@@ -1,7 +1,6 @@
 package com.acme.edu.states;
 
-import com.acme.edu.logger.LoggerState;
-import com.acme.edu.printer.Printable;
+import com.acme.edu.printer.PrinterManager;
 import com.acme.edu.printer.PrinterException;
 
 /**
@@ -20,7 +19,7 @@ public class StringState extends LoggerState {
      * Initialization of types of printing
      * @param printers vararg types printers
      */
-    public StringState(Printable... printers) {
+    public StringState(PrinterManager... printers) {
         super(printers);
     }
     //endregion

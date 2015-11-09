@@ -1,6 +1,6 @@
-package com.acme.edu.logger;
+package com.acme.edu.states;
 
-import com.acme.edu.printer.Printable;
+import com.acme.edu.printer.PrinterManager;
 import com.acme.edu.printer.PrinterException;
 
 /**
@@ -12,7 +12,7 @@ public abstract class LoggerState{
     /**
      * An array of types of printing
      */
-    static Printable[] printers;
+    private static PrinterManager[] printers;
     public static final String STRING = "string: ";
     public static final String PRIMITIVE = "primitive: ";
     //endregion
@@ -21,7 +21,7 @@ public abstract class LoggerState{
      * Initialization of types of printing
      * @param varargPrinters
      */
-    public LoggerState(Printable[] varargPrinters) {
+    public LoggerState(PrinterManager[] varargPrinters) {
         printers = varargPrinters;
     }
     /**
@@ -41,8 +41,16 @@ public abstract class LoggerState{
      * @throws PrinterException
      */
     public void printState(String message) throws PrinterException {
-        for (Printable printable : printers) {
-            printable.print(message);
+        for (PrinterManager printerManager : printers) {
+            printerManager.print(message);
         }
+    }
+
+    /**
+     * Initialization sets printer
+     * @param printers
+     */
+    public static void setPrinters(PrinterManager[] printers) {
+        LoggerState.printers = printers;
     }
 }

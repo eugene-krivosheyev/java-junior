@@ -1,7 +1,8 @@
 package com.acme.edu.logger;
 
-import com.acme.edu.printer.Printable;
+import com.acme.edu.printer.PrinterManager;
 import com.acme.edu.printer.PrinterException;
+import com.acme.edu.states.LoggerState;
 
 
 /**
@@ -26,9 +27,9 @@ public class Logger{
      *
      * @param factory
      */
-    public Logger(Factory factory, Printable... printables) {
+    public Logger(Factory factory, PrinterManager... printerManagers) {
         this.factory = factory;
-        LoggerState.printers = printables;
+        LoggerState.setPrinters(printerManagers);
     }
     //endregion
 
