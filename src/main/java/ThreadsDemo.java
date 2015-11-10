@@ -1,10 +1,10 @@
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
+
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 public class ThreadsDemo {
     public static void main(String[] args) throws InterruptedException {
@@ -28,43 +28,38 @@ public class ThreadsDemo {
         */
         //endregion
 
-        ExecutorService pool = Executors.newFixedThreadPool(5);
-         int i = 7;
-        pool.execute(() -> {
-            System.out.println("HHHHHH" + i);
+        //region future
+        /*
+        ExecutorService service =
+                Executors.newFixedThreadPool(2);
+        Future<String> f = service.submit(() -> {
+            throw new Exception("zzz");
         });
-        pool.execute(new MyWorker(new Object()));
 
-        Future<Integer> f = pool.submit(() -> {return 6;});
+        try {
+            System.out.println(f.get());
+        } catch (ExecutionException e) {
+            System.out.println(e.getCause());
+        }
 
+        service.shutdownNow();
+        */
+        //endregion
+
+        //region interrupt
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                //1
-                //2
-                System.out.println("Hello world!");
+                while (!Thread.interrupted()) {
+                    Thread.currentThread().getName();
+                    System.out.println("Hello world!");
+                }
             }
         });
-
         thread.start();
-        thread.suspend(); thread.resume();
-        thread.stop();
-        thread.setPriority(Thread.MAX_PRIORITY);
-        thread.setDaemon(true);
+        Thread.sleep(100);
+        thread.interrupt();
+        //endregion
 
-    }
-}
-
-class MyWorker implements Runnable {
-    private Object logger;
-
-    public MyWorker(Object logger) {
-        this.logger = logger;
-    }
-
-
-    @Override
-    public void run() {
-        System.out.println(logger);
     }
 }
