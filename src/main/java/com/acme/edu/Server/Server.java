@@ -12,13 +12,14 @@ import java.util.concurrent.Executors;
 /**
  * Created by Павел on 07.11.2015.
  */
-public class Server implements Runnable{
+public class Server implements Runnable {
     //region fields
     private String encoding;
     private int port;
     private Socket client;
     private ExecutorService pool = Executors.newFixedThreadPool(5);
     private List<Socket> listSocket = new ArrayList<>();
+    private boolean flag = true;
     //endregion
 
     /**
@@ -50,7 +51,7 @@ public class Server implements Runnable{
                 });
                     future.get();*/
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             serializeException(new ServerException(e));
         } finally {
             if (client != null) {
@@ -67,13 +68,16 @@ public class Server implements Runnable{
     }
 
     private void serializeException(Exception e) throws ServerException {
-        try(ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());) {
+        try (ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());) {
             out.writeObject(e.toString());
-        }catch (IOException e1){
+        } catch (IOException e1) {
             throw new ServerException(e1);
         }
     }
 
+    /**
+     * Start the server from the stream
+     */
     @Override
     public void run() {
         try {

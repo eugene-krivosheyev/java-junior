@@ -1,7 +1,9 @@
 package com.acme.edu.unit.PrinterTest;
 
+import com.acme.edu.printer.ConsolePrinter;
 import com.acme.edu.printer.FilePrinter;
 import com.acme.edu.printer.PrinterException;
+import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Павел on 07.11.2015.
  */
-public class FilePrinterTest {
+public class FileAndConsolePrinterTest  implements SysoutCaptureAndAssertionAbility{
     static final String SEP = System.lineSeparator();
     private FilePrinter sut;
     private String fileName = "out.txt";
@@ -47,6 +49,23 @@ public class FilePrinterTest {
         assertEquals(listMessages.toString(), readFileToString(new File(fileName)));
         //endregion
     }
+    @Test
+    public void shouldPrintStringToConsole() throws PrinterException, IOException {
+        //region
+        captureSysout();
+        String dummy = "test string";
+        ConsolePrinter sut = new ConsolePrinter();
+        //endregion
+
+        //region when
+        sut.print(dummy);
+        //endregion
+
+        //region then
+        assertSysoutEquals(dummy +SEP);
+        //endregion
+    }
+
 
     @Test (expected = PrinterException.class)
     public void shouldLogPrinterExceptionWhenFileUnsupportedEncoding() throws PrinterException {
@@ -61,4 +80,6 @@ public class FilePrinterTest {
         }
         //endregion
     }
+
+
 }

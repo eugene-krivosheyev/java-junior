@@ -10,7 +10,8 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.ServerSocket;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.junit.Assert.assertEquals;
@@ -24,32 +25,40 @@ public class RemotePrinterTest {
     static final String SEP = System.lineSeparator();
     private Server mock;
     private RemotePrinter sut;
-    private ServerSocket serverSocket;
-    private String fileName = "out.txt";
+    private String fileName;
+    private File file;
+    Server server;
 
     @Before
     public void setUp() throws IOException, PrinterException, ServerException {
         sut = new RemotePrinter("127.0.0.1",6666);
         mock = mock(Server.class);
-        File file = new File(fileName);
+        fileName = "serverOut.txt";
+        file = new File(fileName);
         file.delete();
+
+        server = new Server(6666,"UTF-8");
+        Thread thread = new Thread(server);
+        thread.start();
 
     }
 
     @Test
     public void shouldPrintToFileRemote() throws IOException, PrinterException, ServerException, InterruptedException {
         //region
+        List<String> listMessages = new ArrayList<>();
         String dummy = "test string";
         //endregion
 
         //region when
-        Thread.sleep(2000);
+        for (int i = 0; i < 50; i++) {
             sut.print(dummy);
+            listMessages.add(dummy + SEP);
+        }
         //endregion
 
         //region then
-
-        assertEquals("", readFileToString(new File("serverOut.txt")));
+        assertEquals(listMessages.toString(), readFileToString(new File(fileName)));
         //endregion
     }
 }
