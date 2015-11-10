@@ -1,72 +1,61 @@
 import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 
+import java.io.BufferedReader;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
 import java.util.concurrent.*;
 
-public class ThreadsDemo {
-    public static void main(String[] args) throws InterruptedException {
-        //region overthread demo
-        /*
-        for (int count = 0; count < 1_000; count++) {
-            Thread.sleep(5);
-            new Thread(() -> {
-                while (true) {
-                    try {
-                        Thread.sleep(10);
-                        Thread.sleep(10);
-                        Thread.sleep(10);
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
+class MyThread extends Thread {
+    private boolean isStoped;
+
+    public synchronized boolean isStoped() {
+        return isStoped;
+    }
+
+    public synchronized void setIsStoped(boolean isStoped) {
+        this.isStoped = isStoped;
+    }
+
+    @Override
+    public void run() {
+        while (!isStoped) {
+            System.out.println("vxcmvnbxcmvnb");
         }
-        */
-        //endregion
-
-        //region future
-        /*
-        ExecutorService service =
-                Executors.newFixedThreadPool(2);
-        Future<String> f = service.submit(() -> {
-            throw new Exception("zzz");
-        });
-
-        try {
-            System.out.println(f.get());
-        } catch (ExecutionException e) {
-            System.out.println(e.getCause());
-        }
-
-        service.shutdownNow();
-        */
-        //endregion
-
-        //region interrupt
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (!Thread.interrupted()) {
-                    Thread.currentThread().getName();
-                    System.out.println("Hello world!");
-                    try {
-                        Thread.sleep(4000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        thread.start();
-        Thread.sleep(100);
-        thread.interrupt();
-        //endregion
-
-        Thread.yield();
-        thread.join();
     }
 }
+
+public class ThreadsDemo {
+    public static void main(String[] args) throws InterruptedException {
+        MyThread t = new MyThread();
+        t.start();
+
+        Thread.sleep(2000);
+
+        t.setIsStoped(true);
+    }
+}
+
+class Counter {
+    private int count;
+    private Object monitor;
+
+    Counter(Object monitor) {
+        this.monitor = monitor;
+    }
+
+    public void increment() {
+        synchronized(this) {
+            count++;
+        }
+    }
+
+    public int getCount() {
+        synchronized(this) {
+            if(count > 10) return count;
+            else return 0;
+        }
+    }
+}
+
