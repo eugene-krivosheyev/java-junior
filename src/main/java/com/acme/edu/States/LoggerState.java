@@ -1,7 +1,7 @@
 package com.acme.edu.states;
 
-import com.acme.edu.printer.PrinterManager;
 import com.acme.edu.printer.PrinterException;
+import com.acme.edu.printer.PrinterManager;
 
 /**
  * Contains prefix and behavior of logger

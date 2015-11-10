@@ -35,7 +35,7 @@ public class UnBufferState extends LoggerState {
      */
     @Override
     public void flush() {
-
+    return;
     }
     //endregion
 

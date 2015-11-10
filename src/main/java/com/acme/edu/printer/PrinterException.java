@@ -1,7 +1,5 @@
 package com.acme.edu.printer;
 
-import java.io.IOException;
-
 /**
  * Created by Павел on 06.11.2015.
  */
@@ -15,15 +13,15 @@ public class PrinterException extends Exception {
         super(message, cause);
     }
 
+    /**
+     * A wrapper for different types of exceptions
+     * @param cause
+     */
     public PrinterException(Throwable cause) {
         super(cause);
     }
 
-    /**
-     * An empty constructor
-     * @param e
-     */
-    public PrinterException(IOException e) {
-        super();
+    public PrinterException(String message) {
+        super(message);
     }
 }

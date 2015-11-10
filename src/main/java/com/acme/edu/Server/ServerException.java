@@ -1,13 +1,9 @@
 package com.acme.edu.server;
 
-import com.acme.edu.printer.PrinterException;
-
-import java.io.Serializable;
-
 /**
  * Created by Павел on 07.11.2015.
  */
-public class ServerException extends PrinterException implements Serializable {
+public class ServerException extends Exception {
 
     /**
      * Different exceptions occur when the server is running
@@ -17,4 +13,7 @@ public class ServerException extends PrinterException implements Serializable {
         super(cause);
     }
 
+    public ServerException(String message) {
+        super(message);
+    }
 }

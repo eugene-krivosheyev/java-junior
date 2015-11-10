@@ -32,7 +32,7 @@ public class serverTest extends Thread implements SysoutCaptureAndAssertionAbili
     //region given
     @Before
     public void setUp() throws PrinterException, IOException, ServerException {
-        sut = new RemotePrinter("127.0.0.1", 6666, "UTF-8");
+        sut = new RemotePrinter("127.0.0.1", 6666);
         serverSocket = mock(ServerSocket.class);
         mock = mock(Server.class);
         File file = new File(fileName);

@@ -1,18 +1,24 @@
 package com.acme.edu.server;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by Павел on 07.11.2015.
  */
-public class Server{
+public class Server implements Runnable{
     //region fields
+    private String encoding;
     private int port;
-    private static final String FILE_MESSAGES = "serverOut.txt";
     private Socket client;
-    private DataInputStream dataInputStream;
+    private ExecutorService pool = Executors.newFixedThreadPool(5);
+    private List<Socket> listSocket = new ArrayList<>();
     //endregion
 
     /**
@@ -21,43 +27,59 @@ public class Server{
      * @param port the port number
      * @throws IOException
      */
-    public Server(int port) throws IOException {
+    public Server(int port, String encoding) throws IOException {
         this.port = port;
+        this.encoding = encoding;
     }
 
+    /**
+     * start the server
+     *
+     * @throws ServerException
+     * @throws IOException
+     */
+    public void startServer() throws ServerException {
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            while (true) {
+                client = serverSocket.accept();
+                listSocket.add(client);
 
-    private void startServer() throws ServerException, IOException {
-        try (ServerSocket serverSocket = new ServerSocket(port);
-             Socket client = serverSocket.accept()) {
-            serverSocket.setSoTimeout(10000);
-            dataInputStream = new DataInputStream(client.getInputStream()); //закрывается ли getInputStream
-            writeToFile(dataInputStream.readUTF());
-
-        } catch (IOException e) {
-            serializeException(e);
-        }finally {
-            if (dataInputStream != null){
-                dataInputStream.close();
+                pool.execute(new ServerManager(client, encoding));
+                /*Future<String> future = pool.submit(() -> {   //Вопрос с коллекцией сокетов и получением исключений через future!
+                    throw new ServerException("...");
+                });
+                    future.get();*/
+            }
+        }catch (IOException e) {
+            serializeException(new ServerException(e));
+        } finally {
+            if (client != null) {
+                try {
+                    client.close();
+                } catch (IOException e) {
+                    throw new ServerException(e);
+                }
+            }
+            if (pool != null) {
+                pool.shutdown();
             }
         }
     }
 
-    private void writeToFile(String message) throws IOException {
-        try {
-            FileWriter fw = new FileWriter(FILE_MESSAGES, true);
-            fw.write(message);
-            fw.close();
-        } catch (FileNotFoundException | UnsupportedEncodingException e) {
-            serializeException(e);
-        } catch (IOException e) {
-            serializeException(e);
+    private void serializeException(Exception e) throws ServerException {
+        try(ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());) {
+            out.writeObject(e.toString());
+        }catch (IOException e1){
+            throw new ServerException(e1);
         }
     }
 
-    private void serializeException(Exception e) throws IOException {
-
-        ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());
-        out.writeObject(e);
-        out.close();
+    @Override
+    public void run() {
+        try {
+            startServer();
+        } catch (ServerException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,11 +1,8 @@
 package com.acme.edu.printer;
 
-import com.acme.edu.server.ServerException;
-
-import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +15,7 @@ public class RemotePrinter extends PrinterManager {
     //region fields
     private String host;
     private int port;
-    private String encoding;
     private List<String> bufferMessages = new ArrayList<>(SIZE_BUFFER);
-    //private DataOutputStream dos;
-
     //endregion
 
     /**
@@ -30,8 +24,7 @@ public class RemotePrinter extends PrinterManager {
      * @param host for example 127.0.0.1
      * @param port for example 1500
      */
-    public RemotePrinter(String host, int port, String encoding) throws PrinterException {
-        this.encoding = encoding;
+    public RemotePrinter(String host, int port) throws PrinterException {
         this.host = host;
         this.port = port;
     }
@@ -54,9 +47,10 @@ public class RemotePrinter extends PrinterManager {
 
     private void sendMessage() throws PrinterException {
         try (Socket socket = new Socket(host, port);
-             BufferedWriter bufferWriterMessage = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(),encoding))) {
-            bufferWriterMessage.write(bufferMessages.toString());
-            bufferWriterMessage.flush();
+             DataOutputStream dataStreamMessages = new DataOutputStream(socket.getOutputStream())) {
+
+            dataStreamMessages.writeUTF(bufferMessages.toString());
+            dataStreamMessages.flush();
             bufferMessages.clear();
             getMessage(socket);
         } catch (IOException e) {
@@ -76,8 +70,11 @@ public class RemotePrinter extends PrinterManager {
 
     private void deserializationException(Socket socket) throws PrinterException {
         try(ObjectInputStream serverMessage = new ObjectInputStream(socket.getInputStream())) {
-            throw (ServerException) serverMessage.readObject();
-        } catch (IOException | ClassNotFoundException e) {
+            String message =  serverMessage.readUTF();
+            if (!message.equals("OK")) {
+                throw new PrinterException(message);
+            }
+        } catch (IOException e) {
             throw new PrinterException(e);
         }
     }

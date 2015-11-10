@@ -9,7 +9,7 @@ import java.util.List;
 public abstract class PrinterManager {
 
     //region fields
-    String SEP = System.lineSeparator();
+    protected static final String SEP = System.lineSeparator();
     protected static final int SIZE_BUFFER = 50;
     //endregion
 
@@ -25,11 +25,7 @@ public abstract class PrinterManager {
      * @return
      */
     public boolean checkBuffer(List<String> listMessages){
-        if (listMessages.size() < SIZE_BUFFER){
-            return false;
-        }else{
-            return true;
-        }
+        return listMessages.size() >= SIZE_BUFFER;
     }
 
     /**
