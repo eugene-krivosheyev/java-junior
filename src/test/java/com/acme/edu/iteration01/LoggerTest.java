@@ -1,10 +1,8 @@
 package com.acme.edu.iteration01;
 
-import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.Test;
 
 import java.io.*;
 
@@ -21,9 +19,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogInteger() throws IOException {
         //region when
-        Logger.log(1);
-        Logger.log(0);
-        Logger.log(-1);
+        SuperLogger.log(1);
+        SuperLogger.log(0);
+        SuperLogger.log(-1);
         //endregion
 
         //region then
@@ -35,9 +33,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogByte() throws IOException {
         //region when
-        Logger.log((byte)1);
-        Logger.log((byte)0);
-        Logger.log((byte)-1);
+        SuperLogger.log((byte)1);
+        SuperLogger.log((byte)0);
+        SuperLogger.log((byte)-1);
         //endregion
 
         //region then
@@ -49,13 +47,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     /*
-    TODO: implement Logger solution to match specification as tests
+    TODO: implement SuperLogger solution to match specification as tests
 
     @Test
     public void shouldLogChar() throws IOException {
         //region when
-        Logger.log('a');
-        Logger.log('b');
+        SuperLogger.log('a');
+        SuperLogger.log('b');
         //endregion
 
         //region then
@@ -68,8 +66,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogString() throws IOException {
         //region when
-        Logger.log("test string 1");
-        Logger.log("other str");
+        SuperLogger.log("test string 1");
+        SuperLogger.log("other str");
         //endregion
 
         //region then
@@ -82,8 +80,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogBoolean() throws IOException {
         //region when
-        Logger.log(true);
-        Logger.log(false);
+        SuperLogger.log(true);
+        SuperLogger.log(false);
         //endregion
 
         //region then
@@ -96,7 +94,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogReference() throws IOException {
         //region when
-        Logger.log(new Object());
+        SuperLogger.log(new Object());
         //endregion
 
         //region then

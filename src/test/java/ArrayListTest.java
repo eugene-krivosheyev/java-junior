@@ -13,6 +13,7 @@ public class ArrayListTest {
     ArrayList sut;
     Object dummy;
 
+    /*
     @Before
     public void setUp() {
         sut = new ArrayList();
@@ -69,6 +70,8 @@ public class ArrayListTest {
         Calc calc = new Calc();
         calc.divide(1, 0);
     }
+
+    */
 }
 
 
