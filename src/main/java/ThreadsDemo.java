@@ -7,55 +7,35 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.concurrent.*;
 
-class MyThread extends Thread {
-    private boolean isStoped;
-
-    public synchronized boolean isStoped() {
-        return isStoped;
-    }
-
-    public synchronized void setIsStoped(boolean isStoped) {
-        this.isStoped = isStoped;
-    }
-
-    @Override
-    public void run() {
-        while (!isStoped) {
-            System.out.println("vxcmvnbxcmvnb");
-        }
-    }
-}
-
-public class ThreadsDemo {
-    public static void main(String[] args) throws InterruptedException {
-        MyThread t = new MyThread();
-        t.start();
-
-        Thread.sleep(2000);
-
-        t.setIsStoped(true);
-    }
-}
-
-class Counter {
-    private int count;
-    private Object monitor;
-
-    Counter(Object monitor) {
-        this.monitor = monitor;
-    }
-
-    public void increment() {
-        synchronized(this) {
-            count++;
+class ThreadDemo {
+    public static void main(String[] args) {
+        BlockingQueue q = new BlockingQueue();
+        q.add(new Object());
+        try {
+            Object o = q.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
-    public int getCount() {
-        synchronized(this) {
-            if(count > 10) return count;
-            else return 0;
+}
+
+
+class BlockingQueue {
+    private List queue = new LinkedList();
+
+    public Object get() throws InterruptedException {
+        synchronized (queue) {
+            while (queue.isEmpty()) {
+                queue.wait();
+            }
+            return queue.remove(0);
+        }
+    }
+
+    public void add(Object ele) {
+        synchronized (queue) {
+            queue.add(ele);
         }
     }
 }
-
