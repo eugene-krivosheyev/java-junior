@@ -53,6 +53,11 @@ public class ThreadsDemo {
                 while (!Thread.interrupted()) {
                     Thread.currentThread().getName();
                     System.out.println("Hello world!");
+                    try {
+                        Thread.sleep(4000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -61,5 +66,7 @@ public class ThreadsDemo {
         thread.interrupt();
         //endregion
 
+        Thread.yield();
+        thread.join();
     }
 }
