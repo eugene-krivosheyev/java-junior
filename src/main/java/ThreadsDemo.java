@@ -1,3 +1,4 @@
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -45,3 +46,28 @@ class ThreadDemo {
         }
     }
 }
+
+class Client {
+    public static void main(String[] args) throws IOException {
+        BufferedWriter br = null;
+        br.write("string" + System.lineSeparator());
+        br.newLine();
+        br.flush();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
