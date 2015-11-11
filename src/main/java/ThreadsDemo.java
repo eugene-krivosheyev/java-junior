@@ -1,55 +1,47 @@
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
-
-import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.TreeSet;
-import java.util.concurrent.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 class ThreadDemo {
     public static void main(String[] args) {
-        BlockingQueue q = new BlockingQueue();
-        q.add(new Object());
-        try {
-            Object o = q.get();
-        } catch (InterruptedException e) {
+        try(ServerSocket ss = new ServerSocket(9999)) {
+            final Collection<Socket> sockets = new LinkedList<>();
+
+            //Lock lock = ReentrantReadWriteLock();
+
+            while (true) {
+                Socket s = ss.accept();
+                synchronized (sockets) {
+                    sockets.add(s);
+                }
+                new Thread(() -> {
+                    try(
+                        DataInputStream is =
+                                new DataInputStream(s.getInputStream());
+                        DataOutputStream os =
+                                new DataOutputStream(s.getOutputStream());
+                    ) {
+
+                        while (true) {
+                            os.writeUTF(">>> " + is.readUTF());
+                        }
+
+                    } catch (IOException e) {
+                        synchronized (sockets) {
+                            sockets.remove(s);
+                        }
+                        e.printStackTrace();
+                    }
+                }).start();
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-}
-
-
-class BlockingQueue {
-    private static final int MAX_SIZE = 6;
-    private List queue = new LinkedList();
-    private boolean isStopped;
-
-    public Object get() throws InterruptedException {
-        synchronized (queue) {
-            while (queue.isEmpty() && !isStopped) {
-                queue.wait();
-            }
-            return queue.remove(0);
-        }
-    }
-
-    public void add(Object element) throws InterruptedException {
-        synchronized (queue) {
-            while (queue.size() > MAX_SIZE) {
-                queue.wait();
-            }
-            queue.add(element);
-            queue.notify();
-        }
-    }
-
-    public void stop() {
-        synchronized(queue) {
-            isStopped = true;
-            queue.notifyAll();
-        }
-    }
-
 }
