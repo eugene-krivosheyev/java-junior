@@ -22,20 +22,34 @@ class ThreadDemo {
 
 
 class BlockingQueue {
+    private static final int MAX_SIZE = 6;
     private List queue = new LinkedList();
+    private boolean isStopped;
 
     public Object get() throws InterruptedException {
         synchronized (queue) {
-            while (queue.isEmpty()) {
+            while (queue.isEmpty() && !isStopped) {
                 queue.wait();
             }
             return queue.remove(0);
         }
     }
 
-    public void add(Object ele) {
+    public void add(Object element) throws InterruptedException {
         synchronized (queue) {
-            queue.add(ele);
+            while (queue.size() > MAX_SIZE) {
+                queue.wait();
+            }
+            queue.add(element);
+            queue.notify();
         }
     }
+
+    public void stop() {
+        synchronized(queue) {
+            isStopped = true;
+            queue.notifyAll();
+        }
+    }
+
 }
