@@ -13,6 +13,7 @@ import java.util.List;
 public class RemotePrinter extends PrinterManager {
 
     //region fields
+    private static final String OK = "OK";
     private String host;
     private int port;
     private List<String> bufferMessages = new ArrayList<>(SIZE_BUFFER);
@@ -48,7 +49,6 @@ public class RemotePrinter extends PrinterManager {
     private void sendMessage() throws PrinterException {
         try (Socket socket = new Socket(host, port);
              DataOutputStream dataStreamMessages = new DataOutputStream(socket.getOutputStream())) {
-
             dataStreamMessages.writeUTF(bufferMessages.toString());
             dataStreamMessages.flush();
             bufferMessages.clear();
@@ -71,7 +71,7 @@ public class RemotePrinter extends PrinterManager {
     private void deserializationException(Socket socket) throws PrinterException {
         try(ObjectInputStream serverMessage = new ObjectInputStream(socket.getInputStream())) {
             String message =  serverMessage.readUTF();
-            if (!message.equals("OK")) {
+            if (!message.equals(OK)) {
                 throw new PrinterException(message);
             }
         } catch (IOException e) {

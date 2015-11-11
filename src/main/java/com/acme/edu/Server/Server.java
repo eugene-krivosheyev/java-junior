@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -17,9 +17,10 @@ public class Server implements Runnable {
     private String encoding;
     private int port;
     private Socket client;
+    private Object monitor = new Object();
+
     private ExecutorService pool = Executors.newFixedThreadPool(5);
-    private List<Socket> listSocket = new ArrayList<>();
-    private boolean flag = true;
+    private final List<Socket> listSocket = new LinkedList<>();
     //endregion
 
     /**
@@ -41,13 +42,13 @@ public class Server implements Runnable {
      */
     public void startServer() throws ServerException {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-            while (true) {
+           // Lock lock = ReentrantReadWriteLock посмотреть в гугле
+            while (!Thread.interrupted()) {
                 client = serverSocket.accept();
                 listSocket.add(client);
-
-                pool.execute(new ServerManager(client, encoding));
+                pool.execute(new Proactor(client, encoding, monitor));
                 /*Future<String> future = pool.submit(() -> {   //Вопрос с коллекцией сокетов и получением исключений через future!
-                    throw new ServerException("...");
+                    throw new ServerException("...");              //
                 });
                     future.get();*/
             }
@@ -58,7 +59,7 @@ public class Server implements Runnable {
                 try {
                     client.close();
                 } catch (IOException e) {
-                    throw new ServerException(e);
+                    new ServerException(e);
                 }
             }
             if (pool != null) {

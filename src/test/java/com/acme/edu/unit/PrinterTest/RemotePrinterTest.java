@@ -40,7 +40,6 @@ public class RemotePrinterTest {
         server = new Server(6666,"UTF-8");
         Thread thread = new Thread(server);
         thread.start();
-
     }
 
     @Test
