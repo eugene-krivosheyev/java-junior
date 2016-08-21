@@ -1,10 +1,10 @@
 
 Программа подготовки Java Junior Developer  
-80 hr. course + 24 hr. project = 104 hr.
+64 hr. course + 16 hr. project = 80 hr.
 
 ---
 
-# Introduction to Java and Java Technology (1/0.5) 
+# Introduction to Java and Java Technology (2/0.5) 
 - Introduction to Java. Benefits. 
 - JDK, JVM. 
 - Java 2 (Java EE / SE / ME) 
@@ -22,11 +22,13 @@ $ java -version
 
 ---
 
-# Structure of Java-based applications (2/1)
+# Java App Outside as Black Box (3/1)
+- Java Dictionary
+- JCSC
 - Classes and *.class files
-- Java app definition
-- Classloading
+- Order of class loading
 - Classpath
+- Java app definition
 - Packages
 - JARs
 
@@ -42,7 +44,7 @@ $ Hello, world!
 
 ---
 
-# Development infrastructure: Git (1.5/0.5)
+# Development infrastructure: Git (1/0.5)
 - Intro to GIT
 - Repos
 - Commits
@@ -67,7 +69,7 @@ $ git push
 
 ---
 
-# Development infrastructure: Maven (1.5/0.5)
+# Development infrastructure: Maven (1/0.5)
 - Intro to Maven: build tool and dependency management
 - Build lifecycle, goals
 - Plugins
@@ -99,7 +101,7 @@ $ git push
 
 ---
 
-# JetBrains IDEA (1/0,5)
+# JetBrains IDEA (1/0.5)
 - Opening Maven projects
 - Running java apps
 - Running maven builds
@@ -119,7 +121,7 @@ $ git push
 
 ---
 
-# Java Syntax for Procedure Style (8/3)
+# Procedure Style with Java (6/2)
 
 ## Comments
 - Singe and multiline
@@ -216,9 +218,7 @@ $ git push
 - Code style
 - Documented public API
 
----
-
-# Procedure style recap (1/0)
+## Procedure style recap
 - Subject of procedural design
 - Reuse
 - Procedure generalization
@@ -227,7 +227,7 @@ $ git push
 
 ---
 
-# OOAD recap (1.5/0.5)
+# OOAD recap (1/0.5)
 - Programming styles and paradigms
 - Procedure stype vs OOAD
 - Classes and objects
@@ -256,7 +256,7 @@ $ git push
 
 ---
 
-# Java Syntax for OOP (6/3)
+# Java Syntax for OOP (4/2)
 
 ## Final
 - Final modifier semantics: 3
@@ -314,7 +314,7 @@ $ git push
 ## Interfaces
 - Interface
 - Implementation
-- Miltiple implementation
+- Multiple implementation
 - Default modifiers for fields and methods
 - Static and default (defender) methods
 
@@ -360,7 +360,7 @@ $ git push
 
 ---
 
-# Unit testing with JUnit (4/2)
+# Unit testing with JUnit (2/1)
 - Assertions in Java
 - Testing scopes
 - Unit tests
@@ -386,7 +386,7 @@ $ git push
 
 ---
 
-# Intro to Functional Style (4/2)
+# Intro to Functional Style (2/1)
 - Nested Classes
 - Inner classes
 - Local classes
@@ -442,7 +442,7 @@ $ git push
  
 ---
  
-# System library (4/2)
+# System library (6/2)
 - System
 - Math
 - Object: hc and eq contract, toS
@@ -453,7 +453,7 @@ $ git push
 
 ## Course Project Iteration 12: Logger Library Maturity Grown
 - NFR: As a developer I want higher collection performance for messages through non-default eq and hc
-- NRF: As a developer I want more polymorhism with toS for messages
+- NRF: As a developer I want more polymorphism with toS for messages
 - NFR: As a developer I want lower memory consumption through StringB*
 - FR: As a developer I want business rules applied to all messages types
 ```java
@@ -470,7 +470,7 @@ assertMessageEquals("3")
 
 ---
 
-# Generics (2/0.5)
+# Generics (1/0.5)
 - Generics as design style
 - Type safety
 - Generic classes
@@ -605,7 +605,7 @@ assertMessageEquals("3")
 
 ---
 
-# JDBC API (6/2)
+# JDBC API (4/2)
 - SQL recap: DDL and DML
 - DB schema design
 - Overview of JDBC API
@@ -628,7 +628,7 @@ assertMessageEquals("3")
 
 ---
 
-# Performance tuning and optimization in Java (2/1)
+# [Performance tuning and optimization in Java] (2/1)
 - JVM monitoring tool JVisualVM
 - Heap structure
 - GC types
@@ -642,5 +642,3 @@ assertMessageEquals("3")
 - Bottlenecks detected
 
 ---
-
-# Buffer (11)
