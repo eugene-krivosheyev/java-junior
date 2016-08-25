@@ -642,3 +642,6 @@ assertMessageEquals("3")
 - Bottlenecks detected
 
 ---
+
+# Reading List
+- [http://tinyurl.com/skilltrek-reading-list]
