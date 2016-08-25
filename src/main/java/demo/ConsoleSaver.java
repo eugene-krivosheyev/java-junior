@@ -8,4 +8,9 @@ public class ConsoleSaver extends Object implements Saver, Serializable {
     public void save(String message) {
 
     }
+
+    @Override
+    public int getStatus() {
+        return 0;
+    }
 }

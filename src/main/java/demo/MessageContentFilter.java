@@ -7,4 +7,8 @@ public class MessageContentFilter extends Filter { //IS-A
         //.....
         return false;
     }
+
+    public void prepareMessage() {
+
+    }
 }
