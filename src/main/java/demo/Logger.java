@@ -1,6 +1,12 @@
 package demo;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -19,8 +25,10 @@ public class Logger {
 
     public Decorator log(String message) {
         if (filter.filter(message)) {
-            try {
-                saver.save(decorator.decorate(message));
+/*
+            try (Saver saver2 = saver) {
+//            try (Saver saver = new ConsoleSaver()) {
+                saver2.save(decorator.decorate(message));
                 throw new RuntimeException("0");
                 //...
             } catch (IOException e) {
@@ -29,17 +37,24 @@ public class Logger {
                 //.........
                 throw new RuntimeException("1", e);
             } finally {
-                try {
-                    saver.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                throw new RuntimeException("2");
+//                saver2.getStatus();
             }
+*/
+        }
+        try (
+            Saver s = new ConsoleSaver()
+        ) {
+            throw new IOException("1111");
+        } catch (IOException e) {
+            throw new RuntimeException("222", e);
+        } finally {
+            throw new RuntimeException("333");
         }
 
+        /*
         int i = 7;
         return mes -> mes + "!!!!" + i;
+        */
     }
 }
 

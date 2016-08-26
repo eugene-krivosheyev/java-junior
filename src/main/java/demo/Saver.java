@@ -1,8 +1,9 @@
 package demo;
 
+import java.io.Closeable;
 import java.io.IOException;
 
-public interface Saver {
+public interface Saver extends Closeable {
     public static final int I = 0;
     void save(String message) throws IOException;
 
@@ -14,6 +15,4 @@ public interface Saver {
     static int gS() {
         return 0;
     }
-
-    void close() throws IOException;
 }

@@ -18,6 +18,6 @@ public class ConsoleSaver extends Object implements Saver, Serializable {
 
     @Override
     public void close() throws IOException {
-
+        System.out.println("close()");
     }
 }
