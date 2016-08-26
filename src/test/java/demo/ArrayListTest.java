@@ -6,10 +6,10 @@ import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
@@ -58,6 +58,14 @@ public class ArrayListTest {
         verify(stub).toString();
         assertTrue(result.contains("test data"));
         System.out.println(result);
+
+        //Junit + hamcrest
+        //assertThat(result, is(contains("test data")));
+
+        assertThat(result)
+            .contains("test data")
+            .doesNotContain("!!!!!");
+
         //endregion
     }
 }
