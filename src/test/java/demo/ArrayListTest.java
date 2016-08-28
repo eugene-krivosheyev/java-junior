@@ -55,7 +55,7 @@ public class ArrayListTest {
         //endregion
 
         //region Then
-        verify(stub).toString();
+//        verify(stub).toString();
         assertTrue(result.contains("test data"));
         System.out.println(result);
 

@@ -23,7 +23,7 @@ public class Logger {
         this.filter = filter;
     }
 
-    public Decorator log(String message) {
+    public Decorator log(String message) throws FilterException {
         if (filter.filter(message)) {
 /*
             try (Saver saver2 = saver) {
@@ -59,7 +59,7 @@ public class Logger {
 }
 
 class Client {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FilterException {
         Logger logger = new Logger(new Filter() {
             @Override
             boolean filter(String message) {
