@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import java.io.*;
 
-@Ignore
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
