@@ -649,5 +649,10 @@ assertMessageEquals("3")
 ---
 
 # Reading List
-- [http://tinyurl.com/skilltrek-reading-list]
+- http://tinyurl.com/skilltrek-reading-list
+
+# Project CI
+- Jenkins CI: http://52.90.99.224:8080/jenkins/
+- Sonar Code Analysis Tool: http://52.90.99.224:9000
+ 
 
