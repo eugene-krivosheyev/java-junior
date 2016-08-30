@@ -11,6 +11,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
@@ -55,7 +56,10 @@ public class ArrayListTest {
         //endregion
 
         //region Then
-//        verify(stub).toString();
+        verify(stub).toString();
+
+        Saver s = mock(Saver.class);
+
         assertTrue(result.contains("test data"));
         System.out.println(result);
 
