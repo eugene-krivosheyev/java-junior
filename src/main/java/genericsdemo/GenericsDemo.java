@@ -58,8 +58,6 @@ class Decorator<U extends Object> {
     }
 
 
-
-
     public static <T extends Object, P> P decorate(T message, Class<T> typeInfo) {
         //!!!!! new T();
         return null;
