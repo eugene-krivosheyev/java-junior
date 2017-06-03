@@ -683,9 +683,9 @@ assertMessageEquals("3")
 - Every team's git repo visible to PM and is identifiable
 
 ## When
-- Teams deliver product with two iterations
+- Teams deliver product with six iterations
 
 ## Then
-- PM and Business Customers accept product with two demo sessions
+- PM and Business Customers accept product with six demo sessions
 
 ---
