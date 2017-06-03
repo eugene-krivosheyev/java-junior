@@ -1,10 +1,10 @@
 
-Программа подготовки Java Junior Developer  
-80 hr. course + 24 hr. project = 104 hr.
+# Java Junior Developer Training Course.
+88 hours training + 32 hours work project = 120 hr.
 
 ---
 
-# Introduction to Java and Java Technology (1/0.5) 
+# Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice) 
 - Introduction to Java. Benefits. 
 - JDK, JVM. 
 - Java 2 (Java EE / SE / ME) 
@@ -22,7 +22,7 @@ $ java -version
 
 ---
 
-# Structure of Java-based applications (2/1)
+# Structure of Java-based applications (3/1)
 - Classes and *.class files
 - Java app definition
 - Classloading
@@ -99,7 +99,7 @@ $ git push
 
 ---
 
-# JetBrains IDEA (1/0,5)
+# JetBrains IDEA (1/0.5)
 - Opening Maven projects
 - Running java apps
 - Running maven builds
@@ -119,7 +119,7 @@ $ git push
 
 ---
 
-# Java Syntax for Procedure Style (8/3)
+# Java Syntax for Procedure Style (10/4)
 
 ## Comments
 - Singe and multi-line
@@ -161,6 +161,7 @@ $ git push
 ## Strings
 - String type
 - String literal values
+- Interning
 - String concatenation
 
 ## Course Project Iteration 01: The Rise of Logger Library
@@ -175,6 +176,7 @@ $ git push
 
 ## Operators
 - Arithmetic
+- Arithmetic type promotions
 - Bitwise
 - Logical (lazy and eager) 
 - Compare and Ternary
@@ -227,7 +229,7 @@ $ git push
 
 ---
 
-# OOAD recap (1.5/0.5)
+# OOAD recap (4/1)
 - Programming styles and paradigms
 - Procedure style vs OOAD
 - Classes and objects
@@ -249,14 +251,14 @@ $ git push
 
 ---
 
-# Refactoring with IDEA (0.5/0)
+# Refactoring with IDEA (1/0)
 - Intro to Refactoring
 - Basic Refactorings Matrix
 - Wrap method / Sprout method
 
 ---
 
-# Java Syntax for OOP (6/3)
+# Java Syntax for OOP (12/4)
 
 ## Final
 - Final modifier semantics: 3
@@ -318,7 +320,7 @@ $ git push
 - Default modifiers for fields and methods
 - Static and default (defender) methods
 
-## Course Project Iteration 06: OO Logger Library reached
+## Course Project Iteration 06: OOD Logger Library reached
 - FR: presentation changes and sink changes
 - Refactor to Polymorphic Commands and Appenders
 
@@ -330,7 +332,7 @@ $ git push
 
 ---
 
-# OOD Principles and Patterns (2/1)
+# OOD Principles and Patterns (4/2)
 
 ## OOAD Principles: SOLID
 - SRP
@@ -360,17 +362,17 @@ $ git push
 
 ---
 
-# Unit testing with JUnit (4/2)
+# Unit testing with JUnit (6/3)
 - Assertions in Java
 - Testing scopes
 - Unit tests
 - Structure of unit test
 - Tests and contract
 - JUnit
-- FEST-assert
-- Test doubles
+- Hamcrest and FEST-assert
+- Test doubles types
 - Mockito
-- Types of coverage
+- Types of coverage (including permutation)
 - Intro to TDD
 
 ## Course Project Iteration 08: Coverage with _Unit_ Tests
@@ -383,10 +385,11 @@ $ git push
 - Code style
 - Documented public API
 - Unit tests coverage ≥ 50%
+- Permutation coverage ≥ 30%  
 
 ---
 
-# Intro to Functional Style (4/2)
+# Intro to Functional Style (6/3)
 - Nested Classes
 - Inner classes
 - Local classes
@@ -403,13 +406,14 @@ $ git push
 - Code style
 - Documented public API
 - Unit tests coverage ≥ 50%
+- Permutation coverage ≥ 30%
 - Introduced Observer for supportability
 
 ## Functional style
 - Closures in java
 - Lambdas
 - Functional Interfaces
-- Functional style: state, function composition, declarativity, immutability
+- Functional style: state, function composition, declarative, immutability
 
 ## Course Project Iteration 10: Introducing Filters
 - FR: As developer I want filter my messages
@@ -420,14 +424,16 @@ $ git push
 - Code style
 - Documented public API
 - Unit tests coverage ≥ 50%
+- Permutation coverage ≥ 30%
 - Introduced lambdas for filtering messages
 
 ---
 
-# Error handling with exceptions (2/1)
+# Error handling with exceptions (4/2)
 - Comparison of the exception mechanism to the traditional error-handling mechanism
 - Types of exceptions, their handling
 - Standard Java exceptions
+- Designing exceptions type system
 
 ## Course Project Iteration 11: Introducing Exceptions
 - FR: As developer I want strict contracts and error handling
@@ -438,11 +444,42 @@ $ git push
 - Code style
 - Documented public API
 - Unit tests coverage ≥ 70%
+- Permutation coverage ≥ 50%
 - Introduced checked exceptions for errors and alternate scenarios
  
 ---
+
+# Generics (2/0.5)
+- Generics as design style
+- Type safety
+- Generic classes
+- Generic methods
+
+## Demo: Type safety for sorting with anonymous implementation of comparator
+
+---
+
+# Work Project. Session 1 (8/8)
+
+## Given
+- PM
+- Analyst
+- Product's FRs and NFRs
+- System's internal NFRs
+- CI server
+- Sonar server
+
+## When
+- Teams formed
+- Every team's git repo visible to PM and is identifiable
+- Teams deliver product with two iterations
+
+## Then
+- PM and Business Customers accept product with two demo sessions
+
+---
  
-# System library (4/2)
+# System library (6/2)
 - System
 - Math
 - Object: hc and eq contract, toS
@@ -470,16 +507,6 @@ assertMessageEquals("3")
 
 ---
 
-# Generics (2/0.5)
-- Generics as design style
-- Type safety
-- Generic classes
-- Generic methods
-
-## Demo: Type safety for sorting with anonymous implementation of comparator
-
----
-
 # Collection API (4/1)
 - Collection types and implementations
 - Iteration over collections
@@ -496,7 +523,7 @@ assertMessageEquals("3")
 
 ---
 
-# IO (6/3)
+# IO (8/3)
 - java.io.File
 - RandomAccessFile
 - Stream classes
@@ -628,7 +655,7 @@ assertMessageEquals("3")
 
 ---
 
-# Performance tuning and optimization in Java (2/1)
+# Performance tuning and optimization in Java (3/1)
 - JVM monitoring tool JVisualVM
 - Heap structure
 - GC types
@@ -643,4 +670,22 @@ assertMessageEquals("3")
 
 ---
 
-# Buffer (11)
+# Work Project. Session 2 (24/24)
+
+## Given
+- PM
+- Analyst
+- Product's FRs and NFRs
+- System's internal NFRs
+- CI server
+- Sonar server
+- Teams formed
+- Every team's git repo visible to PM and is identifiable
+
+## When
+- Teams deliver product with two iterations
+
+## Then
+- PM and Business Customers accept product with two demo sessions
+
+---
