@@ -11,11 +11,11 @@
 - Tools: java, javac, javadoc
 
 ## Lab: Installing JDK, Tuning Environmental Variables
-- Install JDK from http://www.oracle.com/technetwork/java/javase/downloads/index.html
+- Install JDK from [Oracle website](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 - Set $JAVA_HOME and $PATH
 
 ### DoD
-```java
+```
 $ javac -version
 $ java -version
 ```
@@ -36,8 +36,8 @@ $ java -version
 - One of them in JAR
 
 ### DoD
-```java
-$ Hello, world! 
+```
+Hello, world! 
 ```
 
 ---
@@ -49,13 +49,13 @@ $ Hello, world!
 - Shortly about branches, conflicts and merges
 
 ## Lab: Setting Up Git
-- Install [Git] (https://git-scm.com/download/win) and in case of Windows [TortoiseGit] (https://tortoisegit.org)
-- Create account at [Github] (http://github.com/): _teamXX_
-- Fork this [repo] (https://github.com/eugene-krivosheyev/java-junior) to your account
+- Install [Git](https://git-scm.com/download/win) and in case of Windows [TortoiseGit](https://tortoisegit.org)
+- Create account at [Github](http://github.com/): _teamXX_
+- Fork this [repo](https://github.com/eugene-krivosheyev/java-junior) to your account
 - Clone your fork repo locally
 - Update README.md locally to your teammates names
 - Commit and push initial commit
-```java
+```
 $ git add .
 $ git commit -m “…”
 $ git push
@@ -77,7 +77,7 @@ $ git push
 ## Demo: Project Creating with Archetype Plugin
 
 ## Lab: Setting Up Maven
-- Install [Maven] (https://maven.apache.org/download.cgi)
+- Install [Maven](https://maven.apache.org/download.cgi)
 - Set $M2_HOME
 - Analyse our project: *tree* and *pom.xml*
 - Move your old codebase to this project
@@ -85,7 +85,7 @@ $ git push
 - Take your last app under version control and push it
 
 ### DoD
-```java
+```
 $ ls teamXX
 src README.md pom.xml
 
@@ -108,7 +108,7 @@ $ git push
 - Git operations
 
 ## Lab: Installing, the first application compile, run, debugging
-- Download and install [IDEA] (https://www.jetbrains.com/idea/?fromMenu) with trial corporate license
+- Download and install [IDEA](https://www.jetbrains.com/idea/?fromMenu) with trial corporate license
 - Open our maven project
 - Change <artifactId> in pom.xml to _teamXX_
 - Build project with maven from IDEA
@@ -122,7 +122,7 @@ $ git push
 # Java Syntax for Procedure Style (8/3)
 
 ## Comments
-- Singe and multiline
+- Singe and multi-line
 - JavaDoc
 
 ## Procedure style
@@ -198,10 +198,10 @@ $ git push
 ## Arrays
 - Arrays declaration
 - Array literals
-- Multi-dimentional arrays
+- Multi-dimension arrays
 
 ## Varargs
-- Declaraion
+- Declaration
 - Using
 - Constraints
 
@@ -229,7 +229,7 @@ $ git push
 
 # OOAD recap (1.5/0.5)
 - Programming styles and paradigms
-- Procedure stype vs OOAD
+- Procedure style vs OOAD
 - Classes and objects
 - Inheritance and Delegation as code reuse styles
 - Visibility as key for encapsulation
@@ -286,7 +286,7 @@ $ git push
 - Overriding methods
 - Overriding constraints
 
-## Instatiating
+## Instatiation
 - Constructors
 - Object Initializers
 - Constructors with inheritance issue
@@ -314,7 +314,7 @@ $ git push
 ## Interfaces
 - Interface
 - Implementation
-- Miltiple implementation
+- Multiple implementation
 - Default modifiers for fields and methods
 - Static and default (defender) methods
 
@@ -368,7 +368,7 @@ $ git push
 - Tests and contract
 - JUnit
 - FEST-assert
-- Test doublers
+- Test doubles
 - Mockito
 - Types of coverage
 - Intro to TDD
@@ -382,7 +382,7 @@ $ git push
 - Code reuse and minimum code duplication
 - Code style
 - Documented public API
-- Unit tests coverage >= 50%
+- Unit tests coverage ≥ 50%
 
 ---
 
@@ -402,7 +402,7 @@ $ git push
 - Code reuse and minimum code duplication
 - Code style
 - Documented public API
-- Unit tests coverage >= 50%
+- Unit tests coverage ≥ 50%
 - Introduced Observer for supportability
 
 ## Functional style
@@ -419,8 +419,8 @@ $ git push
 - Code reuse and minimum code duplication
 - Code style
 - Documented public API
-- Unit tests coverage >= 50%
-- Introduced lambdas for filternig messages
+- Unit tests coverage ≥ 50%
+- Introduced lambdas for filtering messages
 
 ---
 
@@ -437,7 +437,7 @@ $ git push
 - Code reuse and minimum code duplication
 - Code style
 - Documented public API
-- Unit tests coverage >= 70%
+- Unit tests coverage ≥ 70%
 - Introduced checked exceptions for errors and alternate scenarios
  
 ---
@@ -453,10 +453,10 @@ $ git push
 
 ## Course Project Iteration 12: Logger Library Maturity Grown
 - NFR: As a developer I want higher collection performance for messages through non-default eq and hc
-- NRF: As a developer I want more polymorhism with toS for messages
+- NRF: As a developer I want more polymorphism with toS for messages
 - NFR: As a developer I want lower memory consumption through StringB*
 - FR: As a developer I want business rules applied to all messages types
-```java
+```
 log("1", "2");
 assertMessageEquals("3")
 ```
@@ -466,7 +466,7 @@ assertMessageEquals("3")
 - Code reuse and minimum code duplication
 - Code style
 - Documented public API
-- Unit tests coverage >= 70%
+- Unit tests coverage ≥ 70%
 
 ---
 
@@ -476,7 +476,7 @@ assertMessageEquals("3")
 - Generic classes
 - Generic methods
 
-## Demo: Type safety for sorting with anonymous implementaion of comparator
+## Demo: Type safety for sorting with anonymous implementation of comparator
 
 ---
 
@@ -512,7 +512,7 @@ assertMessageEquals("3")
 - Code reuse and minimum code duplication
 - Code style
 - Documented public API
-- Unit tests coverage >= 70%
+- Unit tests coverage ≥ 70%
 
 ## Serialization API
 - Serialization API
@@ -531,12 +531,12 @@ assertMessageEquals("3")
 - Code reuse and minimum code duplication
 - Code style
 - Documented public API
-- Unit tests coverage >= 70%
+- Unit tests coverage ≥ 70%
 - System tests for remote log server
 
 ---
 
-# Multithreading in Java (8/3)
+# Multi-threading in Java (8/3)
 - Thread definition
 - Thread start: 3 options
 - Thread management
@@ -555,13 +555,13 @@ assertMessageEquals("3")
 - Code reuse and minimum code duplication
 - Code style
 - Documented public API
-- Unit tests coverage >= 70%
+- Unit tests coverage ≥ 70%
 - System tests for remote log server
 
-## [Server IO Design Patterns] (https://www.dre.vanderbilt.edu/~schmidt/PDF/OOCP-tutorial4.pdf)
+## [Server IO Design Patterns](https://www.dre.vanderbilt.edu/~schmidt/PDF/OOCP-tutorial4.pdf)
 - Connector/Acceptor
 - Proxy
-- Proactor
+- Pro-actor
 - Handler
 
 ### Discussion: what patterns do you invent?
@@ -589,7 +589,7 @@ assertMessageEquals("3")
 - Code reuse and minimum code duplication
 - Code style
 - Documented public API
-- Unit tests coverage >= 70%
+- Unit tests coverage ≥ 70%
 - Load test for remote log server
 
 ---
@@ -623,7 +623,7 @@ assertMessageEquals("3")
 - Code reuse and minimum code duplication
 - Code style
 - Documented public API
-- Unit tests coverage >= 70%
+- Unit tests coverage ≥ 70%
 - System test for DB
 
 ---
