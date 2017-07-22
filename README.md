@@ -1,6 +1,6 @@
 
 # Java Junior Developer Training Course.
-88 hours training + 32 hours work project = 120 hr.
+80 hours training + 24 hours work project = 104 hr.
 
 ---
 
@@ -229,7 +229,7 @@ $ git push
 
 ---
 
-# OOAD recap (4/1)
+# OOAD recap (2/1)
 - Programming styles and paradigms
 - Procedure style vs OOAD
 - Classes and objects
@@ -258,7 +258,7 @@ $ git push
 
 ---
 
-# Java Syntax for OOP (12/4)
+# Java Syntax for OOP (10/4)
 
 ## Final
 - Final modifier semantics: 3
@@ -389,7 +389,7 @@ $ git push
 
 ---
 
-# Intro to Functional Style (6/3)
+# Intro to Functional Style (2/1)
 - Nested Classes
 - Inner classes
 - Local classes
@@ -458,26 +458,6 @@ $ git push
 ## Demo: Type safety for sorting with anonymous implementation of comparator
 
 ---
-
-# Work Project. Session 1 (8/8)
-
-## Given
-- PM
-- Analyst
-- Product's FRs and NFRs
-- System's internal NFRs
-- CI server
-- Sonar server
-
-## When
-- Teams formed
-- Every team's git repo visible to PM and is identifiable
-- Teams deliver product with two iterations
-
-## Then
-- PM and Business Customers accept product with two demo sessions
-
----
  
 # System library (6/2)
 - System
@@ -507,7 +487,7 @@ assertMessageEquals("3")
 
 ---
 
-# Collection API (4/1)
+# Collection API (2/1)
 - Collection types and implementations
 - Iteration over collections
 - Comparable and Comparator
@@ -523,7 +503,7 @@ assertMessageEquals("3")
 
 ---
 
-# IO (8/3)
+# IO (6/2)
 - java.io.File
 - RandomAccessFile
 - Stream classes
@@ -563,7 +543,7 @@ assertMessageEquals("3")
 
 ---
 
-# Multi-threading in Java (8/3)
+# Multi-threading in Java (6/2)
 - Thread definition
 - Thread start: 3 options
 - Thread management
@@ -622,17 +602,14 @@ assertMessageEquals("3")
 ---
 
 # Annotations and Reflection API intro (1/0)
-- Annotations (0,5/0)
+- Annotations
 - Purpose of annotations
 - Standard annotations
-- Custom annotations
-- Reflection API overview
-- Class loaders
-- Class introspection
+- Reflection API intro
 
 ---
 
-# JDBC API (6/2)
+# JDBC API (4/2)
 - SQL recap: DDL and DML
 - DB schema design
 - Overview of JDBC API
@@ -655,22 +632,40 @@ assertMessageEquals("3")
 
 ---
 
-# Performance tuning and optimization in Java (3/1)
+# Performance tuning and optimization in Java (1/0)
 - JVM monitoring tool JVisualVM
 - Heap structure
 - GC types
 - Profiling
 
-## Course Project Iteration 19: Load testing and profiling
-- Load test
-- Profile with JVisualVM
+---
+
+# REST-ful Services (4/2)
+- RPC architecture overview
+- HTTP protocol overview
+- JSON overview
+- JAX-RS API
+- Server side implementation
+- Client side implementation
+- REST-server testability: WireMock framework
+
+## Course Project Iteration 19: REST-ful remote logger
+- FR: As a developer I want log messages to remote logger with JSON over REST
+- POST new log entry
+- GET log entries
 
 ### DoD
-- Bottlenecks detected
+- All given specifications runs are green
+- Code reuse and minimum code duplication
+- Code style
+- Documented public API
+- Unit tests coverage ≥ 70%
+- Integration test for Client 
+- Integration test for Server 
 
 ---
 
-# Work Project. Session 2 (24/24)
+# Work Project. (24/24)
 
 ## Given
 - PM
