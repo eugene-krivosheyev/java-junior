@@ -38,5 +38,10 @@
       <version>1.4</version>
       <scope>test</scope>
     </dependency>
+      <dependency>
+          <groupId>org.jetbrains</groupId>
+          <artifactId>annotations</artifactId>
+          <version>RELEASE</version>
+      </dependency>
   </dependencies>
 </project>

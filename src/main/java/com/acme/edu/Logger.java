@@ -1,15 +1,21 @@
 package com.acme.edu;
 
-import sun.rmi.runtime.Log;
-
 import static com.acme.edu.Logger.log;
 
 public class Logger {
-    public void m() {
-        log(1);
+    private Logger() {
     }
 
-    //====================
+    //=======================================
+    private static Logger singletonLogger;
+    static {
+        singletonLogger = new Logger();
+    }
+
+    public static Logger getSingletonLogger() {
+        return singletonLogger;
+    }
+
     private static int state;
 
     public static void log(int message) {
@@ -21,9 +27,6 @@ public class Logger {
     }
 
     public static void main(String[] args) {
-        Logger.log(1);
-
-        Logger logger = new Logger();
-        logger.log(1);
+        Logger singletonLogger = Logger.singletonLogger;
     }
 }
