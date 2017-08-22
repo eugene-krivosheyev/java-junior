@@ -688,3 +688,9 @@ assertMessageEquals("3")
 - PM and Business Customers accept product with six demo sessions
 
 ---
+
+# Reading List
+http://tinyurl.com/skilltrekreadinglist
+
+# Additional Topics
+- Top-5 Java Frameworks Overview
