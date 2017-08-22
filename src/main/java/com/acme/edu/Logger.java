@@ -3,22 +3,14 @@ package com.acme.edu;
 import static com.acme.edu.Logger.log;
 
 public class Logger {
-    private Logger() {
-    }
+    static int globalState;
+    int instanceState;
 
-    //=======================================
-    private static Logger singletonLogger;
-    static {
-        singletonLogger = new Logger();
-    }
-
-    public static Logger getSingletonLogger() {
-        return singletonLogger;
-    }
-
-    private static int state;
-
-    public static void log(int message) {
+    /**
+     * Pass by value: for primitives
+     */
+    public static void log(int message) { //Formal parameter
+        message = 2;
         System.out.println("primitive: " + message);
     }
 
@@ -27,6 +19,8 @@ public class Logger {
     }
 
     public static void main(String[] args) {
-        Logger singletonLogger = Logger.singletonLogger;
+        int message = 1;
+        Logger.log(message); //Factual parameter
+        System.out.println(message);
     }
 }
