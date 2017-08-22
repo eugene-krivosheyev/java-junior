@@ -1,4 +1,3 @@
-
 # Java Junior Developer Training Course.
 88 hours training + 32 hours work project = 120 hr.
 
@@ -689,3 +688,9 @@ assertMessageEquals("3")
 - PM and Business Customers accept product with six demo sessions
 
 ---
+
+# Reading List
+http://tinyurl.com/skilltrekreadinglist
+
+# Additional Topics
+- Top-5 Java Frameworks Overview
