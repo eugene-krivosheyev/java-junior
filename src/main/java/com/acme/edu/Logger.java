@@ -1,6 +1,17 @@
 package com.acme.edu;
 
+import sun.rmi.runtime.Log;
+
+import static com.acme.edu.Logger.log;
+
 public class Logger {
+    public void m() {
+        log(1);
+    }
+
+    //====================
+    private static int state;
+
     public static void log(int message) {
         System.out.println("primitive: " + message);
     }
@@ -10,6 +21,9 @@ public class Logger {
     }
 
     public static void main(String[] args) {
-        System.out.println("HWW!!!");
+        Logger.log(1);
+
+        Logger logger = new Logger();
+        logger.log(1);
     }
 }
