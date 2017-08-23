@@ -102,7 +102,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutEquals(
+        assertSysoutContains(
             "str 1\n" +
             "str 2 (x2)\n" +
             "0\n" +
