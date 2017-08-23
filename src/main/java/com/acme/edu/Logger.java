@@ -1,23 +1,16 @@
 package com.acme.edu;
 
 public class Logger {
-    public static void log(int message) {
-        System.out.println("primitive: " + message);
-    }
-
-    public static void log(String message) {
-        System.out.println("string: " + message);
-    }
-
     public static void log(Object message) {
-        System.out.println("reference: " + message);
-    }
 
-    public static void log(boolean message) {
-        System.out.println("primitive: " + message);
-    }
-
-    public static void log(char message) {
-        System.out.println("char: " + message);
+        if (message instanceof String) {
+            System.out.println("string: " + message);
+        } else if (message instanceof Character) {
+            System.out.println("char: " + message);
+        } else if (message instanceof Integer || message instanceof Boolean || message instanceof Byte) {
+            System.out.println("primitive: " + message);
+        } else {
+            System.out.println("reference: " + message);
+        }
     }
 }
