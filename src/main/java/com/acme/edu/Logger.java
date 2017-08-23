@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import java.util.Objects;
+
 public class Logger {
     public strictfp static void main(String... args) {
         //region целочисленные
@@ -38,6 +40,36 @@ public class Logger {
 
         //region Precision loss
         System.out.println(.1 + .2);
+        //endregion
+
+        //region Strings
+        String str1 = "test" + " string"; //pool check + new
+        String str2 = "test string"; //string pool
+        System.out.println(str1 == str2); //interning
+
+        String aaaa = new String("a");
+        String bbbb = "a";
+        System.out.println(aaaa.equals(bbbb));
+
+        bbbb.toUpperCase();
+        System.out.println(bbbb);
+        //endregion
+
+        //region Equality issues
+        str1.equals("a"); //NPE!!!!
+        "a".equals(str1);
+        Objects.equals(str1, "a");
+        //endregion
+
+        //region String Extensions
+        StringBuilder sbl;
+        StringBuffer sbf;
+
+        //"a" + "b" + "c" + "d" ->
+        new StringBuilder("a") //Fluent API | interface
+                .append("b")
+                .append("c")
+                .append("d"); //Oracle JVM optimization
         //endregion
     }
 }
