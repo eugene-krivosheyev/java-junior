@@ -29,17 +29,5 @@ public class ArraysDemo {
     }
 
     private static void m(int... param) {
-        if (!condition()) return; //Guard Clauses
-        if (!condition()) return;
-        if (!condition()) return;
-        if (!condition()) return;
-        if (!condition()) return;
-        if (!condition()) return;
-        if (!condition()) return;
-
-        //main flow
-        //main flow
-        //main flow
-        //main flow
     }
 }
