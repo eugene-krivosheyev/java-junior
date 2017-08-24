@@ -696,3 +696,4 @@ http://tinyurl.com/skilltrekreadinglist
 - Top-5 Java Frameworks Overview
 - Typing systems: строгая vs динамическая
 - @NotNull
+- JNI / JNA

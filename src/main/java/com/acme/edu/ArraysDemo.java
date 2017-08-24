@@ -17,6 +17,8 @@ public class ArraysDemo {
         int[] array2 = new int[] {1, 3, 5}; //Array literal
         m(new int[] {1,2,3});
         m(1,2,3);
+
+//        System.arraycopy();
     }
 
     private static void m(int... array) {
