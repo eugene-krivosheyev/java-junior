@@ -18,6 +18,12 @@ public class ArraysDemo {
         m(new int[] {1,2,3});
         m(1,2,3);
 
+        int[][] matrix = {
+                {1,2},
+                {},
+                {1,2,3,4}
+        };
+
 //        System.arraycopy();
     }
 
