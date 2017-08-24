@@ -1,0 +1,25 @@
+package com.acme.edu;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class ArraysDemo {
+    public static void main(String... args) {
+        int[][] array = new int[5][];
+        for (int[] elementL1 : array) {
+            for (int elementL2 : elementL1) {
+                System.out.print(elementL2 + " ");
+            }
+            System.out.println();
+        }
+        array[0] = new int[1];
+
+        int[] array2 = new int[] {1, 3, 5}; //Array literal
+        m(new int[] {1,2,3});
+        m(1,2,3);
+    }
+
+    private static void m(int... array) {
+
+    }
+}
