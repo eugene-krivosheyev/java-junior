@@ -11,8 +11,21 @@ public class Logger {
     private static int equalStringsCount = 0;
 
     public static void log(Object message) {
+        if (isNull(message)) {
+            return;
+        }
+
         cachePrint();
         System.out.println("reference: " + message);
+    }
+
+    public static void log(int[] message) {
+        if (isNull(message)) {
+            return;
+        }
+
+        cachePrint();
+        System.out.println("primitives array: " + arrayToString(message));
     }
 
     public static void log(int message) {
@@ -22,8 +35,11 @@ public class Logger {
         }
 
         if (intSum + message > (long) Integer.MAX_VALUE) {
-            System.out.println("primitive: " + intSum);
-            intSum = message;
+            System.out.println("primitive: " + Integer.MAX_VALUE);
+            intSum = (message + intSum) % Integer.MAX_VALUE;
+        } else if (intSum + message < (long) Integer.MIN_VALUE) {
+            System.out.println("primitive: " + Integer.MIN_VALUE);
+            intSum = (message + intSum) % Integer.MIN_VALUE;
         } else {
             intSum += message;
         }
@@ -35,6 +51,14 @@ public class Logger {
     }
 
     public static void log(String message) {
+        if (isNull(message)) {
+            return;
+        }
+
+        if ("".equals(message)) {
+            return;
+        }
+
         if (previousString == null || !previousString.equals(message)) {
             cachePrint();
             previousString = message;
@@ -56,8 +80,11 @@ public class Logger {
 
         isPreviousByte = true;
         if (byteSum + message > (int) Byte.MAX_VALUE) {
-            System.out.println("primitive: " + byteSum);
-            byteSum = message;
+            System.out.println("primitive: " + Byte.MAX_VALUE);
+            byteSum = (message + byteSum) % Byte.MAX_VALUE;
+        } else if (byteSum + message < (int) Byte.MIN_VALUE) {
+            System.out.println("primitive: " + Byte.MIN_VALUE);
+            byteSum = (message + byteSum) % Byte.MIN_VALUE;
         } else {
             byteSum += message;
         }
@@ -82,5 +109,31 @@ public class Logger {
             equalStringsCount = 0;
             previousString = null;
         }
+    }
+
+    private static boolean isNull(Object message) {
+        return message == null;
+    }
+
+    private static String arrayToString(int[] a) {
+        int iMax = a.length - 1;
+        if (iMax == -1)
+            return "{}";
+
+        StringBuilder b = new StringBuilder();
+        b.append('{');
+        for (int i = 0; ; i++) {
+            b.append(a[i]);
+            if (i == iMax)
+                return b.append('}').toString();
+            b.append(", ");
+        }
+    }
+
+    public static void main(String[] args) {
+        Logger.log(-5);
+        Logger.log(Integer.MIN_VALUE);
+        Logger.log(-8);
+        Logger.cachePrint();
     }
 }

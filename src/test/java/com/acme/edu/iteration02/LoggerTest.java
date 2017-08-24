@@ -51,6 +51,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 1");
         Logger.log(10);
         Logger.log(Integer.MAX_VALUE);
+        Logger.log(2);
         Logger.log("str 2");
         Logger.log(0);
         Logger.cachePrint();
@@ -59,8 +60,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region then
         assertSysoutEquals(
             "string: str 1" + lineSeparator() +
-            "primitive: 10" + lineSeparator() +
             "primitive: " + Integer.MAX_VALUE + lineSeparator() +
+            "primitive: 12" + lineSeparator() +
             "string: str 2" + lineSeparator() +
             "primitive: 0" + lineSeparator()
         );
@@ -73,6 +74,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 1");
         Logger.log((byte)10);
         Logger.log((byte)Byte.MAX_VALUE);
+        Logger.log((byte)2);
         Logger.log("str 2");
         Logger.log(0);
         Logger.cachePrint();
@@ -81,8 +83,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region then
         assertSysoutEquals(
             "string: str 1" + lineSeparator() +
-            "primitive: 10" + lineSeparator() +
             "primitive: " + Byte.MAX_VALUE + lineSeparator() +
+            "primitive: 12" + lineSeparator() +
             "string: str 2" + lineSeparator() +
             "primitive: 0" + lineSeparator()
         );
@@ -110,6 +112,68 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
             "primitive: 0" + lineSeparator() +
             "string: str 2" + lineSeparator() +
             "string: str 3 (x3)" + lineSeparator()
+        );
+        //endregion
+    }
+
+    @Test
+    public void shouldIgnoreEmptyStringsAndNullObjects() throws IOException {
+        //region when
+        final Object nullObject = null;
+        Logger.log("str 1");
+        Logger.log("str 1");
+        Logger.log("");
+        Logger.log("");
+        Logger.log("");
+        Logger.log("str 1");
+        Logger.log(nullObject);
+        Logger.log("str 2");
+        Logger.log(6);
+        Logger.log("");
+        Logger.log(nullObject);
+        Logger.log(8);
+        Logger.cachePrint();
+        //endregion
+
+        //region then
+        assertSysoutContains(
+                "string: str 1 (x3)" + lineSeparator() +
+                "string: str 2" + lineSeparator() +
+                "primitive: 14" + lineSeparator()
+        );
+        //endregion
+    }
+
+    @Test
+    public void shouldLogCorrectlyNegativeIntegerOverflowWhenSequentIntegers() throws IOException {
+        //region when
+        Logger.log(-5);
+        Logger.log(Integer.MIN_VALUE);
+        Logger.log(-8);
+        Logger.cachePrint();
+        //endregion
+
+        //region then
+        assertSysoutContains(
+            "primitive: " + Integer.MIN_VALUE + lineSeparator() +
+            "primitive: -13" + lineSeparator()
+        );
+        //endregion
+    }
+
+    @Test
+    public void shouldLogCorrectlyNegativeByteOverflowWhenSequentIntegers() throws IOException {
+        //region when
+        Logger.log((byte)-5);
+        Logger.log(Byte.MIN_VALUE);
+        Logger.log((byte)-8);
+        Logger.cachePrint();
+        //endregion
+
+        //region then
+        assertSysoutContains(
+            "primitive: " + Byte.MIN_VALUE + lineSeparator() +
+            "primitive: -13" + lineSeparator()
         );
         //endregion
     }
