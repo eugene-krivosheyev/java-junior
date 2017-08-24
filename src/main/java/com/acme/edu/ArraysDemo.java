@@ -2,6 +2,7 @@ package com.acme.edu;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
 
 public class ArraysDemo {
     public static void main(String... args) {
@@ -27,7 +28,18 @@ public class ArraysDemo {
 //        System.arraycopy();
     }
 
-    private static void m(int... array) {
+    private static void m(int... param) {
+        if (!condition()) return; //Guard Clauses
+        if (!condition()) return;
+        if (!condition()) return;
+        if (!condition()) return;
+        if (!condition()) return;
+        if (!condition()) return;
+        if (!condition()) return;
 
+        //main flow
+        //main flow
+        //main flow
+        //main flow
     }
 }
