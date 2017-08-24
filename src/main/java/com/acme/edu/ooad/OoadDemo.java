@@ -8,13 +8,28 @@ public class OoadDemo {
         ii = 0;
     }
 
-    static void m() {}
     public static void main(final String[] args) {
-        System.out.println(Color.RED);
+        new Girl();
     }
 }
 
-enum Color {
-    GREEN, RED, BLUE;
+class Woman {
+    private int age;
+
+    public Woman(int i) {
+        System.out.println("1");
+        this.age = age;
+    }
+}
+
+class Girl extends Woman {
+    {
+        System.out.println("!!!");
+    }
+
+    {
+        System.out.println("!!!!!!");
+    }
+
 }
 
