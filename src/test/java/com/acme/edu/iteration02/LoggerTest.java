@@ -140,6 +140,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
                 "string: str 1 (x3)" + lineSeparator() +
                 "string: str 2" + lineSeparator() +
                 "primitive: 14" + lineSeparator()
+
+            "str 1\n" +
+            "str 2 (x2)\n" +
+            "0\n" +
+            "str 2\n" +
+            "str 3 (x3)\n"
+
         );
         //endregion
     }
