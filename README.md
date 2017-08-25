@@ -697,3 +697,4 @@ http://tinyurl.com/skilltrekreadinglist
 - Typing systems: строгая vs динамическая
 - @NotNull
 - JNI / JNA
+- Параметрический полиморфизм
