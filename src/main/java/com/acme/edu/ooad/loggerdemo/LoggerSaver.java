@@ -9,5 +9,5 @@ public interface LoggerSaver {
      * 2. Post-conditions (side effects)
      * 3. Invariants
      */
-    void save(String message);
+    void save(LoggerMessage message);
 }
