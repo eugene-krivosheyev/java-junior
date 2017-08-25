@@ -131,6 +131,7 @@ public class Logger {
     }
 
     public static void main(String[] args) {
+
         Logger.log(-5);
         Logger.log(Integer.MIN_VALUE);
         Logger.log(-8);
