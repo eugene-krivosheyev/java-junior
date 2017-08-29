@@ -1,6 +1,7 @@
 package demo;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import static junit.framework.TestCase.assertEquals;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.*;
 
 public class ArrayListTest {
     @Test(timeout = 1_000)
@@ -26,5 +28,30 @@ public class ArrayListTest {
                 .isEqualTo(1)
                 .isPositive();
         //endregion
+    }
+
+    @Test
+    public void shouldRelyOnElementsToStringWhenToString() {
+        ArrayList sut = new ArrayList();
+        Object stub = mock(Object.class);
+        Object stub2 = mock(Object.class);
+        sut.add(stub);
+        sut.add(stub2);
+        when(stub.toString()).thenReturn("test string 1");
+        when(stub2.toString()).thenReturn("test string 2");
+
+        assertThat(sut.toString())
+                .isEqualTo("[test string 2, test string 2]");
+    }
+
+    @Test @Ignore
+    public void shouldRelyOnElementsToStringWhenToString2() {
+        ArrayList sut = new ArrayList();
+        Object mock = mock(Object.class);
+        sut.add(mock);
+
+        sut.toString();
+
+//        verify(mock).toString(anyString());
     }
 }
