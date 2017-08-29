@@ -30,7 +30,7 @@ public class ArrayListTest {
         //endregion
     }
 
-    @Test
+    @Test @Ignore
     public void shouldRelyOnElementsToStringWhenToString() {
         ArrayList sut = new ArrayList();
         Object stub = mock(Object.class);
