@@ -1,6 +1,7 @@
 package demo;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -11,7 +12,13 @@ import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.*;
 
+
 public class ArrayListTest {
+    @Before
+    public void setUp() {
+
+    }
+
     @Test(timeout = 1_000)
     public void shouldContainElementAndSizeIncrementedWhenElementAdd() { //BDD, Cohesion, Contract
         //region Fixture | Arrange | Given
