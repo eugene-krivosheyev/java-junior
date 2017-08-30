@@ -689,6 +689,10 @@ assertMessageEquals("3")
 
 ---
 
+# CI server
+- Jenkins http://34.203.224.212:8080/jenkins
+- Sonar http://34.203.224.212:9000
+
 # Reading List
 http://tinyurl.com/skilltrekreadinglist
 
