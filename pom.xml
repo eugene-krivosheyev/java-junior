@@ -56,6 +56,14 @@
           <targetTests>
             <param>com.acme.edu*</param>
           </targetTests>
+          <mutators>
+            <mutator>ALL</mutator>
+          </mutators>
+          <outputFormats>
+            <outputFormat>HTML</outputFormat>
+            <outputFormat>XML</outputFormat>
+          </outputFormats>
+          <timestampedReports>false</timestampedReports>
         </configuration>
         <executions>
           <execution>
