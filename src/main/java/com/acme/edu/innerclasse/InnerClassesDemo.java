@@ -28,7 +28,7 @@ class Outer {
         Externalizable m() {
             System.out.println(outerState);
 
-            class MyClass implements Externalizable {
+            return new Externalizable() {
                 @Override
                 public void writeExternal(ObjectOutput out) throws IOException {
 
@@ -38,9 +38,7 @@ class Outer {
                 public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
 
                 }
-            }
-
-            return new MyClass();
+            };
         }
     }
 }
