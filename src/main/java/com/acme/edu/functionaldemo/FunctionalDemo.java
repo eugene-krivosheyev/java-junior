@@ -19,7 +19,7 @@ public class FunctionalDemo {
                 .forEach(System.out::println);
 
         Logger logger = new Logger();
-        logger.addEventHandler(FunctionalDemo::callSaoul);
+        logger.addEventHandler(() -> {});
         logger.addEventHandler(FunctionalDemo::callTovMayor);
         logger.addEventHandler(() -> {
             System.out.println(limit);
