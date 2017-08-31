@@ -1,9 +1,14 @@
 package com.acme.edu.innerclasse;
 
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 public class InnerClassesDemo {
     public static void main(String[] args) {
         Outer outer = new Outer();
-        outer.new Inner();
+        Externalizable m = outer.new Inner().m();
         outer.new Inner().new InnerInnerClass();
     }
 }
@@ -20,8 +25,22 @@ class Outer {
             }
         }
 
-        void m() {
+        Externalizable m() {
             System.out.println(outerState);
+
+            class MyClass implements Externalizable {
+                @Override
+                public void writeExternal(ObjectOutput out) throws IOException {
+
+                }
+
+                @Override
+                public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+
+                }
+            }
+
+            return new MyClass();
         }
     }
 }
