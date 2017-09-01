@@ -54,11 +54,11 @@ public class ArrayListTest {
     @Test @Ignore
     public void shouldRelyOnElementsToStringWhenToString2() {
         ArrayList sut = new ArrayList();
-        Object mock = mock(Object.class);
+        String mock = mock(String.class);
         sut.add(mock);
 
         sut.toString();
 
-//        verify(mock).toString(anyString());
+        verify(mock).;
     }
 }
