@@ -1,7 +1,6 @@
 package genericsdemo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static genericsdemo.Pair.*;
 
@@ -96,6 +95,15 @@ class MyQueue4<String> implements Queue {
 
     @Override
     public void push(Object o) {
+        Arrays.asList("12", 12);
+    }
+}
 
+class GenericsDemoWithLambda {
+    public static void main(String[] args) {
+        Collections.sort(
+                Arrays.asList((int)12, (byte)12),
+                (o1, o2) -> 1
+        );
     }
 }
