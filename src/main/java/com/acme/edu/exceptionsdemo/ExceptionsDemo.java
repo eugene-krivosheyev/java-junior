@@ -67,9 +67,37 @@ class SavingException extends Exception {
     }
 }
 
+class TWRDemo {
+    public static void main(String[] args) throws Exception {
+        Connection connection = null;
+        Exception e1 = null;
+        try {
+            connection = getConnection();
+        } catch (Exception e) {
+            e1 = e;
 
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (Exception e2) {
+                    e2.addSuppressed(e1);
+                    throw e2;
+                }
+            }
+        }
+    }
 
+    private static Connection getConnection() {
+        return null;
+    }
+}
 
+class Connection {
+    public void close() throws Exception {
+
+    }
+}
 
 
 
