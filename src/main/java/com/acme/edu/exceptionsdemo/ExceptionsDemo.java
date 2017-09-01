@@ -1,5 +1,6 @@
 package com.acme.edu.exceptionsdemo;
 
+import java.io.Closeable;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -68,36 +69,30 @@ class SavingException extends Exception {
 }
 
 class TWRDemo {
-    public static void main(String[] args) throws Exception {
-        Connection connection = null;
-        Exception e1 = null;
-        try {
-            connection = getConnection();
-        } catch (Exception e) {
-            e1 = e;
+    public static void main(String[] args) {
+        try (
+                Connection c = getConnection();
+                Connection c2 = getConnection();
+        ) {
 
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (Exception e2) {
-                    e2.addSuppressed(e1);
-                    throw e2;
-                }
-            }
+        } catch (Exception e) {
+            System.out.println(">>>>" + e.getMessage());
         }
     }
 
     private static Connection getConnection() {
-        return null;
+        return new Connection();
     }
 }
 
-class Connection {
+class Connection implements AutoCloseable {
+    @Override
     public void close() throws Exception {
-
+        throw new RuntimeException("1111");
     }
 }
+
+
 
 
 
