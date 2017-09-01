@@ -16,7 +16,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         captureSysout();
     }
 
-    @After
+    @After @Test
     public void tearDown() {
         resetOut();
     }

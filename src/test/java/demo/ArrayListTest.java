@@ -59,6 +59,6 @@ public class ArrayListTest {
 
         sut.toString();
 
-        verify(mock).;
+//        verify(mock).;
     }
 }
