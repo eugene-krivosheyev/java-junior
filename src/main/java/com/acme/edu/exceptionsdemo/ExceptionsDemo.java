@@ -44,9 +44,21 @@ class FileSaver implements Saver {
             throw new SavingException(e); //Re-throw
         }
     }
+
+    public static void main(String[] args) {
+        try {
+
+        } catch (FormattingException | SavingException e) {
+            RuntimeException e2 = e;
+        }
+    }
 }
 
-class SavingException extends Exception {
+class FormattingException extends RuntimeException {
+    public void getMessageFormatted() {}
+}
+
+class SavingException extends RuntimeException {
     public SavingException() {
         super();
     }
@@ -66,6 +78,8 @@ class SavingException extends Exception {
     protected SavingException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
+
+    public void getMessageSaved() {}
 }
 
 class TWRDemo {
@@ -75,7 +89,7 @@ class TWRDemo {
                 Connection c2 = getConnection();
         ) {
 
-        } catch (Exception e) {
+        } catch (Exception | Error e) {
             System.out.println(">>>>" + e.getMessage());
         }
     }
