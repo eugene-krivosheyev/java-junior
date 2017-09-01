@@ -1,15 +1,14 @@
 package com.acme.edu.observerdemo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static java.util.Arrays.asList;
 
-public class Context {
+public class Logger {
     private List<EventHandler> handlers = new ArrayList<>();
 
-    public Context(EventHandler... handlers) {
+    public Logger(EventHandler... handlers) {
         this.handlers.addAll(asList(handlers));
     }
 
@@ -39,7 +38,7 @@ class ConsoleEventHandler implements EventHandler {
 
 class LoggerFacade {
     public static void main(String[] args) {
-        new Context(
+        new Logger(
                 new FormattingSavingHandler(),
                 () -> System.out.println()
         );
