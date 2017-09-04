@@ -695,6 +695,7 @@ assertMessageEquals("3")
 
 # Reading List
 http://tinyurl.com/skilltrekreadinglist
+https://github.com/eugene-krivosheyev/java4qa-advanced/commit/b5faa6f652a197316eaf0e4f7867186d64692ef0
 
 # Additional Topics
 - Top-5 Java Frameworks Overview

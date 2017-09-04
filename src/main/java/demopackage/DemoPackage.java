@@ -19,6 +19,9 @@ class OoadLogger {
     }
 }
 
+/**
+ * @throws lkdfgklgkfjghkfgjh
+ */
 interface LogMessage {
     String getMessage();
 }
