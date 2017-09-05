@@ -9,7 +9,7 @@ import static java.util.Comparator.comparing;
 
 public class CollectionsDemo {
     public static void main(String[] args) {
-        Collection set = new HashSet();
+        Collection<Cat> set = new HashSet<>();
 
         Cat murzik = new Cat("Murzik");
         set.add(murzik);
@@ -28,6 +28,11 @@ public class CollectionsDemo {
             System.out.println(mur.getName());
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
+        }
+
+        while (iterator.hasNext()) { //itit
+            Object next = iterator.next();
+
         }
     }
 }
