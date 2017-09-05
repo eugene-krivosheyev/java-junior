@@ -15,7 +15,7 @@ public class NetworkDemoClient {
             DataOutputStream out = new DataOutputStream(outputStream);
         ) {
 
-            out.writeUTF("HELLO!!!!");
+            out.writeUTF("GET /index.html HTTP/1.0");
 
         } catch (IOException e) {
             e.printStackTrace();
