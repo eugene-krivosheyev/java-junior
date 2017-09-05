@@ -1,25 +1,33 @@
 package com.acme.edu.threadsdemo;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.util.concurrent.*;
-
 public class ThreadDemo {
-    public static void main(String[] args) {
-        ExecutorService executorService = Executors.newFixedThreadPool(5);
-        Future<String> submit = executorService.submit(() -> {
-            Thread.sleep(5_000);
-            return "";
-        });
-        submit.isDone(); //polling
-        try {
-            String result = submit.get();//
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.getCause().printStackTrace();
-        }
+    public static void main(String[] args) throws InterruptedException {
+        Thread t = new Thread(() -> {
+            while (!Thread.interrupted()) {
+                try {
+                    Thread.sleep(1_000);
+                } catch (InterruptedException e) {
 
-        executorService.shutdownNow();
+                }
+                System.out.println("111");
+            }
+        });
+
+        t.setDaemon(true);
+        t.start();
+
+        /*
+        t.stop();
+        t.suspend();
+        t.resume();
+        */
+
+        t.setName("main | Thread-1");
+        t.setPriority(Thread.MAX_PRIORITY);
+
+        Thread.sleep(5_000);
+        t.interrupt();
+
+        t.join();
     }
 }
