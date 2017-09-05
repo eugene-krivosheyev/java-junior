@@ -30,10 +30,6 @@ public class CollectionsDemo {
             e.printStackTrace();
         }
 
-        while (iterator.hasNext()) { //itit
-            Object next = iterator.next();
-
-        }
     }
 }
 
