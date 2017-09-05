@@ -38,6 +38,8 @@ public class SerializationDemo {
 }
 
 class Cat implements Serializable {
+    static final long serialVersionUID = 666L;
+
     private String name;
     private transient int id;
 
