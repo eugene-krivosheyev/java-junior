@@ -23,11 +23,16 @@ public class CollectionsDemo {
         Collection<Cat> treeSet = new TreeSet<>(comparing(Cat::getName));
         treeSet.add(new Cat("qqq"));
 
-
+        try {
+            Cat mur = (Cat)new Cat("mur").clone();
+            System.out.println(mur.getName());
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
     }
 }
 
-class Cat {
+class Cat implements Cloneable {
     private String name;
 
     public Cat(String name) {
@@ -60,5 +65,10 @@ class Cat {
     @Override
     public String toString() {
         return "name='" + name + "'";
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
