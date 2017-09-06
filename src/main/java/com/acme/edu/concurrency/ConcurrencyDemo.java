@@ -1,5 +1,7 @@
 package com.acme.edu.concurrency;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -58,6 +60,47 @@ class Counter {
         synchronized (Counter.class) {
 
         }
+    }
+}
+
+
+class BlockingQueue<T> {
+    private List<T> queue = new ArrayList<>(10);
+
+    public void add(T element) {
+        synchronized (queue) {
+            queue.add(element);
+            queue.notifyAll();
+        }
+    }
+
+    public T get() {
+        synchronized (queue) {
+            try {
+                while (queue.isEmpty()) {
+                    queue.wait();
+                }
+            } catch (InterruptedException e) {
+                return null;
+            }
+            return queue.remove(0);
+        }
+    }
+
+    public static void main(String[] args) {
+        BlockingQueue<String> q = new BlockingQueue<>();
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(5_000);
+                q.add("qqq");
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        System.out.println(q.get());
     }
 }
 
