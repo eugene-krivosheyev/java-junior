@@ -1,5 +1,8 @@
 package com.acme.edu.concurrency;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class ConcurrencyDemo {
     public static void main(String[] args) throws InterruptedException {
         Counter counter = new Counter();
@@ -24,18 +27,23 @@ public class ConcurrencyDemo {
         thread1.join();
         thread2.join();
         System.out.println(counter.getState());
+
+        Lock lock = new ReentrantLock();
+        lock.lock();
+        lock.tryLock();
     }
 }
 
 class Counter {
     private int state = 0;
+    private Object monitor = new Object();
 
     /**
      * Data Race
      */
     public void increment() {
-        synchronized (this) {
-                state++;
+        synchronized (monitor) {
+            state++;
         }
         //-> state
         //state = state + 1
@@ -52,3 +60,4 @@ class Counter {
         }
     }
 }
+
