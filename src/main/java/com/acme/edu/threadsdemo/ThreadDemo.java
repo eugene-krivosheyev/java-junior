@@ -1,5 +1,7 @@
 package com.acme.edu.threadsdemo;
 
+import java.util.concurrent.*;
+
 public class ThreadDemo {
     public static void main(String[] args) throws InterruptedException {
         Thread t = new Thread(() -> {
@@ -29,5 +31,15 @@ public class ThreadDemo {
         t.interrupt();
 
         t.join();
+
+
+        ExecutorService pool = Executors.newFixedThreadPool(5);
+        Future<String> futureResult = pool.submit(() -> "");
+        futureResult.isDone();
+        try {
+            String result = futureResult.get();
+        } catch (ExecutionException e) {
+            e.getCause().printStackTrace();
+        }
     }
 }
