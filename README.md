@@ -4,10 +4,10 @@
 
 ---
 
-# Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice) 
-- Introduction to Java. Benefits. 
-- JDK, JVM. 
-- Java 2 (Java EE / SE / ME) 
+# Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice)
+- Introduction to Java. Benefits.
+- JDK, JVM.
+- Java 2 (Java EE / SE / ME)
 - Tools: java, javac, javadoc
 
 ## Lab: Installing JDK, Tuning Environmental Variables
@@ -30,6 +30,11 @@ $ java -version
 - Packages
 - JARs
 
+```
+$ javac -d target -sourcepath src src/Demo.java
+$ java -cp target Demo
+```
+
 ## Lab: developing simple java app
 - Main and Printer classes
 - Different packages
@@ -37,7 +42,7 @@ $ java -version
 
 ### DoD
 ```
-Hello, world! 
+Hello, world!
 ```
 
 ---
@@ -131,11 +136,11 @@ $ git push
 
 ## Class Method Declaration
 - Return type
-- Static modifier 
+- Static modifier
 - Name
 - Parameters
 - Static initializers
- 
+
 ## Variable scopes
 - Local variables
 - Class variables and methods, static import
@@ -178,7 +183,7 @@ $ git push
 - Arithmetic
 - Arithmetic type promotions
 - Bitwise
-- Logical (lazy and eager) 
+- Logical (lazy and eager)
 - Compare and Ternary
 - Object references and equality
 
@@ -265,7 +270,7 @@ $ git push
 
 ## Enums
 - Enums emulation with class
-- Switch recap 
+- Switch recap
 - Smart Enum Pattern
 
 ## Course Project Iteration 04: Logger Library towards OO through Enums
@@ -398,7 +403,7 @@ $ git push
 ## Course Project Iteration 09: Introduce Observer/Listener Design Pattern for Appenders extensibility
 - Observer
 - Implementation with Anonymous classes
-- FR: As developer I want easily add new Appenders 
+- FR: As developer I want easily add new Appenders
 
 ### DoD
 - All given specifications runs are green
@@ -446,7 +451,7 @@ $ git push
 - Unit tests coverage ≥ 70%
 - Permutation coverage ≥ 50%
 - Introduced checked exceptions for errors and alternate scenarios
- 
+
 ---
 
 # Generics (2/0.5)
@@ -458,12 +463,12 @@ $ git push
 ## Demo: Type safety for sorting with anonymous implementation of comparator
 
 ---
- 
+
 # System library (6/2)
 - System
 - Math
 - Object: hc and eq contract, toS
-- String, its API. Immutability and interns. 
+- String, its API. Immutability and interns.
 - StringBuffer, StringBuilder
 - Wrapper classes
 - Autoboxing
@@ -497,7 +502,7 @@ assertMessageEquals("3")
 - Stream API
 
 ## Course Project Iteration 13: Collections for code reuse
-- Choose and state collection interfaces 
+- Choose and state collection interfaces
 - Choose and state collection implementations
 - Refactor legacy codebase to collections API
 
@@ -660,8 +665,8 @@ assertMessageEquals("3")
 - Code style
 - Documented public API
 - Unit tests coverage ≥ 70%
-- Integration test for Client 
-- Integration test for Server 
+- Integration test for Client
+- Integration test for Server
 
 ---
 
