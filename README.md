@@ -62,7 +62,7 @@ Hello, world!
 - Commit and push initial commit
 ```
 $ git add .
-$ git commit -m “…”
+$ git commit -a -m “…”
 $ git push
 ```
 
