@@ -14,21 +14,27 @@ import static java.lang.Math.sin;
  */
 public class Logger {
     public static final String MY_SUPER_CONSTANT = "";
+
+    public static int globalState = 0;
+    public int instanceState = 0;
+
     /*
     xlkvhjkg
     лаорслиормс
      */
 
     //dfgdgfdg
-    public static void logMySuperMessage(int message) {
-        System.out.println("imits " + message);
-        System.out.println("prits " + message);
-//        System.out.println("prits " + message);
-        System.out.println("primits " + message);
-        System.out.println("prits " + message);
-        System.out.println("pmits " + message);
-        System.out.println("primits " + message);
+    public static void logMySuperMessage(int foramlMessage) {
+        foramlMessage = 2;
+        int local = 0; //temp, stack, auto
 
+        System.out.println("imits " + foramlMessage);
+        System.out.println("prits " + foramlMessage);
+//        System.out.println("prits " + foramlMessage);
+        System.out.println("primits " + foramlMessage);
+        System.out.println("prits " + foramlMessage);
+        System.out.println("pmits " + foramlMessage);
+        System.out.println("primits " + foramlMessage);
     }
 
     /**
@@ -51,9 +57,11 @@ public class Logger {
 
 
     public static void main(String[] args) {
+        int local = 0;
+        //kdjfhgkjfgh
         logString("HW!!!");
-        Main.main();
-        Main.counter = 1;
+//        Main.main();
+//        Main.counter = 1;
     }
 }
 
@@ -69,12 +77,17 @@ class Main {
 
     }
 
-    public static void main() {
-        Main main = new Main();
-        main.m();
+    /**
+     * java -Xss2m -Xms4G -Xmx4G
+     */
+    public static void main(String[] args) {
+        int local = 0;
+        main(new String[] {});
 
-        logString("HW!!!");
-        sin(cos(abs(5)));
-        System.out.println(separator);
+        int factualMessage = 1;
+        Object o = new Object();
+
+        logMySuperMessage(1);
+        System.out.println(factualMessage);
     }
 }
