@@ -48,7 +48,6 @@ public class Logger {
      * <bold>kfdfgjkhdgjfdhg</bold>
      *
      * @param message РАПРапрдлпао апдлапорда рдаплро
-     * @throws апорвл лопрл лорло
      */
     public static void log(byte message) {
         System.out.println("primitive: " + message);
@@ -93,7 +92,6 @@ class Main {
         int factualMessage = 1;
         Object o = new Object();
 
-        logMySuperMessage(1);
         System.out.println(factualMessage);
     }
 }
