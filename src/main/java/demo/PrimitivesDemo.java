@@ -64,9 +64,31 @@ public strictfp class PrimitivesDemo {
         System.out.println( isB1() ? 1 : isB2() ? "1" : 2);
 
         cat1 = null;
-        System.out.println(cat1.getId());
+        if (cat1 != null) {
+            System.out.println(cat1.getId());
+        }
         Optional<Cat> maybeCat = Optional.empty();
 //        fopen("cdf") or die()
+        //endregion
+        //endregion
+
+        //region Проблемы
+        //region Type Overflow
+        byte count = 0;
+        for (int j = 0; j < 129; j++) {
+            count++;
+        }
+        System.out.println(count);
+        //endregion
+
+        //region Потеря точности
+        System.out.println(.1 + .2);
+        //endregion
+
+        //region Zero
+        //Static Analyzers: PMD, CheckStyle, FindBugs
+        System.out.println(1/0); //ArEx: / by zero
+        System.out.println(2/0.);
         //endregion
         //endregion
     }
