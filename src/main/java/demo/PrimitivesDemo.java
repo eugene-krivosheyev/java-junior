@@ -1,6 +1,14 @@
 package demo;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
+
 public strictfp class PrimitivesDemo {
+    @NotNull
+    private String state;
+
     public strictfp static void main(String[] args) {
         //region Целые со знаком
         byte b = 1_00; //1 byte, Byte.MAX_VALUE
@@ -23,7 +31,63 @@ public strictfp class PrimitivesDemo {
         boolean boo = true | false;
         //endregion
 
-        System.out.println(0/0.);
-        System.out.println(.1 + .2); //+ type overflow
+        //region Operators
+        //region Casting
+        int ii = 1000;
+        byte bb = (byte) ii;
+        System.out.println(bb);
+        //endregion
+
+        //region Арифметические
+        System.out.println(1 / 1);
+        int counter = 0; counter++;
+        counter *= 2;
+        System.out.println( 10 % 2 );
+        //endregion
+
+        //region Bitwise
+        byte i1 = 1, i2 = 4;
+        //i1 = 001, i2 = 0100
+        System.out.println(i2 >>> 1);
+        //endregion
+
+        //region Logical
+        boolean b1 = false, b2 = true;
+        System.out.println(isB1() && isB2());//and, or, not
+        System.out.println(!b1);
+        System.out.println(1 == 2);  // > = = =
+
+        Cat cat1 = new Cat(1);
+        Cat cat2 = new Cat(1);
+        cat1.equals(cat2); // = = =
+
+        System.out.println( isB1() ? 1 : isB2() ? "1" : 2);
+
+        cat1 = null;
+        System.out.println(cat1.getId());
+        Optional<Cat> maybeCat = Optional.empty();
+//        fopen("cdf") or die()
+        //endregion
+        //endregion
+    }
+
+    private static boolean isB2() {
+        return false;
+    }
+
+    private static boolean isB1() {
+        return false;
+    }
+}
+
+class Cat extends Object {
+    private int id;
+
+    public Cat(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }
