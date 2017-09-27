@@ -38,5 +38,13 @@
       <version>1.4</version>
       <scope>test</scope>
     </dependency>
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>4.3.11.RELEASE</version>
+</dependency>
+
+
   </dependencies>
 </project>
