@@ -32,7 +32,7 @@ public class Logger {
     public static void log(Object message) {
         System.out.print(REF_PREFIX + "@"+ message);
     }
-
+//asdfasdf
 
     private static void print(String message) {
         System.out.println(message);
