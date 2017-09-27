@@ -1,20 +1,29 @@
 package demo;
 
-public class PrimitivesDemo {
-    public static void main(String[] args) {
-        Cat cat = new Cat(0);
-        Cat cat2 = cat;
-        System.out.println(Cat.catsCount);
-    }
-}
+public strictfp class PrimitivesDemo {
+    public strictfp static void main(String[] args) {
+        //region Целые со знаком
+        byte b = 1_00; //1 byte, Byte.MAX_VALUE
+        short s = 010; //2 byte
+        int i = 0x10; //4 bytes
+        long l = 10000000000000L; //8 byte
+        //endregion
 
-class Cat {
-    public static int catsCount;
+        //region С плавающей точкой
+        float f = 0.0000000000000000000000000000000000000001f; //16 byte, IEEE 754?
+        double d = -2e-5d; //32 byte
+        //endregion
 
-    private int id;
-    private Cat friend;
+        //region Символы
+        char c = '\t'; //\u1234
+        System.out.println(c);
+        //endregion
 
-    public Cat(int id) {
-        this.id = id;
+        //region Логический
+        boolean boo = true | false;
+        //endregion
+
+        System.out.println(0/0.);
+        System.out.println(.1 + .2); //+ type overflow
     }
 }
