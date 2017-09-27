@@ -14,6 +14,8 @@ import static java.lang.Math.sin;
  */
 public class Logger {
     public static final String MY_SUPER_CONSTANT = "";
+    private static final String PRIMITIVE_PREFIX = "primitive: ";
+    private static final String CHAR_PREFIX = "char: ";
 
     public static int globalState = 0;
     public int instanceState = 0;
@@ -34,30 +36,35 @@ public class Logger {
         foramlMessage = 2;
         int local = 0; //temp, stack, auto
 
-        System.out.println("imits " + foramlMessage);
-        System.out.println("prits " + foramlMessage);
+        print("imits " + foramlMessage);
+        print("prits " + foramlMessage);
 //        System.out.println("prits " + foramlMessage);
-        System.out.println("primits " + foramlMessage);
-        System.out.println("prits " + foramlMessage);
-        System.out.println("pmits " + foramlMessage);
-        System.out.println("primits " + foramlMessage);
+        print("primits " + foramlMessage);
+        print("prits " + foramlMessage);
+        print("pmits " + foramlMessage);
+        print("primits " + foramlMessage);
     }
 
     /**
      * JavaDoc
      * <bold>kfdfgjkhdgjfdhg</bold>
      *
-     * @param message РАПРапрдлпао апдлапорда рдаплро
      */
     public static void log(byte message) {
-        System.out.println("primitive: " + message);
+        print(PRIMITIVE_PREFIX + message);
     }
+
+
 
     /**
      * public API
      */
     public static void log(String message) {
-        System.out.println(message);
+        print(PRIMITIVE_PREFIX + message);
+    }
+
+    public static void log(char message) {
+        print(CHAR_PREFIX + message);
     }
 
 
@@ -67,6 +74,10 @@ public class Logger {
         log(1);
 //        Main.main();
 //        Main.counter = 1;
+    }
+
+    private static void print(String message) {
+        System.out.println(message);
     }
 }
 
