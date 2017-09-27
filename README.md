@@ -1,13 +1,13 @@
-﻿Matveeva Deryagina
+
 # Java Junior Developer Training Course.
-88 hours training + 32 hours work project = 120 hr.
+64 hours training + 16 hours work project = 80 hr.
 
 ---
 
-# Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice) 
-- Introduction to Java. Benefits. 
-- JDK, JVM. 
-- Java 2 (Java EE / SE / ME) 
+# Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice)
+- Introduction to Java. Benefits.
+- JDK, JVM.
+- Java 2 (Java EE / SE / ME)
 - Tools: java, javac, javadoc
 
 ## Lab: Installing JDK, Tuning Environmental Variables
@@ -30,6 +30,11 @@ $ java -version
 - Packages
 - JARs
 
+```
+$ javac -d target -sourcepath src src/Demo.java
+$ java -cp target Demo
+```
+
 ## Lab: developing simple java app
 - Main and Printer classes
 - Different packages
@@ -37,7 +42,7 @@ $ java -version
 
 ### DoD
 ```
-Hello, world! 
+Hello, world!
 ```
 
 ---
@@ -55,9 +60,10 @@ Hello, world!
 - Clone your fork repo locally
 - Update README.md locally to your teammates names
 - Commit and push initial commit
+- Add your team to https://docs.google.com/spreadsheets/d/1MIkv3X36anTvXKWfXIhG6o9AZBdWg0UT3xaoBDdVnvY/edit?usp=sharing
 ```
 $ git add .
-$ git commit -m “…”
+$ git commit -a -m “…”
 $ git push
 ```
 
@@ -131,11 +137,11 @@ $ git push
 
 ## Class Method Declaration
 - Return type
-- Static modifier 
+- Static modifier
 - Name
 - Parameters
 - Static initializers
- 
+
 ## Variable scopes
 - Local variables
 - Class variables and methods, static import
@@ -178,7 +184,7 @@ $ git push
 - Arithmetic
 - Arithmetic type promotions
 - Bitwise
-- Logical (lazy and eager) 
+- Logical (lazy and eager)
 - Compare and Ternary
 - Object references and equality
 
@@ -229,7 +235,7 @@ $ git push
 
 ---
 
-# OOAD recap (4/1)
+# OOAD recap (2/1)
 - Programming styles and paradigms
 - Procedure style vs OOAD
 - Classes and objects
@@ -258,14 +264,14 @@ $ git push
 
 ---
 
-# Java Syntax for OOP (12/4)
+# Java Syntax for OOP (10/4)
 
 ## Final
 - Final modifier semantics: 3
 
 ## Enums
 - Enums emulation with class
-- Switch recap 
+- Switch recap
 - Smart Enum Pattern
 
 ## Course Project Iteration 04: Logger Library towards OO through Enums
@@ -389,7 +395,7 @@ $ git push
 
 ---
 
-# Intro to Functional Style (6/3)
+# Intro to Functional Style (2/1)
 - Nested Classes
 - Inner classes
 - Local classes
@@ -398,7 +404,7 @@ $ git push
 ## Course Project Iteration 09: Introduce Observer/Listener Design Pattern for Appenders extensibility
 - Observer
 - Implementation with Anonymous classes
-- FR: As developer I want easily add new Appenders 
+- FR: As developer I want easily add new Appenders
 
 ### DoD
 - All given specifications runs are green
@@ -446,7 +452,7 @@ $ git push
 - Unit tests coverage ≥ 70%
 - Permutation coverage ≥ 50%
 - Introduced checked exceptions for errors and alternate scenarios
- 
+
 ---
 
 # Generics (2/0.5)
@@ -459,31 +465,11 @@ $ git push
 
 ---
 
-# Work Project. Session 1 (8/8)
-
-## Given
-- PM
-- Analyst
-- Product's FRs and NFRs
-- System's internal NFRs
-- CI server
-- Sonar server
-
-## When
-- Teams formed
-- Every team's git repo visible to PM and is identifiable
-- Teams deliver product with two iterations
-
-## Then
-- PM and Business Customers accept product with two demo sessions
-
----
- 
 # System library (6/2)
 - System
 - Math
 - Object: hc and eq contract, toS
-- String, its API. Immutability and interns. 
+- String, its API. Immutability and interns.
 - StringBuffer, StringBuilder
 - Wrapper classes
 - Autoboxing
@@ -507,7 +493,7 @@ assertMessageEquals("3")
 
 ---
 
-# Collection API (4/1)
+# Collection API (2/1)
 - Collection types and implementations
 - Iteration over collections
 - Comparable and Comparator
@@ -517,13 +503,13 @@ assertMessageEquals("3")
 - Stream API
 
 ## Course Project Iteration 13: Collections for code reuse
-- Choose and state collection interfaces 
+- Choose and state collection interfaces
 - Choose and state collection implementations
 - Refactor legacy codebase to collections API
 
 ---
 
-# IO (8/3)
+# IO (6/2)
 - java.io.File
 - RandomAccessFile
 - Stream classes
@@ -563,7 +549,7 @@ assertMessageEquals("3")
 
 ---
 
-# Multi-threading in Java (8/3)
+# Multi-threading in Java (6/2)
 - Thread definition
 - Thread start: 3 options
 - Thread management
@@ -622,17 +608,14 @@ assertMessageEquals("3")
 ---
 
 # Annotations and Reflection API intro (1/0)
-- Annotations (0,5/0)
+- Annotations
 - Purpose of annotations
 - Standard annotations
-- Custom annotations
-- Reflection API overview
-- Class loaders
-- Class introspection
+- Reflection API intro
 
 ---
 
-# JDBC API (6/2)
+# JDBC API (4/2)
 - SQL recap: DDL and DML
 - DB schema design
 - Overview of JDBC API
@@ -655,22 +638,40 @@ assertMessageEquals("3")
 
 ---
 
-# Performance tuning and optimization in Java (3/1)
+# Performance tuning and optimization in Java (1/0)
 - JVM monitoring tool JVisualVM
 - Heap structure
 - GC types
 - Profiling
 
-## Course Project Iteration 19: Load testing and profiling
-- Load test
-- Profile with JVisualVM
+---
+
+# REST-ful Services (4/2)
+- RPC architecture overview
+- HTTP protocol overview
+- JSON overview
+- JAX-RS API
+- Server side implementation
+- Client side implementation
+- REST-server testability: WireMock framework
+
+## Course Project Iteration 19: REST-ful remote logger
+- FR: As a developer I want log messages to remote logger with JSON over REST
+- POST new log entry
+- GET log entries
 
 ### DoD
-- Bottlenecks detected
+- All given specifications runs are green
+- Code reuse and minimum code duplication
+- Code style
+- Documented public API
+- Unit tests coverage ≥ 70%
+- Integration test for Client
+- Integration test for Server
 
 ---
 
-# Work Project. Session 2 (24/24)
+# Work Project. (24/24)
 
 ## Given
 - PM
@@ -689,3 +690,6 @@ assertMessageEquals("3")
 - PM and Business Customers accept product with six demo sessions
 
 ---
+
+# Reading List
+- https://docs.google.com/document/d/14r58sL0fKwhJBkfS-yYHhVEVH6sTdQ77QOgCu8Y3hsM/edit#
