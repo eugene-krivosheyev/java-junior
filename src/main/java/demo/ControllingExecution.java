@@ -38,6 +38,37 @@ public class ControllingExecution {
                 System.out.println("!!!");
         }
 
+        for (int j = 0, c = 1; j < 10 && c > 2; j++, c++) {
+
+        }
+
+        //10 ksloc
+        //Cyclomatic complexity: 2.5
+        outer: do {
+            inner: while (true) {
+                break inner;
+                continue outer;
+            }
+        } while (true);
+
+        while (true) {
+            //....
+            if (isIterationDone) continue;
+            if (isDone) break;
+        }
+
+        for (String arg : args) {
+            System.out.println(arg);
+        }
+
+
+
+
+
+
+
+
+
 
 
 
