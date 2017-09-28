@@ -4,8 +4,13 @@ package ooaddemo;
 public class Logger {
     //Creator
     private LoggerFilter filter = new MessageContentLoggerFilter();
-    //Factory Method -> Abstract Factory -> Registry
-    private LoggerSaver saver = new SaverFactory().create();
+    @Autowired
+    private LoggerSaver saver;
+
+    //Dependency Injection: constructor | setter
+    public Logger(LoggerSaver saver) {
+        this.saver = saver;
+    }
 
     /**
      * OCP: Open Closed Principle
