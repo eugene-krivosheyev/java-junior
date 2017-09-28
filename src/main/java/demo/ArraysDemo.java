@@ -1,7 +1,7 @@
 package demo;
 
 public class ArraysDemo {
-    public static void main(String[] args) {
+    public static void main(String... args) {
         Cat[] catArray = new Cat[5];
 //        catArray[0] = 0;
 //        catArray.length
@@ -35,9 +35,20 @@ public class ArraysDemo {
 
         int[] nullarray = null;
         nullarray.length; //NPE
+
+        loveAllCats(new Cat(1), new Cat(2));
+
+        loveAllInts(1,2,3);
     }
 
-    private static void loveAllCats(Cat[] catsToLove) {
+    private static void loveAllCats(Cat... catsToLove) {
 
+    }
+
+    private static void loveAllInts(int... intsToLove) {
+        intsToLove[0] = 0;
+        for (int element : intsToLove) {
+
+        }
     }
 }
