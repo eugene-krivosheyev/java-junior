@@ -30,8 +30,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 1");
         Logger.log(1);
         Logger.log(2);
+        Logger.flushInts();
         Logger.log("str 2");
         Logger.log(0);
+        Logger.stop();
         //endregion
 
         //region then
