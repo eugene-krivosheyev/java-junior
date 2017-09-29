@@ -1,7 +1,7 @@
 package ooaddemo;
 
 
-final public class Logger {
+final class Logger {
     //Creator
     private final LoggerFilter filter = new MessageContentLoggerFilter();
     private final LoggerSaver saver;
