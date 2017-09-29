@@ -98,18 +98,64 @@ public strictfp class PrimitivesDemo {
     }
 
     private static boolean isB1() {
+        Cat cat = new BlueCat(1);
+        cat.????()
+
+        if (cat instanceof BlueCat) {
+            BlueCat cat1 = (BlueCat) cat;
+            cat1.????
+        }
+        //LSP
+        //1M sloc
+
+
         return false;
     }
 }
 
-class Cat extends Object {
+class Cat {
     private int id;
+    private String name = "";
 
-    public Cat(int id) {
+    public Cat(int id, String name) {
         this.id = id;
+        this.name = name;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+class BlueCat extends Cat {
+    public BlueCat(int id) {
+        super(id);
+    }
+
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    @Override
+    public void setName(String name) {
+        if (true) throw new IllegalNameException();
+        super.setName(name);
+    }
+
+    public String getTitul() {
+        return null;
     }
 }
