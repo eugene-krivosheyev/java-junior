@@ -57,17 +57,9 @@ public strictfp class PrimitivesDemo {
         System.out.println(!b1);
         System.out.println(1 == 2);  // > = = =
 
-        Cat cat1 = new Cat(1);
-        Cat cat2 = new Cat(1);
-        cat1.equals(cat2); // = = =
 
         System.out.println( isB1() ? 1 : isB2() ? "1" : 2);
 
-        cat1 = null;
-        if (cat1 != null) {
-            System.out.println(cat1.getId());
-        }
-        Optional<Cat> maybeCat = Optional.empty();
 //        fopen("cdf") or die()
         //endregion
         //endregion
@@ -98,64 +90,7 @@ public strictfp class PrimitivesDemo {
     }
 
     private static boolean isB1() {
-        Cat cat = new BlueCat(1);
-        cat.????()
-
-        if (cat instanceof BlueCat) {
-            BlueCat cat1 = (BlueCat) cat;
-            cat1.????
-        }
-        //LSP
-        //1M sloc
-
-
         return false;
     }
 }
 
-class Cat {
-    private int id;
-    private String name = "";
-
-    public Cat(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-}
-
-class BlueCat extends Cat {
-    public BlueCat(int id) {
-        super(id);
-    }
-
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    @Override
-    public void setName(String name) {
-        if (true) throw new IllegalNameException();
-        super.setName(name);
-    }
-
-    public String getTitul() {
-        return null;
-    }
-}
