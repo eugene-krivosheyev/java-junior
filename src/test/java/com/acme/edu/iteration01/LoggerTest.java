@@ -28,11 +28,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(1);
         Logger.log(0); // 0
         Logger.log(-1); // -1
+        Logger.stop();
         //endregion
 
         //region then
         assertSysoutContains("primitive: ");
-//        assertSysoutEquals("primitive: 1\nprimitive: 0\nprimitive: -1\n");
+        assertSysoutEquals("primitive: 1\nprimitive: 0\nprimitive: -1\n");
         //endregion
     }
 
@@ -42,6 +43,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log((byte)1);
         Logger.log((byte)0);
         Logger.log((byte)-1);
+        Logger.stop();
         //endregion
 
         //region then
@@ -53,7 +55,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
 
-    /*
     // TODO: implement Logger solution to match specification as tests
 
     @Test
@@ -61,6 +62,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log('a');
         Logger.log('b');
+        Logger.stop();
         //endregion
 
         //region then
@@ -75,6 +77,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log("test string 1");
         Logger.log("other str");
+        Logger.stop();
         //endregion
 
         //region then
@@ -89,6 +92,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log(true);
         Logger.log(false);
+        Logger.stop();
         //endregion
 
         //region then
@@ -102,6 +106,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogReference() throws IOException {
         //region when
         Logger.log(new Object());
+        Logger.stop();
         //endregion
 
         //region then
@@ -109,6 +114,4 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("@");
         //endregion
     }
-
-    */
 }
