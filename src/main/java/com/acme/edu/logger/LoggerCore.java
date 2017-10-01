@@ -1,7 +1,7 @@
-package com.acme.edu;
+package com.acme.edu.logger;
 
 /** Simple logger program. */
-public class Logger {
+public class LoggerCore {
 
     /** Types of messages. */
     private static final String
