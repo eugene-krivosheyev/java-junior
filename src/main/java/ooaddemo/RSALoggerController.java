@@ -2,31 +2,42 @@ package ooaddemo;
 
 import java.util.Date;
 
-@SuppressWarnings({"unchecked"})
 public class RSALoggerController extends LoggerController {
-    @Autowired
-    @Named
-    private SaverFactory saverFactory;
+    private int rsaVerySpecificData = 0;
 
-    public RSALoggerController(Accumulator byteAccumulator, Accumulator stringAccumulator) {
-        super(byteAccumulator, stringAccumulator);
+    {
+        System.out.println("1");
+        rsaVerySpecificData = 1;
+    }
+
+    {
+        System.out.println("2");
+    }
+
+    public RSALoggerController(Accumulator currentAccumulator, int rsaVerySpecificData) {
+        super(currentAccumulator);
+        //block
+        this.rsaVerySpecificData = rsaVerySpecificData;
+    }
+
+    public RSALoggerController() {
+        super(null);
+        Repository.register(this);
+    }
+
+    {
+        System.out.println("3");
     }
 
     @Override
-    @Deprecated
     protected Object encode(String message) {
-        new Date(10,10,2010);
         return "4";
     }
 }
 
 class RSAv2LoggerController extends RSALoggerController {
-    public RSAv2LoggerController(Accumulator byteAccumulator, Accumulator stringAccumulator) {
-        super(byteAccumulator, stringAccumulator);
-    }
-
     @Override
     public Integer encode(String message) {
-        return 4;//"v2" + super.encode(message);
+        return "v2" + super.encode(message);
     }
 }

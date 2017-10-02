@@ -11,10 +11,10 @@ abstract class LoggerController {
     private Accumulator stringAccumulator;
 
     //Dependency Injection: constructor | setter
-    public LoggerController(Accumulator byteAccumulator, Accumulator stringAccumulator) {
-        this.byteAccumulator = byteAccumulator;
-        this.stringAccumulator = stringAccumulator;
+    public LoggerController(Accumulator currentAccumulator) {
+        this.currentAccumulator = currentAccumulator;
     }
+
 
     /**
      * OCP: Open Closed Principle
@@ -24,8 +24,8 @@ abstract class LoggerController {
      * DP: Template Method
      */
     public final void log(String message) {
-        if (!filter.filter(message)) {
-            saver.save(encode(message));
+        if (!this.filter.filter(message)) {
+            this.saver.save(encode(message));
         }
     }
 
