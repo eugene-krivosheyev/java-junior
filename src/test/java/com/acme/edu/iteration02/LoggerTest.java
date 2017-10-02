@@ -2,6 +2,7 @@ package com.acme.edu.iteration02;
 
 import com.acme.edu.logger.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.logger2.Logger2;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,14 +28,22 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
-        Logger.logMessageTypesWillChanged();
-        Logger.start();
-        Logger.log("str 1");
-        Logger.log(1);
-        Logger.log(2);
-        Logger.log("str 2");
-        Logger.log(0);
-        Logger.stop();
+//        Logger.start();
+//        Logger.log("str 1");
+//        Logger.log(1);
+//        Logger.log(2);
+//        Logger.log("str 2");
+//        Logger.log(0);
+//        Logger.stop();
+
+
+        Logger2.log("str 1");
+        Logger2.log(1);
+        Logger2.log(2);
+        Logger2.log("str 2");
+        Logger2.log(0);
+        Logger2.stop();
+
         //endregion
 
         //region then
@@ -53,11 +62,21 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
-        Logger.log("str 1");
-        Logger.log(10);
-        Logger.log(Integer.MAX_VALUE);
-        Logger.log("str 2");
-        Logger.log(0);
+//        Logger.start();
+//        Logger.log("str 1");
+//        Logger.log(10);
+//        Logger.log(Integer.MAX_VALUE);
+//        Logger.log("str 2");
+//        Logger.log(0);
+//        Logger.stop();
+
+        Logger2.log("str 1");
+        Logger2.log(10);
+        Logger2.log(Integer.MAX_VALUE);
+        Logger2.log("str 2");
+        Logger2.log(0);
+        Logger2.stop();
+
         //endregion
 
         //region then

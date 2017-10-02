@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="549.0">com.acme.edu.logger.core.output.formatter.ConsoleOutputFormatter</node>
+    <node x="324.0" y="119.0">com.acme.edu.logger.core.message.CharMessage</node>
+    <node x="806.0" y="119.0">com.acme.edu.logger.core.message.ByteMessage</node>
+    <node x="158.56962025316454" y="-33.155063291139214">com.acme.edu.logger.core.control.queues.GeneralMessagesQueue</node>
+    <node x="20.0" y="470.0">com.acme.edu.logger.core.output.formatter.IOutputFormatter</node>
+    <node x="605.0" y="119.0">com.acme.edu.logger.core.message.ObjectReferenceMessage</node>
+    <node x="943.0" y="119.0">com.acme.edu.logger.core.message.LongMessage</node>
+    <node x="818.7172916666666" y="238.0">com.acme.edu.logger.core.output.LoggerOutput</node>
+    <node x="463.0" y="119.0">com.acme.edu.logger.core.message.ShortMessage</node>
+    <node x="613.25" y="396.0">com.acme.edu.logger.Logger</node>
+    <node x="1392.0" y="119.0">com.acme.edu.logger.core.control.queues.MessagesQueue</node>
+    <node x="540.75" y="238.0">com.acme.edu.logger.core.control.LoggerController</node>
+    <node x="179.0" y="119.0">com.acme.edu.logger.core.message.StringMessage</node>
+    <node x="1285.375" y="238.0">com.acme.edu.logger.core.control.queues.IntegerMessagesQueue</node>
+    <node x="1241.0" y="119.0">com.acme.edu.logger.core.message.IntegerMessage</node>
+    <node x="964.1208333333334" y="0.0">com.acme.edu.logger.core.message.Message</node>
+    <node x="589.75" y="317.0">com.acme.edu.logger.core.planning.LoggerManager</node>
+    <node x="1084.0" y="119.0">com.acme.edu.logger.core.message.BooleanMessage</node>
+    <node x="0.0" y="119.0">com.acme.edu.logger.core.planning.LoggerConfiguration</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.acme.edu.logger.core.output.formatter.ConsoleOutputFormatter" target="com.acme.edu.logger.core.output.formatter.IOutputFormatter">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="com.acme.edu.logger.core.message.CharMessage" target="com.acme.edu.logger.core.message.Message">
+      <point x="0.0" y="-14.5" />
+      <point x="383.5" y="59.0" />
+      <point x="975.8708333333334" y="59.0" />
+      <point x="-35.25" y="14.5" />
+    </edge>
+    <edge source="com.acme.edu.logger.core.message.LongMessage" target="com.acme.edu.logger.core.message.Message">
+      <point x="0.0" y="-14.5" />
+      <point x="1003.5" y="99.0" />
+      <point x="1007.2041666666667" y="99.0" />
+      <point x="-3.9166666666666288" y="14.5" />
+    </edge>
+    <edge source="com.acme.edu.logger.core.message.BooleanMessage" target="com.acme.edu.logger.core.message.Message">
+      <point x="0.0" y="-14.5" />
+      <point x="1152.5" y="99.0" />
+      <point x="1015.0374999999999" y="99.0" />
+      <point x="3.9166666666666288" y="14.5" />
+    </edge>
+    <edge source="com.acme.edu.logger.core.message.ObjectReferenceMessage" target="com.acme.edu.logger.core.message.Message">
+      <point x="0.0" y="-14.5" />
+      <point x="695.5" y="79.0" />
+      <point x="991.5374999999999" y="79.0" />
+      <point x="-19.58333333333337" y="14.5" />
+    </edge>
+    <edge source="com.acme.edu.logger.core.message.IntegerMessage" target="com.acme.edu.logger.core.message.Message">
+      <point x="0.0" y="-14.5" />
+      <point x="1306.5" y="89.0" />
+      <point x="1022.8708333333334" y="89.0" />
+      <point x="11.75" y="14.5" />
+    </edge>
+    <edge source="com.acme.edu.logger.core.control.queues.GeneralMessagesQueue" target="com.acme.edu.logger.core.control.queues.MessagesQueue">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.acme.edu.logger.core.message.ShortMessage" target="com.acme.edu.logger.core.message.Message">
+      <point x="0.0" y="-14.5" />
+      <point x="524.0" y="69.0" />
+      <point x="983.7041666666667" y="69.0" />
+      <point x="-27.41666666666663" y="14.5" />
+    </edge>
+    <edge source="com.acme.edu.logger.core.message.ByteMessage" target="com.acme.edu.logger.core.message.Message">
+      <point x="0.0" y="-14.5" />
+      <point x="864.5" y="89.0" />
+      <point x="999.3708333333334" y="89.0" />
+      <point x="-11.75" y="14.5" />
+    </edge>
+    <edge source="com.acme.edu.logger.core.control.queues.IntegerMessagesQueue" target="com.acme.edu.logger.core.control.queues.MessagesQueue">
+      <point x="57.0" y="-14.5" />
+      <point x="1427.875" y="218.0" />
+      <point x="1459.0" y="218.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="com.acme.edu.logger.core.message.StringMessage" target="com.acme.edu.logger.core.message.Message">
+      <point x="0.0" y="-14.5" />
+      <point x="241.5" y="49.0" />
+      <point x="968.0374999999999" y="49.0" />
+      <point x="-43.08333333333337" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8186528497409327" x="762.0" y="180.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -1,5 +1,8 @@
 package com.acme.edu.logger.core.output;
 
+import com.acme.edu.logger.core.output.formatter.ConsoleOutputFormatter;
+import com.acme.edu.logger.core.output.formatter.IOutputFormatter;
+
 /**
  * Main logger output.
  *
@@ -7,6 +10,8 @@ package com.acme.edu.logger.core.output;
  * @since 0.0.1
  */
 public class LoggerOutput {
+
+    IOutputFormatter output = new ConsoleOutputFormatter();
 
     /** Complete string for output. */
     private static StringBuilder complete;

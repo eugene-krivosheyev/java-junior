@@ -7,7 +7,7 @@ package com.acme.edu.logger.core.message;
  * @author Timur Kashapov.
  * @since 0.0.1
  */
-public class StringMessage {
+public class StringMessage extends Message {
 
     /** Message content. */
     private short content;

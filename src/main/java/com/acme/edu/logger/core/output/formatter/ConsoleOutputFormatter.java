@@ -23,7 +23,7 @@ public class ConsoleOutputFormatter implements IOutputFormatter {
     /**
      * Private constructor.
      */
-    private ConsoleOutputFormatter() {
+    public ConsoleOutputFormatter() {
     }
 
     /**

@@ -4,5 +4,11 @@ package com.acme.edu.logger.core.message;
 public abstract class Message {
 
     /** */
-    protected enum MessageType { BOOLEAN, BYTE, SHORT, INT, LONG, CHAR, STRING, OBJECT}
+    protected enum MessageType { BOOLEAN, BYTE, SHORT, INT, LONG, CHAR, STRING, OBJECT, OTHER }
+
+    /** */
+    protected enum MessageArrayTypes { PRIMITIVE, CHAR, STRING, OBJECT, OTHER }
+
+    /** */
+    protected enum MessageVarangTypes { PRIMITIVE, CHAR, STRING, OBJECT, OTHER}
 }
