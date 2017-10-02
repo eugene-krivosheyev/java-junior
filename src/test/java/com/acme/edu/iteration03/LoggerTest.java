@@ -6,7 +6,7 @@ import org.junit.Before;
 
 import java.io.IOException;
 
-public class LoggerCoreTest implements SysoutCaptureAndAssertionAbility {
+public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
@@ -21,12 +21,12 @@ public class LoggerCoreTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     /*
-    TODO: implement LoggerCore solution to match specification as tests
+    TODO: implement Logger solution to match specification as tests
 
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
-        LoggerCore.log(new int[] {-1, 0, 1});
+        Logger.log(new int[] {-1, 0, 1});
         //endregion
 
         //region then
@@ -39,7 +39,7 @@ public class LoggerCoreTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
-        LoggerCore.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         //endregion
 
         //region then
@@ -56,7 +56,7 @@ public class LoggerCoreTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
-        LoggerCore.log(new int[][][][] {{{{0}}}});
+        Logger.log(new int[][][][] {{{{0}}}});
         //endregion
 
         //region then
@@ -73,7 +73,7 @@ public class LoggerCoreTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
-        LoggerCore.log("str1", "string 2", "str 3");
+        Logger.log("str1", "string 2", "str 3");
         //endregion
 
         //region then
@@ -84,7 +84,7 @@ public class LoggerCoreTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
-        LoggerCore.log(-1, 0, 1, 3);
+        Logger.log(-1, 0, 1, 3);
         //endregion
 
         //region then
@@ -95,10 +95,10 @@ public class LoggerCoreTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException {
         //region when
-        LoggerCore.log(1);
-        LoggerCore.log("str");
-        LoggerCore.log(Integer.MAX_VALUE - 10);
-        LoggerCore.log(11);
+        Logger.log(1);
+        Logger.log("str");
+        Logger.log(Integer.MAX_VALUE - 10);
+        Logger.log(11);
         //endregion
 
         //region then

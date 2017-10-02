@@ -1,6 +1,6 @@
 package com.acme.edu.iteration01;
 
-import com.acme.edu.logger.LoggerCore;
+import com.acme.edu.logger.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
@@ -8,12 +8,17 @@ import org.junit.Test;
 
 import java.io.*;
 
-public class LoggerCoreTest implements SysoutCaptureAndAssertionAbility {
+public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
         resetOut();
         captureSysout();
+        //-------------------------------------------------------------------
+        // CUSTOM CONFIGURATION
+        //
+        Logger.logWithPrefixesAndPostfixes();
+        //-------------------------------------------------------------------
     }
 
     @After
@@ -25,10 +30,12 @@ public class LoggerCoreTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogInteger() throws IOException {
         //region when
-        LoggerCore.log(1);
-        LoggerCore.log(0); // 0
-        LoggerCore.log(-1); // -1
-        LoggerCore.stop();
+        Logger.start();
+        Logger.log(1);
+        Logger.log(0); // 0
+        Logger.log(-1); // -1
+        Logger.stop();
+        Logger.out();
         //endregion
 
         //region then
@@ -40,10 +47,12 @@ public class LoggerCoreTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogByte() throws IOException {
         //region when
-        LoggerCore.log((byte)1);
-        LoggerCore.log((byte)0);
-        LoggerCore.log((byte)-1);
-        LoggerCore.stop();
+        Logger.start();
+        Logger.log((byte)1);
+        Logger.log((byte)0);
+        Logger.log((byte)-1);
+        Logger.stop();
+        Logger.out();
         //endregion
 
         //region then
@@ -55,15 +64,17 @@ public class LoggerCoreTest implements SysoutCaptureAndAssertionAbility {
     }
 
 
-    // TODO: implement LoggerCore solution to match specification as tests
+    // TODO: implement Logger solution to match specification as tests
 
     @Test
 
     public void shouldLogChar() throws IOException {
         //region when
-        LoggerCore.log('a');
-        LoggerCore.log('b');
-        LoggerCore.stop();
+        Logger.start();
+        Logger.log('a');
+        Logger.log('b');
+        Logger.stop();
+        Logger.out();
         //endregion
 
         //region then
@@ -76,9 +87,11 @@ public class LoggerCoreTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogString() throws IOException {
         //region when
-        LoggerCore.log("test string 1");
-        LoggerCore.log("other str");
-        LoggerCore.stop();
+        Logger.start();
+        Logger.log("test string 1");
+        Logger.log("other str");
+        Logger.stop();
+        Logger.out();
         //endregion
 
         //region then
@@ -91,9 +104,11 @@ public class LoggerCoreTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogBoolean() throws IOException {
         //region when
-        LoggerCore.log(true);
-        LoggerCore.log(false);
-        LoggerCore.stop();
+        Logger.start();
+        Logger.log(true);
+        Logger.log(false);
+        Logger.stop();
+        Logger.out();
         //endregion
 
         //region then
@@ -106,8 +121,10 @@ public class LoggerCoreTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogReference() throws IOException {
         //region when
-        LoggerCore.log(new Object());
-        LoggerCore.stop();
+        Logger.start();
+        Logger.log(new Object());
+        Logger.stop();
+        Logger.out();
         //endregion
 
         //region then
