@@ -33,6 +33,10 @@ public class RSALoggerController extends LoggerController {
     protected Object encode(String message) {
         return "4";
     }
+
+    public static void uM() {
+
+    }
 }
 
 class RSAv2LoggerController extends RSALoggerController {

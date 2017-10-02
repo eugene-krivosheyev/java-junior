@@ -21,7 +21,7 @@ abstract class LoggerController {
      * DIP: Dependency Inversion Principle
      */
     /**
-     * DP: Template Method
+     * DP: Template Method vs Strategy
      */
     public final void log(String message) {
         if (!this.filter.filter(message)) {
@@ -30,4 +30,8 @@ abstract class LoggerController {
     }
 
     protected abstract Object encode(String message);
+
+    public static void uM() {
+
+    }
 }
