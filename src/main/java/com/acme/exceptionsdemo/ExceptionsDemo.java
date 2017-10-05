@@ -39,8 +39,10 @@ class FileDao implements Closeable {
         //....
         try {
             new FileInputStream("");
+            /*
             is.getByte();
             if (someFlag != someState) throw new IllegalStateException();
+            */
         } catch (FileNotFoundException e) {
             throw new DataException("error while", e);
         } catch (IOException e) {
