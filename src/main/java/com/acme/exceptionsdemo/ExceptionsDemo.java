@@ -1,39 +1,29 @@
 package com.acme.exceptionsdemo;
 
+import java.io.Closeable;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class ExceptionsDemo {
     public static void main(String[] args) {
-        FileDao fileDao = null;
-        RuntimeException runtimeException = null;
-        try {
-            fileDao = new FileDao(null);
+        try (
+            FileDao fileDao = new FileDao(null);
+            FileInputStream is = new FileInputStream("")
+        ) {
             fileDao.getData();
         } catch (DataException e) {
             e.printStackTrace();
             throw new RuntimeException("1", e);
-        } catch (RuntimeException r) {
+        } catch (RuntimeException | FileNotFoundException r) {
             System.out.println("catch");
-            runtimeException = new RuntimeException("2", r);
-            throw runtimeException;
-        } finally {
-            System.out.println("finally");
-            if (fileDao != null) {
-                try {
-                    fileDao.close(); //Suppression by NPE
-                } catch (Exception e) {
-                    if (runtimeException != null) {
-                        e.addSuppressed(runtimeException);
-                    }
-                    throw e;
-                }
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
 
-class FileDao {
+class FileDao implements Closeable {
     private String path;
 
     FileDao(String path) {
@@ -52,7 +42,8 @@ class FileDao {
         return null;
     }
 
-    public void close() {
+    @Override
+    public void close()  {
 
     }
 }
