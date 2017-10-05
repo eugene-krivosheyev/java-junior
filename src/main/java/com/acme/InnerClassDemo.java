@@ -1,35 +1,58 @@
 package com.acme;
 
-import javafx.util.Pair;
-
+import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static java.lang.Integer.parseInt;
+import static java.util.Comparator.reverseOrder;
 
 public class InnerClassDemo {
     public static void main(String[] args) {
-        Outer outer = new Outer();
-        Outer.Inner inner = outer.new Inner();
+        DelayedWorker queue = new DelayedWorker();
 
-        Outer.Inner i = new Outer().new Inner();
+        // - >
+        queue.doLater(new Function<Integer, Integer>() {
+            @Override
+            public Integer apply(Integer integer) {
+                return parseInt(args[0]);
+            }
+        });
+        queue.doLater(param -> parseInt(args[0]));
+
+
+        queue.doLater(p -> {
+            return 0;
+        });
+        queue.doLater(p -> Integer.bitCount(p));
+        queue.doLater(Integer::bitCount);
+        queue.doLater(InnerClassDemo::m);
+
+
+        Arrays.asList(1,6,2,5,3,4,10,1,11,9,8,7).parallelStream()
+            .filter(e -> e > 0)
+            .map(Object::toString)
+            .sorted(reverseOrder())
+            .forEach(System.out::println);
+    }
+
+    private static int m(int arg) {
+        return arg + 1;
     }
 }
 
-class Outer {
+class DelayedWorker {
     private int state;
 
-    public Comparator m() {
-        int localVar = 1; //Effectively final
-
-        return new Comparator() {
-            @Override
-            public int compare(Object o1, Object o2) {
-                state = 0;
-                System.out.println(localVar);
-
-                return 0;
-            }
-        };
+    public int doLater(Function<Integer, Integer> toDo) {
+        //....
+        return toDo.apply(0);
+        //....
     }
 }
 
+@FunctionalInterface
+interface Worker {
+    int doWork(int param);
+}
