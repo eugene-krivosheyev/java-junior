@@ -19,14 +19,17 @@ class Outer {
     private int state;
 
     public Comparator m() {
-        class MyComparator implements Comparator {
+        int localVar = 1; //Effectively final
+
+        return new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
-                return 0;
-            } //aka Local
-        }
+                state = 0;
+                System.out.println(localVar);
 
-        return new MyComparator();
+                return 0;
+            }
+        };
     }
 }
 
