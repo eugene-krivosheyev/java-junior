@@ -2,6 +2,7 @@ package com.acme;
 
 import javafx.util.Pair;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -17,14 +18,15 @@ public class InnerClassDemo {
 class Outer {
     private int state;
 
-    public class Inner {
-        private int state;
-
-        public void m() {
-            Outer.this.state = 0;
+    public Comparator m() {
+        class MyComparator implements Comparator {
+            @Override
+            public int compare(Object o1, Object o2) {
+                return 0;
+            } //aka Local
         }
-    }
 
-    void m() {
+        return new MyComparator();
     }
 }
+
