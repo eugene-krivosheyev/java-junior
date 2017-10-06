@@ -9,16 +9,28 @@ import java.util.function.Consumer;
 
 public class EchoServer {
     public static void main(String[] args) {
-        serverLoop(EchoServer::clientLoop);
-    }
-
-    private static void serverLoop(Consumer<Socket> toDo) {
         try (ServerSocket listener
                      = new ServerSocket(9999)) {
 
             while (true) {
+
                 Socket client = listener.accept();
-                new Thread(() -> toDo.accept(client)).start();
+                new Thread(() -> ((Consumer<Socket>) client1 -> {
+                    try (
+                            OutputStream outputStream = client1.getOutputStream();
+                            InputStream inputStream = client1.getInputStream();
+                    ) {
+
+                        while (true) {
+                            outputStream.write(
+                                    inputStream.read()
+                            );
+                        }
+
+                    } catch (IOException e) {
+
+                    }
+                }).accept(client)).start();
             }
 
         } catch (IOException e) {
@@ -26,20 +38,4 @@ public class EchoServer {
         }
     }
 
-    private static void clientLoop(Socket client) {
-        try (
-                OutputStream outputStream = client.getOutputStream();
-                InputStream inputStream = client.getInputStream();
-        ) {
-
-            while (true) {
-                outputStream.write(
-                        inputStream.read()
-                );
-            }
-
-        } catch (IOException e) {
-
-        }
-    }
 }
