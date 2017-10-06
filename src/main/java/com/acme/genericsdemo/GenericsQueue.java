@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 import static java.util.Arrays.asList;
 
-public class GenericsQueue<T> {
+public class GenericsQueue<T extends String> {
     private T state;
 
     public void enqueue(T element) {
