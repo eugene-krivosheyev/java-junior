@@ -23,11 +23,15 @@ public class ServerDemo {
                                         connection.getInputStream())));
         ) {
 
-            out.write("recieved: " + in.readLine());
-            out.newLine();
-            out.flush();
+            Thread.sleep(5*60_000);
+//            String readLine = in.readLine();
+//            out.write("recieved: " + readLine);
+//            out.newLine();
+//            out.flush();
 
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

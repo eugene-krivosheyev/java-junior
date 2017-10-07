@@ -19,11 +19,16 @@ public class ClientDemo {
                                         connection.getOutputStream())));
         ) {
 
-            out.write("command1 arg1");
-            out.newLine();
-            out.flush();
+            for (int counter = 0; ; counter++) {
+                out.write("command1 arg1");
+                out.newLine();
+                out.flush();
 
-            System.out.println(">>>> " + in.readLine());
+                if (counter % 1000 == 0) System.out.println(counter);
+            }
+
+//            String readLine = in.readLine();
+//            System.out.println(">>>> " + readLine);
 
         } catch (IOException e) {
             e.printStackTrace();
