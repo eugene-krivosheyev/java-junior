@@ -692,4 +692,8 @@ assertMessageEquals("3")
 ---
 
 # Reading List
-- https://docs.google.com/document/d/14r58sL0fKwhJBkfS-yYHhVEVH6sTdQ77QOgCu8Y3hsM/edit#
+- https://docs.google.com/document/d/14r58sL0fKwhJBkfS-yYHhVEVH6sTdQ77QOgCu8Y3hsM/edit
+
+# CI Server and Sonar
+- http://54.175.27.87:8080/jenkins/
+- http://54.175.27.87:9000
