@@ -21,7 +21,7 @@ $ java -version
 
 ---
 
-# Structure of Java-based applications (3/1)
+# Structure of Java-based applications (2/1)
 - Classes and .class files
 - Java app definition
 - Classloading
@@ -41,7 +41,7 @@ Hello, world!
 
 ---
 
-# Development infrastructure: Git (2/1)
+# Development infrastructure: Git (1/0.5)
 - Intro to GIT
 - Repos
 - Commits
@@ -118,7 +118,7 @@ $ git push
 
 ---
 
-# Java Syntax for Procedure Style (12/4)
+# Java Syntax for Procedure Style (6/4)
 
 ## Comments
 - Singe and multi-line
@@ -223,7 +223,7 @@ $ git push
 
 ---
 
-# OOAD recap (3/1)
+# OOAD recap (2/1)
 - Procedure style recap: reuse, generalization, inner NFRs, CC metric
 - Procedure style vs OOAD: goals
 - Classes and objects
@@ -246,7 +246,7 @@ $ git push
 
 ---
 
-# Java Syntax for OOP (12/4)
+# Java Syntax for OOP (6/4)
 
 ## Final
 - Final modifier semantics: 3
@@ -397,7 +397,7 @@ $ git push
 
 ---
 
-# Intro to Functional Style (4/2)
+# Intro to Functional Style (2/2)
 - Nested Classes
 - Inner classes
 - Local classes
