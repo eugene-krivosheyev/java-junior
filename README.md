@@ -41,7 +41,7 @@ Hello, world!
 
 ---
 
-# Development infrastructure: Git (1/0.5)
+# Development infrastructure: Git (1.5/1)
 - Intro to GIT
 - Repos
 - Commits
