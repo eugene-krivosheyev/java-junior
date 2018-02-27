@@ -6,7 +6,7 @@
 # Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice)
 - Introduction to Java. Benefits.
 - JDK, JVM.
-- Java 2 (Java EE / SE / ME) 
+- Java 2 (Java EE / SE / ME)
 - Tools: java, javac, javadoc
 
 ## Lab: Installing JDK, Tuning Environmental Variables
@@ -688,3 +688,7 @@ assertMessageEquals("3")
 - PM and Business Customers accept product with six demo sessions
 
 ---
+
+# Reading List
+## [Minimum Valuable Reading List](http://tinyurl.com/skilltrekreadinglist)
+## [GitFlow Configuration Management Patterns](https://habrahabr.ru/post/106912/)
