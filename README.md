@@ -1,5 +1,5 @@
 # Java Junior Developer Training Course.
-88 hours training + 32 hours work project = 120 hr.
+80 hours training + 16 hours work project = 96 hr.
 
 ---
 
@@ -21,8 +21,8 @@ $ java -version
 
 ---
 
-# Structure of Java-based applications (3/1)
-- Classes and *.class files
+# Structure of Java-based applications (2/1)
+- Classes and .class files
 - Java app definition
 - Classloading
 - Classpath
@@ -41,7 +41,7 @@ Hello, world!
 
 ---
 
-# Development infrastructure: Git (1.5/0.5)
+# Development infrastructure: Git (1.5/1)
 - Intro to GIT
 - Repos
 - Commits
@@ -51,7 +51,7 @@ Hello, world!
 - Install [Git](https://git-scm.com/download/win) and in case of Windows [TortoiseGit](https://tortoisegit.org)
 - Create account at [Github](http://github.com/): _teamXX_
 - Fork this [repo](https://github.com/eugene-krivosheyev/java-junior) to your account
-- Clone your fork repo locally
+- Clone branch 2018-02-jet at from your fork locally
 - Update README.md locally to your teammates names
 - Commit and push initial commit
 ```
@@ -66,7 +66,7 @@ $ git push
 
 ---
 
-# Development infrastructure: Maven (1.5/0.5)
+# Development infrastructure: Maven (1/0.5)
 - Intro to Maven: build tool and dependency management
 - Build lifecycle, goals
 - Plugins
@@ -118,7 +118,7 @@ $ git push
 
 ---
 
-# Java Syntax for Procedure Style (10/4)
+# Java Syntax for Procedure Style (6/4)
 
 ## Comments
 - Singe and multi-line
@@ -156,6 +156,10 @@ $ git push
 - Reference variables declaration and initialization
 - Heap and stack
 - Garbage collector
+
+## Parameters passing styles
+- PbV
+- PbR
 
 ## Strings
 - String type
@@ -219,18 +223,9 @@ $ git push
 
 ---
 
-# Procedure style recap (1/0)
-- Subject of procedural design
-- Reuse
-- Procedure generalization
-- Inner quality attributes
-- Metrics: cyclomatic complexity
-
----
-
-# OOAD recap (4/1)
-- Programming styles and paradigms
-- Procedure style vs OOAD
+# OOAD recap (2/1)
+- Procedure style recap: reuse, generalization, inner NFRs, CC metric
+- Procedure style vs OOAD: goals
 - Classes and objects
 - Inheritance and Delegation as code reuse styles
 - Visibility as key for encapsulation
@@ -240,13 +235,7 @@ $ git push
 
 ## Demo: Logger Library Refactoring to OO-Design
 - Example Appenders and Filters
-
-## Discussion: OOAD benefits for _our_ Logger library and refactorings to do
-- FR: presentation changes and sink changes
-- Inner NFRs
-- Refactorings to do
-- Switch and polymorphism and OCP
-- Command Design Pattern
+- What are the profits for our library?
 
 ---
 
@@ -257,7 +246,7 @@ $ git push
 
 ---
 
-# Java Syntax for OOP (12/4)
+# Java Syntax for OOP (6/4)
 
 ## Final
 - Final modifier semantics: 3
@@ -332,6 +321,8 @@ $ git push
 ---
 
 # OOD Principles and Patterns (4/2)
+- Why correctness is not enough?
+- [Expression Problem](https://en.wikipedia.org/wiki/Expression_problem) as root of all evil
 
 ## OOAD Principles: SOLID
 - SRP
@@ -342,8 +333,26 @@ $ git push
 
 ## Creation Design Patterns
 - Creator
-- Factory
+- Factory (Factory Method, Abstract Factory)
+- Builder
 - DI
+- Prototype
+- Singleton
+
+## Structure Design Patterns
+- Adapter
+- Decorator
+- Facade
+- Proxy
+
+## Behavior Design Patterns
+- Template Method
+- State & Strategy
+- Command
+- Chain of Responsibility
+- Mediator
+- Observer
+- Visitor intro
 
 ## Discussion: Logger Library Design meets principles and patterns
 - What inner NFR issues do we have now
@@ -361,7 +370,7 @@ $ git push
 
 ---
 
-# Unit testing with JUnit (6/3)
+# Unit testing with JUnit (4/2)
 - Assertions in Java
 - Testing scopes
 - Unit tests
@@ -388,7 +397,7 @@ $ git push
 
 ---
 
-# Intro to Functional Style (6/3)
+# Intro to Functional Style (2/2)
 - Nested Classes
 - Inner classes
 - Local classes
@@ -448,33 +457,13 @@ $ git push
 
 ---
 
-# Generics (2/0.5)
+# Generics (2/1)
 - Generics as design style
 - Type safety
 - Generic classes
 - Generic methods
 
 ## Demo: Type safety for sorting with anonymous implementation of comparator
-
----
-
-# Work Project. Session 1 (8/8)
-
-## Given
-- PM
-- Analyst
-- Product's FRs and NFRs
-- System's internal NFRs
-- CI server
-- Sonar server
-
-## When
-- Teams formed
-- Every team's git repo visible to PM and is identifiable
-- Teams deliver product with two iterations
-
-## Then
-- PM and Business Customers accept product with two demo sessions
 
 ---
 
@@ -506,7 +495,7 @@ assertMessageEquals("3")
 
 ---
 
-# Collection API (4/1)
+# Collection API (6/1)
 - Collection types and implementations
 - Iteration over collections
 - Comparable and Comparator
@@ -522,7 +511,7 @@ assertMessageEquals("3")
 
 ---
 
-# IO (8/3)
+# IO (6/3)
 - java.io.File
 - RandomAccessFile
 - Stream classes
@@ -573,7 +562,7 @@ assertMessageEquals("3")
 - Blocking operations
 
 ## Course Project Iteration 16: Parallel LogServer App
-- FR: As a developer I want more performance for server app
+- NFR: As a developer I want more performance for server app
 - NFR: File per Thread
 
 ### DoD
@@ -587,7 +576,6 @@ assertMessageEquals("3")
 ## [Server IO Design Patterns](https://www.dre.vanderbilt.edu/~schmidt/PDF/OOCP-tutorial4.pdf)
 - Connector/Acceptor
 - Proxy
-- Pro-actor
 - Handler
 
 ### Discussion: what patterns do you invent?
@@ -596,16 +584,15 @@ assertMessageEquals("3")
 - Welcome to hell no.2! Concurrency.
 - Thread safety and data race
 - Thread synchronization
-- synchronized section
+- *synchronized* section
 - Lock API
 - New thread states
 - Collections thread safety
 - wait() / notify()
 - Deadlocks
-- Intro to java.util.concurrent
 
 ## Course Project Iteration 17: Concurrent LogServer App
-- FR: As a developer I want more and more performance for server app
+- NFR: As a developer I want more and more performance for server app
 - NFR: one file for threads
 - NFR: less threads with non-blocking input
 - Hints: available() and queues
@@ -620,6 +607,32 @@ assertMessageEquals("3")
 
 ---
 
+# Performance bottlenecks in Java (2/1)
+- JVM monitoring tool JVisualVM
+- Heap structure
+- GC types
+- Profiling
+
+## Demo
+- Profile with JVisualVM
+
+---
+
+# Intro to java.util.concurrent (4/2)
+- Locks API
+- CAS paradigm
+- Atomic types
+- Concurrent collections
+
+## Course Project Iteration 18: Optimized Concurrent LogServer App
+- NFR: As a developer I want more and more performance for server app
+
+### DoD
+- Bottlenecks detected with profiling
+- Bottlenecks solved with refactoring to j.u.c classes
+
+---
+
 # Annotations and Reflection API intro (1/0)
 - Annotations (0,5/0)
 - Purpose of annotations
@@ -631,7 +644,28 @@ assertMessageEquals("3")
 
 ---
 
-# JDBC API (6/2)
+# Database design (2/1)
+- Relational algebra recap
+- Tables
+- Keys
+- Index
+
+## SQL recap
+- DDL
+- DML
+- Selects
+- Joins
+
+## Course Project Iteration 19: DB introduction
+- NFR: As a developer I want more performance for server app at more stored data
+
+## DoD
+- Derby DB instance
+- Designed and implemented DB schema for our domain
+
+---
+
+# JDBC API (4/2)
 - SQL recap: DDL and DML
 - DB schema design
 - Overview of JDBC API
@@ -641,7 +675,7 @@ assertMessageEquals("3")
 - Retrieving data
 - Transactions
 
-## Course Project Iteration 18: Logging to database
+## Course Project Iteration 20: Logging to database
 - FR: As a developer I want log messages to DB
 
 ### DoD
@@ -654,22 +688,34 @@ assertMessageEquals("3")
 
 ---
 
-# Performance tuning and optimization in Java (3/1)
-- JVM monitoring tool JVisualVM
-- Heap structure
-- GC types
-- Profiling
+# Spring (4/2)
+- Why Spring?
+- Modules overview
 
-## Course Project Iteration 19: Load testing and profiling
-- Load test
-- Profile with JVisualVM
+## Spring Core
+- DI core
+- Spring configuration: xml, annotations, java
+- Context usage
+- Component lifecycle
+
+## Spring JDBC
+- Template Method recap
+- Spring JDBC core classes
+
+## Spring Data Overview
+- Why Spring Data?
+- Module overview
+
+## Course Project Iteration 21: Spring introduction
+- NFR: As a developer I want testability and web-readyness for library
 
 ### DoD
-- Bottlenecks detected
+- Spring-based application
+- Spring-based tests
 
 ---
 
-# Work Project. Session 2 (24/24)
+# Work Project (16/16)
 
 ## Given
 - PM
@@ -685,7 +731,7 @@ assertMessageEquals("3")
 - Teams deliver product with six iterations
 
 ## Then
-- PM and Business Customers accept product with six demo sessions
+- PM and Business Customers accept product with four demo sessions
 
 ---
 
