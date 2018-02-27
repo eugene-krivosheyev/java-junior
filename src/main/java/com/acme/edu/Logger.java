@@ -7,7 +7,9 @@ gkjfhkgjfhg
 лпораплорапл
  */
 
-import sun.rmi.runtime.Log;
+
+import static com.acme.edu.Logger.*;
+import static java.lang.Math.sin;
 
 /**
  * Logs messages.
@@ -16,18 +18,22 @@ import sun.rmi.runtime.Log;
  * @see
  */
 public class Logger {
+    //region state
     public static String state = null; //Global state
     public static final String MY_CONST = "";
+    //endregion
 
     static {
         System.out.println(Logger.state);
-        Logger.log(1, 2);
+        log(1, 2);
     }
 
     public static int log(int i1, int i2) {
         int localIntVar = 0; //local, auto, temp, stack
+        //region output
         System.out.println("primitive: " + localIntVar);
         return 0;
+        //endregion
     }
 
     public static void log(byte message) {
@@ -37,8 +43,14 @@ public class Logger {
     }
 
     public static void log(int message) {
-
+        sin(0);
     }
+}
 
-
+class Demo {
+    public static void main(String[] args) {
+        log(1,1);
+        log(0);
+        System.out.println(MY_CONST);
+    }
 }
