@@ -64,6 +64,10 @@ public class Demo {
         byte bbbbbb = incr + 1; //arith. promotion
 
         incr /= 2; //incr = incr + 2;
+
+        boolean b1 = true;
+        boolean b2 = false;
+        System.out.println(b1 ^ b2); //XOR logical
         //endregion
     }
 
