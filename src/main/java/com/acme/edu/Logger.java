@@ -44,21 +44,23 @@ public class Logger {
     public static void log(byte message) {
         int localIntVar = LOWEST_PRICE;
         out(message);
-        log(LOWEST_PRICE);
+//        log(LOWEST_PRICE);
     }
 
+    /*
     public static void log(Object message, FLAG) {
         switch (FLAG) { //Cyclomatic complexity
             case: optiona1();
             case: optiona2();
         }
     }
+    */
 }
 
 class Demo {
     public static void main(String[] args) {
         log(1,1);
-        log(0);
+//        log(0);
         System.out.println(MY_CONST);
     }
 }
