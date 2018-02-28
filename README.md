@@ -734,3 +734,7 @@ assertMessageEquals("3")
 - PM and Business Customers accept product with four demo sessions
 
 ---
+
+# Reading List
+## [Minimum Valuable Reading List](http://tinyurl.com/skilltrekreadinglist)
+## [GitFlow Configuration Management Patterns](https://habrahabr.ru/post/106912/)
