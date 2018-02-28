@@ -42,8 +42,11 @@ public class Logger {
         log(0);
     }
 
-    public static void log(int message) {
-        sin(0);
+    public static void log(Object message, FLAG) {
+        switch (FLAG) { //Cyclomatic complexity
+            case: optiona1();
+            case: optiona2();
+        }
     }
 }
 
