@@ -45,7 +45,7 @@ Hello, world!
 
 ---
 
-# Development infrastructure: Git (1/0.5)
+# Development infrastructure: Git (1.5/1)
 - Intro to GIT
 - Repos
 - Commits
@@ -738,3 +738,7 @@ assertMessageEquals("3")
 - PM and Business Customers accept product with four demo sessions
 
 ---
+
+# Reading List
+## [Minimum Valuable Reading List](http://tinyurl.com/skilltrekreadinglist)
+## [GitFlow Configuration Management Patterns](https://habrahabr.ru/post/106912/)
