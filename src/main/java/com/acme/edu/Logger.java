@@ -45,6 +45,28 @@ public class Logger {
     public static void log(int message) {
         sin(0);
     }
+
+    public static void log(char message) {
+        System.out.println("char: " + message);
+
+    }
+
+    public static void log(boolean message) {
+        System.out.println("primitive: " + message);
+
+    }
+
+    public static void log(String ...message) {
+        for (String mess: message){
+            System.out.println("string: " + mess);
+        }
+    }
+
+    public static void log(Object ...message) {
+        for (Object mess: message){
+            System.out.println("reference: " + mess);
+        }
+    }
 }
 
 class Demo {
