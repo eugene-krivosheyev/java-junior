@@ -171,7 +171,7 @@ $ git push
 - Interning
 - String concatenation
 
-## Course Project Iteration 01: The Rise of Logger Library
+## (Done) Course Project Iteration 01: The Rise of Logger Library 
 - Read and analyse specification as tests for this iteration in *src/test*
 - Uncomment specification cases
 - Implement features needed
