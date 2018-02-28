@@ -1,25 +1,37 @@
 package com.acme.edu.primitives;
 
 public class StackDemo {
-    static String ssss = new String("1");
-
     public static void main(String[] args) {
-        System.out.println(new Object()); //JNI / JNA
+        int param = 0;
+        f(param); //Factual
+        System.out.println(param);
 
-        String string = new String("abc");
-        string = null;
-        f2();
-        System.gc();
+        Employee ek = new Employee("EK");
+        f2(ek);
+        System.out.println(ek.getName());
     }
 
-    private static void f2() {
-        String s1 = new String("111");
-        StackDemo.ssss = null;
+    private static void f2(Employee ek) {
+        ek.setName("Molodets!!!!");
     }
 
-
+    private static void f(int param) { //Formal
+        param = 1;
+    }
 }
 
-class GCDemo {
+class Employee {
+    private String name;
 
+    public Employee(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
