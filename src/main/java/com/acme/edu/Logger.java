@@ -18,6 +18,7 @@ import static java.lang.Math.sin;
  * @see
  */
 public class Logger {
+    public static final int LOWEST_PRICE = 0;
     //region state
     public static String state = null; //Global state
     public static final String MY_CONST = "";
@@ -29,17 +30,21 @@ public class Logger {
     }
 
     public static int log(int i1, int i2) {
-        int localIntVar = 0; //local, auto, temp, stack
+        int localIntVar = LOWEST_PRICE; //local, auto, temp, stack
         //region output
-        System.out.println("primitive: " + localIntVar);
-        return 0;
+        out(localIntVar);
+        return LOWEST_PRICE;
         //endregion
     }
 
+    private static void out(int localIntVar) {
+        System.out.println("primitive: " + localIntVar);
+    }
+
     public static void log(byte message) {
-        int localIntVar = 0;
-        System.out.println("primitive: " + message);
-        log(0);
+        int localIntVar = LOWEST_PRICE;
+        out(message);
+        log(LOWEST_PRICE);
     }
 
     public static void log(Object message, FLAG) {
