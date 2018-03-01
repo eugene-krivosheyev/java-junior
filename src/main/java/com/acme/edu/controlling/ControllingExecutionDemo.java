@@ -55,7 +55,7 @@ public class ControllingExecutionDemo {
     public void m(int param) {
         //Guard Clauses
         if (param != 0) return; //throw new IllegalArgExc
-        if (state != expected) return;
+//        if (state != expected) return;
 
         //main flow
 
