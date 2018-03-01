@@ -51,6 +51,18 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log("str 1");
         Logger.log(10);
+        Logger.log(10);
+        Logger.log(10);
+        Logger.log(10);
+        Logger.log(10);
+        Logger.log(10);
+        Logger.log(10);
+        Logger.log(10);
+        Logger.log(Integer.MAX_VALUE);
+        Logger.log(10);
+        Logger.log("str 2");
+        Logger.log(10);
+        Logger.log(Integer.MAX_VALUE);
         Logger.log(Integer.MAX_VALUE);
         Logger.log("str 2");
         Logger.log(0);
@@ -60,7 +72,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutEquals(
             "str 1\n" +
             "10\n" +
-            Integer.MAX_VALUE + "\n" +
+            Integer.MAX_VALUE (x2) + "\n" +
             "str 2\n" +
             "0\n"
         );

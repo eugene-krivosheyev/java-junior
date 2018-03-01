@@ -3,7 +3,7 @@ package com.acme.edu.arrays;
 public class ArraysDemo {
     public static final int LENGTH = 5;
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
         int[] array = new int[LENGTH];
         array[0] = 0;
         System.out.println(array.length);
@@ -19,10 +19,14 @@ public class ArraysDemo {
                 {new String("2")}
         };
 
-        m(new int[] {2,3});
+        m(1);
     }
 
-    private static void m(int[] param) {
+    static String m(int p, int... aaaa) {
+        return null;
+    }
 
+    private static void m(int... param) {
+        System.out.println(param[10]);
     }
 }
