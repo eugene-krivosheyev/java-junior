@@ -6,9 +6,16 @@ public class Date {
     private int day;
 
     public Date(int year, int month, int day) {
+        super();
         setDay(day);
         setMonth(month);
         setYear(year);
+        System.out.println("bc1");
+    }
+
+    public Date(int year) {
+        this(year,1, 1);
+        System.out.println("bc2");
     }
 
     public void setYear(int year) {
@@ -39,6 +46,26 @@ public class Date {
 }
 
 class IndishDate extends Date {
+    private int state;
+
+    {
+        System.out.println("ib");
+        this.state = 0;
+    }
+
+    public IndishDate(int year, int state) {
+        super(year);
+        ///<<<<============ ib
+        System.out.println("c1");
+        this.state = state;
+    }
+
+    public IndishDate(int year, int month, int day, int state) {
+        super(year, month, day);
+        System.out.println("c2");
+        this.state = state;
+    }
+
     @Override
     protected int getYear() {
         return 0; //super.getYear(); + 10_000;
@@ -47,12 +74,15 @@ class IndishDate extends Date {
     public int getEpoc() {
         return 15;
     }
+
+    public int getState() {
+        return state;
+    }
 }
 
 class DateDemo {
     public static void main(String[] args) {
-        Date date = ???; //new IndishDate();
-        date.getYear();
+        Date date = new IndishDate(1,1); //new IndishDate();
     }
 }
 
