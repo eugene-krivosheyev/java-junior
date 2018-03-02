@@ -1,10 +1,12 @@
 package com.acme.edu.ooad;
 
+
 public class Logger {
     private Filter filter = new MessageFilter();
     private CommonBehaviorSaver saver = new ConsoleSaver();
 
     public void log(Message message) {
+        /*
         switch (message.getPrexidCode()) {
             case PrefixCode.PRIMITIVE_PRFIX: "gfgfg"
         }
@@ -18,6 +20,7 @@ public class Logger {
         }
 
         Color.BLUE.ordinal()
+        */
     }
 }
 

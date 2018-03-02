@@ -16,6 +16,7 @@ public class StaticDemo {
     }
 
     static void printToConsole(DecorType decorType) {
+        /*
         switch (decorType) {
             case PR:
                 System.out.println("primitive: ");
@@ -24,6 +25,7 @@ public class StaticDemo {
                 System.out.println("string: ");
                 break;
         }
+        */
     }
 }
 
@@ -32,7 +34,7 @@ public class StaticDemo {
  * 2. Comple type: протащим с собой всю нужную инфо
  */
 enum DecorType {
-    PR(1,2,3,"primitive"), ST()
+//    PR(1,2,3,"primitive"), ST()
 }
 
 enum SupermanState {
