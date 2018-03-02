@@ -19,7 +19,7 @@ public class ArraysDemo {
                 {new String("2")}
         };
 
-        m(1);
+//        m(1);
     }
 
     static String m(int p, int... aaaa) {

@@ -2,12 +2,13 @@ package com.acme.edu.ooad;
 
 public class Message {
     public String getPrefix() {
-        return prefix;
+//        return prefix;
+        return null;
     }
 
-    public String getText() {
-        return text;
-    }
+//    public String getText() {
+//        return text;
+//    }
 }
 
 class StringPrefixMessage extends Message {}

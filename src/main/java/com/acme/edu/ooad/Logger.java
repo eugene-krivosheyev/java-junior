@@ -5,10 +5,10 @@ public class Logger {
     private CommonBehaviorSaver saver = new ConsoleSaver();
 
     public void log(Message message) {
+        /*
         switch (message.getPrexidCode()) {
             case PrefixCode.PRIMITIVE_PRFIX: "gfgfg"
         }
-
         PrefixCode.PRIMITIVE_PRFIX.getOrdinal()
 
         if (filter.filter(message)) {
@@ -19,6 +19,7 @@ public class Logger {
         }
 
         Color.BLUE.ordinal()
+        */
     }
 }
 

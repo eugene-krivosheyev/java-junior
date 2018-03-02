@@ -1,6 +1,8 @@
 package com.acme.edu.staticandobjectstate;
 
 public class StaticDemo {
+    private int objectState;
+
     public static void main(String[] args) {
         Integer integer = new Integer(1);
         System.out.println(Integer.MAX_VALUE);
