@@ -32,6 +32,7 @@ public class Logger {
     public static String preficsCh = new String("char: ");
     public static String preficsSt = new String("string: ");
     public static String preficsOb = new String("reference: ");
+    public static Prefics prefics;
 
     static {
         //System.out.println(Logger.state);
@@ -39,57 +40,61 @@ public class Logger {
     }
 
     public static void log(byte message) {
+        Message mess = new Message(message, prefics.PRIMITIVE);
         if (message==Byte.MAX_VALUE){
-            print(preficsPr,byteCaster);
-            print(preficsPr,message);
+            print(mess.peficsShow(),byteCaster);
+            print(mess.peficsShow(),message);
             byteCaster=0;
         }
         byteCaster += message;
         if(message==0){
-            print(preficsPr,message);
+            print(mess.peficsShow(),message);
         }
     }
 
     public static void log(int message) {
+        Message mess = new Message(message, prefics.PRIMITIVE);
         if (message==Integer.MAX_VALUE){
-            print(preficsPr,intCaster);
-            print(preficsPr,message);
+            print(mess.peficsShow(),intCaster);
+            print(mess.peficsShow(),message);
             intCaster=0;
         }
         intCaster += message;
         if(message==0){
-            print(preficsPr,message);
+            print(mess.peficsShow(),message);
         }
     }
 
     public static void log(char message) {
+        Message mess = new Message(message, prefics.CHAR);
         if(intCaster != 0){
-            print(preficsPr,intCaster);
+            print(mess.peficsShow(),intCaster);
             intCaster=0;
         }
         if(byteCaster != 0){
-            print(preficsPr, byteCaster);
+            print(mess.peficsShow(), byteCaster);
             byteCaster = 0;
         }
-        print(preficsCh,message);
+        print(mess.peficsShow(),message);
 
     }
 
     public static void log(boolean message) {
+        Message mess = new Message(message, prefics.PRIMITIVE);
         if(intCaster != 0){
-            print(preficsPr,intCaster);
+            print(mess.peficsShow(),intCaster);
             intCaster=0;
         }
         if(byteCaster != 0){
-            print(preficsPr, byteCaster);
+            print(mess.peficsShow(), byteCaster);
             byteCaster = 0;
         }
-        print(preficsPr,message);
+        print(mess.peficsShow(),message);
 
     }
 
     public static void log(String message) {
-        /*if(intCaster != 0){
+        if(intCaster != 0){
             print(preficsPr,intCaster);
             intCaster=0;
         }
@@ -108,11 +113,24 @@ public class Logger {
             print(preficsSt,newMessage);
             stringCaster=message;
             stringCounter=1;
-        }*/
+        }
         //stringCaster=message;
         print(preficsSt,message);
     }
-    public static void log(int[] message){
+    public static void log(String... message){
+        if(intCaster != 0){
+            print(preficsPr,intCaster);
+            intCaster=0;
+        }
+        if(byteCaster != 0){
+            print(preficsPr, byteCaster);
+            byteCaster = 0;
+        }
+        for (String mess:message) {
+            System.out.println(mess);
+        }
+    }
+    public static void log(int... message){
         System.out.print("primitives array: {");
         for(int i=0; i<message.length; i++){
             if(i==(message.length-1)){
@@ -124,7 +142,43 @@ public class Logger {
     }
 
     public static void log(int[][] message) {
-        
+        System.out.println("primitives matrix: {");
+        for (int i=0; i<message.length; i++){
+            System.out.print("{");
+            for (int j=0; j<message[i].length; j++){
+                if (j==(message[i].length-1)){
+                    System.out.print(message[i][j]);
+                    System.out.println("}");
+                }else{
+                    System.out.print(message[i][j]+", ");
+                }
+            }
+        }
+        System.out.println("}");
+    }
+
+    public static void log(int[][][][] message) {
+        System.out.println("primitives multimatrix: {");
+        for (int i=0; i<message.length; i++) {
+            System.out.println("{");
+            for (int j = 0; j < message[i].length; j++) {
+                System.out.println("{");
+                for (int k = 0; k < message[i][j].length; k++) {
+                    System.out.println("{");
+                    for (int l = 0; l < message[i][j][k].length; l++) {
+                        if (l == (message[i][j][k].length - 1)) {
+                            System.out.println(message[i][j][k][l]);
+                            System.out.println("}");
+                        } else {
+                            System.out.println(message[i][j][k][l] + ", ");
+                        }
+                    }
+                    System.out.println("}");
+                }
+                System.out.println("}");
+            }
+            System.out.println("}");
+        }
     }
 
     public static void log(Object message) {
