@@ -1,6 +1,6 @@
 package com.acme.edu.refactoring;
 
-public class IntHandler implements LoggerHandler {
+public abstract class IntHandler extends LoggerHandler {
     Command[] commands = new Command[10_000];
 
     @Override
@@ -17,7 +17,7 @@ public class IntHandler implements LoggerHandler {
 
         }
 
-        message.execute();
+//        message.execute();
 
     }
 }

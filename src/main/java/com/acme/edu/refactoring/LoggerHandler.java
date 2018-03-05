@@ -1,5 +1,11 @@
 package com.acme.edu.refactoring;
 
-public interface LoggerHandler {
-    public void handle(Object message);
+public abstract class LoggerHandler {
+    public abstract void handle(Object message);
+
+    public abstract void mm();
+
+    public void m() {
+        System.out.println("HQQQQ!!!");
+    }
 }
