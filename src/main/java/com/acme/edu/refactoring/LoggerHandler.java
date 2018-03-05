@@ -1,17 +1,16 @@
 package com.acme.edu.refactoring;
 
-public abstract class LoggerHandler {
+public class LoggerHandler {
+    LoggerDecorator decorator;
+    LoggerAccumulator accumulator;
+
     /**
      * Template method
      * @param message
      */
     public void handle(Object message) {
-        if (accumulate()) {
-            decorate();
+        if (accumulator.accumulate()) {
+            decorator.decorate();
         }
     }
-
-    protected abstract void decorate();
-
-    protected abstract boolean accumulate();
 }
