@@ -1,7 +1,27 @@
 package com.acme.edu.creatation;
 
+@Component
+@Scope
 public class LoggerController {
-    private final SaverAbstractFactory configFactory = new SaverXMLConfigFactory(); //-> Factory of Factories -> Registry
-    Saver saver = configFactory.create(); //Abstract Factory [GoF]
+    @Inject
+    private Saver saver; //Field DI
 
+    /**
+     * Constructor DI
+     */
+    @Autowired
+    public LoggerController(Saver saver) {
+        this.saver = saver;
+    }
+
+    /**
+     * Setter DI
+     */
+    public void setSaver(Saver saver) {
+        this.saver = saver;
+    }
+
+    public void log() {
+
+    }
 }
