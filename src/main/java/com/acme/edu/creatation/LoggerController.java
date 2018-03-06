@@ -22,6 +22,6 @@ public class LoggerController {
     }
 
     public void log() {
-
+        saver.save();
     }
 }
