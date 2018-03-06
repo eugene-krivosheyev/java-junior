@@ -10,4 +10,14 @@ public class IntDecoratingAccumulator implements LoggerDecorator, LoggerAccumula
     public boolean accumulate() {
         return false;
     }
+
+    @Override
+    public String getField() {
+        return null;
+    }
+
+    @Override
+    public void mm() {
+
+    }
 }

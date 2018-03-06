@@ -10,9 +10,9 @@ public class LoggerFacade {
 
     public static void log(String message) {
         StringCommand command = new StringCommand();
-        if (command.accumulate(message)) {
-            print(command.decorate(message));
-        }
+//        if (command.accumulate(message)) {
+//            print(command.decorate(message));
+//        }
     }
 
     private static void print(String decoratedMessage) {
