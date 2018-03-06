@@ -1,12 +1,10 @@
 package com.acme.edu.creatation;
 
-public class SaverFactory {
+public interface SaverAbstractFactory {
     /**
      * [GoF] Factory Method:
      * Parameter FM
      * Configurable FM
      */
-    public static Saver create() {
-        return new ConsoleSaver();
-    }
+    Saver create();
 }

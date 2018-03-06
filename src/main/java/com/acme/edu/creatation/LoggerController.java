@@ -1,6 +1,7 @@
 package com.acme.edu.creatation;
 
 public class LoggerController {
-    Saver saver = SaverFactory.create(); //Factory Method [GoF]
+    private final SaverAbstractFactory configFactory = new SaverXMLConfigFactory(); //-> Factory of Factories -> Registry
+    Saver saver = configFactory.create(); //Abstract Factory [GoF]
 
 }
