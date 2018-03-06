@@ -1,5 +1,7 @@
 package com.acme.edu.expressionproblem.message;
 
+import com.acme.edu.expressionproblem.format.FormatVisitor;
+
 public class IntMessage implements Message {
     private int body;
 
@@ -10,5 +12,10 @@ public class IntMessage implements Message {
     @Override
     public String toString() {
         return Integer.toString(body);
+    }
+
+    @Override
+    public String accept(FormatVisitor formatVisitor) {
+        return formatVisitor.formatIntMessage(this);
     }
 }
