@@ -2,8 +2,14 @@ package com.acme.edu.setgeters;
 
 public class SetGetDemo {
     public static void main(String[] args) {
-        System.out.println(new Employee().salary);
-        System.out.println(new BigBoss().getSalary());
+        Employee employee = new Employee();
+        employee.getSalary();
+        employee.getSalary();
+        employee.getSalary();
+        employee.getSalary();
+        employee.getSalary();
+        employee.getSalary();
+        employee.getSalary();
     }
 }
 
@@ -19,8 +25,11 @@ class Employee {
     }
 }
 
-class BigBoss extends Employee {
-
+class NewEmployee extends Employee {
+    @Override
+    public int getSalary() {
+        return super.getSalary() + 10_000_000;
+    }
 }
 
 class Girl {
