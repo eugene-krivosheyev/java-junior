@@ -1,6 +1,6 @@
 package com.acme.edu.creatation;
 
-@Component
+//@Component
 public class ConsoleSaver implements Saver {
     @Override
     public void save() {

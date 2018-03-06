@@ -4,6 +4,7 @@ import com.acme.edu.refactoring.Controller;
 
 public class MainApp {
     public static void main(String[] args) {
+        /*
        Controller controller =
                new SpringContext("config.xml")
                 .getBean("controller");
@@ -22,5 +23,6 @@ public class MainApp {
         controller.log();
         controller.log();
         controller.log();
+        */
     }
 }

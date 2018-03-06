@@ -1,15 +1,15 @@
 package com.acme.edu.creatation;
 
-@Component
-@Scope
+//@Component
+//@Scope
 public class LoggerController {
-    @Inject
+//    @Inject
     private Saver saver; //Field DI
 
     /**
      * Constructor DI
      */
-    @Autowired
+//    @Autowired
     public LoggerController(Saver saver) {
         this.saver = saver;
     }

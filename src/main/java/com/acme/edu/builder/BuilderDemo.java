@@ -2,6 +2,7 @@ package com.acme.edu.builder;
 
 public class BuilderDemo {
     public static void main(String[] args) {
+        /*
         Employee ee = EmployeeFactory.create();
         Employee e = EmployeeBuilder
                 .withName()
@@ -12,15 +13,14 @@ public class BuilderDemo {
                         .build()
                 )
             .build();
-
-
+        */
     }
 }
 
 class Employee {
     private String name;
     private int salary;
-    private Company company;
+//    private Company company;
 
     public Employee(String name, int salary) {
         this.name = name;
