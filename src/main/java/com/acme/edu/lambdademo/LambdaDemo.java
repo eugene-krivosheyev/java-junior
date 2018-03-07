@@ -7,6 +7,8 @@ import com.acme.edu.expressionproblem.message.StringMessage;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparingInt;
@@ -14,10 +16,19 @@ import static java.util.stream.Collectors.toList;
 
 public class LambdaDemo {
     public static void main(String[] args) {
+
+        int var = 5; //final
+        Message m = new IntMessage(0);
+
         Framework framework = new Framework();
         framework.execute(
-            (param1, param2) -> {
+            (param1, param2) -> { //Closure
                 System.out.println(param1);
+//                var = 0;
+                System.out.println(var);
+
+                System.out.println(m);
+                m.setValue(1);
             }
         );
 
@@ -35,6 +46,11 @@ public class LambdaDemo {
                 .collect(toList());
 
         list.forEach(System.out::println);
+
+        java.util.function.Supplier<Integer> my = () -> {
+            System.out.println();
+            return 4;
+        };
 
     }
 }

@@ -6,4 +6,6 @@ public interface Message {
     String toString();
 
     String accept(FormatVisitor formatVisitor);
+
+    void setValue(int i);
 }
