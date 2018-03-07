@@ -18,4 +18,9 @@ public class StringMessage implements Message {
     public String accept(FormatVisitor formatVisitor) {
         return formatVisitor.formatStringMessage(this);
     }
+
+    @Override
+    public void setValue(int i) {
+
+    }
 }

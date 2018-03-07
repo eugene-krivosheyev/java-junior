@@ -18,4 +18,9 @@ public class IntMessage implements Message {
     public String accept(FormatVisitor formatVisitor) {
         return formatVisitor.formatIntMessage(this);
     }
+
+    @Override
+    public void setValue(int i) {
+
+    }
 }
