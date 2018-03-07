@@ -24,18 +24,8 @@ public class InnerClassesDemo {
         getInstanceOfLocalAnonymousClass().print();
 
         new Controller(
-                new Saver() {
-                    @Override
-                    public void save() {
-                        System.out.println();
-                    }
-                },
-                new Saver() {
-                    @Override
-                    public void save() {
-                        System.out.println("ffff");
-                    }
-                }
+                System.out::println,
+                () -> System.out.println("ffff")
         );
     }
 
@@ -96,6 +86,7 @@ class Controller {
     }
 }
 
+@FunctionalInterface
 interface Saver {
     void save();
 }
