@@ -7,7 +7,7 @@ import com.acme.edu.expressionproblem.message.StringMessage;
 import com.acme.edu.expressionproblem.saver.ConsoleSaver;
 
 public class LoggerFacade {
-    private static LoggerController controller = new LoggerController(new ConsoleSaver());
+    private static LoggerController controller = new LoggerController(new com.acme.edu.packagesdemo.businesslogic.services.saver.ConsoleSaver());
 
     public static void log(int message) {
         controller.execute(new IntMessage(message), new PrefixFormatVisitor());
