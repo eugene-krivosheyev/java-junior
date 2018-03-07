@@ -1,6 +1,8 @@
 package com.acme.edu.message;
 
 
+import com.acme.edu.Flusher;
+
 public class StringArrayMessage implements Message {
     private String[] message;
     private static boolean stringArrayUsage;
@@ -9,7 +11,8 @@ public class StringArrayMessage implements Message {
         this.message = message;
     }
 
-    public static boolean isStringArrayUsage() {
+    @Override
+    public boolean isUsed() {
         return stringArrayUsage;
     }
 
@@ -19,8 +22,11 @@ public class StringArrayMessage implements Message {
         for (String mess:message) {
             System.out.println(mess);
         }
+//        Flusher.setBuffer(intBuffer);
+        Flusher.setUsage(stringArrayUsage);
     }
-    public static void flush(){
+    @Override
+    public void flush(){
         stringArrayUsage = false;
     }
 }

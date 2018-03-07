@@ -1,6 +1,7 @@
 package com.acme.edu.message;
 
-import com.acme.edu.MessageBuffer;
+import com.acme.edu.Flusher;
+import com.acme.edu.MessageController;
 
 public class IntMessage implements Message {
 
@@ -16,7 +17,8 @@ public class IntMessage implements Message {
         return intBuffer;
     }
 
-    public static boolean isIntUsage() {
+    @Override
+    public boolean isUsed() {
         return intUsage;
     }
 
@@ -28,19 +30,23 @@ public class IntMessage implements Message {
             long overBuffer = intBuffer+message;
             overBuffer=overBuffer-Integer.MAX_VALUE;
             int needToFlush = Integer.MAX_VALUE;
-            MessageBuffer.overFlush(needToFlush);
+            MessageController.overFlush(needToFlush);
             intBuffer = (int) overBuffer;
         } else if((intBuffer+message)<Integer.MIN_VALUE){
             long overBuffer = intBuffer+message;
             overBuffer=overBuffer-Integer.MIN_VALUE;
             int needToFlush = Integer.MIN_VALUE;
-            MessageBuffer.overFlush(needToFlush);
+            MessageController.overFlush(needToFlush);
             intBuffer = (int) overBuffer;
         }
         intUsage = true;
+
+        Flusher.setBuffer(intBuffer);
+        Flusher.setUsage(intUsage);
     }
 
-    public static void flush() {
+    @Override
+    public void flush() {
         intBuffer = 0;
         intUsage = false;
     }

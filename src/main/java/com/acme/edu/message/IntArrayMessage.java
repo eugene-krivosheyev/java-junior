@@ -1,11 +1,14 @@
 package com.acme.edu.message;
 
+import com.acme.edu.Flusher;
+
 public class IntArrayMessage implements Message{
 
     private int[] message;
     private static boolean intArrayUsage;
 
-    public static boolean isIntArrayUsage() {
+    @Override
+    public boolean isUsed() {
         return intArrayUsage;
     }
     public IntArrayMessage(int... message) {
@@ -22,8 +25,11 @@ public class IntArrayMessage implements Message{
                 System.out.print(message[i]+", ");
             }
         }
+        //Flusher.setBuffer(intBuffer);
+        Flusher.setUsage(intArrayUsage);
     }
-    public static void flush(){
+    @Override
+    public void flush(){
         intArrayUsage = false;
     }
 }

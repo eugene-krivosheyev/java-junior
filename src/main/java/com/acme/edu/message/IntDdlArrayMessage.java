@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import com.acme.edu.Flusher;
+
 public class IntDdlArrayMessage implements Message {
     private int[][] message;
     private static boolean intDblArrayUsage;
@@ -8,7 +10,8 @@ public class IntDdlArrayMessage implements Message {
         this.message = message;
     }
 
-    public static boolean isIntDblArrayUsage() {
+    @Override
+    public boolean isUsed() {
         return intDblArrayUsage;
     }
 
@@ -28,8 +31,11 @@ public class IntDdlArrayMessage implements Message {
             }
         }
         System.out.println("}");
+        //Flusher.setBuffer(intBuffer);
+        Flusher.setUsage(intDblArrayUsage);
     }
-    public static void flush(){
+    @Override
+    public void flush(){
         intDblArrayUsage = false;
     }
 }

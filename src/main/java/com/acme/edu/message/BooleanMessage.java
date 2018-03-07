@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import com.acme.edu.Flusher;
+
 public class BooleanMessage implements Message {
 
     private boolean message;
@@ -11,7 +13,8 @@ public class BooleanMessage implements Message {
         this.message = message;
     }
 
-    public static boolean isBooleanUsage() {
+    @Override
+    public boolean isUsed() {
         return booleanUsage;
     }
 
@@ -27,8 +30,12 @@ public class BooleanMessage implements Message {
     public void accumulate() {
         booleanUsage=true;
         booleanBuffer=message;
+        Flusher.setBuffer(booleanBuffer);
+        Flusher.setUsage(booleanUsage);
+        Flusher.setCounter(booleanCounter);
     }
-    public static void flush(){
+    @Override
+    public void flush(){
         booleanBuffer = false;
         booleanUsage = false;
         booleanCounter = 0;

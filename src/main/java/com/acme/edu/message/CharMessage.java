@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import com.acme.edu.Flusher;
+
 public class CharMessage implements Message {
 
     private char message;
@@ -11,7 +13,8 @@ public class CharMessage implements Message {
         this.message = message;
     }
 
-    public static boolean isCharUsage() {
+    @Override
+    public boolean isUsed() {
         return charUsage;
     }
 
@@ -34,9 +37,13 @@ public class CharMessage implements Message {
             charUsage = false;
         }
         charBuffer = message;
+        Flusher.setBuffer(charBuffer);
+        Flusher.setUsage(charUsage);
+        Flusher.setCounter(charCounter);
     }
 
-    public static void flush(){
+    @Override
+    public void flush(){
         charBuffer='\0';
         charCounter = 0;
         charUsage = false;

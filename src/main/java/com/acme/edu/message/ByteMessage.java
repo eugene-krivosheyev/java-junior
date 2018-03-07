@@ -1,6 +1,7 @@
 package com.acme.edu.message;
 
-import com.acme.edu.MessageBuffer;
+import com.acme.edu.Flusher;
+import com.acme.edu.MessageController;
 
 public class ByteMessage implements Message {
 
@@ -16,7 +17,8 @@ public class ByteMessage implements Message {
         return byteBuffer;
     }
 
-    public static boolean isByteUsage() {
+    @Override
+    public boolean isUsed() {
         return byteUsage;
     }
 
@@ -28,18 +30,22 @@ public class ByteMessage implements Message {
             long overBuffer = byteBuffer+message;
             overBuffer=overBuffer-Byte.MAX_VALUE;
             byte needToFlush = Byte.MAX_VALUE;
-            MessageBuffer.overFlush(needToFlush);
+            MessageController.overFlush(needToFlush);
             byteBuffer = (byte) overBuffer;
         } else if((byteBuffer+message)<Byte.MIN_VALUE){
             long overBuffer = byteBuffer+message;
             overBuffer=overBuffer-Byte.MIN_VALUE;
             byte needToFlush = Byte.MIN_VALUE;
-            MessageBuffer.overFlush(needToFlush);
+            MessageController.overFlush(needToFlush);
             byteBuffer = (byte) overBuffer;
         }
         byteUsage = true;
+
+        Flusher.setBuffer(byteBuffer);
+        Flusher.setUsage(byteUsage);
     }
-    public static void flush(){
+    @Override
+    public void flush(){
         byteBuffer = (byte) 0;
         byteUsage = false;
     }

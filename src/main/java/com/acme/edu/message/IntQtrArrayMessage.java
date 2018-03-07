@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import com.acme.edu.Flusher;
+
 public class IntQtrArrayMessage implements Message{
     private int[][][][] message;
     private static boolean intQtrArrayUsage;
@@ -8,7 +10,8 @@ public class IntQtrArrayMessage implements Message{
         this.message = message;
     }
 
-    public static boolean isIntQtrArrayUsage() {
+    @Override
+    public boolean isUsed() {
         return intQtrArrayUsage;
     }
 
@@ -36,8 +39,11 @@ public class IntQtrArrayMessage implements Message{
             }
             System.out.println("}");
         }
+        //Flusher.setBuffer(intBuffer);
+        Flusher.setUsage(intQtrArrayUsage);
     }
-    public static void flush(){
+    @Override
+    public void flush(){
         intQtrArrayUsage = false;
     }
 }

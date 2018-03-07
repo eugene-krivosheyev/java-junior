@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import com.acme.edu.Flusher;
+
 public class ObjectMessage implements Message{
 
     private Object message;
@@ -11,7 +13,8 @@ public class ObjectMessage implements Message{
         this.message = message;
     }
 
-    public static boolean isObjectUsage() {
+    @Override
+    public boolean isUsed() {
         return objectUsage;
     }
 
@@ -35,9 +38,12 @@ public class ObjectMessage implements Message{
         }
         objectBuffer = message;
 
+        Flusher.setBuffer(objectBuffer);
+        Flusher.setUsage(objectUsage);
     }
 
-    public static void flush(){
+    @Override
+    public void flush(){
         objectBuffer = null;
         objectUsage = false;
         objectCounter = 0;

@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
 public interface Message {
-    public void accumulate();
+    void accumulate();
+    boolean isUsed();
+    void flush();
 }
