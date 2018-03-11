@@ -1,51 +1,51 @@
 package com.acme.edu.message;
 
 import com.acme.edu.Flusher;
+import com.acme.edu.formatters.PrefixFormatter;
 
 public class StringMessage implements Message {
-
     private String message;
-    private static boolean stringUsage;
-    private static String stringBuffer="";
+    private static final String stringUsage= "StringMessage";
+    private static String stringBuffer;
     private static int stringCounter;
 
     public StringMessage (String message) {
         this.message = message;
     }
-
     @Override
-    public boolean isUsed() {
+    public String isUsed() {
         return stringUsage;
-    }
-
-    public static String getStringBuffer() {
-        return stringBuffer;
-    }
-
-    public static int getStringCounter() {
-        return stringCounter;
     }
 
     @Override
     public void accumulate() {
-        if (stringBuffer.equals("")){
-            stringUsage = true;
-        } else if (stringBuffer.equals(message)) {
-            stringCounter++;
-            stringUsage = true;
-        }else {
-            stringUsage = false;
+        if (stringBuffer == null ){
+            Flusher.setUsed(stringUsage);
+        } else {
+            if (stringBuffer.equals(message)) {
+                stringCounter++;
+                Flusher.setUsed(stringUsage);
+            } else {
+                Flusher.flush();
+                flush();
+            }
         }
         stringBuffer = message;
-
-        Flusher.setBuffer(stringBuffer);
-        Flusher.setUsage(stringUsage);
-        Flusher.setCounter(stringCounter);
+        if (stringCounter ==0){
+            Flusher.setValue(stringBuffer);
+        }else {
+            Flusher.setValue(stringBuffer + " (x" + String.valueOf(stringCounter+1) + ")");
+        }
+        Flusher.setPrefix(acceptPrefix(new PrefixFormatter()));
     }
     @Override
     public void flush(){
-        stringBuffer = "";
+        stringBuffer = null;
         stringCounter = 0;
-        stringUsage = false;
+    }
+
+    @Override
+    public String acceptPrefix(PrefixFormatter prefixFormatter) {
+        return prefixFormatter.visitStringMessage(this);
     }
 }

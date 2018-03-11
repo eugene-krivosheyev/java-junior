@@ -1,31 +1,34 @@
 package com.acme.edu;
 
+import com.acme.edu.savers.ConsolePrinter;
+import com.acme.edu.savers.MessageSaver;
+
 public class Flusher {
-    private static Object buffer;
-    private static boolean usage;
-    private static int counter;
+    private static String value;
+    private static String prefix;
+    private static String used;
 
-    public static Object getBuffer() {
-        return buffer;
+    public static void flush() {
+        if (value != null){
+            MessageSaver printer = new ConsolePrinter();
+            printer.output(prefix+value);
+            value = null;
+            prefix = null;
+        }
+    }
+    public static void setValue(String value) {
+
+        Flusher.value = value;
+    }
+    public static void setPrefix(String prefix) {
+        Flusher.prefix = prefix;
     }
 
-    public static boolean isUsage() {
-        return usage;
+    public static String getUsed() {
+        return used;
     }
 
-    public static int getCounter() {
-        return counter;
-    }
-
-    public static void setBuffer(Object buffer) {
-        Flusher.buffer = buffer;
-    }
-
-    public static void setUsage(boolean usage) {
-        Flusher.usage = usage;
-    }
-
-    public static void setCounter(int counter) {
-        Flusher.counter = counter;
+    public static void setUsed(String used) {
+        Flusher.used = used;
     }
 }

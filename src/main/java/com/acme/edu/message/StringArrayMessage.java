@@ -2,31 +2,39 @@ package com.acme.edu.message;
 
 
 import com.acme.edu.Flusher;
+import com.acme.edu.formatters.PrefixFormatter;
+
+import static java.lang.System.lineSeparator;
 
 public class StringArrayMessage implements Message {
     private String[] message;
-    private static boolean stringArrayUsage;
+    private static final String stringArrayUsage = "StringArrayMessage";
 
     public StringArrayMessage(String... message) {
         this.message = message;
     }
 
     @Override
-    public boolean isUsed() {
+    public String isUsed() {
         return stringArrayUsage;
     }
 
     @Override
     public void accumulate() {
-        stringArrayUsage = true;
+        StringBuilder messb = new StringBuilder();
+        Flusher.setUsed(stringArrayUsage);
         for (String mess:message) {
-            System.out.println(mess);
+            messb.append(mess+lineSeparator());
         }
-//        Flusher.setBuffer(intBuffer);
-        Flusher.setUsage(stringArrayUsage);
+        Flusher.setValue(messb.toString());
+        Flusher.setPrefix(acceptPrefix(new PrefixFormatter()));
     }
     @Override
     public void flush(){
-        stringArrayUsage = false;
+    }
+
+    @Override
+    public String acceptPrefix(PrefixFormatter prefixFormatter) {
+        return prefixFormatter.visitStringArrayMessage(this);
     }
 }

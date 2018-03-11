@@ -2,51 +2,56 @@ package com.acme.edu.message;
 
 import com.acme.edu.Flusher;
 import com.acme.edu.MessageController;
+import com.acme.edu.formatters.PrefixFormatter;
 
 public class ByteMessage implements Message {
 
     private byte message;
     private static byte byteBuffer;
-    private static boolean byteUsage;
+    private static final String byteUsage = "ByteMessage";
 
     public ByteMessage(byte message) {
         this.message = message;
     }
 
-    public static byte getByteBuffer() {
-        return byteBuffer;
-    }
-
     @Override
-    public boolean isUsed() {
+    public String  isUsed() {
         return byteUsage;
     }
 
     @Override
     public void accumulate() {
-        if ((byteBuffer+message)<=Byte.MAX_VALUE && (byteBuffer+message)>=Byte.MIN_VALUE){
+        int sum = byteBuffer+(int)message;
+        if ((sum)<=Byte.MAX_VALUE && (sum)>=Byte.MIN_VALUE){
             byteBuffer +=message;
-        }else if ((byteBuffer+message)>Byte.MAX_VALUE){
-            long overBuffer = byteBuffer+message;
-            overBuffer=overBuffer-Byte.MAX_VALUE;
-            byte needToFlush = Byte.MAX_VALUE;
-            MessageController.overFlush(needToFlush);
-            byteBuffer = (byte) overBuffer;
-        } else if((byteBuffer+message)<Byte.MIN_VALUE){
-            long overBuffer = byteBuffer+message;
-            overBuffer=overBuffer-Byte.MIN_VALUE;
-            byte needToFlush = Byte.MIN_VALUE;
-            MessageController.overFlush(needToFlush);
-            byteBuffer = (byte) overBuffer;
+        }else{
+            if ((sum)>Byte.MAX_VALUE){
+                sum=sum-Byte.MAX_VALUE;
+                Flusher.setUsed(byteUsage);
+                Flusher.setValue(String.valueOf(Byte.MAX_VALUE));
+                Flusher.flush();
+                byteBuffer = (byte) sum;
+            } else{
+                if((sum)<Byte.MIN_VALUE){
+                    sum=sum-Byte.MIN_VALUE;
+                    Flusher.setUsed(byteUsage);
+                    Flusher.setValue(String.valueOf(Byte.MIN_VALUE));
+                    Flusher.flush();
+                    byteBuffer = (byte) sum;
+                }
+            }
         }
-        byteUsage = true;
-
-        Flusher.setBuffer(byteBuffer);
-        Flusher.setUsage(byteUsage);
+        Flusher.setUsed(byteUsage);
+        Flusher.setValue(String.valueOf(byteBuffer));
+        Flusher.setPrefix(acceptPrefix(new PrefixFormatter()));
     }
     @Override
     public void flush(){
         byteBuffer = (byte) 0;
-        byteUsage = false;
+    }
+
+    @Override
+    public String acceptPrefix(PrefixFormatter prefixFormatter) {
+        return prefixFormatter.visitByteMessage(this);
     }
 }

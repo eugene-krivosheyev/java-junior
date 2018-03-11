@@ -55,8 +55,6 @@ public class LoggerFacade {
         mess.accumulate();
     }
     public static void flush(){
-
-        System.out.println(Flusher.getBuffer());
-        System.out.println(Flusher.getCounter());
+        Flusher.flush();
     }
 }

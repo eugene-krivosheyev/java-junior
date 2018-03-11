@@ -1,14 +1,17 @@
 package com.acme.edu.message;
 
 import com.acme.edu.Flusher;
+import com.acme.edu.formatters.PrefixFormatter;
+
+import static java.lang.System.lineSeparator;
 
 public class IntArrayMessage implements Message{
 
     private int[] message;
-    private static boolean intArrayUsage;
+    private static final String intArrayUsage = "IntArrayMessage";
 
     @Override
-    public boolean isUsed() {
+    public String isUsed() {
         return intArrayUsage;
     }
     public IntArrayMessage(int... message) {
@@ -16,20 +19,28 @@ public class IntArrayMessage implements Message{
     }
     @Override
     public void accumulate() {
-        intArrayUsage = true;
-        System.out.print("primitives array: {");
+        StringBuilder mess = new StringBuilder();
+        int sum=0;
+        Flusher.setUsed(intArrayUsage);
         for(int i=0; i<message.length; i++){
             if(i==(message.length-1)){
-                System.out.println(message[i]+"}");
+                mess.append(message[i]+"}");
+                sum+=message[i];
             } else {
-                System.out.print(message[i]+", ");
+                mess.append(message[i]+", ");
+                sum+=message[i];
             }
         }
-        //Flusher.setBuffer(intBuffer);
-        Flusher.setUsage(intArrayUsage);
+        mess.append(lineSeparator()+sum);
+        Flusher.setValue(mess.toString());
+        Flusher.setPrefix(acceptPrefix(new PrefixFormatter()));
     }
     @Override
     public void flush(){
-        intArrayUsage = false;
+    }
+
+    @Override
+    public String acceptPrefix(PrefixFormatter prefixFormatter) {
+        return prefixFormatter.visitIntArrayMessage(this);
     }
 }

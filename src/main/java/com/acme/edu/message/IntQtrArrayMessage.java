@@ -1,49 +1,55 @@
 package com.acme.edu.message;
 
 import com.acme.edu.Flusher;
+import com.acme.edu.formatters.PrefixFormatter;
+
+import static java.lang.System.lineSeparator;
 
 public class IntQtrArrayMessage implements Message{
     private int[][][][] message;
-    private static boolean intQtrArrayUsage;
+    private static final String intQtrArrayUsage = "IntQtrArrayMessage";
 
     public IntQtrArrayMessage(int[][][][] message) {
         this.message = message;
     }
 
     @Override
-    public boolean isUsed() {
+    public String isUsed() {
         return intQtrArrayUsage;
     }
 
     @Override
     public void accumulate() {
-        intQtrArrayUsage = true;
-        System.out.println("primitives multimatrix: {");
+        StringBuilder mess = new StringBuilder();
+        Flusher.setUsed(intQtrArrayUsage);
         for (int i=0; i<message.length; i++) {
-            System.out.println("{");
+            mess.append("{"+lineSeparator());
             for (int j = 0; j < message[i].length; j++) {
-                System.out.println("{");
+                mess.append("{"+lineSeparator());
                 for (int k = 0; k < message[i][j].length; k++) {
-                    System.out.println("{");
+                    mess.append("{"+lineSeparator());
                     for (int l = 0; l < message[i][j][k].length; l++) {
                         if (l == (message[i][j][k].length - 1)) {
-                            System.out.println(message[i][j][k][l]);
-                            System.out.println("}");
+                            mess.append(message[i][j][k][l] + lineSeparator() + "}" +lineSeparator());
                         } else {
-                            System.out.println(message[i][j][k][l] + ", ");
+                            mess.append(message[i][j][k][l] + ", ");
                         }
                     }
-                    System.out.println("}");
+                    mess.append("}"+lineSeparator());
                 }
-                System.out.println("}");
+                mess.append("}"+lineSeparator());
             }
-            System.out.println("}");
+            mess.append("}"+lineSeparator());
         }
-        //Flusher.setBuffer(intBuffer);
-        Flusher.setUsage(intQtrArrayUsage);
+        Flusher.setValue(mess.toString());
+        Flusher.setPrefix(acceptPrefix(new PrefixFormatter()));
     }
     @Override
     public void flush(){
-        intQtrArrayUsage = false;
+    }
+
+    @Override
+    public String acceptPrefix(PrefixFormatter prefixFormatter) {
+        return prefixFormatter.visitIntQtrArrayMessage(this);
     }
 }

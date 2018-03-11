@@ -1,11 +1,12 @@
 package com.acme.edu.message;
 
 import com.acme.edu.Flusher;
+import com.acme.edu.formatters.PrefixFormatter;
 
 public class ObjectMessage implements Message{
 
     private Object message;
-    private static boolean objectUsage;
+    private static String objectUsage = "ObjectMessage";
     private static Object objectBuffer;
     private static int objectCounter;
 
@@ -14,38 +15,36 @@ public class ObjectMessage implements Message{
     }
 
     @Override
-    public boolean isUsed() {
+    public String isUsed() {
         return objectUsage;
-    }
-
-    public static Object getObjectBuffer() {
-        return objectBuffer;
-    }
-
-    public static int getObjectCounter() {
-        return objectCounter;
     }
 
     @Override
     public void accumulate() {
-        if (objectBuffer.equals(null)){
-            objectUsage = true;
+        if (objectBuffer==null){
+            Flusher.setUsed(objectUsage);
         } else if (objectBuffer.equals(message)) {
             objectCounter++;
-            objectUsage = true;
+            Flusher.setUsed(objectUsage);
         }else {
-            objectUsage = false;
+            Flusher.flush();
+            flush();
         }
         objectBuffer = message;
-
-        Flusher.setBuffer(objectBuffer);
-        Flusher.setUsage(objectUsage);
+        if (objectCounter==0){
+            Flusher.setValue(objectBuffer.toString());
+        } else {
+            Flusher.setValue(objectBuffer.toString() + " (x" + String.valueOf(objectCounter+1) + ")");
+        }
+        Flusher.setPrefix(acceptPrefix(new PrefixFormatter()));
     }
-
     @Override
     public void flush(){
         objectBuffer = null;
-        objectUsage = false;
         objectCounter = 0;
+    }
+    @Override
+    public String acceptPrefix(PrefixFormatter prefixFormatter) {
+        return prefixFormatter.visitObjectMessage(this);
     }
 }

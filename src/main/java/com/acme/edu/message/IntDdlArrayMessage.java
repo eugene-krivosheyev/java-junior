@@ -1,41 +1,47 @@
 package com.acme.edu.message;
 
 import com.acme.edu.Flusher;
+import com.acme.edu.formatters.PrefixFormatter;
+
+import static java.lang.System.lineSeparator;
 
 public class IntDdlArrayMessage implements Message {
     private int[][] message;
-    private static boolean intDblArrayUsage;
+    private static final String intDblArrayUsage = "IntDblArrayMessage";
 
     public IntDdlArrayMessage(int[][] message) {
         this.message = message;
     }
 
     @Override
-    public boolean isUsed() {
+    public String isUsed() {
         return intDblArrayUsage;
     }
 
     @Override
     public void accumulate() {
-        intDblArrayUsage = true;
-        System.out.println("primitives matrix: {");
+        StringBuilder mess = new StringBuilder();
+        Flusher.setUsed(intDblArrayUsage);
         for (int i=0; i<message.length; i++){
-            System.out.print("{");
+            mess.append("{");
             for (int j=0; j<message[i].length; j++){
                 if (j==(message[i].length-1)){
-                    System.out.print(message[i][j]);
-                    System.out.println("}");
+                    mess.append(message[i][j]+"}"+lineSeparator());
                 }else{
-                    System.out.print(message[i][j]+", ");
+                    mess.append(message[i][j]+", ");
                 }
             }
         }
-        System.out.println("}");
-        //Flusher.setBuffer(intBuffer);
-        Flusher.setUsage(intDblArrayUsage);
+        mess.append("}"+lineSeparator());
+        Flusher.setValue(mess.toString());
+        Flusher.setPrefix(acceptPrefix(new PrefixFormatter()));
     }
     @Override
     public void flush(){
-        intDblArrayUsage = false;
+    }
+
+    @Override
+    public String acceptPrefix(PrefixFormatter prefixFormatter) {
+        return prefixFormatter.visitIntDblArrayMessage(this);
     }
 }

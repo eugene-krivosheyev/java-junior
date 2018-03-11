@@ -2,52 +2,57 @@ package com.acme.edu.message;
 
 import com.acme.edu.Flusher;
 import com.acme.edu.MessageController;
+import com.acme.edu.formatters.PrefixFormatter;
 
 public class IntMessage implements Message {
-
     private int message;
     private static int intBuffer;
-    private static boolean intUsage;
+    private static final String intUsage = "IntMessage";
 
     public IntMessage(int message) {
         this.message = message;
     }
-
-    public static int getIntBuffer() {
-        return intBuffer;
-    }
-
     @Override
-    public boolean isUsed() {
+    public String isUsed() {
         return intUsage;
     }
 
     @Override
     public void accumulate() {
-        if ((intBuffer+message)<=Integer.MAX_VALUE && (intBuffer+message)>=Integer.MIN_VALUE){
+        long sum=intBuffer+(long)message;
+        if ((sum)<=Integer.MAX_VALUE && (sum)>=Integer.MIN_VALUE){
             intBuffer +=message;
-        }else if ((intBuffer+message)>Integer.MAX_VALUE){
-            long overBuffer = intBuffer+message;
-            overBuffer=overBuffer-Integer.MAX_VALUE;
-            int needToFlush = Integer.MAX_VALUE;
-            MessageController.overFlush(needToFlush);
-            intBuffer = (int) overBuffer;
-        } else if((intBuffer+message)<Integer.MIN_VALUE){
-            long overBuffer = intBuffer+message;
-            overBuffer=overBuffer-Integer.MIN_VALUE;
-            int needToFlush = Integer.MIN_VALUE;
-            MessageController.overFlush(needToFlush);
-            intBuffer = (int) overBuffer;
+        }else {
+            if ((sum)>Integer.MAX_VALUE){
+                sum=sum-Integer.MAX_VALUE;
+                Flusher.setUsed(intUsage);
+                Flusher.setValue(String.valueOf(Integer.MAX_VALUE));
+                Flusher.setPrefix(acceptPrefix(new PrefixFormatter()));
+                Flusher.flush();
+                intBuffer = (int) sum;
+            } else{
+                if((sum)<Integer.MIN_VALUE){
+                    sum=sum-Integer.MIN_VALUE;
+                    Flusher.setUsed(intUsage);
+                    Flusher.setValue(String.valueOf(Integer.MIN_VALUE));
+                    Flusher.setPrefix(acceptPrefix(new PrefixFormatter()));
+                    Flusher.flush();
+                    intBuffer = (int) sum;
+                }
+            }
         }
-        intUsage = true;
-
-        Flusher.setBuffer(intBuffer);
-        Flusher.setUsage(intUsage);
+        Flusher.setUsed(intUsage);
+        Flusher.setValue(String.valueOf(intBuffer));
+        Flusher.setPrefix(acceptPrefix(new PrefixFormatter()));
     }
 
     @Override
     public void flush() {
         intBuffer = 0;
-        intUsage = false;
+    }
+
+    @Override
+    public String acceptPrefix(PrefixFormatter prefixFormatter) {
+        return prefixFormatter.visitIntMessage(this);
     }
 }

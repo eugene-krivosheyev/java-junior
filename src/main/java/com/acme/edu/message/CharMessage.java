@@ -1,11 +1,12 @@
 package com.acme.edu.message;
 
 import com.acme.edu.Flusher;
+import com.acme.edu.formatters.PrefixFormatter;
 
 public class CharMessage implements Message {
 
     private char message;
-    private static boolean charUsage;
+    private static final String charUsage = "CharMessage";
     private static char charBuffer;
     private static int charCounter;
 
@@ -14,38 +15,36 @@ public class CharMessage implements Message {
     }
 
     @Override
-    public boolean isUsed() {
+    public String isUsed() {
         return charUsage;
-    }
-
-    public static char getCharBuffer() {
-        return charBuffer;
-    }
-
-    public static int getCharCounter() {
-        return charCounter;
     }
 
     @Override
     public void accumulate() {
-        if (charBuffer=='\0'){
-            charUsage = true;
-        }else if (charBuffer==message){
+        if (charBuffer == '\0') {
+            Flusher.setUsed(charUsage);
+        } else if (charBuffer == message) {
             charCounter++;
-            charUsage = true;
-        } else {
-            charUsage = false;
+            Flusher.setUsed(charUsage);
         }
         charBuffer = message;
-        Flusher.setBuffer(charBuffer);
-        Flusher.setUsage(charUsage);
-        Flusher.setCounter(charCounter);
+
+        if (charCounter == 0) {
+            Flusher.setValue(String.valueOf(charBuffer));
+        } else {
+            Flusher.setValue(String.valueOf(charBuffer) + " (x" + String.valueOf(charCounter+1) + ")");
+        }
+        Flusher.setPrefix(acceptPrefix(new PrefixFormatter()));
     }
 
     @Override
     public void flush(){
         charBuffer='\0';
         charCounter = 0;
-        charUsage = false;
+    }
+
+    @Override
+    public String acceptPrefix(PrefixFormatter prefixFormatter) {
+        return prefixFormatter.visitCharMessage(this);
     }
 }

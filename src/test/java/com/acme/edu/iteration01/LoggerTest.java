@@ -28,6 +28,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         LoggerFacade.log(1);
         LoggerFacade.log(0);
         LoggerFacade.log(-1);
+        LoggerFacade.flush();
         //endregion
 
         //region then
@@ -42,6 +43,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         LoggerFacade.log((byte)1);
         LoggerFacade.log((byte)0);
         LoggerFacade.log((byte)-1);
+        LoggerFacade.flush();
         //endregion
 
         //region then
