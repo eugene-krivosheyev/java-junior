@@ -736,5 +736,13 @@ assertMessageEquals("3")
 ---
 
 # Reading List
-## [Minimum Valuable Reading List](http://tinyurl.com/skilltrekreadinglist)
-## [GitFlow Configuration Management Patterns](https://habrahabr.ru/post/106912/)
+- [Minimum Valuable Reading List](http://tinyurl.com/skilltrekreadinglist)
+- [GitFlow Configuration Management Patterns](https://habrahabr.ru/post/106912/)
+- [Object::equals implementation and magic constant 31](https://stackoverflow.com/questions/299304/why-does-javas-hashcode-in-string-use-31-as-a-multiplier/299748), [which is prime](https://cs.stackexchange.com/questions/11029/why-is-it-best-to-use-a-prime-number-as-a-mod-in-a-hashing-function/64191#64191)
+- [Collections](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html) [cheat sheet](http://files.zeroturnaround.com/pdf/zt_java_collections_cheat_sheet.pdf) and [tutorial](http://tutorials.jenkov.com/java-collections/index.html) and [reference](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/reference.html)
+- [Generic data structures in O(n) notation](http://bigocheatsheet.com) and [java collection performance](https://gist.github.com/psayre23/c30a821239f4818b0709)
+- [Производительность коллекций](https://habrahabr.ru/post/237043/)
+- [Простой обзор j.u.c](https://habrahabr.ru/company/luxoft/blog/157273/) и [более глубокий](https://habrahabr.ru/post/187854/)
+- [Atomic-типы](http://java-online.ru/concurrent-atomic.xhtml), в т.ч. [atomic references](http://qaru.site/questions/32880/when-to-use-atomicreference-in-java)
+- [Введение в многопоточность](https://urvanov.ru/2016/05/27/java-8-многопоточность/)
+- [j.u.c.collections](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/package-summary.html)
