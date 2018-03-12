@@ -31,3 +31,20 @@ public class ExceptionDemo {
     }
 }
 
+
+class DAO {
+    public void saveDate() throws SaveOperationException {
+
+    }
+}
+
+class FileDAO extends DAO {
+    @Override
+    public void saveDate() throws FileNotFoundWxception, FileOpeningException {
+        try {
+            super.saveDate();
+        } catch (SaveOperationException e) {
+            throw new FileNotFoundWxception(e);
+        }
+    }
+}
