@@ -1,49 +1,25 @@
 package com.acme.edu.exception;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class ExceptionDemo {
-    MyConnection c;
     public static void main(String[] args) {
-        try (
-                MyConnection c = new MyConnection();
-                InputStream is = new FileInputStream(""))
-        { //t-w-r
+        try {
             doMediate();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private static void doMediate() {
-        RuntimeException hE = null;
-        try {
-//            Connection c = new C();
-            doBusinessLogic();
-            //
-        } catch (IllegalArgumentException problem) {
-//            problem.printStackTrace();
-            hE = new RuntimeException("hello from catch block");
-            hE.addSuppressed(problem);
-            throw hE;
-        } catch (RuntimeException e) {
-
-        } catch (Throwable e) {
-
-        } finally {
-//            if (c != null) try {
-//                  c.close();
-//            } catch
-            NullPointerException nullPointerException = new NullPointerException();
-            if (hE != null) nullPointerException.addSuppressed(hE);
-            throw nullPointerException;
-        }
+        doBusinessLogic();
     }
 
-    private static void doBusinessLogic() {
+    private static void doBusinessLogic() { //re-throw: encapsulation errors
+        try {
             doDataAccess(null);
+        } catch (IllegalArgumentException e) {
+            throw new MoneyTransferException("Can't transfer money", e); //Business Operation error
+        }
     }
 
     private static void doDataAccess(Integer param) {
