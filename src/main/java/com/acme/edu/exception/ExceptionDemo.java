@@ -5,16 +5,16 @@ public class ExceptionDemo {
     public static void main(String[] args) {
         try {
             doMediate();
-        } catch (Exception e) {
+        } catch (MoneyTransferException e) {
             e.printStackTrace();
         }
     }
 
-    private static void doMediate() {
+    private static void doMediate() throws MoneyTransferException {
         doBusinessLogic();
     }
 
-    private static void doBusinessLogic() { //re-throw: encapsulation errors
+    private static void doBusinessLogic() throws MoneyTransferException { //re-throw: encapsulation errors
         try {
             doDataAccess(null);
         } catch (IllegalArgumentException e) {

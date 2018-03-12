@@ -1,6 +1,6 @@
 package com.acme.edu.exception;
 
-public class MoneyTransferException extends RuntimeException {
+public class MoneyTransferException extends Exception {
     public MoneyTransferException() {
         super();
     }
