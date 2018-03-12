@@ -1,12 +1,14 @@
 package com.acme.edu.iteration03;
 
-import com.acme.edu.Logger;
+import com.acme.edu.LoggerFacade;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+
+import static java.lang.System.lineSeparator;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
@@ -22,71 +24,77 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    /*
-    TODO: implement Logger solution to match specification as tests
+
+    //TODO: implement Logger solution to match specification as tests
 
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
-        Logger.log(new int[] {-1, 0, 1});
+        LoggerFacade.log(new int[] {-1, 0, 1});
+        LoggerFacade.flush();
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "primitives array: {-1, 0, 1}\n"
-        );
+        assertSysoutContains("primitives array: {");
+        assertSysoutContains("-1, 0, 1}"+lineSeparator());
         //endregion
     }
 
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
-        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        LoggerFacade.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        LoggerFacade.flush();
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "primitives matrix: {\n" +
-                "{-1, 0, 1}\n" +
-                "{1, 2, 3}\n" +
-                "{-1, -2, -3}\n" +
-            "}\n"
-        );
+        assertSysoutContains("primitives matrix: {" + lineSeparator());
+        assertSysoutContains("{-1, 0, 1}" + lineSeparator());
+        assertSysoutContains("{1, 2, 3}" + lineSeparator());
+        assertSysoutContains("{-1, -2, -3}" + lineSeparator());
+        assertSysoutContains("}" + lineSeparator());
         //endregion
     }
 
     @Test
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
-        Logger.log(new int[][][][] {{{{0}}}});
+        LoggerFacade.log(new int[][][][] {{{{0}}}});
+        LoggerFacade.flush();
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "primitives multimatrix: {\n" +
-                "{\n" + "{\n" + "{\n" +
-                    "0\n" +
-                "}\n" + "}\n" + "}\n" +
-            "}\n"
-        );
+        assertSysoutContains("primitives multimatrix: {" + lineSeparator());
+        assertSysoutContains("{"+lineSeparator());
+        assertSysoutContains("{"+lineSeparator());
+        assertSysoutContains("{" +lineSeparator());
+        assertSysoutContains("0" +lineSeparator());
+        assertSysoutContains("}"+lineSeparator());
+        assertSysoutContains("}" +lineSeparator());
+        assertSysoutContains("}" +lineSeparator());
+        assertSysoutContains("}"+lineSeparator());
         //endregion
     }
 
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
-        Logger.log("str1", "string 2", "str 3");
+        LoggerFacade.log("str1", "string 2", "str 3");
+        LoggerFacade.flush();
         //endregion
 
         //region then
-        assertSysoutContains("str1\nstring 2\nstr 3");
+        assertSysoutContains("str1"+lineSeparator());
+        assertSysoutContains("string 2"+lineSeparator());
+        assertSysoutContains("str 3"+lineSeparator());
         //endregion
     }
 
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
-        Logger.log(-1, 0, 1, 3);
+        LoggerFacade.log(-1, 0, 1, 3);
+        LoggerFacade.flush();
         //endregion
 
         //region then
@@ -97,19 +105,18 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException {
         //region when
-        Logger.log(1);
-        Logger.log("str");
-        Logger.log(Integer.MAX_VALUE - 10);
-        Logger.log(11);
+        LoggerFacade.log(1);
+        LoggerFacade.log("str");
+        LoggerFacade.log(Integer.MAX_VALUE - 10);
+        LoggerFacade.log(11);
+        LoggerFacade.flush();
         //endregion
 
         //region then
-        assertSysoutContains(1);
-        assertSysoutContains("str");
-        assertSysoutContains(Integer.MAX_VALUE - 10);
-        assertSysoutContains(11);
+        assertSysoutContains(1+lineSeparator());
+        assertSysoutContains("str"+lineSeparator());
+        assertSysoutContains(Integer.MAX_VALUE+lineSeparator());
+        assertSysoutContains(1+lineSeparator());
         //endregion
     }
-
-    */
 }
