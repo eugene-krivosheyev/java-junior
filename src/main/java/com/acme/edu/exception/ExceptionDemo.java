@@ -17,7 +17,7 @@ public class ExceptionDemo {
     private static void doBusinessLogic() throws MoneyTransferException { //re-throw: encapsulation errors
         try {
             doDataAccess(null);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | NullPointerException e) { //Multi-catch
             throw new MoneyTransferException("Can't transfer money", e); //Business Operation error
         }
     }
