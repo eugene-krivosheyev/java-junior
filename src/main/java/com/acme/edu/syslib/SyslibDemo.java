@@ -2,6 +2,8 @@ package com.acme.edu.syslib;
 
 import java.lang.*;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SyslibDemo {
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
@@ -16,6 +18,27 @@ public class SyslibDemo {
 //        o1.equals(o2);
 //        o2.equals(o1);
 
+//        "fffffff 6 4 yyyy 6 uuuu".split("^f*[1..9]*(u+)\[:word]?+");
+//        Pattern, Matcher
+
+        System.out.println("1" + "2" + "3" + "4");
+        new StringBuilder("1")
+                .append("2")
+                .append("3");
+
+        Integer i = new Integer(5);
+        int ii = i;
+        Integer.valueOf("lkjkjkj");
+
+        System.out.println(Double.parseDouble("-2e+7"));
+
+        //Performance issue
+        for (Integer counter = 0; counter < 10; counter++) {
+            System.out.println(counter);
+        }
+
+        Integer i1 = 1, i2 = 1; //intern
+        System.out.println(i1 == i2);
     }
 }
 
