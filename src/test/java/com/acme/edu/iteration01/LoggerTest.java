@@ -22,7 +22,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    @Test
+    @Test(expected = NullPointerException.class, timeout = 10_00)
     public void shouldLogInteger() throws IOException {
         //region when
 //        Logger.log(1);
