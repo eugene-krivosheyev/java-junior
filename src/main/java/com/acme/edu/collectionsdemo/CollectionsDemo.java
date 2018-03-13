@@ -27,6 +27,33 @@ public class CollectionsDemo {
 
         System.out.println(murik.equals(murik2));
         set.forEach(System.out::println);
+
+
+        Set<String> largeSet = new HashSet<>(10_000);
+        largeSet.add("str1");
+        largeSet.add("str2");
+        largeSet.add("str3");
+        largeSet.add("str4");
+        largeSet.add("str5");
+        largeSet.add("str6");
+        largeSet.add("str7");
+        largeSet.add("str8");
+        largeSet.add("str9");
+
+        Set<String> treeSet = new TreeSet<>((o1, o2) -> -o1.compareTo(o2));
+        treeSet.add("1");
+
+        Map<String, Boolean> cats = new HashMap<>();
+        cats.put(null, new Boolean(true));
+        System.out.println(cats.get(null));
+
+        Map<Object, Object> objectObjectHashMap = new HashMap<>();
+        Collection<Object> objects = new HashSet<>();
+
+        //Fail-fast iterators VS Fail-safe iterators
+        objects.iterator().remove();
+        //Concurrent VS Thread-safe collections (old-school)
+//        java.util.concurrent.ConcurrentMap;
     }
 }
 
