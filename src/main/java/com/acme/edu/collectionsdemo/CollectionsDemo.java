@@ -1,6 +1,11 @@
 package com.acme.edu.collectionsdemo;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.Comparator.reverseOrder;
+import static java.util.stream.Collectors.joining;
 
 public class CollectionsDemo {
     public static void main(String[] args) {
@@ -51,14 +56,30 @@ public class CollectionsDemo {
         Collection<Object> objects = new HashSet<>();
 
         //Fail-fast iterators VS Fail-safe iterators
-        objects.iterator().remove();
+//        objects.iterator().remove();
         //Concurrent VS Thread-safe collections (old-school) VS Regular
 //        java.util.concurrent.ConcurrentMap;
 
+        /*
         Collections.sort(new ArrayList<String>());
         Collections.synchronizedCollection(treeSet);
         Map<String, Boolean> unmCats = Collections.unmodifiableMap(cats);
         unmCats.put("111", null);
+        */
+
+
+//        new ArrayList<>().parallelStream().map();
+
+        Stream<String> stream = Stream.<String>of("1", "2", "3", "4", "5", "6")
+                .map(Integer::parseInt)
+                .filter(e -> e < 4)
+                .sorted(reverseOrder())
+                .map(e -> Integer.toString(e));
+
+        String collected = stream.collect(joining(", "));
+        System.out.println(collected);
+
+//        new ArrayList<>().forEach();
     }
 }
 
