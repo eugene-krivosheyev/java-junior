@@ -52,8 +52,13 @@ public class CollectionsDemo {
 
         //Fail-fast iterators VS Fail-safe iterators
         objects.iterator().remove();
-        //Concurrent VS Thread-safe collections (old-school)
+        //Concurrent VS Thread-safe collections (old-school) VS Regular
 //        java.util.concurrent.ConcurrentMap;
+
+        Collections.sort(new ArrayList<String>());
+        Collections.synchronizedCollection(treeSet);
+        Map<String, Boolean> unmCats = Collections.unmodifiableMap(cats);
+        unmCats.put("111", null);
     }
 }
 
