@@ -11,23 +11,30 @@ public class IODemo {
 
         File file = new File("unicode.txt");
 
-        try (FileWriter fw = new FileWriter(file,true)) {
-            fw.write("Привет!!!!");
-            fw.write(System.lineSeparator());
+        try (PrintWriter out = new PrintWriter(
+                new OutputStreamWriter(
+                    new BufferedOutputStream(
+                        new FileOutputStream(file, true)), "windows-1251"))) {
+
+            out.println("Привет!!!!");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        try (BufferedReader fr =
-                     new BufferedReader(new FileReader(file))) {
+        try (BufferedReader in = new BufferedReader(
+                new InputStreamReader(
+                    new BufferedInputStream(
+                        new FileInputStream(file)), "windows-1251"))) {
 
             String line = null;
-            while((line = fr.readLine()) != null) {
-                System.out.println(">>> " + line);
+            while((line = in.readLine()) != null) {
+                System.out.println(" >>>>>>> " + line);
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }
