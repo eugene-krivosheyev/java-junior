@@ -9,13 +9,37 @@ import static java.util.concurrent.Executors.newFixedThreadPool;
 import static java.util.concurrent.Executors.newSingleThreadExecutor;
 
 public class ParallelDemo {
-    public static void main(String[] args) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(() -> {
-            System.out.println("HW!!!");
-        });
+    public static void main(String[] args) throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            while (!Thread.interrupted()) {
 
-        executorService.shutdown();
+            }
+        });
+        thread.start();
+        thread.interrupt();
+
+        Thread thread1 = new Thread() {
+            @Override
+            public void run() {
+                while (!this.isInterrupted()) {
+
+                }
+            }
+        };
+        thread1.start();
+        thread1.interrupt();
+
+
+
+        thread.start();
+        thread.stop();
+        thread.suspend(); thread.resume();
+
+        thread.setDaemon(true);
+        thread.setName(""); thread.getName();
+
+
+        thread.join();
 
     }
 }
