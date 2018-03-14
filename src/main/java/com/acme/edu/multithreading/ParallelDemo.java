@@ -22,7 +22,9 @@ public class ParallelDemo {
             @Override
             public void run() {
                 while (!this.isInterrupted()) {
-
+                    //lkklllk
+                    Thread.yield();
+                    //lllll
                 }
             }
         };
@@ -41,6 +43,7 @@ public class ParallelDemo {
 
         thread.join();
 
+        thread.setPriority(Thread.MAX_PRIORITY);
     }
 }
 
