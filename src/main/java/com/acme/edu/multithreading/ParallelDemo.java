@@ -12,7 +12,13 @@ public class ParallelDemo {
     public static void main(String[] args) throws InterruptedException {
         Thread thread = new Thread(() -> {
             while (!Thread.interrupted()) {
+                try {
+                    Thread.sleep(10_000);
+                } catch (InterruptedException e) {
 
+                }
+
+                Thread.currentThread().stop();
             }
         });
         thread.start();
