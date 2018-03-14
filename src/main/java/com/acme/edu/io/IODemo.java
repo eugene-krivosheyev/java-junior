@@ -9,32 +9,77 @@ public class IODemo {
 
 //        Scanner;
 
-        File file = new File("unicode.txt");
+        File file = new File("cats.txt");
 
-        try (PrintWriter out = new PrintWriter(
-                new OutputStreamWriter(
+        try (ObjectOutputStream out = new ObjectOutputStream(
                     new BufferedOutputStream(
-                        new FileOutputStream(file, true)), "windows-1251"))) {
+                        new FileOutputStream(file, true)))) {
 
-            out.println("Привет!!!!");
+            out.writeObject(new NewCat("murik", 7));
+            out.writeObject(new NewCat("murik2", 8));
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        try (BufferedReader in = new BufferedReader(
-                new InputStreamReader(
+
+        try (ObjectInputStream in = new ObjectInputStream(
                     new BufferedInputStream(
-                        new FileInputStream(file)), "windows-1251"))) {
+                        new FileInputStream(file)))) {
 
-            String line = null;
-            while((line = in.readLine()) != null) {
-                System.out.println(" >>>>>>> " + line);
-            }
+            System.out.println(in.readObject());
+            System.out.println(in.readObject());
 
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
+
+
+    }
+}
+
+class NewCat implements Serializable {
+    static long serialVersionUID = 1L;
+
+    private String name;
+    transient private int age;
+
+    NewCat(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public String toString() {
+        return "NewCat{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+
+/**
+ * -> JAXB, JsonMappers: GSON, Jackson -> JSR: json-java mappers
+ */
+class NewNewCat implements Externalizable {
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
 
     }
 }
