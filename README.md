@@ -746,3 +746,7 @@ assertMessageEquals("3")
 - [Atomic-типы](http://java-online.ru/concurrent-atomic.xhtml), в т.ч. [atomic references](http://qaru.site/questions/32880/when-to-use-atomicreference-in-java)
 - [Введение в многопоточность](https://urvanov.ru/2016/05/27/java-8-многопоточность/)
 - [j.u.c.collections](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/package-summary.html)
+
+# CI & Static analysis 
+- [Jenkins CI](http://54.164.209.32:8080/jenkins/)
+- [Sonar Code Analysis](http://54.164.209.32:9000)
