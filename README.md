@@ -747,6 +747,14 @@ assertMessageEquals("3")
 - [Введение в многопоточность](https://urvanov.ru/2016/05/27/java-8-многопоточность/)
 - [j.u.c.collections](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/package-summary.html)
 
-# CI & Static analysis 
+- [Why Atomics](https://www.ibm.com/developerworks/ru/library/j-jtp04186/index.html), special for Misha ))
+- Junit [test structure](https://easyjava.ru/testing/junit/osnovy-junit/) with [IDEA](http://javastudy.ru/junit/junit-hello-world/) and [its annotations](https://habrahabr.ru/post/120101/)
+- Make unit test really isolated with [Mockito](https://habrahabr.ru/post/243155/) and [new test structure](http://nixx78.blogspot.ru/p/blog-page.html)
+
+- [SQL intro](http://proselyte.net/tutorials/sql/introduction/) and DB server shipped with JDK: [JavaDB/Derby](http://www.smartyit.ru/java/106)
+- [JDBC](http://proselyte.net/tutorials/jdbc/introduction/) and its [API](http://proselyte.net/tutorials/jdbc/introduction/)
+- Spring [intro](http://spring-projects.ru/projects/spring-framework/), [tutorial](http://proselyte.net/tutorials/spring-tutorial-full-version/introduction/)
+
+# CI & Static analysis
 - [Jenkins CI](http://54.164.209.32:8080/jenkins/)
 - [Sonar Code Analysis](http://54.164.209.32:9000)
