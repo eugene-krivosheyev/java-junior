@@ -1,12 +1,16 @@
 # Java Junior Developer Training Course.
 88 hours training + 32 hours work project = 120 hr.
 
+To simplify cloning just clone one this branch:
+```bash
+git clone -b 2018-05-db --single-branch https://github.com/eugene-krivosheyev/java-junior
+```
 ---
 
 # Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice)
 - Introduction to Java. Benefits.
 - JDK, JVM.
-- Java 2 (Java EE / SE / ME) 
+- Java 2 (Java EE / SE / ME)
 - Tools: java, javac, javadoc
 
 ## Lab: Installing JDK, Tuning Environmental Variables
