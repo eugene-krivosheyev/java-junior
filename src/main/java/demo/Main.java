@@ -1,10 +1,12 @@
 package demo;
 
+import java.io.PrintStream;
+
 import static demo.President.getTheOne;
 
 public class Main {
     public static void main(String[] args) {
-        President.getTheOne().order("command");
+        getTheOne().order("command");
     }
 }
 
@@ -12,7 +14,6 @@ public class Main {
 class President {
     static {
         System.out.println("HW!!!");
-        int i = 1 / 0; //AE: / by zero
     }
 
 
@@ -26,7 +27,7 @@ class President {
     //=============
 
     private President() {}
-
+    private String name;
     public void order(String command) { //BL
 
     }
