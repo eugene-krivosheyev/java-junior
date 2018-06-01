@@ -4,12 +4,18 @@ import static demo.President.getTheOne;
 
 public class Main {
     public static void main(String[] args) {
-        getTheOne().order("command");
+        President.getTheOne().order("command");
     }
 }
 
 //Singleton: DP [GoF] (Head First)
 class President {
+    static {
+        System.out.println("HW!!!");
+        int i = 1 / 0; //AE: / by zero
+    }
+
+
     //Creational Logic: infr
     private static President theOne = new President();
 
