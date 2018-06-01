@@ -699,3 +699,7 @@ assertMessageEquals("3")
 
 ## Then
 - PM and Business Customers accept product with two demo sessions
+
+---
+
+# JNI / JNA
