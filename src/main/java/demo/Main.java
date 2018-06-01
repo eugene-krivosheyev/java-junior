@@ -25,3 +25,22 @@ class President {
 
     }
 }
+
+
+
+
+
+
+class Emplyee {
+    int id; //insta
+
+    void instanceMethod() {
+        Emplyee.staticMethod(); //or static import
+    }
+
+
+    //=======
+
+    public static void staticMethod() {
+    }
+}
