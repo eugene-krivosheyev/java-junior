@@ -1,7 +1,11 @@
 package demo;
 
-public class PrimitivesDemo {
-    public static void main(String[] args) {
+import java.math.BigDecimal;
+
+import static java.lang.Byte.MIN_VALUE;
+
+public strictfp class PrimitivesDemo {
+    public static strictfp void main(String[] args) {
         //region Примитивные = 8
         //region Целочисленные
         byte b = -022; //-128..127;
@@ -72,9 +76,15 @@ public class PrimitivesDemo {
 
         //region Проблемы
         //region Type Overflow
+        byte accumulator = MIN_VALUE;
+        for (int counter = 0; counter < 255; counter++) {
+            accumulator++;
+        }
+        System.out.println(accumulator);
         //endregion
         //region Precision Loss
-        System.out.println(.1 + .2);
+        System.out.println(1/3f);
+        System.out.println(.1f + .2d); //IEEE 457
         //endregion
         //endregion
 
