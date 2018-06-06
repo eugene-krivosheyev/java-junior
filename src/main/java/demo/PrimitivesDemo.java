@@ -30,6 +30,44 @@ public class PrimitivesDemo {
         //endregion
 
         //region Операторы
+        //region Casting
+        byte bb = 0;
+        int ii = 129;
+        bb = (byte) ii; //Потеря данных
+        System.out.println("(): " + bb);
+        //endregion
+        //region Arithmetic
+        System.out.println(1 / 2);
+        System.out.println(-1 + 2 + "3" + 4 * 5);
+        int iii = 0;
+        iii += 0; //iii = iii + 1
+        System.out.println(--iii);
+        System.out.println(iii++);
+        //endregion
+        //region Bitwise
+        int i1 = 1, i2 = 2;
+        System.out.println(i1 & i2); //*
+        System.out.println(i1 | i2); //+
+        System.out.println(i1 ^ i2); //xor
+        System.out.println(~i2); //not
+        System.out.println(i1 >> 1); //unsigned shift
+        System.out.println(i1 >>> 1); //signed shift
+        System.out.println(i1 << 1); //left shift
+        //endregion
+        //region Logic
+        boolean isUserLogged = true, moonInJupiter = false;
+        boolean unseccessCase = isUserLogged && moonInJupiter;
+        System.out.println(unseccessCase); //*
+        System.out.println(isUserLogged || moonInJupiter); //+
+
+        System.out.println(f1() || f2());
+        // fopen('ddd') or die();
+        System.out.println(!moonInJupiter);
+        //endregion
+        //region Ternary Operator
+        String myCase = unseccessCase ? "OOOK" : "non Ok";
+        System.out.println( isUserLogged ? myCase : 4 );
+        //endregion
         //endregion
 
         //region Проблемы
@@ -42,5 +80,13 @@ public class PrimitivesDemo {
 
         //region Ссылочные
         //endregion
+    }
+
+    private static boolean f2() {
+        return false;
+    }
+
+    private static boolean f1() {
+        return false;
     }
 }
