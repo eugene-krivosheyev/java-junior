@@ -10,15 +10,24 @@ public class Main {
     }
 }
 
-//Singleton: DP [GoF] (Head First)
+//Singleton: DP [GoF] (Head First): роли (ответственности) <-> классы
 class President {
+    /**
+     * IL = Creational Logic
+     */
     static {
         System.out.println("HW!!!");
     }
 
 
     //Creational Logic: infr
-    private static President theOne = new President();
+    private static President theOne;
+
+    //region static block
+    static {
+        theOne = new President();
+    }
+    //endregion
 
     public static President getTheOne() {
         return theOne;
@@ -26,6 +35,9 @@ class President {
 
     //=============
 
+    /**
+     * BL
+     */
     private President() {}
     private String name;
     public void order(String command) { //BL
