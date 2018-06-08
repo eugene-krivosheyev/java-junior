@@ -1,10 +1,17 @@
 package demo;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import static java.lang.Byte.MIN_VALUE;
 
 public strictfp class PrimitivesDemo {
+    int objectField = 0;
+    static double classField = 0.;
+    boolean field = false;
+    String s = null;
+    char c = '\u0000';
+
     public static strictfp void main(String[] args) {
         //region Примитивные = 8
         //region Целочисленные
@@ -89,6 +96,33 @@ public strictfp class PrimitivesDemo {
         //endregion
 
         //region Ссылочные
+
+        int localVar = 0;
+        System.out.println(localVar);
+        boolean localBool = false;
+        System.out.println(localBool);
+
+        //region String
+        String s1 = "string"; //сколько хавает в памяти? -X:usecompressedops
+        System.out.println(s1);
+        String s2 = "string";
+
+        "abc".intern();
+        String s3 = "abc";
+
+        s1.toUpperCase();
+        System.out.println(s1);
+
+        System.out.println(s1 == s2);
+        System.out.println(s1.equals(s2));
+
+        System.out.println("a" + "b" + "c");
+        StringBuilder stringBuilder = new StringBuilder(); //or StringBuffer
+        stringBuilder
+                .append("a")
+                .append("b")
+                .append("c");
+        //endregion
         //endregion
     }
 
