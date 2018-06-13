@@ -1,42 +1,42 @@
 package com.acme.edu;
 
 public class Logger {
-
     private static int integerChainSum;
 
     public static void flushIntegerBuffer() {
-        System.out.println("primitive: " + integerChainSum);
+        output("primitive: " + integerChainSum, false);
         integerChainSum = 0;
     }
-
 
     public static void log(int message) {
         integerChainSum += message;
     }
 
     public static void log(byte message) {
-        flushIntegerBuffer();
-        System.out.println("primitive: " + message);
+        output("primitive: " + message, true);
     }
 
     public static void log(char message) {
-        flushIntegerBuffer();
-        System.out.println("char: " + message);
+        output("char: " + message, true);
     }
 
     public static void log(String message) {
-        flushIntegerBuffer();
-        System.out.println("string: " + message);
+        output("string: " + message, true);
     }
 
     public static void log(boolean message) {
-        flushIntegerBuffer();
-        System.out.println("primitive: " + message);
+        output("primitive: " + message, true);
     }
 
     public static void log(Object message) {
-        flushIntegerBuffer();
-        System.out.println("reference: " + message);
+        output("reference: " + message, true);
     }
 
+
+    private static void output(String decoratedMessage, boolean needToFlushIntBuffer) {
+        if (needToFlushIntBuffer) {
+            flushIntegerBuffer();
+        }
+        System.out.println(decoratedMessage);
+    }
 }
