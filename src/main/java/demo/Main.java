@@ -12,6 +12,10 @@ public class Main {
 
 //Singleton: DP [GoF] (Head First): роли (ответственности) <-> классы
 class President {
+
+    int state;
+    static int classState;
+
     /**
      * IL = Creational Logic
      */
@@ -41,7 +45,8 @@ class President {
     private President() {}
     private String name;
     public void order(String command) { //BL
-
+        String s;
+        System.out.println(s);
     }
 }
 
