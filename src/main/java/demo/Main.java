@@ -46,7 +46,7 @@ class President {
     private String name;
     public void order(String command) { //BL
         String s;
-        System.out.println(s);
+//        System.out.println(s);
     }
 }
 

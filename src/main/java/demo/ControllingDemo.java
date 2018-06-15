@@ -1,7 +1,8 @@
 package demo;
 
 public class ControllingDemo {
-    public static void main(String[] args) {
+    public static void main(String... args) {
+        /*
         //region guard clauses:
         if (1 == 0) return;
         if (1 == 0) throw new RuntimeException("");
@@ -55,11 +56,45 @@ public class ControllingDemo {
         }
         //ldfjvldkgj
 
-        for (;;) {}
+//        for (;;) {}
         //endregion
+        */
 
+//        System.out.println("jnvjjjnnmvxnmvnxmvbnxmvb xkvbxmcvbxcmnvbxmc xcmvbxcmvnbxcmvb xcvmxb");
+        //region arrays
+        int[] myArray = new int[10_000];
+        System.out.println(myArray[0]);
+        System.out.println(myArray.length);
 
+        int[][] matrix = new int[5][5];
+        System.out.println(matrix[0][0]);
 
+        int[] hardcodedArray = {1,2,3,6};
+        System.out.println(hardcodedArray[0]);
+        hardcodedArray[0] = 10;
+        System.out.println(hardcodedArray[0]);
 
+        int[][] harcodedMatrix = {
+                {1,2},
+                {},
+                {1,2,6}
+        };
+
+        doSmthWithArray(new int[] {1,2,3});
+        doSmthWithArray(1,2,4);
+        doSmthWithArray();
+        doSmthWithArray(1); //m(pname: 1)
+
+        //endregion
+    }
+
+    private static void doSmthWithArray(int... arg1) {
+        for (int number = 0; number < arg1.length; number++) {
+
+        }
+
+        for (int element : arg1) {
+            System.out.println(element);
+        }
     }
 }
