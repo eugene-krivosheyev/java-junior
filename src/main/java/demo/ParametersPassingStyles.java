@@ -1,6 +1,8 @@
 package demo;
 
 public class ParametersPassingStyles {
+    public static int globalState;
+
     public static void main(String[] args) {
         Data factualParam = new Data();
         factualParam.setState(1);
@@ -9,6 +11,9 @@ public class ParametersPassingStyles {
         System.out.println(factualParam.getState());
     }
 
+    //===================
+
+    private int objectState;
     private static void m(Data formalParam) { //Formal parameter
         formalParam.setState(5);
     }
