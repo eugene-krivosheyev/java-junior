@@ -1,5 +1,7 @@
 package com.acme.edu;
 
-interface MessageProcessor {
-    void process(Object message);
+interface MessageProcessor<T> {
+    boolean canAggregate(T message);
+    void process(T message);
+    void flush();
 }

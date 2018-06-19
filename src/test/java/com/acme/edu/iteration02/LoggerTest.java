@@ -22,10 +22,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-
-    /*
-    TODO: implement Logger solution to match specification as tests
-
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
@@ -37,10 +33,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "str 1\n" +
-            "3\n" +
-            "str 2\n" +
+        assertSysoutContains(
+            "str 1\n",
+            "3\n",
+            "str 2\n",
             "0\n"
         );
         //endregion
@@ -57,11 +53,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "str 1\n" +
-            "10\n" +
-            Integer.MAX_VALUE + "\n" +
-            "str 2\n" +
+        assertSysoutContains(
+            "str 1\n",
+            "10\n",
+            Integer.MAX_VALUE + "\n",
+            "str 2\n",
             "0\n"
         );
         //endregion
@@ -78,11 +74,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "str 1\n" +
-            "10\n" +
-            Byte.MAX_VALUE + "\n" +
-            "str 2\n" +
+        assertSysoutContains(
+            "str 1\n",
+            "10\n",
+            Byte.MAX_VALUE + "\n",
+            "str 2\n",
             "0\n"
         );
         //endregion
@@ -99,18 +95,17 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 3");
         Logger.log("str 3");
         Logger.log("str 3");
+        Logger.flush();
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "str 1\n" +
-            "str 2 (x2)\n" +
-            "0\n" +
-            "str 2\n" +
+        assertSysoutContains(
+            "str 1\n",
+            "str 2 (x2)\n",
+            "0\n",
+            "str 2\n",
             "str 3 (x3)\n"
         );
         //endregion
     }
-
-    */
 }
