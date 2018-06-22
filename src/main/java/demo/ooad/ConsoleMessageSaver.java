@@ -1,8 +1,13 @@
 package demo.ooad;
 
 public class ConsoleMessageSaver extends MessageSaver {
-    @Override
-    public void save(String message) {
+    private String message;
+
+    public ConsoleMessageSaver(String message) {
+        this.message = message;
+    }
+
+    public void save() {
         super.save(message);
         System.out.println(message);
     }

@@ -5,11 +5,12 @@ package demo.ooad;
  */
 public class Logger {
     private MessageFilter filter = new MoonPhaseMessageFilter();
-    private MessageSaver saver = new ConsoleMessageSaver();
+    private MessageSaver saver;
 
     public void log(String message) {
         if (filter.filter(message)) {
-            saver.save(message);
+            saver = new ConsoleMessageSaver(message);
+            saver.save();
         }
     }
 }
