@@ -4,7 +4,7 @@ package demo.ooad;
  * Stateful VS Stateless Design
  */
 public class Logger {
-    private MessageFilter filter = new MoonPhaseMessageFilter();
+    private MessageFilter filter = new MoonPhaseMessageFilter(); //[GRASP] Creator
     private MessageSaver saver;
 
     public void log(String message) {
