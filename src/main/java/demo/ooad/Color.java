@@ -12,6 +12,10 @@ public enum Color {
     public int getColorInHex() {
         return colorInHex;
     }
+
+    public void f() {
+
+    }
 }
 
 enum DayOfWeek {
@@ -50,6 +54,17 @@ class EnumDemo {
         if (color == Color.RED) {
 
         }
+
+        switch (color) {
+            case RED: doBusinessLogic1();
+            case GREEN: doBusinessLogic2();
+            case BLUE: doBusinessLogic3();
+        }
+
+        color.doBusinessLogic();
+
+        myObj.doSmt();
+
 
 
         OldSchoolColor color1 = OldSchoolColor.RED;
