@@ -26,12 +26,6 @@ public final class Logger {
         if (filter.filter(message)) {
             MessageSaver saver = saverFactory.createSaverWithState();
             saver.setMessage(message);
-            saver.save(message);
-            saver.save();
-            saver.save();
-            saver.save();
-            saver.save();
-            saver.save();
             saver.save();
         }
     }
