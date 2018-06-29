@@ -1,8 +1,10 @@
 package demo.ooad;
 
+import demo.ooad.message.LogSeverityMessage;
+
 /**
  * OCP
  */
 public interface MessageFilter {
-    boolean filter(String message, SeverityLevel severity);
+    boolean filter(LogSeverityMessage message);
 }

@@ -1,5 +1,7 @@
 package demo.ooad;
 
+import demo.ooad.message.LogSeverityMessage;
+
 public class MessageSeverityFilter implements MessageFilter {
     private SeverityLevel minLevelForLogging;
 
@@ -8,12 +10,7 @@ public class MessageSeverityFilter implements MessageFilter {
     }
 
     @Override
-    public boolean filter(String message, SeverityLevel severity) {
-        switch (severity) {
-            case INFO: if (minLevelForLogging == SeverityLevel.INFO) return true;
-            case WARN:
-            case ERROR:
-        }
-        return true;
+    public boolean filter(LogSeverityMessage message) {
+        return message.filter(minLevelForLogging);
     }
 }
