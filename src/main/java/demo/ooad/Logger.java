@@ -1,5 +1,7 @@
 package demo.ooad;
 
+import demo.ooad.message.LogSeverityMessage;
+
 /**
  * Stateful VS Stateless Design
  */
@@ -23,12 +25,12 @@ public final class Logger {
     }
 
     /**
-     * Public API
+     * Public API: OOP
      */
-    public final void log(String message, SeverityLevel severity) {
-        if (filter.filter(message, severity)) {
+    public final void log(LogSeverityMessage message) {
+        if (filter.filter(message)) {
             MessageSaver saver = saverFactory.createSaverWithState();
-            saver.setMessage(message);
+            saver.setMessage(message.getMessage());
             saver.save();
         }
     }
