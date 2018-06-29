@@ -4,5 +4,5 @@ package demo.ooad;
  * OCP
  */
 public interface MessageFilter {
-    boolean filter(String message);
+    boolean filter(String message, SeverityLevel severity);
 }

@@ -22,8 +22,11 @@ public final class Logger {
         this.filter = filter;
     }
 
-    public final void log(String message) {
-        if (filter.filter(message)) {
+    /**
+     * Public API
+     */
+    public final void log(String message, SeverityLevel severity) {
+        if (filter.filter(message, severity)) {
             MessageSaver saver = saverFactory.createSaverWithState();
             saver.setMessage(message);
             saver.save();
