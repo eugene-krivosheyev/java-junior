@@ -1,4 +1,4 @@
-package demo;
+package demo.procedure;
 
 public class ControllingDemo {
     public static void main(String... args) {

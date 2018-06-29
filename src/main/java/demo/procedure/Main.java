@@ -1,8 +1,6 @@
-package demo;
+package demo.procedure;
 
-import java.io.PrintStream;
-
-import static demo.President.getTheOne;
+import static demo.procedure.President.getTheOne;
 
 public class Main {
     public static void main(String[] args) {

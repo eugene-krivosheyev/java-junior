@@ -1,4 +1,4 @@
-package demo;
+package demo.procedure;
 
 public class ParametersPassingStyles {
     public static int globalState;

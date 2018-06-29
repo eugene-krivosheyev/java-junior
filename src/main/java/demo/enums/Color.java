@@ -1,4 +1,4 @@
-package demo.ooad;
+package demo.enums;
 
 public enum Color {
     RED(0xFF0000), BLUE(0x0000FF), GREEN(0x00FF00);
@@ -55,6 +55,7 @@ class EnumDemo {
 
         }
 
+        /*
         switch (color) {
             case RED: doBusinessLogic1();
             case GREEN: doBusinessLogic2();
@@ -64,7 +65,7 @@ class EnumDemo {
         color.doBusinessLogic();
 
         myObj.doSmt();
-
+        */
 
 
         OldSchoolColor color1 = OldSchoolColor.RED;
