@@ -1,5 +1,6 @@
-package demo.ooad;
+package demo.ooad.filter;
 
+import demo.ooad.SeverityLevel;
 import demo.ooad.message.LogSeverityMessage;
 
 public class MessageSeverityFilter implements MessageFilter {
@@ -11,6 +12,6 @@ public class MessageSeverityFilter implements MessageFilter {
 
     @Override
     public boolean filter(LogSeverityMessage message) {
-        return message.filter(minLevelForLogging);
+        return message.compareTo(minLevelForLogging);
     }
 }

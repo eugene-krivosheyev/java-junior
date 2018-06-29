@@ -8,7 +8,21 @@ public class LogInfoMessage extends LogSeverityMessage {
     }
 
     @Override
-    public boolean filter(SeverityLevel minLevelForLogging) {
+    public String getMessage() {
+        return "[INFO] " + super.getMessage();
+    }
+
+    @Override
+    public boolean compareTo(SeverityLevel minLevelForLogging) {
         return minLevelForLogging == SeverityLevel.INFO;
+    }
+}
+
+
+class InheritanceDemo {
+    public static void main(String[] args) {
+        LogSeverityMessage message
+                = new LogInfoMessage("test message", SeverityLevel.WARN);
+        message.getMessage();
     }
 }

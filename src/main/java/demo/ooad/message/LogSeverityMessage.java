@@ -5,7 +5,22 @@ import demo.ooad.SeverityLevel;
 /**
  * Immutable POJO
  */
-public abstract class LogSeverityMessage {
+abstract class LogSeverityMessage {
+    /**
+     * Visibility modifiers:
+     * - public
+     * - protected: visibility for subclasses
+     * - "default" | "package-friendly"
+     * - private
+     */
+
+    /**
+     * OCP:
+     * Client {
+     * LMS message;
+     * message.getMessage();
+     * }
+     */
     private String message;
     private SeverityLevel severityLevel;
 
@@ -14,7 +29,7 @@ public abstract class LogSeverityMessage {
         this.severityLevel = severityLevel;
     }
 
-    public String getMessage() {
+    protected String getMessage() {
         return message;
     }
 
@@ -22,5 +37,15 @@ public abstract class LogSeverityMessage {
         return severityLevel;
     }
 
-    public abstract boolean filter(SeverityLevel minLevelForLogging);
+    public abstract boolean compareTo(SeverityLevel minLevelForLogging);
+}
+
+
+class Girl {
+    private int age;
+
+
+    public int getAge() {
+        return 15;
+    }
 }

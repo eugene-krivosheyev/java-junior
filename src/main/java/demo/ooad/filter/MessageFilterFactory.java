@@ -1,4 +1,4 @@
-package demo.ooad;
+package demo.ooad.filter;
 
 public class MessageFilterFactory {
     /**

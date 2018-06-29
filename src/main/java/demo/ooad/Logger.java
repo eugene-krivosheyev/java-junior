@@ -1,5 +1,7 @@
 package demo.ooad;
 
+import demo.ooad.filter.MessageFilter;
+import demo.ooad.filter.MoonPhaseMessageFilter;
 import demo.ooad.message.LogSeverityMessage;
 
 /**
