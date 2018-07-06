@@ -2,7 +2,7 @@ package demo.instatiation;
 
 public class NewDemo {
     public static void main(String[] args) {
-        new Data();
+        new Data(1);
     }
 }
 
