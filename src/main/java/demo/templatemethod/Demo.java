@@ -2,35 +2,57 @@ package demo.templatemethod;
 
 public class Demo {
     public static void main(String[] args) {
-        Logger logger = new ConsoleMessageFilteringLogger();
+        MessageFilterConsoleSaver filterAndSaver = new MessageFilterConsoleSaver();
+        Logger logger = new Logger(
+                filterAndSaver,
+                filterAndSaver
+        );
+
         logger.log();
+
+        System.out.println(LoggerSaver.MY_CONST);
     }
 }
 
 /**
- * Template Method
+ * State/Strategy
  */
-abstract class Logger {
-    protected abstract void save();
+class Logger {
+    private LoggerFilter filter;
+    private LoggerSaver saver;
 
-    protected abstract boolean filter();
+    public Logger(LoggerFilter filter, LoggerSaver saver) {
+        this.filter = filter;
+        this.saver = saver;
+    }
 
     public void log() {
-        if (this.filter()) {
-            this.save();
+        if (filter.filter()) {
+            saver.save();
         }
     }
 }
 
-class ConsoleMessageFilteringLogger extends Logger {
-    @Override
-    protected void save() {
-        System.out.println();
-    }
-
-    @Override
-    protected boolean filter() {
-        return false;
-    }
+interface LoggerFilter {
+    public boolean filter();
 }
 
+interface LoggerSaver {
+    public static final int MY_CONST = 0;
+    void save();
+}
+
+class MessageFilterConsoleSaver extends Object implements LoggerFilter, LoggerSaver {
+    private boolean filtered;
+
+    @Override
+    public boolean filter() {
+        this.filtered = true;
+        return false;
+    }
+
+    @Override
+    public void save() {
+        System.out.println(filtered);
+    }
+}
