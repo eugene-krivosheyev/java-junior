@@ -18,16 +18,24 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @After
     public void tearDown() {
+        Logger.flush(false);
+        Logger.flush(true);
         resetOut();
+
+
     }
+
     //endregion
 
     @Test
     public void shouldLogInteger() throws IOException {
         //region when
         Logger.log(1);
+        Logger.flush(true);
         Logger.log(0);
+        Logger.flush(true);
         Logger.log(-1);
+        Logger.flush(true);
         //endregion
 
         //region then
@@ -40,8 +48,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogByte() throws IOException {
         //region when
         Logger.log((byte)1);
+        Logger.flush(true);
         Logger.log((byte)0);
+        Logger.flush(true);
         Logger.log((byte)-1);
+        Logger.flush(true);
         //endregion
 
         //region then
@@ -52,8 +63,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    /*
-    TODO: implement Logger solution to match specification as tests
+
+    //TODO: implement Logger solution to match specification as tests
 
     @Test
     public void shouldLogChar() throws IOException {
@@ -74,6 +85,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log("test string 1");
         Logger.log("other str");
+        Logger.flush(false);
         //endregion
 
         //region then
@@ -108,6 +120,4 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("@");
         //endregion
     }
-
-    */
 }
