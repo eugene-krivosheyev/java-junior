@@ -1,5 +1,3 @@
-package com.acme.edu;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
