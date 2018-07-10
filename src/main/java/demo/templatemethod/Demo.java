@@ -88,6 +88,11 @@ class MessageFilterConsoleSaver extends Object implements LoggerFilter, LoggerSa
     }
 
     @Override
+    public boolean getState() {
+        return false;
+    }
+
+    @Override
     public void save() {
         System.out.println(filtered);
     }

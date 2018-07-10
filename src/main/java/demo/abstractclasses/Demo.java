@@ -42,7 +42,6 @@ class Cat extends Animal {
 
     }
 
-    @Override
     public static long getCount() {
         return 5;
     }

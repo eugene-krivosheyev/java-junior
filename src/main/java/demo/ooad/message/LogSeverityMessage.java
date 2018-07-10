@@ -5,7 +5,7 @@ import demo.ooad.SeverityLevel;
 /**
  * Immutable POJO
  */
-abstract class LogSeverityMessage {
+public abstract class LogSeverityMessage {
     /**
      * Visibility modifiers:
      * - public
@@ -29,7 +29,7 @@ abstract class LogSeverityMessage {
         this.severityLevel = severityLevel;
     }
 
-    protected String getMessage() {
+    public String getMessage() {
         return message;
     }
 
