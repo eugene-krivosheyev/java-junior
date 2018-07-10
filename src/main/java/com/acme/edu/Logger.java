@@ -1,25 +1,70 @@
 package com.acme.edu;
 
+
 public class Logger {
-
-    //region Integer and Byte
     static long sumInt;
+    static byte versionSumInt;
+    static String strToPrint;
+    static byte strRepeats;
 
-
-    public static void log(int message) {
-        output("primitive: " + message);
+    public static void setSumInt(long sumInt) {
+        Logger.sumInt += sumInt;
+        versionSumInt++;
     }
 
-    public static void log(int message, long maxVal, boolean isFlush) {
-        if (maxVal > sumInt + message) {
-            sumInt += message;
+    public static void eraseSumInt(){
+        sumInt = 0;
+        versionSumInt = 0;
+    }
+
+    public static void setStrToPrint(String message) {
+        if (message != strToPrint) {
+            flush(false);
+            strToPrint = message;
+            strRepeats = 1;
         } else {
-            log(maxVal);
-            sumInt = sumInt + message - maxVal;
+            strRepeats++;
         }
-        if (isFlush) {
-            log(sumInt);
-            sumInt = 0;
+
+    }
+
+    //region Integer and Byte
+
+
+    public static void flush(final boolean isIntFlush) {
+
+        if (isIntFlush){
+            if (versionSumInt > 0 ) {
+                output("primitive: " + sumInt);
+                eraseSumInt();
+                strToPrint = null;
+            }
+        } else {
+
+            if (strToPrint != null){
+                if (strRepeats == 1) {
+                    output("string: " + strToPrint);
+                } else {
+                    output("string: " + strToPrint +" (x" + strRepeats + ")");
+                }
+
+            }
+        }
+    }
+
+    public static void log(int message) {
+        flush(false);
+        setSumInt(message);
+    }
+
+    public static void log(int message, long maxVal) {
+        flush(false);
+        if (maxVal >= sumInt + message) {
+            setSumInt(message);
+        } else {
+            flush(true);
+            //log(maxVal);
+            setSumInt(message);
         }
     }
 
@@ -29,6 +74,29 @@ public class Logger {
 
 // endregion
 
+
+
+    public static void log(char message) {
+        output("char: " + message);
+    }
+
+    public static void log(String message) {
+        flush(true);
+        setStrToPrint(message);
+    }
+
+    public static void log(boolean message) {
+        output("primitive: " + message);
+    }
+
+    public static void log(Object message) {
+        output("reference: " + message);
+    }
+
+    private static void output(String decoratedMessage) {
+        System.out.println(decoratedMessage);
+    }
+
     // region Array
     public static void log(int[] message, boolean hint) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -36,12 +104,12 @@ public class Logger {
             stringBuilder.append("primitives array: ");
         };
         stringBuilder.append("{");
-                for (int i = 0; i < message.length; i++) {
-                    stringBuilder.append(message[i]);
-                    if (i < (message.length - 1)) {
-                        stringBuilder.append(", ");
-                    }
-                }
+        for (int i = 0; i < message.length; i++) {
+            stringBuilder.append(message[i]);
+            if (i < (message.length - 1)) {
+                stringBuilder.append(", ");
+            }
+        }
         stringBuilder.append("}");
         output(stringBuilder.toString());
     }
@@ -62,26 +130,4 @@ public class Logger {
         output("}");
     }
     // endregion
-
-    public static void log(char message) {
-        output("char: " + message);
-    }
-
-    public static void log(String message) {
-        output("string: " + message);
-    }
-
-    public static void log(boolean message) {
-        output("primitive: " + message);
-    }
-
-    public static void log(Object message) {
-        output("reference: " + message);
-    }
-
-    private static void output(String decoratedMessage) {
-        System.out.println(decoratedMessage);
-    }
-
-
 }

@@ -5,6 +5,7 @@ import java.io.PrintStream;
 
 import static org.fest.assertions.Assertions.*;
 
+
 public interface SysoutCaptureAndAssertionAbility {
     ByteArrayOutputStream OUT = new ByteArrayOutputStream();
 
