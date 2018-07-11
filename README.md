@@ -1,12 +1,16 @@
 # Java Junior Developer Training Course.
-88 hours training + 32 hours work project = 120 hr.
+44 hours training + 6 hours work project = 50 hr.
 
+To simplify cloning just clone one this branch:
+```bash
+git clone -b 2018-05-db --single-branch https://github.com/eugene-krivosheyev/java-junior
+```
 ---
 
-# Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice)
+# Introduction to Java and Java Technology (0)
 - Introduction to Java. Benefits.
 - JDK, JVM.
-- Java 2 (Java EE / SE / ME) 
+- Java 2 (Java EE / SE / ME)
 - Tools: java, javac, javadoc
 
 ## Lab: Installing JDK, Tuning Environmental Variables
@@ -21,7 +25,7 @@ $ java -version
 
 ---
 
-# Structure of Java-based applications (3/1)
+# Structure of Java-based applications (6)
 - Classes and *.class files
 - Java app definition
 - Classloading
@@ -41,7 +45,7 @@ Hello, world!
 
 ---
 
-# Development infrastructure: Git (1.5/0.5)
+# Development infrastructure: Git (0)
 - Intro to GIT
 - Repos
 - Commits
@@ -66,7 +70,7 @@ $ git push
 
 ---
 
-# Development infrastructure: Maven (1.5/0.5)
+# Development infrastructure: Maven (0)
 - Intro to Maven: build tool and dependency management
 - Build lifecycle, goals
 - Plugins
@@ -98,7 +102,7 @@ $ git push
 
 ---
 
-# JetBrains IDEA (1/0.5)
+# JetBrains IDEA (0)
 - Opening Maven projects
 - Running java apps
 - Running maven builds
@@ -118,7 +122,7 @@ $ git push
 
 ---
 
-# Java Syntax for Procedure Style (10/4)
+# Java Syntax for Procedure Style (6/2)
 
 ## Comments
 - Singe and multi-line
@@ -228,7 +232,7 @@ $ git push
 
 ---
 
-# OOAD recap (4/1)
+# OOAD recap (1/0)
 - Programming styles and paradigms
 - Procedure style vs OOAD
 - Classes and objects
@@ -257,7 +261,7 @@ $ git push
 
 ---
 
-# Java Syntax for OOP (12/4)
+# Java Syntax for OOP (5/2)
 
 ## Final
 - Final modifier semantics: 3
@@ -331,7 +335,7 @@ $ git push
 
 ---
 
-# OOD Principles and Patterns (4/2)
+# OOD Principles and Patterns (2/0)
 
 ## OOAD Principles: SOLID
 - SRP
@@ -361,7 +365,7 @@ $ git push
 
 ---
 
-# Unit testing with JUnit (6/3)
+# Unit testing with JUnit (2/0)
 - Assertions in Java
 - Testing scopes
 - Unit tests
@@ -388,7 +392,7 @@ $ git push
 
 ---
 
-# Intro to Functional Style (6/3)
+# Intro to Functional Style (2/0)
 - Nested Classes
 - Inner classes
 - Local classes
@@ -428,7 +432,7 @@ $ git push
 
 ---
 
-# Error handling with exceptions (4/2)
+# Error handling with exceptions (2/1)
 - Comparison of the exception mechanism to the traditional error-handling mechanism
 - Types of exceptions, their handling
 - Standard Java exceptions
@@ -448,7 +452,7 @@ $ git push
 
 ---
 
-# Generics (2/0.5)
+# Generics (0.5/0)
 - Generics as design style
 - Type safety
 - Generic classes
@@ -458,27 +462,7 @@ $ git push
 
 ---
 
-# Work Project. Session 1 (8/8)
-
-## Given
-- PM
-- Analyst
-- Product's FRs and NFRs
-- System's internal NFRs
-- CI server
-- Sonar server
-
-## When
-- Teams formed
-- Every team's git repo visible to PM and is identifiable
-- Teams deliver product with two iterations
-
-## Then
-- PM and Business Customers accept product with two demo sessions
-
----
-
-# System library (6/2)
+# System library (2/1)
 - System
 - Math
 - Object: hc and eq contract, toS
@@ -506,7 +490,13 @@ assertMessageEquals("3")
 
 ---
 
-# Collection API (4/1)
+## Logging (1)
+- Logging libraries hell overview
+- Using SLF4J
+
+---
+
+# Collection API (1/0)
 - Collection types and implementations
 - Iteration over collections
 - Comparable and Comparator
@@ -522,7 +512,7 @@ assertMessageEquals("3")
 
 ---
 
-# IO (8/3)
+# IO (3/1)
 - java.io.File
 - RandomAccessFile
 - Stream classes
@@ -562,7 +552,7 @@ assertMessageEquals("3")
 
 ---
 
-# Multi-threading in Java (8/3)
+# Multi-threading in Java (6/2)
 - Thread definition
 - Thread start: 3 options
 - Thread management
@@ -631,7 +621,30 @@ assertMessageEquals("3")
 
 ---
 
-# JDBC API (6/2)
+# Libraries for Flat Data Interaction Overview (1/0)
+- Apache Commons IO library
+- Apache Commons CSV library
+- Apache POI library
+
+---
+
+# Data interaction with XML files (1/0)
+- XML recap: namespaces, elements, attributes
+- Well-formed vs Valid documents
+- APIs overview: SAX vs DOM
+- Java API for SAX
+- Java API for DOM
+- OXM with JAXB overview
+
+---
+
+# Data integration with JSON files (1/0)
+- JSON recap
+- Jackson library
+
+---
+
+# JDBC API (2/1)
 - SQL recap: DDL and DML
 - DB schema design
 - Overview of JDBC API
@@ -654,7 +667,7 @@ assertMessageEquals("3")
 
 ---
 
-# Performance tuning and optimization in Java (3/1)
+# Performance tuning and optimization in Java (1/0)
 - JVM monitoring tool JVisualVM
 - Heap structure
 - GC types
@@ -669,7 +682,7 @@ assertMessageEquals("3")
 
 ---
 
-# Work Project. Session 2 (24/24)
+# Work Project. Session 1 (3/3)
 
 ## Given
 - PM
@@ -678,13 +691,15 @@ assertMessageEquals("3")
 - System's internal NFRs
 - CI server
 - Sonar server
-- Teams formed
-- Every team's git repo visible to PM and is identifiable
 
 ## When
-- Teams deliver product with six iterations
+- Teams formed
+- Every team's git repo visible to PM and is identifiable
+- Teams deliver product with two iterations
 
 ## Then
-- PM and Business Customers accept product with six demo sessions
+- PM and Business Customers accept product with two demo sessions
 
 ---
+
+# JNI / JNA
