@@ -83,7 +83,7 @@ public class ControllingDemo {
         doSmthWithArray(new int[] {1,2,3});
         doSmthWithArray(1,2,4);
         doSmthWithArray();
-        doSmthWithArray(1); //m(pname: 1)
+        doSmthWithArray(1); //factoryMethod(pname: 1)
 
         //endregion
     }

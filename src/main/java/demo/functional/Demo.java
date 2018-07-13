@@ -5,7 +5,8 @@ public class Demo {
     public static void main(String[] args) {
 //        Outer.outerInstanceState ???
         Outer outer = new Outer();
-        Outer.Inner inner = outer.new Inner();
+        Saver saver = outer.factoryMethod();
+        saver.save();
     }
 }
 
@@ -15,9 +16,18 @@ public class Demo {
 class Outer {
     private int outerInstanceState = 0;
 
-    public class Inner {
-        void m() {
-            Outer.this.outerInstanceState = 1;
+    public Saver factoryMethod() {
+        class ConsoleSaver implements Saver {
+            @Override
+            public void save() {
+                //????
+            }
         }
+
+        return new ConsoleSaver();
     }
+}
+
+interface Saver {
+    void save();
 }
