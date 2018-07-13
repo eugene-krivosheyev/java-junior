@@ -3,10 +3,9 @@ package demo.functional;
 
 public class Demo {
     public static void main(String[] args) {
-//        Outer.state ???
-        Outer.Inner obj = new Outer.Inner();
-        obj.m();
-
+//        Outer.outerInstanceState ???
+        Outer outer = new Outer();
+        Outer.Inner inner = outer.new Inner();
     }
 }
 
@@ -14,11 +13,11 @@ public class Demo {
  * Top-level class
  */
 class Outer {
-    private static int state = 0;
+    private int outerInstanceState = 0;
 
-    public static class Inner {
+    public class Inner {
         void m() {
-            state = 1;
+            Outer.this.outerInstanceState = 1;
         }
     }
 }
