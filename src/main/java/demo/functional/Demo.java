@@ -1,5 +1,12 @@
 package demo.functional;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Demo {
     public static void main(String[] args) {
@@ -12,7 +19,25 @@ public class Demo {
             (p, severity) -> outer.doThm(p)
         );
 
+        System.out.println("=================");
+        Collection<Integer> list = Arrays.asList(1,7,2,6,3,5,4);
+        list.stream()
+                .map(param -> param + 1)
+                .filter(integer -> integer < 5)
+                .sorted((e1,e2) -> e2 - e1)
+        .forEach(System.out::println);
 
+
+        new FluentInterface() //Chaining
+                    .operation()
+                    .operation()
+                    .operation();
+    }
+}
+
+class FluentInterface {
+    FluentInterface operation() {
+        return this;
     }
 }
 
