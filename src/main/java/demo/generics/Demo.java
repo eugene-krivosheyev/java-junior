@@ -1,10 +1,13 @@
 package demo.generics;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class Demo {
     public static void main(String[] args) {
-        MySuperArray array = new MySuperArray();
+        MySuperArray<String> array = new MySuperArray<>(new String[5]);
         array.setElement("abc", 1);
 
         //===========
@@ -13,30 +16,54 @@ public class Demo {
                 array.getElement(1),
                 System.out::println
         );
+
+
     }
 
-    public static void doIfString(Object element, Consumer todo) {
+    public static void doIfString(Object element, ToDo todo) {
         if (element instanceof String) {
-            todo.accept((String)element);
+            todo.<String>todo();
         }
     }
 }
 
 interface ToDo {
-    void todo(Object subject);
+    <T> T todo();
 }
 
 /**
  * Generic Algorithm
  */
-class MySuperArray {
-    private Object[] internalArray = new Object[15];
+class MySuperArray<E> {
+    private E[] internalArray;
 
-    public void setElement(Object newValue, int position) {
+    MySuperArray(E[] internalArray) {
+        this.internalArray = internalArray;
+    }
+
+    public void setElement(E newValue, int position) {
         this.internalArray[position] = newValue;
     }
 
-    public Object getElement(int position) {
+    public E getElement(int position) {
         return this.internalArray[position];
+    }
+}
+
+interface Interf<T> {
+    T operation();
+}
+
+class Sub1<T> implements Interf<T> {
+    @Override
+    public T operation() {
+        return null;
+    }
+}
+
+class Sub2 implements Interf<String> {
+    @Override
+    public String operation() {
+        return null;
     }
 }
