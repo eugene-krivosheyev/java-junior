@@ -12,19 +12,19 @@ public class Demo {
 
         //===========
 
-        doIfString(
-                array.getElement(1),
-                System.out::println
-        );
+//        doIfString(
+//                array.getElement(1),
+//                System.out::println
+//        );
 
         //when(myObj.toString()).thenReturn("");
     }
 
-    public static void doIfString(Object element, ToDo todo) {
-        if (element instanceof String) {
-            todo.<String>todo();
-        }
-    }
+//    public static void doIfString(Object element, ToDo todo) {
+//        if (element instanceof String) {
+//            todo.<String>todo();
+//        }
+//    }
 }
 
 interface ToDo {
