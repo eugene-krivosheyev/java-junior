@@ -17,7 +17,7 @@ public class Demo {
                 System.out::println
         );
 
-
+        //when(myObj.toString()).thenReturn("");
     }
 
     public static void doIfString(Object element, ToDo todo) {
@@ -28,7 +28,7 @@ public class Demo {
 }
 
 interface ToDo {
-    <T> T todo();
+    <T> T todo(T param);
 }
 
 /**
