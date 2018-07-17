@@ -48,18 +48,14 @@ class Outer {
     private int outerInstanceState = 0;
 
     public Saver factoryMethod() {
-        int outerMethodLocalVar = 0;
+         int outerMethodLocalVar = 0;
 
-       return new Saver() {
-           @Override //Closure
-           public void save(String message, String severity) {
-               Outer.this.outerInstanceState = 1;
-               System.out.println(outerMethodLocalVar);
+       return (message, severity) -> {
+           Outer.this.outerInstanceState = 1;
+           System.out.println(outerMethodLocalVar);
 //               outerMethodLocalVar = 5;
-           }
        };
     }
-
 
     void doThm(String p) {
 
