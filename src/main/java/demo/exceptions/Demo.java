@@ -3,6 +3,7 @@ package demo.exceptions;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class Demo {
     public static void main(String[] args) {
@@ -42,7 +43,9 @@ class MoneyService {
     }
 
     public void doTransfer() throws TransferException {
-        try (FinDao finlogDao = new FinDao()) {
+        try (
+            FinDao finlogDao = new FinDao();
+        ) {
             accountDao.getAmount();
             finlogDao.save();
         } catch (IOException e) {
