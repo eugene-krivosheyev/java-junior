@@ -7,8 +7,7 @@ public class Demo {
     public static void main(String[] args) {
         UI ui = new UI(
                     new MoneyService(
-                        new AccountDao(),
-                        new FinDao()
+                        new AccountDao()
                     )
         );
 
@@ -36,22 +35,35 @@ class UI {
 
 class MoneyService {
     private AccountDao accountDao;
-    private FinDao finlogDao;
+    private FinDao finlogDao = null;
 
-    MoneyService(AccountDao accountDao, FinDao finlogDao) {
+    MoneyService(AccountDao accountDao) {
         this.accountDao = accountDao;
-        this.finlogDao = finlogDao;
     }
 
     public void doTransfer() throws TransferException {
+        TransferException transferException = null;
         try {
+            finlogDao = new FinDao();
             accountDao.getAmount();
             finlogDao.save();
         } catch (IOException e) {
             //0. logging
             //1. Compensating TX
             //2. Re-throw
-            throw new TransferException("Can't transfer", e); //Wrapped
+            transferException = new TransferException("Can't transfer", e);
+            throw transferException; //Wrapped
+        } finally {
+//            if (finlogDao != null) {
+            try {
+                finlogDao.close();
+            } catch (NullPointerException e) {
+                if (transferException != null) {
+                    e.addSuppressed(transferException);
+                }
+                throw e;
+            }
+//            }
         }
         //unreachable
     }
@@ -75,5 +87,9 @@ class FinDao {
             throw new IOException("Can't open file");
             //unreachable
         }
+    }
+
+    public void close() {
+
     }
 }

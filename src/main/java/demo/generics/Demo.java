@@ -2,6 +2,7 @@ package demo.generics;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
@@ -18,6 +19,10 @@ public class Demo {
 //        );
 
         //when(myObj.toString()).thenReturn("");
+
+
+        List<String> list = new ArrayList<>();
+        list.add("");
     }
 
 //    public static void doIfString(Object element, ToDo todo) {
