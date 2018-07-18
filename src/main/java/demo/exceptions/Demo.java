@@ -1,6 +1,7 @@
 package demo.exceptions;
 
 
+import java.io.Closeable;
 import java.io.IOException;
 
 public class Demo {
@@ -35,37 +36,21 @@ class UI {
 
 class MoneyService {
     private AccountDao accountDao;
-    private FinDao finlogDao = null;
 
     MoneyService(AccountDao accountDao) {
         this.accountDao = accountDao;
     }
 
     public void doTransfer() throws TransferException {
-        TransferException transferException = null;
-        try {
-            finlogDao = new FinDao();
+        try (FinDao finlogDao = new FinDao()) {
             accountDao.getAmount();
             finlogDao.save();
         } catch (IOException e) {
             //0. logging
             //1. Compensating TX
             //2. Re-throw
-            transferException = new TransferException("Can't transfer", e);
-            throw transferException; //Wrapped
-        } finally {
-//            if (finlogDao != null) {
-            try {
-                finlogDao.close();
-            } catch (NullPointerException e) {
-                if (transferException != null) {
-                    e.addSuppressed(transferException);
-                }
-                throw e;
-            }
-//            }
+            throw new TransferException("Can't transfer", e);
         }
-        //unreachable
     }
 }
 
@@ -81,7 +66,7 @@ class AccountDao {
     }
 }
 
-class FinDao {
+class FinDao implements Closeable {
     public void save() throws IOException {
         if (1 == 1) {
             throw new IOException("Can't open file");
@@ -89,6 +74,7 @@ class FinDao {
         }
     }
 
+    @Override
     public void close() {
 
     }
