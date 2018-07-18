@@ -42,6 +42,10 @@ class MoneyService {
         this.accountDao = accountDao;
     }
 
+    /**
+     *
+     * @throws TransferException
+     */
     public void doTransfer() throws TransferException {
         try (
             FinDao finlogDao = new FinDao();
