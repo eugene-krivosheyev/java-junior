@@ -57,6 +57,13 @@ public class Demo {
         Integer boxedI1 = 128; //new Integer(1_000)
         Integer boxedI2 = 128; // -128..127
         System.out.println(boxedI1 == boxedI2);
+        System.out.println(boxedI1.equals(boxedI2));
+
+        //DON'T!!!!!!!
+        for (Integer c = 0; c < 1_000; c++) {
+
+        }
+
     }
 }
 
