@@ -35,6 +35,8 @@ public class Demo {
         cats.add(new Cat("Murik-2"));
 
         cats.forEach(System.out::println);
+
+        Collections.unmodifiableSet(cats);
     }
 }
 
