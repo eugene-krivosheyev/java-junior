@@ -43,6 +43,20 @@ public class Demo {
             e.printStackTrace();
         }
 
+
+
+        Integer i = new Integer(5);
+        Integer.parseInt("5");
+        i.intValue();
+
+        Integer boxedI = 5; //new Integer(5);
+        int unboxedI = boxedI; //boxedI.xxxValue();
+
+        String s = "sss"; //new String() + intern
+
+        Integer boxedI1 = 128; //new Integer(1_000)
+        Integer boxedI2 = 128; // -128..127
+        System.out.println(boxedI1 == boxedI2);
     }
 }
 
