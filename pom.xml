@@ -38,5 +38,10 @@
       <version>1.4</version>
       <scope>test</scope>
     </dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-webmvc</artifactId>
+    <version>5.0.8.RELEASE</version>
+</dependency>
   </dependencies>
 </project>

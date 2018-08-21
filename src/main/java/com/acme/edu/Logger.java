@@ -1,5 +1,6 @@
 package com.acme.edu;
 
+//TODO To think
 public class Logger {
     public static void log(int message) {
         System.out.println("primitive: " + message);
