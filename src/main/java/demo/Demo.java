@@ -1,5 +1,8 @@
 package demo;
 
+import static java.lang.Math.PI;
+import static java.lang.Math.abs;
+
 /**
  * JCSC
  * @author fkgjfbnjk
@@ -36,5 +39,10 @@ public class Demo {
     private static void nestedMethod() {
         int nestedLocalVar;
         String localStringVar = new String();
+    }
+
+    private void staticImportDemo() {
+        abs(1);
+        System.out.println(PI);
     }
 }
