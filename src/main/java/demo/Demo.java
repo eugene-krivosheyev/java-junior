@@ -2,15 +2,33 @@ package demo;
 
 public class Demo {
     public static void main(String[] args) {
-        int factualParam = 0;
+        IntHolder factualParam = new IntHolder(0);
         nestedMethod(factualParam);
-        System.out.println(factualParam);
+        System.out.println(factualParam.getState());
     }
 
     /**
-     * For primitives: Pass By Value
+     * For primitives: Pass By Value.
+     * For references: Pass By Reference.
      */
-    private static void nestedMethod(int formalParam) {
-        formalParam = 1;
+    private static void nestedMethod(IntHolder formalParam) {
+        formalParam.setState(1);
+    }
+}
+
+//POJO
+class IntHolder {
+    private int state;
+
+    public IntHolder(int state) {
+        this.state = state;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }
