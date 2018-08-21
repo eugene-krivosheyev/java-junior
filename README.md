@@ -1,3 +1,6 @@
+ZhenyaMsl: Валентина Рыбникова
+petertrr: Петр Трифанов
+
 # Java Junior Developer Training Course.
 88 hours training + 32 hours work project = 120 hr.
 
