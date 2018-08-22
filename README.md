@@ -158,12 +158,6 @@ $ git push
 - Heap and stack
 - Garbage collector
 
-## Strings
-- String type
-- String literal values
-- Interning
-- String concatenation
-
 ## Course Project Iteration 01: The Rise of Logger Library
 - Read and analyse specification as tests for this iteration in *src/test*
 - Uncomment specification cases
@@ -173,6 +167,12 @@ $ git push
 - All given specifications runs are green
 - Code reuse and minimum code duplication
 - Code style
+
+## Strings
+- String type
+- String literal values
+- Interning
+- String concatenation
 
 ## Operators
 - Arithmetic
