@@ -1,5 +1,7 @@
 package primitives;
 
+import java.util.Objects;
+
 public class PrimitivesDemo {
     public static void main(String[] args) {
         //region Целочисленные
@@ -25,8 +27,23 @@ public class PrimitivesDemo {
         //#DEFINE true false
         //endregion
 
-        //region Ссылочный тип
-        String str = "";
+        //region Строковый тип
+        //DP: Immutable
+        String str1 = new String("a"); str1.intern();
+        String str2 = "a"; //new String() + intern()
+        System.out.println(str1 == str2);
+        System.out.println(">: " + (null == null));
+
+        System.out.println(str1.equals(str2)); //NPE!!!
+        Objects.equals(str1, str2);
+
+        String newString = str1.toUpperCase();
+        System.out.println(newString);
+
+//        StringBuffer, StringBuilder;
+        System.out.println("a" + "b" + "c" + "d" + "e");
+        StringBuilder sb = new StringBuilder("a");
+        sb.append("b").append("c").append("d"); //Fluent Interface
         //endregion
     }
 }
