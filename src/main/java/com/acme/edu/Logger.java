@@ -47,8 +47,7 @@ public class Logger {
     public static void log(Object message) {
         log(REFERENCE_NAME, message.toString());
     }
-
-
+    
     public static void log(String message) {
         log(STRING_NAME, message);
     }
