@@ -91,7 +91,7 @@ public class Logger {
     }
 
     private static void checkStare(State state) /* throws Exception */ {
-        if (state != currentState) {
+        if (state != currentState && state != State.INITIAL) {
             Logger.flush();
         }
     }
