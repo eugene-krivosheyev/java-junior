@@ -1,17 +1,19 @@
 package controllingexecution;
 
 public class CyclesAndBranchesDemo {
+    /**
+     * $> java -Xmx6G MyClass a b cd "ef gh"
+     */
     public static void main(String[] args) {
-        String s = ""; //null
-        switch (s) {
-            case "a":
-                System.out.println("1");
-                break;
-            case "b":
-                System.out.println("2");
-                break;
-            default:
-                System.out.println("?????");
+        for (String current : args) {
+            System.out.println("> " + current);
         }
+
+        outer: do {
+            inner: while (true) {
+                break inner;
+//                continue outer;
+            }
+        } while (true);
     }
 }
