@@ -1,5 +1,6 @@
 package com.acme.edu;
 
+//TODO To think
 public class Logger {
     private static final String PRIMITIVE = "primitive";
     private static final String STRING = "string";
