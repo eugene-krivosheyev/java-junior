@@ -1,27 +1,38 @@
 package com.acme.edu;
 
 public class Logger {
+
+    private static final String PRIMITIVE = "primitive: ";
+    private static final String CHAR = "char: ";
+    private static final String STRING = "string: ";
+    private static final String REFERENCE = "reference: ";
+
     public static void log(int message) {
-        System.out.println("primitive: " + message);
+        save(PRIMITIVE + message);
     }
 
     public static void log(byte message) {
-        System.out.println("primitive: " + message);
+        save(PRIMITIVE + message);
+    }
+
+    private static void save(String decoratedMessage) {
+        System.out.println(decoratedMessage);
     }
 
     public static void log(char message) {
-        System.out.println("char: " + message);
+        save(CHAR + message);
     }
 
     public static void log(String message) {
-        System.out.println("string: " + message);
+        save(STRING + message);
     }
 
     public static void log(boolean message) {
-        System.out.println("primitive: " + message);
+        save(PRIMITIVE + message);
     }
 
     public static void log(Object message) {
-        System.out.println("reference: " + message);
+        save(REFERENCE + message);
+
     }
 }
