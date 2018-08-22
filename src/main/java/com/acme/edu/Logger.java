@@ -77,14 +77,17 @@ public class Logger {
     }
 
     public static void log(boolean message) {
+        flush();
         log(PRIMITIVE_NAME, String.valueOf(message));
     }
 
     public static void log(char message) {
+        flush();
         log(CHAR_NAME, String.valueOf(message));
     }
 
     public static void log(Object message) {
+        flush();
         log(REFERENCE_NAME, Objects.toString(message, "null"));
     }
 
