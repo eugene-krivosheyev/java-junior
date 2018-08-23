@@ -32,10 +32,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 1");
         Logger.log(1);
         Logger.log(2);
-        Logger.digitFlush();
         Logger.log("str 2");
         Logger.log(0);
-        Logger.digitFlush();
+        Logger.flush();
         //endregion
 
         //region then
@@ -49,12 +48,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log("str 1");
         Logger.log(10);
-        Logger.digitFlush();
         Logger.log(Integer.MAX_VALUE);
-        Logger.digitFlush();
         Logger.log("str 2");
         Logger.log(0);
-        Logger.digitFlush();
+        Logger.flush();
         //endregion
 
         //region then
@@ -70,12 +67,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log("str 1");
         Logger.log((byte)10);
-        Logger.digitFlush();
         Logger.log((byte)Byte.MAX_VALUE);
-        Logger.digitFlush();
         Logger.log("str 2");
         Logger.log(0);
-        Logger.digitFlush();
+        Logger.flush();
         //endregion
 
         //region then
@@ -90,18 +85,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
         //region when
         Logger.log("str 1");
-        Logger.stringFlush();
         Logger.log("str 2");
         Logger.log("str 2");
-        Logger.stringFlush();
         Logger.log(0);
-        Logger.digitFlush();
         Logger.log("str 2");
-        Logger.stringFlush();
         Logger.log("str 3");
         Logger.log("str 3");
         Logger.log("str 3");
-        Logger.stringFlush();
+        Logger.flush();
         //endregion
 
         //region then
