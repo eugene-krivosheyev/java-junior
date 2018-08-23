@@ -1,6 +1,8 @@
 package com.acme.edu;
 
 
+import java.util.Arrays;
+
 public class Logger {
     public static void log(int message) /* throws Exception */ {
         String decoratedMessage = PRIMITIVE + message;
@@ -72,14 +74,37 @@ public class Logger {
         save(decoratedMessage);
         currentState = State.REFERENCE;
     }
+    private static String messageDecorator(String message) {
+        return message.replace('[', '{').replace(']','}');
+    }
+    public static void log(int[] message) /* throws Exception */ {
+        String decoratedMessage = PRIMITIVES_ARRAY + Arrays.toString(message);
+        checkStare(State.INT_ARRAY);
+        save(messageDecorator(decoratedMessage));
+        currentState = State.INT_ARRAY;
+    }
+    private static String messageDecoratorCurveBrackets(String message) {
+        return "{" + System.lineSeparator() + message + "}" + System.lineSeparator();
+    }
+    public static void log(int[][] message) /* throws Exception */ {
+        String decoratedMessage = new String("");
+        checkStare(State.INT_MATRIX);
+        for (int[] row : message) {
+            decoratedMessage += Arrays.toString(row) + System.lineSeparator();
+        }
+        save(PRIMITIVES_MATRIX + messageDecoratorCurveBrackets(messageDecorator(decoratedMessage)));
+        currentState = State.INT_MATRIX;
+    }
 
     private static final String PRIMITIVE = "primitive: ";
+    private static final String PRIMITIVES_ARRAY = "primitives array: ";
+    private static final String PRIMITIVES_MATRIX = "primitives matrix: ";
     private static final String CHAR = "char: ";
     private static final String STRING = "string: ";
     private static final String REFERENCE = "reference: ";
 
 
-    public enum State { INITIAL, INTEGER, BYTE, STRING, REFERENCE}
+    public enum State { INITIAL, INTEGER, BYTE, STRING, REFERENCE, INT_ARRAY, INT_MATRIX}
 
     private static State currentState = State.INITIAL;
     private static int currentSum = 0;
@@ -91,7 +116,7 @@ public class Logger {
     }
 
     private static void checkStare(State state) /* throws Exception */ {
-        if (state != currentState && state != State.INITIAL) {
+        if (state != currentState && currentState != State.INITIAL) {
             Logger.flush();
         }
     }
