@@ -4,36 +4,31 @@ import java.util.Stack;
 
 public class Logger {
     private static final String PRIMITIVE = "primitive";
+    private static final String PRIMITIVES_ARRAY = "primitives array";
+    public static final String PRIMITIVES_MATRIX = "primitives matrix";
     private static final String CHAR = "char";
     private static final String STRING = "string";
     private static final String REFERENCE = "reference";
 
-    private  static  Stack<Object> objectStack = new Stack<Object>();
+    private static Stack<Object> objectStack = new Stack<Object>();
 
     public static void flush() {
+
         Object currentElement = null;
-        /*objectStack.push(10);
-        objectStack.push("a1");
-        objectStack.push("a1");
-        objectStack.push("a2");*/
-        while(!objectStack.empty())
-        {
+
+        while (!objectStack.empty()) {
             currentElement = objectStack.pop();
-            //System.out.println(currentElement.getClass());
-            if(currentElement.getClass() == Integer.class || currentElement.getClass() == Byte.class)
-            {
+
+            if (currentElement.getClass() == Integer.class || currentElement.getClass() == Byte.class) {
                 save(PRIMITIVE, currentElement.toString());
-            }
-            else if(currentElement.getClass() == String.class)
-            {
+            } else if (currentElement.getClass() == String.class) {
                 int numberOfEncounters = 1;
-                while(!objectStack.empty() && objectStack.peek().getClass() == String.class && objectStack.peek().toString().equals(currentElement.toString()))
-                {
+                while (!objectStack.empty() && objectStack.peek().getClass() == String.class && objectStack.peek().toString().equals(currentElement.toString())) {
                     objectStack.pop();
                     numberOfEncounters++;
                 }
                 String resultString = currentElement.toString();
-                if(numberOfEncounters > 1)
+                if (numberOfEncounters > 1)
                     resultString = resultString + " (x" + numberOfEncounters + ")";
                 save(STRING, resultString);
             }
@@ -41,59 +36,60 @@ public class Logger {
     }
 
     public static void log(int message) {
-        if(objectStack.empty())
-        {
-            objectStack.push(message);
-            return;
-        }
-        if (objectStack.peek().getClass() != Integer.class)
-        {
-            flush();
+        if (stackIsCleanedAsFilledWithNotType(Integer.class)) {
             objectStack.push(message);
             return;
         }
 
         int tempResult = Integer.valueOf(objectStack.pop().toString());
-        if (tempResult + message >= tempResult)
-        {
+        if (tempResult + message >= tempResult) {
             objectStack.push(tempResult + message);
-        }
-        else
-        {
+        } else {
             objectStack.push(Integer.MAX_VALUE);
             flush();
             int result = message - (Integer.MAX_VALUE - tempResult);
             objectStack.push(result);
         }
-        //save(PRIMITIVE, Integer.toString(message));
     }
 
     public static void log(byte message) {
-        if(objectStack.empty())
-        {
-            objectStack.push(message);
-            return;
-        }
-        if (objectStack.peek().getClass() != Byte.class)
-        {
-            flush();
+        if (stackIsCleanedAsFilledWithNotType(Byte.class)) {
             objectStack.push(message);
             return;
         }
 
         byte tempResult = Byte.valueOf(objectStack.pop().toString());
-        if ( (byte)(tempResult + message) >= tempResult)
-        {
+        if ((byte) (tempResult + message) >= tempResult) {
             objectStack.push(tempResult + message);
-        }
-        else
-        {
+        } else {
             objectStack.push(Byte.MAX_VALUE);
             flush();
             int result = message - (Byte.MAX_VALUE - tempResult);
             objectStack.push(result);
         }
-       // save(PRIMITIVE, Byte.toString(message));
+    }
+
+    public static void log(String message) {
+        if (!stackIsNotEmptyAndContainsString()) {
+            flush();
+        }
+        objectStack.push((message));
+
+    }
+
+    public static void log(int[] message) {
+        save(PRIMITIVES_ARRAY, oneDimArrayAsString(message));
+    }
+
+    public static void log(int[][] message) {
+
+        String[] result = new String[message.length];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = oneDimArrayAsString(message[i]);
+        }
+        String overallResult = String.join(System.lineSeparator(), result);
+        String finalResult = "{" + System.lineSeparator() + overallResult + System.lineSeparator() + "}";
+        save(PRIMITIVES_MATRIX, finalResult);
     }
 
     public static void log(char message) {
@@ -104,17 +100,6 @@ public class Logger {
         save(PRIMITIVE, Boolean.toString(message));
     }
 
-    public static void log(String message) {
-        if(objectStack.empty() || objectStack.peek().getClass() == String.class)
-        {
-            objectStack.push(message);
-        }
-        else
-        {
-            flush();
-            objectStack.push(message);
-        }
-    }
 
     public static void log(Object message) {
         save(REFERENCE, message.toString());
@@ -124,4 +109,34 @@ public class Logger {
         System.out.println(type + ": " + message);
     }
 
+    private static boolean stackIsNotEmptyAndContainsString() {
+        return (objectStack.empty() || objectStack.peek().getClass() == String.class);
+    }
+
+    private static boolean stackIsCleanedAsFilledWithNotType(Class type) {
+        if (objectStack.empty()) {
+            return true;
+        }
+
+        if (objectStack.peek().getClass() != Integer.class) {
+            flush();
+            return true;
+        }
+
+        return false;
+    }
+
+    private static String oneDimArrayAsString(int[] array) {
+        if (array.length == 0) {
+            return "{" + System.lineSeparator() + "}";
+        }
+        StringBuilder arrayAsString = new StringBuilder("{");
+        for (int i = 0; i < array.length - 1; i++) {
+            arrayAsString.append(array[i]);
+            arrayAsString.append(", ");
+        }
+        arrayAsString.append(array[array.length - 1]);
+        arrayAsString.append("}");
+        return arrayAsString.toString();
+    }
 }
