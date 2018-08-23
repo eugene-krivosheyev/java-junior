@@ -2,55 +2,21 @@ package com.acme.edu;
 
 public class Logger {
     enum MessageType {
-        BOOLEAN, BYTE, INT, CHAR, STRING, OBJECT
+        BOOLEAN, BYTE, INT, CHAR, STRING, OBJECT, INTARRAY, INTMATRIX
     }
 
     private static final String PRIMITIVE = "primitive: ";
     private static final String CHAR = "char: ";
     private static final String STRING = "string: ";
     private static final String REFERENCE = "reference: ";
+    private static final String PRIMITIVE_ARR = "primitives array: ";
+    private static final String PRIMITIVE_MAT = "primitives matrix: ";
 
     private static MessageType previousType = null;
     private static int intSum = 0;
     private static byte byteSum = 0;
     private static String prevString = null;
     private static int countPrevString = 0;
-
-    private static boolean isOverflow(int val1, int val2) {
-        return val1 > 0 ?
-                Integer.MAX_VALUE - val1 < val2 :
-                Integer.MIN_VALUE - val1 > val2;
-    }
-
-    private static boolean isOverflow(byte val1, byte val2) {
-        return val1 > 0 ?
-                Byte.MAX_VALUE - val1 < val2 :
-                Byte.MIN_VALUE - val1 > val2;
-    }
-
-    private static void flushWithoutStateChange() {
-        switch (previousType) {
-            case BOOLEAN:
-                break;
-            case BYTE:
-                save(PRIMITIVE + byteSum);
-                byteSum = 0;
-                break;
-            case INT:
-                save(PRIMITIVE + intSum);
-                intSum = 0;
-                break;
-            case CHAR:
-                break;
-            case STRING:
-                save(STRING + prevString + (countPrevString > 1 ? " (x" + countPrevString + ")" : ""));
-                prevString = null;
-                countPrevString = 0;
-                break;
-            case OBJECT:
-                break;
-        }
-    }
 
     public static void flush() {
         flushWithoutStateChange();
@@ -72,6 +38,22 @@ public class Logger {
             flushWithoutStateChange();
         }
         intSum += message;
+    }
+
+    public static void log(int[] message) {
+        updateState(MessageType.INTARRAY);
+        save(PRIMITIVE_ARR + array1dToString(message));
+    }
+
+    public static void log(int[][] message) {
+        updateState(MessageType.INTMATRIX);
+        StringBuilder outString = new StringBuilder(PRIMITIVE_MAT);
+        outString.append("{").append(System.lineSeparator());
+        for(int[] subArr : message) {
+            outString.append(array1dToString(subArr)).append(System.lineSeparator());
+        }
+        outString.append("}");
+        save(outString.toString());
     }
 
     public static void log(byte message) {
@@ -111,5 +93,54 @@ public class Logger {
 
     private static void save(String decoratedMessage) {
         System.out.println(decoratedMessage);
+    }
+
+    private static boolean isOverflow(int val1, int val2) {
+        return val1 > 0 ?
+                Integer.MAX_VALUE - val1 < val2 :
+                Integer.MIN_VALUE - val1 > val2;
+    }
+
+    private static boolean isOverflow(byte val1, byte val2) {
+        return val1 > 0 ?
+                Byte.MAX_VALUE - val1 < val2 :
+                Byte.MIN_VALUE - val1 > val2;
+    }
+
+    private static void flushWithoutStateChange() {
+        switch (previousType) {
+            case BOOLEAN:
+                break;
+            case BYTE:
+                save(PRIMITIVE + byteSum);
+                byteSum = 0;
+                break;
+            case INT:
+                save(PRIMITIVE + intSum);
+                intSum = 0;
+                break;
+            case CHAR:
+                break;
+            case STRING:
+                save(STRING + prevString + (countPrevString > 1 ? " (x" + countPrevString + ")" : ""));
+                prevString = null;
+                countPrevString = 0;
+                break;
+            case OBJECT:
+                break;
+        }
+    }
+
+    private static String array1dToString(int[] array) {
+        StringBuilder outString = new StringBuilder();
+        outString.append("{");
+        if (array.length > 0) {
+            outString.append(array[0]);
+        }
+        for(int i=1; i<array.length; i++) {
+            outString.append(", ").append(array[i]);
+        }
+        outString.append("}");
+        return outString.toString();
     }
 }
