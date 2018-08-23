@@ -40,7 +40,9 @@ public class Logger {
     }
 
     private static void save(String decoratedMessage) {
-        fullMessage += decoratedMessage + System.lineSeparator();
+//        fullMessage += decoratedMessage + System.lineSeparator();
+        System.out.println(decoratedMessage);
+
     }
 
     public static void log(int message) {
@@ -69,6 +71,39 @@ public class Logger {
             storedString = "";
         }
         storedByte += message;
+    }
+
+    public static void log(int[] message){
+        String  currentString = stringFromArray(message);
+        StringBuilder decoratedMessage = new StringBuilder("primitives array: ").
+                append(currentString);
+
+        save(decoratedMessage.toString());
+    }
+
+    private static String stringFromArray(int[] message) {
+        String[] strings = new String[message.length];
+        for (int counter = 0; counter < message.length; counter++) {
+            strings[counter] = Integer.toString(message[counter]);
+        }
+        StringBuilder decoratedMessage = new StringBuilder("{").
+                append(String.join(", ", strings)).
+                append("}");
+        return decoratedMessage.toString();
+    }
+
+    public static void log(int[][] message){
+        String[] strings = new String[message.length];
+        for (int counter = 0; counter < message.length; counter++) {
+            strings[counter] = stringFromArray(message[counter]);
+
+        }
+
+        StringBuilder decoratedMessage = new StringBuilder("primitives matrix: {").
+                append(System.lineSeparator()).
+                append( String.join(System.lineSeparator(), strings)).
+                append(System.lineSeparator()+"}");
+        save(decoratedMessage.toString());
     }
 
     public static void log(char message) {
