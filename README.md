@@ -207,6 +207,15 @@ $ git push
 - Using
 - Constraints
 
+---
+
+# Refactoring with IDEA (1/0)
+- Intro to Refactoring
+- Basic Refactorings Matrix
+- Wrap method / Sprout method
+
+---
+
 ## Course Project Iteration 03: Logger Library
 - Read and analyse specification as tests for this iteration in *src/test*
 - Uncomment specification cases
@@ -248,13 +257,6 @@ $ git push
 - Refactorings to do
 - Switch and polymorphism and OCP
 - Command Design Pattern
-
----
-
-# Refactoring with IDEA (1/0)
-- Intro to Refactoring
-- Basic Refactorings Matrix
-- Wrap method / Sprout method
 
 ---
 
