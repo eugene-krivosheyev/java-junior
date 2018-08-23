@@ -22,11 +22,7 @@ public class Logger {
             if (currentElement.getClass() == Integer.class || currentElement.getClass() == Byte.class) {
                 save(PRIMITIVE, currentElement.toString());
             } else if (currentElement.getClass() == String.class) {
-                int numberOfEncounters = 1;
-                while (!objectStack.empty() && objectStack.peek().getClass() == String.class && objectStack.peek().toString().equals(currentElement.toString())) {
-                    objectStack.pop();
-                    numberOfEncounters++;
-                }
+                int numberOfEncounters =countStringOccurrenciesInStack(currentElement);
                 String resultString = currentElement.toString();
                 if (numberOfEncounters > 1)
                     resultString = resultString + " (x" + numberOfEncounters + ")";
@@ -35,6 +31,15 @@ public class Logger {
         }
     }
 
+    private static int countStringOccurrenciesInStack(Object currentElement)
+    {
+        int numberOfEncounters = 1;
+        while (!objectStack.empty() && objectStack.peek().getClass() == String.class && objectStack.peek().toString().equals(currentElement.toString())) {
+            objectStack.pop();
+            numberOfEncounters++;
+        }
+        return numberOfEncounters;
+    }
     public static void log(int message) {
         if (stackIsCleanedAsFilledWithNotType(Integer.class)) {
             objectStack.push(message);
@@ -83,12 +88,12 @@ public class Logger {
 
     public static void log(int[][] message) {
 
-        String[] result = new String[message.length];
-        for (int i = 0; i < result.length; i++) {
-            result[i] = oneDimArrayAsString(message[i]);
+        String[] arrayOfIntsAsString = new String[message.length];
+        for (int i = 0; i < arrayOfIntsAsString.length; i++) {
+            arrayOfIntsAsString[i] = oneDimArrayAsString(message[i]);
         }
-        String overallResult = String.join(System.lineSeparator(), result);
-        String finalResult = "{" + System.lineSeparator() + overallResult + System.lineSeparator() + "}";
+        String joinedArraysAsStrings = String.join(System.lineSeparator(), arrayOfIntsAsString);
+        String finalResult = "{" + System.lineSeparator() + joinedArraysAsStrings + System.lineSeparator() + "}";
         save(PRIMITIVES_MATRIX, finalResult);
     }
 
