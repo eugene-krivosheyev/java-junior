@@ -110,4 +110,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
 
+    @Test
+    public void shouldCorrectLogEmptyString()throws IOException {
+        Logger.log("");
+        Logger.flush();
+
+        assertSysoutContains("(x1)");
+    }
+
 }

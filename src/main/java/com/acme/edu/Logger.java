@@ -6,91 +6,110 @@ public class Logger {
     private static final String STRING = "string";
     private static final String REFERENCE = "reference";
     private static final String CHAR = "char";
-    private  static final String lineSeparator = ": ";
+    private  static final String LINE_SEPARATOR = ": ";
+    private static final String INTEGER = "int";
+    private static final String BYTE = "byte";
+    private static final String PRIMITIVE_ARRAY = "primitives array";
+    private static final String PRIMITIVE_MATRIX = "primitives matrix";
 
-    private static String state = "";
-    private static int sum = 0;
-    private  static String currentString = "";
-    private  static int numOfStrings = 0;
-    /*private static  boolean logBoolean;
-    private static char logChar;
-    private  static Object logObject;*/
-    private static String buffer;
+    private static String loggerMessageType = "";
+    private static int sequentNumberSum = 0;
+    private static String currentString = "";
+    private static int numOfStringRepetions = 0;
+    private static String bufferForFlush;
 
     public static void log(int message) {
-       // printOutputToConsole(PRIMITIVE + message);
-        if (!state.equals("int")) {
-            Logger.flush();
-            state = "int";
-            sum = 0;
+        if (!loggerMessageType.equals(INTEGER)) {
+            Logger.flushAndChangeType(INTEGER);
+            sequentNumberSum = 0;
         }
-        long ifOverflow = (long)sum + message;
+        long ifOverflow = (long) sequentNumberSum + message;
         if (ifOverflow > Integer.MAX_VALUE || ifOverflow < Integer.MIN_VALUE) {
-            Logger.flush();
-            state = "int";
-            sum = 0;
+            Logger.flushAndChangeType(INTEGER);
+            sequentNumberSum = 0;
         }
-        sum += message;
-        buffer = PRIMITIVE + lineSeparator + sum;
+        sequentNumberSum += message;
+        bufferForFlush = PRIMITIVE + LINE_SEPARATOR + sequentNumberSum;
     }
 
     public static void log(byte message) {
-        //printOutputToConsole(PRIMITIVE + message);
-        if (!state.equals("byte")) {
-            Logger.flush();
-            state = "byte";
-            sum = 0;
+        if (!loggerMessageType.equals(BYTE)) {
+            Logger.flushAndChangeType(BYTE);
+            sequentNumberSum = 0;
         }
-        long ifOverflow = (long)sum + message;
+        long ifOverflow = (long) sequentNumberSum + message;
         if (ifOverflow > Byte.MAX_VALUE || ifOverflow < Byte.MIN_VALUE) {
-            Logger.flush();
-            state = "byte";
-            sum = 0;
+            Logger.flushAndChangeType(BYTE);
+            sequentNumberSum = 0;
         }
-        sum += message;
-        buffer = PRIMITIVE + lineSeparator + sum;
+        sequentNumberSum += message;
+        bufferForFlush = PRIMITIVE + LINE_SEPARATOR + sequentNumberSum;
     }
 
     public static void log(boolean message) {
-        //printOutputToConsole(PRIMITIVE + message);
-        Logger.flush();
-        state = PRIMITIVE;
-        buffer = state + lineSeparator + message;
+        Logger.flushAndChangeType(PRIMITIVE);
+        bufferForFlush = loggerMessageType + LINE_SEPARATOR + message;
     }
 
     public static void log(char message) {
-        //printOutputToConsole(CHAR + message);
-        Logger.flush();
-        state = CHAR;
-        buffer = state + lineSeparator + message;
+        Logger.flushAndChangeType(CHAR);
+        bufferForFlush = loggerMessageType + LINE_SEPARATOR + message;
     }
 
     public static void log(String message) {
-        //printOutputToConsole(STRING + message);
-        if (!state.equals(STRING) || !currentString.equals(message)) {
-            Logger.flush();
-            state = STRING;
-            numOfStrings = 0;
+        if (!loggerMessageType.equals(STRING) || !currentString.equals(message)) {
+            Logger.flushAndChangeType(STRING);
+            numOfStringRepetions = 0;
             currentString = message;
         }
-        numOfStrings++;
-        buffer = state + lineSeparator + currentString + " (x" + numOfStrings + ")";
+        numOfStringRepetions++;
+        bufferForFlush = loggerMessageType + LINE_SEPARATOR + currentString + " (x" + numOfStringRepetions + ")";
     }
 
     public static void log(Object message) {
-        //printOutputToConsole(REFERENCE + message);
-        Logger.flush();
-        state = REFERENCE;
-        buffer = state + lineSeparator + message;
+        Logger.flushAndChangeType(REFERENCE);
+        bufferForFlush = loggerMessageType + LINE_SEPARATOR + message;
+    }
+
+    public static void log(int[] message) {
+        Logger.flushAndChangeType(PRIMITIVE_ARRAY);
+        bufferForFlush = loggerMessageType + LINE_SEPARATOR;
+        addArrayToBuffer(message);
+    }
+
+    public static void log(int[][] message) {
+        Logger.flushAndChangeType(PRIMITIVE_MATRIX);
+        bufferForFlush = loggerMessageType + LINE_SEPARATOR + "{" + System.lineSeparator();
+        for (int outerCurrent = 0; outerCurrent < message.length; outerCurrent++) {
+            addArrayToBuffer(message[outerCurrent]);
+            bufferForFlush += System.lineSeparator();
+        }
+        bufferForFlush += "}";
+    }
+
+    public static void addArrayToBuffer(int[] message) {
+        bufferForFlush += "{";
+        for (int current = 0; current < message.length-1; current++) {
+            bufferForFlush += message[current] + ", ";
+        }
+        if (message.length > 0) {
+            bufferForFlush += message[message.length-1];
+        }
+        bufferForFlush += "}";
     }
 
     public static void printOutputToConsole(String message) {
         System.out.println(message);
     }
 
-    public  static void flush() {
-        if (state.equals("")) return;
-        System.out.println(buffer);
-        state = "";
+    public static void flushAndChangeType(String type) {
+        Logger.flush();
+        loggerMessageType = type;
+    }
+
+    public static void flush() {
+        if (loggerMessageType.equals("")) return;
+        System.out.println(bufferForFlush);
+        loggerMessageType = "";
     }
 }
