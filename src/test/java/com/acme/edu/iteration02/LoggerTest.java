@@ -47,6 +47,16 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
+    public void correctnessTest() {
+        Logger.log(Integer.MIN_VALUE+10);
+        Logger.log(100);
+        Logger.log(10);
+        Logger.flush();
+
+        assertSysoutContains(Integer.MIN_VALUE+20+100+"");
+    }
+
+    @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
         Logger.log("str 1");
