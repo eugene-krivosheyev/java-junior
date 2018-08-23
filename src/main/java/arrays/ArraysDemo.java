@@ -15,9 +15,18 @@ public class ArraysDemo {
         int[] hardcodedArray2 = {1,2,3};
 
         m(new int[] {1,2,3});
+
+        varargm(1, 11, 12);
     }
 
     private static void m(int[] param) {
 
+    }
+    private static void varargm(int... p) {}
+
+    private static void varargm(int p, int... param) {
+        for (int current : param) {
+            System.out.println(current);
+        }
     }
 }
