@@ -34,7 +34,8 @@ public class Logger {
     private static int countStringOccurrenciesInStack(Object currentElement)
     {
         int numberOfEncounters = 1;
-        while (!objectStack.empty() && objectStack.peek().getClass() == String.class && objectStack.peek().toString().equals(currentElement.toString())) {
+        while (!objectStack.empty() && objectStack.peek().getClass() == String.class
+                && objectStack.peek().toString().equals(currentElement.toString())) {
             objectStack.pop();
             numberOfEncounters++;
         }
