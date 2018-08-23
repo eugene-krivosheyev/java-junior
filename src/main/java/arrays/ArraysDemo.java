@@ -16,7 +16,7 @@ public class ArraysDemo {
 
         m(new int[] {1,2,3});
 
-        varargm(1, 11, 12);
+//        varargm(1, 11, 12);
     }
 
     private static void m(int[] param) {
