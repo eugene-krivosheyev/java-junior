@@ -1,6 +1,6 @@
 package com.acme.edu.iteration03;
-
-import com.acme.edu.Logger;
+/*
+//import com.acme.edu.message.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
@@ -109,5 +109,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    */
+
 }
+
+*/
