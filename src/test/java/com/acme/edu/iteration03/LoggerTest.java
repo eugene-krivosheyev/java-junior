@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.concurrent.locks.Lock;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
@@ -29,6 +30,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersArray() throws IOException {
         //region when
         Logger.log(new int[] {-1, 0, 1});
+        Logger.flush();
         //endregion
 
         //region then
@@ -43,6 +45,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         int[][] message = {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}};
         Logger.log(message);
+        Logger.flush();
         //endregion
 
         //region then
