@@ -1,5 +1,9 @@
-package ooaddemo;
+package ooaddemo.controller;
 
+
+import ooaddemo.filter.FilterFactory;
+import ooaddemo.filter.LoggerFilter;
+import ooaddemo.saver.LoggerSaver;
 
 public class Logger {
 //    private LoggerSaver saver = new ConsoleLoggerSaver(); //[GRASP]: Creator
@@ -29,8 +33,4 @@ public class Logger {
             saver.save(message);
         }
     }
-}
-
-enum SeverityLevel {
-    ERROR, WARN, INFO
 }
