@@ -694,3 +694,7 @@ assertMessageEquals("3")
 
 # Reading List
 [Minimal Valuable Reading List](http://tinyurl.com/skilltrekreadinglist)
+
+# CI Tools
+- [Jenkins CI](http://52.23.162.200:8080/jenkins)
+- [Sonar](http://52.23.162.200:9000)
