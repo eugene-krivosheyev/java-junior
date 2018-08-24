@@ -1,33 +1,33 @@
 package com.acme.edu;
 
-import com.acme.edu.accumulator.MessageAccumulator;
-import com.acme.edu.container.MessageContainer;
-import com.acme.edu.decorator.MessageDecorator;
-import com.acme.edu.saver.ConsoleSaver;
+import com.acme.edu.message.Message;
 import com.acme.edu.saver.LoggerSaver;
-
-import java.util.ArrayList;
+import org.springframework.context.support.MessageSourceAccessor;
 
 public class LoggerController {
-    private ArrayList<MessageContainer> messages;
-    private MessageDecorator decorator;
-    private MessageAccumulator accumulator;
+    private Message currentMessage;
     private LoggerSaver saver;
 
-    public LoggerController(MessageDecorator decorator, MessageAccumulator accumulator, LoggerSaver saver) {
-        this.decorator = decorator;
-        this.accumulator = accumulator;
+    public LoggerController(LoggerSaver saver) {
         this.saver = saver;
     }
 
-    public void log(MessageContainer message) {
-        messages.add(message);
+    public void log(Message message) {
+        if (currentMessage == null) {
+            currentMessage = message;
+            return;
+        }
+
+        if (currentMessage.isSameTypeOf(message)){
+            currentMessage.accumulate(message);
+        } else {
+            flush();
+            currentMessage = message;
+        }
     }
 
     public void flush() {
-        messages = accumulator.accumulate(messages);
-        String message = decorator.decorate(messages);
-        saver.save(message);
+        saver.save(currentMessage.getDecoratedMessage());
+        currentMessage = null;
     }
-
 }
