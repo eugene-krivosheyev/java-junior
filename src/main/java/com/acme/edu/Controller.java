@@ -1,6 +1,5 @@
 package com.acme.edu;
 
-import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.Message;
 
 public class Controller {
