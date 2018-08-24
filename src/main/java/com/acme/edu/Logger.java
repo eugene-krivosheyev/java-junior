@@ -1,5 +1,6 @@
 package com.acme.edu;
 
+/*
 //TODO To think
 public class Logger {
     private static final String PRIMITIVE = "primitive";
@@ -17,59 +18,6 @@ public class Logger {
     private static String currentString = "";
     private static int numOfStringRepetions = 0;
     private static String bufferForFlush;
-
-    public static void log(int message) {
-        if (!loggerMessageType.equals(INTEGER)) {
-            Logger.flushAndChangeType(INTEGER);
-            sequentNumberSum = 0;
-        }
-        long ifOverflow = (long) sequentNumberSum + message;
-        if (ifOverflow > Integer.MAX_VALUE || ifOverflow < Integer.MIN_VALUE) {
-            Logger.flushAndChangeType(INTEGER);
-            sequentNumberSum = 0;
-        }
-        sequentNumberSum += message;
-        bufferForFlush = PRIMITIVE + LINE_SEPARATOR + sequentNumberSum;
-    }
-
-    public static void log(byte message) {
-        if (!loggerMessageType.equals(BYTE)) {
-            Logger.flushAndChangeType(BYTE);
-            sequentNumberSum = 0;
-        }
-        long ifOverflow = (long) sequentNumberSum + message;
-        if (ifOverflow > Byte.MAX_VALUE || ifOverflow < Byte.MIN_VALUE) {
-            Logger.flushAndChangeType(BYTE);
-            sequentNumberSum = 0;
-        }
-        sequentNumberSum += message;
-        bufferForFlush = PRIMITIVE + LINE_SEPARATOR + sequentNumberSum;
-    }
-
-    public static void log(boolean message) {
-        Logger.flushAndChangeType(PRIMITIVE);
-        bufferForFlush = loggerMessageType + LINE_SEPARATOR + message;
-    }
-
-    public static void log(char message) {
-        Logger.flushAndChangeType(CHAR);
-        bufferForFlush = loggerMessageType + LINE_SEPARATOR + message;
-    }
-
-    public static void log(String message) {
-        if (!loggerMessageType.equals(STRING) || !currentString.equals(message)) {
-            Logger.flushAndChangeType(STRING);
-            numOfStringRepetions = 0;
-            currentString = message;
-        }
-        numOfStringRepetions++;
-        bufferForFlush = loggerMessageType + LINE_SEPARATOR + currentString + " (x" + numOfStringRepetions + ")";
-    }
-
-    public static void log(Object message) {
-        Logger.flushAndChangeType(REFERENCE);
-        bufferForFlush = loggerMessageType + LINE_SEPARATOR + message;
-    }
 
     public static void log(int[] message) {
         Logger.flushAndChangeType(PRIMITIVE_ARRAY);
@@ -97,19 +45,46 @@ public class Logger {
         }
         bufferForFlush += "}";
     }
+}
+*/
 
-    public static void printOutputToConsole(String message) {
-        System.out.println(message);
+public class Logger {
+    static Controller controller = new Controller();
+
+    public static void log(int message) {
+        controller.log(new IntMessage(message));
     }
 
-    public static void flushAndChangeType(String type) {
-        Logger.flush();
-        loggerMessageType = type;
+    public static void log(byte message) {
+        controller.log(new ByteMessage(message));
+    }
+
+    public static void log(boolean message) {
+        controller.log(new BooleanMessage(message));
+    }
+
+    public static void log(char message) {
+        controller.log(new CharMessage(message));
+    }
+
+    public static void log(String message) {
+        controller.log(new StringMessage(message));
+    }
+
+    public static void log(Object message) {
+        controller.log(new ObjectMessage(message));
+    }
+
+    public static void log(int[] message) {
+
+    }
+
+    public static void log(int[][] message) {
+
     }
 
     public static void flush() {
-        if (loggerMessageType.equals("")) return;
-        System.out.println(bufferForFlush);
-        loggerMessageType = "";
+        controller.flush();
     }
+
 }
