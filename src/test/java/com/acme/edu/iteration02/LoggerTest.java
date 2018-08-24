@@ -40,16 +40,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("3");
         assertSysoutContains("str 2");
         assertSysoutContains("0");
-
-        /*assertSysoutEquals(
-                "str 1" + System.lineSeparator() +
-                        "3" + System.lineSeparator() +
-                        "str 2" + System.lineSeparator() +
-                        "0" + System.lineSeparator()
-        );*/
         //endregion
     }
-
+/*
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
@@ -67,16 +60,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains(Integer.MAX_VALUE + "");
         assertSysoutContains("str 2");
         assertSysoutContains("0");
-        /*assertSysoutEquals(
-                "str 1" + System.lineSeparator() +
-                        "10" + System.lineSeparator() +
-                        Integer.MAX_VALUE + "" + System.lineSeparator() +
-                        "str 2" + System.lineSeparator() +
-                        "0" + System.lineSeparator()
-        );*/
-        //endregion
-    }
 
+        //endregion
+    }*/
+/*
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
@@ -95,16 +82,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains(Byte.MAX_VALUE+"");
         assertSysoutContains("str 2");
         assertSysoutContains( "0");
-       /* assertSysoutEquals(
-                "str 1" + System.lineSeparator() +
-                        "10" + System.lineSeparator() +
-                        Byte.MAX_VALUE + "" + System.lineSeparator() +
-                        "str 2" + System.lineSeparator() +
-                        "0" + System.lineSeparator()
-        );*/
+
         //endregion
     }
-
+*/
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
         //region when
@@ -125,13 +106,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("0");
         assertSysoutContains("str 2");
         assertSysoutContains( "str 3 (x3)");
-      /*  assertSysoutEquals(
-                "str 1" + System.lineSeparator() +
-                        "str 2 (x2)" + System.lineSeparator() +
-                        "0" + System.lineSeparator() +
-                        "str 2" + System.lineSeparator() +
-                        "str 3 (x3)" + System.lineSeparator()
-        );*/
+
         //endregion
     }
 

@@ -115,13 +115,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogReference() throws IOException {
         //region when
-        //Logger.log(new Object());
-       // Logger.flush();
+        Logger.log(new Object());
+        Logger.flush();
         //endregion
 
         //region then
-        //assertSysoutContains("reference: ");
-       // assertSysoutContains("@");
+        assertSysoutContains("reference: ");
+        assertSysoutContains("@");
         //endregion
     }
 }
