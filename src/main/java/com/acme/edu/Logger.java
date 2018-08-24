@@ -1,7 +1,6 @@
 package com.acme.edu;
 
 import java.util.Objects;
-
 public class Logger {
     private static final String PRIMITIVE = "primitive: ";
     private static final String CHAR = "char: ";
