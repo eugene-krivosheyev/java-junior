@@ -9,7 +9,6 @@ public class DefMessage implements Message {
 
     @Override
     public String getDecoratedMessage() {
-
         return null;
     }
 
