@@ -49,7 +49,13 @@ public class Logger {
 */
 
 public class Logger {
-    static Controller controller = new Controller();
+    static Controller controller = new Controller(new Saver());
+
+
+    /*public static void main(String[] args) {
+        Logger.log(1);
+        Logger.flush();
+    }*/
 
     public static void log(int message) {
         controller.log(new IntMessage(message));

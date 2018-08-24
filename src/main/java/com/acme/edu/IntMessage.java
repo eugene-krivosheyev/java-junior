@@ -19,6 +19,7 @@ public class IntMessage implements Message{
 
     @Override
     public boolean isSameType(Message message) {
+        if (message == null) return false;
         return message instanceof IntMessage;
     }
 }
