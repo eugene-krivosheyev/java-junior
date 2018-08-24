@@ -15,8 +15,7 @@ public class ByteMessage implements Message {
 
     @Override
     public String getDecoratedMessage() {
-
-        return "primitive" + ": " + message + System.lineSeparator();
+        return String.format("%s: %d%s", "primitive", message, System.lineSeparator());
     }
 
     @Override

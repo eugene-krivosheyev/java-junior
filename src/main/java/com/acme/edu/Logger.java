@@ -3,7 +3,7 @@ package com.acme.edu;
 import com.acme.edu.message.*;
 
 public class Logger {
-    private static LoggerController controller = new LoggerController();
+    private static LoggerController controller = new LoggerController(new LoggerSaver());
 
     public static void log(int message) {
         controller.log(new IntMessage(message));

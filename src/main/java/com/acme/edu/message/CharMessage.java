@@ -13,7 +13,7 @@ public class CharMessage implements Message {
 
     @Override
     public String getDecoratedMessage() {
-        return "char" + ": " + message + System.lineSeparator();
+        return String.format("%s: %c%s", "char", message, System.lineSeparator());
     }
 
     @Override

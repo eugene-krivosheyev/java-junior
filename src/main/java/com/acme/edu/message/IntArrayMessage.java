@@ -14,7 +14,7 @@ public class IntArrayMessage implements Message {
 
     @Override
     public String getDecoratedMessage() {
-        return "primitives array" + ": " + oneDimArrayAsString() + System.lineSeparator();
+        return String.format("%s: %s%s", "primitives array", oneDimArrayAsString(), System.lineSeparator());
     }
 
     @Override
@@ -24,7 +24,7 @@ public class IntArrayMessage implements Message {
 
     protected String oneDimArrayAsString() {
         if (message.length == 0) {
-            return "{" + System.lineSeparator() + "}";
+            return String.format("{%s}", System.lineSeparator());
         }
         StringBuilder arrayAsString = new StringBuilder("{");
         for (int i = 0; i < message.length - 1; i++) {

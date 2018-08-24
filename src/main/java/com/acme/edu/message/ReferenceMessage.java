@@ -13,7 +13,7 @@ public class ReferenceMessage implements  Message {
 
     @Override
     public String getDecoratedMessage() {
-        return "reference" +": " + message;
+        return String.format("%s: %s%s", "reference", message, System.lineSeparator());
     }
 
     @Override

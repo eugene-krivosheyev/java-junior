@@ -7,8 +7,11 @@ public class LoggerController {
     private Message currentMessage;
     private LoggerSaver saver;
 
+    public LoggerController(LoggerSaver loggerSaver) {
+        this.saver = loggerSaver;
+    }
+
     public void log(Message message) {
-        saver = new LoggerSaver();
         if (currentMessage == null) {
             currentMessage = message;
             return;
@@ -20,5 +23,4 @@ public class LoggerController {
             currentMessage = message;
         }
     }
-
 }
