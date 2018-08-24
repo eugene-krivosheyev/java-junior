@@ -23,7 +23,7 @@ public class StringMessage extends Message {
     @Override
     public String getFormattedMessage(){
         String postfixForRepeatedStrings = (currentStringCount > 1) ? String.format(" (x%d)", currentStringCount) : "";
-        return (super.getFormattedString(value) + postfixForRepeatedStrings);
+        return super.getFormattedString(value) + postfixForRepeatedStrings;
     }
 
     @Override

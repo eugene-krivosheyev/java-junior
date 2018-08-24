@@ -11,12 +11,6 @@ public class ArrayIntMessage extends Message {
         type = TYPE_NAME;
     }
 
-
-    @Override
-    public Message accumulate(Message message) {
-        return message;
-    }
-
     @Override
     public String getFormattedMessage() {
         return super.getFormattedString(Arrays.toString(value)

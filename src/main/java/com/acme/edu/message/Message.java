@@ -5,7 +5,10 @@ public abstract class Message {
 
     protected String type;
 
-    public abstract Message accumulate(Message message);
+    public Message accumulate(Message message){
+        return message;
+    };
+
     public abstract String getFormattedMessage();
 
     public boolean canBeAccumulated(Message message) {

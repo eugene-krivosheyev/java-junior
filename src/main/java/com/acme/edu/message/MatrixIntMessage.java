@@ -11,12 +11,6 @@ public class MatrixIntMessage extends Message {
         type = TYPE_NAME;
     }
 
-
-    @Override
-    public Message accumulate(Message message) {
-        return message;
-    }
-
     @Override
     public String getFormattedMessage() {
         StringBuilder arrayStringBuilder = new StringBuilder();
