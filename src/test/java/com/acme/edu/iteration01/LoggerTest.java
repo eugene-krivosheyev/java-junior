@@ -53,13 +53,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     /*
-    TODO: implement Logger solution to match specification as tests
+    TODO: implement LoggerController solution to match specification as tests
 
     @Test
     public void shouldLogChar() throws IOException {
         //region when
-        Logger.log('a');
-        Logger.log('b');
+        LoggerController.log('a');
+        LoggerController.log('b');
         //endregion
 
         //region then
@@ -72,8 +72,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogString() throws IOException {
         //region when
-        Logger.log("test string 1");
-        Logger.log("other str");
+        LoggerController.log("test string 1");
+        LoggerController.log("other str");
         //endregion
 
         //region then
@@ -86,8 +86,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogBoolean() throws IOException {
         //region when
-        Logger.log(true);
-        Logger.log(false);
+        LoggerController.log(true);
+        LoggerController.log(false);
         //endregion
 
         //region then
@@ -100,7 +100,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogReference() throws IOException {
         //region when
-        Logger.log(new Object());
+        LoggerController.log(new Object());
         //endregion
 
         //region then

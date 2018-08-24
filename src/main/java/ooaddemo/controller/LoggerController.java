@@ -3,9 +3,14 @@ package ooaddemo.controller;
 
 import ooaddemo.filter.FilterFactory;
 import ooaddemo.filter.LoggerFilter;
+import ooaddemo.filter.MessageContentLengthLoggerFilter;
+import ooaddemo.filter.SeverityLevelLoggerFilter;
 import ooaddemo.saver.LoggerSaver;
 
-public class Logger {
+/**
+ * System Public API
+ */
+public class LoggerController {
 //    private LoggerSaver saver = new ConsoleLoggerSaver(); //[GRASP]: Creator
 //    private LoggerSaver saver = SaverFactory.create(); //[GoF]: Factory Method
 //    private LoggerSaver saver = new ???SaverFactory().create(); //[GoF]: Abstract Factory
@@ -17,7 +22,7 @@ public class Logger {
     private FilterFactory filterFactory;
 
     //Constructor DI
-    public Logger(LoggerSaver saver, FilterFactory filterFactory) {
+    public LoggerController(LoggerSaver saver, FilterFactory filterFactory) {
         this.saver = saver;
         this.filterFactory = filterFactory;
     }

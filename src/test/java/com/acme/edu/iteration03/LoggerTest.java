@@ -23,12 +23,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     /*
-    TODO: implement Logger solution to match specification as tests
+    TODO: implement LoggerController solution to match specification as tests
 
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
-        Logger.log(new int[] {-1, 0, 1});
+        LoggerController.log(new int[] {-1, 0, 1});
         //endregion
 
         //region then
@@ -41,7 +41,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
-        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        LoggerController.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         //endregion
 
         //region then
@@ -58,7 +58,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
-        Logger.log(new int[][][][] {{{{0}}}});
+        LoggerController.log(new int[][][][] {{{{0}}}});
         //endregion
 
         //region then
@@ -75,7 +75,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
-        Logger.log("str1", "string 2", "str 3");
+        LoggerController.log("str1", "string 2", "str 3");
         //endregion
 
         //region then
@@ -86,7 +86,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
-        Logger.log(-1, 0, 1, 3);
+        LoggerController.log(-1, 0, 1, 3);
         //endregion
 
         //region then
@@ -97,10 +97,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException {
         //region when
-        Logger.log(1);
-        Logger.log("str");
-        Logger.log(Integer.MAX_VALUE - 10);
-        Logger.log(11);
+        LoggerController.log(1);
+        LoggerController.log("str");
+        LoggerController.log(Integer.MAX_VALUE - 10);
+        LoggerController.log(11);
         //endregion
 
         //region then
