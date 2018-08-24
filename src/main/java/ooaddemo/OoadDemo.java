@@ -11,7 +11,7 @@ public class OoadDemo {
         //Spring
         LoggerController logger = new LoggerController(
                 new ConsoleLoggerSaver(),
-                new FilterFactory(objectsToCreate)
+                new FilterFactory()
         );
 
         logger.log("test", SeverityLevel.ERROR);
