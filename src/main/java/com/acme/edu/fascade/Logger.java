@@ -1,9 +1,7 @@
 package com.acme.edu.fascade;
 
 import com.acme.edu.LoggerController;
-import com.acme.edu.message.ByteMessage;
-import com.acme.edu.message.IntMessage;
-import com.acme.edu.message.StringMessage;
+import com.acme.edu.message.*;
 import com.acme.edu.saver.ConsoleSaver;
 
 public class Logger {
@@ -25,11 +23,16 @@ public class Logger {
         controller.log(new StringMessage(message));
     }
 
-//    public void log(char message) {
-//        controller.log(new CharMessage(message));
-//    }
-//
-//    public void log(boolean message) {
-//        controller.log(new BooleanMessage(message));
-//    }
+
+    public static void log(char message) {
+        controller.log(new CharMessage(message));
+    }
+
+    public static void log(boolean message) {
+        controller.log(new BooleanMessage(message));
+    }
+
+    public static void log(Object message) {
+        controller.log(new ObjectMessage(message));
+    }
 }

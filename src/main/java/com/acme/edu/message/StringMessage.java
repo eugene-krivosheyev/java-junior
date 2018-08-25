@@ -8,17 +8,13 @@ public class StringMessage implements Message {
     private String  message;
     private int counter;
 
-    private String  getMessage() {
-        return message;
-    }
-
     public StringMessage(String message) {
         this.message = message;
         this.counter = 1;
     }
 
     public boolean isSameTypeOf(Message comparedMessage){
-        return (comparedMessage instanceof StringMessage) && Objects.equals(this.message, ((StringMessage) comparedMessage).getMessage());
+        return (comparedMessage instanceof StringMessage) && Objects.equals(this.message, ((StringMessage) comparedMessage).message);
     }
 
     @Override
@@ -33,13 +29,13 @@ public class StringMessage implements Message {
     @Override
     public Message accumulate(Message message) {
         StringMessage stringMessage = (StringMessage) message;
-        if (this.message.equals(stringMessage.getMessage())){
+        if (this.message.equals(stringMessage.message)){
             this.counter++;
-            return this;
         } else {
-            this.message = stringMessage.getMessage();
+            this.message = stringMessage.message;
             this.counter = 1;
-            return this;
         }
+
+        return this;
     }
 }

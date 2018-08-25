@@ -4,10 +4,6 @@ public class ByteMessage implements Message {
     private static final String PRIMITIVE = "primitive: ";
     private byte message;
 
-    private byte getMessage() {
-        return message;
-    }
-
     public ByteMessage(byte message) {
         this.message = message;
     }
@@ -24,7 +20,7 @@ public class ByteMessage implements Message {
     @Override
     public Message accumulate(Message message) {
         ByteMessage byteMessage = (ByteMessage) message;
-        this.message += byteMessage.getMessage();
+        this.message += byteMessage.message;
         return this;
     }
 }

@@ -58,13 +58,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    /*//TODO: implement Logger solution to match specification as tests
 
     @Test
     public void shouldLogChar() throws IOException {
         //region when
         Logger.log('a');
+        Logger.flush();
         Logger.log('b');
+        Logger.flush();
         //endregion
 
         //region then
@@ -73,7 +74,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("b");
         //endregion
     }
-*/
 
     @Test
     public void shouldLogString() throws IOException {
@@ -91,32 +91,35 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-//    @Test
-//    public void shouldLogBoolean() throws IOException {
-//        //region when
-//        Logger.log(true);
-//        Logger.log(false);
-//        //endregion
-//
-//        //region then
-//        assertSysoutContains("primitive: ");
-//        assertSysoutContains("true");
-//        assertSysoutContains("false");
-//        //endregion
-//    }
+    @Test
+    public void shouldLogBoolean() throws IOException {
+        //region when
+        Logger.log(true);
+        Logger.flush();
+        Logger.log(false);
+        Logger.flush();
+        //endregion
+
+        //region then
+        assertSysoutContains("primitive: ");
+        assertSysoutContains("true");
+        assertSysoutContains("false");
+        //endregion
+    }
 
 
-//    @Test
-//    public void shouldLogReference() throws IOException {
-//        //region when
-//        Logger.log(new Object());
-//        //endregion
-//
-//        //region then
-//        assertSysoutContains("reference: ");
-//        assertSysoutContains("@");
-//        //endregion
-//    }
+    @Test
+    public void shouldLogReference() throws IOException {
+        //region when
+        Logger.log(new Object());
+        Logger.flush();
+        //endregion
+
+        //region then
+        assertSysoutContains("reference: ");
+        assertSysoutContains("@");
+        //endregion
+    }
 
 
 }

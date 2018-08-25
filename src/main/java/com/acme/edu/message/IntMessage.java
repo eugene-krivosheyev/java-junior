@@ -4,10 +4,6 @@ public class IntMessage implements Message {
     private static final String PRIMITIVE = "primitive: ";
     private int message;
 
-    private int getMessage() {
-        return message;
-    }
-
     public IntMessage(int message) {
         this.message = message;
     }
@@ -24,7 +20,7 @@ public class IntMessage implements Message {
     @Override
     public Message accumulate(Message message) {
         IntMessage intMessage = (IntMessage) message;
-        this.message += intMessage.getMessage();
+        this.message += intMessage.message;
         return this;
     }
 }
