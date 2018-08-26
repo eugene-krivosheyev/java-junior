@@ -1,15 +1,28 @@
 package com.acme.edu.message;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+
 /**
  * Created by Java_1 on 24.08.2018.
  */
 public class StringMessage implements  Message{
 
-    private String message;
+    private String value;
+    private static ArrayList<String> arrayOfStrings = new ArrayList<>();
+    private static ArrayList<String> arrayOfUniqueString = new ArrayList<>();
+    private static ArrayList<Integer> amountOfString = new ArrayList<>();
+    private String result = "";
+
     private static final String STRING = "string: ";
 
     public StringMessage(String message) {
-        this.message = message;
+        this.value = message;
+        arrayOfStrings.add(value);
+        if (!arrayOfUniqueString.contains(value)){
+            arrayOfUniqueString.add(value);
+        }
     }
 
     @Override
@@ -19,16 +32,31 @@ public class StringMessage implements  Message{
 
     @Override
     public String getDecoratedMessage(){
-        return STRING + message;
+        for (String string : arrayOfUniqueString){
+            amountOfString.add(Collections.frequency(arrayOfStrings, string));
+        }
+
+        int i = 0;
+        do {
+            int index = amountOfString.get(i);
+            String times = index > 1 ? " (x"+index + ")\n" : "\n";
+            String value = arrayOfUniqueString.get(i);
+            result = result.concat(value + times);
+            i ++;
+        } while (i < amountOfString.size());
+        arrayOfStrings.clear();
+        arrayOfUniqueString.clear();
+        amountOfString.clear();
+        return STRING + result;
     }
 
     @Override
     public Message accumulate(Message message) {
-        return new StringMessage(((StringMessage) message).getMessage());
+        return message;
     }
 
-    public String getMessage() {
-        return message;
+    public String getValue() {
+        return value;
     }
 }
 

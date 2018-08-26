@@ -5,13 +5,12 @@ package com.acme.edu.message;
  */
 public class ByteMessage implements Message {
 
-    private byte message;
-    private static byte sum = 0;
+    private byte value;
 
     public static final String PRIMITIVE = "primitive: ";
 
     public ByteMessage(byte message) {
-        this.message = message;
+        this.value = message;
     }
 
     @Override
@@ -21,17 +20,16 @@ public class ByteMessage implements Message {
 
     @Override
     public String getDecoratedMessage(){
-        return PRIMITIVE + message;
+        return PRIMITIVE + value;
     }
 
     @Override
     public Message accumulate(Message message){
-        byte value = ((ByteMessage) message).getMessage();
-        sum = (byte)(sum + value);
-        return new ByteMessage((byte)(sum));
+        byte value = ((ByteMessage) message).getValue();
+        return new ByteMessage((byte)(value + this.value));
     }
 
-    public byte getMessage() {
-        return message;
+    public byte getValue() {
+        return value;
     }
 }

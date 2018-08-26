@@ -3,14 +3,14 @@ package com.acme.edu.message;
 /**
  * Created by Java_1 on 24.08.2018.
  */
+
 public class IntMessage implements Message {
 
-    private int message;
-    private int sum = 0;
+    private int value;
     public static final String PRIMITIVE = "primitive: ";
 
     public IntMessage(int message) {
-        this.message = message;
+        this.value = message;
     }
 
     @Override
@@ -20,17 +20,16 @@ public class IntMessage implements Message {
 
     @Override
     public String getDecoratedMessage(){
-        return PRIMITIVE + message;
+        return PRIMITIVE + value;
     }
 
     @Override
     public Message accumulate(Message message){
-        int value = ((IntMessage) message).getMessage();
-        sum = sum + value;
-        return new IntMessage(sum);
+        int value = ((IntMessage) message).getValue();
+        return new IntMessage(value + this.value);
     }
 
-    public int getMessage() {
-        return message;
+    public int getValue() {
+        return value;
     }
 }

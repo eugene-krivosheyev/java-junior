@@ -32,5 +32,6 @@ public class Controller {
 
     public void flush() {
         System.out.println(currentMessage.getDecoratedMessage());
+        currentMessage = null;
     }
 }
