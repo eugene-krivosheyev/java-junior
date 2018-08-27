@@ -36,3 +36,11 @@ class Color {
         return ordinal;
     }
 }
+
+class BlankFinalDemo {
+    private final int field; //blank final
+
+    public BlankFinalDemo(int field) {
+        this.field = field;
+    }
+}
