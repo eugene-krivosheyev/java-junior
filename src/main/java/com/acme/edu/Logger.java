@@ -2,12 +2,12 @@ package com.acme.edu;
 
 import com.acme.edu.controller.LogController;
 import com.acme.edu.message.*;
-import com.acme.edu.saver.ConsoleSaver;
+import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class Logger {
     private Logger(){}
 
-    private static LogController controller = new LogController(new ConsoleSaver());
+    private static LogController controller = new LogController(new ConsoleLoggerSaver());
 
     public static void log(int message) {
         controller.log(new IntMessage(message));

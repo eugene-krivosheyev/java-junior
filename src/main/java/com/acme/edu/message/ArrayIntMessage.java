@@ -7,7 +7,7 @@ public class ArrayIntMessage extends Message {
     private int[] value;
 
     public ArrayIntMessage(int[] message) {
-        this.value = message;
+        this.value = message.clone();
         type = TYPE_NAME;
     }
 

@@ -7,7 +7,7 @@ public class MatrixIntMessage extends Message {
     private int[][] value;
 
     public MatrixIntMessage(int[][] message) {
-        this.value = message;
+        this.value = message.clone();
         type = TYPE_NAME;
     }
 

@@ -1,13 +1,13 @@
 package com.acme.edu.controller;
 
 import com.acme.edu.message.Message;
-import com.acme.edu.saver.ConsoleSaver;
+import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class LogController {
     private Message previousMessage;
-    private ConsoleSaver saver;
+    private ConsoleLoggerSaver saver;
 
-    public LogController(ConsoleSaver saver) {
+    public LogController(ConsoleLoggerSaver saver) {
         this.saver = saver;
     }
 
