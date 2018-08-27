@@ -1,15 +1,9 @@
 package newlogger.message;
 
-public class IntMessage implements Message {
-    private int message;
-
-    public IntMessage(int message) {
-        this.message = message;
-    }
-
+public class FlushMessage implements Message {
     @Override
     public boolean isSameTypeOf(Message message) {
-        return message instanceof IntMessage;
+        return false;
     }
 
     @Override

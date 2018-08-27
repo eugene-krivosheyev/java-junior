@@ -1,6 +1,7 @@
 package newlogger.controller;
 
 import newlogger.message.Message;
+import newlogger.saver.Saver;
 
 public class Controller {
     private Message currentMessage;

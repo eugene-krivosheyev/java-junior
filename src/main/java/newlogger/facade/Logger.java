@@ -2,6 +2,7 @@ package newlogger.facade;
 
 import newlogger.controller.Controller;
 import newlogger.message.ByteMessage;
+import newlogger.message.FlushMessage;
 import newlogger.message.IntMessage;
 import newlogger.message.StringMessage;
 
@@ -21,6 +22,6 @@ public class Logger {
     }
 
     public static void flush() {
-        controller.flush(new FlushMessage())
+        controller.log(new FlushMessage());
     }
 }

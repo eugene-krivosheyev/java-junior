@@ -11,4 +11,14 @@ public class StringMessage implements Message {
     public boolean isSameTypeOf(Message message) {
         return message instanceof StringMessage;
     }
+
+    @Override
+    public Message accumulate(Message message) {
+        return null;
+    }
+
+    @Override
+    public String getDecoratedMessage() {
+        return null;
+    }
 }

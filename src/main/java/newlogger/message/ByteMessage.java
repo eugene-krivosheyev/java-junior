@@ -11,4 +11,14 @@ public class ByteMessage implements Message {
     public boolean isSameTypeOf(Message message) {
         return message instanceof ByteMessage;
     }
+
+    @Override
+    public Message accumulate(Message message) {
+        return null;
+    }
+
+    @Override
+    public String getDecoratedMessage() {
+        return null;
+    }
 }

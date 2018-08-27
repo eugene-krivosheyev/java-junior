@@ -7,5 +7,6 @@ public class LoggerTest {
         Logger.log(0);
         Logger.log((byte)1);
         Logger.log("2");
+        Logger.flush();
     }
 }
