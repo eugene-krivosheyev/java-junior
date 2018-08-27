@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import com.acme.edu.decorator.LoggerDecorator;
+
 public class IntMessage extends Message {
     private static final String TYPE_NAME = "primitive";
     private int value;
@@ -7,6 +9,10 @@ public class IntMessage extends Message {
     public IntMessage(int message) {
         this.value = message;
         type = TYPE_NAME;
+    }
+
+    public int getValue() {
+        return value;
     }
 
 
@@ -18,8 +24,8 @@ public class IntMessage extends Message {
     }
 
     @Override
-    public String getFormattedMessage() {
-        return super.getFormattedString(String.valueOf(value));
+    public String getFormattedMessage(LoggerDecorator decorator) {
+        return decorator.decorate(this);
     }
 
     @Override

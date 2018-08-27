@@ -1,4 +1,4 @@
-package com.acme.edu.loggersaver;
+package com.acme.edu.iteration04;
 
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.saver.ConsoleLoggerSaver;
@@ -22,7 +22,7 @@ public class LoggerSaverTest implements SysoutCaptureAndAssertionAbility {
     public void tearDown() {
         resetOut();
     }
-    
+
     @Test
     public void checkNullMessageTest() {
         LoggerSaver loggerSaver = new ConsoleLoggerSaver();

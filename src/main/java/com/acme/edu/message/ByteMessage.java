@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import com.acme.edu.decorator.LoggerDecorator;
+
 public class ByteMessage extends Message {
     private static final String TYPE_NAME = "primitive";
     private byte value;
@@ -18,8 +20,8 @@ public class ByteMessage extends Message {
     }
 
     @Override
-    public String getFormattedMessage() {
-        return super.getFormattedString(String.valueOf(value));
+    public String getFormattedMessage(LoggerDecorator decorator) {
+        return decorator.decorate(this);
     }
 
     @Override
@@ -30,5 +32,9 @@ public class ByteMessage extends Message {
     private boolean isOverflow(byte term){
         return (term > 0 && value > Byte.MAX_VALUE - term) ||
                 (term < 0 && value < Byte.MIN_VALUE - term);
+    }
+
+    public byte getValue() {
+        return value;
     }
 }

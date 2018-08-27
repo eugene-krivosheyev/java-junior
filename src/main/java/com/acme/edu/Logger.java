@@ -1,16 +1,21 @@
 package com.acme.edu;
 
 import com.acme.edu.controller.LogController;
+import com.acme.edu.decorator.PrefixLoggerDecorator;
 import com.acme.edu.message.*;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class Logger {
     private Logger(){}
 
-    private static LogController controller = new LogController(new ConsoleLoggerSaver());
+    private static LogController controller = new LogController(new ConsoleLoggerSaver(), new PrefixLoggerDecorator());
 
     public static void log(int message) {
         controller.log(new IntMessage(message));
+    }
+
+    public static void setController(LogController controller) {
+        Logger.controller = controller;
     }
 
     public  static void flush(){

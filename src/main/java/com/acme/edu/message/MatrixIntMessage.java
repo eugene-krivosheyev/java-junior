@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import com.acme.edu.decorator.LoggerDecorator;
+
 import java.util.Arrays;
 
 public class MatrixIntMessage extends Message {
@@ -11,20 +13,13 @@ public class MatrixIntMessage extends Message {
         type = TYPE_NAME;
     }
 
+    public int[][] getValue() {
+        return value;
+    }
+
     @Override
-    public String getFormattedMessage() {
-        StringBuilder arrayStringBuilder = new StringBuilder();
-        arrayStringBuilder
-                .append('{')
-                .append(System.lineSeparator());
-        for (int[] arr: value) {
-            arrayStringBuilder
-                    .append(formatArray(arr))
-                    .append(System.lineSeparator());
-        }
-        arrayStringBuilder
-                .append('}');
-        return getFormattedString(arrayStringBuilder.toString());
+    public String getFormattedMessage(LoggerDecorator decorator) {
+        return decorator.decorate(this);
     }
 
     @Override

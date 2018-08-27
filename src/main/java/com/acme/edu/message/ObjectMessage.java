@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import com.acme.edu.decorator.LoggerDecorator;
+
 public class ObjectMessage extends Message {
     private static final String TYPE_NAME = "reference";
     private Object value;
@@ -10,12 +12,16 @@ public class ObjectMessage extends Message {
     }
 
     @Override
-    public String getFormattedMessage() {
-        return super.getFormattedString(String.valueOf(value));
+    public String getFormattedMessage(LoggerDecorator decorator) {
+        return  decorator.decorate(this);
     }
 
     @Override
     public boolean canBeAccumulated(Message message) {
         return false;
+    }
+
+    public Object getValue() {
+        return value;
     }
 }

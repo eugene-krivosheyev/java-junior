@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-import java.util.Arrays;
+import com.acme.edu.decorator.LoggerDecorator;
 
 public class ArrayIntMessage extends Message {
     private static final String TYPE_NAME = "primitives array";
@@ -12,15 +12,16 @@ public class ArrayIntMessage extends Message {
     }
 
     @Override
-    public String getFormattedMessage() {
-        return super.getFormattedString(Arrays.toString(value)
-                .replace('[', '{')
-                .replace(']', '}')
-        );
+    public String getFormattedMessage(LoggerDecorator decorator) {
+        return decorator.decorate(this);
     }
 
     @Override
     public boolean canBeAccumulated(Message message) {
         return false;
+    }
+
+    public int[] getValue() {
+        return value;
     }
 }
