@@ -13,7 +13,7 @@ public class ProtectedDemo {
 abstract class MainAlgorithm {
     public void decoratedExec() {
         System.out.println(">>>>>");
-        op(); //step
+        this.op(); //step
         System.out.println("<<<<<");
     }
 
