@@ -1,12 +1,22 @@
 package com.acme.edu.message;
 
-public interface Message {
-    public Message log(Message message);
-    //{return this;}
-    public boolean isSameTypeOf(Message message);
-    //{return true;}
-    public void flush();
-    public void accumulate(Message message);
-    public String fetch();
-    //{}
+import com.acme.edu.decorator.Decorator;
+
+public abstract class Message {
+    private Decorator decorator;
+    public Decorator getDecorator() {
+        return decorator;
+    }
+    public void setDecorator(Decorator decorator) {
+        this.decorator = decorator;
+    }
+
+  /*  public Message(Decorator decorator) {
+        this.decorator = decorator;
+    }*/
+    public abstract Message log(Message message);
+    public abstract boolean isSameTypeOf(Message message);
+    public abstract void flush();
+    public abstract void accumulate(Message message);
+    public abstract String fetch();
 }

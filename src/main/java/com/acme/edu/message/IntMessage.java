@@ -1,7 +1,7 @@
 package com.acme.edu.message;
 
 //public class IntMessage extends Message {  @Override
-public class IntMessage implements Message {
+public class IntMessage extends Message {
     private int message;
   //  int sum = 0;
     public IntMessage (int message) {
@@ -25,6 +25,6 @@ public class IntMessage implements Message {
     }
     @Override
     public String fetch() {
-        return Integer.toString(message);
+        return super.getDecorator().decorate(message);
     }
 }

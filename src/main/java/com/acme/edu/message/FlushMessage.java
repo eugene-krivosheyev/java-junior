@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-public class FlushMessage implements Message {
+public class FlushMessage extends Message {
     public FlushMessage(){
     }
 

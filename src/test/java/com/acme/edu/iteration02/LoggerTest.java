@@ -29,13 +29,17 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
-        //region when
-        Logger.log("str 1");
-        Logger.log(1);
-        Logger.log(2);
-        Logger.log("str 2");
-        Logger.log(0);
-        Logger.flush();
+        try {
+            //region when
+            Logger.log("str 1");
+            Logger.log(1);
+            Logger.log(2);
+            Logger.log("str 2");
+            Logger.log(0);
+            Logger.flush();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         //endregion
 
         //region then

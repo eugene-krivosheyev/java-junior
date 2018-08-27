@@ -1,5 +1,7 @@
 package com.acme.edu.saver;
 
-public interface Saver {
-    public void save(String message);
+public abstract class Saver {
+    protected void save(String message) throws Exception {
+        if (message == null) throw new IllegalArgumentException("null");
+    }
 }

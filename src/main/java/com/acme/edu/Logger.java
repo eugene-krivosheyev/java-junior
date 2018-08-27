@@ -6,14 +6,13 @@ import com.acme.edu.message.FlushMessage;
 
 public class Logger {
     private static LoggerController loggerController = new LoggerController();
-
-    public static void log(int message) {
+    public static void log(int message) throws Exception {
         loggerController.log(new IntMessage(message));
     }
-    public static void log(String message) {
+    public static void log(String message) throws Exception {
         loggerController.log(new StringMessage(message));
     }
-    public static void flush() {
+    public static void flush() throws Exception {
         loggerController.log(new FlushMessage());
     }
 }

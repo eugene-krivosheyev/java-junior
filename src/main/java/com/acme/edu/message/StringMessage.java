@@ -2,7 +2,7 @@ package com.acme.edu.message;
 
 import java.util.Objects;
 
-public class StringMessage implements Message {
+public class StringMessage extends Message {
     private String message;
     private int amount = 1;
     public StringMessage (String message) {

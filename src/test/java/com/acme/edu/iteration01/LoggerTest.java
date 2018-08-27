@@ -1,6 +1,5 @@
 package com.acme.edu.iteration01;
-/*
-import com.acme.edu.message.Logger;
+import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
@@ -25,12 +24,17 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogInteger() throws IOException {
         //region when
-        Logger.log(1);
-        Logger.flush();
-        Logger.log(0);
-        Logger.flush();
-        Logger.log(-1);
-        Logger.flush();
+        try {
+            Logger.log(1);
+            Logger.flush();
+            Logger.log(0);
+            Logger.flush();
+            Logger.log(-1);
+            Logger.flush();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         //endregion
 
         //region then
@@ -40,7 +44,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("primitive: -1" + System.lineSeparator()); //  assertSysoutEquals("primitive: 1\nprimitive: 0\nprimitive: -1\n");
         //endregion
     }
-
+/*
     @Test
     public void shouldLogByte() throws IOException {
         //region when
@@ -124,7 +128,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-
+*/
 }
 
-*/
