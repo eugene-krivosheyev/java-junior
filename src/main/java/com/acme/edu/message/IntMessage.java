@@ -1,21 +1,25 @@
 package com.acme.edu.message;
 
-public class IntMessage implements Message {
+import com.acme.edu.message.decorator.Decorator;
+
+public class IntMessage extends Message {
     private int message;
 
-    public IntMessage(int message) {
+    public IntMessage(int message, Decorator decorator) {
+        super (decorator);
         this.message = message;
     }
 
     @Override
     public Message accumulate(Message nextMessage) {
         IntMessage downcastedMessage = (IntMessage) nextMessage;
-        return new IntMessage(this.message + downcastedMessage.message);
+        return new IntMessage(this.message + downcastedMessage.message, this.getDecorator());
     }
 
     @Override
     public String getDecoratedMessage() {
-        return String.format("%s: %d%s", "primitive", message, System.lineSeparator());
+        getDecorator().setMessage(Integer.toString(message));
+        return getDecorator().getDecoratedMessage();
     }
 
     @Override

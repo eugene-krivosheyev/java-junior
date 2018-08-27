@@ -1,12 +1,15 @@
 package com.acme.edu.message;
 
-public class Int2DimArrayMessage implements Message {
+import com.acme.edu.message.decorator.Decorator;
+
+public class Int2DimArrayMessage extends Message {
     IntArrayMessage[] message;
 
-    public Int2DimArrayMessage(int[][] message) {
+    public Int2DimArrayMessage(int[][] message, Decorator decorator) {
+        super(decorator);
         this.message = new IntArrayMessage[message.length];
         for (int i = 0; i < this.message.length; i++) {
-            this.message[i] = new IntArrayMessage(message[i]);
+            this.message[i] = new IntArrayMessage(message[i], getDecorator());
         }
     }
 
@@ -22,9 +25,10 @@ public class Int2DimArrayMessage implements Message {
             arrayOfIntsAsString[i] = message[i].oneDimArrayAsString();
         }
         String joinedArraysAsStrings = String.join(System.lineSeparator(), arrayOfIntsAsString);
-        String finalResult = "primitives matrix: "+"{" + System.lineSeparator() +
+        String finalResult = "{" + System.lineSeparator() +
                 joinedArraysAsStrings + System.lineSeparator() + "}";
-        return finalResult;
+        getDecorator().setMessage(finalResult);
+        return getDecorator().getDecoratedMessage();
     }
 
     @Override

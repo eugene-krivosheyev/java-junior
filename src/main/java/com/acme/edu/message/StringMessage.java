@@ -1,29 +1,35 @@
 package com.acme.edu.message;
 
+import com.acme.edu.message.decorator.Decorator;
+
 import java.util.Objects;
 
-public class StringMessage implements Message {
+public class StringMessage extends Message {
     private String message;
     private int counter;
 
-    public StringMessage(String message) {
+    public StringMessage(String message, Decorator decorator) {
+        super(decorator);
         this.message = message;
         counter  = 1;
     }
-    private StringMessage (String message, int counter) {
+    private StringMessage (String message, int counter, Decorator decorator) {
+        super(decorator);
         this.message = message;
         this.counter  = counter;
     }
 
     @Override
     public Message accumulate(Message nextMessage) {
-        return  new StringMessage(message, counter+1);
+        return  new StringMessage(message, counter+1, getDecorator());
     }
 
     @Override
     public String getDecoratedMessage() {
-        String quantityString = counter >1 ? String.format("(x%d)", counter): "";
-        return String.format("%s: %s %s%s","string", message, quantityString, System.lineSeparator() );
+        String quantityString = counter > 1 ? String.format("(x%d)", counter): "";
+        String formattedMessage = String.format("%s %s", message, quantityString);
+        getDecorator().setMessage(formattedMessage);
+        return getDecorator().getDecoratedMessage();
     }
 
     @Override

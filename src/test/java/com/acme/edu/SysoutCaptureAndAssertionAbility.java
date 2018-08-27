@@ -15,6 +15,9 @@ public interface SysoutCaptureAndAssertionAbility {
     default void assertSysoutEquals(String expected) {
         assertThat(OUT.toString()).isEqualTo(expected);
     }
+    default void assertSysoutNotEquals(String expected) {
+        assertThat(OUT.toString()).isNotEqualTo(expected);
+    }
 
     default void assertSysoutContains(String expected) {
         assertThat(OUT.toString()).contains(expected);

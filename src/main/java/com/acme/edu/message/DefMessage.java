@@ -1,6 +1,12 @@
 package com.acme.edu.message;
 
-public class DefMessage implements Message {
+import com.acme.edu.message.decorator.Decorator;
+
+public class DefMessage extends Message {
+
+    public DefMessage(Decorator decorator) {
+        super(decorator);
+    }
 
     @Override
     public Message accumulate(Message nextMessage) {

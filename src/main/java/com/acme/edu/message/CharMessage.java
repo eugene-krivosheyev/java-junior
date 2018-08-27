@@ -1,9 +1,12 @@
 package com.acme.edu.message;
 
-public class CharMessage implements Message {
+import com.acme.edu.message.decorator.Decorator;
+
+public class CharMessage extends Message {
     private char message;
 
-    public CharMessage(char message) {
+    public CharMessage(char message, Decorator decorator) {
+        super(decorator);
         this.message = message;
     }
     @Override
@@ -13,7 +16,8 @@ public class CharMessage implements Message {
 
     @Override
     public String getDecoratedMessage() {
-        return String.format("%s: %c%s", "char", message, System.lineSeparator());
+        getDecorator().setMessage(Character.toString(message));
+        return getDecorator().getDecoratedMessage();
     }
 
     @Override

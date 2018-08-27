@@ -3,7 +3,6 @@ package com.acme.edu;
 import com.acme.edu.message.Message;
 
 public class LoggerController {
-
     private Message currentMessage;
     private LoggerSaver saver;
 

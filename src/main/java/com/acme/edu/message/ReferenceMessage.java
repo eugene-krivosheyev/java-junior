@@ -1,9 +1,12 @@
 package com.acme.edu.message;
 
-public class ReferenceMessage implements  Message {
+import com.acme.edu.message.decorator.Decorator;
+
+public class ReferenceMessage extends  Message {
     private Object message;
 
-    public ReferenceMessage(Object message) {
+    public ReferenceMessage(Object message, Decorator decorator) {
+        super(decorator);
         this.message = message;
     }
     @Override
@@ -13,7 +16,8 @@ public class ReferenceMessage implements  Message {
 
     @Override
     public String getDecoratedMessage() {
-        return String.format("%s: %s%s", "reference", message, System.lineSeparator());
+        getDecorator().setMessage(message.toString());
+        return getDecorator().getDecoratedMessage();
     }
 
     @Override

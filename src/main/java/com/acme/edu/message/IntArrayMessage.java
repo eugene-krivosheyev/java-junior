@@ -1,9 +1,12 @@
 package com.acme.edu.message;
 
-public class IntArrayMessage implements Message {
+import com.acme.edu.message.decorator.Decorator;
+
+public class IntArrayMessage extends Message {
     private int [] message;
 
-    public IntArrayMessage (int [] message) {
+    public IntArrayMessage (int [] message, Decorator decorator) {
+        super(decorator);
         this.message = message;
     }
 
@@ -14,7 +17,9 @@ public class IntArrayMessage implements Message {
 
     @Override
     public String getDecoratedMessage() {
-        return String.format("%s: %s%s", "primitives array", oneDimArrayAsString(), System.lineSeparator());
+        //return String.format("%s: %s%s", "primitives array", oneDimArrayAsString(), System.lineSeparator());
+        getDecorator().setMessage(oneDimArrayAsString());
+        return getDecorator().getDecoratedMessage();
     }
 
     @Override

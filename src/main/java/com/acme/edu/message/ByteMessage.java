@@ -1,21 +1,25 @@
 package com.acme.edu.message;
 
-public class ByteMessage implements Message {
+import com.acme.edu.message.decorator.Decorator;
+
+public class ByteMessage extends Message {
     private byte message;
 
-    public ByteMessage(byte message) {
+    public ByteMessage(byte message, Decorator decorator) {
+        super(decorator);
         this.message = message;
     }
 
     @Override
     public Message accumulate(Message nextMessage) {
         ByteMessage downcastedMessage =  (ByteMessage)nextMessage;
-        return new ByteMessage((byte)(this.message + downcastedMessage.message));
+        return new ByteMessage((byte)(this.message + downcastedMessage.message), getDecorator());
     }
 
     @Override
     public String getDecoratedMessage() {
-        return String.format("%s: %d%s", "primitive", message, System.lineSeparator());
+        getDecorator().setMessage(Byte.toString(message));
+        return getDecorator().getDecoratedMessage();
     }
 
     @Override
