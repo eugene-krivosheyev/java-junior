@@ -1,8 +1,8 @@
 package com.acme.edu;
 
+import com.acme.edu.decorator.DecoratorVisitor;
 import com.acme.edu.message.Message;
 import com.acme.edu.saver.LoggerSaver;
-import org.springframework.context.support.MessageSourceAccessor;
 
 public class LoggerController {
     private Message currentMessage;
@@ -13,12 +13,14 @@ public class LoggerController {
     }
 
     public void log(Message message) {
+
+
         if (currentMessage == null) {
             currentMessage = message;
             return;
         }
 
-        if (currentMessage.isSameTypeOf(message)){
+        if (currentMessage.isSameTypeOf(message)) {
             currentMessage.accumulate(message);
         } else {
             flush();
@@ -26,8 +28,9 @@ public class LoggerController {
         }
     }
 
+
     public void flush() {
-        saver.save(currentMessage.getDecoratedMessage());
+        saver.save(currentMessage);
         currentMessage = null;
     }
 }

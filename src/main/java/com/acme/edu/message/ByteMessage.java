@@ -1,7 +1,8 @@
 package com.acme.edu.message;
 
+import com.acme.edu.decorator.DecoratorVisitor;
+
 public class ByteMessage implements Message {
-    private static final String PRIMITIVE = "primitive: ";
     private byte message;
 
     public ByteMessage(byte message) {
@@ -13,14 +14,14 @@ public class ByteMessage implements Message {
     }
 
     @Override
-    public String getDecoratedMessage() {
-        return PRIMITIVE + this.message;
-    }
-
-    @Override
     public Message accumulate(Message message) {
         ByteMessage byteMessage = (ByteMessage) message;
         this.message += byteMessage.message;
         return this;
+    }
+
+    @Override
+    public String accept(DecoratorVisitor decoratorVisitor) {
+        return decoratorVisitor.decorateByte(this.message);
     }
 }

@@ -1,8 +1,9 @@
 package com.acme.edu.message;
 
+import com.acme.edu.decorator.DecoratorVisitor;
+
 public class ObjectMessage implements Message{
     private Object message;
-    private static final String REFERENCE = "reference: ";
 
     public ObjectMessage(Object message) {
         this.message = message;
@@ -14,12 +15,12 @@ public class ObjectMessage implements Message{
     }
 
     @Override
-    public String getDecoratedMessage() {
-        return REFERENCE + this.message;
+    public Message accumulate(Message message) {
+        return null;
     }
 
     @Override
-    public Message accumulate(Message message) {
-        return null;
+    public String accept(DecoratorVisitor decoratorVisitor) {
+        return decoratorVisitor.decorateObject(this.message);
     }
 }

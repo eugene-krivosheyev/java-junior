@@ -1,7 +1,9 @@
 package com.acme.edu.message;
 
+import com.acme.edu.decorator.DecoratorVisitor;
+
 public interface Message {
-    public boolean isSameTypeOf(Message message);
-    String getDecoratedMessage();
-    public Message accumulate(Message message);
+    boolean isSameTypeOf(Message message);
+    Message accumulate(Message message);
+    String accept(DecoratorVisitor decoratorVisitor);
 }

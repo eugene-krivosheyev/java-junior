@@ -1,7 +1,8 @@
 package com.acme.edu.message;
 
+import com.acme.edu.decorator.DecoratorVisitor;
+
 public class IntMessage implements Message {
-    private static final String PRIMITIVE = "primitive: ";
     private int message;
 
     public IntMessage(int message) {
@@ -13,14 +14,14 @@ public class IntMessage implements Message {
     }
 
     @Override
-    public String getDecoratedMessage() {
-        return PRIMITIVE + this.message;
-    }
-
-    @Override
     public Message accumulate(Message message) {
         IntMessage intMessage = (IntMessage) message;
         this.message += intMessage.message;
         return this;
+    }
+
+    @Override
+    public String accept(DecoratorVisitor decoratorVisitor) {
+        return decoratorVisitor.decorateInt(this.message);
     }
 }

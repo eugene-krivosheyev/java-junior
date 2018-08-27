@@ -1,10 +1,11 @@
 package com.acme.edu.message;
 
 
+import com.acme.edu.decorator.DecoratorVisitor;
+
 import java.util.Objects;
 
 public class StringMessage implements Message {
-    private static final String STRING = "string: ";
     private String  message;
     private int counter;
 
@@ -18,15 +19,6 @@ public class StringMessage implements Message {
     }
 
     @Override
-    public String getDecoratedMessage() {
-        String decoratedMessage = STRING + this.message;
-        if (this.counter != 1) {
-            decoratedMessage += " (x" + this.counter + ")";
-        }
-        return decoratedMessage;
-    }
-
-    @Override
     public Message accumulate(Message message) {
         StringMessage stringMessage = (StringMessage) message;
         if (this.message.equals(stringMessage.message)){
@@ -37,5 +29,10 @@ public class StringMessage implements Message {
         }
 
         return this;
+    }
+
+    @Override
+    public String accept(DecoratorVisitor decoratorVisitor) {
+        return decoratorVisitor.decorateString(this.message);
     }
 }

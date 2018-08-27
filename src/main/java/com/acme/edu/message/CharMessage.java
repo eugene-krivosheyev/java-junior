@@ -1,8 +1,9 @@
 package com.acme.edu.message;
 
+import com.acme.edu.decorator.DecoratorVisitor;
+
 public class CharMessage implements Message {
     private char message;
-    private static final String CHAR = "char: ";
 
     public CharMessage(char message) {
         this.message = message;
@@ -14,12 +15,12 @@ public class CharMessage implements Message {
     }
 
     @Override
-    public String getDecoratedMessage() {
-        return CHAR + this.message;
+    public Message accumulate(Message message) {
+        return null;
     }
 
     @Override
-    public Message accumulate(Message message) {
-        return null;
+    public String accept(DecoratorVisitor decoratorVisitor) {
+        return decoratorVisitor.decorateChar(this.message);
     }
 }
