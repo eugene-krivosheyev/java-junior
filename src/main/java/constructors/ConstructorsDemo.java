@@ -3,7 +3,7 @@ package constructors;
 public class ConstructorsDemo {
     public static void main(String[] args) {
         Animal cat = new Cat("cat");
-        Animal sp = new Sphinx("");
+        Animal sp = new Sphinx();
         System.out.println(cat.getName());
     }
 }
