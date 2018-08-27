@@ -39,7 +39,7 @@ public class StringMessage implements  Message{
         int i = 0;
         do {
             int index = amountOfString.get(i);
-            String times = index > 1 ? " (x"+index + ")\n" : "\n";
+            String times = index > 1 ? " (x"+index + ")" + System.lineSeparator() : System.lineSeparator();
             String value = arrayOfUniqueString.get(i);
             result = result.concat(value + times);
             i ++;

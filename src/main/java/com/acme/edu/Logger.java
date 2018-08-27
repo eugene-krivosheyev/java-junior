@@ -1,5 +1,6 @@
 package com.acme.edu;
 
+import com.acme.edu.Decorator.Decorator;
 import com.acme.edu.controller.Controller;
 import com.acme.edu.message.*;
 
@@ -9,6 +10,10 @@ public class Logger {
 
     public static void log(int message) {
         controller.log(new IntMessage(message));
+    }
+
+    public static void log(int message, Decorator decorator) {
+        controller.log(new IntMessage(message, decorator));
     }
 
     public static void log(char message) {

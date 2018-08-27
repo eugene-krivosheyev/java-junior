@@ -1,5 +1,9 @@
 package com.acme.edu.message;
 
+import com.acme.edu.Decorator.IntegerDecorator;
+import com.acme.edu.Decorator.PrimitiveDecorator;
+import com.acme.edu.Decorator.Decorator;
+
 /**
  * Created by Java_1 on 24.08.2018.
  */
@@ -7,10 +11,16 @@ package com.acme.edu.message;
 public class IntMessage implements Message {
 
     private int value;
-    public static final String PRIMITIVE = "primitive: ";
+    private Decorator decorator;
 
     public IntMessage(int message) {
         this.value = message;
+        decorator = new PrimitiveDecorator();
+    }
+
+    public IntMessage(int message, Decorator decorator) {
+        this.value = message;
+        this.decorator = decorator;
     }
 
     @Override
@@ -20,7 +30,7 @@ public class IntMessage implements Message {
 
     @Override
     public String getDecoratedMessage(){
-        return PRIMITIVE + value;
+        return decorator.getDecoratedMessage(new IntMessage(getValue()));
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.acme.edu.iteration01;
 
+import com.acme.edu.Decorator.IntegerDecorator;
+import com.acme.edu.Decorator.PrimitiveDecorator;
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
@@ -36,6 +38,23 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region then
         assertSysoutContains("primitive: ");
         assertSysoutEquals("primitive: 1" + System.lineSeparator() + "primitive: 0" + System.lineSeparator() + "primitive: -1" + System.lineSeparator());
+        //endregion
+    }
+
+    @Test
+    public void shouldLogAnotherFormatInteger() throws IOException {
+        //region when
+        Logger.log(1,  new IntegerDecorator());
+        Logger.flush();
+        Logger.log(0);
+        Logger.flush();
+        Logger.log(-1,  new IntegerDecorator());
+        Logger.flush();
+        //endregion
+
+        //region then
+        assertSysoutContains("integer: ");
+        assertSysoutEquals("integer: 1" + System.lineSeparator() + "primitive: 0" + System.lineSeparator() + "integer: -1" + System.lineSeparator());
         //endregion
     }
 

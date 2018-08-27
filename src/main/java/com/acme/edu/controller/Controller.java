@@ -1,7 +1,7 @@
 package com.acme.edu.controller;
 
 import com.acme.edu.message.Message;
-import com.acme.edu.saver.Saver;
+import com.acme.edu.saver.SimpleSaver;
 
 import static java.util.Objects.isNull;
 
@@ -11,7 +11,7 @@ import static java.util.Objects.isNull;
 public class Controller {
 
     private Message currentMessage;
-    private Saver saver;
+    private SimpleSaver saver = new SimpleSaver();
 
     public void log(Message message){
 
