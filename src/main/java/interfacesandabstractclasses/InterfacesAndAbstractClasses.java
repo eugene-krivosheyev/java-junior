@@ -2,6 +2,8 @@ package interfacesandabstractclasses;
 
 import java.io.Serializable;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 public class InterfacesAndAbstractClasses {
@@ -12,6 +14,8 @@ public class InterfacesAndAbstractClasses {
         System.out.println(hawk instanceof Object);
         System.out.println(hawk instanceof Flyable);
         System.out.println(hawk instanceof Cloneable);
+
+        Flyable.getT();
     }
 }
 
@@ -37,6 +41,14 @@ abstract class Animal {
 interface Flyable {
     public static final int STRATOSPHERE = 10_000;
     public Object fly();
+
+    static void getT() {
+        System.out.println("celcius");
+    }
+
+    default void landing() {
+        this.fly();
+    }
 }
 
 //@Serializable(state=1, target="io")
