@@ -1,6 +1,6 @@
 package newlogger.message;
 
-public class IntMessage implements Message {
+class IntMessage implements Message {
     private int message;
 
     public IntMessage(int message) {

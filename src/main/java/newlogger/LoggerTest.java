@@ -1,6 +1,6 @@
 package newlogger;
 
-import newlogger.facade.Logger;
+import newlogger.message.Logger;
 
 public class LoggerTest {
     public static void main(String[] args) {

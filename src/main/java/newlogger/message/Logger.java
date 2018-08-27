@@ -1,4 +1,4 @@
-package newlogger.facade;
+package newlogger.message;
 
 import newlogger.controller.Controller;
 import newlogger.message.ByteMessage;
@@ -6,6 +6,9 @@ import newlogger.message.FlushMessage;
 import newlogger.message.IntMessage;
 import newlogger.message.StringMessage;
 
+/**
+ * Facade [GoF]
+ */
 public class Logger {
     private static Controller controller = new Controller();
 

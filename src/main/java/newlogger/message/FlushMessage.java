@@ -1,6 +1,6 @@
 package newlogger.message;
 
-public class FlushMessage implements Message {
+class FlushMessage implements Message {
     @Override
     public boolean isSameTypeOf(Message message) {
         return false;

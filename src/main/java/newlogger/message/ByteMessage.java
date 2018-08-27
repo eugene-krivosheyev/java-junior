@@ -1,6 +1,6 @@
 package newlogger.message;
 
-public class ByteMessage implements Message {
+class ByteMessage implements Message {
     private byte message;
 
     public ByteMessage(byte message) {

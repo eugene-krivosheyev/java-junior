@@ -43,4 +43,8 @@ class BlankFinalDemo {
     public BlankFinalDemo(int field) {
         this.field = field;
     }
+
+    public BlankFinalDemo() {
+        field = 0;
+    }
 }
