@@ -1,8 +1,12 @@
 package com.acme.edu;
 
+import com.acme.edu.decorators.Decorator;
+import com.acme.edu.decorators.StringDecorator;
+
 public class StringMessage implements Message {
     private String value;
     private int numOfSequent;
+    private static Decorator decorator = new StringDecorator();
 
     public StringMessage(String message) {
         this.value = message;
@@ -16,7 +20,7 @@ public class StringMessage implements Message {
 
     @Override
     public String decorate() {
-        return "string: " + value + " (x" + numOfSequent + ")";
+        return  decorator.decorate("" + value, "" + numOfSequent);
     }
 
     @Override

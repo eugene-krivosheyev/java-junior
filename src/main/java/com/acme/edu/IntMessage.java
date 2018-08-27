@@ -1,7 +1,12 @@
 package com.acme.edu;
 
+import com.acme.edu.decorators.Decorator;
+import com.acme.edu.decorators.IntDecorator;
+
 public class IntMessage implements Message{
     private int value;
+    private static Decorator decorator = new IntDecorator();
+
 
     public IntMessage(int message) {
         this.value = message;
@@ -9,7 +14,7 @@ public class IntMessage implements Message{
 
     @Override
     public String decorate() {
-        return "primitive: " + value;
+        return decorator.decorate("" + value);
     }
 
     @Override

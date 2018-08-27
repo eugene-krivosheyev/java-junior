@@ -52,10 +52,10 @@ public class Logger {
     public static Controller controller = new Controller(new ConsolSaver());
 
 
-    /*public static void main(String[] args) {
-        Logger.log(1);
+    public static void main(String[] args) {
+        Logger.log("Byaka");
         Logger.flush();
-    }*/
+    }
 
     public static void log(int message) {
         controller.log(new IntMessage(message));
@@ -82,13 +82,13 @@ public class Logger {
     }
 
     public static void log(int[] message) {
-
+        controller.log(new ArrayMessage(message));
     }
-
+/*
     public static void log(int[][] message) {
-
+        controller.log(new MatrixMessage(message));
     }
-
+*/
     public static void flush() {
         controller.flush();
     }

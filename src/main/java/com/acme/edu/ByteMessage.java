@@ -1,7 +1,11 @@
 package com.acme.edu;
 
+import com.acme.edu.decorators.ByteDecorator;
+import com.acme.edu.decorators.Decorator;
+
 public class ByteMessage implements Message {
     private byte value;
+    private static Decorator decorator = new ByteDecorator();
 
     public ByteMessage(byte message) {
         this.value = message;
@@ -9,7 +13,7 @@ public class ByteMessage implements Message {
 
     @Override
     public String decorate() {
-        return "primitive: " + value;
+        return decorator.decorate("" + value);
     }
 
     @Override

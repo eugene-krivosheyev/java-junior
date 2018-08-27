@@ -1,7 +1,12 @@
 package com.acme.edu;
 
+import com.acme.edu.decorators.BooleanDecorator1;
+import com.acme.edu.decorators.BooleanDecorator2;
+import com.acme.edu.decorators.Decorator;
+
 public class BooleanMessage implements Message {
     private boolean value;
+    private static Decorator decorator = new BooleanDecorator2();
 
     public BooleanMessage(boolean message) {
         this.value = message;
@@ -9,7 +14,7 @@ public class BooleanMessage implements Message {
 
     @Override
     public String decorate() {
-        return "primitive: " + value;
+        return decorator.decorate("" + value);
     }
 
     @Override

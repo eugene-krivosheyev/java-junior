@@ -1,7 +1,12 @@
 package com.acme.edu;
 
+import com.acme.edu.decorators.CharDecorator;
+import com.acme.edu.decorators.Decorator;
+
 public class CharMessage implements Message {
     private char value;
+    private static Decorator decorator = new CharDecorator();
+
 
     public CharMessage(char message) {
         this.value = message;
@@ -9,7 +14,7 @@ public class CharMessage implements Message {
 
     @Override
     public String decorate() {
-        return "char: " + value;
+        return decorator.decorate("" + value);
     }
 
     @Override

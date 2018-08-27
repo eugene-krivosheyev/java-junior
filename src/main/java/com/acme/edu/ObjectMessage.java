@@ -1,7 +1,11 @@
 package com.acme.edu;
 
+import com.acme.edu.decorators.Decorator;
+import com.acme.edu.decorators.ObjectDecorator;
+
 public class ObjectMessage implements Message {
     private Object value;
+    private static Decorator decorator = new ObjectDecorator();
 
     public ObjectMessage(Object message) {
         this.value = message;
@@ -9,7 +13,7 @@ public class ObjectMessage implements Message {
 
     @Override
     public String decorate() {
-        return "reference: " + value;
+        return decorator.decorate("" + value);
     }
 
     @Override

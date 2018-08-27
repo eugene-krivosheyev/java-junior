@@ -22,9 +22,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    /*
+/*
     TODO: implement Logger solution to match specification as tests
-
+*/
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
@@ -38,7 +38,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-
+/*
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
