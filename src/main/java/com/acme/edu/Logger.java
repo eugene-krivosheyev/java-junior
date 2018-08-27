@@ -41,4 +41,5 @@ public class Logger {
         controller.log(new FlushMessage(new DefaultDecorator("")));
     }
 
+    private Logger() {}
 }
