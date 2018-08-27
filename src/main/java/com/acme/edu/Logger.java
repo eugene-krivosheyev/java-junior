@@ -49,7 +49,7 @@ public class Logger {
 */
 
 public class Logger {
-    static Controller controller = new Controller(new Saver());
+    private static Controller controller = new Controller(new Saver());
 
 
     /*public static void main(String[] args) {
