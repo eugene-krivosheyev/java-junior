@@ -8,8 +8,9 @@ public class StringMessage implements Message {
     }
 
     @Override
-    public boolean isSameTypeOf(Message message) {
+    public boolean isSameTypeOf(final Message message) {
         return message instanceof StringMessage;
+        //10 ksloc
     }
 
     @Override
