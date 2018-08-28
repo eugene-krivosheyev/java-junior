@@ -34,6 +34,9 @@ public class Logger {
         controller.log(new BooleanMessage(message));
     }
 
+    public static void log(int[] message) { controller.log(new IntArrayMessage(message));}
+
+    public static void log(int[][] message) { controller.log(new IntMatrixMessage(message));}
     public static void log(Object message) {
         controller.log(new ObjectMessage(message));
     }

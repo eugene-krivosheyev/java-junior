@@ -13,8 +13,6 @@ public class LoggerController {
     }
 
     public void log(Message message) {
-
-
         if (currentMessage == null) {
             currentMessage = message;
             return;

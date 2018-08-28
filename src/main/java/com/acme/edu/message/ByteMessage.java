@@ -10,7 +10,10 @@ public class ByteMessage implements Message {
     }
 
     public boolean isSameTypeOf(Message comparedMessage){
-        return  (comparedMessage instanceof ByteMessage);
+        if (!(comparedMessage instanceof ByteMessage)) return false;
+        ByteMessage castedMessage = (ByteMessage) comparedMessage;
+        int sum = (int) castedMessage.message + (int) this.message;
+        return sum <= Byte.MAX_VALUE && sum >= Byte.MIN_VALUE;
     }
 
     @Override

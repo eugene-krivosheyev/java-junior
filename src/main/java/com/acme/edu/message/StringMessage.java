@@ -20,19 +20,12 @@ public class StringMessage implements Message {
 
     @Override
     public Message accumulate(Message message) {
-        StringMessage stringMessage = (StringMessage) message;
-        if (this.message.equals(stringMessage.message)){
-            this.counter++;
-        } else {
-            this.message = stringMessage.message;
-            this.counter = 1;
-        }
-
+        this.counter++;
         return this;
     }
 
     @Override
     public String accept(DecoratorVisitor decoratorVisitor) {
-        return decoratorVisitor.decorateString(this.message);
+        return decoratorVisitor.decorateString(this.message, this.counter);
     }
 }
