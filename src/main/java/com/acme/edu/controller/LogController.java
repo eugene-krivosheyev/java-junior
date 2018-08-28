@@ -6,9 +6,9 @@ import com.acme.edu.message.Message;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class LogController {
-    private transient Message previousMessage = new BlankMessage();
-    private final transient ConsoleLoggerSaver saver;
-    private final transient LoggerDecorator decorator;
+    private Message previousMessage = new BlankMessage();
+    private final ConsoleLoggerSaver saver;
+    private final LoggerDecorator decorator;
 
     public LogController(ConsoleLoggerSaver saver, LoggerDecorator decorator) {
         this.saver = saver;

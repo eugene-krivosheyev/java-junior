@@ -3,7 +3,7 @@ package com.acme.edu.message;
 public class StringMessage extends Message {
     private static final String TYPE_NAME = "string";
     private final String value;
-    private final transient int currentStringCount;
+    private final int currentStringCount;
 
     private StringMessage(String message, int count) {
         this.value = message;

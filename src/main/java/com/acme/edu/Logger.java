@@ -13,9 +13,9 @@ import com.acme.edu.message.StringMessage;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public final class Logger {
-    private Logger(){}
-
     private static LogController controller = new LogController(new ConsoleLoggerSaver(), new PrefixLoggerDecorator());
+
+    private Logger(){}
 
     public static void log(int message) {
         controller.log(new IntMessage(message));
