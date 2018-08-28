@@ -1,13 +1,14 @@
 package com.acme.edu.controller;
 
+import com.acme.edu.message.BlankMessage;
 import com.acme.edu.message.decorator.LoggerDecorator;
 import com.acme.edu.message.Message;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class LogController {
-    private Message previousMessage;
-    private ConsoleLoggerSaver saver;
-    private LoggerDecorator decorator;
+    private transient Message previousMessage = new BlankMessage();
+    private final transient ConsoleLoggerSaver saver;
+    private final transient LoggerDecorator decorator;
 
     public LogController(ConsoleLoggerSaver saver, LoggerDecorator decorator) {
         this.saver = saver;
@@ -15,12 +16,7 @@ public class LogController {
     }
 
     public void log(Message message) {
-        if (previousMessage == null){
-            previousMessage = message;
-            return;
-        }
-
-        if (message.canBeAccumulated(previousMessage)) {
+        if (previousMessage.canBeAccumulated(message)) {
             previousMessage = previousMessage.accumulate(message);
         } else {
             flush();
@@ -28,8 +24,9 @@ public class LogController {
         }
     }
 
-    public void flush(){
+    public void flush() {
+        if (previousMessage instanceof BlankMessage) return;
         saver.save(previousMessage.getFormattedMessage(decorator));
-        previousMessage = null;
+        previousMessage = new BlankMessage();
     }
 }

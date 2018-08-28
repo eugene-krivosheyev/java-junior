@@ -5,7 +5,7 @@ import com.acme.edu.message.decorator.PrefixLoggerDecorator;
 import com.acme.edu.message.*;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 
-public class Logger {
+public final class Logger {
     private Logger(){}
 
     private static LogController controller = new LogController(new ConsoleLoggerSaver(), new PrefixLoggerDecorator());
@@ -46,7 +46,7 @@ public class Logger {
         controller.log(new ArrayIntMessage(message));
     }
 
-    public static void log(int [][] message) {
+    public static void log(int [] ... message) {
         controller.log(new MatrixIntMessage(message));
     }
 }
