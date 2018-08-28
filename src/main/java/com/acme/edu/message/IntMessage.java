@@ -1,7 +1,5 @@
 package com.acme.edu.message;
 
-import com.acme.edu.decorator.LoggerDecorator;
-
 public class IntMessage extends Message {
     private static final String TYPE_NAME = "primitive";
     private final int value;

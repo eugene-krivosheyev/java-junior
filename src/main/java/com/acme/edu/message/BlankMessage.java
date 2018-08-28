@@ -1,7 +1,5 @@
 package com.acme.edu.message;
 
-import com.acme.edu.decorator.LoggerDecorator;
-
 public class BlankMessage extends Message {
     @Override
     public String getFormattedMessage(LoggerDecorator decorator) {

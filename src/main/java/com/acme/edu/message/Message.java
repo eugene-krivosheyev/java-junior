@@ -1,7 +1,5 @@
 package com.acme.edu.message;
 
-import com.acme.edu.decorator.LoggerDecorator;
-
 public abstract class Message {
     protected String type;
 
