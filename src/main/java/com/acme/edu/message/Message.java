@@ -1,9 +1,19 @@
 package com.acme.edu.message;
 
-public interface Message {
-    public Message accumulate(Message message);
+import com.acme.edu.message.decorator.Decorator;
 
-    public String decorate();
+abstract public class Message {
+//    private Decorator decorator;
+/*
+    public Message(Decorator decorator) {
+        this.decorator = decorator;
+    }
+*/
+    abstract public Message accumulate(Message message);
 
-    public boolean isAbleToAccumulate(Message message);
+    public String decorate(Decorator decorator) {
+        return decorator.decorate(this);
+    }
+
+    abstract public boolean isAbleToAccumulate(Message message);
 }

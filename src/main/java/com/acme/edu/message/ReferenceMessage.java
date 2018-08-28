@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-public class ReferenceMessage implements Message {
+public class ReferenceMessage extends Message {
     private Object message;
 
     public Object getMessage() {
@@ -14,11 +14,6 @@ public class ReferenceMessage implements Message {
     @Override
     public Message accumulate(Message message) {
         return null;
-    }
-
-    @Override
-    public String decorate() {
-        return "reference: " + message;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-public class StringMessage implements Message {
+public class StringMessage extends Message {
     private String message;
     private int countOfStrings;
 
@@ -13,8 +13,7 @@ public class StringMessage implements Message {
     }
 
     public StringMessage(String message) {
-        this.message = message;
-        this.countOfStrings = 1;
+        this(message, 1);
     }
 
     private StringMessage(String message, int countOfStrings) {
@@ -25,11 +24,6 @@ public class StringMessage implements Message {
     @Override
     public Message accumulate(Message message) {
         return new StringMessage(this.message, this.countOfStrings + ((StringMessage) message).getCountOfStrings());
-    }
-
-    @Override
-    public String decorate() {
-        return "string: " + message + (countOfStrings > 1 ? " (x" + countOfStrings + ")" : "");
     }
 
     @Override

@@ -1,13 +1,8 @@
 package com.acme.edu.message;
 
-public class FlushMessage implements Message {
+public class FlushMessage extends Message {
     @Override
     public Message accumulate(Message message) {
-        return null;
-    }
-
-    @Override
-    public String decorate() {
         return null;
     }
 

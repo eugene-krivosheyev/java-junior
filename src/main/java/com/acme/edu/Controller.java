@@ -1,19 +1,24 @@
 package com.acme.edu;
 
+import com.acme.edu.message.FlushMessage;
 import com.acme.edu.message.Message;
+import com.acme.edu.message.decorator.Decorator;
+import com.acme.edu.message.decorator.EmptyDecorator;
+import com.acme.edu.saver.DefaultSaver;
+import com.acme.edu.saver.Saver;
 
 public class Controller {
-    private Saver saver = new Saver();
-    private Message prevMessage;
+    private Saver defaultSaver = new DefaultSaver();
+    private Message prevMessage = new FlushMessage();
+    private Decorator prevDecorator = new EmptyDecorator();
 
-    public void log(Message message) {
-        if (prevMessage == null) {
-            prevMessage = message;
-        } else if (prevMessage.isAbleToAccumulate(message)) {
+    public void log(Message message, Decorator decorator) {
+        if (prevMessage.isAbleToAccumulate(message)) {
             prevMessage = prevMessage.accumulate(message);
         } else {
-            saver.save(prevMessage.decorate());
+            defaultSaver.save(prevMessage.decorate(prevDecorator));
             prevMessage = message;
+            prevDecorator = decorator;
         }
     }
 }

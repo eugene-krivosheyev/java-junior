@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-public class BooleanMessage implements Message {
+public class BooleanMessage extends Message {
     private boolean message;
 
     public boolean getMessage() {
@@ -14,11 +14,6 @@ public class BooleanMessage implements Message {
     @Override
     public Message accumulate(Message message) {
         return null;
-    }
-
-    @Override
-    public String decorate() {
-        return "primitive: " + message;
     }
 
     @Override

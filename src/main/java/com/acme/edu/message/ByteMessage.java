@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-public class ByteMessage implements Message {
+public class ByteMessage extends Message {
     private byte message;
 
     public byte getMessage() {
@@ -14,11 +14,6 @@ public class ByteMessage implements Message {
     @Override
     public Message accumulate(Message message) {
         return new ByteMessage((byte) (this.message + ((ByteMessage) message).getMessage()));
-    }
-
-    @Override
-    public String decorate() {
-        return "primitive: " + message;
     }
 
     @Override

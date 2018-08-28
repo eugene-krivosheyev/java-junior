@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-public class CharMessage implements Message {
+public class CharMessage extends Message {
     private char message;
 
     public char getMessage() {
@@ -14,11 +14,6 @@ public class CharMessage implements Message {
     @Override
     public Message accumulate(Message message) {
         return null;
-    }
-
-    @Override
-    public String decorate() {
-        return "char: " + message;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-public class IntMessage implements Message {
+public class IntMessage extends Message {
     private int message;
 
     public int getMessage() {
@@ -14,11 +14,6 @@ public class IntMessage implements Message {
     @Override
     public Message accumulate(Message message) {
         return new IntMessage(this.message + ((IntMessage) message).getMessage());
-    }
-
-    @Override
-    public String decorate() {
-        return "primitive: " + message;
     }
 
     @Override
