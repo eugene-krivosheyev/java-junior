@@ -22,6 +22,11 @@ public class ArrayListTest {
     @Test
     public void shouldAddElementWhenElementIsNull() {
         //region Given | Fixture
+        new ControllerBuilder()
+                .withSaver()
+                .withDecorator()
+            .build();
+
         Object testObject = null;
         //endregion
 
@@ -35,7 +40,10 @@ public class ArrayListTest {
 //        assertThat(sut)
 //            .contains(null)
 //            .hasSize(1);
-        assertTrue(sut.get(0) == null);
+        assertTrue(
+                sut.get(0) == null,
+
+        );
         //endregion
     }
 
