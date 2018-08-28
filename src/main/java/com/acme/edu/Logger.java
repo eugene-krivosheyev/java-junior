@@ -1,7 +1,7 @@
 package com.acme.edu;
 
 import com.acme.edu.controller.LogController;
-import com.acme.edu.decorator.PrefixLoggerDecorator;
+import com.acme.edu.message.decorator.PrefixLoggerDecorator;
 import com.acme.edu.message.*;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 

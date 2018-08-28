@@ -1,4 +1,4 @@
-package com.acme.edu.decorator;
+package com.acme.edu.message.decorator;
 
 import com.acme.edu.message.*;
 

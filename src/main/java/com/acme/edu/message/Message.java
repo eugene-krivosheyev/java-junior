@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-import com.acme.edu.decorator.LoggerDecorator;
+import com.acme.edu.message.decorator.LoggerDecorator;
 
 public abstract class Message {
 

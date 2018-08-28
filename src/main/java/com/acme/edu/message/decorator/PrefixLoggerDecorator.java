@@ -1,32 +1,45 @@
-package com.acme.edu.decorator;
+package com.acme.edu.message.decorator;
 
-import com.acme.edu.message.*;
+import com.acme.edu.message.ArrayIntMessage;
+import com.acme.edu.message.ByteMessage;
+import com.acme.edu.message.CharMessage;
+import com.acme.edu.message.IntMessage;
+import com.acme.edu.message.BooleanMessage;
+import com.acme.edu.message.MatrixIntMessage;
+import com.acme.edu.message.ObjectMessage;
+import com.acme.edu.message.StringMessage;
 
 import java.util.Arrays;
 
 public class PrefixLoggerDecorator implements LoggerDecorator {
     private static final String FORMAT_STRING = "%s: %s";
 
+    @Override
     public String decorate (IntMessage message){
         return getFormattedString(String.valueOf(message.getValue()), message.getType());
     }
 
+    @Override
     public String decorate (ByteMessage message){
         return getFormattedString(String.valueOf(message.getValue()), message.getType());
     }
 
+    @Override
     public String decorate (CharMessage message){
         return getFormattedString(String.valueOf(message.getValue()), message.getType());
     }
 
+    @Override
     public String decorate (ArrayIntMessage message) {
         return getFormattedString(formatArray(message.getValue()), message.getType());
     }
 
+    @Override
     public String decorate(BooleanMessage message) {
         return getFormattedString(String.valueOf(message.getValue()), message.getType());
     }
 
+    @Override
     public String decorate(MatrixIntMessage message) {
         StringBuilder arrayStringBuilder = new StringBuilder();
         arrayStringBuilder
@@ -42,10 +55,12 @@ public class PrefixLoggerDecorator implements LoggerDecorator {
         return  getFormattedString(arrayStringBuilder.toString(), message.getType());
     }
 
+    @Override
     public String decorate(ObjectMessage message) {
         return getFormattedString(message.getValue().toString(), message.getType());
     }
 
+    @Override
     public String decorate(StringMessage message) {
         int currentStringCount = message.getStringCount();
         String postfixForRepeatedStrings = (currentStringCount > 1) ? String.format(" (x%d)", currentStringCount) : "";

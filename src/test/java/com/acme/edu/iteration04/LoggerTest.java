@@ -3,14 +3,12 @@ package com.acme.edu.iteration04;
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.controller.LogController;
-import com.acme.edu.decorator.PrefixLoggerDecorator;
-import com.acme.edu.decorator.TypeLoggerDecorator;
+import com.acme.edu.message.decorator.PrefixLoggerDecorator;
+import com.acme.edu.message.decorator.TypeLoggerDecorator;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private static final String LINE_SEPARATOR = System.lineSeparator();

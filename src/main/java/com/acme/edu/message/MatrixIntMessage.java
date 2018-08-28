@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-import com.acme.edu.decorator.LoggerDecorator;
+import com.acme.edu.message.decorator.LoggerDecorator;
 
 public class MatrixIntMessage extends Message {
     private static final String TYPE_NAME = "primitives matrix";
