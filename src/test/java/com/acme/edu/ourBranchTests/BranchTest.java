@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-public class BranchTests implements SysoutCaptureAndAssertionAbility {
+public class BranchTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
