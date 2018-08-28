@@ -24,15 +24,21 @@ public class LoggerWithDifferentDecoratorsTest implements SysoutCaptureAndAssert
     }
 
     @Test
-    public void typeLoggerDecoratorUsageTest(){
+    public void shouldLogUsingTypeLoggerDecorator(){
         Logger.setController(new LogController(new ConsoleLoggerSaver(), new TypeLoggerDecorator()));
+        int[] message = new int[] {1,2,3};
+        Logger.log(message);
+        Logger.log((byte) 7);
         Logger.log(12);
+        Logger.log("some text");
         Logger.log("some text");
         Logger.log('a');
         Logger.log(true);
         Logger.log(1,2,3);
         Logger.flush();
-        assertSysoutEquals("This is primitive" + LINE_SEPARATOR +
+        assertSysoutEquals("This is primitives array" + LINE_SEPARATOR +
+                "This is primitive" + LINE_SEPARATOR +
+                "This is primitive" + LINE_SEPARATOR +
                 "This is string" + LINE_SEPARATOR +
                 "This is char" + LINE_SEPARATOR +
                 "This is primitive" + LINE_SEPARATOR +
@@ -40,7 +46,7 @@ public class LoggerWithDifferentDecoratorsTest implements SysoutCaptureAndAssert
     }
 
     @Test
-    public void loggerDecoratorShifting(){
+    public void shouldLogUsingPrefixLoggerDecorator(){
         Logger.setController(new LogController(new ConsoleLoggerSaver(), new TypeLoggerDecorator()));
         Logger.log(11923);
         Logger.log("hfhf");
