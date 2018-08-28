@@ -22,7 +22,6 @@ import static org.mockito.Mockito.when;
 public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
     LoggerController testLoggerController = new LoggerController(new LoggerSaver());
 
-    //region given
     @Before
     public void setUpSystemOut() throws IOException {
         resetOut();
@@ -33,7 +32,6 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
     public void tearDown() {
         resetOut();
     }
-    //endregion
 
     @Test
     public void shouldNotFailWhenAddFirstMessage() {

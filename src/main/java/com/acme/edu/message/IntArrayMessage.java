@@ -17,7 +17,6 @@ public class IntArrayMessage extends Message {
 
     @Override
     public String getDecoratedMessage() {
-        //return String.format("%s: %s%s", "primitives array", oneDimArrayAsString(), System.lineSeparator());
         getDecorator().setMessage(oneDimArrayAsString());
         return getDecorator().getDecoratedMessage();
     }
