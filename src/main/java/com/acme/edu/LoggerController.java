@@ -1,6 +1,5 @@
 package com.acme.edu;
 
-import com.acme.edu.decorator.DecoratorVisitor;
 import com.acme.edu.message.Message;
 import com.acme.edu.saver.LoggerSaver;
 
