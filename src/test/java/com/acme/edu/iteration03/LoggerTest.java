@@ -24,7 +24,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 /*
     TODO: implement Logger solution to match specification as tests
-*/
+
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when

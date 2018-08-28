@@ -22,7 +22,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    @Test
+  /*  @Test
     public void shouldLogInteger() throws IOException {
         //region when
         Logger.log(1);
@@ -58,9 +58,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    /*
+
     TODO: implement Logger solution to match specification as tests
-*/
+
     @Test
     public void shouldLogChar() throws IOException {
         //region when
@@ -121,6 +121,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("@");
         //endregion
     }
-
+*/
 
 }
