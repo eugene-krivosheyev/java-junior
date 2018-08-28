@@ -22,6 +22,6 @@ public class ArrayIntMessage extends Message {
     }
 
     public int[] getValue() {
-        return value;
+        return value.clone();
     }
 }
