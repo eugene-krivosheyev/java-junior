@@ -23,7 +23,7 @@ public class SaverTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
     @Test
-    public void smoke() {
+    public void shouldSaveString() {
         Saver saver = new LoggerSaver();
         String output = "test output";
         saver.save(output);
