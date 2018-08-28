@@ -34,4 +34,8 @@ public class Controller {
         System.out.println(currentMessage.getDecoratedMessage());
         currentMessage = null;
     }
+
+    public void setCurrentMessage(Message message) {
+        this.currentMessage = message;
+    }
 }
