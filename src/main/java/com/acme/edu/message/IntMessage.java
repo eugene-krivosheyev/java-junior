@@ -1,10 +1,13 @@
 package com.acme.edu.message;
 
+import com.acme.edu.decorator.Decorator;
+
 //public class IntMessage extends Message {  @Override
 public class IntMessage extends Message {
     private int message;
   //  int sum = 0;
-    public IntMessage (int message) {
+    public IntMessage (int message, Decorator decorator) {
+        super(decorator);
         this.message = message;
     }
     @Override

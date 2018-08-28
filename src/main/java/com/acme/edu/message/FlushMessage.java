@@ -1,7 +1,10 @@
 package com.acme.edu.message;
 
+import com.acme.edu.decorator.Decorator;
+
 public class FlushMessage extends Message {
-    public FlushMessage(){
+    public FlushMessage(Decorator decorator){
+        super(decorator);
     }
 
     @Override
@@ -26,6 +29,6 @@ public class FlushMessage extends Message {
 
     @Override
     public String fetch() {
-        return null;
+        return "";
     }
 }

@@ -1,11 +1,14 @@
 package com.acme.edu.message;
 
+import com.acme.edu.decorator.Decorator;
+
 import java.util.Objects;
 
 public class StringMessage extends Message {
     private String message;
     private int amount = 1;
-    public StringMessage (String message) {
+    public StringMessage (String message, Decorator decorator) {
+        super(decorator);
         this.message = message;
     }
     @Override
