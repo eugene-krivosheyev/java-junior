@@ -1,7 +1,7 @@
 package com.acme.edu.message;
 
 public class IntMessage implements Message {
-    private final String PRIMITIVE_PREFIX = "primitive";
+    private final String PREFIX = "primitive";
     private final String SEPARATOR = ": ";
 
     private int accumulatedMessage = 0;
@@ -20,7 +20,7 @@ public class IntMessage implements Message {
 
     @Override
     public Message decorate() {
-        this.decoratedMessage = PRIMITIVE_PREFIX + SEPARATOR + String.valueOf(accumulatedMessage);
+        this.decoratedMessage = PREFIX + SEPARATOR + String.valueOf(accumulatedMessage);
         return this;
     }
 
@@ -33,12 +33,4 @@ public class IntMessage implements Message {
     public String getDecoratedString() {
         return decoratedMessage;
     }
-//
-//    public String getDecoratedMessage() {
-//        return decoratedMessage;
-//    }
-//
-//    public int getRawMessage() {
-//        return rawMessage;
-//    }
 }

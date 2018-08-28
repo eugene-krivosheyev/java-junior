@@ -1,31 +1,31 @@
 package com.acme.edu.message;
 
-public class ByteMessage implements Message {
+public class BooleanMessage implements Message {
     private final String PREFIX = "primitive";
     private final String SEPARATOR = ": ";
-    private int accumulatedMessage = 0;
+
+    private boolean rawMessage;
     private String decoratedMessage;
 
-    public ByteMessage(byte rawMessage) {
-        this.accumulatedMessage = rawMessage;
+    public BooleanMessage(boolean rawMessage) {
+        this.rawMessage = rawMessage;
         this.decoratedMessage = String.valueOf(rawMessage);
     }
 
     @Override
     public Message accumulate(Message message) {
-        accumulatedMessage += ((ByteMessage)message).accumulatedMessage;
         return this;
     }
 
     @Override
     public Message decorate() {
-        this.decoratedMessage = PREFIX + SEPARATOR + String.valueOf(accumulatedMessage);
+        this.decoratedMessage = PREFIX + SEPARATOR + String.valueOf(rawMessage);
         return this;
     }
 
     @Override
     public boolean isInstanceOf(Message message) {
-        return message instanceof ByteMessage;
+        return message instanceof BooleanMessage;
     }
 
     @Override

@@ -15,14 +15,18 @@ public class LoggerController {
         if (currentMessage.isInstanceOf(message)) {
             this.currentMessage = currentMessage.accumulate(message);
         } else {
+            saver.save(currentMessage.decorate());
             this.currentMessage = message;
         }
         saver.save(message.decorate());
-
     }
 
     public void flush() {
         this.saver.save(currentMessage.decorate());
         currentMessage = null;
+    }
+
+    public void setSaver(Saver saver) {
+        this.saver = saver;
     }
 }
