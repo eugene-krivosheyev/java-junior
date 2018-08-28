@@ -4,7 +4,7 @@ import com.acme.edu.message.decorator.LoggerDecorator;
 
 public class CharMessage extends Message {
     private static final String TYPE_NAME = "char";
-    private char value;
+    private final char value;
 
     public CharMessage(char message) {
         this.value = message;

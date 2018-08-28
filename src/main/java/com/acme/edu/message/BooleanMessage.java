@@ -4,7 +4,7 @@ import com.acme.edu.message.decorator.LoggerDecorator;
 
 public class BooleanMessage extends Message {
     private static final String TYPE_NAME = "primitive";
-    private boolean value;
+    private final boolean value;
 
     public BooleanMessage(boolean message) {
         this.value = message;

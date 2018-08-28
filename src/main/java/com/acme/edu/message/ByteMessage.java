@@ -4,7 +4,7 @@ import com.acme.edu.message.decorator.LoggerDecorator;
 
 public class ByteMessage extends Message {
     private static final String TYPE_NAME = "primitive";
-    private byte value;
+    private final byte value;
 
     public ByteMessage(byte message) {
         this.value = message;

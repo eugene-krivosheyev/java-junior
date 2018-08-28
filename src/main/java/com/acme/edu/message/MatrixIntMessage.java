@@ -4,7 +4,7 @@ import com.acme.edu.message.decorator.LoggerDecorator;
 
 public class MatrixIntMessage extends Message {
     private static final String TYPE_NAME = "primitives matrix";
-    private int[][] value;
+    private final int[][] value;
 
     public MatrixIntMessage(int[][] message) {
         this.value = message.clone();

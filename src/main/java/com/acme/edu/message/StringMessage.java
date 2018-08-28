@@ -4,8 +4,8 @@ import com.acme.edu.message.decorator.LoggerDecorator;
 
 public class StringMessage extends Message {
     private static final String TYPE_NAME = "string";
-    private String value;
-    private int currentStringCount;
+    private final String value;
+    private final int currentStringCount;
 
     private StringMessage(String message, int count) {
         this.value = message;

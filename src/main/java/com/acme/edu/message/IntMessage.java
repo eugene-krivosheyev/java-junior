@@ -4,7 +4,7 @@ import com.acme.edu.message.decorator.LoggerDecorator;
 
 public class IntMessage extends Message {
     private static final String TYPE_NAME = "primitive";
-    private int value;
+    private final int value;
 
     public IntMessage(int message) {
         this.value = message;

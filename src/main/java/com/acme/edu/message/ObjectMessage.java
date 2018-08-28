@@ -4,7 +4,7 @@ import com.acme.edu.message.decorator.LoggerDecorator;
 
 public class ObjectMessage extends Message {
     private static final String TYPE_NAME = "reference";
-    private Object value;
+    private final Object value;
 
     public ObjectMessage(Object message) {
         this.value = message;

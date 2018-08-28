@@ -3,8 +3,6 @@ package com.acme.edu.message;
 import com.acme.edu.message.decorator.LoggerDecorator;
 
 public abstract class Message {
-
-
     protected String type;
 
     public Message accumulate(Message message){
