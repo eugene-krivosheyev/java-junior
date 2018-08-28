@@ -1,8 +1,15 @@
 package com.acme.edu;
 
 import com.acme.edu.controller.LogController;
-import com.acme.edu.message.decorator.PrefixLoggerDecorator;
-import com.acme.edu.message.*;
+import com.acme.edu.decorator.PrefixLoggerDecorator;
+import com.acme.edu.message.ArrayIntMessage;
+import com.acme.edu.message.ByteMessage;
+import com.acme.edu.message.CharMessage;
+import com.acme.edu.message.IntMessage;
+import com.acme.edu.message.BooleanMessage;
+import com.acme.edu.message.MatrixIntMessage;
+import com.acme.edu.message.ObjectMessage;
+import com.acme.edu.message.StringMessage;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public final class Logger {

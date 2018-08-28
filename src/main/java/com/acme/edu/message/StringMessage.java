@@ -1,11 +1,11 @@
 package com.acme.edu.message;
 
-import com.acme.edu.message.decorator.LoggerDecorator;
+import com.acme.edu.decorator.LoggerDecorator;
 
 public class StringMessage extends Message {
     private static final String TYPE_NAME = "string";
     private final String value;
-    private final int currentStringCount;
+    private final transient int currentStringCount;
 
     private StringMessage(String message, int count) {
         this.value = message;

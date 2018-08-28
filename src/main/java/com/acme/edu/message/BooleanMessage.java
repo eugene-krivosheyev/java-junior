@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-import com.acme.edu.message.decorator.LoggerDecorator;
+import com.acme.edu.decorator.LoggerDecorator;
 
 public class BooleanMessage extends Message {
     private static final String TYPE_NAME = "primitive";

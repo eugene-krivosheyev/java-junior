@@ -1,7 +1,7 @@
 package com.acme.edu.controller;
 
 import com.acme.edu.message.BlankMessage;
-import com.acme.edu.message.decorator.LoggerDecorator;
+import com.acme.edu.decorator.LoggerDecorator;
 import com.acme.edu.message.Message;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 

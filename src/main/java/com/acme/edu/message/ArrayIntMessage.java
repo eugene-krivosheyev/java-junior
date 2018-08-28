@@ -1,12 +1,12 @@
 package com.acme.edu.message;
 
-import com.acme.edu.message.decorator.LoggerDecorator;
+import com.acme.edu.decorator.LoggerDecorator;
 
 public class ArrayIntMessage extends Message {
     private static final String TYPE_NAME = "primitives array";
     private final int[] value;
 
-    public ArrayIntMessage(int[] message) {
+    public ArrayIntMessage(int ... message) {
         this.value = message.clone();
         type = TYPE_NAME;
     }
