@@ -1,5 +1,10 @@
 package com.acme.edu.message;
 
+import com.acme.edu.MessageType;
+import com.acme.edu.message.decorator.Decorator;
+
+import java.util.Map;
+
 public class ByteMessage extends Message {
     private byte message;
 
@@ -14,6 +19,11 @@ public class ByteMessage extends Message {
     @Override
     public Message accumulate(Message message) {
         return new ByteMessage((byte) (this.message + ((ByteMessage) message).getMessage()));
+    }
+
+    @Override
+    public String decorate(Map<MessageType, Decorator> decoratorMap) {
+        return decorate(decoratorMap.get(MessageType.BYTE));
     }
 
     @Override

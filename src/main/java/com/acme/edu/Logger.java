@@ -5,79 +5,44 @@ import com.acme.edu.message.decorator.*;
 
 public class Logger {
     public static void flush() {
-        controller.log(new FlushMessage(), emptyDecorator);
+        controller.log(new FlushMessage());
     }
 
     public static void log(int message) {
-        controller.log(new IntMessage(message), intDecorator);
+        controller.log(new IntMessage(message));
     }
 
     public static void log(int[] message) {
-        controller.log(new IntArrayMessage(message), intArrayDecorator);
+        controller.log(new IntArrayMessage(message));
     }
 
     public static void log(int[][] message) {
-        controller.log(new IntMatrixMessage(message), intMatrixDecorator);
+        controller.log(new IntMatrixMessage(message));
     }
 
     public static void log(byte message) {
-        controller.log(new ByteMessage(message), byteDecorator);
+        controller.log(new ByteMessage(message));
     }
 
     public static void log(char message) {
-        controller.log(new CharMessage(message), charDecorator);
+        controller.log(new CharMessage(message));
     }
 
     public static void log(String message) {
-        controller.log(new StringMessage(message), stringDecorator);
+        controller.log(new StringMessage(message));
     }
 
     public static void log(boolean message) {
-        controller.log(new BooleanMessage(message), booleanDecorator);
+        controller.log(new BooleanMessage(message));
     }
 
     public static void log(Object message) {
-        controller.log(new ReferenceMessage(message), referenceDecorator);
+        controller.log(new ReferenceMessage(message));
     }
 
-    public static void setDecorator(MessageType messageType, Decorator newDecorator) {
-        switch (messageType) {
-            case BOOLEAN:
-                booleanDecorator = newDecorator;
-                break;
-            case BYTE:
-                byteDecorator = newDecorator;
-                break;
-            case INT:
-                intDecorator = newDecorator;
-                break;
-            case CHAR:
-                charDecorator = newDecorator;
-                break;
-            case STRING:
-                stringDecorator = newDecorator;
-                break;
-            case OBJECT:
-                referenceDecorator = newDecorator;
-                break;
-            case INTARRAY:
-                intArrayDecorator = newDecorator;
-                break;
-            case INTMATRIX:
-                intMatrixDecorator = newDecorator;
-                break;
-        }
+    public static void setDecorator(Decorator newDecorator) {
+        controller.update(newDecorator);
     }
 
     private static Controller controller = new Controller();
-
-    private static Decorator booleanDecorator = new DefaultBooleanDecorator();
-    private static Decorator byteDecorator = new DefaultByteDecorator();
-    private static Decorator charDecorator = new DefaultCharDecorator();
-    private static Decorator emptyDecorator = new EmptyDecorator();
-    private static Decorator intDecorator = new DefaultIntDecorator();
-    private static Decorator intArrayDecorator = new DefaultIntArrayDecorator();
-    private static Decorator intMatrixDecorator = new DefaultIntMatrixDecorator();
-    private static Decorator referenceDecorator = new DefaultReferenceDecorator();
-    private static Decorator stringDecorator = new DefaultStringDecorator();
 }

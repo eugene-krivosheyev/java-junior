@@ -1,5 +1,10 @@
 package com.acme.edu.message;
 
+import com.acme.edu.MessageType;
+import com.acme.edu.message.decorator.Decorator;
+
+import java.util.Map;
+
 public class StringMessage extends Message {
     private String message;
     private int countOfStrings;
@@ -24,6 +29,11 @@ public class StringMessage extends Message {
     @Override
     public Message accumulate(Message message) {
         return new StringMessage(this.message, this.countOfStrings + ((StringMessage) message).getCountOfStrings());
+    }
+
+    @Override
+    public String decorate(Map<MessageType, Decorator> decoratorMap) {
+        return decorate(decoratorMap.get(MessageType.STRING));
     }
 
     @Override

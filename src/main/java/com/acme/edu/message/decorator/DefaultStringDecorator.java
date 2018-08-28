@@ -1,7 +1,10 @@
 package com.acme.edu.message.decorator;
 
+import com.acme.edu.MessageType;
 import com.acme.edu.message.Message;
 import com.acme.edu.message.StringMessage;
+
+import java.util.Map;
 
 public class DefaultStringDecorator implements Decorator {
     @Override
@@ -9,5 +12,10 @@ public class DefaultStringDecorator implements Decorator {
         String text = ((StringMessage)message).getMessage();
         int countOfStrings = ((StringMessage)message).getCountOfStrings();
         return "string: " + text + (countOfStrings > 1 ? " (x" + countOfStrings + ")" : "");
+    }
+
+    @Override
+    public void update(Map<MessageType, Decorator> decoratorMap) {
+        decoratorMap.put(MessageType.STRING, this);
     }
 }
