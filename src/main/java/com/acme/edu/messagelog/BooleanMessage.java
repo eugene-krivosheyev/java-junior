@@ -1,15 +1,15 @@
-package com.acme.edu.message;
+package com.acme.edu.messagelog;
 
-public class CharMessage extends Message {
-    private static final String TYPE_NAME = "char";
-    private final char value;
+public class BooleanMessage extends Message {
+    private static final String TYPE_NAME = "primitive";
+    private final boolean value;
 
-    public CharMessage(char message) {
+    public BooleanMessage(boolean message) {
         this.value = message;
         type = TYPE_NAME;
     }
 
-    public char getValue() {
+    public boolean getValue() {
         return value;
     }
 

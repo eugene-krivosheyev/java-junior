@@ -1,6 +1,6 @@
 package com.acme.edu.decorator;
 
-import com.acme.edu.message.*;
+import com.acme.edu.messagelog.*;
 
 import java.util.Arrays;
 

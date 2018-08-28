@@ -1,8 +1,8 @@
 package com.acme.edu.controller;
 
-import com.acme.edu.message.BlankMessage;
-import com.acme.edu.message.LoggerDecorator;
-import com.acme.edu.message.Message;
+import com.acme.edu.messagelog.BlankMessage;
+import com.acme.edu.messagelog.LoggerDecorator;
+import com.acme.edu.messagelog.Message;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class LogController {

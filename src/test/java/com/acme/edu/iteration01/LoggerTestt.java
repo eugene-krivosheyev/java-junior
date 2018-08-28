@@ -4,11 +4,20 @@ import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import java.io.*;
+import java.util.ArrayList;
 
-public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+import static org.fest.assertions.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.*;
+
+@Ignore
+public class LoggerTestt implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
@@ -121,6 +130,20 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("reference: ");
         assertSysoutContains("@");
         //endregion
+    }
+
+    @Test
+    public void nullTest() {
+        ArrayList<Object> sut = new ArrayList<>();
+        sut.add(null);
+        assertTrue(sut.contains(null));
+        assertThat(sut)
+                .contains(new Object[] {null});
+        Object stub = mock(Object.class);
+        when(stub.toString()).thenAnswer((Answer<String>) invocationOnMock -> invocationOnMock.getMethod().getName());
+        sut.add(stub);
+        sut.toString();
+//        verify(stub, times(1)).toString();
     }
 
 }

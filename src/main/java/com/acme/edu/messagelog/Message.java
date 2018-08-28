@@ -1,4 +1,4 @@
-package com.acme.edu.message;
+package com.acme.edu.messagelog;
 
 public abstract class Message {
     protected String type;

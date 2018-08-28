@@ -10,7 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+public class LoggerWithDifferentDecoratorsTest implements SysoutCaptureAndAssertionAbility {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     @Before
     public void setUp() throws Exception {

@@ -1,4 +1,4 @@
-package com.acme.edu.message;
+package com.acme.edu.messagelog;
 
 public class StringMessage extends Message {
     private static final String TYPE_NAME = "string";

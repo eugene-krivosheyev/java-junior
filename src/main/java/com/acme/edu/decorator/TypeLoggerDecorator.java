@@ -1,6 +1,6 @@
 package com.acme.edu.decorator;
 
-import com.acme.edu.message.*;
+import com.acme.edu.messagelog.*;
 
 public class TypeLoggerDecorator implements LoggerDecorator {
     private static final String FORMAT_STRING = "This is %s";

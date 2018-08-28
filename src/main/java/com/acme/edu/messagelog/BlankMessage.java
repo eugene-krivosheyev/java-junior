@@ -1,4 +1,4 @@
-package com.acme.edu.message;
+package com.acme.edu.messagelog;
 
 public class BlankMessage extends Message {
     @Override

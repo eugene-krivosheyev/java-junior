@@ -4,11 +4,14 @@ import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
 
-public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+@Ignore
+public class LoggerTestg implements SysoutCaptureAndAssertionAbility {
+    private static final String LINE_SEPARATOR = System.lineSeparator();
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
@@ -118,4 +121,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //endregion
     }
+
+
 }
