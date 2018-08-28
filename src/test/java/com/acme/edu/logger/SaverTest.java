@@ -1,4 +1,4 @@
-package com.acme.edu.NewTests;
+package com.acme.edu.logger;
 
 import com.acme.edu.saver.SimpleSaver;
 import org.junit.Before;

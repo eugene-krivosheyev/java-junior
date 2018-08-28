@@ -59,7 +59,7 @@
             <param>com.acme.edu*</param>
           </targetClasses>
           <targetTests>
-            <param>com.acme.edu*</param>
+            <param>com.acme.edu.logger*</param>
           </targetTests>
         </configuration>
         <executions>
