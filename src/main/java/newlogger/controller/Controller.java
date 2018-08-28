@@ -8,6 +8,8 @@ public class Controller {
     private Saver saver;
 
     public void log(Message message) {
+        assert message.getDecoratedMessage() != null : "de_me is null";
+
         if (currentMessage.isSameTypeOf(message)) {
             this.currentMessage = currentMessage.accumulate(message);
         } else {

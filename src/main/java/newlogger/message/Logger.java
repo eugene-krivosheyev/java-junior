@@ -10,7 +10,7 @@ import newlogger.message.StringMessage;
  * Facade [GoF]
  */
 public class Logger {
-    private static Controller controller = new Controller(???);
+    private static Controller controller = new Controller();
 
     public static void log(int message) {
         controller.log(new IntMessage(message));
