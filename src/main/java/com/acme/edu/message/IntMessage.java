@@ -39,7 +39,15 @@ public class IntMessage implements Message {
         return new IntMessage(value + this.value);
     }
 
-    public int getValue() {
+    public int getValue(){
         return value;
+    }
+
+    public void setValue(int value){
+        this.value = value;
+    }
+
+    public void setDecorator(Decorator decorator){
+        this.decorator = decorator;
     }
 }

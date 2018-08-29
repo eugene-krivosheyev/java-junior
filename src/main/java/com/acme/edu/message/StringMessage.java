@@ -58,5 +58,7 @@ public class StringMessage implements  Message{
     public String getValue() {
         return value;
     }
+
+    public void setValue(String message) {this.value = message;}
 }
 
