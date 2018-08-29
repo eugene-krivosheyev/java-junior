@@ -2,11 +2,13 @@ package com.acme.edu.fascade;
 
 import com.acme.edu.LoggerController;
 import com.acme.edu.decorator.ClassicDecorator;
+import com.acme.edu.decorator.LoggerDecorator;
 import com.acme.edu.message.*;
 import com.acme.edu.saver.ConsoleSaver;
+import com.acme.edu.saver.LoggerSaver;
 
 public class Logger {
-    private static LoggerController controller = new LoggerController(new ConsoleSaver(new ClassicDecorator()));
+    private static LoggerController controller = new LoggerController(decoratedMessage -> System.out.println(decoratedMessage), message -> new ClassicDecorator().visit(message));
 
     public static void flush() {
         controller.flush();
