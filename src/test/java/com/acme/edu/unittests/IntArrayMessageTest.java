@@ -15,7 +15,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class IntArrayMessageTest {
-    Decorator stubDecorator = mock(DefaultDecorator.class);
+    private Decorator stubDecorator = mock(DefaultDecorator.class);
 
     public void testGetDecoratedMessage(int[] testArray, String nonDecoratedArrayAsString) {
         String stubResult = "primitives array: {" + nonDecoratedArrayAsString + "}"

@@ -10,7 +10,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class Int2DimArrayMessageTest {
-    Decorator stubDecorator = mock(DefaultDecorator.class);
+    private Decorator stubDecorator = mock(DefaultDecorator.class);
 
     @Test
     public void getDecoratedNonEmptyInt2DimArray() {

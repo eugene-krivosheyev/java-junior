@@ -1,7 +1,7 @@
 package com.acme.edu;
 
 
-public class LoggerSaver implements Saver{
+public class ConsoleLoggerSaver implements Saver{
     @Override
     public void save(String decoratedOutput) {
         if (isNull(decoratedOutput))

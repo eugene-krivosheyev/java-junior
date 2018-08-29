@@ -14,8 +14,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class StringMessageTest {
-    Decorator decorator = mock(DefaultDecorator.class);
-    StringMessage sut = new StringMessage("test", decorator);
+    private Decorator decorator = mock(DefaultDecorator.class);
+    private StringMessage sut = new StringMessage("test", decorator);
 
 
     public void checkIsSameTypeOf(Message messageToCompareWith, boolean expectedResult) {

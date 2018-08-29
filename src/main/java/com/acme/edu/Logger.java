@@ -4,7 +4,7 @@ import com.acme.edu.message.*;
 import com.acme.edu.message.decorator.DefaultDecorator;
 
 public class Logger {
-    private static LoggerController controller = new LoggerController(new LoggerSaver());
+    private static LoggerController controller = new LoggerController(new ConsoleLoggerSaver());
 
     public static void log(int message) {
         controller.log(new IntMessage(message, new DefaultDecorator("primitive")));

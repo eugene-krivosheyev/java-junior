@@ -1,26 +1,19 @@
 package com.acme.edu.unittests;
 
 import com.acme.edu.LoggerController;
-import com.acme.edu.LoggerSaver;
-import com.acme.edu.Saver;
-import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.ConsoleLoggerSaver;
 import com.acme.edu.message.FlushMessage;
 import com.acme.edu.message.Message;
 import com.acme.edu.message.StringMessage;
-import com.acme.edu.message.decorator.DefaultDecorator;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-
-import java.io.IOException;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 public class LoggerControllerTest {
-    LoggerSaver stubLoggerSaver = mock(LoggerSaver.class);
-    LoggerController testLoggerController = new LoggerController(stubLoggerSaver);
+    private ConsoleLoggerSaver stubConsoleLoggerSaver = mock(ConsoleLoggerSaver.class);
+    private LoggerController testLoggerController = new LoggerController(stubConsoleLoggerSaver);
 
     @Test
     public void shouldNotFailWhenAddFirstMessage() {
@@ -32,7 +25,7 @@ public class LoggerControllerTest {
 
         testLoggerController.log(stubStringMessage);
         testLoggerController.log(stubFlushMessage);
-        verify(stubLoggerSaver, times(1)).save(anyString());
+        verify(stubConsoleLoggerSaver, times(1)).save(anyString());
     }
 
     @Test
@@ -50,7 +43,7 @@ public class LoggerControllerTest {
 
         testLoggerController.log(stubStringMessage);
         testLoggerController.log(stubFlushMessage);
-        verify(stubLoggerSaver, times(1)).save(anyString());
+        verify(stubConsoleLoggerSaver, times(1)).save(anyString());
     }
 
 }

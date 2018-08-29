@@ -4,10 +4,10 @@ import com.acme.edu.message.Message;
 
 public class LoggerController {
     private Message currentMessage;
-    private LoggerSaver saver;
+    private ConsoleLoggerSaver saver;
 
-    public LoggerController(LoggerSaver loggerSaver) {
-        this.saver = loggerSaver;
+    public LoggerController(ConsoleLoggerSaver consoleLoggerSaver) {
+        this.saver = consoleLoggerSaver;
     }
 
     public void log(Message message) {
