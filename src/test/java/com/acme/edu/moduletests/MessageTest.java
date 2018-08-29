@@ -7,20 +7,85 @@ import org.junit.Test;
 import java.util.Map;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 public class MessageTest {
     @Test
+    public void booleanShouldReturnMessage() {
+        Boolean test = true;
+        BooleanMessage sut = new BooleanMessage(test);
+
+        assertEquals(test, sut.getMessage());
+    }
+
+    @Test
+    public void byteShouldReturnMessage() {
+        byte test = (byte) 41;
+        ByteMessage sut = new ByteMessage(test);
+
+        assertEquals(test, sut.getMessage());
+    }
+
+    @Test
+    public void charShouldReturnMessage() {
+        char test = 'd';
+        CharMessage sut = new CharMessage(test);
+
+        assertEquals(test, sut.getMessage());
+    }
+
+    @Test
+    public void intShouldReturnMessage() {
+        int test = 111;
+        IntMessage sut = new IntMessage(test);
+
+        assertEquals(test, sut.getMessage());
+    }
+
+    @Test
+    public void intArrayShouldReturnMessage() {
+        int[] test = {1,2,3};
+        IntArrayMessage sut = new IntArrayMessage(test);
+
+        assertArrayEquals(test, sut.getMessage());
+    }
+
+    @Test
+    public void intMatrixShouldReturnMessage() {
+        int[][] test = {{1,2},{3,4}};
+        IntMatrixMessage sut = new IntMatrixMessage(test);
+
+        assertArrayEquals(test, sut.getMessage());
+    }
+
+    @Test
+    public void referenceShouldReturnMessage() {
+        ReferenceMessage sut = new ReferenceMessage(new Object());
+
+        assertTrue(sut.getMessage() instanceof Object);
+    }
+
+    @Test
+    public void stringShouldReturnMessage() {
+        String test = "test";
+        StringMessage sut = new StringMessage(test);
+
+        assertEquals(test, sut.getMessage());
+    }
+
+    @Test
     public void shouldAccumulateByte() {
         ByteMessage messageToAccumulate = new ByteMessage((byte)11);
+        ByteMessage negativeMessageToAccumulate = new ByteMessage((byte)-1);
         ByteMessage sut = new ByteMessage((byte)21);
 
         ByteMessage accumulatedMessage = (ByteMessage) sut.accumulate(messageToAccumulate);
-
         assertEquals((byte)32, accumulatedMessage.getMessage());
+
+        accumulatedMessage = (ByteMessage) sut.accumulate(negativeMessageToAccumulate);
+        assertEquals((byte)20, accumulatedMessage.getMessage());
     }
 
     @Test
@@ -52,11 +117,14 @@ public class MessageTest {
     @Test
     public void shouldAccumulateInt() {
         IntMessage messageToAccumulate = new IntMessage(11);
+        IntMessage negativeMessageToAccumulate = new IntMessage(-1);
         IntMessage sut = new IntMessage(21);
 
         IntMessage accumulatedMessage = (IntMessage) sut.accumulate(messageToAccumulate);
-
         assertEquals(32, accumulatedMessage.getMessage());
+
+        accumulatedMessage = (IntMessage) sut.accumulate(negativeMessageToAccumulate);
+        assertEquals(20, accumulatedMessage.getMessage());
     }
 
     @Test
@@ -117,6 +185,7 @@ public class MessageTest {
 
         assertFalse(sut.isAbleToAccumulate(notAccumulatableMessage));
         assertFalse(sut.isAbleToAccumulate(notAccumulatableBooleanMessage));
+        assertNull(sut.accumulate(notAccumulatableMessage));
     }
 
     @Test
@@ -127,6 +196,7 @@ public class MessageTest {
 
         assertFalse(sut.isAbleToAccumulate(notAccumulatableMessage));
         assertFalse(sut.isAbleToAccumulate(notAccumulatableCharMessage));
+        assertNull(sut.accumulate(notAccumulatableMessage));
     }
 
     @Test
@@ -137,6 +207,7 @@ public class MessageTest {
 
         assertFalse(sut.isAbleToAccumulate(notAccumulatableMessage));
         assertFalse(sut.isAbleToAccumulate(notAccumulatableFlushMessage));
+        assertNull(sut.accumulate(notAccumulatableMessage));
     }
 
     @Test
@@ -147,6 +218,7 @@ public class MessageTest {
 
         assertFalse(sut.isAbleToAccumulate(notAccumulatableMessage));
         assertFalse(sut.isAbleToAccumulate(notAccumulatableIntArrayMessage));
+        assertNull(sut.accumulate(notAccumulatableMessage));
     }
 
     @Test
@@ -157,6 +229,7 @@ public class MessageTest {
 
         assertFalse(sut.isAbleToAccumulate(notAccumulatableMessage));
         assertFalse(sut.isAbleToAccumulate(notAccumulatableSameTypeMessage));
+        assertNull(sut.accumulate(notAccumulatableMessage));
     }
 
     @Test
@@ -167,6 +240,7 @@ public class MessageTest {
 
         assertFalse(sut.isAbleToAccumulate(notAccumulatableMessage));
         assertFalse(sut.isAbleToAccumulate(notAccumulatableSameTypeMessage));
+        assertNull(sut.accumulate(notAccumulatableMessage));
     }
 
     @Test
