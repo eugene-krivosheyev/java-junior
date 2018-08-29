@@ -30,8 +30,14 @@ public class IntArrayMessageTest {
     }
 
     @Test
-    public void shouldDecorateNonEmptyArray() {
+    public void shouldDecorateNonEmptyArrayWithOneElement() {
         int[] emptyArray = {1};
         testGetDecoratedMessage(emptyArray, "1");
+    }
+
+    @Test
+    public void shouldDecorateNonEmptyArrayWithMultipleElements() {
+        int[] emptyArray = {1,2,3};
+        testGetDecoratedMessage(emptyArray, "1, 2, 3");
     }
 }

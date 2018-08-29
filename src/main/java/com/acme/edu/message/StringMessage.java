@@ -8,6 +8,10 @@ public class StringMessage extends Message {
     private String message;
     private int counter;
 
+    public int getCounter() {
+        return counter;
+    }
+
     public StringMessage(String message, Decorator decorator) {
         super(decorator);
         this.message = message;

@@ -42,7 +42,6 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
         when(stubFlushMessage.getDecoratedMessage()).thenReturn("");
 
         testLoggerController.log(stubStringMessage);
-
         testLoggerController.log(stubFlushMessage);
         assertSysoutEquals("str: message");
     }
