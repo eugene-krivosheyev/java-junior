@@ -1,13 +1,14 @@
-package com.acme.edu.messagelog;
+package com.acme.edu.systemtest;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
-
+@Ignore
 public class LogByteMessageTest implements SysoutCaptureAndAssertionAbility {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     @Before
@@ -36,7 +37,8 @@ public class LogByteMessageTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(Byte.MIN_VALUE);
         Logger.log((byte) 15);
         Logger.flush();
-        assertSysoutContains("-20" + LINE_SEPARATOR +
+        assertSysoutContains(
+                "-20" + LINE_SEPARATOR +
                 "primitive: -113" + LINE_SEPARATOR);
     }
 }

@@ -1,9 +1,8 @@
 package com.acme.edu.saver;
 
-public class ConsoleLoggerSaver implements LoggerSaver {
+public class ConsoleLoggerSaver extends LoggerSaver {
     @Override
-    public void save (String msg){
-        if (checkNull(msg)) return;
+    protected void saveOp(String msg){
         System.out.println(msg);
     }
 }

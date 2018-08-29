@@ -1,4 +1,4 @@
-package com.acme.edu.messagelog;
+package com.acme.edu.systemtest;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
@@ -37,7 +37,8 @@ public class LogStringMessageTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 1");
         Logger.log("str 2");
         Logger.flush();
-        assertSysoutEquals("string: str 1" + LINE_SEPARATOR +
+        assertSysoutEquals(
+                "string: str 1" + LINE_SEPARATOR +
                 "string: str 2" + LINE_SEPARATOR);
     }
 }

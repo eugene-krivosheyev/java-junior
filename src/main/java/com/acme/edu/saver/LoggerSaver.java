@@ -1,9 +1,12 @@
 package com.acme.edu.saver;
 
-public interface LoggerSaver {
-    void save(String message);
+import java.util.Objects;
 
-    default boolean checkNull(String message) {
-        return message == null;
+public abstract class LoggerSaver {
+    public void save(String message) {
+        if (Objects.isNull(message)) return;
+        saveOp(message);
     }
+
+    protected abstract void saveOp(String message);
 }

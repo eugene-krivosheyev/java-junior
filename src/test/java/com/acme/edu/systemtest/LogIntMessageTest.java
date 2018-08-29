@@ -1,13 +1,14 @@
-package com.acme.edu.messagelog;
+package com.acme.edu.systemtest;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
-
+@Ignore
 public class LogIntMessageTest implements SysoutCaptureAndAssertionAbility {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     @Before
@@ -46,7 +47,8 @@ public class LogIntMessageTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(Integer.MAX_VALUE);
         Logger.log(-15);
         Logger.flush();
-        assertSysoutEquals("primitive: 20" + LINE_SEPARATOR +
+        assertSysoutEquals(
+                "primitive: 20" + LINE_SEPARATOR +
                 "primitive: 2147483632" + LINE_SEPARATOR);
     }
 }
