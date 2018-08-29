@@ -1,6 +1,6 @@
-package com.acme.edu.message.decorator;
+package com.acme.edu.decorator;
 
-import com.acme.edu.MessageType;
+import com.acme.edu.message.MessageType;
 import com.acme.edu.message.IntArrayMessage;
 import com.acme.edu.message.Message;
 
@@ -21,14 +21,14 @@ public class DefaultIntArrayDecorator implements Decorator {
 
     String arrayToString(int[] message) {
         StringBuilder decoratedString = new StringBuilder();
-        decoratedString.append("{");
+        decoratedString.append('{');
         for (int i = 0; i < message.length - 1; ++i) {
             decoratedString.append(message[i]).append(", ");
         }
         if (message.length > 1) {
             decoratedString.append(message[message.length - 1]);
         }
-        decoratedString.append("}");
+        decoratedString.append('}');
         return decoratedString.toString();
     }
 }

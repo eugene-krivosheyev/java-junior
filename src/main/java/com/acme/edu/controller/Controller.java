@@ -1,21 +1,21 @@
-package com.acme.edu;
+package com.acme.edu.controller;
 
+import com.acme.edu.decorator.*;
 import com.acme.edu.message.FlushMessage;
 import com.acme.edu.message.Message;
-import com.acme.edu.message.decorator.*;
+import com.acme.edu.message.MessageType;
 import com.acme.edu.saver.DefaultSaver;
 import com.acme.edu.saver.Saver;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.EnumMap;
 
 public class Controller {
     private Saver defaultSaver = new DefaultSaver();
     private Message prevMessage = new FlushMessage();
-    private Map<MessageType, Decorator> decoratorMap;
+    private EnumMap<MessageType, Decorator> decoratorMap;
 
     public Controller() {
-        decoratorMap = new HashMap<>();
+        decoratorMap = new EnumMap<>(MessageType.class);
         decoratorMap.put(MessageType.BOOLEAN, new DefaultBooleanDecorator());
         decoratorMap.put(MessageType.BYTE, new DefaultByteDecorator());
         decoratorMap.put(MessageType.CHAR, new DefaultCharDecorator());

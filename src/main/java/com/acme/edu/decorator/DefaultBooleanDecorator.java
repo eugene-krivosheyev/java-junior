@@ -1,6 +1,6 @@
-package com.acme.edu.message.decorator;
+package com.acme.edu.decorator;
 
-import com.acme.edu.MessageType;
+import com.acme.edu.message.MessageType;
 import com.acme.edu.message.BooleanMessage;
 import com.acme.edu.message.Message;
 

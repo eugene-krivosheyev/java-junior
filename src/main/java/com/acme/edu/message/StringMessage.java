@@ -1,7 +1,6 @@
 package com.acme.edu.message;
 
-import com.acme.edu.MessageType;
-import com.acme.edu.message.decorator.Decorator;
+import com.acme.edu.decorator.Decorator;
 
 import java.util.Map;
 

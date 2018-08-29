@@ -1,6 +1,6 @@
-package com.acme.edu.message.decorator;
+package com.acme.edu.decorator;
 
-import com.acme.edu.MessageType;
+import com.acme.edu.message.MessageType;
 import com.acme.edu.message.IntMatrixMessage;
 import com.acme.edu.message.Message;
 
@@ -12,13 +12,13 @@ public class DefaultIntMatrixDecorator implements Decorator {
     @Override
     public String decorate(Message message) {
         StringBuilder decoratedString = new StringBuilder("primitives matrix: ");
-        decoratedString.append("{").append(System.lineSeparator());
+        decoratedString.append('{').append(System.lineSeparator());
         int[][] matrix = ((IntMatrixMessage)message).getMessage();
         for (int[] row : matrix) {
             decoratedString.append(rowDecorator.arrayToString(row))
                     .append(System.lineSeparator());
         }
-        decoratedString.append("}");
+        decoratedString.append('}');
         return decoratedString.toString();
     }
 
