@@ -1,6 +1,9 @@
 package unittestsdemo;
 
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 
@@ -10,9 +13,10 @@ import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ArrayListTest {
-    private ArrayList sut;
-    //????????
+    private ArrayList sut = new ArrayList();
+    @Mock private Object stub; //= mock(Object.class)
 
     @Before //@BeforeClass
     public void setUp() {
@@ -22,10 +26,10 @@ public class ArrayListTest {
     @Test
     public void shouldAddElementWhenElementIsNull() {
         //region Given | Fixture
-        new ControllerBuilder()
-                .withSaver()
-                .withDecorator()
-            .build();
+//        new ControllerBuilder()
+//                .withSaver()
+//                .withDecorator()
+//            .build();
 
         Object testObject = null;
         //endregion
@@ -41,8 +45,7 @@ public class ArrayListTest {
 //            .contains(null)
 //            .hasSize(1);
         assertTrue(
-                sut.get(0) == null,
-
+                sut.get(0) == null
         );
         //endregion
     }
