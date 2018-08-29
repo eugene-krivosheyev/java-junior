@@ -78,6 +78,17 @@ public class DecoratorTest {
     }
 
     @Test
+    public void shouldDecorateEmptyIntArray() {
+        DefaultIntArrayDecorator sut = new DefaultIntArrayDecorator();
+        IntArrayMessage mockMessage = mock(IntArrayMessage.class);
+        when(mockMessage.getMessage()).thenReturn(new int[] {});
+
+        String decoratedMessage = sut.decorate(mockMessage);
+
+        assertEquals(decoratedMessage, "primitives array: {}");
+    }
+
+    @Test
     public void shouldDecorateIntMatrix() {
         DefaultIntMatrixDecorator sut = new DefaultIntMatrixDecorator();
         IntMatrixMessage mockMessage = mock(IntMatrixMessage.class);
@@ -114,5 +125,17 @@ public class DecoratorTest {
         String decoratedMessage = sut.decorate(mockMessage);
 
         assertEquals(decoratedMessage, "string: test string");
+    }
+
+    @Test
+    public void shouldDecorateStringWithCounter() {
+        DefaultStringDecorator sut = new DefaultStringDecorator();
+        StringMessage mockMessage = mock(StringMessage.class);
+        when(mockMessage.getMessage()).thenReturn("test string");
+        when(mockMessage.getCountOfStrings()).thenReturn(10);
+
+        String decoratedMessage = sut.decorate(mockMessage);
+
+        assertEquals(decoratedMessage, "string: test string (x10)");
     }
 }
