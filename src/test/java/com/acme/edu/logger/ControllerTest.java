@@ -3,9 +3,7 @@ package com.acme.edu.logger;
 import com.acme.edu.Decorator.IntegerDecorator;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.controller.Controller;
-import com.acme.edu.message.IntMessage;
-import com.acme.edu.message.Message;
-import com.acme.edu.message.StringMessage;
+import com.acme.edu.message.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -47,12 +45,56 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogInteger() {
         IntMessage message = mock(IntMessage.class);
-        message.setValue(2);
         when(message.getDecoratedMessage()).thenReturn("primitive: 2");
         testController.log(message);
         testController.flush();
         assertSysoutContains("2");
+    }
 
+    @Test
+    public void shouldLogChar() {
+        CharMessage message = mock(CharMessage.class);
+        when(message.getDecoratedMessage()).thenReturn("char: a");
+        testController.log(message);
+        testController.flush();
+        assertSysoutContains("a");
+    }
+
+    @Test
+    public void shouldLogBoolean() {
+        BooleanMessage message = mock(BooleanMessage.class);
+        when(message.getDecoratedMessage()).thenReturn("primitive: true");
+        testController.log(message);
+        testController.flush();
+        assertSysoutContains("true");
+    }
+
+    @Test
+    public void shouldLogByte() {
+        ByteMessage message = mock(ByteMessage.class);
+        when(message.getDecoratedMessage()).thenReturn("primitive: 3");
+        testController.log(message);
+        testController.flush();
+        assertSysoutContains("3");
+    }
+
+    @Test
+    public void shouldLogString() {
+        StringMessage message = mock(StringMessage.class);
+        when(message.getDecoratedMessage()).thenReturn("string: test message");
+        testController.log(message);
+        testController.flush();
+        assertSysoutContains("test message");
+    }
+
+    @Test
+    public void shouldLogObject() {
+        ObjectMessage message = mock(ObjectMessage.class);
+        when(message.getDecoratedMessage()).thenReturn("reference: " + new Object().toString());
+        testController.log(message);
+        testController.flush();
+        assertSysoutContains("reference: ");
+        assertSysoutContains("@");
     }
 
     @Test
@@ -60,10 +102,6 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
         IntMessage firstMessage = mock(IntMessage.class);
         IntMessage secondMessage = mock(IntMessage.class);
         IntMessage resultMessage = mock(IntMessage.class);
-        firstMessage.setValue(5);
-        secondMessage.setValue(3);
-        resultMessage.setValue(8);
-        when(firstMessage.accumulate(secondMessage)).thenReturn(resultMessage);
         when(resultMessage.getDecoratedMessage()).thenReturn("primitive: 8");
         testController.log(firstMessage);
         testController.log(secondMessage);
@@ -76,9 +114,6 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
         StringMessage firstMessage = mock(StringMessage.class);
         StringMessage secondMessage = mock(StringMessage.class);
         StringMessage thirdMessage = mock(StringMessage.class);
-        firstMessage.setValue("test message");
-        secondMessage.setValue("test message");
-        thirdMessage.setValue("test message");
         when(firstMessage.accumulate(secondMessage)).thenReturn(secondMessage);
         when(secondMessage.accumulate(thirdMessage)).thenReturn(thirdMessage);
         when(thirdMessage.getDecoratedMessage()).thenReturn("test message(x3)");
@@ -90,17 +125,18 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    @Ignore
     public void shouldLogDecoratedInteger() {
         IntMessage message = mock(IntMessage.class);
         IntegerDecorator decorator = mock(IntegerDecorator.class);
-        message.setValue(2);
-        message.setDecorator(decorator);
         when(decorator.getDecoratedMessage(any(Message.class))).thenReturn("integer: 2");
-  //      when(message.getDecoratedMessage()).thenReturn("integer: 2");
+        when(message.getDecorator()).thenReturn(decorator);
+
+        String result = decorator.getDecoratedMessage(message);
+        when(message.getDecoratedMessage()).thenReturn(result);
+
         testController.log(message);
         testController.flush();
-        assertSysoutContains("2");
+        assertSysoutContains("integer: 2");
 
     }
 }

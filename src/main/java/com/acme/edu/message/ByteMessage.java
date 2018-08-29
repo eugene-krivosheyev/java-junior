@@ -32,4 +32,8 @@ public class ByteMessage implements Message {
     public byte getValue() {
         return value;
     }
+
+    public void setValue(byte value) {
+        this.value = value;
+    }
 }

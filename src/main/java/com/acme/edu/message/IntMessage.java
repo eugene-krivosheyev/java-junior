@@ -30,7 +30,7 @@ public class IntMessage implements Message {
 
     @Override
     public String getDecoratedMessage(){
-        return decorator.getDecoratedMessage(new IntMessage(getValue()));
+        return getDecorator().getDecoratedMessage(new IntMessage(getValue()));
     }
 
     @Override
@@ -50,4 +50,6 @@ public class IntMessage implements Message {
     public void setDecorator(Decorator decorator){
         this.decorator = decorator;
     }
+
+    public Decorator getDecorator() {return decorator;}
 }

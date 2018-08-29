@@ -4,11 +4,11 @@ package com.acme.edu.message;
  * Created by Java_1 on 24.08.2018.
  */
 public class CharMessage implements Message {
-    private char message;
+    private char value;
     private static final String CHAR = "char: ";
 
     public CharMessage(char message) {
-        this.message = message;
+        this.value = message;
     }
 
     @Override
@@ -18,15 +18,17 @@ public class CharMessage implements Message {
 
     @Override
     public String getDecoratedMessage(){
-        return CHAR + message;
+        return CHAR + value;
     }
 
     @Override
     public Message accumulate(Message message){
-        return new CharMessage(((CharMessage) message).getMessage());
+        return new CharMessage(((CharMessage) message).getValue());
     }
 
-    public char getMessage() {
-        return message;
+    public char getValue() {
+        return value;
     }
+
+    public void setValue(char value) {this.value = value;}
 }
