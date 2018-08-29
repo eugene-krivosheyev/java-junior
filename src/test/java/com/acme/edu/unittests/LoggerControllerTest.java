@@ -25,7 +25,7 @@ public class LoggerControllerTest {
 
         testLoggerController.log(stubStringMessage);
         testLoggerController.log(stubFlushMessage);
-        verify(stubConsoleLoggerSaver, times(1)).save(anyString());
+        verify(stubConsoleLoggerSaver).save("str: message");
     }
 
     @Test
@@ -43,7 +43,7 @@ public class LoggerControllerTest {
 
         testLoggerController.log(stubStringMessage);
         testLoggerController.log(stubFlushMessage);
-        verify(stubConsoleLoggerSaver, times(1)).save(anyString());
+        verify(stubConsoleLoggerSaver).save("string: str (x2)");
     }
 
 }

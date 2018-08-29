@@ -7,6 +7,8 @@ import com.acme.edu.message.decorator.Decorator;
 import com.acme.edu.message.decorator.DefaultDecorator;
 import org.junit.Test;
 
+import java.util.Objects;
+
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -18,27 +20,40 @@ public class StringMessageTest {
     private StringMessage sut = new StringMessage("test", decorator);
 
 
-    public void checkIsSameTypeOf(Message messageToCompareWith, boolean expectedResult) {
-        assertEquals(expectedResult, sut.isSameTypeOf(messageToCompareWith));
+    private void assertSutIsSameTypeOf(Message messageToCompareWith) {
+        boolean testMethodResult = sut.isSameTypeOf(messageToCompareWith);
+        if (!(messageToCompareWith instanceof StringMessage)) {
+            assertFalse(testMethodResult);
+        }
+        else {
+            if (Objects.equals(sut.getMessage(), ((StringMessage) messageToCompareWith).getMessage()))
+            {
+                assertTrue(testMethodResult);
+            }
+            else
+            {
+                assertFalse(testMethodResult);
+            }
+        }
     }
 
     @Test
     public void isSameTypeOfWithSameString(){
-        checkIsSameTypeOf(sut, true);
+        StringMessage stubMessage = new StringMessage("test", decorator);
+        assertSutIsSameTypeOf(stubMessage);
     }
 
     @Test
     public void isSameTypeOfWithAnotherString(){
-        StringMessage stubMessage = mock(StringMessage.class);
-        when(stubMessage.getMessage()).thenReturn("another_test");
-        checkIsSameTypeOf(stubMessage, false);
+        StringMessage stubMessage = new StringMessage("another_test", decorator);
+        assertSutIsSameTypeOf(stubMessage);
     }
 
     @Test
     public void isSameTypeOfWithIntMessage(){
         IntMessage stubMessage = mock(IntMessage.class);
         when(stubMessage.getMessage()).thenReturn(1);
-        checkIsSameTypeOf(stubMessage, false);
+        assertSutIsSameTypeOf(stubMessage);
     }
 
     @Test
