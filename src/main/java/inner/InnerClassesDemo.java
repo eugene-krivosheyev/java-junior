@@ -7,6 +7,7 @@ public class InnerClassesDemo {
     private Flyable getCommand() {
         int localVar = 0;
 
+        /*
         return new Flyable() {
             @Override
             public void fly() {
@@ -14,6 +15,12 @@ public class InnerClassesDemo {
                 System.out.println(InnerClassesDemo.this.instanceState);
                 System.out.println(localVar);
             }
+        };
+        */
+        return  () -> {
+            System.out.println(classState);
+            System.out.println(InnerClassesDemo.this.instanceState);
+            System.out.println(localVar);
         };
     }
 
@@ -24,7 +31,7 @@ public class InnerClassesDemo {
     }
 }
 
-
+@FunctionalInterface
 interface Flyable {
     void fly();
 }
