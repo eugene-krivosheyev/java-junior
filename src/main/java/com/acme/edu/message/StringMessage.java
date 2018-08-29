@@ -28,4 +28,12 @@ public class StringMessage implements Message {
     public String accept(DecoratorVisitor decoratorVisitor) {
         return decoratorVisitor.decorateString(this.message, this.counter);
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
 }

@@ -19,12 +19,16 @@ public class IntMessage implements Message {
     @Override
     public Message accumulate(Message message) {
         IntMessage intMessage = (IntMessage) message;
-        this.message += intMessage.message;
+        this.message += intMessage.getMessage();
         return this;
     }
 
     @Override
     public String accept(DecoratorVisitor decoratorVisitor) {
         return decoratorVisitor.decorateInt(this.message);
+    }
+
+    public int getMessage() {
+        return message;
     }
 }

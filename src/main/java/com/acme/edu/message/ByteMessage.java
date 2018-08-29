@@ -19,12 +19,16 @@ public class ByteMessage implements Message {
     @Override
     public Message accumulate(Message message) {
         ByteMessage byteMessage = (ByteMessage) message;
-        this.message += byteMessage.message;
+        this.message += byteMessage.getMessage();
         return this;
     }
 
     @Override
     public String accept(DecoratorVisitor decoratorVisitor) {
         return decoratorVisitor.decorateByte(this.message);
+    }
+
+    public byte getMessage() {
+        return message;
     }
 }
