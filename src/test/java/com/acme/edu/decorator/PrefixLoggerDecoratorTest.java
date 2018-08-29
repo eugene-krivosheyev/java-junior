@@ -63,10 +63,23 @@ public class PrefixLoggerDecoratorTest {
         StringMessage message = mock(StringMessage.class);
         when(message.getValue()).thenReturn("str 1");
         when(message.getType()).thenReturn("string");
+        when(message.getStringCount()).thenReturn(1);
 
         String actualDecoratedMessage = decorator.decorate(message);
 
         assertEquals("string: str 1", actualDecoratedMessage);
+    }
+
+    @Test
+    public void shouldDecorateAsRepeatedStringWhenParameterIsRepeatedStringMessage() {
+        StringMessage message = mock(StringMessage.class);
+        when(message.getValue()).thenReturn("str 1");
+        when(message.getType()).thenReturn("string");
+        when(message.getStringCount()).thenReturn(3);
+
+        String actualDecoratedMessage = decorator.decorate(message);
+
+        assertEquals("string: str 1 (x3)", actualDecoratedMessage);
     }
 
     @Test
