@@ -52,6 +52,39 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
+    public void shouldLogIntegerAndChar() {
+        IntMessage intMessage = mock(IntMessage.class);
+        when(intMessage.getDecoratedMessage()).thenReturn("primitive: 2");
+        CharMessage charMessage = mock(CharMessage.class);
+        when(charMessage.getDecoratedMessage()).thenReturn("char: a");
+
+        testController.log(intMessage);
+        testController.log(charMessage);
+        testController.flush();
+
+        assertSysoutContains("primitive: 2");
+        assertSysoutContains("char: a");
+    }
+
+    @Test
+    public void shouldLogAccumulateStringsAndBoolean() {
+        StringMessage firstMessage = mock(StringMessage.class);
+        StringMessage secondMessage = mock(StringMessage.class);
+        BooleanMessage booleanMessage = mock(BooleanMessage.class);
+        when(firstMessage.accumulate(secondMessage)).thenReturn(secondMessage);
+        when(secondMessage.getDecoratedMessage()).thenReturn("test message(x2)");
+        when(booleanMessage.getDecoratedMessage()).thenReturn("primitive: true");
+
+        testController.log(firstMessage);
+        testController.log(secondMessage);
+        testController.log(booleanMessage);
+        testController.flush();
+
+        assertSysoutContains("test message(x2)");
+        assertSysoutContains("primitive: true");
+    }
+
+    @Test
     public void shouldLogChar() {
         CharMessage message = mock(CharMessage.class);
         when(message.getDecoratedMessage()).thenReturn("char: a");
@@ -114,9 +147,11 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
         StringMessage firstMessage = mock(StringMessage.class);
         StringMessage secondMessage = mock(StringMessage.class);
         StringMessage thirdMessage = mock(StringMessage.class);
-        when(firstMessage.accumulate(secondMessage)).thenReturn(secondMessage);
-        when(secondMessage.accumulate(thirdMessage)).thenReturn(thirdMessage);
+
+        when(firstMessage.isSameTypeOf(secondMessage)).thenReturn(true);
+        when(secondMessage.isSameTypeOf(thirdMessage)).thenReturn(true);
         when(thirdMessage.getDecoratedMessage()).thenReturn("test message(x3)");
+
         testController.log(firstMessage);
         testController.log(secondMessage);
         testController.log(thirdMessage);
