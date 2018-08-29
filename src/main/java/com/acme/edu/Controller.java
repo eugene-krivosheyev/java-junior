@@ -1,11 +1,20 @@
 package com.acme.edu;
 
 public class Controller {
-    Message currentMessage = null;
+    private Message currentMessage = null;
     private Saver saver;
 
     public Controller(Saver saver) {
         this.saver = saver;
+    }
+
+    public Controller(Saver saver, Message currentMessage) {
+        this.saver = saver;
+        this.currentMessage = currentMessage;
+    }
+
+    public Message getCurrentMessage() {
+        return currentMessage;
     }
 
     public void log(Message message) {
@@ -20,7 +29,9 @@ public class Controller {
     }
 
     public void flush() {
-        saver.save(currentMessage.decorate());
-        currentMessage = null;
+        if (currentMessage != null) {
+            saver.save(currentMessage.decorate());
+            currentMessage = null;
+        }
     }
 }
