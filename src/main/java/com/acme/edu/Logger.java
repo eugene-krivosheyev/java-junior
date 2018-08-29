@@ -10,10 +10,12 @@ import com.acme.edu.messagelog.BooleanMessage;
 import com.acme.edu.messagelog.MatrixIntMessage;
 import com.acme.edu.messagelog.ObjectMessage;
 import com.acme.edu.messagelog.StringMessage;
-import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public final class Logger {
-    private static LogController controller = new LogController(new ConsoleLoggerSaver(), new PrefixLoggerDecorator());
+    private static LogController controller = new LogController(
+            (message) -> {if (message != null) System.out.println();},
+            new PrefixLoggerDecorator()
+    );
 
     private Logger(){}
 

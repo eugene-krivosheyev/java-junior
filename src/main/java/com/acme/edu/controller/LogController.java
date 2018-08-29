@@ -4,13 +4,14 @@ import com.acme.edu.messagelog.BlankMessage;
 import com.acme.edu.messagelog.LoggerDecorator;
 import com.acme.edu.messagelog.Message;
 import com.acme.edu.saver.ConsoleLoggerSaver;
+import com.acme.edu.saver.Saver;
 
 public class LogController {
     private Message previousMessage = new BlankMessage();
-    private final ConsoleLoggerSaver saver;
+    private final Saver saver;
     private final LoggerDecorator decorator;
 
-    public LogController(ConsoleLoggerSaver saver, LoggerDecorator decorator) {
+    public LogController(Saver saver, LoggerDecorator decorator) {
         this.saver = saver;
         this.decorator = decorator;
     }

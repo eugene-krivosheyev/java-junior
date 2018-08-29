@@ -3,6 +3,8 @@ package com.acme.edu.messagelog;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.concurrent.Callable;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -31,8 +33,7 @@ public class StringMessageTest {
     @Test
     public void shouldReturnDecoratedMessageWhenCallGetFormattedString() {
         LoggerDecorator stubLoggerDecorator = mock(LoggerDecorator.class);
-        when(stubLoggerDecorator.decorate(stringMessage))
-                .thenAnswer((invocationOnMock) -> "StringMessage: " + stringMessage.getValue());
+        when(stubLoggerDecorator.decorate(stringMessage)).thenReturn("StringMessage: " + stringMessage.getValue());
 
         assertEquals("StringMessage: " + stringMessage.getValue(), stringMessage.getFormattedMessage(stubLoggerDecorator));
     }
