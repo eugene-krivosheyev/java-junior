@@ -1,6 +1,7 @@
 package com.acme.edu.testing;
 
 import com.acme.edu.Logger;
+import com.acme.edu.LoggerController;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.decorator.Decorator;
 import com.acme.edu.decorator.PrefixDecorator;
@@ -8,9 +9,11 @@ import com.acme.edu.message.Message;
 import com.acme.edu.message.StartMessage;
 import com.acme.edu.saver.ConsoleSaver;
 import com.acme.edu.saver.Saver;
+import com.acme.edu.saver.SaverToLambda;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import sun.rmi.runtime.Log;
 
 import java.io.IOException;
 
@@ -29,32 +32,49 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         resetOut();
     }
     //endregion
-    @Test
-    public void checkSimpleInt() {
+
+    @Before
+    public void initializeTest () {
         Saver saver = new ConsoleSaver();
         Decorator decorator = new PrefixDecorator();
-        Message message = new StartMessage(saver, decorator);
-        Logger logger = new Logger(message, saver, decorator);
-        try {
-            logger.log(1);
-            logger.flush();
 
+        Logger.setSaver(saver);
+        Logger.setDecorator(decorator);
+
+        Message message = new StartMessage(saver, decorator);
+
+//        () -> new Saver()
+
+
+        LoggerController loggerController = new LoggerController(
+            message,
+                messageToPrint -> System.out.print(messageToPrint),
+               // System.out::print,
+            decorator
+        );
+        Logger.setLoggerController(loggerController);
+    }
+
+    @Test
+    public void checkSimpleInt() {
+        try {
+            Logger.log(1);
+            Logger.flush();
         } catch (Exception e) {
 
         }
         assertSysoutEquals("primitive: 1" + System.lineSeparator());
     }
-
     @Test
     public void checkSimpleString() {
 
-        Saver saver = new ConsoleSaver();
+       /* Saver saver = new ConsoleSaver();
         Decorator decorator = new PrefixDecorator();
         Message message = new StartMessage(saver, decorator);
-        Logger logger = new Logger(message, saver, decorator);
+        Logger logger = new Logger(message, saver, decorator);*/
         try {
-            logger.log("str 1");
-            logger.flush();
+            Logger.log("str 1");
+            Logger.flush();
 
         } catch (Exception e) {
 
@@ -64,15 +84,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void checkSequenceInt() {
-        Saver saver = new ConsoleSaver();
+  /*      Saver saver = new ConsoleSaver();
         Decorator decorator = new PrefixDecorator();
         Message message = new StartMessage(saver, decorator);
-        Logger logger = new Logger(message, saver, decorator);
+        Logger logger = new Logger(message, saver, decorator);*/
         try {
-            logger.log(1);
-            logger.log(2);
-            logger.log(3);
-            logger.flush();
+            Logger.log(1);
+            Logger.log(2);
+            Logger.log(3);
+            Logger.flush();
 
         } catch (Exception e) {
 
@@ -82,17 +102,17 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void checkBrokenSequencesInt() {
-        Saver saver = new ConsoleSaver();
+      /*  Saver saver = new ConsoleSaver();
         Decorator decorator = new PrefixDecorator();
-        Message message = new StartMessage(saver, decorator);Logger logger = new Logger(message, saver, decorator);
+        Message message = new StartMessage(saver, decorator);Logger logger = new Logger(message, saver, decorator);*/
         try {
-            logger.log(1);
-            logger.log(2);
-            logger.log(3);
-            logger.flush();
-            logger.log(1);
-            logger.log(2);
-            logger.flush();
+            Logger.log(1);
+            Logger.log(2);
+            Logger.log(3);
+            Logger.flush();
+            Logger.log(1);
+            Logger.log(2);
+            Logger.flush();
         } catch (Exception e) {
 
         }

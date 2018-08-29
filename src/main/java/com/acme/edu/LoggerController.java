@@ -4,11 +4,12 @@ import com.acme.edu.decorator.Decorator;
 import com.acme.edu.message.Message;
 import com.acme.edu.saver.ConsoleSaver;
 import com.acme.edu.saver.Saver;
+import com.acme.edu.saver.SaverToLambda;
 
 public class LoggerController {
     private Message previousMessage = null;
-    private Saver saver;
-    public LoggerController(Message message, Saver saver, Decorator decorator) {
+    private SaverToLambda saver;
+    public LoggerController(Message message, SaverToLambda saver, Decorator decorator) {
         this.previousMessage = previousMessage;
         this.saver = saver;
     }

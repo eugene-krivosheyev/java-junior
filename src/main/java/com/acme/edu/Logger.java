@@ -10,10 +10,15 @@ public class Logger {
     private static LoggerController loggerController;
     private static Decorator decorator;
     private static Saver saver;
-    public Logger(Message message, Saver saver, Decorator decorator) {
-        this.decorator = decorator;
-        message.setSaver(saver);
-        loggerController = new LoggerController(message, saver, decorator);
+    private Logger() { }
+    public static void setLoggerController(LoggerController loggerController) {
+        Logger.loggerController = loggerController;
+    }
+    public static void setDecorator(Decorator decorator) {
+        Logger.decorator = decorator;
+    }
+    public static void setSaver(Saver saver) {
+        Logger.saver = saver;
     }
     public static void log(int message) throws Exception {
         loggerController.log(new IntMessage(message, saver, decorator));
