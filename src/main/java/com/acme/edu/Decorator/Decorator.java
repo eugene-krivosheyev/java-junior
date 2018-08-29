@@ -5,8 +5,9 @@ import com.acme.edu.message.Message;
 /**
  * Created by Java_1 on 27.08.2018.
  */
-abstract public class Decorator {
+@FunctionalInterface
+public interface Decorator {
 
-    public abstract String getDecoratedMessage(Message message);
+    String getDecoratedMessage(Message message);
 
 }

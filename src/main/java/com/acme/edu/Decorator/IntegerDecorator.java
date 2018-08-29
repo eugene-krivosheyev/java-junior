@@ -6,7 +6,7 @@ import com.acme.edu.message.Message;
 /**
  * Created by Java_1 on 27.08.2018.
  */
-public class IntegerDecorator extends  Decorator {
+public class IntegerDecorator implements  Decorator {
 
     public static final String INTEGER = "integer: ";
 
