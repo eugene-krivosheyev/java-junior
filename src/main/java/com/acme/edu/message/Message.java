@@ -7,7 +7,7 @@ import java.util.Map;
 abstract public class Message {
     abstract public Message accumulate(Message message);
 
-    public String decorate(Decorator decorator) {
+    protected String decorate(Decorator decorator) {
         return decorator.decorate(this);
     }
 

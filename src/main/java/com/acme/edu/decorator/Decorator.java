@@ -7,6 +7,4 @@ import java.util.Map;
 
 public interface Decorator {
     String decorate(Message message);
-
-    void update(Map<MessageType, Decorator> decoratorMap);
 }

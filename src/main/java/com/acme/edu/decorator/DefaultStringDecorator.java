@@ -1,10 +1,7 @@
 package com.acme.edu.decorator;
 
-import com.acme.edu.message.MessageType;
 import com.acme.edu.message.Message;
 import com.acme.edu.message.StringMessage;
-
-import java.util.Map;
 
 public class DefaultStringDecorator implements Decorator {
     @Override
@@ -14,8 +11,4 @@ public class DefaultStringDecorator implements Decorator {
         return "string: " + text + (countOfStrings > 1 ? " (x" + countOfStrings + ')' : "");
     }
 
-    @Override
-    public void update(Map<MessageType, Decorator> decoratorMap) {
-        decoratorMap.put(MessageType.STRING, this);
-    }
 }

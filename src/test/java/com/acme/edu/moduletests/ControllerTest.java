@@ -3,6 +3,7 @@ package com.acme.edu.moduletests;
 import com.acme.edu.controller.Controller;
 import com.acme.edu.decorator.Decorator;
 import com.acme.edu.message.Message;
+import com.acme.edu.message.MessageType;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,15 +56,5 @@ public class ControllerTest {
         verify(mockPrevMessage, times(1)).isAbleToAccumulate(mockMessage);
         verify(mockPrevMessage, times(1)).decorate(any(Map.class));
         //endregion
-    }
-
-    @Test
-    public void shouldChangeDecorator() {
-        Decorator mockDecorator = mock(Decorator.class);
-
-        sut.update(mockDecorator);
-
-        verify(mockDecorator, times(1)).update(any(Map.class));
-
     }
 }

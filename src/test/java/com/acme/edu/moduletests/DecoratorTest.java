@@ -2,6 +2,7 @@ package com.acme.edu.moduletests;
 
 import com.acme.edu.decorator.*;
 import com.acme.edu.message.*;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -64,6 +65,17 @@ public class DecoratorTest {
         String decoratedMessage = sut.decorate(mockMessage);
 
         assertEquals(decoratedMessage, "1101");
+    }
+
+    @Test
+    public void shouldSetDecoratorByLambda() {
+        Decorator sut = (message) -> "** " + ((IntMessage)message).getMessage() + " **";
+        IntMessage mockMessage = mock(IntMessage.class);
+        when(mockMessage.getMessage()).thenReturn(13);
+
+        String decoratedMessage = sut.decorate(mockMessage);
+
+        assertEquals(decoratedMessage, "** 13 **");
     }
 
     @Test

@@ -4,6 +4,7 @@ import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.decorator.BinaryIntDecorator;
 import com.acme.edu.decorator.DefaultIntDecorator;
+import com.acme.edu.message.MessageType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -169,10 +170,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogWithDifferentDecorators() throws IOException {
         Logger.log(134);
         Logger.flush();
-        Logger.setDecorator(new BinaryIntDecorator());
+        Logger.setDecorator(MessageType.INT, new BinaryIntDecorator());
         Logger.log(5);
         Logger.flush();
-        Logger.setDecorator(new DefaultIntDecorator());
+        Logger.setDecorator(MessageType.INT, new DefaultIntDecorator());
 
         assertSysoutContains("134");
         assertSysoutContains("101");

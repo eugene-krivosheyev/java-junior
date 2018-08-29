@@ -1,10 +1,7 @@
 package com.acme.edu.decorator;
 
-import com.acme.edu.message.MessageType;
 import com.acme.edu.message.IntMatrixMessage;
 import com.acme.edu.message.Message;
-
-import java.util.Map;
 
 public class DefaultIntMatrixDecorator implements Decorator {
     private DefaultIntArrayDecorator rowDecorator = new DefaultIntArrayDecorator();
@@ -22,8 +19,4 @@ public class DefaultIntMatrixDecorator implements Decorator {
         return decoratedString.toString();
     }
 
-    @Override
-    public void update(Map<MessageType, Decorator> decoratorMap) {
-        decoratorMap.put(MessageType.INTMATRIX, this);
-    }
 }

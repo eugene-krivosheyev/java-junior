@@ -27,6 +27,11 @@ public class Controller {
         decoratorMap.put(MessageType.STRING, new DefaultStringDecorator());
     }
 
+    public Controller(Saver saver) {
+        this();
+        defaultSaver = saver;
+    }
+
     public void log(Message message) {
         if (prevMessage.isAbleToAccumulate(message)) {
             prevMessage = prevMessage.accumulate(message);
@@ -36,7 +41,7 @@ public class Controller {
         }
     }
 
-    public void update(Decorator newDecorator) {
-        newDecorator.update(decoratorMap);
+    public void update(MessageType type, Decorator newDecorator) {
+        decoratorMap.put(type, newDecorator);
     }
 }

@@ -41,9 +41,9 @@ public class Logger {
         controller.log(new ReferenceMessage(message));
     }
 
-    public static void setDecorator(Decorator newDecorator) {
-        controller.update(newDecorator);
+    public static void setDecorator(MessageType type, Decorator newDecorator) {
+        controller.update(type, newDecorator);
     }
 
-    private static Controller controller = new Controller();
+    private static Controller controller = new Controller(System.out::println);
 }
