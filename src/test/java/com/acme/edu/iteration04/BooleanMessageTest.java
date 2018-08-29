@@ -1,25 +1,25 @@
 package com.acme.edu.iteration04;
 
-import com.acme.edu.message.CharMessage;
+import com.acme.edu.message.BooleanMessage;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
-public class CharMessageTest {
+public class BooleanMessageTest {
     @Test
-    public void shouldGetDecoratedMessageWhenConstructNewMessage() {
+    public void shouldGetDecoratedMessageWhenConstructNewBooleanMessage() {
         //region Given
-        CharMessage sut;
+        BooleanMessage sut;
         //endregion
 
         //region When
-        sut = new CharMessage('a');
+        sut = new BooleanMessage(true);
         //endregion
 
         //region Then
-        String expected = "a";
+        String expected = "true";
         String result = sut.getDecoratedString();
         assertEquals(expected, result);
         //endregion
@@ -28,42 +28,42 @@ public class CharMessageTest {
     @Test
     public void shouldReturnDecoratedValueWhenDecorateIsCalled() {
         //region Given
-        CharMessage sut = new CharMessage('a');
+        BooleanMessage sut = new BooleanMessage(true);
         //endregion
 
         //region When
-        sut = (CharMessage) sut.decorate();
+        sut = (BooleanMessage) sut.decorate();
         //endregion
 
         //region Then
-        assertTrue(sut.getDecoratedString().contains("char: a"));
+        assertTrue(sut.getDecoratedString().contains("primitive: true"));
         //endregion
     }
 
     @Test
     public void shouldNotChangeValueInMessageWhenAccumulateIsCalled() {
         //region Given
-        CharMessage sut = new CharMessage('a');
-        CharMessage mockCharMessage = mock(CharMessage.class);
+        BooleanMessage sut = new BooleanMessage(true);
+        BooleanMessage mockBooleanMessage = mock(BooleanMessage.class);
         //endregion
 
         //region When
-        sut = (CharMessage) sut.accumulate(mockCharMessage);
+        sut = (BooleanMessage) sut.accumulate(mockBooleanMessage);
         //endregion
 
         //region Then
-        assertTrue(sut.getDecoratedString().equals("a"));
+        assertTrue(sut.getDecoratedString().equals("true"));
         //endregion
     }
 
     @Test
-    public void shouldReturnCharMessageTypeWhenInstanceOf() {
+    public void shouldReturnBooleanMessageTypeWhenInstanceOf() {
         //region Given
-        CharMessage sut = new CharMessage('a');
+        BooleanMessage sut = new BooleanMessage(true);
         //endregion
 
         //region When
-        CharMessage messageToCheckTypeWith = new CharMessage('b');
+        BooleanMessage messageToCheckTypeWith = new BooleanMessage(false);
         //endregion
 
         //region Then

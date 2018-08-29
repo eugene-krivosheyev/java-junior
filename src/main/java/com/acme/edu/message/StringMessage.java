@@ -17,10 +17,6 @@ public class StringMessage implements Message {
 
     @Override
     public Message accumulate(Message message) {
-        // Check if the string is the same
-        // increment counter
-        // else
-
         if (((StringMessage)message).rawMessage.equals(rawMessage)) {
             counter ++;
         } else {

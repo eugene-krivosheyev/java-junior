@@ -27,6 +27,23 @@ public class ObjectMessageTest {
     }
 
     @Test
+    public void shouldReturnDecoratedValueWhenDecorateIsCalled() {
+        //region Given
+        ObjectMessage sut = new ObjectMessage(new Object());
+        //endregion
+
+        //region When
+        sut = (ObjectMessage) sut.decorate();
+        //endregion
+
+        //region Then
+        String actualValue = sut.getDecoratedString();
+        assertTrue(sut.getDecoratedString().contains("reference: "));
+        assertTrue(sut.getDecoratedString().contains("@"));
+        //endregion
+    }
+
+    @Test
     public void shouldNotChangeValueInMessageWhenAccumulateIsCalled() {
         //region Given
         ObjectMessage sut = new ObjectMessage('a');

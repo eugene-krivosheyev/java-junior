@@ -19,7 +19,7 @@ public class ObjectMessage implements Message {
 
     @Override
     public Message decorate() {
-        this.decoratedMessage = PREFIX + SEPARATOR + String.valueOf(rawMessage);
+        this.decoratedMessage = PREFIX + SEPARATOR + rawMessage;
         return this;
     }
 
