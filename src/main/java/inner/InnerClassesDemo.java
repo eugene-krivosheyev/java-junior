@@ -1,27 +1,20 @@
 package inner;
 
+import java.io.Serializable;
+
 public class InnerClassesDemo {
     public static void main(String[] args) {
-        Outer outer = new Outer();
-        Outer.Inner inner1 = outer.new Inner();
-        Outer.Inner inner2 = outer.new Inner();
-        inner1.m();
-        inner2.m();
-
-        System.out.println(outer.getI());
-    }
-}
-
-class Outer {
-    private int i = 0;
-
-    public int getI() {
-        return i;
+        System.out.println(getCommand().toString());
     }
 
-    class Inner {
-        void m() {
-            Outer.this.i = 1;
+    private static Object getCommand() {
+        class My extends Object {
+            @Override
+            public String toString() {
+                return "My";
+            }
         }
+
+        return new My();
     }
 }
