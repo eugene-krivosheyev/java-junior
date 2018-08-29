@@ -1,20 +1,36 @@
 package inner;
 
-import java.io.Serializable;
-
 public class InnerClassesDemo {
-    public static void main(String[] args) {
-        System.out.println(getCommand().toString());
+    private static int classState;
+    private int instanceState;
+
+    private Flyable getCommand() {
+        int localVar = 0;
+
+        return new Flyable() {
+            @Override
+            public void fly() {
+                System.out.println(classState);
+                System.out.println(InnerClassesDemo.this.instanceState);
+                System.out.println(localVar);
+            }
+        };
     }
 
-    private static Object getCommand() {
-        class My extends Object {
-            @Override
-            public String toString() {
-                return "My";
-            }
-        }
+    public static void main(String[] args) {
+        Flyable object = new InnerClassesDemo().getCommand();
+        //?????
+        object.fly();
+    }
+}
 
-        return new My();
+
+interface Flyable {
+    void fly();
+}
+
+class MyRegistry {
+    public static void register(Flyable object) {
+        object.fly(); //in parallel
     }
 }
