@@ -24,17 +24,21 @@ public class StringMessageTest {
 
     @Test
     public void isSameTypeOfWithSameString(){
-        checkIsSameTypeOf(new StringMessage("test", decorator), true);
+        checkIsSameTypeOf(sut, true);
     }
 
     @Test
     public void isSameTypeOfWithAnotherString(){
-        checkIsSameTypeOf(new StringMessage("another_test", decorator), false);
+        StringMessage stubMessage = mock(StringMessage.class);
+        when(stubMessage.getMessage()).thenReturn("another_test");
+        checkIsSameTypeOf(stubMessage, false);
     }
 
     @Test
-    public void isSameTypeOfWithFlushMessage(){
-        checkIsSameTypeOf(new IntMessage(1, decorator), false);
+    public void isSameTypeOfWithIntMessage(){
+        IntMessage stubMessage = mock(IntMessage.class);
+        when(stubMessage.getMessage()).thenReturn(1);
+        checkIsSameTypeOf(stubMessage, false);
     }
 
     @Test

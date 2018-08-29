@@ -16,22 +16,11 @@ import org.mockito.Mockito;
 import java.io.IOException;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
-    LoggerController testLoggerController = new LoggerController(new LoggerSaver());
-
-    @Before
-    public void setUpSystemOut() throws IOException {
-        resetOut();
-        captureSysout();
-    }
-
-    @After
-    public void tearDown() {
-        resetOut();
-    }
+public class LoggerControllerTest {
+    LoggerSaver stubLoggerSaver = mock(LoggerSaver.class);
+    LoggerController testLoggerController = new LoggerController(stubLoggerSaver);
 
     @Test
     public void shouldNotFailWhenAddFirstMessage() {
@@ -43,7 +32,7 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
 
         testLoggerController.log(stubStringMessage);
         testLoggerController.log(stubFlushMessage);
-        assertSysoutEquals("str: message");
+        verify(stubLoggerSaver, times(1)).save(anyString());
     }
 
     @Test
@@ -61,7 +50,7 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
 
         testLoggerController.log(stubStringMessage);
         testLoggerController.log(stubFlushMessage);
-        assertSysoutEquals("string: str (x2)");
+        verify(stubLoggerSaver, times(1)).save(anyString());
     }
 
 }

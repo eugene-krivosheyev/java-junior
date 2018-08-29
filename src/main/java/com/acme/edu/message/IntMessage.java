@@ -10,6 +10,10 @@ public class IntMessage extends Message {
         this.message = message;
     }
 
+    public int getMessage() {
+        return  message;
+    }
+
     @Override
     public Message accumulate(Message nextMessage) {
         IntMessage downcastedMessage = (IntMessage) nextMessage;

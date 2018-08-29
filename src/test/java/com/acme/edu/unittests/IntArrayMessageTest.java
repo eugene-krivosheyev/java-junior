@@ -15,11 +15,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class IntArrayMessageTest {
+    Decorator stubDecorator = mock(DefaultDecorator.class);
+
     public void testGetDecoratedMessage(int[] testArray, String nonDecoratedArrayAsString) {
-        Decorator stubDecorator = new DefaultDecorator("primitives array");
+        String stubResult = "primitives array: {" + nonDecoratedArrayAsString + "}"
+                + System.lineSeparator();
+        when(stubDecorator.getDecoratedMessage()).thenReturn(stubResult);
         IntArrayMessage sut = new IntArrayMessage(testArray, stubDecorator);
-        assertEquals("primitives array: {" + nonDecoratedArrayAsString + "}"
-                + System.lineSeparator(), sut.getDecoratedMessage());
+        assertEquals(stubResult, sut.getDecoratedMessage());
     }
 
     @Test
