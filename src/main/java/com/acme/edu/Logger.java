@@ -3,27 +3,6 @@ package com.acme.edu;
 /*
 //TODO To think
 public class Logger {
-    private static final String PRIMITIVE = "primitive";
-    private static final String STRING = "string";
-    private static final String REFERENCE = "reference";
-    private static final String CHAR = "char";
-    private  static final String LINE_SEPARATOR = ": ";
-    private static final String INTEGER = "int";
-    private static final String BYTE = "byte";
-    private static final String PRIMITIVE_ARRAY = "primitives array";
-    private static final String PRIMITIVE_MATRIX = "primitives matrix";
-
-    private static String loggerMessageType = "";
-    private static int sequentNumberSum = 0;
-    private static String currentString = "";
-    private static int numOfStringRepetions = 0;
-    private static String bufferForFlush;
-
-    public static void log(int[] message) {
-        Logger.flushAndChangeType(PRIMITIVE_ARRAY);
-        bufferForFlush = loggerMessageType + LINE_SEPARATOR;
-        addArrayToBuffer(message);
-    }
 
     public static void log(int[][] message) {
         Logger.flushAndChangeType(PRIMITIVE_MATRIX);
@@ -48,8 +27,10 @@ public class Logger {
 }
 */
 
+import com.acme.edu.decorators.*;
+
 public class Logger {
-    public static Controller controller = new Controller(new ConsolSaver());
+    public static Controller controller = new Controller(System.out::println);
 
 
     public static void main(String[] args) {
@@ -58,31 +39,31 @@ public class Logger {
     }
 
     public static void log(int message) {
-        controller.log(new IntMessage(message));
+        controller.log(new IntMessage(message, new IntDecorator()));
     }
 
     public static void log(byte message) {
-        controller.log(new ByteMessage(message));
+        controller.log(new ByteMessage(message, new ByteDecorator()));
     }
 
     public static void log(boolean message) {
-        controller.log(new BooleanMessage(message));
+        controller.log(new BooleanMessage(message, new BooleanDecorator2()));
     }
 
     public static void log(char message) {
-        controller.log(new CharMessage(message));
+        controller.log(new CharMessage(message, new CharDecorator()));
     }
 
     public static void log(String message) {
-        controller.log(new StringMessage(message));
+        controller.log(new StringMessage(message, new StringDecorator()));
     }
 
     public static void log(Object message) {
-        controller.log(new ObjectMessage(message));
+        controller.log(new ObjectMessage(message, new ObjectDecorator()));
     }
 
     public static void log(int[] message) {
-        controller.log(new ArrayMessage(message));
+        controller.log(new ArrayMessage(message, new ArrayDecorator()));
     }
 /*
     public static void log(int[][] message) {

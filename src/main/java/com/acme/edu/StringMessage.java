@@ -6,16 +6,18 @@ import com.acme.edu.decorators.StringDecorator;
 public class StringMessage implements Message {
     private String value;
     private int numOfSequent;
-    private static Decorator decorator = new StringDecorator();
+    private Decorator decorator;
 
-    public StringMessage(String message) {
-        this.value = message;
-        this.numOfSequent = 1;
+    public StringMessage(String value, int numOfSequent, Decorator decorator) {
+        this.value = value;
+        this.numOfSequent = numOfSequent;
+        this.decorator = decorator;
     }
 
-    public StringMessage(String message, int numOfSequent) {
-        this.value = message;
-        this.numOfSequent = numOfSequent;
+    public StringMessage(String value, Decorator decorator) {
+        this.value = value;
+        this.numOfSequent = 1;
+        this.decorator = decorator;
     }
 
     @Override
@@ -25,7 +27,7 @@ public class StringMessage implements Message {
 
     @Override
     public Message accumulate(Message message) {
-        return new StringMessage(value, numOfSequent + ((StringMessage)message).numOfSequent);
+        return new StringMessage(value, numOfSequent + ((StringMessage)message).numOfSequent, decorator);
     }
 
     @Override

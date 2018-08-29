@@ -5,12 +5,13 @@ import com.acme.edu.decorators.IntDecorator;
 
 public class IntMessage implements Message{
     private int value;
-    private static Decorator decorator = new IntDecorator();
+    private Decorator decorator;
 
-
-    public IntMessage(int message) {
-        this.value = message;
+    public IntMessage(int value, Decorator decorator) {
+        this.value = value;
+        this.decorator = decorator;
     }
+
 
     @Override
     public String decorate() {
@@ -19,7 +20,7 @@ public class IntMessage implements Message{
 
     @Override
     public Message accumulate(Message message) {
-        return new IntMessage(this.value + ((IntMessage)message).value);
+        return new IntMessage(this.value + ((IntMessage)message).value, decorator);
     }
 
     @Override

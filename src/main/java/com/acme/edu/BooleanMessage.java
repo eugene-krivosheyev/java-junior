@@ -6,10 +6,11 @@ import com.acme.edu.decorators.Decorator;
 
 public class BooleanMessage implements Message {
     private boolean value;
-    private static Decorator decorator = new BooleanDecorator2();
+    private Decorator decorator;
 
-    public BooleanMessage(boolean message) {
+    public BooleanMessage(boolean message, Decorator decorator) {
         this.value = message;
+        this.decorator = decorator;
     }
 
     @Override

@@ -8,10 +8,11 @@ import com.acme.edu.decorators.Decorator;
  */
 public class ArrayMessage implements Message {
     private int[] value;
-    private static Decorator decorator = new ArrayDecorator();
+    private Decorator decorator;
 
-    public ArrayMessage(int[] message) {
-        this.value = message;
+    public ArrayMessage(int[] value, Decorator decorator) {
+        this.value = value;
+        this.decorator = decorator;
     }
 
     @Override

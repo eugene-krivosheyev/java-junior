@@ -1,11 +1,8 @@
 package com.acme.edu;
 
-import java.io.IOException;
-
-public class Saver {
-    public void save(String decoratedString) {
-        if (decoratedString == null) {
-            System.out.println("It is null!!!!");
-        };
-    }
+/**
+ * Created by Java_12 on 29.08.2018.
+ */
+public interface Saver {
+    void save(String decoratedString);
 }

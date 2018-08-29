@@ -5,10 +5,11 @@ import com.acme.edu.decorators.ObjectDecorator;
 
 public class ObjectMessage implements Message {
     private Object value;
-    private static Decorator decorator = new ObjectDecorator();
+    private Decorator decorator;
 
-    public ObjectMessage(Object message) {
-        this.value = message;
+    public ObjectMessage(Object value, Decorator decorator) {
+        this.value = value;
+        this.decorator = decorator;
     }
 
     @Override

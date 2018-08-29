@@ -64,7 +64,7 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void saverNullStringTest() throws IOException {
         //region given
-        Saver saver = new Saver();
+        Saver saver = new ParameterCheckingSaver();
         String testString = null;
         //endregion
 
@@ -82,7 +82,7 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void saverNotNullStringTest() throws IOException {
         //region given
-        Saver saver = new Saver();
+        Saver saver = new ParameterCheckingSaver();
         //endregion
 
         //region when
@@ -129,7 +129,7 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void controllerFlushFunctionWhenNullMessageTest() throws IOException {
-        Saver mock = mock(Saver.class);
+        Saver mock = mock(ParameterCheckingSaver.class);
         Controller controller = new Controller(mock);
 
         controller.flush();
@@ -139,7 +139,7 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void controllerFlushFunctionWhenNotNullMessageTest() throws IOException {
-        Saver mock = mock(Saver.class);
+        Saver mock = mock(ParameterCheckingSaver.class);
         Message stub = mock(Message.class);
         when(stub.decorate()).thenReturn("test");
         Controller controller = new Controller(mock, stub);
@@ -151,7 +151,7 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void controllerLogFunctionWhenNullCurrentMessageTest() throws IOException {
-        Saver mock = mock(Saver.class);
+        Saver mock = mock(ParameterCheckingSaver.class);
         Message stub = mock(Message.class);
         Controller controller = new Controller(mock);
 
@@ -162,7 +162,7 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void controllerLogFunctionWhenNotNullCurrentMessageWithChangedTypesTest() throws IOException {
-        Saver mock = mock(Saver.class);
+        Saver mock = mock(ParameterCheckingSaver.class);
         Message stub = mock(Message.class);
         when(stub.decorate()).thenReturn("test");
         Controller controller = new Controller(mock, stub);
@@ -179,7 +179,7 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void controllerLogFunctionWhenNotNullCurrentMessageWithoutChangedTypesTest() throws IOException {
-        Saver mock = mock(Saver.class);
+        Saver mock = mock(ParameterCheckingSaver.class);
         Message stub = mock(Message.class);
         Controller controller = new Controller(mock, stub);
         Message logMessageStub = mock(Message.class);

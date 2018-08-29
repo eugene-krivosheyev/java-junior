@@ -5,11 +5,13 @@ import com.acme.edu.decorators.Decorator;
 
 public class ByteMessage implements Message {
     private byte value;
-    private static Decorator decorator = new ByteDecorator();
+    private Decorator decorator;
 
-    public ByteMessage(byte message) {
-        this.value = message;
+    public ByteMessage(byte value, Decorator decorator) {
+        this.value = value;
+        this.decorator = decorator;
     }
+
 
     @Override
     public String decorate() {
@@ -18,7 +20,7 @@ public class ByteMessage implements Message {
 
     @Override
     public Message accumulate(Message message) {
-        return new ByteMessage ((byte)(value + ((ByteMessage)message).value));
+        return new ByteMessage ((byte)(value + ((ByteMessage)message).value), decorator);
     }
 
     @Override
