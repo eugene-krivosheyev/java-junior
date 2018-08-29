@@ -10,34 +10,15 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class StringMessageTest {
-
     @Test
-    public void log() {
-    /*
+    public void SameStringInARowAccumulation() {
         String message = "hello";
         Saver saver = mock(Saver.class);
         Decorator decorator = mock(Decorator.class);
-        when(decorator.decorate("hello")).thenReturn("hello");
+        when(decorator.decorate("hello (x2)")).thenReturn("hello (x2)");
         StringMessage stringMessage = new StringMessage (message, saver, decorator);
         StringMessage stringMessage2 = new StringMessage (message, saver, decorator);
         stringMessage.accumulate(stringMessage2);
-        assertEquals("hello (x2)", stringMessage.fetch());
-        */
-    }
-
-    @Test
-    public void isSameTypeOf() {
-    }
-
-    @Test
-    public void flush() {
-    }
-
-    @Test
-    public void accumulate() {
-    }
-
-    @Test
-    public void fetch() {
+        assertEquals("hello (x2)" + System.lineSeparator(), stringMessage.fetch());
     }
 }
