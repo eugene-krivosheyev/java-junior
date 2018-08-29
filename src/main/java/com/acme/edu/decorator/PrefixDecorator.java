@@ -15,4 +15,13 @@ public class PrefixDecorator extends Decorator {
     public String decorate(String message) {
         return STRING + message;
     }
+    public String decorate(char message) {
+        return CHAR + message;
+    }
+    public String decorate(byte message) {
+        return PRIMITIVE + message;
+    }
+    public String decorate(boolean message) {
+        return PRIMITIVE + message;
+    }
 }

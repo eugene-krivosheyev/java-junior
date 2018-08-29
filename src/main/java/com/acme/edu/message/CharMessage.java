@@ -5,10 +5,10 @@ import com.acme.edu.saver.Saver;
 
 import java.util.Objects;
 
-public class StringMessage extends Message {
-    private String message;
+public class CharMessage extends Message {
+    private char message;
     private int amount = 1;
-    public StringMessage (String message, Saver saver, Decorator decorator) {
+    public CharMessage (char message, Saver saver, Decorator decorator) {
         super(saver, decorator);
         this.message = message;
     }
@@ -18,7 +18,7 @@ public class StringMessage extends Message {
     }
     @Override
     public boolean isSameTypeOf(Message message) {
-        return message instanceof StringMessage;
+        return message instanceof CharMessage;
     }
     @Override
     public void flush() {
@@ -26,7 +26,7 @@ public class StringMessage extends Message {
     }
     @Override
     public void accumulate(Message message) {
-        String value = ((StringMessage)message).message;
+        char value = ((CharMessage)message).message;
         if (Objects.equals(value, this.message)) {
             this.amount++;
         } else {
@@ -34,8 +34,9 @@ public class StringMessage extends Message {
             this.message = value;
             this.amount = 1;
         }
+
     }
     public String fetch() {
-        return getDecorator().decorate(message + (this.amount == 1 ? "" : " (x" + Integer.toString(amount) + ")")) + System.lineSeparator();
+        return getDecorator().decorate(message) + System.lineSeparator();
     }
 }

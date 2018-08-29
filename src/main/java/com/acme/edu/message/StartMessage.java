@@ -3,8 +3,8 @@ package com.acme.edu.message;
 import com.acme.edu.decorator.Decorator;
 import com.acme.edu.saver.Saver;
 
-public class FlushMessage extends Message {
-    public FlushMessage(Saver saver, Decorator decorator) {
+public class StartMessage extends Message {
+    public StartMessage(Saver saver, Decorator decorator) {
         super(saver, decorator);
     }
     @Override
@@ -25,6 +25,6 @@ public class FlushMessage extends Message {
     }
     @Override
     public String fetch() {
-        return "";
+        return null;
     }
 }

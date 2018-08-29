@@ -4,7 +4,7 @@ public class ConsoleSaver extends Saver {
     @Override
     public void save(String message) throws Exception {
         super.save(message);
-        System.out.println(message);
+        System.out.print(message);
     }
     /*public static void main(String[] args) {
         Saver saver = new ConsoleSaver();

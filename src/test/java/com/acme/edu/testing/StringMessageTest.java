@@ -1,0 +1,43 @@
+package com.acme.edu.testing;
+
+import com.acme.edu.decorator.Decorator;
+import com.acme.edu.saver.Saver;
+import org.junit.Test;
+import com.acme.edu.message.StringMessage;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+public class StringMessageTest {
+
+    @Test
+    public void log() {
+    /*
+        String message = "hello";
+        Saver saver = mock(Saver.class);
+        Decorator decorator = mock(Decorator.class);
+        when(decorator.decorate("hello")).thenReturn("hello");
+        StringMessage stringMessage = new StringMessage (message, saver, decorator);
+        StringMessage stringMessage2 = new StringMessage (message, saver, decorator);
+        stringMessage.accumulate(stringMessage2);
+        assertEquals("hello (x2)", stringMessage.fetch());
+        */
+    }
+
+    @Test
+    public void isSameTypeOf() {
+    }
+
+    @Test
+    public void flush() {
+    }
+
+    @Test
+    public void accumulate() {
+    }
+
+    @Test
+    public void fetch() {
+    }
+}

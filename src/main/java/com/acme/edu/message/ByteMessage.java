@@ -3,9 +3,10 @@ package com.acme.edu.message;
 import com.acme.edu.decorator.Decorator;
 import com.acme.edu.saver.Saver;
 
-public class IntMessage extends Message {
-    private int message;
-    public IntMessage (int message, Saver saver, Decorator decorator) {
+public class ByteMessage extends Message {
+    private byte message;
+    //  int sum = 0;
+    public ByteMessage (byte message, Saver saver, Decorator decorator) {
         super(saver, decorator);
         this.message = message;
     }
@@ -15,18 +16,19 @@ public class IntMessage extends Message {
     }
     @Override
     public boolean isSameTypeOf(Message message) {
-        return message instanceof IntMessage;
+        return message instanceof ByteMessage; //this.getClass();
     }
-    public void flush() {
+    public void flush(){
 
     }
     @Override
     public void accumulate(Message message) {
-        int value = ((IntMessage)message).message;
+        byte value = ((ByteMessage)message).message;
         this.message += value;
     }
     @Override
     public String fetch() {
+        //return super.getDecorator().decorate(message);
         return getDecorator().decorate(message) + System.lineSeparator();
     }
 }
