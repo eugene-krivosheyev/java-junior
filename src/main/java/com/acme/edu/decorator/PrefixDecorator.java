@@ -1,7 +1,5 @@
 package com.acme.edu.decorator;
 
-import com.acme.edu.message.IntMessage;
-
 public class PrefixDecorator extends Decorator {
     private static final String PRIMITIVE = "primitive: ";
     private static final String PRIMITIVES_ARRAY = "primitives array: ";
