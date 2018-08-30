@@ -1,45 +1,93 @@
 package com.acme.edu;
 
+import com.acme.edu.loggerexceptions.LoggerException;
 import com.acme.edu.message.*;
 import com.acme.edu.message.decorator.DefaultDecorator;
 
 public class Logger {
     private static LoggerController controller = new LoggerController(new ConsoleLoggerSaver());
 
-    public static void log(int message) {
-        controller.log(new IntMessage(message, new DefaultDecorator("primitive")));
+    public static int log(int message) {
+        try {
+            controller.log(new IntMessage(message, new DefaultDecorator("primitive")));
+        } catch (LoggerException e) {
+            return e.getErrorCodeOrdinal();
+        }
+        return 0;
     }
 
-    public static void log(byte message) {
-        controller.log(new ByteMessage(message, new DefaultDecorator("primitive")));
+    public static int log(byte message) {
+        try {
+            controller.log(new ByteMessage(message, new DefaultDecorator("primitive")));
+        } catch (LoggerException e) {
+            return e.getErrorCodeOrdinal();
+        }
+        return 0;
     }
 
-    public static void log(String message) {
-        controller.log(new StringMessage(message, new DefaultDecorator("string")));
+    public static int log(String message) {
+        try {
+            controller.log(new StringMessage(message, new DefaultDecorator("string")));
+        } catch (LoggerException e) {
+            return e.getErrorCodeOrdinal();
+        }
+        return 0;
     }
 
-    public static void log(char message) {
-        controller.log(new CharMessage(message, new DefaultDecorator("char")));
+    public static int log(char message) {
+        try {
+            controller.log(new CharMessage(message, new DefaultDecorator("char")));
+        } catch (LoggerException e) {
+            return e.getErrorCodeOrdinal();
+        }
+        return 0;
     }
 
-    public static void log(boolean message) {
-        controller.log(new BoolMessage(message, new DefaultDecorator("primitive")));
+    public static int log(boolean message) {
+        try {
+            controller.log(new BoolMessage(message, new DefaultDecorator("primitive")));
+        } catch (LoggerException e) {
+            return e.getErrorCodeOrdinal();
+        }
+        return 0;
     }
 
-    public static void log(Object message) {
-        controller.log(new ReferenceMessage(message, new DefaultDecorator("reference")));
+    public static int log(Object message) {
+        try {
+            controller.log(new ReferenceMessage(message, new DefaultDecorator("reference")));
+        } catch (LoggerException e) {
+            return e.getErrorCodeOrdinal();
+        }
+        return 0;
     }
 
-    public static void log(int [] message) {
-        controller.log(new IntArrayMessage(message, new DefaultDecorator("primitives array")));
+    public static int log(int[] message) {
+        try {
+            controller.log(new IntArrayMessage(message, new DefaultDecorator("primitives array")));
+        } catch (LoggerException e) {
+            return e.getErrorCodeOrdinal();
+        }
+        return 0;
     }
 
-    public static void log(int [][] message) {
-        controller.log(new Int2DimArrayMessage(message, new DefaultDecorator("primitives matrix")));
-    }
-    public static void flush() {
-        controller.log(new FlushMessage(new DefaultDecorator("")));
+    public static int log(int[][] message) {
+        try {
+            controller.log(new Int2DimArrayMessage(message, new DefaultDecorator("primitives matrix")));
+        } catch (LoggerException e) {
+            return e.getErrorCodeOrdinal();
+        }
+        return 0;
     }
 
-    private Logger() {}
+    public static int flush() {
+        try {
+            controller.log(new FlushMessage(new DefaultDecorator("")));
+        } catch (LoggerException e) {
+            return e.getErrorCodeOrdinal();
+        }
+        return 0;
+    }
+
+    private Logger() {
+    }
 }

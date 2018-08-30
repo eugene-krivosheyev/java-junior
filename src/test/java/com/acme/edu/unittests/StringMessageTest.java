@@ -19,7 +19,6 @@ public class StringMessageTest {
     private Decorator decorator = mock(DefaultDecorator.class);
     private StringMessage sut = new StringMessage("test", decorator);
 
-
     private void assertSutIsSameTypeOf(Message messageToCompareWith) {
         boolean testMethodResult = sut.isSameTypeOf(messageToCompareWith);
         if (!(messageToCompareWith instanceof StringMessage)) {

@@ -1,5 +1,6 @@
 package com.acme.edu;
 
+import com.acme.edu.loggerexceptions.LoggerSaverException;
 import com.acme.edu.message.Message;
 
 public class LoggerController {
@@ -10,7 +11,7 @@ public class LoggerController {
         this.saver = consoleLoggerSaver;
     }
 
-    public void log(Message message) {
+    public void log(Message message) throws LoggerSaverException {
         if (currentMessage == null) {
             currentMessage = message;
             return;

@@ -1,6 +1,7 @@
 package com.acme.edu.unittests;
 
 import com.acme.edu.ConsoleLoggerSaver;
+import com.acme.edu.loggerexceptions.LoggerSaverException;
 import com.acme.edu.Saver;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
@@ -23,28 +24,27 @@ public class ConsoleLoggerSaverTest implements SysoutCaptureAndAssertionAbility 
     }
     //endregion
     @Test
-    public void shouldSaveString() {
+    public void shouldSaveString() throws LoggerSaverException {
         Saver saver = new ConsoleLoggerSaver();
         String output = "test output";
         saver.save(output);
         assertSysoutEquals("test output");
     }
 
-    @Test
-    public void shouldNotSaveNull() {
+    @Test (expected = LoggerSaverException.class)
+    public void shouldNotSaveNull() throws LoggerSaverException {
         Saver saver = new ConsoleLoggerSaver();
         String output = null;
         saver.save(output);
         assertSysoutNotEquals("null");
     }
 
-    @Test
-    public void saveStringAndNull() {
+    @Test (expected = LoggerSaverException.class)
+    public void saveStringAndNull() throws LoggerSaverException {
         Saver saver = new ConsoleLoggerSaver();
         String output = "test output";
         String nullOutput = null;
         saver.save(output);
         saver.save(nullOutput);
-        assertSysoutEquals("test output");
     }
 }
