@@ -27,7 +27,7 @@ public class StringMessage extends Message {
 
     }
     @Override
-    public void accumulate(Message message) {
+    public void accumulate(Message message) throws MessageException {
         String value = ((StringMessage)message).message;
         if (Objects.equals(value, this.message)) {
             this.amount++;
@@ -37,6 +37,7 @@ public class StringMessage extends Message {
                 this.saver.save(fetch());
             } catch (Exception e) {
                 e.printStackTrace();
+                throw new MessageException(e);
             }
             this.message = value;
             this.amount = 1;
@@ -46,3 +47,4 @@ public class StringMessage extends Message {
         return getDecorator().decorate(message + (this.amount == 1 ? "" : " (x" + Integer.toString(amount) + ")")) + System.lineSeparator();
     }
 }
+

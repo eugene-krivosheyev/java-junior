@@ -37,21 +37,18 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void initializeTest () {
         Saver saver = new ConsoleSaver();
         Decorator decorator = new PrefixDecorator();
-
         Logger.setSaver(saver);
         Logger.setDecorator(decorator);
-
         Message message = new StartMessage(saver, decorator);
-
-//        () -> new Saver()
-
-
+        LoggerController loggerController = new LoggerController(message, saver, decorator);
+        /*
         LoggerController loggerController = new LoggerController(
             message,
                 messageToPrint -> System.out.print(messageToPrint),
                // System.out::print,
             decorator
         );
+        */
         Logger.setLoggerController(loggerController);
     }
 

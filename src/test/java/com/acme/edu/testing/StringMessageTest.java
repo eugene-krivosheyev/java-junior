@@ -1,6 +1,7 @@
 package com.acme.edu.testing;
 
 import com.acme.edu.decorator.Decorator;
+import com.acme.edu.message.MessageException;
 import com.acme.edu.saver.Saver;
 import org.junit.Test;
 import com.acme.edu.message.StringMessage;
@@ -11,7 +12,7 @@ import static org.mockito.Mockito.when;
 
 public class StringMessageTest {
     @Test
-    public void SameStringInARowAccumulation() {
+    public void SameStringInARowAccumulation() throws MessageException {
         String message = "hello";
         Saver saver = mock(Saver.class);
         Decorator decorator = mock(Decorator.class);

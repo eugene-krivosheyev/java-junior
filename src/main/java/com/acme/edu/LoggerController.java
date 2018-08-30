@@ -8,8 +8,8 @@ import com.acme.edu.saver.SaverToLambda;
 
 public class LoggerController {
     private Message previousMessage = null;
-    private SaverToLambda saver;
-    public LoggerController(Message message, SaverToLambda saver, Decorator decorator) {
+    private Saver saver;
+    public LoggerController(Message message, Saver saver, Decorator decorator) {
         this.previousMessage = previousMessage;
         this.saver = saver;
     }

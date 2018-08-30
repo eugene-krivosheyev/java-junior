@@ -25,6 +25,6 @@ public abstract class Message {
     public abstract Message log(Message message);
     public abstract boolean isSameTypeOf(Message message);
     public abstract void flush();
-    public abstract void accumulate(Message message);
+    public abstract void accumulate(Message message) throws MessageException;
     public abstract String fetch();
 }
