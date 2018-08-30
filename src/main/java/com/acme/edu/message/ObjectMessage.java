@@ -5,11 +5,11 @@ package com.acme.edu.message;
  */
 public class ObjectMessage implements Message {
 
-    private Object message;
+    private Object value;
     private static final String REFERENCE = "reference: ";
 
     public ObjectMessage(Object message) {
-        this.message = message;
+        this.value = message;
     }
 
     @Override
@@ -19,15 +19,19 @@ public class ObjectMessage implements Message {
 
     @Override
     public String getDecoratedMessage(){
-        return REFERENCE + message;
+        return REFERENCE + value;
     }
 
     @Override
     public Message accumulate(Message message){
-        return new ObjectMessage(((ObjectMessage) message).getMessage());
+        return new ObjectMessage(((ObjectMessage) message).getValue());
     }
 
-    public Object getMessage() {
-        return message;
+    public Object getValue() {
+        return value;
+    }
+
+    public void setValue(Object value) {
+        this.value = value;
     }
 }

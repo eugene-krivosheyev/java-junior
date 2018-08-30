@@ -5,11 +5,11 @@ package com.acme.edu.message;
  */
 public class BooleanMessage implements Message {
 
-    private boolean message;
+    private boolean value;
     private static final String PRIMITIVE = "primitive: ";
 
     public BooleanMessage(boolean message) {
-        this.message = message;
+        this.value = message;
     }
 
     @Override
@@ -19,15 +19,17 @@ public class BooleanMessage implements Message {
 
     @Override
     public String getDecoratedMessage(){
-        return PRIMITIVE + message;
+        return PRIMITIVE + value;
     }
 
     @Override
     public Message accumulate(Message message){
-        return new BooleanMessage(((BooleanMessage) message).getMessage());
+        return new BooleanMessage(((BooleanMessage) message).getValue());
     }
 
-    public boolean getMessage() {
-        return message;
+    public boolean getValue() {
+        return value;
     }
+
+    public void setValue(boolean value) {this.value = value;}
 }

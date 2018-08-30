@@ -10,9 +10,9 @@ import java.util.LinkedList;
 public class StringMessage implements  Message{
 
     private String value;
-    private static ArrayList<String> arrayOfStrings = new ArrayList<>();
-    private static ArrayList<String> arrayOfUniqueString = new ArrayList<>();
-    private static ArrayList<Integer> amountOfString = new ArrayList<>();
+    public static ArrayList<String> arrayOfStrings = new ArrayList<>();
+    public static ArrayList<String> arrayOfUniqueString = new ArrayList<>();
+    public static ArrayList<Integer> amountOfString = new ArrayList<>();
     private String result = "";
 
     private static final String STRING = "string: ";
