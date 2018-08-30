@@ -1,5 +1,6 @@
 package exceptions;
 
+import java.io.Closeable;
 import java.io.IOException;
 
 public class ExceptionsDemo {
@@ -21,6 +22,17 @@ class LoggerFacade {
 
 class LoggerController {
     public void log(String message) throws LogOperationException {
+
+        try (Saver saver = new ConsoleSaver()) {
+            saver.save("");
+        } catch (SaveException | RuntimeException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+
         //region t-c
         Saver saver = null;
         LogOperationException logOperationException = null;
@@ -58,9 +70,8 @@ class LoggerController {
     }
 }
 
-interface Saver {
+interface Saver extends AutoCloseable  {
     void save(String message) throws SaveException;
-    void close() throws Exception;
 }
 
 class ConsoleSaver implements Saver {
@@ -73,6 +84,11 @@ class ConsoleSaver implements Saver {
         }
         //IO ops
         throw new SaveException(new IOException("ini.sys"));
+    }
+
+    @Override
+    public void close() throws Exception {
+
     }
 }
 
