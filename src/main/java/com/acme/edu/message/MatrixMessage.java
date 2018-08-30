@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import com.acme.edu.DecorateException;
+
 public class MatrixMessage implements Message {
     private final String PREFIX = "primitives matrix";
     private final String SEPARATOR = ": ";
@@ -18,15 +20,19 @@ public class MatrixMessage implements Message {
     }
 
     @Override
-    public Message decorate() {
+    public Message decorate() throws DecorateException {
         int[][] array = accumulatedMessage;
         StringBuilder array2DAsString = new StringBuilder();
-        array2DAsString.append("{").append(System.lineSeparator());
-        for (int currentIndex = 0; currentIndex < array.length; ++currentIndex) {
-            array2DAsString.append(decorate1DArray(array[currentIndex])).append(System.lineSeparator());
+        try {
+            array2DAsString.append("{").append(System.lineSeparator());
+            for (int currentIndex = 0; currentIndex < array.length; ++currentIndex) {
+                array2DAsString.append(decorate1DArray(array[currentIndex])).append(System.lineSeparator());
+            }
+            array2DAsString.append("}").append(System.lineSeparator());
+            decoratedMessage = PREFIX + SEPARATOR + array2DAsString.toString();
+        } catch (Exception e) {
+            throw new DecorateException(e);
         }
-        array2DAsString.append("}").append(System.lineSeparator());
-        decoratedMessage = PREFIX + SEPARATOR + array2DAsString.toString();
         return this;
     }
 

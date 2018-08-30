@@ -1,5 +1,8 @@
 package com.acme.edu.message;
 
+import com.acme.edu.AccumulateException;
+import com.acme.edu.DecorateException;
+
 public class StringMessage implements Message {
     private final String PREFIX = "string";
     private final String SEPARATOR = ": ";
@@ -16,24 +19,31 @@ public class StringMessage implements Message {
     }
 
     @Override
-    public Message accumulate(Message message) {
-        if (((StringMessage)message).rawMessage.equals(rawMessage)) {
-            counter ++;
-        } else {
-            counter = 1;
-            rawMessage = ((StringMessage)message).rawMessage;
+    public Message accumulate(Message message) throws AccumulateException {
+        try {
+            if (((StringMessage)message).rawMessage.equals(rawMessage)) {
+                counter ++;
+            } else {
+                counter = 1;
+                rawMessage = ((StringMessage)message).rawMessage;
+            }
+        } catch (Exception e) {
+            throw new AccumulateException(e);
         }
         return this;
     }
 
     @Override
-    public Message decorate() {
-        if (counter > 1) {
-            this.decoratedMessage = PREFIX + SEPARATOR + String.valueOf(rawMessage) + " (x" + counter + ")" ;
-        } else {
-            this.decoratedMessage = PREFIX + SEPARATOR + String.valueOf(rawMessage);
+    public Message decorate() throws DecorateException {
+        try{
+            if (counter > 1) {
+                this.decoratedMessage = PREFIX + SEPARATOR + String.valueOf(rawMessage) + " (x" + counter + ")" ;
+            } else {
+                this.decoratedMessage = PREFIX + SEPARATOR + String.valueOf(rawMessage);
+            }
+        } catch (Exception e) {
+            throw new DecorateException(e);
         }
-
         return this;
     }
 

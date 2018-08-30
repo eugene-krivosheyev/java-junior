@@ -61,6 +61,41 @@
           <targetTests>
             <param>com.acme.edu*</param>
           </targetTests>
+          <outputFormats>
+            <outputFormat>XML</outputFormat>
+            <outputFormat>HTML</outputFormat>
+          </outputFormats>
+          <reportsDirectory>
+            target/pit-reports
+          </reportsDirectory>
+          <timestampedReports>false</timestampedReports>
+        </configuration>
+        <executions>
+          <execution>
+            <id>mutation-coverage</id>
+            <goals>
+              <goal>mutationCoverage</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>mutation-report</id>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <version>1.2.0</version>
+        <configuration>
+          <targetClasses>
+            <param>com.acme.edu*</param>
+          </targetClasses>
+          <targetTests>
+            <param>com.acme.edu*</param>
+          </targetTests>
         </configuration>
         <executions>
           <execution>

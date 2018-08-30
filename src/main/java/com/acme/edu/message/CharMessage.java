@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import com.acme.edu.DecorateException;
+
 public class CharMessage implements Message {
     private final String PREFIX = "char";
     private final String SEPARATOR = ": ";
@@ -18,8 +20,12 @@ public class CharMessage implements Message {
     }
 
     @Override
-    public Message decorate() {
-        this.decoratedMessage = PREFIX + SEPARATOR + String.valueOf(rawMessage);
+    public Message decorate() throws DecorateException {
+        try {
+            this.decoratedMessage = PREFIX + SEPARATOR + String.valueOf(rawMessage);
+        } catch (Exception e) {
+            throw new DecorateException(e);
+        }
         return this;
     }
 

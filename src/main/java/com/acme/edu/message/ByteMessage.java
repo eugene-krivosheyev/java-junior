@@ -1,5 +1,8 @@
 package com.acme.edu.message;
 
+import com.acme.edu.AccumulateException;
+import com.acme.edu.DecorateException;
+
 public class ByteMessage implements Message {
     private final String PREFIX = "primitive";
     private final String SEPARATOR = ": ";
@@ -12,14 +15,22 @@ public class ByteMessage implements Message {
     }
 
     @Override
-    public Message accumulate(Message message) {
-        accumulatedMessage += ((ByteMessage)message).accumulatedMessage;
+    public Message accumulate(Message message) throws AccumulateException {
+        try {
+            accumulatedMessage += ((ByteMessage) message).accumulatedMessage;
+        } catch (Exception e) {
+            throw new AccumulateException(e);
+        }
         return this;
     }
 
     @Override
-    public Message decorate() {
-        this.decoratedMessage = PREFIX + SEPARATOR + String.valueOf(accumulatedMessage);
+    public Message decorate() throws DecorateException {
+        try {
+            this.decoratedMessage = PREFIX + SEPARATOR + String.valueOf(accumulatedMessage);
+        } catch (Exception e) {
+            throw new DecorateException(e);
+        }
         return this;
     }
 

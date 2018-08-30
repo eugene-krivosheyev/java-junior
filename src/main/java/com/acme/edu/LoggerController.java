@@ -8,22 +8,52 @@ public class LoggerController {
 
     public void log(Message message) {
         if (currentMessage == null) {
-            this.saver.save(message.decorate());
-            this.currentMessage = message;
-            return;
+            try {
+                Message decoratedMessage = message.decorate();
+                this.saver.save(decoratedMessage);
+                this.currentMessage = message;
+                return;
+            } catch (DecorateException e) {
+                System.out.println(e.getMessage());
+            } catch (SaveException e) {
+                System.out.println(e.getMessage());
+            }
+            if (currentMessage.isInstanceOf(message)) {
+                try {
+                    this.currentMessage = currentMessage.accumulate(message);
+                } catch (AccumulateException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else {
+                try {
+                    Message decoratedMessage = currentMessage.decorate();
+                    saver.save(decoratedMessage);
+                    this.currentMessage = message;
+                } catch (DecorateException e) {
+                    System.out.println(e.getMessage());
+                } catch (SaveException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
         }
-        if (currentMessage.isInstanceOf(message)) {
-            this.currentMessage = currentMessage.accumulate(message);
-        } else {
-            saver.save(currentMessage.decorate());
-            this.currentMessage = message;
+        try {
+            saver.save(message.decorate());
+        } catch (DecorateException e) {
+            System.out.println(e.getMessage());
+        } catch (SaveException e) {
+            System.out.println(e.getMessage());
         }
-        saver.save(message.decorate());
-    }
+}
 
-    public void flush() {
-        this.saver.save(currentMessage.decorate());
-        currentMessage = null;
+    public void flush() throws FlushException {
+        try {
+            this.saver.save(currentMessage.decorate());
+            currentMessage = null;
+        } catch (NullPointerException e) {
+            throw new FlushException(e);
+        } catch (Exception e) {
+            throw new FlushException(e);
+        }
     }
 
     public void setSaver(Saver saver) {

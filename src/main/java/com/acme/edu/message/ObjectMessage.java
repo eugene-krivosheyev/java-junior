@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import com.acme.edu.DecorateException;
+
 public class ObjectMessage implements Message {
     private final String PREFIX = "reference";
     private final String SEPARATOR = ": ";
@@ -18,8 +20,12 @@ public class ObjectMessage implements Message {
     }
 
     @Override
-    public Message decorate() {
-        this.decoratedMessage = PREFIX + SEPARATOR + rawMessage;
+    public Message decorate() throws DecorateException {
+        try {
+            this.decoratedMessage = PREFIX + SEPARATOR + rawMessage;
+        } catch (Exception e) {
+            throw new DecorateException();
+        }
         return this;
     }
 
