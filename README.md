@@ -449,6 +449,8 @@ $ git push
 - Permutation coverage ≥ 50%
 - Introduced checked exceptions for errors and alternate scenarios
 
+---
+
 # System library (6/2)
 - System
 - Math
