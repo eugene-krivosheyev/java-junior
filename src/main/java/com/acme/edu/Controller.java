@@ -17,7 +17,7 @@ public class Controller {
         return currentMessage;
     }
 
-    public void log(Message message) {
+    public void log(Message message) throws LogException {
         if (message.isSameType(currentMessage)) {
             currentMessage = message.accumulate(currentMessage);
         } else {
@@ -28,10 +28,11 @@ public class Controller {
         }
     }
 
-    public void flush() {
-        if (currentMessage != null) {
-            saver.save(currentMessage.decorate());
-            currentMessage = null;
+    public void flush() throws LogException {
+        if (currentMessage == null) {
+            throw new LogException("There is nothing to flush", 1002);
         }
+        saver.save(currentMessage.decorate());
+        currentMessage = null;
     }
 }

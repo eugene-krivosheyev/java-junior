@@ -38,40 +38,80 @@ public class Logger {
         Logger.flush();
     }
 
-    public static void log(int message) {
-        controller.log(new IntMessage(message, new IntDecorator()));
+    public static int log(int message) {
+        try {
+            controller.log(new IntMessage(message, new IntDecorator()));
+        } catch (LogException e) {
+            return e.getCode();
+        }
+        return 0;
     }
 
-    public static void log(byte message) {
-        controller.log(new ByteMessage(message, new ByteDecorator()));
+    public static int log(byte message) {
+        try {
+            controller.log(new ByteMessage(message, new ByteDecorator()));
+        } catch (LogException e) {
+            return e.getCode();
+        }
+        return 0;
     }
 
-    public static void log(boolean message) {
-        controller.log(new BooleanMessage(message, new BooleanDecorator2()));
+    public static int log(boolean message) {
+        try {
+            controller.log(new BooleanMessage(message, new BooleanDecorator2()));
+        } catch (LogException e) {
+            return e.getCode();
+        }
+        return 0;
     }
 
-    public static void log(char message) {
-        controller.log(new CharMessage(message, new CharDecorator()));
+    public static int log(char message) {
+        try {
+            controller.log(new CharMessage(message, new CharDecorator()));
+        } catch (LogException e) {
+            return e.getCode();
+        }
+        return 0;
     }
 
-    public static void log(String message) {
-        controller.log(new StringMessage(message, new StringDecorator()));
+    public static int log(String message) {
+        try {
+            controller.log(new StringMessage(message, new StringDecorator()));
+        } catch (LogException e) {
+            return e.getCode();
+        }
+        return 0;
     }
 
-    public static void log(Object message) {
-        controller.log(new ObjectMessage(message, new ObjectDecorator()));
+    public static int log(Object message) {
+        try {
+            controller.log(new ObjectMessage(message, new ObjectDecorator()));
+        } catch (LogException e) {
+            return e.getCode();
+        }
+        return 0;
     }
 
-    public static void log(int[] message) {
-        controller.log(new ArrayMessage(message, new ArrayDecorator()));
+    public static int log(int[] message) {
+        try {
+            controller.log(new ArrayMessage(message, new ArrayDecorator()));
+        } catch (LogException e) {
+            return e.getCode();
+        }
+        return 0;
     }
 /*
     public static void log(int[][] message) {
         controller.log(new MatrixMessage(message));
     }
 */
-    public static void flush() {
-        controller.flush();
+    public static int flush() {
+        try {
+            controller.flush();
+        } catch (LogException e) {
+            return e.getCode();
+        }
+        return 0;
     }
 
 }

@@ -4,9 +4,9 @@ import java.io.IOException;
 
 public class ParameterCheckingSaver implements Saver {
     @Override
-    public void save(String decoratedString) {
+    public void save(String decoratedString) throws LogException {
         if (decoratedString == null) {
-            System.out.println("It is null!!!!");
+            throw new LogException("try to print null string", 1001);
         };
     }
 }
