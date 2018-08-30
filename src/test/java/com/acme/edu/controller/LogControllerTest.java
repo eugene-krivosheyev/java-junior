@@ -1,5 +1,6 @@
 package com.acme.edu.controller;
 
+import com.acme.edu.loggerexceptions.SaverExceptions;
 import com.acme.edu.messagelog.IntMessage;
 import com.acme.edu.messagelog.LoggerDecorator;
 import com.acme.edu.messagelog.Message;
@@ -52,7 +53,7 @@ public class LogControllerTest {
     }
 
     @Test
-    public void shouldNotSaveWithoutNewMessages() {
+    public void shouldNotSaveWithoutNewMessages() throws SaverExceptions {
         String stubStringToFlush = "str";
 
         logController.flush();

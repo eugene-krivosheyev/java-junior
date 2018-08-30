@@ -1,6 +1,8 @@
 package com.acme.edu.iteration04;
 
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.loggerexceptions.MessageException;
+import com.acme.edu.loggerexceptions.SaverExceptions;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 import com.acme.edu.saver.LoggerSaver;
 import org.junit.After;
@@ -24,8 +26,8 @@ public class LoggerSaverTest implements SysoutCaptureAndAssertionAbility {
         resetOut();
     }
 
-    @Test
-    public void checkNullMessageEmptyOutputTest() {
+    @Test (expected = MessageException.class)
+    public void checkNullMessageEmptyOutputTest() throws SaverExceptions {
         LoggerSaver loggerSaver = new ConsoleLoggerSaver();
         loggerSaver.save(null);
         assertSysoutEquals("");

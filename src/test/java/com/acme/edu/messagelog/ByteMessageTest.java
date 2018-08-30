@@ -18,7 +18,6 @@ public class ByteMessageTest {
     @Test
     public void shouldReturnFalseWhenCallCanBeAccumulatedWithOtherMessageType() {
         ByteMessage dummyByteMessage = mock(ByteMessage.class);
-
         assertFalse(byteMessage.canBeAccumulated(dummyByteMessage));
     }
 

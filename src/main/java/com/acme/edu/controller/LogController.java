@@ -1,9 +1,9 @@
 package com.acme.edu.controller;
 
+import com.acme.edu.loggerexceptions.SaverExceptions;
 import com.acme.edu.messagelog.BlankMessage;
 import com.acme.edu.messagelog.LoggerDecorator;
 import com.acme.edu.messagelog.Message;
-import com.acme.edu.saver.ConsoleLoggerSaver;
 import com.acme.edu.saver.Saver;
 
 public class LogController {
@@ -16,18 +16,28 @@ public class LogController {
         this.decorator = decorator;
     }
 
-    public void log(Message message) {
+    public int log(Message message) {
         if (previousMessage.canBeAccumulated(message)) {
             previousMessage = previousMessage.accumulate(message);
         } else {
-            flush();
-            previousMessage = message;
-        }
+                int isFlushSuccess = flush();
+                if (isFlushSuccess == 0){
+                    previousMessage = message;
+                }
+                return isFlushSuccess;
+            }
+        return 0;
     }
 
-    public void flush() {
-        if (previousMessage instanceof BlankMessage) return;
-        saver.save(previousMessage.getFormattedMessage(decorator));
+    public int flush() {
+        if (previousMessage instanceof BlankMessage) return 0;
+        try {
+            saver.save(previousMessage.getFormattedMessage(decorator));
+        } catch (SaverExceptions saverExceptions) {
+            saverExceptions.printStackTrace();
+            return saverExceptions.getCode();
+        }
         previousMessage = new BlankMessage();
+        return 0;
     }
 }

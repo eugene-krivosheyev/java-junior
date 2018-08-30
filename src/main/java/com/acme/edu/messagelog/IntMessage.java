@@ -30,8 +30,16 @@ public class IntMessage extends Message {
     public boolean canBeAccumulated(Message message) {
         return super.canBeAccumulated(message) && !isOverflow(((IntMessage) message).value);
     }
+/*
+    private void isOverflow(int term) throws OverflowException {
+        if ((term > 0 && value > Integer.MAX_VALUE - term) ||
+                (term < 0 && value < Integer.MIN_VALUE - term)) {
+            throw new OverflowException("Overflow int type when tried to sum " + value + " with " + value);
+        };
+    }
+    */
 
-    private boolean isOverflow(int term){
+    private boolean isOverflow(int term) {
         return (term > 0 && value > Integer.MAX_VALUE - term) ||
                 (term < 0 && value < Integer.MIN_VALUE - term);
     }

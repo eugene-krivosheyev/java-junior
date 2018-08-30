@@ -1,6 +1,8 @@
 package com.acme.edu.saver;
 
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.loggerexceptions.MessageException;
+import com.acme.edu.loggerexceptions.SaverExceptions;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,8 +24,8 @@ public class ConsoleLoggerSaverTest implements SysoutCaptureAndAssertionAbility 
         resetOut();
     }
 
-    @Test
-    public void shouldNotSaveWhenMessageIsNull() {
+    @Test (expected = MessageException.class)
+    public void shouldNotSaveWhenMessageIsNull() throws SaverExceptions {
         String dummyMessage = null;
 
         loggerSaver.save(dummyMessage);
@@ -32,7 +34,7 @@ public class ConsoleLoggerSaverTest implements SysoutCaptureAndAssertionAbility 
     }
 
     @Test
-    public void shouldPrintToSysoutWhenMessageIsNotNull() {
+    public void shouldPrintToSysoutWhenMessageIsNotNull() throws SaverExceptions {
         String stubMessage = "message";
 
         loggerSaver.save(stubMessage);
