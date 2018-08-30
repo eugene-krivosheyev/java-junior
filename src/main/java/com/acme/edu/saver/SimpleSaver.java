@@ -5,7 +5,7 @@ package com.acme.edu.saver;
  */
 public class SimpleSaver extends Saver {
 
-    public  void save(String decoratedMessage) {
+    public  void save(String decoratedMessage) throws SaveException {
         if (!super.checkIsNull(decoratedMessage)) {
             System.out.println(decoratedMessage);
         }

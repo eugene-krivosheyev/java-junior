@@ -1,6 +1,7 @@
 package com.acme.edu.controller;
 
 import com.acme.edu.message.Message;
+import com.acme.edu.saver.SaveException;
 import com.acme.edu.saver.SimpleSaver;
 
 import static java.util.Objects.isNull;
@@ -13,25 +14,47 @@ public class Controller {
     private Message currentMessage;
     private SimpleSaver saver = new SimpleSaver();
 
-    public void log(Message message){
+    public int log(Message message) throws LogOperationException {
+
+        LogOperationException exception = null;
 
         if (isNull(currentMessage)){
             currentMessage = message;
-            return;
+            return 0;
         }
 
         if (currentMessage.isSameTypeOf(message)){
             this.currentMessage = currentMessage.accumulate(message);
+            return 0;
         }
         else{
             String decoratedMessage = currentMessage.getDecoratedMessage();
+            try {
             saver.save(decoratedMessage);
-            this.currentMessage = message;
+            }
+            catch (SaveException e){
+                e.printStackTrace();
+                exception = new LogOperationException("Your output is null", e, 228);
+                throw exception;
+            }
+            finally {
+                if (isNull(exception)){
+                    this.currentMessage = message;
+                    return 0;
+                } else {
+                    return exception.getCode();
+                }
+
+            }
+
         }
+
     }
 
     public void flush() {
-        System.out.println(currentMessage.getDecoratedMessage());
+        if (!isNull(currentMessage)) {
+            System.out.println(currentMessage.getDecoratedMessage());
+        }
         currentMessage = null;
     }
 

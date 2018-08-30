@@ -4,6 +4,7 @@ import com.acme.edu.Decorator.IntegerDecorator;
 import com.acme.edu.Decorator.PrimitiveDecorator;
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.controller.LogOperationException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -28,7 +29,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Ignore
-    public void shouldLogInteger() throws IOException {
+    public void shouldLogInteger() throws IOException, LogOperationException {
         //region when
         Logger.log(1);
         Logger.flush();
@@ -45,7 +46,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogAnotherFormatInteger() throws IOException {
+    public void shouldLogAnotherFormatInteger() throws IOException, LogOperationException {
         //region when
         Logger.log(1,  new IntegerDecorator());
         Logger.flush();
@@ -63,7 +64,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Ignore
     @Test
-    public void shouldLogByte() throws IOException {
+    public void shouldLogByte() throws IOException, LogOperationException {
         //region when
         Logger.log((byte)1);
         Logger.flush();
@@ -84,7 +85,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Ignore
     @Test
-    public void shouldLogChar() throws IOException {
+    public void shouldLogChar() throws IOException, LogOperationException {
         //region when
         Logger.log('a');
         Logger.flush();
@@ -101,7 +102,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Ignore
     @Test
-    public void shouldLogString() throws IOException {
+    public void shouldLogString() throws IOException, LogOperationException {
         //region when
         Logger.log("test string 1");
         Logger.flush();
@@ -118,7 +119,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Ignore
     @Test
-    public void shouldLogBoolean() throws IOException {
+    public void shouldLogBoolean() throws IOException, LogOperationException {
         //region when
         Logger.log(true);
         Logger.flush();
@@ -135,7 +136,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Ignore
     @Test
-    public void shouldLogReference() throws IOException {
+    public void shouldLogReference() throws IOException, LogOperationException {
         //region when
         Logger.log(new Object());
         Logger.flush();
