@@ -23,6 +23,7 @@ class LoggerController {
     private Saver saver = new ConsoleSaver();
     public void log(String message) throws LogOperationException {
         //region t-c
+        LogOperationException logOperationException = null;
         try {
             saver.save(message);
         } catch (IllegalArgumentException e) {
@@ -32,11 +33,16 @@ class LoggerController {
             throw new LogOperationException("!!!", e);
         } catch (SaveException e) {
             e.printStackTrace();
-            throw new LogOperationException(e);
+            logOperationException = new LogOperationException(e);
+            throw logOperationException;
         } catch (Exception e) {
 
         } finally {
-
+            RuntimeException runtimeException = new RuntimeException();
+            if (logOperationException != null) {
+                runtimeException.addSuppressed(logOperationException);
+            }
+            throw runtimeException;
         }
         //endregion
         //
