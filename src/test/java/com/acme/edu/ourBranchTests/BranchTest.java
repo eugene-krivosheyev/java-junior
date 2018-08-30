@@ -125,7 +125,7 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
     }
 
 
-    @Test (expected = LogException.class) 
+    @Test (expected = LogException.class)
     public void controllerFlushFunctionWhenNullMessageTest() throws IOException, LogException {
         Saver mock = mock(ParameterCheckingSaver.class);
         Controller controller = new Controller(mock);
