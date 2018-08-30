@@ -20,11 +20,12 @@ class LoggerFacade {
 }
 
 class LoggerController {
-    private Saver saver = new ConsoleSaver();
     public void log(String message) throws LogOperationException {
         //region t-c
+        Saver saver = null;
         LogOperationException logOperationException = null;
         try {
+            saver = new ConsoleSaver();
             saver.save(message);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -38,6 +39,14 @@ class LoggerController {
         } catch (Exception e) {
 
         } finally {
+            if (saver != null) {
+                try {
+                    saver.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
             RuntimeException runtimeException = new RuntimeException();
             if (logOperationException != null) {
                 runtimeException.addSuppressed(logOperationException);
@@ -51,6 +60,7 @@ class LoggerController {
 
 interface Saver {
     void save(String message) throws SaveException;
+    void close() throws Exception;
 }
 
 class ConsoleSaver implements Saver {
