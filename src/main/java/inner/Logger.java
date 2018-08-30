@@ -16,11 +16,12 @@ class LoggerApp {
         String mesasge = "test message";
         int severity = new Random().nextInt();
 
+        /*
         new Logger().log(
             () -> severity < 5,
             () -> System.out.println(mesasge)
         );
-
+        */
 
         Collection<Integer> list = Arrays.asList(1,4,2,3);
         Stream<String> sorted = list.parallelStream()
