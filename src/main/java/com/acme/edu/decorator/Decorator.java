@@ -1,10 +1,13 @@
 package com.acme.edu.decorator;
 
-import com.acme.edu.message.MessageType;
 import com.acme.edu.message.Message;
 
-import java.util.Map;
-
+/**
+ * Interface for decorating message into string
+ */
 public interface Decorator {
+    /**
+     * Convert message into decorated string
+     */
     String decorate(Message message);
 }

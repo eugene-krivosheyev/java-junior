@@ -4,6 +4,9 @@ import com.acme.edu.decorator.Decorator;
 
 import java.util.Map;
 
+/**
+ * Class representing pseudo-message which is sent to logger to trigger flushing
+ */
 public class FlushMessage extends Message {
     @Override
     public Message accumulate(Message message) {

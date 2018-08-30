@@ -51,7 +51,12 @@ public class Controller {
         return 0;
     }
 
-    public void update(MessageType type, Decorator newDecorator) {
-        decoratorMap.put(type, newDecorator);
+    public int update(MessageType type, Decorator newDecorator) {
+        if(newDecorator != null) {
+            decoratorMap.put(type, newDecorator);
+        } else {
+            return 1;
+        }
+        return 0;
     }
 }
