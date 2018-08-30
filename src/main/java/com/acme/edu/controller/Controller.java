@@ -6,6 +6,7 @@ import com.acme.edu.message.Message;
 import com.acme.edu.message.MessageType;
 import com.acme.edu.saver.DefaultSaver;
 import com.acme.edu.saver.Saver;
+import com.acme.edu.saver.SavingException;
 
 import java.util.EnumMap;
 
@@ -32,13 +33,22 @@ public class Controller {
         defaultSaver = saver;
     }
 
-    public void log(Message message) {
+    public int log(Message message) {
         if (prevMessage.isAbleToAccumulate(message)) {
             prevMessage = prevMessage.accumulate(message);
         } else {
-            defaultSaver.save(prevMessage.decorate(decoratorMap));
-            prevMessage = message;
+            try {
+                defaultSaver.save(prevMessage.decorate(decoratorMap));
+                prevMessage = message;
+            } catch (SavingException se) {
+                if (se.getExceptionCode() != 1) {
+                    return se.getExceptionCode();
+                } else {
+                    prevMessage = message;
+                }
+            }
         }
+        return 0;
     }
 
     public void update(MessageType type, Decorator newDecorator) {
