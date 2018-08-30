@@ -7,10 +7,12 @@ import java.util.Objects;
 
 public class StringMessage extends Message {
     private String message;
+    private Saver saver;
     private int amount = 1;
     public StringMessage (String message, Saver saver, Decorator decorator) {
         super(saver, decorator);
         this.message = message;
+        this.saver = saver;
     }
     @Override
     public Message log(Message message) {
@@ -31,6 +33,11 @@ public class StringMessage extends Message {
             this.amount++;
         } else {
             this.flush();
+            try {
+                this.saver.save(fetch());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             this.message = value;
             this.amount = 1;
         }

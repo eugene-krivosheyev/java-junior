@@ -1,8 +1,15 @@
-/*package com.acme.edu.iteration02;
+package com.acme.edu.iteration02;
 
 //import com.acme.edu.message.Logger;
+import com.acme.edu.LoggerController;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.Logger;
+import com.acme.edu.decorator.Decorator;
+import com.acme.edu.decorator.PrefixDecorator;
+import com.acme.edu.message.Message;
+import com.acme.edu.message.StartMessage;
+import com.acme.edu.saver.ConsoleSaver;
+import com.acme.edu.saver.Saver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,13 +24,35 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         captureSysout();
     }
 
+    @Before
+    public void initializeTest () {
+        Saver saver = new ConsoleSaver();
+        Decorator decorator = new PrefixDecorator();
+
+        Logger.setSaver(saver);
+        Logger.setDecorator(decorator);
+
+        Message message = new StartMessage(saver, decorator);
+
+//        () -> new Saver()
+
+
+        LoggerController loggerController = new LoggerController(
+                message,
+                messageToPrint -> System.out.print(messageToPrint),
+                // System.out::print,
+                decorator
+        );
+        Logger.setLoggerController(loggerController);
+    }
+
     @After
     public void tearDown() {
         resetOut();
     }
     //endregion
 
-
+/*
 
    // TODO: implement Logger solution to match specification as tests
 
@@ -92,8 +121,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //endregion
     }
+
 */
-/*
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
         //region when
@@ -122,4 +151,4 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
 }
-*/
+
