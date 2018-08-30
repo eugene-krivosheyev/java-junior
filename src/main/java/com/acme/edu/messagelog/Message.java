@@ -1,9 +1,11 @@
 package com.acme.edu.messagelog;
 
+import com.acme.edu.loggerexceptions.AccumulateException;
+
 public abstract class Message {
     protected String type;
 
-    public Message accumulate(Message message){
+    public Message accumulate(Message message) throws AccumulateException {
         return message;
     }
 

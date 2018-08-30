@@ -1,5 +1,6 @@
 package com.acme.edu.controller;
 
+import com.acme.edu.loggerexceptions.AccumulateException;
 import com.acme.edu.loggerexceptions.SaverExceptions;
 import com.acme.edu.messagelog.BlankMessage;
 import com.acme.edu.messagelog.LoggerDecorator;
@@ -18,7 +19,12 @@ public class LogController {
 
     public int log(Message message) {
         if (previousMessage.canBeAccumulated(message)) {
-            previousMessage = previousMessage.accumulate(message);
+            try {
+                previousMessage = previousMessage.accumulate(message);
+            } catch (AccumulateException e) {
+                e.printStackTrace();
+                return e.getCode();
+            }
         } else {
                 int isFlushSuccess = flush();
                 if (isFlushSuccess == 0){

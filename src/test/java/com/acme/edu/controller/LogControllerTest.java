@@ -1,5 +1,6 @@
 package com.acme.edu.controller;
 
+import com.acme.edu.loggerexceptions.AccumulateException;
 import com.acme.edu.loggerexceptions.SaverExceptions;
 import com.acme.edu.messagelog.IntMessage;
 import com.acme.edu.messagelog.LoggerDecorator;
@@ -29,7 +30,7 @@ public class LogControllerTest {
     }
 
     @Test
-    public void shouldAccumulateWhenGivenTwoMessagesOfTheSameType() {
+    public void shouldAccumulateWhenGivenTwoMessagesOfTheSameType() throws AccumulateException {
         Message mockMessage1 = mock(Message.class);
         Message mockMessage2 = mock(Message.class);
         when(mockMessage1.canBeAccumulated(mockMessage2)).thenReturn(true);
@@ -41,7 +42,7 @@ public class LogControllerTest {
     }
 
     @Test
-    public void shouldNotAccumulateWhenGivenTwoMessagesOfDifferentTypes() {
+    public void shouldNotAccumulateWhenGivenTwoMessagesOfDifferentTypes() throws AccumulateException {
         Message mockMessage1 = mock(Message.class);
         Message mockMessage2 = mock(Message.class);
         when(mockMessage1.canBeAccumulated(mockMessage2)).thenReturn(false);

@@ -54,6 +54,7 @@
                 </targetTests>
                 <outputFormats>
                     <outputFormat>XML</outputFormat>
+                    <outputFormat>HTML</outputFormat>
                 </outputFormats>
                 <reportsDirectory>
                     target/pit-reports
@@ -61,12 +62,12 @@
                 <timestampedReports>false</timestampedReports>
             </configuration>
             <executions>
-                <!--<execution>-->
-                    <!--<id>mutation-coverage</id>-->
-                    <!--<goals>-->
-                        <!--<goal>mutationCoverage</goal>-->
-                    <!--</goals>-->
-                <!--</execution>-->
+                <execution>
+                    <id>mutation-coverage</id>
+                    <goals>
+                        <goal>mutationCoverage</goal>
+                    </goals>
+                </execution>
                 <execution>
                     <id>mutation-report</id>
                     <goals>
