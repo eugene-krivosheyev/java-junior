@@ -3,6 +3,7 @@ package inner;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Random;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -13,14 +14,13 @@ import static java.util.stream.Collectors.toList;
 class LoggerApp {
     public static void main(String[] args) {
         String mesasge = "test message";
-        int severity = 6;
+        int severity = new Random().nextInt();
 
-        /*
         new Logger().log(
             () -> severity < 5,
             () -> System.out.println(mesasge)
         );
-        */
+
 
         Collection<Integer> list = Arrays.asList(1,4,2,3);
         Stream<String> sorted = list.parallelStream()

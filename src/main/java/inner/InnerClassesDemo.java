@@ -17,7 +17,7 @@ public class InnerClassesDemo {
             }
         };
         */
-        return  () -> {
+        return () -> {
             System.out.println(classState);
             System.out.println(InnerClassesDemo.this.instanceState);
             System.out.println(localVar);
