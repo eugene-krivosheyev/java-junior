@@ -449,18 +449,6 @@ $ git push
 - Permutation coverage ≥ 50%
 - Introduced checked exceptions for errors and alternate scenarios
 
----
-
-# Generics (2/0.5)
-- Generics as design style
-- Type safety
-- Generic classes
-- Generic methods
-
-## Demo: Type safety for sorting with anonymous implementation of comparator
-
----
-
 # System library (6/2)
 - System
 - Math
@@ -469,6 +457,8 @@ $ git push
 - StringBuffer, StringBuilder
 - Wrapper classes
 - Autoboxing
+
+---
 
 ## Course Project Iteration 12: Logger Library Maturity Grown
 - NFR: As a developer I want higher collection performance for messages through non-default eq and hc
@@ -522,6 +512,16 @@ assertMessageEquals("3")
 
 ## Then
 - PM and Business Customers accept product with two demo sessions
+
+---
+
+# Generics (2/0.5)
+- Generics as design style
+- Type safety
+- Generic classes
+- Generic methods
+
+## Demo: Type safety for sorting with anonymous implementation of comparator
 
 ---
 
