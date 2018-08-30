@@ -1,7 +1,6 @@
 package com.acme.edu.iteration04;
 
-import com.acme.edu.LoggerController;
-import com.acme.edu.Saver;
+import com.acme.edu.*;
 import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.StringMessage;
 import org.junit.Test;
@@ -11,7 +10,7 @@ import static org.mockito.Mockito.*;
 public class LoggerConrollerTest {
 
     @Test
-    public void shouldInvokeOneTimeSaveMethodWhenGetTheFirstMessage() {
+    public void shouldInvokeOneTimeSaveMethodWhenGetTheFirstMessage() throws SaveException {
         LoggerController loggerController = new LoggerController();
         IntMessage stubIntMessage = mock(IntMessage.class);
         Saver mockSaver = mock(Saver.class);
@@ -23,7 +22,7 @@ public class LoggerConrollerTest {
     }
 
     @Test
-    public void shouldInvokeOneTimeAccumulateWhenGetTwoSameTypedMessagesInARow() {
+    public void shouldInvokeOneTimeAccumulateWhenGetTwoSameTypedMessagesInARow() throws AccumulateException {
         LoggerController loggerController = new LoggerController();
         StringMessage firstMessage = mock(StringMessage.class);
         StringMessage secondMessage = mock(StringMessage.class);
@@ -39,7 +38,7 @@ public class LoggerConrollerTest {
     }
 
     @Test
-    public void shouldInvokeTwoTimesSaveForTheFirstMessageWhenGetTwoDifferentlyTypedMessagesInARow() {
+    public void shouldInvokeTwoTimesSaveForTheFirstMessageWhenGetTwoDifferentlyTypedMessagesInARow() throws DecorateException, SaveException {
         LoggerController loggerController = new LoggerController();
         StringMessage firstStringMessage = mock(StringMessage.class);
         IntMessage secondIntMessage = mock(IntMessage.class);
@@ -57,7 +56,7 @@ public class LoggerConrollerTest {
     }
 
     @Test
-    public void shouldInvokeTwoTimseSaveForMessageWhenFlushIsCalled() {
+    public void shouldInvokeTwoTimseSaveForMessageWhenFlushIsCalled() throws SaveException, DecorateException, FlushException {
         LoggerController loggerController = new LoggerController();
         StringMessage stubStringMessage = mock(StringMessage.class);
 

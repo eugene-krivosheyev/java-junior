@@ -1,5 +1,7 @@
 package com.acme.edu.iteration04;
 
+import com.acme.edu.AccumulateException;
+import com.acme.edu.DecorateException;
 import com.acme.edu.message.StringMessage;
 import org.junit.Test;
 
@@ -25,7 +27,7 @@ public class StringMessageTest {
     }
 
     @Test
-    public void shouldReturnAccumulatedValueWhenAccumulateTwoSameMessages() {
+    public void shouldReturnAccumulatedValueWhenAccumulateTwoSameMessages() throws DecorateException, AccumulateException {
         //region Given
         StringMessage sut = new StringMessage("a");
         StringMessage additionMessage = new StringMessage("a");
@@ -42,7 +44,7 @@ public class StringMessageTest {
     }
 
     @Test
-    public void shouldReturnLastValueWhenAccumulateTwoDifferentMessages() {
+    public void shouldReturnLastValueWhenAccumulateTwoDifferentMessages() throws AccumulateException, DecorateException {
         //region Given
         StringMessage sut = new StringMessage("a");
         StringMessage additionMessage = new StringMessage("b");

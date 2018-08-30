@@ -1,5 +1,6 @@
 package com.acme.edu.iteration04;
 
+import com.acme.edu.DecorateException;
 import com.acme.edu.message.CharMessage;
 import org.junit.Test;
 
@@ -26,7 +27,7 @@ public class CharMessageTest {
     }
 
     @Test
-    public void shouldReturnDecoratedValueWhenDecorateIsCalled() {
+    public void shouldReturnDecoratedValueWhenDecorateIsCalled() throws DecorateException {
         //region Given
         CharMessage sut = new CharMessage('a');
         //endregion

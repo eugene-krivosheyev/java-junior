@@ -1,5 +1,6 @@
 package com.acme.edu.iteration04;
 
+import com.acme.edu.DecorateException;
 import com.acme.edu.message.Array1DMessage;
 import org.junit.Test;
 
@@ -26,7 +27,7 @@ public class Array1DMessageTest {
     }
 
     @Test
-    public void shouldReturnDecoratedValueWhenDecorateIsCalled() {
+    public void shouldReturnDecoratedValueWhenDecorateIsCalled() throws DecorateException {
         //region Given
         Array1DMessage sut = new Array1DMessage(new int[] {12, 13});
         //endregion

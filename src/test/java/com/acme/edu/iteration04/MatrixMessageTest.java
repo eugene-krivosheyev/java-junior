@@ -1,5 +1,6 @@
 package com.acme.edu.iteration04;
 
+import com.acme.edu.DecorateException;
 import com.acme.edu.message.MatrixMessage;
 import org.junit.Test;
 
@@ -26,7 +27,7 @@ public class MatrixMessageTest {
     }
 
     @Test
-    public void shouldReturnDecoratedValueWhenDecorateIsCalled() {
+    public void shouldReturnDecoratedValueWhenDecorateIsCalled() throws DecorateException {
         //region Given
         MatrixMessage sut = new MatrixMessage(new int[][] {{12, 13}});
         //endregion

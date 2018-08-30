@@ -7,43 +7,32 @@ public class LoggerController {
     private Saver saver = new Saver();
 
     public void log(Message message) {
-        if (currentMessage == null) {
-            try {
+        try {
+            if (currentMessage == null) {
                 Message decoratedMessage = message.decorate();
                 this.saver.save(decoratedMessage);
                 this.currentMessage = message;
                 return;
-            } catch (DecorateException e) {
-                System.out.println(e.getMessage());
-            } catch (SaveException e) {
-                System.out.println(e.getMessage());
             }
             if (currentMessage.isInstanceOf(message)) {
-                try {
-                    this.currentMessage = currentMessage.accumulate(message);
-                } catch (AccumulateException e) {
-                    System.out.println(e.getMessage());
-                }
+                this.currentMessage = currentMessage.accumulate(message);
             } else {
-                try {
-                    Message decoratedMessage = currentMessage.decorate();
-                    saver.save(decoratedMessage);
-                    this.currentMessage = message;
-                } catch (DecorateException e) {
-                    System.out.println(e.getMessage());
-                } catch (SaveException e) {
-                    System.out.println(e.getMessage());
-                }
+                Message decoratedMessage = currentMessage.decorate();
+                saver.save(decoratedMessage);
+                this.currentMessage = message;
             }
-        }
-        try {
             saver.save(message.decorate());
         } catch (DecorateException e) {
             System.out.println(e.getMessage());
+        } catch (AccumulateException e) {
+            System.out.println(e.getMessage());
         } catch (SaveException e) {
             System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-}
+
+    }
 
     public void flush() throws FlushException {
         try {

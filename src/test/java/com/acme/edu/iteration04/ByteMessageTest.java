@@ -1,5 +1,7 @@
 package com.acme.edu.iteration04;
 
+import com.acme.edu.AccumulateException;
+import com.acme.edu.DecorateException;
 import com.acme.edu.message.ByteMessage;
 import org.junit.Test;
 
@@ -25,7 +27,7 @@ public class ByteMessageTest {
     }
 
     @Test
-    public void shouldReturnAccumulatedValueWhenAccumulateTwoMessages() {
+    public void shouldReturnAccumulatedValueWhenAccumulateTwoMessages() throws AccumulateException, DecorateException {
         //region Given
         ByteMessage sut = new ByteMessage((byte) 12);
         ByteMessage additionMessage = new ByteMessage((byte) 13);
