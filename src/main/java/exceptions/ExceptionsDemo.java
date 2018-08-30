@@ -1,21 +1,27 @@
 package exceptions;
 
+import java.io.IOException;
+
 public class ExceptionsDemo {
     public static void main(String[] args) {
-        LoggerFacade.log(" ");
+        try {
+            LoggerFacade.log(" ");
+        } catch (LogOperationException e) {
+            e.printStackTrace();
+        }
     }
 }
 
 class LoggerFacade {
     private static LoggerController controller = new LoggerController();
-    public static void log(String message) {
+    public static void log(String message) throws LogOperationException {
         controller.log(message);
     }
 }
 
 class LoggerController {
-    private ConsoleSaver saver = new ConsoleSaver();
-    public void log(String message) {
+    private Saver saver = new ConsoleSaver();
+    public void log(String message) throws LogOperationException {
         //region t-c
         try {
             saver.save(message);
@@ -24,8 +30,11 @@ class LoggerController {
         } catch (RuntimeException e) {
             e.printStackTrace();
             throw new LogOperationException("!!!", e);
-        } catch (Exception e) {
+        } catch (SaveException e) {
             e.printStackTrace();
+            throw new LogOperationException(e);
+        } catch (Exception e) {
+
         } finally {
 
         }
@@ -34,16 +43,24 @@ class LoggerController {
     }
 }
 
-class ConsoleSaver {
-    public void save(String message) {
+interface Saver {
+    void save(String message) throws SaveException;
+}
+
+class ConsoleSaver implements Saver {
+    @Override
+    public void save(String message) throws SaveException {
         if (message == null || "".equals(message)) {
-            throw new IllegalArgumentException("Input message is crap.");
+            throw new SaveException(
+                new IllegalArgumentException("Input message is crap.")
+            );
         }
-        throw new RuntimeException("IO Exception: ini.sys");
+        //IO ops
+        throw new SaveException(new IOException("ini.sys"));
     }
 }
 
-class LogOperationException extends RuntimeException {
+class LogOperationException extends Exception {
     public LogOperationException(String message) {
         super(message);
     }
@@ -54,5 +71,27 @@ class LogOperationException extends RuntimeException {
 
     public LogOperationException(String message, Throwable cause) {
         super(message, cause);
+    }
+}
+
+class SaveException extends Exception {
+    public SaveException() {
+        super();
+    }
+
+    public SaveException(String message) {
+        super(message);
+    }
+
+    public SaveException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public SaveException(Throwable cause) {
+        super(cause);
+    }
+
+    protected SaveException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
     }
 }
