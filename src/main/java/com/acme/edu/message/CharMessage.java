@@ -1,7 +1,7 @@
-package com.acme.edu;
+package com.acme.edu.message;
 
-import com.acme.edu.decorators.CharDecorator;
 import com.acme.edu.decorators.Decorator;
+import com.acme.edu.message.Message;
 
 public class CharMessage implements Message {
     private char value;

@@ -1,7 +1,6 @@
-package com.acme.edu;
+package com.acme.edu.message;
 
 import com.acme.edu.decorators.Decorator;
-import com.acme.edu.decorators.StringDecorator;
 
 public class StringMessage implements Message {
     private String value;

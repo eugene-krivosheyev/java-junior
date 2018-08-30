@@ -1,7 +1,7 @@
-package com.acme.edu;
+package com.acme.edu.message;
 
-import com.acme.edu.decorators.ArrayDecorator;
 import com.acme.edu.decorators.Decorator;
+import com.acme.edu.message.Message;
 
 /**
  * Created by Java_12 on 27.08.2018.

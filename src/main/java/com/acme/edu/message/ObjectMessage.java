@@ -1,17 +1,16 @@
-package com.acme.edu;
+package com.acme.edu.message;
 
 import com.acme.edu.decorators.Decorator;
-import com.acme.edu.decorators.IntDecorator;
+import com.acme.edu.message.Message;
 
-public class IntMessage implements Message{
-    private int value;
+public class ObjectMessage implements Message {
+    private Object value;
     private Decorator decorator;
 
-    public IntMessage(int value, Decorator decorator) {
+    public ObjectMessage(Object value, Decorator decorator) {
         this.value = value;
         this.decorator = decorator;
     }
-
 
     @Override
     public String decorate() {
@@ -20,12 +19,11 @@ public class IntMessage implements Message{
 
     @Override
     public Message accumulate(Message message) {
-        return new IntMessage(this.value + ((IntMessage)message).value, decorator);
+        return null;
     }
 
     @Override
     public boolean isSameType(Message message) {
-        if (message == null) return false;
-        return message instanceof IntMessage;
+        return false;
     }
 }

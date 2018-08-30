@@ -28,6 +28,7 @@ public class Logger {
 */
 
 import com.acme.edu.decorators.*;
+import com.acme.edu.message.*;
 
 public class Logger {
     public static Controller controller = new Controller(System.out::println);

@@ -1,6 +1,5 @@
-package com.acme.edu;
+package com.acme.edu.message;
 
-import com.acme.edu.decorators.ByteDecorator;
 import com.acme.edu.decorators.Decorator;
 
 public class ByteMessage implements Message {

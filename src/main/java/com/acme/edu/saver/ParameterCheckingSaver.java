@@ -1,6 +1,7 @@
-package com.acme.edu;
+package com.acme.edu.saver;
 
-import java.io.IOException;
+import com.acme.edu.LogException;
+import com.acme.edu.saver.Saver;
 
 public class ParameterCheckingSaver implements Saver {
     @Override

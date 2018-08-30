@@ -1,5 +1,8 @@
 package com.acme.edu;
 
+import com.acme.edu.message.Message;
+import com.acme.edu.saver.Saver;
+
 public class Controller {
     private Message currentMessage = null;
     private Saver saver;

@@ -1,8 +1,7 @@
-package com.acme.edu;
+package com.acme.edu.message;
 
-import com.acme.edu.decorators.BooleanDecorator1;
-import com.acme.edu.decorators.BooleanDecorator2;
 import com.acme.edu.decorators.Decorator;
+import com.acme.edu.message.Message;
 
 public class BooleanMessage implements Message {
     private boolean value;
