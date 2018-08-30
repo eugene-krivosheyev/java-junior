@@ -461,26 +461,6 @@ $ git push
 
 ---
 
-# Work Project. Session 1 (8/8)
-
-## Given
-- PM
-- Analyst
-- Product's FRs and NFRs
-- System's internal NFRs
-- CI server
-- Sonar server
-
-## When
-- Teams formed
-- Every team's git repo visible to PM and is identifiable
-- Teams deliver product with two iterations
-
-## Then
-- PM and Business Customers accept product with two demo sessions
-
----
-
 # System library (6/2)
 - System
 - Math
@@ -522,6 +502,26 @@ assertMessageEquals("3")
 - Choose and state collection interfaces
 - Choose and state collection implementations
 - Refactor legacy codebase to collections API
+
+---
+
+# Work Project. Session 1 (8/8)
+
+## Given
+- PM
+- Analyst
+- Product's FRs and NFRs
+- System's internal NFRs
+- CI server
+- Sonar server
+
+## When
+- Teams formed
+- Every team's git repo visible to PM and is identifiable
+- Teams deliver product with two iterations
+
+## Then
+- PM and Business Customers accept product with two demo sessions
 
 ---
 
