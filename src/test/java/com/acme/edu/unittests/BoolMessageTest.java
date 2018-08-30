@@ -14,7 +14,7 @@ import static org.mockito.Mockito.when;
 
 public class BoolMessageTest {
 
-    Decorator stubDecorator = mock(DefaultDecorator.class);
+    private Decorator stubDecorator = mock(DefaultDecorator.class);
 
     @Test
     public void shouldDecorateBoolMessageTrue() {
