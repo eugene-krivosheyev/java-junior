@@ -1,5 +1,6 @@
 package com.acme.edu.message;
 
+import com.acme.edu.loggerexceptions.LoggerDecoratorException;
 import com.acme.edu.message.decorator.Decorator;
 
 public class IntMessage extends Message {
@@ -21,7 +22,7 @@ public class IntMessage extends Message {
     }
 
     @Override
-    public String getDecoratedMessage() {
+    public String getDecoratedMessage() throws LoggerDecoratorException {
         getDecorator().setMessage(Integer.toString(message));
         return getDecorator().getDecoratedMessage();
     }

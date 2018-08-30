@@ -1,7 +1,7 @@
 package com.acme.edu.loggerexceptions;
 
 public class LoggerException extends Exception {
-    private LoggerErrors errorCode = LoggerErrors.OK;
+    private LoggerErrors errorCode = LoggerErrors.UNEXPECTED;
 
     public LoggerException(String message) {
         super(message);
@@ -14,6 +14,14 @@ public class LoggerException extends Exception {
 
     public LoggerException(LoggerErrors errorCode) {
         super();
+        this.errorCode = errorCode;
+    }
+    public LoggerException(LoggerErrors errorCode, Throwable cause) {
+        super(cause);
+        this.errorCode = errorCode;
+    }
+    public LoggerException(String message, LoggerErrors errorCode, Throwable cause) {
+        super(message, cause);
         this.errorCode = errorCode;
     }
 

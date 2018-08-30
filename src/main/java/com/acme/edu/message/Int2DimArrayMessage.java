@@ -1,5 +1,6 @@
 package com.acme.edu.message;
 
+import com.acme.edu.loggerexceptions.LoggerDecoratorException;
 import com.acme.edu.message.decorator.Decorator;
 
 public class Int2DimArrayMessage extends Message {
@@ -19,7 +20,7 @@ public class Int2DimArrayMessage extends Message {
     }
 
     @Override
-    public String getDecoratedMessage() {
+    public String getDecoratedMessage() throws LoggerDecoratorException {
         String[] arrayOfIntsAsString = new String[message.length];
         for (int i = 0; i < message.length; i++) {
             arrayOfIntsAsString[i] = message[i].oneDimArrayAsString();

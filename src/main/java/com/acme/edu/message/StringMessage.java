@@ -1,5 +1,6 @@
 package com.acme.edu.message;
 
+import com.acme.edu.loggerexceptions.LoggerDecoratorException;
 import com.acme.edu.message.decorator.Decorator;
 
 import java.util.Objects;
@@ -33,7 +34,7 @@ public class StringMessage extends Message {
     }
 
     @Override
-    public String getDecoratedMessage() {
+    public String getDecoratedMessage() throws LoggerDecoratorException {
         String quantityString = counter > 1 ? String.format("(x%d)", counter): "";
         String formattedMessage = String.format("%s %s", message, quantityString);
         getDecorator().setMessage(formattedMessage);

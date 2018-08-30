@@ -1,5 +1,6 @@
 package com.acme.edu.unittests;
 
+import com.acme.edu.loggerexceptions.LoggerDecoratorException;
 import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.Message;
 import com.acme.edu.message.StringMessage;
@@ -56,7 +57,7 @@ public class StringMessageTest {
     }
 
     @Test
-    public void getDecoratedMessageIfCounterEqualsOne(){
+    public void getDecoratedMessageIfCounterEqualsOne() throws LoggerDecoratorException {
         when(decorator.getDecoratedMessage()).thenReturn("string: test");
         String resultingDecoratedMessage = sut.getDecoratedMessage();
         assertEquals(1, sut.getCounter());
@@ -64,7 +65,7 @@ public class StringMessageTest {
     }
 
     @Test
-    public void getDecoratedMessageIfCounterIsMoreThanOne(){
+    public void getDecoratedMessageIfCounterIsMoreThanOne() throws LoggerDecoratorException {
         StringMessage dummyMessage = null;
         Message resultAccumulate = sut.accumulate(dummyMessage);
         when(decorator.getDecoratedMessage()).thenReturn("string: test (x2)");

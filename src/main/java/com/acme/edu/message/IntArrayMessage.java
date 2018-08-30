@@ -1,5 +1,6 @@
 package com.acme.edu.message;
 
+import com.acme.edu.loggerexceptions.LoggerDecoratorException;
 import com.acme.edu.message.decorator.Decorator;
 
 public class IntArrayMessage extends Message {
@@ -16,7 +17,7 @@ public class IntArrayMessage extends Message {
     }
 
     @Override
-    public String getDecoratedMessage() {
+    public String getDecoratedMessage() throws LoggerDecoratorException {
         getDecorator().setMessage(oneDimArrayAsString());
         return getDecorator().getDecoratedMessage();
     }

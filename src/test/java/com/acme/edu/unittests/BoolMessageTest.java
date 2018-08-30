@@ -1,5 +1,6 @@
 package com.acme.edu.unittests;
 
+import com.acme.edu.loggerexceptions.LoggerDecoratorException;
 import com.acme.edu.message.BoolMessage;
 import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.decorator.Decorator;
@@ -17,14 +18,14 @@ public class BoolMessageTest {
     private Decorator stubDecorator = mock(DefaultDecorator.class);
 
     @Test
-    public void shouldDecorateBoolMessageTrue() {
+    public void shouldDecorateBoolMessageTrue() throws LoggerDecoratorException {
         when(stubDecorator.getDecoratedMessage()).thenReturn("primitive: true");
         BoolMessage sut = new BoolMessage(true,stubDecorator);
         assertEquals("primitive: true", sut.getDecoratedMessage());
     }
 
     @Test
-    public void shouldDecorateBoolMessageFalse() {
+    public void shouldDecorateBoolMessageFalse() throws LoggerDecoratorException {
         when(stubDecorator.getDecoratedMessage()).thenReturn("primitive: false");
         BoolMessage sut = new BoolMessage(true,stubDecorator);
         assertEquals("primitive: false", sut.getDecoratedMessage());

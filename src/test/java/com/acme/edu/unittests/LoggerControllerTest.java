@@ -2,7 +2,7 @@ package com.acme.edu.unittests;
 
 import com.acme.edu.LoggerController;
 import com.acme.edu.ConsoleLoggerSaver;
-import com.acme.edu.loggerexceptions.LoggerSaverException;
+import com.acme.edu.loggerexceptions.*;
 import com.acme.edu.message.FlushMessage;
 import com.acme.edu.message.Message;
 import com.acme.edu.message.StringMessage;
@@ -17,7 +17,7 @@ public class LoggerControllerTest {
     private LoggerController testLoggerController = new LoggerController(stubConsoleLoggerSaver);
 
     @Test
-    public void shouldNotFailWhenAddFirstMessage() throws LoggerSaverException {
+    public void shouldNotFailWhenAddFirstMessage() throws LoggerException {
         Message stubStringMessage = mock(StringMessage.class);
         when(stubStringMessage.getDecoratedMessage()).thenReturn("str: message");
 
@@ -30,7 +30,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldAccumulateTwoMessagesOfTheStringType() throws LoggerSaverException {
+    public void shouldAccumulateTwoMessagesOfTheStringType() throws LoggerException {
 
         Message stubStringMessage = mock(StringMessage.class);
         when(stubStringMessage.isSameTypeOf(any(StringMessage.class))).thenReturn(true);

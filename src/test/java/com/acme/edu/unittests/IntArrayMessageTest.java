@@ -1,6 +1,7 @@
 package com.acme.edu.unittests;
 
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.loggerexceptions.LoggerDecoratorException;
 import com.acme.edu.message.IntArrayMessage;
 import com.acme.edu.message.decorator.Decorator;
 import com.acme.edu.message.decorator.DefaultDecorator;
@@ -17,7 +18,7 @@ import static org.mockito.Mockito.when;
 public class IntArrayMessageTest {
     private Decorator stubDecorator = mock(DefaultDecorator.class);
 
-    public void testGetDecoratedMessage(int[] testArray, String nonDecoratedArrayAsString) {
+    public void testGetDecoratedMessage(int[] testArray, String nonDecoratedArrayAsString) throws LoggerDecoratorException {
         String stubResult = "primitives array: {" + nonDecoratedArrayAsString + "}"
                 + System.lineSeparator();
         when(stubDecorator.getDecoratedMessage()).thenReturn(stubResult);
@@ -26,20 +27,20 @@ public class IntArrayMessageTest {
     }
 
     @Test
-    public void shouldDecorateEmptyArray() {
+    public void shouldDecorateEmptyArray() throws LoggerDecoratorException {
         int[] emptyArray = new int[0];
         testGetDecoratedMessage(emptyArray, System.lineSeparator());
 
     }
 
     @Test
-    public void shouldDecorateNonEmptyArrayWithOneElement() {
+    public void shouldDecorateNonEmptyArrayWithOneElement() throws LoggerDecoratorException {
         int[] emptyArray = {1};
         testGetDecoratedMessage(emptyArray, "1");
     }
 
     @Test
-    public void shouldDecorateNonEmptyArrayWithMultipleElements() {
+    public void shouldDecorateNonEmptyArrayWithMultipleElements() throws LoggerDecoratorException {
         int[] emptyArray = {1,2,3};
         testGetDecoratedMessage(emptyArray, "1, 2, 3");
     }
