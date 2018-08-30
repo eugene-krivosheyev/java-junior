@@ -61,6 +61,13 @@
           <targetTests>
             <param>com.acme.edu.logger*</param>
           </targetTests>
+          <outputFormats>
+           <outputFormat>XML</outputFormat>
+           </outputFormats>
+           <reportsDirectory>
+             target/pit-reports
+           </reportsDirectory>
+          <timestampedReports>false</timestampedReports>
         </configuration>
         <executions>
           <execution>
