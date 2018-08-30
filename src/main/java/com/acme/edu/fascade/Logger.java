@@ -8,7 +8,7 @@ import com.acme.edu.saver.ConsoleSaver;
 import com.acme.edu.saver.LoggerSaver;
 
 public class Logger {
-    private static LoggerController controller = new LoggerController(decoratedMessage -> System.out.println(decoratedMessage), message -> new ClassicDecorator().visit(message));
+    private static LoggerController controller = new LoggerController(System.out::println, message -> new ClassicDecorator().visit(message));
 
     public static void flush() {
         controller.flush();
