@@ -68,4 +68,9 @@ public class ArrayListTest {
 
         verify(mock, times(1)).toString();
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldGetErrorWhenIncorrectInput() {
+        throw new IllegalArgumentException("!!!!");
+    }
 }
