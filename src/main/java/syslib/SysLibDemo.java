@@ -18,7 +18,7 @@ public class SysLibDemo {
         Runtime.getRuntime();
 
         System.out.println(
-            ((Cat)(new Cat("m", 10).clone())).getName()
+//            ((Cat)(new Cat("m").clone())).getName()
         );
 
         Integer i1 = 5; //new Integer() + intern with diapason
