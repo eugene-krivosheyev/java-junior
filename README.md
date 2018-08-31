@@ -508,12 +508,27 @@ assertMessageEquals("3")
 - Sonar server
 
 ## When
-- Teams formed
-- Every team's git repo visible to PM and is identifiable
-- Teams deliver product with two iterations
+- Teams formed: XX
+- Every team's git repo visible to PM and is identifiable: projectXX
+- Teams deliver product with one iteration
 
-## Then
-- PM and Business Customers accept product with two demo sessions
+## Then (DoD)
+- Jenkins project: projectXX
+- Sonar entry: projectXX
+- Test Coverage ≥ 80%
+- Code reuse and minimum code duplication
+- Code style
+- Documented public API ≥ 80%
+
+### PM and Business Customers accept product with demo session:
+- Ready test environment: notebook VGA-connected to projector
+- Show full MVN build on Jenkins
+- Show Sonar statistics
+- Test Point of View: main scenarios
+- Test PoV: alt scenarios
+- Structure PoV: UML diagram 
+- Structure PoV: Class Sources
+- Dynamic PoV: key algorithms
 
 ---
 
