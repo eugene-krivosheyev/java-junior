@@ -1,16 +1,11 @@
 package com.acme.edu.messagelog;
 
-public class MatrixIntMessage extends Message {
+public class MatrixIntMessage extends Message<int[][]> {
     private static final String TYPE_NAME = "primitives matrix";
-    private final int[][] value;
 
     public MatrixIntMessage(int[] ... message) {
         this.value = message.clone();
         type = TYPE_NAME;
-    }
-
-    public int[][] getValue() {
-        return value.clone();
     }
 
     @Override

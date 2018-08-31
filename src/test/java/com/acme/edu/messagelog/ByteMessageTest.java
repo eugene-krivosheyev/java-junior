@@ -44,9 +44,9 @@ public class ByteMessageTest {
 
     @Test
     public void shouldReturnNewByteMessageWhenCallAccumulate() {
-        ByteMessage dummyByteMessage = mock(ByteMessage.class);
+        ByteMessage byteMessage1 = new ByteMessage((byte) 2);
 
-        assertNotEquals(dummyByteMessage, byteMessage.accumulate(dummyByteMessage));
+        assertNotEquals(byteMessage1, byteMessage.accumulate(byteMessage1));
     }
 
     @Test

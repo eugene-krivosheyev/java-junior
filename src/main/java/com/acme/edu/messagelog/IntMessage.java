@@ -1,18 +1,12 @@
 package com.acme.edu.messagelog;
 
-public class IntMessage extends Message {
+public class IntMessage extends Message<Integer> {
     private static final String TYPE_NAME = "primitive";
-    private final int value;
 
     public IntMessage(int message) {
         this.value = message;
         type = TYPE_NAME;
     }
-
-    public int getValue() {
-        return value;
-    }
-
 
     @Override
     public Message accumulate(Message message) {

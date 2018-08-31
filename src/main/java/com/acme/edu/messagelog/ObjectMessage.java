@@ -1,8 +1,7 @@
 package com.acme.edu.messagelog;
 
-public class ObjectMessage extends Message {
+public class ObjectMessage extends Message<Object> {
     private static final String TYPE_NAME = "reference";
-    private final Object value;
 
     public ObjectMessage(Object message) {
         this.value = message;
@@ -17,9 +16,5 @@ public class ObjectMessage extends Message {
     @Override
     public boolean canBeAccumulated(Message message) {
         return false;
-    }
-
-    public Object getValue() {
-        return value;
     }
 }

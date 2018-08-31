@@ -1,8 +1,7 @@
 package com.acme.edu.messagelog;
 
-public class ArrayIntMessage extends Message {
+public class ArrayIntMessage extends Message<int[]> {
     private static final String TYPE_NAME = "primitives array";
-    private final int[] value;
 
     public ArrayIntMessage(int ... message) {
         this.value = message.clone();
@@ -17,9 +16,5 @@ public class ArrayIntMessage extends Message {
     @Override
     public boolean canBeAccumulated(Message message) {
         return false;
-    }
-
-    public int[] getValue() {
-        return value.clone();
     }
 }

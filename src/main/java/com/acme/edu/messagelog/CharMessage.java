@@ -1,16 +1,11 @@
 package com.acme.edu.messagelog;
 
-public class CharMessage extends Message {
+public class CharMessage extends Message<Character> {
     private static final String TYPE_NAME = "char";
-    private final char value;
 
     public CharMessage(char message) {
         this.value = message;
         type = TYPE_NAME;
-    }
-
-    public char getValue() {
-        return value;
     }
 
     @Override

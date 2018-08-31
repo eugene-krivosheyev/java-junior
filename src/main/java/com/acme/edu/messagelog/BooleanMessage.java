@@ -1,16 +1,11 @@
 package com.acme.edu.messagelog;
 
-public class BooleanMessage extends Message {
+public class BooleanMessage extends Message<Boolean> {
     private static final String TYPE_NAME = "primitive";
-    private final boolean value;
 
     public BooleanMessage(boolean message) {
         this.value = message;
         type = TYPE_NAME;
-    }
-
-    public boolean getValue() {
-        return value;
     }
 
     @Override

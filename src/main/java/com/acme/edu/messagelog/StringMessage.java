@@ -1,8 +1,7 @@
 package com.acme.edu.messagelog;
 
-public class StringMessage extends Message {
+public class StringMessage extends Message<String> {
     private static final String TYPE_NAME = "string";
-    private final String value;
     private final int currentStringCount;
 
     private StringMessage(String message, int count) {
@@ -13,10 +12,6 @@ public class StringMessage extends Message {
 
     public StringMessage(String message){
         this(message, 1);
-    }
-
-    public String getValue() {
-        return value;
     }
 
     public int getStringCount() {

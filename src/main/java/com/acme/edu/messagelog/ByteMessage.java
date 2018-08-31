@@ -1,14 +1,12 @@
 package com.acme.edu.messagelog;
 
-public class ByteMessage extends Message {
+public class ByteMessage extends Message<Byte> {
     private static final String TYPE_NAME = "primitive";
-    private final byte value;
 
     public ByteMessage(byte message) {
         this.value = message;
         type = TYPE_NAME;
     }
-
 
     @Override
     public Message accumulate(Message message) {
@@ -30,9 +28,5 @@ public class ByteMessage extends Message {
     private boolean isOverflow(byte term){
         return (term > 0 && value > Byte.MAX_VALUE - term) ||
                 (term < 0 && value < Byte.MIN_VALUE - term);
-    }
-
-    public byte getValue() {
-        return value;
     }
 }

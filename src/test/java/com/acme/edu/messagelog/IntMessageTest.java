@@ -46,9 +46,9 @@ public class IntMessageTest {
 
     @Test
     public void shouldReturnNewIntMessageWhenCallAccumulate() {
-        IntMessage dummyIntMessage = mock(IntMessage.class);
+        IntMessage intMessage1 = new IntMessage(5);
 
-        assertNotEquals(dummyIntMessage, intMessage.accumulate(dummyIntMessage));
+        assertNotEquals(intMessage1, intMessage.accumulate(intMessage1));
     }
 
     @Test
