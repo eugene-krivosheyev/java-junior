@@ -13,5 +13,11 @@ public class CollectionsDemo {
         cats.keySet();
         cats.values();
         cats.entrySet();
+
+//        Collections.sort();
+//        Collections.synchronizedXXX()
+//        Collections.unmodifiableXXX()
+//        Collections.binarySearch()
+//        ArrayList<Cat> cats2 = Collections.checkedCollection(new ArrayList(), Cat.class);
     }
 }
