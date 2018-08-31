@@ -1,20 +1,20 @@
 package syslib;
 
-public class Cat implements Cloneable {
-    private String name;
-    private int age;
+import java.util.Objects;
 
-    public Cat(String name, int age) {
+public class Cat implements Comparable {
+    private String name;
+
+    public Cat(String name) {
         this.name = name;
-        this.age = age;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getAge() {
-        return age;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -24,27 +24,24 @@ public class Cat implements Cloneable {
 
         Cat cat = (Cat) o;
 
-        if (age != cat.age) return false;
         return name != null ? name.equals(cat.name) : cat.name == null;
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + age;
-        return result;
+        return name != null ? name.hashCode() : 0;
     }
 
     @Override
     public String toString() {
         return "Cat {" +
                 "name='" + name + '\'' +
-                ", age=" + age +
                 '}';
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public int compareTo(Object o) {
+        if (this == o || this.equals(o)) return 0;
+        return this.name.compareTo(((Cat)o).name);
     }
 }
