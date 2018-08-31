@@ -8,8 +8,10 @@ import static java.util.Comparator.comparing;
 
 public class CollectionsDemo {
     public static void main(String[] args) {
-        Set<Cat> cats = new TreeSet<>(comparing(Cat::getName));
-
-
+        Map<String, Cat> cats = new HashMap<>();
+        cats.get("");
+        cats.keySet();
+        cats.values();
+        cats.entrySet();
     }
 }
