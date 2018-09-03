@@ -9,13 +9,14 @@ import java.util.stream.Collectors;
 public class CollectionsDemo {
     public static void main(String[] args) {
         Collection<Integer> list = Arrays.asList(1,6,2,5,3,4);
-        list.stream()
+        list.parallelStream()
             .filter(e -> e >= 3)
             .map(CollectionsDemo::dec)
             .sorted(Comparator.reverseOrder())
             .skip(1)
             .limit(2)
-            .forEach(System.out::println);
+            .reduce((e1, e2) -> e1 + e2)
+                .ifPresent(System.out::println);
 //            .collect(Collectors.toList())
 //            .reduce((e1, e2) -> e1 + e2); //fold
     }
