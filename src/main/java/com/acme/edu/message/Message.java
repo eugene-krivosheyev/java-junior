@@ -8,5 +8,5 @@ public interface Message {
 
     String getDecoratedMessage();
 
-    Message accumulate(Message message);
+    void accumulate(Message message);
 }

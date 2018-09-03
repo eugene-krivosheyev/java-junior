@@ -1,12 +1,30 @@
 package com.acme.edu.logger;
 
+import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.message.StringMessage;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.io.IOException;
 
-public class StringMessageTest {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+public class StringMessageTest implements SysoutCaptureAndAssertionAbility {
+
+    //region given
+    @Before
+    public void setUpSystemOut() throws IOException {
+        resetOut();
+        captureSysout();
+    }
+
+    @After
+    public void tearDown() {
+        resetOut();
+    }
+    //endregion
 
     @After
     public void clear(){
@@ -32,17 +50,18 @@ public class StringMessageTest {
     public void shouldAccumulateEqualStrings(){
         StringMessage firstMessage = new StringMessage("test message");
         StringMessage secondMessage = new StringMessage("test message");
-        assertEquals("string: test message (x2)" + System.lineSeparator(), firstMessage.accumulate(secondMessage).getDecoratedMessage());
+        firstMessage.accumulate(secondMessage);
+
+        assertEquals("string: test message (x2)" + System.lineSeparator(), secondMessage.getDecoratedMessage());
     }
 
     @Test
     public void shouldELogDifferentStringsSeparately(){
         StringMessage firstMessage = new StringMessage("first message");
         StringMessage secondMessage = new StringMessage("second message");
-        String accumulatedResult = firstMessage.accumulate(secondMessage).getDecoratedMessage();
+        firstMessage.accumulate(secondMessage);
 
-        assertEquals(true, accumulatedResult.contains("first message"));
-        assertEquals(true, accumulatedResult.contains("second message"));
+        assertEquals("string: first message" + System.lineSeparator() + "second message" + System.lineSeparator(), secondMessage.getDecoratedMessage());
 
     }
 }

@@ -51,9 +51,7 @@ public class StringMessage implements  Message{
     }
 
     @Override
-    public Message accumulate(Message message) {
-        return message;
-    }
+    public void accumulate(Message message){}
 
     public String getValue() {
         return value;

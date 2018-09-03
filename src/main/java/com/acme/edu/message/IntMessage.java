@@ -4,6 +4,9 @@ import com.acme.edu.Decorator.IntegerDecorator;
 import com.acme.edu.Decorator.PrimitiveDecorator;
 import com.acme.edu.Decorator.Decorator;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  * Created by Java_1 on 24.08.2018.
  */
@@ -12,14 +15,17 @@ public class IntMessage implements Message {
 
     private int value;
     private Decorator decorator;
+    public static Collection<Integer> arrayOfInt = new ArrayList<>();
 
     public IntMessage(int message) {
         this.value = message;
+        arrayOfInt.add(message);
         decorator = new PrimitiveDecorator();
     }
 
     public IntMessage(int message, Decorator decorator) {
         this.value = message;
+        arrayOfInt.add(message);
         this.decorator = decorator;
     }
 
@@ -30,13 +36,17 @@ public class IntMessage implements Message {
 
     @Override
     public String getDecoratedMessage(){
-        return getDecorator().getDecoratedMessage(new IntMessage(getValue()));
+        Integer value = arrayOfInt.stream()
+                             .reduce((e1,e2) -> e1 + e2).orElse(null);
+        arrayOfInt.clear();
+        this.setValue(value);
+        return getDecorator().getDecoratedMessage(this);
     }
 
     @Override
-    public Message accumulate(Message message){
-        int value = ((IntMessage) message).getValue();
-        return new IntMessage(value + this.value);
+    public void accumulate(Message message){
+       // int value = ((IntMessage) message).getValue();
+        arrayOfInt.add(((IntMessage) message).getValue());
     }
 
     public int getValue(){

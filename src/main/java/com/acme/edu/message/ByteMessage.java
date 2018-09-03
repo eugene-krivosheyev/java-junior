@@ -24,9 +24,8 @@ public class ByteMessage implements Message {
     }
 
     @Override
-    public Message accumulate(Message message){
+    public void accumulate(Message message){
         byte value = ((ByteMessage) message).getValue();
-        return new ByteMessage((byte)(value + this.value));
     }
 
     public byte getValue() {

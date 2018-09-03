@@ -22,9 +22,7 @@ public class CharMessage implements Message {
     }
 
     @Override
-    public Message accumulate(Message message){
-        return new CharMessage(((CharMessage) message).getValue());
-    }
+    public void accumulate(Message message){}
 
     public char getValue() {
         return value;

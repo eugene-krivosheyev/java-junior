@@ -12,6 +12,7 @@ public class IntegerDecorator implements  Decorator {
 
     @Override
     public String getDecoratedMessage(Message message) {
+        IntMessage.arrayOfInt.clear();
         return INTEGER + ((IntMessage) message).getValue();
     }
 }

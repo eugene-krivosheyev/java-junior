@@ -23,9 +23,7 @@ public class BooleanMessage implements Message {
     }
 
     @Override
-    public Message accumulate(Message message){
-        return new BooleanMessage(((BooleanMessage) message).getValue());
-    }
+    public void accumulate(Message message){}
 
     public boolean getValue() {
         return value;

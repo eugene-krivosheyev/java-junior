@@ -5,6 +5,7 @@ import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.controller.Controller;
 import com.acme.edu.controller.LogOperationException;
 import com.acme.edu.message.*;
+import com.acme.edu.saver.SaveException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -69,11 +70,11 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
 
     @Ignore
     @Test
-    public void shouldLogAccumulateStringsAndBoolean() throws LogOperationException{
+    public void shouldLogAccumulateStringsAndBoolean() throws LogOperationException, SaveException{
         StringMessage firstMessage = mock(StringMessage.class);
         StringMessage secondMessage = mock(StringMessage.class);
         BooleanMessage booleanMessage = mock(BooleanMessage.class);
-        when(firstMessage.accumulate(secondMessage)).thenReturn(secondMessage);
+        //when(firstMessage.accumulate(secondMessage)).thenReturn(secondMessage);
         when(secondMessage.getDecoratedMessage()).thenReturn("test message(x2)");
         when(booleanMessage.getDecoratedMessage()).thenReturn("primitive: true");
 
@@ -86,7 +87,6 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("primitive: true");
     }
 
-    @Ignore
     @Test
     public void shouldLogChar() throws LogOperationException{
         CharMessage message = mock(CharMessage.class);
@@ -139,7 +139,7 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
         IntMessage firstMessage = mock(IntMessage.class);
         IntMessage secondMessage = mock(IntMessage.class);
         IntMessage resultMessage = mock(IntMessage.class);
-        when(firstMessage.accumulate(secondMessage)).thenReturn(resultMessage);
+ //       when(firstMessage.accumulate(secondMessage)).thenReturn(resultMessage);
         when(resultMessage.getDecoratedMessage()).thenReturn("primitive: 8");
         testController.log(firstMessage);
         testController.log(secondMessage);

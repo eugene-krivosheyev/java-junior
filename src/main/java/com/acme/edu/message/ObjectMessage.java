@@ -23,9 +23,7 @@ public class ObjectMessage implements Message {
     }
 
     @Override
-    public Message accumulate(Message message){
-        return new ObjectMessage(((ObjectMessage) message).getValue());
-    }
+    public void accumulate(Message message){}
 
     public Object getValue() {
         return value;

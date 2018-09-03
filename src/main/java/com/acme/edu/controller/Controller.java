@@ -24,7 +24,7 @@ public class Controller {
         }
 
         if (currentMessage.isSameTypeOf(message)){
-            this.currentMessage = currentMessage.accumulate(message);
+            currentMessage.accumulate(message);
             return 0;
         }
         else{
