@@ -490,7 +490,7 @@ assertMessageEquals("3")
 - Queues
 - Stream API
 
-## Course Project Iteration 13: Collections for code reuse
+## Course Project Iteration 13: Collections for Lazy and Declarative Logger
 - Choose and state collection interfaces
 - Choose and state collection implementations
 - Refactor legacy codebase to collections API
