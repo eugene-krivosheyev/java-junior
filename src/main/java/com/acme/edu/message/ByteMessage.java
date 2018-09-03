@@ -2,22 +2,39 @@ package com.acme.edu.message;
 
 import com.acme.edu.decorator.Decorator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Map;
 
 public class ByteMessage extends Message {
     private byte message;
+    private Collection<Byte> collection;
 
     public byte getMessage() {
-        return message;
+        return collection.stream()
+                .reduce((byte) 0, (e1, e2) -> (byte)(e1+e2));
+    }
+
+    public Collection getCollection() {
+        return collection;
     }
 
     public ByteMessage(byte message) {
+        this(message, Arrays.asList(message));
+    }
+
+    public ByteMessage(byte message, Collection collection) {
         this.message = message;
+        this.collection = collection;
     }
 
     @Override
     public Message accumulate(Message message) {
-        return new ByteMessage((byte) (this.message + ((ByteMessage) message).getMessage()));
+        Collection concatenateCollection = new ArrayList();
+        concatenateCollection.addAll(this.getCollection());
+        concatenateCollection.addAll(((ByteMessage) message).getCollection());
+        return new ByteMessage(this.message, concatenateCollection);
     }
 
     @Override

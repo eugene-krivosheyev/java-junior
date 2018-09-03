@@ -146,6 +146,24 @@ public class MessageTest {
     }
 
     @Test
+    public void intAccumulationWithCollectionsAndStreamApi() {
+        IntMessage message1 = new IntMessage(Integer.MAX_VALUE-3);
+        IntMessage message2 = new IntMessage(2);
+        IntMessage message3 = new IntMessage(5);
+
+        IntMessage accumulatedMessage1 = (IntMessage) message1.accumulate(message2);
+        IntMessage accumulatedMessage2 = (IntMessage) accumulatedMessage1.accumulate(message3);
+
+        assertTrue(message1.isAbleToAccumulate(message2));
+        assertTrue(message2.isAbleToAccumulate(message3));
+        assertFalse(message3.isAbleToAccumulate(accumulatedMessage1));
+
+        //System.out.println(Integer.MAX_VALUE);
+        //System.out.println(accumulatedMessage2.getMessage());
+        //System.out.println(accumulatedMessage2.getMessage());
+    }
+
+    @Test
     public void intShouldNotBeAccumulatableWithNegativeOverflow() {
         IntMessage notAccumulatableMessage = new IntMessage(Integer.MIN_VALUE);
         IntMessage sut = new IntMessage(-21);

@@ -2,32 +2,45 @@ package com.acme.edu.message;
 
 import com.acme.edu.decorator.Decorator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Map;
 
 public class StringMessage extends Message {
     private String message;
-    private int countOfStrings;
+    private Collection<String> collection;
 
     public String getMessage() {
         return message;
     }
 
     public int getCountOfStrings() {
-        return countOfStrings;
+        return collection.stream()
+                .map(e -> 1)
+                .reduce(0, (e1, e2) -> e1+e2);
+    }
+
+    public Collection getCollection() {
+        return collection;
     }
 
     public StringMessage(String message) {
-        this(message, 1);
+        this(message, Arrays.asList(message));
     }
 
-    private StringMessage(String message, int countOfStrings) {
+    public StringMessage(String message, Collection collection) {
         this.message = message;
-        this.countOfStrings = countOfStrings;
+        this.collection = collection;
     }
 
     @Override
     public Message accumulate(Message message) {
-        return new StringMessage(this.message, this.countOfStrings + ((StringMessage) message).getCountOfStrings());
+        //return new StringMessage(this.message, this.countOfStrings + ((StringMessage) message).getCountOfStrings());
+        Collection concatenateCollection = new ArrayList();
+        concatenateCollection.addAll(this.getCollection());
+        concatenateCollection.addAll(((StringMessage) message).getCollection());
+        return new StringMessage(this.message, concatenateCollection);
     }
 
     @Override
