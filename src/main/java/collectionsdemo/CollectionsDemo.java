@@ -1,23 +1,26 @@
 package collectionsdemo;
 
-import syslib.Cat;
-
-import java.util.*;
-
-import static java.util.Comparator.comparing;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.function.BinaryOperator;
+import java.util.stream.Collectors;
 
 public class CollectionsDemo {
     public static void main(String[] args) {
-        Map<String, Cat> cats = new HashMap<>();
-        cats.get("");
-        cats.keySet();
-        cats.values();
-        cats.entrySet();
+        Collection<Integer> list = Arrays.asList(1,6,2,5,3,4);
+        list.stream()
+            .filter(e -> e >= 3)
+            .map(CollectionsDemo::dec)
+            .sorted(Comparator.reverseOrder())
+            .skip(1)
+            .limit(2)
+            .forEach(System.out::println);
+//            .collect(Collectors.toList())
+//            .reduce((e1, e2) -> e1 + e2); //fold
+    }
 
-//        Collections.sort();
-//        Collections.synchronizedXXX()
-//        Collections.unmodifiableXXX()
-//        Collections.binarySearch()
-//        ArrayList<Cat> cats2 = Collections.checkedCollection(new ArrayList(), Cat.class);
+    private static int dec(int param) {
+        return param - 1;
     }
 }

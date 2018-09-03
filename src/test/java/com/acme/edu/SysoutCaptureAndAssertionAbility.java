@@ -23,4 +23,6 @@ public interface SysoutCaptureAndAssertionAbility {
     default void resetOut() {
         OUT.reset();
     }
+
+
 }
