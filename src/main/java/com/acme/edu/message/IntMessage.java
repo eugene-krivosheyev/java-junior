@@ -8,12 +8,12 @@ import java.util.Optional;
 
 public class IntMessage extends Message {
     private int message;
-    private ArrayList<IntMessage> integerArrayList;
+    private ArrayList<IntMessage> intMessageAccumulator;
 
     public IntMessage(int message, Decorator decorator) {
         super (decorator);
         this.message = message;
-        this.integerArrayList = new ArrayList<IntMessage>();
+        this.intMessageAccumulator = new ArrayList<IntMessage>();
     }
 
     public int getMessage() {
@@ -23,13 +23,13 @@ public class IntMessage extends Message {
     @Override
     public Message accumulate(Message nextMessage) {
         IntMessage downcastedMessage = (IntMessage) nextMessage;
-        integerArrayList.add(downcastedMessage);
+        intMessageAccumulator.add(downcastedMessage);
         return this;
     }
 
     @Override
     public String getDecoratedMessage() throws LoggerDecoratorException {
-        Optional<Integer> result = integerArrayList.stream().map(e ->e.getMessage()).reduce((a, b) -> a + b);
+        Optional<Integer> result = intMessageAccumulator.stream().map(e ->e.getMessage()).reduce((a, b) -> a + b);
         getDecorator().setMessage(result.toString());
         return getDecorator().getDecoratedMessage();
     }
