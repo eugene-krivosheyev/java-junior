@@ -7,43 +7,56 @@ import com.acme.edu.messagelog.LoggerDecorator;
 import com.acme.edu.messagelog.Message;
 import com.acme.edu.saver.Saver;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
+
 public class LogController {
-    private Message previousMessage = new BlankMessage();
+    private Collection<Message> previousMessages;
+    private Message lastMessage = new BlankMessage();
     private final Saver saver;
     private final LoggerDecorator decorator;
 
     public LogController(Saver saver, LoggerDecorator decorator) {
+        this.previousMessages = new LinkedList<>();
+   //     this.previousMessages.add(new BlankMessage());
         this.saver = saver;
         this.decorator = decorator;
     }
 
     public int log(Message message) {
-        if (previousMessage.canBeAccumulated(message)) {
-            try {
-                previousMessage = previousMessage.accumulate(message);
-            } catch (AccumulateException e) {
-                e.printStackTrace();
-                return e.getCode();
-            }
+        if (lastMessage.canBeAccumulated(message)) {
+            previousMessages.add(message);
+            lastMessage = message;
         } else {
-                int isFlushSuccess = flush();
-                if (isFlushSuccess == 0){
-                    previousMessage = message;
-                }
-                return isFlushSuccess;
+            int isFlushSuccess = flush();
+            if (isFlushSuccess == 0) {
+                lastMessage = message;
+                previousMessages.clear();
+                previousMessages.add(lastMessage);
             }
+            return isFlushSuccess;
+        }
         return 0;
     }
 
     public int flush() {
-        if (previousMessage instanceof BlankMessage) return 0;
+        if (lastMessage instanceof BlankMessage) return 0;
+
         try {
-            saver.save(previousMessage.getFormattedMessage(decorator));
+            saver.save(
+                    previousMessages.stream()
+                            .reduce(Message::accumulate)
+                            .get()
+                            .getFormattedMessage(decorator)
+            );
         } catch (SaverExceptions saverExceptions) {
             saverExceptions.printStackTrace();
             return saverExceptions.getCode();
         }
-        previousMessage = new BlankMessage();
+
+        lastMessage = new BlankMessage();
+        previousMessages.clear();
         return 0;
     }
 }

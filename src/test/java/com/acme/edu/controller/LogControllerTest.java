@@ -34,9 +34,11 @@ public class LogControllerTest {
         Message mockMessage1 = mock(Message.class);
         Message mockMessage2 = mock(Message.class);
         when(mockMessage1.canBeAccumulated(mockMessage2)).thenReturn(true);
+        when(mockMessage1.accumulate(mockMessage2)).thenReturn(mockMessage1);
 
         logController.log(mockMessage1);
         logController.log(mockMessage2);
+        logController.flush();
 
         verify(mockMessage1).accumulate(mockMessage2);
     }
