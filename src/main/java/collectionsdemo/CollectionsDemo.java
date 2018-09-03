@@ -15,10 +15,10 @@ public class CollectionsDemo {
             .sorted(Comparator.reverseOrder())
             .skip(1)
             .limit(2)
-            .reduce((e1, e2) -> e1 + e2)
-                .ifPresent(System.out::println);
-//            .collect(Collectors.toList())
-//            .reduce((e1, e2) -> e1 + e2); //fold
+                .forEach(System.out::println);
+//            .reduce((e1, e2) -> e1 + e2)
+//                .ifPresent(System.out::println);
+
     }
 
     private static int dec(int param) {
