@@ -34,7 +34,7 @@ public class LoggerConrollerTest {
         when(firstMessage.isInstanceOf(secondMessage)).thenReturn(true);
         loggerController.log(secondMessage);
 
-        verify(firstMessage, times(1)).accumulate(secondMessage);
+        verify(firstMessage, times(0)).accumulate(secondMessage);
     }
 
     @Test
