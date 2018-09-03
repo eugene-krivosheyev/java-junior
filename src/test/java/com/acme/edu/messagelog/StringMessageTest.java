@@ -1,9 +1,9 @@
 package com.acme.edu.messagelog;
 
+import com.acme.edu.loggerexceptions.OverflowAccumulationException;
+import com.acme.edu.loggerexceptions.StringMessageAccumulationException;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.concurrent.Callable;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -39,16 +39,16 @@ public class StringMessageTest {
     }
 
     @Test
-    public void shouldReturnNewStringMessageWhenCallAccumulate() {
-        StringMessage dummyStringMessage = mock(StringMessage.class);
+    public void shouldReturnNewStringMessageWhenCallAccumulate() throws StringMessageAccumulationException {
+        StringMessage dummyStringMessage = new StringMessage("str 1");
 
         assertNotEquals(dummyStringMessage, stringMessage.accumulate(dummyStringMessage));
     }
 
-    @Test
-    public void shouldReturnFalseWhenCallCanBeAccumulatedWithDifferentValue(){
+    @Test(expected = StringMessageAccumulationException.class)
+    public void shouldThrowExceptionWhenCallAccumulateWithDifferentValue() throws StringMessageAccumulationException {
         StringMessage newMessage = new StringMessage("str 2");
 
-        assertFalse(stringMessage.canBeAccumulated(newMessage));
+        stringMessage.accumulate(newMessage);
     }
 }

@@ -1,18 +1,15 @@
 package com.acme.edu.controller;
 
-import com.acme.edu.loggerexceptions.AccumulateException;
-import com.acme.edu.loggerexceptions.SaverExceptions;
-import com.acme.edu.messagelog.IntMessage;
+import com.acme.edu.loggerexceptions.AccumulationException;
+import com.acme.edu.loggerexceptions.OverflowAccumulationException;
+import com.acme.edu.loggerexceptions.SaverException;
 import com.acme.edu.messagelog.LoggerDecorator;
 import com.acme.edu.messagelog.Message;
 import com.acme.edu.messagelog.StringMessage;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.internal.verification.Times;
-import org.mockito.verification.VerificationMode;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class LogControllerTest {
@@ -30,7 +27,7 @@ public class LogControllerTest {
     }
 
     @Test
-    public void shouldAccumulateWhenGivenTwoMessagesOfTheSameType() throws AccumulateException {
+    public void shouldAccumulateWhenGivenTwoMessagesOfTheSameType() throws SaverException, AccumulationException {
         Message mockMessage1 = mock(Message.class);
         Message mockMessage2 = mock(Message.class);
         when(mockMessage1.canBeAccumulated(mockMessage2)).thenReturn(true);
@@ -44,7 +41,7 @@ public class LogControllerTest {
     }
 
     @Test
-    public void shouldNotAccumulateWhenGivenTwoMessagesOfDifferentTypes() throws AccumulateException {
+    public void shouldNotAccumulateWhenGivenTwoMessagesOfDifferentTypes() throws AccumulationException {
         Message mockMessage1 = mock(Message.class);
         Message mockMessage2 = mock(Message.class);
         when(mockMessage1.canBeAccumulated(mockMessage2)).thenReturn(false);
@@ -56,11 +53,13 @@ public class LogControllerTest {
     }
 
     @Test
-    public void shouldNotSaveWithoutNewMessages() throws SaverExceptions {
+    public void shouldNotSaveWithoutNewMessages() throws SaverException {
         String stubStringToFlush = "str";
 
         logController.flush();
 
         verify(stubSaver, times(0)).save(stubStringToFlush);
     }
+
+
 }

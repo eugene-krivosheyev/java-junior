@@ -1,5 +1,7 @@
 package com.acme.edu.messagelog;
 
+import com.acme.edu.loggerexceptions.OverflowAccumulationException;
+
 public class IntMessage extends Message<Integer> {
     private static final String TYPE_NAME = "primitive";
 
@@ -9,7 +11,8 @@ public class IntMessage extends Message<Integer> {
     }
 
     @Override
-    public Message accumulate(Message message) {
+    public Message accumulate(Message message) throws OverflowAccumulationException {
+        if (isOverflow(((IntMessage) message).value)) throw new OverflowAccumulationException("Integer is overflowed!");
         IntMessage newMessage = (IntMessage) message;
         int newValue = value + newMessage.value;
         return new IntMessage(newValue);
@@ -22,16 +25,8 @@ public class IntMessage extends Message<Integer> {
 
     @Override
     public boolean canBeAccumulated(Message message) {
-        return super.canBeAccumulated(message) && !isOverflow(((IntMessage) message).value);
+        return super.canBeAccumulated(message);
     }
-/*
-    private void isOverflow(int term) throws OverflowException {
-        if ((term > 0 && value > Integer.MAX_VALUE - term) ||
-                (term < 0 && value < Integer.MIN_VALUE - term)) {
-            throw new OverflowException("Overflow int type when tried to sum " + value + " with " + value);
-        };
-    }
-    */
 
     private boolean isOverflow(int term) {
         return (term > 0 && value > Integer.MAX_VALUE - term) ||

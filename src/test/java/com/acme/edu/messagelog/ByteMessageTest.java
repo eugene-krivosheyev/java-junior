@@ -1,5 +1,6 @@
 package com.acme.edu.messagelog;
 
+import com.acme.edu.loggerexceptions.OverflowAccumulationException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,24 +44,24 @@ public class ByteMessageTest {
     }
 
     @Test
-    public void shouldReturnNewByteMessageWhenCallAccumulate() {
+    public void shouldReturnNewByteMessageWhenCallAccumulate() throws OverflowAccumulationException {
         ByteMessage byteMessage1 = new ByteMessage((byte) 2);
 
         assertNotEquals(byteMessage1, byteMessage.accumulate(byteMessage1));
     }
 
-    @Test
-    public void shouldReturnFalseWhenCallCanBeAccumulatedInPositiveOverflowCase(){
+    @Test(expected = OverflowAccumulationException.class)
+    public void shouldThrowExceptionWhenCallAccumulateInPositiveOverflowCase() throws OverflowAccumulationException {
         ByteMessage dummyByteMessage = new ByteMessage(Byte.MAX_VALUE);
 
-        assertFalse(byteMessage.canBeAccumulated(dummyByteMessage));
+        byteMessage.accumulate(dummyByteMessage);
     }
 
-    @Test
-    public void shouldReturnFalseWhenCallCanBeAccumulatedInNegativeOverflowCase(){
+    @Test(expected = OverflowAccumulationException.class)
+    public void shouldThrowExceptionWhenCallAccumulateInNegativeOverflowCase() throws OverflowAccumulationException {
         ByteMessage byteMessage1 = new ByteMessage(Byte.MIN_VALUE);
         ByteMessage byteMessage2 = new ByteMessage((byte)-1);
 
-        assertFalse(byteMessage1.canBeAccumulated(byteMessage2));
+        byteMessage1.accumulate(byteMessage2);
     }
 }

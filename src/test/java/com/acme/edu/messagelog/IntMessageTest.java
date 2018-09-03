@@ -1,8 +1,8 @@
 package com.acme.edu.messagelog;
 
+import com.acme.edu.loggerexceptions.OverflowAccumulationException;
 import org.junit.Before;
 import org.junit.Test;
-import org.omg.PortableInterceptor.INACTIVE;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -45,24 +45,24 @@ public class IntMessageTest {
     }
 
     @Test
-    public void shouldReturnNewIntMessageWhenCallAccumulate() {
+    public void shouldReturnNewIntMessageWhenCallAccumulate() throws OverflowAccumulationException {
         IntMessage intMessage1 = new IntMessage(5);
 
         assertNotEquals(intMessage1, intMessage.accumulate(intMessage1));
     }
 
-    @Test
-    public void shouldReturnFalseWhenCallCanBeAccumulatedInPositiveOverflowCase(){
+    @Test(expected = OverflowAccumulationException.class)
+    public void shouldThrowExceptionWhenCallAccumulateInPositiveOverflowCase() throws OverflowAccumulationException {
         IntMessage dummyIntMessage = new IntMessage(Integer.MAX_VALUE);
 
-        assertFalse(intMessage.canBeAccumulated(dummyIntMessage));
+        intMessage.accumulate(dummyIntMessage);
     }
 
-    @Test
-    public void shouldReturnFalseWhenCallCanBeAccumulatedInNegativeOverflowCase(){
+    @Test(expected = OverflowAccumulationException.class)
+    public void shouldThrowExceptionWhenCallAccumulateInNegativeOverflowCase() throws OverflowAccumulationException {
         IntMessage intMessage1 = new IntMessage(Integer.MIN_VALUE);
         IntMessage intMessage2 = new IntMessage(-1);
 
-        assertFalse(intMessage1.canBeAccumulated(intMessage2));
+        intMessage1.accumulate(intMessage2);
     }
 }

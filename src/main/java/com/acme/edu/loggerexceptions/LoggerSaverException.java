@@ -1,21 +1,21 @@
 package com.acme.edu.loggerexceptions;
 
-public class SaveException extends SaverExceptions {
+public class LoggerSaverException extends SaverException {
     private static int code = 2;
 
     public int getCode(){
         return code;
     }
 
-    public SaveException(String message) {
+    public LoggerSaverException(String message) {
         super(message);
     }
 
-    public SaveException(Throwable cause) {
+    public LoggerSaverException(Throwable cause) {
         super(cause);
     }
 
-    public SaveException(String message, Throwable cause) {
+    public LoggerSaverException(String message, Throwable cause) {
         super(message, cause);
     }
 }

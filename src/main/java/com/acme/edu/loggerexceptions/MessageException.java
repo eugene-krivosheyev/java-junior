@@ -1,6 +1,6 @@
 package com.acme.edu.loggerexceptions;
 
-public class MessageException extends SaverExceptions {
+public class MessageException extends SaverException {
     private static int code = 3;
 
     public int getCode(){

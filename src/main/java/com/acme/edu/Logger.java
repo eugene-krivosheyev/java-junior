@@ -2,9 +2,7 @@ package com.acme.edu;
 
 import com.acme.edu.controller.LogController;
 import com.acme.edu.decorator.PrefixLoggerDecorator;
-import com.acme.edu.loggerexceptions.MessageException;
-import com.acme.edu.loggerexceptions.SaveException;
-import com.acme.edu.loggerexceptions.SaverExceptions;
+import com.acme.edu.loggerexceptions.SaverException;
 import com.acme.edu.messagelog.ArrayIntMessage;
 import com.acme.edu.messagelog.ByteMessage;
 import com.acme.edu.messagelog.CharMessage;
@@ -28,8 +26,14 @@ public final class Logger {
         Logger.controller = controller;
     }
 
-    public  static int flush(){
-        return controller.flush();
+    public static int flush(){
+        try {
+            controller.flush();
+        } catch (SaverException e) {
+            e.printStackTrace();
+            return e.getCode();
+        }
+        return 0;
     }
 
     public static int log(byte message) {

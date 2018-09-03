@@ -1,21 +1,21 @@
 package com.acme.edu.loggerexceptions;
 
-public class AccumulateException extends Exception{
+public class AccumulationException extends Exception {
     private static int code = 5;
 
     public int getCode(){
         return code;
     }
 
-    public AccumulateException(String message) {
+    public AccumulationException(String message) {
         super(message);
     }
 
-    public AccumulateException(Throwable cause) {
+    public AccumulationException(Throwable cause) {
         super(cause);
     }
 
-    public AccumulateException(String message, Throwable cause) {
+    public AccumulationException(String message, Throwable cause) {
         super(message, cause);
     }
 }

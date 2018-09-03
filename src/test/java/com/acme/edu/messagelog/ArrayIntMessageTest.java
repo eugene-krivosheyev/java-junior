@@ -1,6 +1,6 @@
 package com.acme.edu.messagelog;
 
-import com.acme.edu.loggerexceptions.AccumulateException;
+import com.acme.edu.loggerexceptions.AccumulationException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,7 +39,7 @@ public class ArrayIntMessageTest {
     }
 
     @Test
-    public void shouldReturnTheSameMessageWhenCallAccumulate() throws AccumulateException {
+    public void shouldReturnTheSameMessageWhenCallAccumulate() throws AccumulationException {
         ArrayIntMessage dummyArrayIntMessage = mock(ArrayIntMessage.class);
 
         assertEquals(dummyArrayIntMessage, arrayIntMessage.accumulate(dummyArrayIntMessage));

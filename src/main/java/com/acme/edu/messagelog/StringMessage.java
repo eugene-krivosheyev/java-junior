@@ -1,5 +1,8 @@
 package com.acme.edu.messagelog;
 
+import com.acme.edu.loggerexceptions.OverflowAccumulationException;
+import com.acme.edu.loggerexceptions.StringMessageAccumulationException;
+
 public class StringMessage extends Message<String> {
     private static final String TYPE_NAME = "string";
     private final int currentStringCount;
@@ -19,7 +22,8 @@ public class StringMessage extends Message<String> {
     }
 
     @Override
-    public Message accumulate(Message message) {
+    public Message accumulate(Message message) throws StringMessageAccumulationException {
+        if (!((StringMessage) message).value.equals(value)) throw new StringMessageAccumulationException("String value is changed");
         return new StringMessage(value, currentStringCount + 1);
     }
 
@@ -30,7 +34,7 @@ public class StringMessage extends Message<String> {
 
     @Override
     public boolean canBeAccumulated(Message message) {
-        return super.canBeAccumulated(message) && ((StringMessage) message).value.equals(value);
+        return super.canBeAccumulated(message);
     }
 
 }
