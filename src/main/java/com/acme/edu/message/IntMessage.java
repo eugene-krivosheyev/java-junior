@@ -2,24 +2,43 @@ package com.acme.edu.message;
 
 import com.acme.edu.decorators.Decorator;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class IntMessage implements Message {
-    private int value;
+    private Collection<Integer> values;
     private Decorator decorator;
 
+    public Collection<Integer> getValues() {
+        return values;
+    }
+
     public IntMessage(int value, Decorator decorator) {
-        this.value = value;
+        this.decorator = decorator;
+        this.values = new ArrayList<>();
+        this.values.add(value);
+    }
+
+    public IntMessage(Collection<Integer> values, Decorator decorator) {
+        this.values = values;
         this.decorator = decorator;
     }
 
-
     @Override
     public String decorate() {
-        return decorator.decorate("" + value);
+        return decorator.decorate("" + this.aggregate());
+    }
+
+    private Integer aggregate() {
+        return this.values.stream()
+                .reduce((e1, e2) -> e1 + e2)
+                .get();
     }
 
     @Override
     public Message accumulate(Message message) {
-        return new IntMessage(this.value + ((IntMessage)message).value, decorator);
+        this.values.addAll(((IntMessage) message).getValues());
+        return this;
     }
 
     @Override
