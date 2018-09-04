@@ -1,5 +1,6 @@
 package com.acme.edu.clientside;
 
+import com.acme.edu.Logger;
 import com.acme.edu.decorator.Decorator;
 import com.acme.edu.message.*;
 
@@ -49,11 +50,11 @@ public class LoggerProxy implements Closeable{
     }
 
     public int log(int[] message) {
-        return 0;//controller.log(new IntArrayMessage(message));
+        return Logger.log(message);
     }
 
     public int log(int[][] message) {
-        return 0;//controller.log(new IntMatrixMessage(message));
+        return Logger.log(message);
     }
 
     public int log(byte message) {
@@ -73,10 +74,10 @@ public class LoggerProxy implements Closeable{
     }
 
     public int log(Object message) {
-        return 0;//controller.log(new ReferenceMessage(message));
+        return Logger.log(message);
     }
 
     public int setDecorator(MessageType type, Decorator newDecorator) {
-        return 0;//controller.update(type, newDecorator);
+        return Logger.setDecorator(type, newDecorator);
     }
 }
