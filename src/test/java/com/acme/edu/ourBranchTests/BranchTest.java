@@ -68,7 +68,7 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
     }
 
 
-    @Test (expected = LogException.class) @Ignore
+    @Test (expected = LogException.class)
     public void saverNullStringTest() throws IOException, LogException {
         //region given
         Saver saver = new ParameterCheckingSaver();
@@ -81,14 +81,14 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
 
     }
 
-    @Test @Ignore
+    @Test
     public void shouldNotFlushBeforeLog()throws IOException {
         int exception = Logger.flush();
 
         assertThat(exception).isEqualTo(1002);
     }
 
-    @Test @Ignore
+    @Test
     public void saverNotNullStringTest() throws IOException, LogException {
         //region given
         Saver saver = new ParameterCheckingSaver();
@@ -103,7 +103,7 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test (expected = LogException.class) @Ignore
+    @Test (expected = LogException.class)
     public void consoleSaverNullStringTest() throws IOException, LogException {
         //region given
         Saver saver = new ConsoleSaver();
@@ -115,7 +115,7 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test @Ignore
+    @Test
     public void consoleSaverNotNullStringTest() throws IOException, LogException {
         //region given
         Saver saver = new ConsoleSaver();
@@ -132,7 +132,7 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
     }
 
 
-    @Test (expected = LogException.class) @Ignore
+    @Test (expected = LogException.class)
     public void controllerFlushFunctionWhenNullMessageTest() throws IOException, LogException {
         Saver mock = mock(ParameterCheckingSaver.class);
         Controller controller = new Controller(mock);
@@ -142,7 +142,7 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
         verify(mock, times(0)).save(null);
     }
 
-    @Test @Ignore
+    @Test
     public void controllerFlushFunctionWhenNotNullMessageTest() throws IOException, LogException {
         Saver mock = mock(ParameterCheckingSaver.class);
         Message stub = mock(Message.class);
@@ -154,7 +154,7 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
         verify(mock, times(1)).save("test");
     }
 
-    @Test @Ignore
+    @Test
     public void controllerLogFunctionWhenNullCurrentMessageTest() throws IOException, LogException {
         Saver mock = mock(ParameterCheckingSaver.class);
         Message stub = mock(Message.class);
@@ -165,7 +165,7 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
         assertThat(controller.getCurrentMessage()).isEqualTo(stub);
     }
 
-    @Test @Ignore
+    @Test
     public void controllerLogFunctionWhenNotNullCurrentMessageWithChangedTypesTest() throws IOException, LogException {
         Saver mock = mock(ParameterCheckingSaver.class);
         Message stub = mock(Message.class);
@@ -182,7 +182,7 @@ public class BranchTest implements SysoutCaptureAndAssertionAbility {
         assertThat(controller.getCurrentMessage()).isEqualTo(logMessageStub);
     }
 
-    @Test @Ignore
+    @Test
     public void controllerLogFunctionWhenNotNullCurrentMessageWithoutChangedTypesTest() throws IOException, LogException {
         Saver mock = mock(ParameterCheckingSaver.class);
         Message stub = mock(Message.class);
