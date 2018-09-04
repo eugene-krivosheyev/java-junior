@@ -2,7 +2,7 @@ package com.acme.edu;
 
 import com.acme.edu.loggerexceptions.*;
 import com.acme.edu.message.Message;
-import org.springframework.core.codec.DecodingException;
+import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class LoggerController {
     private Message currentMessage;
@@ -30,7 +30,7 @@ public class LoggerController {
             } catch (LoggerDecoratorException e) {
                 throw new LoggingException(LoggerErrors.UNABLE_DECORATE, e);
             } catch (LoggerSaverException e) {
-                throw new LoggingException(LoggerErrors.UNABLE_SAVE, e);
+                throw new LoggingException(LoggerErrors.UNABLE_SAVE_CONSOLE, e);
             }
             currentMessage = message;
         }

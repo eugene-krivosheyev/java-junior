@@ -3,17 +3,16 @@ package com.acme.edu.message;
 import com.acme.edu.loggerexceptions.LoggerDecoratorException;
 import com.acme.edu.message.decorator.Decorator;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
 
 public class IntMessage extends Message {
     private int message;
-    private ArrayList<IntMessage> intMessageAccumulator;
+    private Collection<IntMessage> intMessageAccumulator;
 
     public IntMessage(int message, Decorator decorator) {
         super (decorator);
         this.message = message;
-        this.intMessageAccumulator = new ArrayList<IntMessage>();
+        this.intMessageAccumulator = new LinkedList<IntMessage>();
     }
 
     public int getMessage() {

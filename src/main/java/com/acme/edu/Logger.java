@@ -4,6 +4,7 @@ import com.acme.edu.loggerexceptions.LoggerDecoratorException;
 import com.acme.edu.loggerexceptions.LoggerException;
 import com.acme.edu.message.*;
 import com.acme.edu.message.decorator.DefaultDecorator;
+import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class Logger {
     private static LoggerController controller = new LoggerController(new ConsoleLoggerSaver());

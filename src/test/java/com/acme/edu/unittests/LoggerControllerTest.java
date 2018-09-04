@@ -1,7 +1,7 @@
 package com.acme.edu.unittests;
 
 import com.acme.edu.LoggerController;
-import com.acme.edu.ConsoleLoggerSaver;
+import com.acme.edu.saver.ConsoleLoggerSaver;
 import com.acme.edu.loggerexceptions.*;
 import com.acme.edu.message.FlushMessage;
 import com.acme.edu.message.Message;

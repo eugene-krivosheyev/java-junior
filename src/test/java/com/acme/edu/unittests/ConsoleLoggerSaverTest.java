@@ -1,8 +1,8 @@
 package com.acme.edu.unittests;
 
-import com.acme.edu.ConsoleLoggerSaver;
+import com.acme.edu.saver.ConsoleLoggerSaver;
 import com.acme.edu.loggerexceptions.LoggerSaverException;
-import com.acme.edu.Saver;
+import com.acme.edu.saver.Saver;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
