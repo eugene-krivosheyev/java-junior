@@ -23,8 +23,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    @Test
-    @Ignore
+    @Test @Ignore
     public void shouldLogInteger() throws IOException {
         //region when
         Logger.log(1);
@@ -41,8 +40,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test
-    @Ignore
+    @Test @Ignore
     public void shouldLogByte() throws IOException {
         //region when
         Logger.log((byte)1);

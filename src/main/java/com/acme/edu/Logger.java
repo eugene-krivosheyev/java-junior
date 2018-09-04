@@ -29,10 +29,27 @@ public class Logger {
 
 import com.acme.edu.decorators.*;
 import com.acme.edu.message.*;
+import com.acme.edu.saver.FileSaver;
+
+import java.io.*;
 
 public class Logger {
-    public static Controller controller = new Controller(System.out::println);
-
+    public static Controller controller;
+    static {
+        try {
+            controller = new Controller(
+                    new FileSaver(
+                            new PrintWriter(
+                                    new OutputStreamWriter(
+                                            new BufferedOutputStream(
+                                                    new FileOutputStream(new File(".", "logger.txt"), true)
+                                            )
+                                    )
+                            )));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
         Logger.log("Byaka");
