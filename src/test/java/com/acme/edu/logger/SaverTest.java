@@ -1,7 +1,7 @@
 package com.acme.edu.logger;
 
 import com.acme.edu.saver.SaveException;
-import com.acme.edu.saver.SimpleSaver;
+import com.acme.edu.saver.ConsoleSaver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,14 +27,14 @@ public class SaverTest implements SysoutCaptureAndAssertionAbility {
 
     @Test(expected = SaveException.class)
     public void shouldDoNothingWhenMessageIsNull() throws SaveException{
-        SimpleSaver testSaver = new SimpleSaver();
+        ConsoleSaver testSaver = new ConsoleSaver();
         testSaver.save(null);
         assertSysoutEquals("");
     }
 
     @Test
     public void shouldPrintProvidedMessageWhenItIsNotNull() throws SaveException{
-        SimpleSaver testSaver = new SimpleSaver();
+        ConsoleSaver testSaver = new ConsoleSaver();
         testSaver.save("Test message string");
         assertSysoutEquals("Test message string" + System.lineSeparator());
     }

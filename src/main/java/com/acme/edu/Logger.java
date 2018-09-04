@@ -41,7 +41,7 @@ public class Logger {
         return controller.log(new ObjectMessage(message));
     }
 
-    public static void flush() {
+    public static void flush() throws LogOperationException{
         controller.flush();
     }
 }

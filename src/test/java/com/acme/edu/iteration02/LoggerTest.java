@@ -27,6 +27,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
    // TODO: implement Logger solution to match specification as tests
+
     @Ignore
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException, LogOperationException {
@@ -87,7 +88,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains ("0");
         //endregion
     }
-*/  @Ignore
+*/
+    @Ignore
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException, LogOperationException {
         //region when

@@ -1,8 +1,9 @@
 package com.acme.edu.controller;
 
 import com.acme.edu.message.Message;
+import com.acme.edu.saver.ConsoleSaver;
 import com.acme.edu.saver.SaveException;
-import com.acme.edu.saver.SimpleSaver;
+import com.acme.edu.saver.Saver;
 
 import static java.util.Objects.isNull;
 
@@ -12,11 +13,11 @@ import static java.util.Objects.isNull;
 public class Controller {
 
     private Message currentMessage;
-    private SimpleSaver saver = new SimpleSaver();
+    private Saver saver = new ConsoleSaver();
+
+    private LogOperationException exception = null;
 
     public int log(Message message) throws LogOperationException {
-
-        LogOperationException exception = null;
 
         if (isNull(currentMessage)){
             currentMessage = message;
@@ -51,9 +52,16 @@ public class Controller {
 
     }
 
-    public void flush() {
+    public void flush() throws LogOperationException{
         if (!isNull(currentMessage)) {
-            System.out.println(currentMessage.getDecoratedMessage());
+            String decoratedMessage = currentMessage.getDecoratedMessage();
+            try {
+                saver.save(decoratedMessage);
+            } catch (SaveException e) {
+                e.printStackTrace();
+                exception = new LogOperationException("Your output is null", e, 228);
+                throw exception;
+            }
         }
         currentMessage = null;
     }
