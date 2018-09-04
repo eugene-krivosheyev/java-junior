@@ -5,13 +5,14 @@ import com.acme.edu.message.FlushMessage;
 import com.acme.edu.message.Message;
 import com.acme.edu.message.MessageType;
 import com.acme.edu.saver.DefaultSaver;
+import com.acme.edu.saver.FileSaver;
 import com.acme.edu.saver.Saver;
 import com.acme.edu.saver.SavingException;
 
 import java.util.EnumMap;
 
 public class Controller {
-    private Saver defaultSaver = new DefaultSaver();
+    private Saver defaultSaver = new FileSaver();
     private Message prevMessage = new FlushMessage();
     private EnumMap<MessageType, Decorator> decoratorMap;
 

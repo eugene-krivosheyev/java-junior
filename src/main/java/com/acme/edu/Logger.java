@@ -91,5 +91,5 @@ public class Logger {
         return controller.update(type, newDecorator);
     }
 
-    private static Controller controller = new Controller(System.out::println);
+    private static Controller controller = new Controller();
 }

@@ -10,7 +10,7 @@ public class FileSaver implements Saver {
     private String parent;
 
     public FileSaver() {
-        this(".", "default.txt", false, "UTF-16");
+        this(".", "default.txt", false, "windows-1251");
     }
 
     public FileSaver(String parent, String fileName, boolean toAppend, String charsetName) {
