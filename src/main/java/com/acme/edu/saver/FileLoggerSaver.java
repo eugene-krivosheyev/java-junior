@@ -40,9 +40,9 @@ public class FileLoggerSaver implements Saver {
         )) {
             printWriter.println(decoratedOutput);
         } catch (FileNotFoundException e) {
-            throw new LoggerSaverException("could not write into file", LoggerErrors.UNABLE_SAVE_FILE);
+            throw new LoggerSaverException("could not find file", LoggerErrors.UNABLE_SAVE_FILE);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new LoggerSaverException("could not write into file", LoggerErrors.UNABLE_SAVE_FILE);
         }
     }
 
