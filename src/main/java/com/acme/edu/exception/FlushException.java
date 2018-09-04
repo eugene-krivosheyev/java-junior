@@ -1,4 +1,4 @@
-package com.acme.edu;
+package com.acme.edu.exception;
 
 public class FlushException extends Exception{
 

@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-import com.acme.edu.DecorateException;
+import com.acme.edu.exception.DecorateException;
 
 public class CharMessage implements Message {
     private final String PREFIX = "char";

@@ -1,4 +1,4 @@
-package com.acme.edu;
+package com.acme.edu.exception;
 
 public class SaveException extends Exception {
     public SaveException() {

@@ -1,14 +1,21 @@
 package com.acme.edu;
 
+import com.acme.edu.exception.AccumulateException;
+import com.acme.edu.exception.DecorateException;
+import com.acme.edu.exception.FlushException;
+import com.acme.edu.exception.SaveException;
 import com.acme.edu.message.Message;
+import com.acme.edu.saver.ConsoleSaver;
+import com.acme.edu.saver.FileSaver;
+import com.acme.edu.saver.Saver;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 public class LoggerController {
     private Message currentMessage = null;
-    private Saver saver = new Saver();
-    private Collection<Message> collectedMessages = new ArrayList<>();
+    private Saver saver = new FileSaver();
+    private Collection<Message> collectedMessages = new LinkedList<>();
 
     public void log(Message message) {
         try {

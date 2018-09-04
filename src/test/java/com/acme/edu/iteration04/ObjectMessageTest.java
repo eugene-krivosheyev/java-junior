@@ -1,7 +1,7 @@
 package com.acme.edu.iteration04;
 
 
-import com.acme.edu.DecorateException;
+import com.acme.edu.exception.DecorateException;
 import com.acme.edu.message.ObjectMessage;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;

@@ -1,5 +1,6 @@
 package com.acme.edu;
 
+import com.acme.edu.exception.FlushException;
 import com.acme.edu.message.*;
 
 public class Logger {

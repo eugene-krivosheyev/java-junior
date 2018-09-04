@@ -1,8 +1,13 @@
 package com.acme.edu.iteration04;
 
 import com.acme.edu.*;
+import com.acme.edu.exception.AccumulateException;
+import com.acme.edu.exception.DecorateException;
+import com.acme.edu.exception.FlushException;
+import com.acme.edu.exception.SaveException;
 import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.StringMessage;
+import com.acme.edu.saver.ConsoleSaver;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;
@@ -13,7 +18,7 @@ public class LoggerConrollerTest {
     public void shouldInvokeOneTimeSaveMethodWhenGetTheFirstMessage() throws SaveException {
         LoggerController loggerController = new LoggerController();
         IntMessage stubIntMessage = mock(IntMessage.class);
-        Saver mockSaver = mock(Saver.class);
+        ConsoleSaver mockSaver = mock(ConsoleSaver.class);
         loggerController.setSaver(mockSaver);
 
         loggerController.log(stubIntMessage);
@@ -27,7 +32,7 @@ public class LoggerConrollerTest {
         StringMessage firstMessage = mock(StringMessage.class);
         StringMessage secondMessage = mock(StringMessage.class);
 
-        Saver saverMock = mock(Saver.class);
+        ConsoleSaver saverMock = mock(ConsoleSaver.class);
         loggerController.setSaver(saverMock);
 
         loggerController.log(firstMessage);
@@ -43,7 +48,7 @@ public class LoggerConrollerTest {
         StringMessage firstStringMessage = mock(StringMessage.class);
         IntMessage secondIntMessage = mock(IntMessage.class);
 
-        Saver saverMock = mock(Saver.class);
+        ConsoleSaver saverMock = mock(ConsoleSaver.class);
         loggerController.setSaver(saverMock);
 
         when(firstStringMessage.decorate()).thenReturn(firstStringMessage);
@@ -60,7 +65,7 @@ public class LoggerConrollerTest {
         LoggerController loggerController = new LoggerController();
         StringMessage stubStringMessage = mock(StringMessage.class);
 
-        Saver saverMock = mock(Saver.class);
+        ConsoleSaver saverMock = mock(ConsoleSaver.class);
         loggerController.setSaver(saverMock);
 
         when(stubStringMessage.decorate()).thenReturn(stubStringMessage);
