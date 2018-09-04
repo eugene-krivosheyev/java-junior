@@ -49,7 +49,7 @@ public class IntMessage extends Message {
                     });
             return result;
         } catch (IntCollectionOverflowException e) {
-            this.collection = ((ArrayList)this.collection).subList(e.getIndex(),this.collection.size());
+            this.collection = ((ArrayList)this.collection).subList(e.getIndex()-1,this.collection.size());
             return e.getCurrentSum();
         }
     }

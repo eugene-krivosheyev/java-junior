@@ -6,6 +6,11 @@ public class SavingException extends Exception {
         super();
     }
 
+    public SavingException(String message, Throwable cause, int exceptionCode) {
+        super(message, cause);
+        this.exceptionCode = exceptionCode;
+    }
+
     public SavingException(int code) {
         super();
         exceptionCode = code;
