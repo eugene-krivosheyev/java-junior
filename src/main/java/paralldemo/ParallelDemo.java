@@ -1,8 +1,6 @@
 package paralldemo;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 import static java.lang.Thread.currentThread;
 import static java.lang.Thread.interrupted;
@@ -10,29 +8,19 @@ import static java.lang.Thread.sleep;
 
 public class ParallelDemo {
     public static void main(String[] args) throws InterruptedException {
-        Executor pool = Executors.newFixedThreadPool(4);
-        pool.execute(() -> {
-            /*
-            while (!interrupted()) {
-                try {
-                    System.out.println(currentThread().getName());
-                    sleep(100);
-                } catch (InterruptedException e) {
+        ExecutorService pool = Executors.newFixedThreadPool(4);
+        Future<String> result = pool.submit(() -> "abc");
 
-                }
-            }*/
-            System.out.println("HW!!");
-        });
+        result.isDone();
+        try {
+            result.get(10_000, TimeUnit.MILLISECONDS);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
 
-
-
-        ((ExecutorService) pool).shutdown();
-        ((ExecutorService) pool).shutdownNow();
-
-//        while (true) {
-//            sleep(100);
-//            System.out.println(Thread.currentThread().getName());
-//        }
+        pool.shutdownNow();
 
     }
 }
