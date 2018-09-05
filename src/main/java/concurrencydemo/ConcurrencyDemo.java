@@ -24,7 +24,6 @@ public class ConcurrencyDemo {
 
         thread1.join();
         thread2.join();
-        System.out.println(counter.getValue());
     }
 }
 
@@ -39,24 +38,7 @@ class Counter {
     public void increment() {
         synchronized(this) {
             value++;
-            history.add();
         }
     }
 
-    public void decrement() {
-//        Lock lock = new ReentrantLock();
-        ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
-//        lock.tryLock();
-        lock.readLock().lock();
-        lock.writeLock().lock();
-        try {
-            value--;
-        } finally {
-            lock.unlock();
-        }
-    }
-
-    public int getValue() {
-        return value;
-    }
 }
