@@ -9,18 +9,22 @@ import static java.lang.Thread.sleep;
 public class ParallelDemo {
     public static void main(String[] args) throws InterruptedException {
         ExecutorService pool = Executors.newFixedThreadPool(4);
-        Future<String> result = pool.submit(() -> "abc");
 
-        result.isDone();
-        try {
-            result.get(10_000, TimeUnit.MILLISECONDS);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        }
+        pool.execute(() -> {
+            int count = 0;
+            try {
+                while (!interrupted()) {
+                    System.out.println(count++);
+                    Thread.sleep(5_000);
+                }
+            } catch (InterruptedException e) {
 
+            }
+        });
+
+        System.out.println("before shutdown");
         pool.shutdownNow();
+        System.out.println("after shutdown");
 
     }
 }
