@@ -1,35 +1,38 @@
 package paralldemo;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import static java.lang.Thread.currentThread;
 import static java.lang.Thread.interrupted;
 import static java.lang.Thread.sleep;
 
 public class ParallelDemo {
     public static void main(String[] args) throws InterruptedException {
-       final Thread controlled = new Thread(() -> {
-           while (!interrupted()) {
-               try {
-    //               this != currentThread()
+        Executor pool = Executors.newFixedThreadPool(4);
+        pool.execute(() -> {
+            /*
+            while (!interrupted()) {
+                try {
                     System.out.println(currentThread().getName());
-                   sleep(100);
-               } catch (InterruptedException e) {
+                    sleep(100);
+                } catch (InterruptedException e) {
 
-               }
-           }
-       });
-       controlled.setDaemon(true);
-       controlled.start();
-       controlled.stop(); controlled.suspend(); controlled.resume();
-       controlled.getName();
-       controlled.setPriority(Thread.MAX_PRIORITY); controlled.getPriority();
+                }
+            }*/
+            System.out.println("HW!!");
+        });
 
-        controlled.join(10_000);
 
-        controlled.interrupt();
-        while (true) {
-            sleep(100);
-            System.out.println(Thread.currentThread().getName());
-        }
+
+        ((ExecutorService) pool).shutdown();
+        ((ExecutorService) pool).shutdownNow();
+
+//        while (true) {
+//            sleep(100);
+//            System.out.println(Thread.currentThread().getName());
+//        }
 
     }
 }
