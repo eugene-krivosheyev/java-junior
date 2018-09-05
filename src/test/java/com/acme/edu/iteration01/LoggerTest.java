@@ -1,11 +1,9 @@
 package com.acme.edu.iteration01;
 
-import com.acme.edu.Decorator.IntegerDecorator;
-import com.acme.edu.Decorator.PrimitiveDecorator;
+import com.acme.edu.decorator.IntegerDecorator;
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.controller.LogOperationException;
-import com.acme.edu.message.IntMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;

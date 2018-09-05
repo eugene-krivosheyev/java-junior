@@ -1,4 +1,4 @@
-package com.acme.edu.Decorator;
+package com.acme.edu.decorator;
 
 import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.Message;

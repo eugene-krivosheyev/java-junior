@@ -1,6 +1,6 @@
 package com.acme.edu.logger;
 
-import com.acme.edu.Decorator.IntegerDecorator;
+import com.acme.edu.decorator.IntegerDecorator;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.controller.Controller;
 import com.acme.edu.controller.LogOperationException;

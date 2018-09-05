@@ -1,11 +1,11 @@
 package com.acme.edu;
 
-import com.acme.edu.Decorator.Decorator;
+import com.acme.edu.decorator.Decorator;
 import com.acme.edu.controller.Controller;
 import com.acme.edu.controller.LogOperationException;
 import com.acme.edu.message.*;
 
-import static com.acme.edu.Decorator.IntegerDecorator.INTEGER;
+import static com.acme.edu.decorator.IntegerDecorator.INTEGER;
 
 public class Logger {
 

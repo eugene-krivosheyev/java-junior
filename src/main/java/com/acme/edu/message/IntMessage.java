@@ -1,9 +1,9 @@
 package com.acme.edu.message;
 
-import com.acme.edu.Decorator.IntegerDecorator;
-import com.acme.edu.Decorator.PrimitiveDecorator;
-import com.acme.edu.Decorator.Decorator;
+import com.acme.edu.decorator.PrimitiveDecorator;
+import com.acme.edu.decorator.Decorator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -11,10 +11,10 @@ import java.util.Collection;
  * Created by Java_1 on 24.08.2018.
  */
 
-public class IntMessage implements Message {
+public class IntMessage implements Message, Serializable {
 
     private int value;
-    private Decorator decorator;
+    transient private Decorator decorator;
     public static Collection<Integer> arrayOfInt = new ArrayList<>();
 
     public IntMessage(int message) {
