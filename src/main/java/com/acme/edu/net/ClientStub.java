@@ -4,30 +4,28 @@ import java.io.*;
 import java.net.Socket;
 
 public class ClientStub {
-    public void flush() {
-
+    public void flush(Writer writer) {
+        try {
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void log(int message) {
         try (
-                Socket socket = new Socket("127.0.0.1", 6666);
-                PrintWriter out = new PrintWriter(
-                        new OutputStreamWriter(
-                                new BufferedOutputStream(
-                                        socket.getOutputStream())));
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(
-                                new BufferedInputStream(
-                                        socket.getInputStream())));
+            Socket socket = new Socket("127.0.0.1", 6666);
+            PrintWriter out = new PrintWriter(
+                    new OutputStreamWriter(
+                            new BufferedOutputStream(
+                                    socket.getOutputStream())));
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(
+                            new BufferedInputStream(
+                                    socket.getInputStream())))
         ) {
             out.println("log int " + String.valueOf(message));
-            out.flush();
-//            String line = null;
-////            while ((
-//            line = in.readLine();
-////            )!= null) {
-//            System.out.println("клиент получил: " + line);
-////            }
+            flush(out);
         } catch (IOException e) {
             e.printStackTrace();
         }
