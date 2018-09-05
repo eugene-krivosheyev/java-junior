@@ -2,9 +2,7 @@ package paralldemo;
 
 import java.util.concurrent.*;
 
-import static java.lang.Thread.currentThread;
 import static java.lang.Thread.interrupted;
-import static java.lang.Thread.sleep;
 
 public class ParallelDemo {
     public static void main(String[] args) throws InterruptedException {
@@ -25,7 +23,6 @@ public class ParallelDemo {
         System.out.println("before shutdown");
         pool.shutdownNow();
         System.out.println("after shutdown");
-
     }
 }
 
