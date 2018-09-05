@@ -23,7 +23,7 @@ class BlockingQueue<T> {
                         queue.wait(10_000);
                     }
                 } catch (InterruptedException e) {
-                    //????
+                    return;
                 }
             } else  {
                 queue.add(element);
@@ -37,7 +37,7 @@ class BlockingQueue<T> {
                 try {
                     queue.wait();
                 } catch (InterruptedException e) {
-
+                    return null;
                 }
             } else {
                 T object = queue.remove(0);
@@ -45,5 +45,6 @@ class BlockingQueue<T> {
                 return object;
             }
         }
+        return null;
     }
 }
