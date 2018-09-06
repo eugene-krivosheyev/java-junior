@@ -7,7 +7,7 @@
 # Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice)
 - Introduction to Java. Benefits.
 - JDK, JVM.
-- Java 2 (Java EE / SE / ME) 
+- Java 2 (Java EE / SE / ME)
 - Tools: java, javac, javadoc
 
 ## Lab: Installing JDK, Tuning Environmental Variables
@@ -526,7 +526,7 @@ assertMessageEquals("3")
 - Show Sonar statistics
 - Test Point of View: main scenarios
 - Test PoV: alt scenarios
-- Structure PoV: UML diagram 
+- Structure PoV: UML diagram
 - Structure PoV: Class Sources
 - Dynamic PoV: key algorithms
 
@@ -689,7 +689,7 @@ assertMessageEquals("3")
 
 ---
 
-# Work Project. Session 2 (24/24)
+# Work Project. Session 2 (16/16)
 
 ## Given
 - PM
@@ -712,7 +712,7 @@ assertMessageEquals("3")
 - Show full MVN build on Jenkins
 - Test Point of View: main scenarios
 - Test PoV: alt scenarios
-- Structure PoV: UML diagram 
+- Structure PoV: UML diagram
 - Structure PoV: Class Sources
 - Dynamic PoV: key algorithms
 - Show Sonar statistics:
