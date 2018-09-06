@@ -702,10 +702,24 @@ assertMessageEquals("3")
 - Every team's git repo visible to PM and is identifiable
 
 ## When
-- Teams deliver product with six iterations
-
-## Then
+- Teams deliver product with four iterations
 - PM and Business Customers accept product with six demo sessions
+- Jenkins project: projectXX
+- Sonar entry: projectXX
+
+## Then on any demo session
+- Ready test environment: notebook VGA-connected to projector
+- Show full MVN build on Jenkins
+- Test Point of View: main scenarios
+- Test PoV: alt scenarios
+- Structure PoV: UML diagram 
+- Structure PoV: Class Sources
+- Dynamic PoV: key algorithms
+- Show Sonar statistics:
+- Test Coverage ≥ 80%
+- Code reuse and minimum code duplication
+- Code style
+- Documented public API ≥ 60%
 
 ---
 
