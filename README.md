@@ -702,7 +702,7 @@ assertMessageEquals("3")
 - Every team's git repo visible to PM and is identifiable
 
 ## When
-- Teams deliver product with four iterations
+- Teams deliver product with four iterations: Th-Fr 10:00-13:00 and 17:00-18:00
 - PM and Business Customers accept product with six demo sessions
 - Jenkins project: projectXX
 - Sonar entry: projectXX
