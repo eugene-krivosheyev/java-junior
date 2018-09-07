@@ -716,6 +716,7 @@ assertMessageEquals("3")
 - Structure PoV: Class Sources
 - Dynamic PoV: key algorithms
 - Parallel & Concurrency PoV: threads, data races, JMM issues
+- Test PoV: Run load tests and profiler and view profier results
 - Show Sonar statistics:
 - Test Coverage ≥ 80%
 - Code reuse and minimum code duplication
