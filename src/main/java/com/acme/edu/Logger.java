@@ -5,6 +5,7 @@ public class Logger {
         System.out.println("primitive: " + message);
     }
 
+    //TODO dflkjdfkgjhdfkgjdhgkjdfhgkdfjhg
     public static void log(byte message) {
         System.out.println("primitive: " + message);
     }
