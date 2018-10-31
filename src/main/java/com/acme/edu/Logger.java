@@ -10,8 +10,22 @@ import java.io.IOException;
  * @since 16.18
  */
 public class Logger {
-    public static void log(int message) {
+    public static void log(String message) {
+        if (message == null) return; //Guard Clause
+        if ("".equals(message)) throw new IllegalArgumentException();
+
         printToConsole("primitive: " + message);
+
+        //===================
+        if (message == null) {
+            if ("".equals(message)) {
+
+            } else {
+
+            }
+        } else { //main flow
+
+        }
     }
 
     /**
@@ -23,12 +37,12 @@ public class Logger {
      * 2. Architecture comments & whys?
      * - JDBC -> ORM, faster
      */
-    public static int findMinimalElementInCollection(byte message) throws IOException {
+    public static void findMinimalElementInCollection(byte message) throws IOException {
         //region checks
-        boolean a;
-        boolean b;
-        boolean c;
-        boolean d;
+        boolean a = false;
+        boolean b = false;
+        boolean c = false;
+        boolean d = false;
         boolean isUserLoggedIn = a != b;
         //c == d -> is user registered?
         if (isUserLoggedIn && c == d) {
