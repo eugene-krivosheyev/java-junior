@@ -60,13 +60,17 @@ public class Logger {
         printToConsole("primitive: " + message);
     }
 
+    //<=5MSLoC -> <=100k global vars
+    public static int primitiveClassVar;
+    public static Object refClassVar = new Object();
     public static void main(String[] args) {
-        printToConsole("HW!!!");
+        int localOrStackOrTempOrAutoVar = 0;
+        Logger.printToConsole("HW!!!");
     }
 
-
-
     private static void printToConsole(String s) {
+        int localVar = 0;
         System.out.println(s);
+//        printToConsole(s); //Tail Recursion, Java - no (((
     }
 }
