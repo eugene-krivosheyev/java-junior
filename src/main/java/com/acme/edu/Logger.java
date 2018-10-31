@@ -8,3 +8,7 @@ public class Logger {
         System.out.println("primitive: " + message);
     }
 }
+
+public static void main(String[] args) {
+    System.out.println("HW!");
+}
