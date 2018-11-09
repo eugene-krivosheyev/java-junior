@@ -1,5 +1,7 @@
 package demo.staticdemo;
 
+import java.sql.DriverManager;
+
 public class StaticDemo {
     private static int staticState = 0;
     private static StaticDemo staticState2;
@@ -18,7 +20,15 @@ public class StaticDemo {
     }
 
     static {
+        staticState = 1;
+    }
 
+    static {
+        System.out.println("ku-ku");
+    }
+
+    static {
+        DriverManager.registerDriver(new StaticDemo(0));
     }
 
     //==============================
