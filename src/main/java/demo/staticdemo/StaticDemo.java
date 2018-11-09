@@ -1,7 +1,5 @@
 package demo.staticdemo;
 
-import java.sql.DriverManager;
-
 public class StaticDemo {
     private static int staticState = 0;
     private static StaticDemo staticState2;
@@ -14,7 +12,7 @@ public class StaticDemo {
         StaticDemo.staticState = 1;
         StaticDemo.sm();
 
-        staticState2 = new StaticDemo();
+        staticState2 = new StaticDemo(0);
         staticState2.staticState = 0;
         staticState2.sm();
     }
@@ -27,9 +25,9 @@ public class StaticDemo {
         System.out.println("ku-ku");
     }
 
-    static {
-        DriverManager.registerDriver(new StaticDemo(0));
-    }
+//    static {
+//        DriverManager.registerDriver(new StaticDemo(0));
+//    }
 
     //==============================
 
@@ -46,7 +44,7 @@ public class StaticDemo {
 
 class Human {
     static void killEmAll() {
-        killMyself();
+//        killMyself();
     }
 
     void killMyself() {
