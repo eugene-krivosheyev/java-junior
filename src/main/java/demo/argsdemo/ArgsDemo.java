@@ -1,4 +1,4 @@
-package demo;
+package demo.argsdemo;
 
 public class ArgsDemo {
     static int globalState = 0;
