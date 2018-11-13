@@ -1,27 +1,34 @@
 package demo.staticdemo;
 
 public class Superman {
-    private static final Superman theOne = new Superman();
-
-    public static Superman getTheOne() {
-        return theOne;
-    }
-
-    //=======================
-
     private int id;
     private String name;
 
-    private Superman() { }
+    Superman() { }
+}
+
+class SupermanFactory {
+    private static volatile Superman theOne; //EAGER
+
+    public static Superman getTheOne() { //LAZY
+        if (theOne != null) return theOne;
+
+        synchronized(theOne) {
+            if (theOne != null) return theOne;
+            theOne = new Superman();
+            return theOne;
+        }
+    }
 }
 
 class App {
     public static void main(String[] args) {
-        System.out.println(Superman.getTheOne());
-        Superman.getTheOne();
-        Superman.getTheOne();
-        Superman.getTheOne();
-        Superman.getTheOne();
-        Superman.getTheOne();
+        System.out.println(SupermanFactory.getTheOne());
+
+        SupermanFactory.getTheOne();
+        SupermanFactory.getTheOne();
+        SupermanFactory.getTheOne();
+        SupermanFactory.getTheOne();
+        SupermanFactory.getTheOne();
     }
 }
