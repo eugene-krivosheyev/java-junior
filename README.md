@@ -6,7 +6,7 @@
 # Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice)
 - Introduction to Java. Benefits.
 - JDK, JVM.
-- Java 2 (Java EE / SE / ME) 
+- Java 2 (Java EE / SE / ME)
 - Tools: java, javac, javadoc
 
 ## Lab: Installing JDK, Tuning Environmental Variables
@@ -105,6 +105,7 @@ $ git push
 - Debugging
 - Hotkeys
 - Git operations
+- [Historical debug and "step back" option](https://www.jetbrains.com/help/idea/debugging-with-chronon.html)
 
 ## Lab: Installing, the first application compile, run, debugging
 - Download and install [IDEA](https://www.jetbrains.com/idea/?fromMenu) with trial corporate license
