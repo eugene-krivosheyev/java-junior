@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import static java.lang.System.lineSeparator;
 
+//ATDD
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
