@@ -2,7 +2,6 @@ package com.acme.edu;
 
 
 public class TypeSafeLogger {
-    private static final String LINE_SEPARATOR = "";
     private static final String PRIMITIVE_PREFIX = "primitive: ";
     public static final String CHAR_PREFIX = "char: ";
 
