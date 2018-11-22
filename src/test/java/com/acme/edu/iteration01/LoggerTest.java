@@ -28,14 +28,18 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogInteger() throws IOException {
 //        region when
+        //System.out.println("!!!");
         TypeSafeLogger.log(1);
+        TypeSafeLogger.flush();
         TypeSafeLogger.log(0);
+        TypeSafeLogger.flush();
         TypeSafeLogger.log(-1);
+        TypeSafeLogger.flush();
         //endregion
         //i18n, l16n
         //region then
         assertSysoutContains("primitive: ");
-        assertSysoutEquals("primitive: 1\nprimitive: 0\nprimitive: -1" + lineSeparator());
+        assertSysoutEquals("primitive: 1" + lineSeparator() + "primitive: 0" + lineSeparator() + "primitive: -1" + lineSeparator());
         //endregion
     }
 
@@ -43,8 +47,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogByte() throws IOException {
         //region when
         TypeSafeLogger.log((byte)1);
+        TypeSafeLogger.flush();
         TypeSafeLogger.log((byte)0);
+        TypeSafeLogger.flush();
         TypeSafeLogger.log((byte)-1);
+        TypeSafeLogger.flush();
         //endregion
 
         //region then
@@ -61,7 +68,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogChar() throws IOException {
         //region when
         TypeSafeLogger.log('a');
+        TypeSafeLogger.flush();
         TypeSafeLogger.log('b');
+        TypeSafeLogger.flush();
         //endregion
 
         //region then
@@ -71,12 +80,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    /*
+
     @Test
     public void shouldLogString() throws IOException {
         //region when
         TypeSafeLogger.log("test string 1");
+        TypeSafeLogger.flush();
         TypeSafeLogger.log("other str");
+        TypeSafeLogger.flush();
         //endregion
 
         //region then
@@ -90,7 +101,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogBoolean() throws IOException {
         //region when
         TypeSafeLogger.log(true);
+        TypeSafeLogger.flush();
         TypeSafeLogger.log(false);
+        TypeSafeLogger.flush();
         //endregion
 
         //region then
@@ -104,6 +117,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogReference() throws IOException {
         //region when
         TypeSafeLogger.log(new Object());
+        TypeSafeLogger.flush();
         //endregion
 
         //region then
@@ -112,5 +126,5 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    */
+
 }

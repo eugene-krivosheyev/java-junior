@@ -1,8 +1,10 @@
 package com.acme.edu.iteration02;
 
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.TypeSafeLogger;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.io.IOException;
 
@@ -21,8 +23,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
 
-    /*
-    TODO: implement TypeSafeLogger solution to match specification as tests
+
+    //TODO: implement TypeSafeLogger solution to match specification as tests
 
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
@@ -32,15 +34,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         TypeSafeLogger.log(2);
         TypeSafeLogger.log("str 2");
         TypeSafeLogger.log(0);
+        TypeSafeLogger.flush();
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "str 1\n" +
-            "3\n" +
-            "str 2\n" +
-            "0\n"
-        );
+        assertSysoutContains("str 1");
+        assertSysoutContains("3");
+        assertSysoutContains("str 2");
+        assertSysoutContains("0");
         //endregion
     }
 
@@ -52,16 +53,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         TypeSafeLogger.log(Integer.MAX_VALUE);
         TypeSafeLogger.log("str 2");
         TypeSafeLogger.log(0);
+        TypeSafeLogger.flush();
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "str 1\n" +
-            "10\n" +
-            Integer.MAX_VALUE + "\n" +
-            "str 2\n" +
-            "0\n"
-        );
+        assertSysoutContains("str 1");
+        assertSysoutContains("10");
+        assertSysoutContains("Integer.MAX_VALUE");
+        assertSysoutContains("str 2");
+        assertSysoutContains("0");
         //endregion
     }
 
@@ -73,16 +73,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         TypeSafeLogger.log((byte)Byte.MAX_VALUE);
         TypeSafeLogger.log("str 2");
         TypeSafeLogger.log(0);
+        TypeSafeLogger.flush();
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "str 1\n" +
-            "10\n" +
-            Byte.MAX_VALUE + "\n" +
-            "str 2\n" +
-            "0\n"
-        );
+        assertSysoutContains("str 1");
+        assertSysoutContains("10");
+        assertSysoutContains("Byte.MAX_VALUE");
+        assertSysoutContains("str 2");
+        assertSysoutContains("0");
         //endregion
     }
 
@@ -97,18 +96,16 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         TypeSafeLogger.log("str 3");
         TypeSafeLogger.log("str 3");
         TypeSafeLogger.log("str 3");
+        TypeSafeLogger.flush();
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "str 1\n" +
-            "str 2 (x2)\n" +
-            "0\n" +
-            "str 2\n" +
-            "str 3 (x3)\n"
-        );
+        assertSysoutContains("str 1");
+        assertSysoutContains("str 2 (x2)");
+        assertSysoutContains("0");
+        assertSysoutContains("str 2");
+        assertSysoutContains("str 3 (x3)");
         //endregion
     }
 
-    */
 }
