@@ -82,10 +82,10 @@ public class TypeSafeLogger {
     private static void updateDecoratedMessage() {
         switch (lastType) {
             case INT_TYPE:
-                decoratedMessage = PRIMITIVE_PREFIX + (currentInt == Integer.MAX_VALUE ? "Integer.MAX_VALUE" : Integer.toString(currentInt));
+                decoratedMessage = PRIMITIVE_PREFIX + Integer.toString(currentInt);
                 break;
             case BYTE_TYPE:
-                decoratedMessage = PRIMITIVE_PREFIX + (currentByte == Byte.MAX_VALUE ? "Byte.MAX_VALUE" : Byte.toString(currentByte));
+                decoratedMessage = PRIMITIVE_PREFIX + Byte.toString(currentByte);
                 break;
             case CHAR_TYPE:
                 decoratedMessage = CHAR_PREFIX + Character.toString(currentChar);
