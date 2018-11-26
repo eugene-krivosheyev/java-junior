@@ -156,12 +156,12 @@ public class TypeSafeLogger {
 
     private static void flushIfTypeChanged(String newType) {
         if (lastType != newType && lastType != "") {
-            flush();
+            print(decoratedMessage);
         }
     }
 
     private static void setState(String message) {
-        if (lastType != STRING_TYPE) {
+        if (lastType != STRING_TYPE || !currentString.equals(message)) {
             currentString = message;
             lastType = STRING_TYPE;
             currentStringCount = 0;
