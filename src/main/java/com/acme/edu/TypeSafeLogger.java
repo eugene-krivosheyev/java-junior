@@ -32,50 +32,42 @@ public class TypeSafeLogger {
 
     public static void log(int message) {
         flushIfTypeChanged(INT_TYPE);
-        flushIfOverflow(message);
-        setCurrentState(message);
+        setState(message);
         updateDecoratedMessage();
     }
 
     public static void log(byte message) {
         flushIfTypeChanged(BYTE_TYPE);
-        flushIfOverflow(message);
-        setCurrentState(message);
+        setState(message);
         updateDecoratedMessage();
     }
 
     public static void log(char message) {
         flushIfTypeChanged(CHAR_TYPE);
-        setCurrentState(message);
+        setState(message);
         updateDecoratedMessage();
     }
 
     public static void log(boolean message) {
         flushIfTypeChanged(BOOLEAN_TYPE);
-        setCurrentState(message);
+        setState(message);
         updateDecoratedMessage();
     }
 
     public static void log(String message) {
         flushIfTypeChanged(STRING_TYPE);
         flushIfStringChanged(message);
-        setCurrentState(message);
+        setState(message);
         updateDecoratedMessage();
     }
 
     public static void log(Object message) {
         flushIfTypeChanged(REFERENCE_TYPE);
-        setCurrentState(message);
+        setState(message);
         updateDecoratedMessage();
     }
 
-    private static void flushIfOverflow(int message) {
-        if (message == Integer.MAX_VALUE) {
-            flush();
-        }
-    }
-
-    private static void flushIfOverflow(byte message) {
+    private static void checkIfOverflow(byte message) {
         if (message == Byte.MAX_VALUE) {
             flush();
         }
@@ -113,35 +105,57 @@ public class TypeSafeLogger {
         }
     }
 
-    private static void setCurrentState(int message) {
+    private static void setState(int message) {
         if (lastType != INT_TYPE) {
             currentInt = message;
             lastType = INT_TYPE;
         } else {
-            currentInt = (message == Integer.MAX_VALUE ? Integer.MAX_VALUE : currentInt + message);
+            if ((message < 0 && currentInt > 0) || (currentInt < 0 && message > 0)) {
+                currentInt = message + currentInt;
+            } else {
+                int sum = currentInt + message;
+                if (currentInt < 0 && sum > 0) {
+                    sum = currentInt - Integer.MIN_VALUE + message;
+                }
+                if (currentInt > 0 && sum < 0) {
+                    sum = currentInt - Integer.MAX_VALUE + message;
+                }
+                currentInt = sum;
+            }
         }
     }
 
-    private static void setCurrentState(byte message) {
+    private static void setState(byte message) {
         if (lastType != BYTE_TYPE) {
             currentByte = message;
             lastType = BYTE_TYPE;
         } else {
-            currentByte = (message == Byte.MAX_VALUE ? Byte.MAX_VALUE : (byte)(currentByte + message));
+            if ((message < 0 && currentByte > 0) || (currentByte < 0 && message > 0)) {
+                currentByte = (byte)(message + currentByte);
+            } else {
+                byte sum = (byte)(currentByte + message);
+                if (currentByte < 0 && sum > 0) {
+                    sum = (byte)(currentByte - Byte.MIN_VALUE + message);
+                }
+                if (currentByte > 0 && sum < 0) {
+                    sum = (byte)(currentByte - Byte.MAX_VALUE + message);
+                }
+                currentByte = sum;
+            }
         }
     }
 
-    private static void setCurrentState(char message) {
+    private static void setState(char message) {
         currentChar = message;
         lastType = CHAR_TYPE;
     }
 
-    private static void setCurrentState(boolean message) {
+    private static void setState(boolean message) {
         currentBoolean = message;
         lastType = BOOLEAN_TYPE;
     }
 
-    private static void setCurrentState(Object message) {
+    private static void setState(Object message) {
         currentReference = message;
         lastType = REFERENCE_TYPE;
     }
@@ -152,7 +166,7 @@ public class TypeSafeLogger {
         }
     }
 
-    private static void setCurrentState(String message) {
+    private static void setState(String message) {
         if (lastType != STRING_TYPE) {
             currentString = message;
             lastType = STRING_TYPE;
