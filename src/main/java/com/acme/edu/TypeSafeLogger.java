@@ -67,12 +67,6 @@ public class TypeSafeLogger {
         updateDecoratedMessage();
     }
 
-    private static void checkIfOverflow(byte message) {
-        if (message == Byte.MAX_VALUE) {
-            flush();
-        }
-    }
-
     private static void flushIfStringChanged(String message) {
         if (!currentString.equals(message)) {
             flush();
