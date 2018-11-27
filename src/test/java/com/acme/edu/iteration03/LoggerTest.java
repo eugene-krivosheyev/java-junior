@@ -1,8 +1,10 @@
 package com.acme.edu.iteration03;
 
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.TypeSafeLogger;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.io.IOException;
 
@@ -22,37 +24,40 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     /*
     TODO: implement TypeSafeLogger solution to match specification as tests
-
+*/
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
         TypeSafeLogger.log(new int[] {-1, 0, 1});
+        TypeSafeLogger.flush();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "primitives array: {-1, 0, 1}\n"
+            "primitives array: {-1, 0, 1}" + System.lineSeparator()
         );
         //endregion
     }
+
 
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
-        TypeSafeLogger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        TypeSafeLogger.log((int[][])new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        TypeSafeLogger.flush();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "primitives matrix: {\n" +
-                "{-1, 0, 1}\n" +
-                "{1, 2, 3}\n" +
-                "{-1, -2, -3}\n" +
-            "}\n"
+            "primitives matrix: {" + System.lineSeparator()+
+                "{-1, 0, 1}" + System.lineSeparator() +
+                "{1, 2, 3}" + System.lineSeparator() +
+                "{-1, -2, -3}" + System.lineSeparator() +
+            "}" + System.lineSeparator()
         );
         //endregion
     }
-
+/*
     @Test
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
