@@ -13,8 +13,12 @@ public class Logger {
         this.filter = filter;
     }
 
+    public void setFilter(LoggerFilter filter) {
+        this.filter = filter;
+    }
+
     //10 MSLoC
-    public void log(String message, int severity) {
+    public void log(Request message, int severity) {
         if(!filter.filter(message, severity)) {
             saver.save(message);
         }
