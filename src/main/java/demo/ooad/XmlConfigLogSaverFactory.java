@@ -1,7 +1,8 @@
 package demo.ooad;
 
-public class XmlConfigLogSaverFactory {
-    public static LogSaver create() {
+public class XmlConfigLogSaverFactory implements SaverFactory {
+    @Override
+    public LogSaver createLogSaver() {
         return null;
     }
 }
