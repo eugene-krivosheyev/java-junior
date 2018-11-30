@@ -1,13 +1,17 @@
 package demo.ooad;
 
 public class Logger {
-    //[GRASP] Creator
-    private LoggerFilter filter = new MessageLengthLogFilter(10); //Stateful
+    private LoggerFilter filter; //DI
     //[GoF] Factory Method
     private LogSaver saver //[PoEAA]
             = Registry
                 .createLogSaverFactory()
-                .createLogSaver();
+                    .createLogSaver();
+
+    //Constructor DI
+    public Logger(LoggerFilter filter) {
+        this.filter = filter;
+    }
 
     //10 MSLoC
     public void log(String message, int severity) {
