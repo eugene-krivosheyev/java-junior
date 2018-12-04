@@ -20,11 +20,11 @@ public class Logger {
     }
 
     //10 MSLoC
-    public void log(Command command, int severity) {
+    public void log(String command, int severity) {
         //not OOAD: "ask"
-        if(!filter.filter(command.getMessage, severity)) {
+        if(!filter.filter(command, severity)) {
             //OOAD: "tell"
-            command.save(saver);
+            saver.save(command);
         }
     }
 }
