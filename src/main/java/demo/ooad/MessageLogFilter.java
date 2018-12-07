@@ -24,7 +24,7 @@ class MessageLengthLogFilter extends MessageLogFilter {
     }
 
     @Override
-    private boolean checkMessageLength(String message) {
+    public boolean checkMessageLength(String message) {
         return message.length() > maxLength;
     }
 }
