@@ -2,7 +2,8 @@ package demo.ooad;
 
 //Service
 public class Logger {
-    private LoggerFilter filter; //field DI + Reflection
+    private LoggerFilter filter
+            = new MessageLengthLogFilter(10);
 
     //[GoF] Factory Method
     private LogSaver saver //[PoEAA]

@@ -19,7 +19,12 @@ abstract class MessageLogFilter extends LoggerFilter {
 class MessageLengthLogFilter extends MessageLogFilter {
     private int maxLength;
 
+    MessageLengthLogFilter() {
+        this(0);
+    }
+
     MessageLengthLogFilter(int maxLength) {
+        if (maxLength == 0) throw new IllegalArgumentException();
         this.maxLength = maxLength;
     }
 
