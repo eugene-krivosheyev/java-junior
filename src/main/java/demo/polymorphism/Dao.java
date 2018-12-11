@@ -8,13 +8,7 @@ import java.sql.SQLWarning;
  * [GoF] Strategy
  */
 public class Dao {
-    private StepStrategy step;
-
-    public Dao(StepStrategy step) {
-        this.step = step;
-    }
-
-    public void exec() {
+       public void exec(StepStrategy step) {
         Connection c = null;
         try {
 
@@ -44,12 +38,14 @@ public class Dao {
     }
 }
 
+@FunctionalInterface
 interface StepStrategy {
-    void doBusinessLogic();
+    void doBusinessLogic(String param);
 }
 
-class UpdateStepStrategy implements StepStrategy {
-    public void doBusinessLogic() {
-        //SQL UPDATE
+class Test {
+    public static void main(String[] args) {
+        Dao dao = new Dao();
+        dao.exec(param -> System.out.println(param));
     }
 }
