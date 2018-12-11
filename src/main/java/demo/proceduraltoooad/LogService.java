@@ -1,5 +1,8 @@
 package demo.proceduraltoooad;
 
+/**
+ * Stateful!!!
+ */
 public class LogService {
     private ConsolePrinter saver;
 
