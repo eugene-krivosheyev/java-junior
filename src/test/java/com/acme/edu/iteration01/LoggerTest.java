@@ -15,8 +15,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
-        resetOut();
-        captureSysout();
+        this.resetOut();
+        this.captureSysout();
     }
 
     @After
@@ -34,8 +34,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
         //i18n, l16n
         //region then
-        assertSysoutContains("primitive: ");
-        assertSysoutEquals("primitive: 1\nprimitive: 0\nprimitive: -1" + lineSeparator());
+        this.assertSysoutContains("primitive: ");
+        this.assertSysoutEquals("primitive: 1\nprimitive: 0\nprimitive: -1" + lineSeparator());
         //endregion
     }
 

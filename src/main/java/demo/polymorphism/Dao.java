@@ -40,7 +40,16 @@ public class Dao {
 
 @FunctionalInterface
 interface StepStrategy {
+    int I = 0;
     void doBusinessLogic(String param);
+
+    static void sm() {
+        System.out.println();
+    }
+
+    default void im() {
+        this.doBusinessLogic("");
+    }
 }
 
 class Test {
