@@ -11,6 +11,6 @@ public class LogService {
     }
 
     public void log(IntMessage message) {
-        saver.save(message.getDecoratedMessage());
+        saver.print(message.getDecoratedMessage());
     }
 }

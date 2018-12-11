@@ -2,7 +2,7 @@ package demo.proceduraltoooad;
 
 public class Logger {
     private static LogService logService = new LogService(
-                new ConsolePrinter()
+                new NewConsolePrinter()
             );
 
     public static void log(int message) {
