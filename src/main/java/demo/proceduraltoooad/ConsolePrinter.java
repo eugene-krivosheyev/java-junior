@@ -1,7 +1,7 @@
 package demo.proceduraltoooad;
 
 public class ConsolePrinter {
-    public String print(String message) {
+    public void print(String message) {
         System.out.println(message);
     }
 }

@@ -5,18 +5,18 @@ import static demo.finalandenumdemo.SeverityLevel.INFO;
 public class FinalAndEnumDemo {
     public static void main(String[] args) {
         SeverityLevel severityLevel = INFO;
-        switch (severityLevel) {
-            case INFO: break;
-            default:
-        }
+//        switch (severityLevel) {
+//            case INFO: break;
+//            default:
+//        }
 
         SeverityLevel severityLevel1 = INFO;
         SeverityLevel severityLevel2 = severityLevel1;
         SeverityLevel severityLevel3 = null;
-        System.out.println(severityLevel3);
+//        System.out.println(severityLevel3);
 
-        Color.valueOf("RED");
-        SuperColor.B.getCode();
+//        Color.valueOf("RED");
+//        SuperColor.B.getCode();
     }
 }
 
@@ -62,7 +62,7 @@ class Humanbeing {
 
     //===
 
-    private Hand hand;
+//    private Hand hand;
     private int age;
 }
 
