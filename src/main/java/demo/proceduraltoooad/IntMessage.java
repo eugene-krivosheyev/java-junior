@@ -1,27 +1,37 @@
 package demo.proceduraltoooad;
 
-public class IntMessage {
+import java.util.Date;
+
+class AbstractMessage extends Object {
+    private String timestamp;
+
+    public AbstractMessage(String timestamp) {
+        this.timestamp = timestamp;
+    }
+}
+
+public class IntMessage extends AbstractMessage {
     private int message;
 
+    public IntMessage(String timestamp) {
+        super(timestamp);
+    }
+
     public IntMessage(int message) {
-        //0.
-        //1. {}
+        this();
+        // {}
         this.message = message;
-        System.out.println("1");
     }
 
     public IntMessage() {
-        System.out.println("3");
+        super(new Date().toString());
+        // {}
+        System.out.println("");
     }
 
     {
-        System.out.println("2");
+        System.out.println();
     }
-
-    {
-        System.out.println("3");
-    }
-
 
     public String getDecoratedMessage() {
         return "PRIMITIVE: " + this.message;
