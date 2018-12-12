@@ -2,22 +2,19 @@ package demo.innerclasses;
 
 public class Demo {
     public static void main(String[] args) {
-        Outer.Inner obj =
-                new Outer.Inner();
+        Outer outer = new Outer();
+        Outer.Inner obj1 = outer.new Inner();
     }
 }
 
-
 class Outer {
-    private int instanceState;
+    private int instanceState = 0;
     private static int classState;
 
-    static class Inner {
+    private class Inner {
+        private int instanceState = 0;
         void im() {
-            System.out.println(classState);
+            System.out.println(Outer.this.instanceState);
         }
-    }
-
-    void om() {
     }
 }
