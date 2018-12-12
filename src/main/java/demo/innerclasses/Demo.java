@@ -1,38 +1,21 @@
 package demo.innerclasses;
 
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
+import demo.ooad.Logger;
+import demo.ooad.LoggerFilter;
 
 public class Demo {
-    public static void main(String[] args) {
-        Outer outer = new Outer();
-        Outer.Inner obj1 = outer.new Inner();
-    }
-
-
-}
-
-class Outer {
-    private int instanceState = 0;
     private static int classState;
+    private int instanceState;
 
-    Externalizable om(Externalizable p) {
-        class Inner implements Externalizable {
+    public static void main(String[] args) {
+        int tempVar = 0;
+
+        Logger logger = new Logger(new LoggerFilter() {
             @Override
-            public void writeExternal(ObjectOutput out) throws IOException {
-                //....
+            public boolean filter(String message, int severity) {
+                System.out.println(tempVar);
+                return false;
             }
-
-            @Override
-            public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-
-            }
-
-            public void m() {}
-        }
-
-        return new Inner();
+        });
     }
 }
