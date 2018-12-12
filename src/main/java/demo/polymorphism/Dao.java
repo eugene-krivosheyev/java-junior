@@ -12,7 +12,7 @@ public class Dao {
         Connection c = null;
         try {
 
-            step.doBusinessLogic(); //Strategy [GoF]
+//            step.doBusinessLogic(); //Strategy [GoF]
 
             SQLWarning nextWarning = c.getWarnings().getNextWarning();
             while (nextWarning != null) {
