@@ -17,10 +17,11 @@ public class Demo {
         );
 
         List<Integer> list = Arrays.asList(6,1,5,2,4,3);
-        list.stream()
+        list.parallelStream() //ForkJoinPool (MapReduce)
                 .filter(e -> e < 4)
                 .sorted(comparingInt(e2 -> e2))
                 .map(Object::toString)
+//                .reduce(); //CompletableFuture | Akka | RxJava
             .forEach(System.out::println);
     }
 }
