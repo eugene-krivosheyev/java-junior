@@ -1,17 +1,34 @@
 package demo.genericsdemo;
 
+import static demo.genericsdemo.MySuperComparator.compareTo;
+
 public class Demno {
     public static void main(String[] args) {
-        Object o1 = "";
-        if (o1 instanceof String) {
-            (String)o1
-        }
-        (String)MySuperComparator.compareTo()
+        String s = compareTo("", "");
+        Integer m = MySuperComparator.<Integer>m();
+
+        MySuperComparator<Object> comp
+                = new MySuperComparator<String>();
     }
 }
 
-class MySuperComparator {
-    public static Object compareTo(Object o1, Object o2) {
-        return 0;
+class MySuperComparator<V> {
+    private V field;
+
+    public V getField() {
+        return field;
+    }
+
+    public void setField(V field) {
+        this.field = field;
+    }
+
+    public static<T> T compareTo(T o1, T o2) {
+        T object;
+        return null;
+    }
+
+    public static<U> U m() {
+        return null;
     }
 }
