@@ -1,7 +1,6 @@
 package demo.genericsdemo;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import static demo.genericsdemo.MySuperComparator.compareTo;
 
@@ -14,6 +13,7 @@ public class Demno {
 //                new MySuperComparator<String>();
 //
         ArrayList<String> c = new ArrayList<>();
+
 
     }
 }
@@ -33,7 +33,7 @@ class SPC2<T extends String> implements SuperPuperComparator<T> {
     @Override
     public int compareTo(T o1, T o2) {
         o1.toUpperCase();
-        Collections.sort(new ArrayList<>());
+//        Collections.sort(new ArrayList<>());
         return 0;
     }
 }
