@@ -7,11 +7,10 @@ import java.sql.Statement;
 public class TwrDemo {
     public static void main(String[] args) {
         try (
-            Connection c = factory.getConnection();
+            Connection c = null; //factory.getConnection();
             Statement s = c.createStatement();
         ) {
 
-            empl.setSalary(+1_000);
             ///?????
 
         } catch (SQLException e) {
