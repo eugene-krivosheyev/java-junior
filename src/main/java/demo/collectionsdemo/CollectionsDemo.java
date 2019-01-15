@@ -1,18 +1,17 @@
 package demo.collectionsdemo;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.TreeSet;
-
-import static java.util.Comparator.reverseOrder;
+import java.util.List;
 
 public class CollectionsDemo {
     public static void main(String[] args) {
-        Collection<String> collection = new TreeSet<>(reverseOrder());
-        collection.add("1"); //!Comparable
+        List<String> collection = new ArrayList<>(500);
+        collection.add(0, "1"); //!Comparable
         collection.add("2");
         collection.add("3"); //hashCode == 1004576
         collection.add("3"); // -> return false
+        collection.get(0);
 
         Iterator<String> iterator = collection.iterator();
         while (iterator.hasNext()) {
