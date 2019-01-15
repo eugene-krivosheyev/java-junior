@@ -1,12 +1,16 @@
 package demo.collectionsdemo;
 
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 
 public class CollectionsDemo {
     public static void main(String[] args) {
-        Collection<String> collection = Arrays.asList("2", "1", "3");
+        Collection<String> collection = new HashSet<>(); //LoadFactor ==
+        collection.add("1");
+        collection.add("2");
+        collection.add("3"); //hashCode == 1004576
+        collection.add("3"); // -> return false
 
         Iterator<String> iterator = collection.iterator();
         while (iterator.hasNext()) {
