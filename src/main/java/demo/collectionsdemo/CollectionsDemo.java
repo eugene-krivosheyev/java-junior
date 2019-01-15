@@ -1,35 +1,51 @@
 package demo.collectionsdemo;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CollectionsDemo {
     public static void main(String[] args) {
-        List<String> collection = new LinkedList<>();
-        collection.add(10_000, "1"); //!Comparable
-        collection.add("2");
-        collection.add("3"); //hashCode == 1004576
-        collection.add("3"); // -> return false
-        collection.get(0); //O(n/2)
+        Set<Cat> cats = new HashSet<>();
+        Cat cat1 = new Cat("Cat1");
+        cats.add(cat1);
+        cat1.setName("Cat2");
+        cats.add(new Cat("Cat2"));
 
-        Iterator<String> iterator = collection.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(
-                iterator.next() //2 functions
-            );
-        }
+        cats.forEach(System.out::println);
+    }
+}
 
-        for (String e : collection) {
-            System.out.println(e);
-        }
+class Cat {
+    private String name;
 
-        collection.stream()
-                .map(Integer::parseInt)
-                .forEach(System.out::println);
+    Cat(String name) {
+        this.name = name;
+    }
 
-        List<String> strings = Collections.unmodifiableList(collection);
-        strings.add(""); //OpNSE
+    //!!!
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Cat cat = (Cat) o;
+
+        return name != null ? name.equals(cat.name) : cat.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Cat {" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

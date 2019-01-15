@@ -43,13 +43,13 @@ class Cat implements Cloneable {
         this.name = name;
     }
 
-    @Retry(kjghdkfgjh)
+//    @Retry(kjghdkfgjh)
     public String getName() {
         return name;
     }
 
-    @Transaction
-    @RolewAllowes
+//    @Transaction
+//    @RolewAllowes
     @Override
     @Deprecated
     public Object clone() throws CloneNotSupportedException {
