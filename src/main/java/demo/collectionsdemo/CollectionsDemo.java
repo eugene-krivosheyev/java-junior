@@ -1,13 +1,15 @@
 package demo.collectionsdemo;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.TreeSet;
+
+import static java.util.Comparator.reverseOrder;
 
 public class CollectionsDemo {
     public static void main(String[] args) {
-        Collection<String> collection = new HashSet<>(); //LoadFactor ==
-        collection.add("1");
+        Collection<String> collection = new TreeSet<>(reverseOrder());
+        collection.add("1"); //!Comparable
         collection.add("2");
         collection.add("3"); //hashCode == 1004576
         collection.add("3"); // -> return false
