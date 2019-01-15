@@ -11,6 +11,9 @@ public class CollectionsDemo {
         cat1.setName("Cat2");
         cats.add(new Cat("Cat2"));
 
+        for (Cat e : cats) {
+            cats.add(new Cat("1"));
+        }
         cats.forEach(System.out::println);
     }
 }
