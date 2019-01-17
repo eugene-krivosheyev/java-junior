@@ -1,17 +1,17 @@
 package demo.iodemo;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class IODemo {
     public static void main(String[] args) {
         File file = new File("test.txt"); //Path responsibility
 
         //Writing:
-        try (PrintWriter out =
-                     new PrintWriter(
-                             new FileWriter(file, true))) {
+        try (PrintWriter out = new PrintWriter(
+                new OutputStreamWriter(
+                    new BufferedOutputStream(
+                        new FileOutputStream(file, true)),
+                            "windows-1251"))) {
 
             out.println("тест 1");
             out.println("тест 2");
@@ -26,7 +26,7 @@ public class IODemo {
                  new InputStreamReader(
                      new BufferedInputStream(
                          new FileInputStream(file), 8000),
-                             "UTF-8"))) {
+                             "windows-1251"))) {
 
             String readLine = null;
             while ((readLine = in.readLine()) != null) {
@@ -37,6 +37,7 @@ public class IODemo {
             e.printStackTrace();
         }
 
+        /*
         // OR with simplified API (≥ v6):
         try {
             //NIO ≥ v6
@@ -46,5 +47,6 @@ public class IODemo {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
     }
 }
