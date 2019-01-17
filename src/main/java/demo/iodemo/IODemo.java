@@ -10,9 +10,9 @@ public class IODemo {
         try (PrintWriter out = new PrintWriter(
                 new OutputStreamWriter(
                     new BufferedOutputStream(
-                        new FileOutputStream(file, true)),
-                            "windows-1251"))) {
+                        new FileOutputStream(file, true))))) {
 
+            //java -Dfile.encoding=cp866
             out.println("тест 1");
             out.println("тест 2");
             out.println("тест 3");
@@ -25,8 +25,7 @@ public class IODemo {
         try (BufferedReader in = new BufferedReader(
                  new InputStreamReader(
                      new BufferedInputStream(
-                         new FileInputStream(file), 8000),
-                             "windows-1251"))) {
+                         new FileInputStream(file), 8000)))) {
 
             String readLine = null;
             while ((readLine = in.readLine()) != null) {
