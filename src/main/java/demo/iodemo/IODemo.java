@@ -1,51 +1,65 @@
 package demo.iodemo;
 
 import java.io.*;
+import java.util.Date;
 
 public class IODemo {
     public static void main(String[] args) {
         File file = new File("test.txt"); //Path responsibility
 
         //Writing:
-        try (PrintWriter out = new PrintWriter(
-                new OutputStreamWriter(
+        try (ObjectOutputStream out = new ObjectOutputStream(
                     new BufferedOutputStream(
-                        new FileOutputStream(file, true))))) {
+                        new FileOutputStream(file)))) {
 
-            //java -Dfile.encoding=cp866
-            out.println("тест 1");
-            out.println("тест 2");
-            out.println("тест 3");
+            out.writeObject(new Cat("1"));
+            out.writeObject(new Cat("2"));
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        //Reading:
-        try (BufferedReader in = new BufferedReader(
-                 new InputStreamReader(
-                     new BufferedInputStream(
-                         new FileInputStream(file), 8000)))) {
 
-            String readLine = null;
-            while ((readLine = in.readLine()) != null) {
-                System.out.println(">>> " + readLine);
+        try (ObjectInputStream in = new ObjectInputStream(
+                new BufferedInputStream(
+                        new FileInputStream(file)))) {
+
+            Cat cat = null;
+            while ( (cat = (Cat) in.readObject()) != null) {
+                System.out.println(">>> " + cat);
             }
 
-        } catch (IOException e) {
+        } catch (EOFException e) {
+
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+}
 
-        /*
-        // OR with simplified API (≥ v6):
-        try {
-            //NIO ≥ v6
-            Files.lines(Paths.get("test.txt"))
-                    .forEach(System.out::println);
+//JAXP API: SAX + DOM
+//JAXB API: XSD <-> class, xml <-> obj
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
+//obj <-> json: GSON, Jackson
+class Cat implements Serializable {
+//    private static long serialVerId = 0L;
+
+    private String name;
+//    @JsonIgnore
+    private transient Date smth;
+
+    public Cat(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Cat {" +
+                "name='" + name + '\'' +
+                '}';
     }
 }
