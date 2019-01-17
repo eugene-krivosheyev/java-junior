@@ -2,14 +2,14 @@ package demo.ThreadDemo;
 
 public class ThreadsDemo {
     public static void main(String[] args) {
-        Thread worker = new Thread() {
+        Thread worker = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
-                    System.out.println("Th-1");
+                    System.out.println("th-1");
                 }
             }
-        };
+        });
         worker.start();
 
         while (true) {
