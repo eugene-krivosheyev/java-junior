@@ -6,11 +6,12 @@ import java.nio.file.Paths;
 
 public class IODemo {
     public static void main(String[] args) {
-        File file = new File("test.txt");//Path
+        File file = new File("test.txt"); //Path responsibility
 
+        //Writing:
         try (PrintWriter out =
-                    new PrintWriter(
-                            new FileWriter(file, true))) {
+                     new PrintWriter(
+                             new FileWriter(file, true))) {
 
             out.println("тест 1");
             out.println("тест 2");
@@ -20,16 +21,15 @@ public class IODemo {
             e.printStackTrace();
         }
 
-        //-----
-
-        try (BufferedReader in =
-                     new BufferedReader(new InputStreamReader(
-                        new BufferedInputStream(
-                            new FileInputStream(file), 8000),
+        //Reading:
+        try (BufferedReader in = new BufferedReader(
+                 new InputStreamReader(
+                     new BufferedInputStream(
+                         new FileInputStream(file), 8000),
                              "UTF-8"))) {
 
             String readLine = null;
-            while((readLine = in.readLine()) != null) {
+            while ((readLine = in.readLine()) != null) {
                 System.out.println(">>> " + readLine);
             }
 
@@ -37,8 +37,9 @@ public class IODemo {
             e.printStackTrace();
         }
 
+        // OR with simplified API (≥ v6):
         try {
-
+            //NIO ≥ v6
             Files.lines(Paths.get("test.txt"))
                     .forEach(System.out::println);
 
