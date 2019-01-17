@@ -1,16 +1,23 @@
 package demo.ThreadDemo;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class ThreadsDemo {
     public static void main(String[] args) {
-        Thread worker = new Thread(() -> {
-            while (true) {
-                System.out.println("th-1");
+        ExecutorService pool
+                = Executors.newFixedThreadPool(4);
+
+        pool.execute(() -> {
+            while(!interr) {
+
             }
         });
-        worker.start();
+        pool.execute(() -> {
+            System.out.println("t2");
+        });
 
-        while (true) {
-            System.out.println("main");
-        }
+        pool.shutdown();
+
     }
 }
