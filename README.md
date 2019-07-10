@@ -669,8 +669,11 @@ assertMessageEquals("3")
 
 ---
 
-# Spring Core Intro*
-# Enterprise Application Architecture*
+# Backlog
+- Spring Core Intro*
+- Enterprise Application Architecture*
+
+---
 
 # Work Project. Session 2 (24/24)
 
