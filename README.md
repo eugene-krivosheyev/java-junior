@@ -631,7 +631,7 @@ assertMessageEquals("3")
 
 ---
 
-# JDBC API (6/2)
+# JDBC API* (6/2)
 - SQL recap: DDL and DML
 - DB schema design
 - Overview of JDBC API
@@ -654,7 +654,7 @@ assertMessageEquals("3")
 
 ---
 
-# Performance tuning and optimization in Java (3/1)
+# Performance tuning and optimization in Java* (3/1)
 - JVM monitoring tool JVisualVM
 - Heap structure
 - GC types
@@ -668,6 +668,9 @@ assertMessageEquals("3")
 - Bottlenecks detected
 
 ---
+
+# Spring Core Intro*
+# Enterprise Application Architecture*
 
 # Work Project. Session 2 (24/24)
 
