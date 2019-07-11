@@ -1,3 +1,9 @@
+#Users
+-Mazurenko Anastasia
+-Naumova Arina
+
+---
+
 # Java Junior Developer Training Course.
 88 hours training + 32 hours work project = 120 hr.
 
@@ -651,6 +657,7 @@ assertMessageEquals("3")
 - Documented public API
 - Unit tests coverage ≥ 70%
 - System test for DB
+
 
 ---
 
