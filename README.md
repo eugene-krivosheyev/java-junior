@@ -21,6 +21,7 @@ $ java -version
 
 ---
 
+---
 # Structure of Java-based applications (3/1)
 - Classes and *.class files
 - Java app definition
