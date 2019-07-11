@@ -59,6 +59,7 @@ $ git add .
 $ git commit -m “…”
 $ git push
 ```
+Anna Ristich and Maria Tereshina there!
 
 ### DoD
 - Trainer see all the forks in github
