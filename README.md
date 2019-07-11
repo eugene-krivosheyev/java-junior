@@ -40,7 +40,7 @@ $ java -version
 Hello, world!
 ```
 
----
+--- MIPT
 
 # Development infrastructure: Git (1.5/0.5)
 - Intro to GIT
