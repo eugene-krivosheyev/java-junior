@@ -1,12 +1,12 @@
 # Java Junior Developer Training Course.
 88 hours training + 32 hours work project = 120 hr.
-
+Abaskin Kirill; Arina Dubinich
 ---
 
 # Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice)
 - Introduction to Java. Benefits.
 - JDK, JVM.
-- Java 2 (Java EE / SE / ME) 
+- Java 2 (Java EE / SE / ME)
 - Tools: java, javac, javadoc
 
 ## Lab: Installing JDK, Tuning Environmental Variables
