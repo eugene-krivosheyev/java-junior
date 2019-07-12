@@ -694,3 +694,6 @@ assertMessageEquals("3")
 - PM and Business Customers accept product with six demo sessions
 
 ---
+
+# Reading List
+- [Common reading](http://tinyurl.com/skilltrekreadinglist)
