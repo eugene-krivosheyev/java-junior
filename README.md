@@ -149,7 +149,8 @@ $ git push
 - Primitive types
 - Primitive types literal values
 - Primitive types casting
-- Types Overflow
+- Types Overflow and solution with [BigInteger](http://pr0java.blogspot.com/2015/05/biginteger-bigdecimal_70.html)
+- FP precision loss and solution with [BigDecimal](http://dmilvdv.narod.ru/Translate/MISC/how_to_use_java_bigdecimal.html)
 
 ## References
 - Reference types in Java
