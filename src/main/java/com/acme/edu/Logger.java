@@ -19,12 +19,7 @@ public class Logger {
         System.out.println("primitive: " + message);
     }
 
-    // public static void log(char message) {
-    //    System.out.println("char: " + message);
-
-    // }
     public static void log(Object message) {
-        //System.out.println(message.getClass().getName() + ": " + message);
         if (message == null) {
             System.out.println("reference: null");
             return;
