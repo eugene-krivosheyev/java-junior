@@ -62,7 +62,7 @@ $ git push
 Anna Ristich and Maria Tereshina there!
 
 ### DoD
-- Trainer see all the forks in github
+- Trainer sees all the forks in github
 - Trainer can locate every teammate by its team repo
 
 ---
@@ -695,3 +695,6 @@ assertMessageEquals("3")
 - PM and Business Customers accept product with six demo sessions
 
 ---
+
+# Reading List
+- [Common reading](http://tinyurl.com/skilltrekreadinglist)
