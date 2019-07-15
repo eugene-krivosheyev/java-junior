@@ -29,17 +29,17 @@ public class OperatorsDemo {
 //
 //        } while (true);
 
-        for (String current : args) {
-            System.out.println(current);
-        }
-
-        label1: do {
-            outer: while (???) {
-                inner: for (???) {
-                    if (????) break inner;
-                    if (????) continue outer;
-                }
-            }
-        } while (???);
+//        for (String current : args) {
+//            System.out.println(current);
+//        }
+//
+//        label1: do {
+//            outer: while (???) {
+//                inner: for (???) {
+//                    if (????) break inner;
+//                    if (????) continue outer;
+//                }
+//            }
+//        } while (???);
     }
 }
