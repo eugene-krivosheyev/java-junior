@@ -60,9 +60,13 @@ $ git commit -m “…”
 $ git push
 ```
 <<<<<<< HEAD
+<<<<<<< HEAD
 Anna Ristich and Maria Tereshina there!
 =======
 >>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
+=======
+Anna Ristich and Maria Tereshina there!
+>>>>>>> d3419244d7223707567d749c12b1a86158ce4e55
 
 ### DoD
 - Trainer sees all the forks in github

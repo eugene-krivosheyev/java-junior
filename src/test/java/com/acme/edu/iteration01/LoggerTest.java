@@ -27,25 +27,36 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log(1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d3419244d7223707567d749c12b1a86158ce4e55
         Logger.flush();
         Logger.log(0);
         Logger.flush();
         Logger.log(-1);
         Logger.flush();
+<<<<<<< HEAD
 =======
         Logger.log(0);
         Logger.log(-1);
 >>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
+=======
+>>>>>>> d3419244d7223707567d749c12b1a86158ce4e55
         //endregion
 
         //region then
         assertSysoutContains("primitive: ");
+<<<<<<< HEAD
 <<<<<<< HEAD
         String newLn = System.lineSeparator();
         assertSysoutEquals("primitive: 1" + newLn + "primitive: 0" + newLn + "primitive: -1" + newLn);
 =======
         assertSysoutEquals("primitive: 1\nprimitive: 0\nprimitive: -1\n");
 >>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
+=======
+        String newLn = System.lineSeparator();
+        assertSysoutEquals("primitive: 1" + newLn + "primitive: 0" + newLn + "primitive: -1" + newLn);
+>>>>>>> d3419244d7223707567d749c12b1a86158ce4e55
         //endregion
     }
 
@@ -66,6 +77,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d3419244d7223707567d749c12b1a86158ce4e55
 
 =======
     /*
@@ -84,10 +98,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
     TODO: implement Logger solution to match specification as tests*/
 =======
 >>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
+=======
+/*
+    TODO: implement Logger solution to match specification as tests*/
+>>>>>>> d3419244d7223707567d749c12b1a86158ce4e55
 
     @Test
     public void shouldLogString() throws IOException {
@@ -129,8 +148,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
     */
 >>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
+=======
+>>>>>>> d3419244d7223707567d749c12b1a86158ce4e55
 }

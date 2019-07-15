@@ -9,10 +9,15 @@ import org.junit.Test;
 import java.io.IOException;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import static java.lang.System.lineSeparator;
 
 =======
 >>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
+=======
+import static java.lang.System.lineSeparator;
+
+>>>>>>> d3419244d7223707567d749c12b1a86158ce4e55
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
@@ -29,11 +34,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
     /*
     TODO: implement Logger solution to match specification as tests
 >>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
+=======
+
+>>>>>>> d3419244d7223707567d749c12b1a86158ce4e55
 
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
@@ -43,6 +52,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(2);
         Logger.log("str 2");
         Logger.log(0);
+<<<<<<< HEAD
 <<<<<<< HEAD
         Logger.flush();
         //endregion
@@ -55,24 +65,40 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
             "str 2" + newLine +
             "0" + newLine
 =======
+=======
+        Logger.flush();
+>>>>>>> d3419244d7223707567d749c12b1a86158ce4e55
         //endregion
 
         //region then
+        String newLine = lineSeparator();
         assertSysoutEquals(
+<<<<<<< HEAD
             "str 1\n" +
             "3\n" +
             "str 2\n" +
             "0\n"
 >>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
+=======
+            "str 1" + newLine +
+            "3" + newLine +
+            "str 2" + newLine +
+            "0" + newLine
+>>>>>>> d3419244d7223707567d749c12b1a86158ce4e55
         );
         //endregion
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     /*
     TODO: implement Logger solution to match specification as tests
 =======
 >>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
+=======
+    /*
+    TODO: implement Logger solution to match specification as tests
+>>>>>>> d3419244d7223707567d749c12b1a86158ce4e55
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
