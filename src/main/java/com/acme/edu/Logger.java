@@ -1,18 +1,16 @@
 package com.acme.edu;
 
-import javax.lang.model.type.PrimitiveType;
-
 import static java.lang.System.lineSeparator;
 
 public class Logger {
-    private static int accumullatedSum = 0;
-    private static String accumullatedStr = "";
+    private static int accumulatedSum = 0;
+    private static String accumulatedStr = "";
     private static boolean isEmptyAccum = true;
     private static boolean isPrimitive = true;
 
     public static void log(int message) {
-        //System.out.println("primitive: " + (accumullatedSum += message));
-        accumullatedSum += message;
+        //System.out.println("primitive: " + (accumulatedSum += message));
+        accumulatedSum += message;
         isEmptyAccum = false;
         //flush();
     }
@@ -27,11 +25,11 @@ public class Logger {
 
     public static void log(String message) {
         if (!isEmptyAccum) {
-            message = accumullatedSum + lineSeparator() + message;
+            message = accumulatedSum + lineSeparator() + message;
         }
-        accumullatedSum = 0;
+        accumulatedSum = 0;
         isEmptyAccum = true;
-        accumullatedStr += message + lineSeparator();
+        accumulatedStr += message + lineSeparator();
         //System.out.println("string: " + message);
     }
 
@@ -49,9 +47,9 @@ public class Logger {
 
     public static void flush() {
         if (!isEmptyAccum) {
-            accumullatedStr += accumullatedSum;
+            accumulatedStr += accumulatedSum;
         }
-        System.out.println(accumullatedStr);
-        accumullatedStr = "";
+        System.out.println(accumulatedStr);
+        accumulatedStr = "";
     }
 }
