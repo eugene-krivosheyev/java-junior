@@ -1,63 +1,52 @@
 package com.acme.edu;
 
-<<<<<<< HEAD
-public class PrimitivesDemo {
-    public static void main(String[] args) {
-=======
 import java.util.Objects;
 
 public class PrimitivesDemo {
-    public strictfp static void main(String[] args) {
->>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
-        //region Primitives: 8
-        //region Целые
-        byte b = 0;
-        short s = 0b10;
-        int i = 100_000_000;
-        long l = 9999999999999999L;
+        public strictfp static void main(String[] args) {
+                //region Primitives: 8
+                //region Целые
+                byte b = 0;
+                short s = 0b10;
+                int i = 100_000_000;
+                long l = 9999999999999999L;
 
-        short counter = 0;
-        for (int i1 = 0; i1 <= Short.MAX_VALUE; i1++) {
-            counter++;
+                short counter = 0;
+                for (int i1 = 0; i1 <= Short.MAX_VALUE; i1++) {
+                        counter++;
+                }
+                System.out.println(counter);
+                //endregion
+                //region FP
+                float f = 0.f; //IEEE 754
+                double d = -2E-3; //BigDecimal
+                //endregion
+                //region Логический
+                boolean bb = true | false;
+                //endregion
+                //region Символьный
+                char c = 'ꯉ';
+                int ic = c;
+                System.out.println(c);
+                System.out.println(ic);
+                //endregion
+                //endregion
+
+                //region Reference type
+                String o1 = "abc"; //new String + intern
+                String o2 = "abc";
+                System.out.println(o1.equals(o2));
+                Objects.equals(o1, o2);
+
+                System.out.println(o1);
+                String o3 = o1.toUpperCase();
+                System.out.println(o3);
+                //endregion
+
+                System.out.println(null == null);
+
+                String out = "a" + "b" + "c" + "d" + "e" + "f";
+                new StringBuilder("a").append("b").append("c");
+
         }
-        System.out.println(counter);
-        //endregion
-        //region FP
-        float f = 0.f; //IEEE 754
-        double d = -2E-3; //BigDecimal
-        //endregion
-        //region Логический
-        boolean bb = true | false;
-        //endregion
-        //region Символьный
-        char c = 'ꯉ';
-        int ic = c;
-        System.out.println(c);
-        System.out.println(ic);
-        //endregion
-        //endregion
-
-        //region Reference type
-        String o1 = "abc"; //new String + intern
-        String o2 = "abc";
-        System.out.println(o1.equals(o2));
-<<<<<<< HEAD
-=======
-        Objects.equals(o1, o2);
->>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
-
-        System.out.println(o1);
-        String o3 = o1.toUpperCase();
-        System.out.println(o3);
-        //endregion
-<<<<<<< HEAD
-=======
-
-        System.out.println(null == null);
-
-        String out = "a" + "b" + "c" + "d" + "e" + "f";
-        new StringBuilder("a").append("b").append("c");
-
->>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
-    }
 }
