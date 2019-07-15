@@ -8,8 +8,11 @@ import org.junit.Test;
 
 import java.io.IOException;
 
+<<<<<<< HEAD
 import static java.lang.System.lineSeparator;
 
+=======
+>>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
@@ -25,7 +28,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
 
+<<<<<<< HEAD
 
+=======
+    /*
+    TODO: implement Logger solution to match specification as tests
+>>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
 
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
@@ -35,6 +43,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(2);
         Logger.log("str 2");
         Logger.log(0);
+<<<<<<< HEAD
         Logger.flush();
         //endregion
 
@@ -45,12 +54,25 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
             "3" + newLine +
             "str 2" + newLine +
             "0" + newLine
+=======
+        //endregion
+
+        //region then
+        assertSysoutEquals(
+            "str 1\n" +
+            "3\n" +
+            "str 2\n" +
+            "0\n"
+>>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
         );
         //endregion
     }
 
+<<<<<<< HEAD
     /*
     TODO: implement Logger solution to match specification as tests
+=======
+>>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when

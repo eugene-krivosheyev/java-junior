@@ -59,7 +59,10 @@ $ git add .
 $ git commit -m “…”
 $ git push
 ```
+<<<<<<< HEAD
 Anna Ristich and Maria Tereshina there!
+=======
+>>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
 
 ### DoD
 - Trainer sees all the forks in github
@@ -150,8 +153,12 @@ $ git push
 - Primitive types
 - Primitive types literal values
 - Primitive types casting
+<<<<<<< HEAD
 - Types Overflow and solution with [BigInteger](http://pr0java.blogspot.com/2015/05/biginteger-bigdecimal_70.html)
 - FP precision loss and solution with [BigDecimal](http://dmilvdv.narod.ru/Translate/MISC/how_to_use_java_bigdecimal.html)
+=======
+- Types Overflow
+>>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
 
 ## References
 - Reference types in Java
@@ -633,7 +640,11 @@ assertMessageEquals("3")
 
 ---
 
+<<<<<<< HEAD
 # JDBC API (6/2)
+=======
+# JDBC API* (6/2)
+>>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
 - SQL recap: DDL and DML
 - DB schema design
 - Overview of JDBC API
@@ -656,7 +667,11 @@ assertMessageEquals("3")
 
 ---
 
+<<<<<<< HEAD
 # Performance tuning and optimization in Java (3/1)
+=======
+# Performance tuning and optimization in Java* (3/1)
+>>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
 - JVM monitoring tool JVisualVM
 - Heap structure
 - GC types
@@ -671,6 +686,15 @@ assertMessageEquals("3")
 
 ---
 
+<<<<<<< HEAD
+=======
+# Backlog
+- Spring Core Intro*
+- Enterprise Application Architecture*
+
+---
+
+>>>>>>> 0ac3bf5d12d32a685309e3a0991f9de5a9121844
 # Work Project. Session 2 (24/24)
 
 ## Given
