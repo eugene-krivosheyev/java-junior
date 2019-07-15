@@ -8,6 +8,7 @@ public class Logger {
     private static int accumullatedSum = 0;
     private static String accumullatedStr = "";
     private static boolean isEmptyAccum = true;
+    private static boolean isPrimitive = true;
 
     public static void log(int message) {
         //System.out.println("primitive: " + (accumullatedSum += message));
