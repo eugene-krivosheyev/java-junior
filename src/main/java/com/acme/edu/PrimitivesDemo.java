@@ -1,7 +1,9 @@
 package com.acme.edu;
 
+import java.util.Objects;
+
 public class PrimitivesDemo {
-    public static void main(String[] args) {
+    public strictfp static void main(String[] args) {
         //region Primitives: 8
         //region Целые
         byte b = 0;
@@ -34,10 +36,17 @@ public class PrimitivesDemo {
         String o1 = "abc"; //new String + intern
         String o2 = "abc";
         System.out.println(o1.equals(o2));
+        Objects.equals(o1, o2);
 
         System.out.println(o1);
         String o3 = o1.toUpperCase();
         System.out.println(o3);
         //endregion
+
+        System.out.println(null == null);
+
+        String out = "a" + "b" + "c" + "d" + "e" + "f";
+        new StringBuilder("a").append("b").append("c");
+
     }
 }
