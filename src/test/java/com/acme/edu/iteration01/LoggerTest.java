@@ -31,18 +31,18 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        String newLine=System.lineSeparator();
+        String newLine = System.lineSeparator();
         assertSysoutContains("primitive: ");
-        assertSysoutEquals("primitive: 1"+newLine+"primitive: 0"+newLine+"primitive: -1"+newLine);
+        assertSysoutEquals("primitive: 1" + newLine + "primitive: 0" + newLine + "primitive: -1" + newLine);
         //endregion
     }
 
     @Test
     public void shouldLogByte() throws IOException {
         //region when
-        Logger.log((byte)1);
-        Logger.log((byte)0);
-        Logger.log((byte)-1);
+        Logger.log((byte) 1);
+        Logger.log((byte) 0);
+        Logger.log((byte) -1);
         //endregion
 
         //region then

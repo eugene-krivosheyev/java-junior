@@ -1,33 +1,44 @@
 package com.acme.edu;
 
+import static java.lang.String.valueOf;
+
 public class Logger {
-    private static void mainLog(String type, String message){
+    private static void typeLog(String type, String message) {
         System.out.println(type + ": " + message);
     }
 
+    private static void primitiveTypeLog(String message) {
+        System.out.println("primitive: " + message);
+    }
+
     public static void log(int message) {
-        mainLog("primitive", String.valueOf(message));
-    }
-
-    public static void log(char message) {
-        mainLog("char", String.valueOf(message));
-    }
-
-    public static void log(String message) {
-        mainLog("string", String.valueOf(message));
-    }
-
-    public static void log(boolean message) {
-        mainLog("primitive", String.valueOf(message));
-    }
-
-    public static void log(Object message) {
-        if(message != null) {
-            mainLog("reference", message.toString());
-        }
+        primitiveTypeLog(valueOf(message));
     }
 
     public static void log(byte message) {
-        mainLog("primitive",String.valueOf(message));
+        primitiveTypeLog(valueOf(message));
     }
+
+    public static void log(boolean message) {
+        primitiveTypeLog(valueOf(message));
+    }
+
+    public static void log(char message) {
+        typeLog("char", valueOf(message));
+    }
+
+    public static void log(String message) {
+        typeLog("string", valueOf(message));
+    }
+
+
+    public static void log(Object message) {
+        if (message != null) {
+            typeLog("reference", message.toString());
+        } else {
+            typeLog("reference", "null");
+        }
+    }
+
+
 }
