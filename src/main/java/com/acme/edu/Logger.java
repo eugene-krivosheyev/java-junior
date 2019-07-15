@@ -2,9 +2,18 @@ package com.acme.edu;
 
 import javax.lang.model.type.PrimitiveType;
 
+import static java.lang.System.lineSeparator;
+
 public class Logger {
+    private static int accumullatedSum = 0;
+    private static String accumullatedStr = "";
+    private static boolean isEmptyAccum = true;
+
     public static void log(int message) {
-        System.out.println("primitive: " + message);
+        //System.out.println("primitive: " + (accumullatedSum += message));
+        accumullatedSum += message;
+        isEmptyAccum = false;
+        //flush();
     }
 
     public static void log(byte message) {
@@ -16,7 +25,13 @@ public class Logger {
     }
 
     public static void log(String message) {
-        System.out.println("string: " + message);
+        if (!isEmptyAccum) {
+            message = accumullatedSum + lineSeparator() + message;
+        }
+        accumullatedSum = 0;
+        isEmptyAccum = true;
+        accumullatedStr += message + lineSeparator();
+        //System.out.println("string: " + message);
     }
 
     public static void log(boolean message) {
@@ -29,5 +44,13 @@ public class Logger {
             return;
         }
         System.out.println("reference: " + message);
+    }
+
+    public static void flush() {
+        if (!isEmptyAccum) {
+            accumullatedStr += accumullatedSum;
+        }
+        System.out.println(accumullatedStr);
+        accumullatedStr = "";
     }
 }
