@@ -1,24 +1,35 @@
 package com.acme.edu;
 
 public class Logger {
-    public static final String PRIMITIVE_PREFIX = "primitive: ";
+    private static String currentState = null;
+    private static int intState = 0;
+    private static byte byteState = 0;
 
     public static void log(int message) {
-        if (message == 0) return; //Guard clause
+        log("int", () -> intState = message);
+        intState += message;
+    }
 
-        System.out.println(PRIMITIVE_PREFIX + message);
+    public static void log(byte message) {
+        log("byte", () -> byteState = message);
+        byteState += message;
+    }
 
-
-        //========
-
-        if (message != 0) {
-            System.out.println("primitive: " + message);
-        } else {
+    private static void log(String state, SideEffect todo) {
+        if (!state.equals(currentState)) {
+            flush();
+            todo.apply();
+            currentState = state;
             return;
         }
     }
 
-    public static void log(byte message) {
-        System.out.println("primitive: " + message);
+    private static void flush() {
+
     }
+}
+
+@FunctionalInterface
+interface SideEffect {
+    void apply();
 }
