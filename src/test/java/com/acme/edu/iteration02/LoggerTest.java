@@ -48,8 +48,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    /*
-    TODO: implement Logger solution to match specification as tests
+
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
@@ -58,15 +57,16 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(Integer.MAX_VALUE);
         Logger.log("str 2");
         Logger.log(0);
+        Logger.flush();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "10\n" +
-            Integer.MAX_VALUE + "\n" +
-            "str 2\n" +
-            "0\n"
+            "str 1" + lineSeparator() +
+            "10" + lineSeparator() +
+            Integer.MAX_VALUE + lineSeparator() +
+            "str 2" + lineSeparator() +
+            "0" + lineSeparator()
         );
         //endregion
     }
@@ -79,15 +79,16 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log((byte)Byte.MAX_VALUE);
         Logger.log("str 2");
         Logger.log(0);
+        Logger.flush();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "10\n" +
-            Byte.MAX_VALUE + "\n" +
-            "str 2\n" +
-            "0\n"
+            "str 1" + lineSeparator() +
+            "10" + lineSeparator() +
+            Byte.MAX_VALUE + lineSeparator() +
+            "str 2" + lineSeparator() +
+            "0" + lineSeparator()
         );
         //endregion
     }
@@ -103,18 +104,17 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 3");
         Logger.log("str 3");
         Logger.log("str 3");
+        Logger.flush();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "str 2 (x2)\n" +
-            "0\n" +
-            "str 2\n" +
-            "str 3 (x3)\n"
+            "str 1" + lineSeparator() +
+            "str 2 (x2)" + lineSeparator() +
+            "0" + lineSeparator() +
+            "str 2" + lineSeparator() +
+            "str 3 (x3)" + lineSeparator()
         );
         //endregion
     }
-
-    */
 }
