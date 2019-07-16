@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 
+import static java.lang.System.lineSeparator;
+
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
@@ -22,9 +24,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    /*
-    TODO: implement Logger solution to match specification as tests
-
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
@@ -33,10 +32,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "primitives array: {-1, 0, 1}\n"
+            "primitives array: {-1, 0, 1}" + lineSeparator()
         );
         //endregion
     }
+
+    /*
+    TODO: implement Logger solution to match specification as tests
 
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
@@ -71,7 +73,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-
+*/
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
@@ -79,10 +81,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("str1\nstring 2\nstr 3");
+        assertSysoutContains("str1" + lineSeparator() + "string 2" + lineSeparator() + "str 3");
         //endregion
     }
-
+/*
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when

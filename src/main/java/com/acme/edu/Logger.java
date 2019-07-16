@@ -1,29 +1,31 @@
 package com.acme.edu;
 
+import java.util.Arrays;
+
 import static java.lang.System.lineSeparator;
 
 public class Logger {
     private static int accumulatedSum = 0;
     private static String accumulatedStr = "";
     private static String previousStr = "";
-    private static boolean isEmptyAccumInt = true;
-    private static boolean isEmptyAccumByte = true;
-    private static boolean isPrimitive = true;
-    private static String ifSingleLogType = "";
+    private static int isPrimitiveCount = 0;
+    //private static String ifSingleLoggerType = "";
     private static int sameStringsAmount = 0;
     private static String prevTypeName = "";
+    private static boolean isPrimitive = true;
 
     private static String decorator(String message, String typeName) {
+        if (!isPrimitive) return message;
         switch (typeName) {
-            case "int" :
-            case "byte" :
-            case "bool" : {
+            case "int":
+            case "byte":
+            case "bool": {
                 return "primitive: " + message;
             }
-            case "char" : {
+            case "char": {
                 return "char: " + message;
             }
-            case "string" : {
+            case "string": {
                 return "string: " + message;
             }
             default: {
@@ -33,6 +35,7 @@ public class Logger {
     }
 
     private static void typeSwitcher(String typeName) {
+        isPrimitiveCount++;
         if (prevTypeName.equals(typeName)) return;
         switch (prevTypeName) {
             case "int":
@@ -57,11 +60,20 @@ public class Logger {
     public static void log(int message) {
         typeSwitcher("int");
         prevTypeName = "int";
-        if (accumulatedSum > Integer.MAX_VALUE - message) {
-            accumulatedStr += accumulatedSum + lineSeparator();
-            accumulatedSum = Integer.MAX_VALUE;
+        if (message > 0) {
+            if (accumulatedSum > Integer.MAX_VALUE - message) {
+                accumulatedStr += accumulatedSum + lineSeparator();
+                accumulatedSum = Integer.MAX_VALUE;
+            } else {
+                accumulatedSum += message;
+            }
         } else {
-            accumulatedSum += message;
+            if (accumulatedSum + message < Integer.MIN_VALUE) {
+                accumulatedStr += accumulatedSum + lineSeparator();
+                accumulatedSum = Integer.MIN_VALUE;
+            } else {
+                accumulatedSum += message;
+            }
         }
     }
 
@@ -110,12 +122,35 @@ public class Logger {
         System.out.println("reference: " + message);
     }
 
+    public static void log(int[] array) {
+        System.out.println(("primitives array: " + String.join(lineSeparator(), Arrays.toString(array)))
+                .replace('[', '{')
+                .replace(']', '}'));
+//        System.out.print("primitives array: {");
+//        for(int i = 0; i < array.length - 1; i++) {
+//            System.out.print(array[i] + ", ");
+//        }
+//        if (array.length > 0) {
+//            System.out.print(array[array.length - 1]);
+//        }
+//        System.out.println("}");
+    }
+
+    public static void log(String... params) {
+        System.out.print(String.join(lineSeparator(), params));
+    }
+
     public static void flush() {
+        if (isPrimitiveCount > 1) {
+            isPrimitive = false;
+        }
         typeSwitcher("");
-        System.out.print(accumulatedStr);
+        System.out.print(decorator(accumulatedStr, prevTypeName));
         accumulatedStr = "";
         accumulatedSum = 0;
         previousStr = "";
         prevTypeName = "";
+        isPrimitive = true;
+        isPrimitiveCount = 0;
     }
 }
