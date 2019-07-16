@@ -1,7 +1,7 @@
 package com.acme.edu.ooad;
 
-public class HardCodedSaverFactory {
-    public static LogSaver create() {
+public class HardCodedSaverFactory implements SaverFactory {
+    public LogSaver create() {
         return new LogConsoleSaver();
     }
 }
