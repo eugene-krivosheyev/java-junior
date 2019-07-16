@@ -697,3 +697,4 @@ assertMessageEquals("3")
 
 # Reading List
 - [Common reading](http://tinyurl.com/skilltrekreadinglist)
+- [Инженерные практики, которые должен знать разработчик](https://paper.dropbox.com/doc/Delivery-Pipeline-ci-cd-devops-AhDDhbiM81S6VHUbx8qK1BfdAg-OBLCVRSkMek24U7IXIHbq)
