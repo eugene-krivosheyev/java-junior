@@ -11,6 +11,8 @@ public class Logger {
 
     private static String currentType = "none";
 
+    private static String separator = System.lineSeparator();
+
     private static void typeLog(String type, String message) {
         saveSpecificMessage(type + ": " + message);
     }
@@ -23,6 +25,22 @@ public class Logger {
         System.out.println(message);
     }
 //TODO : reuse
+    public static void log(int... message){
+        typeLog("primitives array", messageDecorate(message));
+    }
+
+    public static void log(int[][] message){
+        typeLog("primitives matrix", messageDecorate(message));
+    }
+
+    public static void log(int[][][] message){
+        typeLog("primitives multimatrix", messageDecorate(message));
+    }
+
+    public static void log(int[][][][] message){
+        typeLog("primitives multimatrix", messageDecorate(message));
+    }
+
     public static void log(int message) {
         if (!"int".equals(currentType) || checkOverflow(message)) {
             flush();
@@ -60,6 +78,12 @@ public class Logger {
             return;
         }
         strCount++;
+    }
+
+    public static void log(String... message) {
+        for(String currentString : message) {
+            log(currentString);
+        }
     }
 
     public static void log(Object message) {
@@ -115,6 +139,41 @@ public class Logger {
             return message + " (x" + strCount + ")";
         }
     }
+
+    private static String messageDecorate(int[] message) {
+        String answer = "{";
+        for(int currentValue:message){
+            answer+=currentValue + ", ";
+        }
+        answer=answer.substring(0,answer.length()-2);
+        return answer + "}";
+   }
+
+    private static String messageDecorate(int[][] message) {
+        String answer = "{"+separator;
+        for(int[] currentValue:message){
+            answer+=messageDecorate(currentValue)+separator;
+        }
+        return answer + "}";
+    }
+
+    private static String messageDecorate(int[][][] message) {
+        String answer = "{"+separator;
+        for(int[][] currentValue:message){
+            answer+=messageDecorate(currentValue)+separator;
+        }
+        return answer + "}";
+    }
+
+    private static String messageDecorate(int[][][][] message){
+        String answer = "{"+separator;
+        for(int[][][] currentValue:message){
+            answer+=messageDecorate(currentValue)+separator;
+        }
+        return answer + "}";
+    }
+
+
 
     private static boolean checkOverflow(int message) {
         if (intBuff > 0 && (Integer.MAX_VALUE - intBuff < message)) return true;
