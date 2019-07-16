@@ -2,18 +2,24 @@ package com.acme.edu;
 
 public class ArraysDemo {
     public static void main(String... args) {
-        String[][] array = new String[10][1];
-        array[0] = new String[0];
-        array[1] = new String[3];
-        System.out.println(array[0][1]);
+        Counter factual = new Counter();
+        m(factual);
+        System.out.println(factual.getCounter());
     }
 
-    private static void m(int... params) {
-
+    private static void m(Counter formal) {
+        formal.increment();
     }
-    private static void m(int a, int... params) {
-        for (int current : params) {
-            System.out.println(current);
-        }
+}
+
+class Counter {
+    private int counter;
+
+    public void increment() {
+        counter++;
+    }
+
+    public int getCounter() {
+        return counter;
     }
 }
