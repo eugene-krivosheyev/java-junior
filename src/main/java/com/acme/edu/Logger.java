@@ -9,8 +9,28 @@ public class Logger {
     private static boolean isEmptyAccumInt = true;
     private static boolean isEmptyAccumByte = true;
     private static boolean isPrimitive = true;
+    private static String ifSingleLogType = "";
     private static int sameStringsAmount = 0;
     private static String prevTypeName = "";
+
+    private static String decorator(String message, String typeName) {
+        switch (typeName) {
+            case "int" :
+            case "byte" :
+            case "bool" : {
+                return "primitive: " + message;
+            }
+            case "char" : {
+                return "char: " + message;
+            }
+            case "string" : {
+                return "string: " + message;
+            }
+            default: {
+                return "reference: " + message;
+            }
+        }
+    }
 
     private static void typeSwitcher(String typeName) {
         if (prevTypeName.equals(typeName)) return;
