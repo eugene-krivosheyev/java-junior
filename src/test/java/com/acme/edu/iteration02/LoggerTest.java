@@ -37,7 +37,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 2");
         Logger.log(0);
 
-        Logger.flush();
         Logger.close();
         //endregion
 
@@ -60,7 +59,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 2");
         Logger.log(0);
 
-        Logger.flush();
         Logger.close();
         //endregion
 
@@ -84,7 +82,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 2");
         Logger.log(0);
 
-        Logger.flush();
         Logger.close();
         //endregion
 
@@ -111,7 +108,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 3");
         Logger.log("str 3");
 
-        Logger.flush();
         Logger.close();
         //endregion
 
@@ -130,49 +126,37 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogCorrectMinusIntOverflow() throws IOException {
         Logger.log(-10);
         Logger.log(Integer.MAX_VALUE);
-        Logger.flush();
         Logger.close();
 
-        assertSysoutEquals(
-                String.valueOf(Integer.MAX_VALUE - 10) + separator
-        );
+        assertSysoutContains(String.valueOf(Integer.MAX_VALUE-10));
     }
 
     @Test
     public void shouldLogCorrectMinusIntOverflowWithMinValue() throws IOException {
         Logger.log(-10);
         Logger.log(Integer.MIN_VALUE);
-        Logger.flush();
         Logger.close();
 
-        assertSysoutEquals(
-                -10 + separator +
-                        Integer.MIN_VALUE + separator
-        );
+        assertSysoutContains("-10");
+        assertSysoutContains(String.valueOf(Integer.MIN_VALUE));
     }
 
     @Test
     public void shouldLogCorrectMinusByteOverflow() throws IOException {
         Logger.log((byte) -10);
         Logger.log(Byte.MAX_VALUE);
-        Logger.flush();
         Logger.close();
 
-        assertSysoutEquals(
-                String.valueOf(Byte.MAX_VALUE - 10) + separator
-        );
+        assertSysoutContains(String.valueOf(Byte.MAX_VALUE-10));
     }
 
     @Test
     public void shouldLogCorrectMinusByteOverflowWithMinValue() throws IOException {
         Logger.log((byte) -10);
         Logger.log(Byte.MIN_VALUE);
-        Logger.flush();
         Logger.close();
 
-        assertSysoutEquals(
-                -10 + separator +
-                        Byte.MIN_VALUE + separator
-        );
+        assertSysoutContains("-10");
+        assertSysoutContains(String.valueOf(Byte.MIN_VALUE));
     }
 }

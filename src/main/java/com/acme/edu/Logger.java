@@ -6,23 +6,23 @@ public class Logger {
     private static int intBuff = 0;
     private static byte byteBuff = 0;
 
-    private static String strBuff;
+    private static String strBuff = "";
     private static int strCount = 0;
 
-    private static String currentType = "non";
+    private static String currentType = "none";
 
     private static void typeLog(String type, String message) {
-        System.out.println(type + ": " + message);
+        saveSpecificMessage(type + ": " + message);
     }
 
     private static void primitiveTypeLog(String message) {
-        System.out.println("primitive: " + message);
+        saveSpecificMessage("primitive: " + message);
     }
 
     private static void saveSpecificMessage(String message) {
         System.out.println(message);
     }
-
+//TODO : reuse
     public static void log(int message) {
         if (!"int".equals(currentType) || checkOverflow(message)) {
             flush();
@@ -32,7 +32,6 @@ public class Logger {
         }
         intBuff += message;
     }
-
 
     public static void log(byte message) {
         if (!"byte".equals(currentType) || checkOverflow(message)) {
@@ -74,17 +73,17 @@ public class Logger {
     public static void flush() {
         switch (currentType) {
             case "int": {
-                saveSpecificMessage(messageDecor(intBuff));
+                saveSpecificMessage(messageDecorate(intBuff));
                 intBuff = 0;
                 break;
             }
             case "byte": {
-                saveSpecificMessage(messageDecor(byteBuff));
+                saveSpecificMessage(messageDecorate(byteBuff));
                 byteBuff = 0;
                 break;
             }
             case "string": {
-                saveSpecificMessage(messageDecor(strBuff));
+                saveSpecificMessage(messageDecorate(strBuff));
                 strBuff = "";
                 strCount = 0;
                 break;
@@ -93,22 +92,23 @@ public class Logger {
     }
 
     public static void close() {
+        flush();
         intBuff = 0;
         byteBuff = 0;
         strBuff = "";
         strCount = 0;
-        currentType = "non";
+        currentType = "none";
     }
 
-    private static String messageDecor(int message) {
+    private static String messageDecorate(int message) {
         return valueOf(message);
     }
 
-    private static String messageDecor(byte message) {
+    private static String messageDecorate(byte message) {
         return valueOf(message);
     }
 
-    private static String messageDecor(String message) {
+    private static String messageDecorate(String message) {
         if (strCount == 1) {
             return message;
         } else {
