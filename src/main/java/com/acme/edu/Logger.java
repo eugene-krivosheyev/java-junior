@@ -67,7 +67,7 @@ public class Logger {
                 accumulatedSum += message;
             }
         } else {
-            if (accumulatedSum + message < Integer.MIN_VALUE) {
+            if (accumulatedSum < Integer.MIN_VALUE - message) {
                 accumulatedStr += accumulatedSum + lineSeparator();
                 accumulatedSum = Integer.MIN_VALUE;
             } else {
@@ -79,11 +79,20 @@ public class Logger {
     public static void log(byte message) {
         typeSwitcher("byte");
         prevTypeName = "byte";
-        if (accumulatedSum > Byte.MAX_VALUE - message) {
-            accumulatedStr += accumulatedSum + lineSeparator();
-            accumulatedSum = Byte.MAX_VALUE;
+        if (message > 0) {
+            if (accumulatedSum > Byte.MAX_VALUE - message) {
+                accumulatedStr += accumulatedSum + lineSeparator();
+                accumulatedSum = Byte.MAX_VALUE;
+            } else {
+                accumulatedSum += message;
+            }
         } else {
-            accumulatedSum += message;
+            if (accumulatedSum > Byte.MIN_VALUE - message) {
+                accumulatedStr += accumulatedSum + lineSeparator();
+                accumulatedSum = Byte.MIN_VALUE;
+            } else {
+                accumulatedSum += message;
+            }
         }
     }
 
