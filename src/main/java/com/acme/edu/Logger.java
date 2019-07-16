@@ -9,7 +9,6 @@ public class Logger {
     private static String accumulatedStr = "";
     private static String previousStr = "";
     private static int isPrimitiveCount = 0;
-    //private static String ifSingleLoggerType = "";
     private static int sameStringsAmount = 0;
     private static String prevTypeName = "";
     private static boolean isPrimitive = true;
@@ -97,17 +96,15 @@ public class Logger {
         prevTypeName = "string";
         if (previousStr.equals(message)) {
             sameStringsAmount++;
-        } else {
-            if (!previousStr.equals("")) {
-                accumulatedStr += previousStr;
-                if (sameStringsAmount > 1) {
-                    accumulatedStr += " (x" + sameStringsAmount + ")";
-                }
-                accumulatedStr += lineSeparator();
-            }
-            previousStr = message;
-            sameStringsAmount = 1;
+            return;
         }
+        if (!previousStr.equals("")) {
+            accumulatedStr += previousStr +
+                    (sameStringsAmount > 1 ? " (x" + sameStringsAmount + ")" : "") +
+                    lineSeparator();
+        }
+        previousStr = message;
+        sameStringsAmount = 1;
     }
 
     public static void log(boolean message) {
