@@ -126,14 +126,6 @@ public class Logger {
         System.out.println(("primitives array: " + String.join(lineSeparator(), Arrays.toString(array)))
                 .replace('[', '{')
                 .replace(']', '}'));
-//        System.out.print("primitives array: {");
-//        for(int i = 0; i < array.length - 1; i++) {
-//            System.out.print(array[i] + ", ");
-//        }
-//        if (array.length > 0) {
-//            System.out.print(array[array.length - 1]);
-//        }
-//        System.out.println("}");
     }
 
     public static void log(String... params) {
