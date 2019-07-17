@@ -1,9 +1,11 @@
 package com.acme.edu.ooad;
 
+import java.io.File;
+
 public class Logger {
     //Field DI
-    private LogFilter filter;
-    private LogSaver saver;
+    private final LogFilter filter;
+    private final LogSaver saver;
 
     //Constructor DI
     public Logger(LogFilter filter, LogSaver saver) {
@@ -11,12 +13,7 @@ public class Logger {
         this.saver = saver;
     }
 
-    //Setter DI
-    public void setSaver(LogSaver saver) {
-        this.saver = saver;
-    }
-
-    public void log(String message) {
+    public void log(Command message) {
         if (filter.allow(message)) {
             saver.save(message);
         }

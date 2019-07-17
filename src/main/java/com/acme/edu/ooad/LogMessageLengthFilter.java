@@ -10,9 +10,9 @@ public class LogMessageLengthFilter implements LogFilter {
     }
 
     @Override
-    public boolean allow(String message) {
+    public boolean allow(Command message) {
         if(message == null) throw new IllegalArgumentException();
 
-        return message.length() <= maxMessageLength;
+        return message.getMessage().length() <= maxMessageLength;
     }
 }
