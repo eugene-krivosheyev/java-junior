@@ -17,22 +17,6 @@ public class Logger {
     private static String decorator(String message, MessageTypeName typeName) {
         if (!isPrimitive) return message;
         return typeName.decoratePrimitive(message);
-//        switch (typeName) {
-//            case INT:
-//            case BYTE:
-//            case BOOLEAN: {
-//                return "primitive: " + message;
-//            }
-//            case CHAR: {
-//                return "char: " + message;
-//            }
-//            case STRING: {
-//                return "string: " + message;
-//            }
-//            default: {
-//                return "reference: " + message;
-//            }
-//        }
     }
 
     private static void typeSwitcher(MessageTypeName typeName) {
