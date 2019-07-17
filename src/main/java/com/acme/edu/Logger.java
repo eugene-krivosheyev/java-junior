@@ -2,6 +2,7 @@ package com.acme.edu;
 
 import java.util.Arrays;
 
+import static com.acme.edu.MessageTypeName.*;
 import static java.lang.System.lineSeparator;
 
 public class Logger {
@@ -10,40 +11,41 @@ public class Logger {
     private static String previousStr = "";
     private static int isPrimitiveCount = 0;
     private static int sameStringsAmount = 0;
-    private static String prevTypeName = "";
+    private static MessageTypeName prevTypeName = MessageTypeName.INITIAL;
     private static boolean isPrimitive = true;
 
-    private static String decorator(String message, String typeName) {
+    private static String decorator(String message, MessageTypeName typeName) {
         if (!isPrimitive) return message;
-        switch (typeName) {
-            case "int":
-            case "byte":
-            case "bool": {
-                return "primitive: " + message;
-            }
-            case "char": {
-                return "char: " + message;
-            }
-            case "string": {
-                return "string: " + message;
-            }
-            default: {
-                return "reference: " + message;
-            }
-        }
+        return typeName.decoratePrimitive(message);
+//        switch (typeName) {
+//            case INT:
+//            case BYTE:
+//            case BOOLEAN: {
+//                return "primitive: " + message;
+//            }
+//            case CHAR: {
+//                return "char: " + message;
+//            }
+//            case STRING: {
+//                return "string: " + message;
+//            }
+//            default: {
+//                return "reference: " + message;
+//            }
+//        }
     }
 
-    private static void typeSwitcher(String typeName) {
+    private static void typeSwitcher(MessageTypeName typeName) {
         isPrimitiveCount++;
         if (prevTypeName.equals(typeName)) return;
         switch (prevTypeName) {
-            case "int":
-            case "byte": {
+            case INT:
+            case BYTE: {
                 accumulatedStr += accumulatedSum + lineSeparator();
                 accumulatedSum = 0;
                 break;
             }
-            case "string": {
+            case STRING: {
                 accumulatedStr += previousStr;
                 if (sameStringsAmount > 1) {
                     accumulatedStr += " (x" + sameStringsAmount + ")";
@@ -57,8 +59,8 @@ public class Logger {
     }
 
     public static void log(int message) {
-        typeSwitcher("int");
-        prevTypeName = "int";
+        typeSwitcher(INT);
+        prevTypeName = INT;
         if (message > 0) {
             if (accumulatedSum > Integer.MAX_VALUE - message) {
                 accumulatedStr += accumulatedSum + lineSeparator();
@@ -77,8 +79,8 @@ public class Logger {
     }
 
     public static void log(byte message) {
-        typeSwitcher("byte");
-        prevTypeName = "byte";
+        typeSwitcher(BYTE);
+        prevTypeName = BYTE;
         if (message > 0) {
             if (accumulatedSum > Byte.MAX_VALUE - message) {
                 accumulatedStr += accumulatedSum + lineSeparator();
@@ -101,8 +103,8 @@ public class Logger {
     }
 
     public static void log(String message) {
-        typeSwitcher("string");
-        prevTypeName = "string";
+        typeSwitcher(STRING);
+        prevTypeName = STRING;
         if (previousStr.equals(message)) {
             sameStringsAmount++;
             return;
@@ -141,12 +143,12 @@ public class Logger {
         if (isPrimitiveCount > 1) {
             isPrimitive = false;
         }
-        typeSwitcher("");
+        typeSwitcher(INITIAL);
         System.out.print(decorator(accumulatedStr, prevTypeName));
         accumulatedStr = "";
         accumulatedSum = 0;
         previousStr = "";
-        prevTypeName = "";
+        prevTypeName = INITIAL;
         isPrimitive = true;
         isPrimitiveCount = 0;
     }
