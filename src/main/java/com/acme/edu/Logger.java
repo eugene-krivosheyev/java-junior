@@ -87,7 +87,7 @@ public class Logger {
                 accumulatedSum += message;
             }
         } else {
-            if (accumulatedSum > Byte.MIN_VALUE - message) {
+            if (accumulatedSum < Byte.MIN_VALUE - message) {
                 accumulatedStr += accumulatedSum + lineSeparator();
                 accumulatedSum = Byte.MIN_VALUE;
             } else {
