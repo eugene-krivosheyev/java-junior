@@ -282,11 +282,6 @@ $ git push
 - Encapsulation for classes
 - Access modifiers
 
-## Inheritance
-- Inheritance implementation
-- Overriding methods
-- Overriding constraints
-
 ## Instatiation
 - Constructors
 - Object Initializers
@@ -318,6 +313,11 @@ $ git push
 - Multiple implementation
 - Default modifiers for fields and methods
 - Static and default (defender) methods
+
+## Inheritance
+- Inheritance implementation
+- Overriding methods
+- Overriding constraints
 
 ## Course Project Iteration 06: OOD Logger Library reached
 - FR: presentation changes and sink changes
