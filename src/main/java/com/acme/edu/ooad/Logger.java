@@ -1,9 +1,20 @@
 package com.acme.edu.ooad;
 
 public class Logger {
-    private LogMessageLengthFilter filter = new LogMessageLengthFilter(50);
-    //Abstract Factory [GoF] + Registry [PoEAA]
-    private LogSaver saver = AppRegistry.getSaverFactory().create();
+    //Field DI
+    private LogFilter filter;
+    private LogSaver saver;
+
+    //Constructor DI
+    public Logger(LogFilter filter, LogSaver saver) {
+        this.filter = filter;
+        this.saver = saver;
+    }
+
+    //Setter DI
+    public void setSaver(LogSaver saver) {
+        this.saver = saver;
+    }
 
     public void log(String message) {
         if (filter.allow(message)) {
