@@ -1,6 +1,5 @@
 package com.acme.edu.saver;
 
-import com.acme.edu.Accumulator;
 import com.acme.edu.command.Command;
 
 public class ConsoleLoggerSaver {

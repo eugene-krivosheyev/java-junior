@@ -2,11 +2,11 @@ package com.acme.edu;
 
 import com.acme.edu.command.*;
 import com.acme.edu.saver.ConsoleLoggerSaver;
+import com.sun.deploy.uitoolkit.ui.LoggerConsole;
 
 public class LoggerController {
-    private Accumulator localState = new Accumulator();
-    private Command prevCommand = new NoneCommand();
-    private ConsoleLoggerSaver loggerSaver = new ConsoleLoggerSaver();
+    private Command prevCommand;
+    private ConsoleLoggerSaver loggerSaver;
 
     public void log(Command command) {
         if (prevCommand.getType().equals(Type.NONE)) {
@@ -23,6 +23,11 @@ public class LoggerController {
     public void flush() {
         loggerSaver.save(prevCommand);
         prevCommand = new NoneCommand();
+    }
+
+    public LoggerController(ConsoleLoggerSaver consoleLoggerSaver){
+        this.loggerSaver = consoleLoggerSaver;
+        this.prevCommand = new NoneCommand();
     }
 
     /*

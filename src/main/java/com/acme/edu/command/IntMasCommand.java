@@ -1,6 +1,5 @@
 package com.acme.edu.command;
 
-import com.acme.edu.Accumulator;
 import com.acme.edu.Type;
 
 public class IntMasCommand implements Command {
@@ -25,10 +24,6 @@ public class IntMasCommand implements Command {
 
     public int[] getIntMasValue() {
         return message;
-    }
-
-    public boolean isOverflow(Accumulator accumulator) {
-        return true;
     }
 
     @Override

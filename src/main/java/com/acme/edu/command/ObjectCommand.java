@@ -1,6 +1,5 @@
 package com.acme.edu.command;
 
-import com.acme.edu.Accumulator;
 import com.acme.edu.Type;
 
 public class ObjectCommand implements Command {
@@ -21,10 +20,6 @@ public class ObjectCommand implements Command {
 
     public Object getObjectValue() {
         return message;
-    }
-
-    public boolean isOverflow(Accumulator accumulator) {
-        return true;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.acme.edu.command;
 
-import com.acme.edu.Accumulator;
 import com.acme.edu.Type;
 
 public class StringCommand implements Command {
@@ -49,8 +48,4 @@ public class StringCommand implements Command {
             return false;
         }
     }
-
-    /*public boolean isOverflow(Accumulator accumulator) {
-        return !message.equals(accumulator.getStrBuff());
-    }*/
 }

@@ -1,6 +1,5 @@
 package com.acme.edu.command;
 
-import com.acme.edu.Accumulator;
 import com.acme.edu.Type;
 
 public class NoneCommand implements Command {
