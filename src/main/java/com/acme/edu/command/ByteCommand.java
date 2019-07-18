@@ -1,4 +1,7 @@
-package com.acme.edu;
+package com.acme.edu.command;
+
+import com.acme.edu.Accumulator;
+import com.acme.edu.Type;
 
 public class ByteCommand {
     private byte message = 0;

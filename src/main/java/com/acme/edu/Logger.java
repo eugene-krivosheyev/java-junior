@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import com.acme.edu.command.*;
+
 import static java.lang.String.valueOf;
 
 public class Logger {
@@ -18,6 +20,18 @@ public class Logger {
         loggerController.log(new IntCommand(message));
     }
 
+    public static void log(int... message) {
+        loggerController.log(new IntMasCommand(message));
+    }
+
+    public static void log(int[][] message) {
+        loggerController.log(new IntMas2Command(message));
+    }
+
+    public static void log(int[][][][] message) {
+        loggerController.log(new IntMas4Command(message));
+    }
+
     public static void log(byte message) {
         loggerController.log(new ByteCommand(message));
     }
@@ -30,24 +44,23 @@ public class Logger {
         loggerController.log(new StringCommand(message));
     }
 
+    public static void log(String... message) {
+        for(String s:message){
+            loggerController.log(new StringCommand(s));
+        }
+
+    }
+
     public static void log(boolean message) {
         loggerController.log(new BooleanCommand(message));
     }
 
     public static void log(Object message) {
-        loggerController.log(new ObjectCommand(message));
+       loggerController.log(new ObjectCommand(message));
     }
-    /*
-    private static int intBuff = 0;
-    private static byte byteBuff = 0;
 
-    private static String strBuff = "";
-    private static int strCount = 0;
 
-    private static String currentType = "none";
-
-    private static String separator = System.lineSeparator();
-
+/*
     private static void typeLog(String type, String message) {
         saveSpecificMessage(type + ": " + message);
     }
@@ -76,102 +89,9 @@ public class Logger {
         typeLog("primitives multimatrix", messageDecorate(message));
     }
 
-    public static void log(int message) {
-        if (!"int".equals(currentType) || checkOverflow(message)) {
-            flush();
-            intBuff = message;
-            currentType = "int";
-            return;
-        }
-        intBuff += message;
-    }
-
-    public static void log(byte message) {
-        if (!"byte".equals(currentType) || checkOverflow(message)) {
-            flush();
-            byteBuff = message;
-            currentType = "byte";
-            return;
-        }
-        byteBuff += message;
-    }
-
-    public static void log(boolean message) {
-        primitiveTypeLog(valueOf(message));
-    }
-
-    public static void log(char message) {
-        typeLog("char", valueOf(message));
-    }
-
-    public static void log(String message) {
-        if (!"string".equals(currentType) || !message.equals(strBuff)) {
-            flush();
-            strBuff = message;
-            strCount = 1;
-            currentType = "string";
-            return;
-        }
-        strCount++;
-    }
-
     public static void log(String... message) {
         for(String currentString : message) {
             log(currentString);
-        }
-    }
-
-    public static void log(Object message) {
-        if (message != null) {
-            typeLog("reference", message.toString());
-        } else {
-            typeLog("reference", "null");
-        }
-    }
-
-    public static void flush() {
-        switch (currentType) {
-            case "int": {
-                saveSpecificMessage(messageDecorate(intBuff));
-                intBuff = 0;
-                break;
-            }
-            case "byte": {
-                saveSpecificMessage(messageDecorate(byteBuff));
-                byteBuff = 0;
-                break;
-            }
-            case "string": {
-                saveSpecificMessage(messageDecorate(strBuff));
-                strBuff = "";
-                strCount = 0;
-                break;
-            }
-        }
-    }
-
-    public static void close() {
-        flush();
-        intBuff = 0;
-        byteBuff = 0;
-        strBuff = "";
-        strCount = 0;
-        currentType = "none";
-    }
-
-    private static String messageDecorate(int message) {
-        return valueOf(message);
-    }
-
-    private static String messageDecorate(byte message) {
-        return valueOf(message);
-    }
-
-    private static String messageDecorate(String message) {
-        if (strCount == 1) {
-            return message;
-        } else {
-            return message + " (x" + strCount + ")";
         }
     }
 

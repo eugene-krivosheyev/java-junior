@@ -40,11 +40,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-/*
+
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
-        Logger.log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        Logger.log((int[][])(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}}));
         Logger.close();
         //endregion
 
@@ -62,7 +62,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
-        Logger.log(new int[][][][]{{{{0}}}});
+        Logger.log((int[][][][])(new int[][][][]{{{{0}}}}));
         Logger.close();
         //endregion
         //region then
@@ -117,6 +117,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains(String.valueOf(11));
         //endregion
     }
-*/
+
 
 }

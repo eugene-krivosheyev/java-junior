@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import com.acme.edu.command.*;
+
 public class Accumulator {
     private int intBuff = 0;
     private byte byteBuff = 0;
@@ -66,6 +68,54 @@ public class Accumulator {
         }
     }
 
+    public boolean accumulate(IntMasCommand command) {
+        if (currentType.equals(Type.NONE))
+            currentType = command.getType();
+        if (!isAccumulative(command)) {
+            strBuff = "";
+            currentMessage = command.messageDecorate(0);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean accumulate(IntMas2Command command) {
+        if (currentType.equals(Type.NONE))
+            currentType = command.getType();
+        if (!isAccumulative(command)) {
+            strBuff = "";
+            currentMessage = command.messageDecorate(0);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean accumulate(IntMas4Command command) {
+        if (currentType.equals(Type.NONE))
+            currentType = command.getType();
+        if (!isAccumulative(command)) {
+            strBuff = "";
+            currentMessage = command.messageDecorate(0);
+            return true;
+        } else {
+            return false;
+        }
+    }
+/*
+    public boolean accumulate(IntMas4Command command) {
+        if (currentType.equals(Type.NONE))
+            currentType = command.getType();
+        if (!isAccumulative(command)) {
+            strBuff = "";
+            currentMessage = command.messageDecorate(0);
+            return true;
+        } else {
+            return false;
+        }
+    }*/
+
     public boolean accumulate(BooleanCommand command) {
         if (currentType.equals(Type.NONE))
             currentType = command.getType();
@@ -97,6 +147,19 @@ public class Accumulator {
             return !command.isOverflow(this);
         }
     }
+
+    public boolean isAccumulative(IntMasCommand command) {
+        return false;
+    }
+
+    public boolean isAccumulative(IntMas2Command command) {
+        return false;
+    }
+
+    public boolean isAccumulative(IntMas4Command command) {
+        return false;
+    }
+
 
     public boolean isAccumulative(ByteCommand command) {
         if (!command.getType().equals(currentType)) {
