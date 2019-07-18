@@ -1,8 +1,17 @@
 package com.acme.edu.ooad;
 
+/**
+ * Template Method [GoF]
+ */
 public abstract class LogDefaultSaver implements LogSaver {
     @Override
     public void save(Command message) {
-        if (message == null) throw new IllegalArgumentException();
+       //....
+        //....
+        this.doStep(message);
+        ///.....
+        //.....
     }
+
+    protected abstract void doStep(Command message);
 }
