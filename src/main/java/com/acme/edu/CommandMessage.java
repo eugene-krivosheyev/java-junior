@@ -1,8 +1,8 @@
 package com.acme.edu;
 
 public interface CommandMessage {
-    public MessageTypeName getTypeName();
+    MessageTypeName getTypeName();
 
-    public void accumulate(ControllerState state);
-    public void typeSwitchUpdate(ControllerState state);
+    void accumulate(ControllerState state);
+    void typeSwitchUpdate(ControllerState state);
 }

@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import static java.lang.System.lineSeparator;
+
 public class ControllerState {
     private int accumulatedSum;
     private String accumulatedString;
@@ -36,7 +38,7 @@ public class ControllerState {
     }
 
     public void setAccumulatedString(String accumulatedString) {
-        this.accumulatedString += accumulatedString;
+        this.accumulatedString += accumulatedString + lineSeparator();
     }
 
     public void setPreviousString(String previousString) {
@@ -46,6 +48,7 @@ public class ControllerState {
     public void setStringCounter(int stringCounter) {
         this.stringCounter = stringCounter;
     }
+
 
     public ControllerState() {
         accumulatedString = "";

@@ -12,10 +12,10 @@ public class Logger {
     private static int isPrimitiveCount = 0;
     private static int sameStringsAmount = 0;
     private static MessageTypeName prevTypeName = MessageTypeName.INITIAL;
-    private static boolean isPrimitive = true;
+    //private static boolean isPrimitive = true;
     private static LoggerController loggerController = new LoggerController(new ControllerState());
 
-    private static String decorator(String message, MessageTypeName typeName) {
+    private static String decorator(String message, MessageTypeName typeName, boolean isPrimitive) {
         if (!isPrimitive) return message;
         return typeName.decoratePrimitive(message);
     }
@@ -84,25 +84,25 @@ public class Logger {
         }
     }
 
-    public static void log(char message) {
-        System.out.println("char: " + message);
-    }
-
-    public static void log(String message) {
-        typeSwitcher(STRING);
-        prevTypeName = STRING;
-        if (previousStr.equals(message)) {
-            sameStringsAmount++;
-            return;
-        }
-        if (!previousStr.equals("")) {
-            accumulatedStr += previousStr +
-                    (sameStringsAmount > 1 ? " (x" + sameStringsAmount + ")" : "") +
-                    lineSeparator();
-        }
-        previousStr = message;
-        sameStringsAmount = 1;
-    }
+//    public static void log(char message) {
+//        System.out.println("char: " + message);
+//    }
+//
+//    public static void log(String message) {
+//        typeSwitcher(STRING);
+//        prevTypeName = STRING;
+//        if (previousStr.equals(message)) {
+//            sameStringsAmount++;
+//            return;
+//        }
+//        if (!previousStr.equals("")) {
+//            accumulatedStr += previousStr +
+//                    (sameStringsAmount > 1 ? " (x" + sameStringsAmount + ")" : "") +
+//                    lineSeparator();
+//        }
+//        previousStr = message;
+//        sameStringsAmount = 1;
+//    }
 
     public static void log(boolean message) {
         System.out.println("primitive: " + message);
@@ -132,7 +132,8 @@ public class Logger {
 //        }
 //        typeSwitcher(INITIAL);
         //System.out.print(decorator(accumulatedStr, prevTypeName));
-        System.out.print(decorator(loggerController.getAccumulatedString(), INITIAL));
+        loggerController.finishString();
+        System.out.print(loggerController.decorator(loggerController.getAccumulatedString(), loggerController.getLogCount()));
 //        accumulatedStr = "";
 //        accumulatedSum = 0;
 //        previousStr = "";
