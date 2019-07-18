@@ -10,6 +10,7 @@ import java.io.*;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private String separator = System.lineSeparator();
+
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
@@ -60,9 +61,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    /*
-    TODO: implement Logger solution to match specification as tests
-    */
     @Test
     public void shouldLogChar() throws IOException {
         //region when

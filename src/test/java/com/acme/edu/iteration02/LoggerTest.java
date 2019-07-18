@@ -25,9 +25,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
 
-    /*
-    TODO: implement Logger solution to match specification as tests
-    */
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
@@ -78,7 +75,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log("str 1");
         Logger.log((byte) 10);
-        Logger.log( Byte.MAX_VALUE);
+        Logger.log(Byte.MAX_VALUE);
         Logger.log("str 2");
         Logger.log(0);
 
@@ -128,7 +125,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(Integer.MAX_VALUE);
         Logger.close();
 
-        assertSysoutContains(String.valueOf(Integer.MAX_VALUE-10));
+        assertSysoutContains(String.valueOf(Integer.MAX_VALUE - 10));
     }
 
     @Test
@@ -147,7 +144,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(Byte.MAX_VALUE);
         Logger.close();
 
-        assertSysoutContains(String.valueOf(Byte.MAX_VALUE-10));
+        assertSysoutContains(String.valueOf(Byte.MAX_VALUE - 10));
     }
 
     @Test

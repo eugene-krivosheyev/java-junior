@@ -3,6 +3,41 @@ package com.acme.edu;
 import static java.lang.String.valueOf;
 
 public class Logger {
+    private static LoggerController loggerController = new LoggerController();
+
+    public static void flush() {
+        loggerController.flush();
+    }
+
+    public static void close() {
+        flush();
+        loggerController = new LoggerController();
+    }
+
+    public static void log(int message) {
+        loggerController.log(new IntCommand(message));
+    }
+
+    public static void log(byte message) {
+        loggerController.log(new ByteCommand(message));
+    }
+
+    public static void log(char message) {
+        loggerController.log(new CharCommand(message));
+    }
+
+    public static void log(String message) {
+        loggerController.log(new StringCommand(message));
+    }
+
+    public static void log(boolean message) {
+        loggerController.log(new BooleanCommand(message));
+    }
+
+    public static void log(Object message) {
+        loggerController.log(new ObjectCommand(message));
+    }
+    /*
     private static int intBuff = 0;
     private static byte byteBuff = 0;
 
@@ -185,5 +220,5 @@ public class Logger {
         if (byteBuff > 0 && (Byte.MAX_VALUE - byteBuff < message)) return true;
         if (byteBuff <= 0 && (Byte.MIN_VALUE - byteBuff > message)) return true;
         return false;
-    }
+    }*/
 }
