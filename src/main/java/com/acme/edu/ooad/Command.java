@@ -31,8 +31,18 @@ public class Command {
     }
 }
 
-class StrignCommand extends Command {
-    public StrignCommand(String messsage, int level) {
+class StringCommand extends Command {
+    private String message;
+
+    public StringCommand(String messsage, int level) {
         super(messsage, level);
+    }
+
+    public boolean equals(Command other) {
+        return (other instanceof StringCommand) && this.message.equals(((StringCommand) other).message);
+    }
+
+    public void strMethod() {
+
     }
 }
