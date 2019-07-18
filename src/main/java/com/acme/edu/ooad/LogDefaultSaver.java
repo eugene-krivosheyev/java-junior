@@ -5,12 +5,13 @@ package com.acme.edu.ooad;
  */
 public abstract class LogDefaultSaver implements LogSaver {
     @Override
-    public void save(Command message) {
+    public String save(Command message) {
        //....
         //....
         this.doStep(message);
         ///.....
         //.....
+        return null;
     }
 
     protected abstract void doStep(Command message);

@@ -1,5 +1,5 @@
 package com.acme.edu.ooad;
 
 public interface LogSaver {
-    void save(Command message);
+    Object save(Command message) throws Exception;
 }
