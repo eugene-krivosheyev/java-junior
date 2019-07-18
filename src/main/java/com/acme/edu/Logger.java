@@ -13,6 +13,7 @@ public class Logger {
     private static int sameStringsAmount = 0;
     private static MessageTypeName prevTypeName = MessageTypeName.INITIAL;
     private static boolean isPrimitive = true;
+    private static LoggerController loggerController = new LoggerController(new ControllerState());
 
     private static String decorator(String message, MessageTypeName typeName) {
         if (!isPrimitive) return message;
@@ -43,23 +44,24 @@ public class Logger {
     }
 
     public static void log(int message) {
-        typeSwitcher(INT);
-        prevTypeName = INT;
-        if (message > 0) {
-            if (accumulatedSum > Integer.MAX_VALUE - message) {
-                accumulatedStr += accumulatedSum + lineSeparator();
-                accumulatedSum = Integer.MAX_VALUE;
-            } else {
-                accumulatedSum += message;
-            }
-        } else {
-            if (accumulatedSum < Integer.MIN_VALUE - message) {
-                accumulatedStr += accumulatedSum + lineSeparator();
-                accumulatedSum = Integer.MIN_VALUE;
-            } else {
-                accumulatedSum += message;
-            }
-        }
+        loggerController.proceed(new CommandMessageInt(message));
+//        typeSwitcher(INT);
+//        prevTypeName = INT;
+//        if (message > 0) {
+//            if (accumulatedSum > Integer.MAX_VALUE - message) {
+//                accumulatedStr += accumulatedSum + lineSeparator();
+//                accumulatedSum = Integer.MAX_VALUE;
+//            } else {
+//                accumulatedSum += message;
+//            }
+//        } else {
+//            if (accumulatedSum < Integer.MIN_VALUE - message) {
+//                accumulatedStr += accumulatedSum + lineSeparator();
+//                accumulatedSum = Integer.MIN_VALUE;
+//            } else {
+//                accumulatedSum += message;
+//            }
+//        }
     }
 
     public static void log(byte message) {
@@ -124,16 +126,18 @@ public class Logger {
     }
 
     public static void flush() {
-        if (isPrimitiveCount > 1) {
-            isPrimitive = false;
-        }
-        typeSwitcher(INITIAL);
-        System.out.print(decorator(accumulatedStr, prevTypeName));
-        accumulatedStr = "";
-        accumulatedSum = 0;
-        previousStr = "";
-        prevTypeName = INITIAL;
-        isPrimitive = true;
-        isPrimitiveCount = 0;
+//        System.out.println(loggerController.getAccumulatedString());
+//        if (isPrimitiveCount > 1) {
+//            isPrimitive = false;
+//        }
+//        typeSwitcher(INITIAL);
+        //System.out.print(decorator(accumulatedStr, prevTypeName));
+        System.out.print(decorator(loggerController.getAccumulatedString(), INITIAL));
+//        accumulatedStr = "";
+//        accumulatedSum = 0;
+//        previousStr = "";
+//        prevTypeName = INITIAL;
+//        isPrimitive = true;
+//        isPrimitiveCount = 0;
     }
 }
