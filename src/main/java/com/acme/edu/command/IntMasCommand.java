@@ -3,7 +3,7 @@ package com.acme.edu.command;
 import com.acme.edu.Accumulator;
 import com.acme.edu.Type;
 
-public class IntMasCommand {
+public class IntMasCommand implements Command {
     private int[] message = {1};
     private Type CURRENT_TYPE = Type.INT_MAS;
 
@@ -15,7 +15,7 @@ public class IntMasCommand {
         return CURRENT_TYPE;
     }
 
-    public String messageDecorate(int value) {
+    public String messageDecorate() {
         String str= "primitives array: {";
         for(int i:message)
             str+=i+", ";
@@ -29,5 +29,10 @@ public class IntMasCommand {
 
     public boolean isOverflow(Accumulator accumulator) {
         return true;
+    }
+
+    @Override
+    public boolean accumulate(Command accumulator) {
+        return false;
     }
 }

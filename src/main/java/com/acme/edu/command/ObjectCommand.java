@@ -3,7 +3,7 @@ package com.acme.edu.command;
 import com.acme.edu.Accumulator;
 import com.acme.edu.Type;
 
-public class ObjectCommand {
+public class ObjectCommand implements Command {
     private Object message ;
     private Type CURRENT_TYPE = Type.OBJECT;
 
@@ -15,7 +15,7 @@ public class ObjectCommand {
         return CURRENT_TYPE;
     }
 
-    public String messageDecorate(int value) {
+    public String messageDecorate() {
         return "reference: " + message.toString();
     }
 
@@ -25,5 +25,10 @@ public class ObjectCommand {
 
     public boolean isOverflow(Accumulator accumulator) {
         return true;
+    }
+
+    @Override
+    public boolean accumulate(Command accumulator) {
+        return false;
     }
 }

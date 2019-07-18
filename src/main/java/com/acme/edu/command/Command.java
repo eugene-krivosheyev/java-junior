@@ -1,5 +1,10 @@
 package com.acme.edu.command;
 
-public class Command {
+import com.acme.edu.Accumulator;
+import com.acme.edu.Type;
 
+public interface Command {
+    boolean accumulate(Command accumulator);
+    Type getType();
+    String messageDecorate();
 }

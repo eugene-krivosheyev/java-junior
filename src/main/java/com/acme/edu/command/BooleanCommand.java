@@ -3,7 +3,7 @@ package com.acme.edu.command;
 import com.acme.edu.Accumulator;
 import com.acme.edu.Type;
 
-public class BooleanCommand {
+public class BooleanCommand implements Command {
     private boolean message ;
     private Type CURRENT_TYPE = Type.BOOLEAN;
 
@@ -15,7 +15,7 @@ public class BooleanCommand {
         return CURRENT_TYPE;
     }
 
-    public String messageDecorate(int value) {
+    public String messageDecorate() {
         return "primitive: " + String.valueOf(message);
     }
 
@@ -25,5 +25,10 @@ public class BooleanCommand {
 
     public boolean isOverflow(Accumulator accumulator) {
         return true;
+    }
+
+    @Override
+    public boolean accumulate(Command accumulator) {
+        return false;
     }
 }

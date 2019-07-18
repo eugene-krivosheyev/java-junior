@@ -71,9 +71,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("char: ");
-        assertSysoutContains("a");
-        assertSysoutContains("b");
+        assertSysoutEquals("char: a"+System.lineSeparator() +
+                "char: b"+System.lineSeparator());
         //endregion
     }
 

@@ -3,7 +3,7 @@ package com.acme.edu.command;
 import com.acme.edu.Accumulator;
 import com.acme.edu.Type;
 
-public class IntCommand {
+public class IntCommand implements Command {
     private int message = 0;
     private Type CURRENT_TYPE = Type.INT;
 
@@ -11,22 +11,40 @@ public class IntCommand {
         this.message = message;
     }
 
+    @Override
+    public boolean accumulate(Command command) {
+        if (isAccumulative(command)) {
+            int commandValue = ((IntCommand)command).getIntValue();
+            setIntValue(commandValue+message);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isAccumulative(Command command) {
+        if (command.getType().equals(CURRENT_TYPE)) {
+            int intBuff = ((IntCommand) command).getIntValue();
+            if (intBuff > 0 && (Integer.MAX_VALUE - intBuff < message)) return false;
+            if (intBuff <= 0 && (Integer.MIN_VALUE - intBuff > message)) return false;
+            return true;
+        }
+        return false;
+    }
+
     public Type getType() {
         return CURRENT_TYPE;
     }
 
-    public String messageDecorate(int value) {
-        return String.valueOf(value);
+    public String messageDecorate() { return String.valueOf(message);
     }
 
     public int getIntValue() {
         return message;
     }
 
-    public boolean isOverflow(Accumulator accumulator) {
-        int intBuff = accumulator.getIntBuff();
-        if (intBuff > 0 && (Integer.MAX_VALUE - intBuff < message)) return true;
-        if (intBuff <= 0 && (Integer.MIN_VALUE - intBuff > message)) return true;
-        return false;
+    public void setIntValue(int value) {
+        message = value;
     }
+
 }

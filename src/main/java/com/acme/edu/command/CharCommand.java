@@ -3,7 +3,7 @@ package com.acme.edu.command;
 import com.acme.edu.Accumulator;
 import com.acme.edu.Type;
 
-public class CharCommand {
+public class CharCommand implements Command {
     private char message;
     private Type CURRENT_TYPE = Type.CHAR;
 
@@ -15,7 +15,7 @@ public class CharCommand {
         return CURRENT_TYPE;
     }
 
-    public String messageDecorate(int value) {
+    public String messageDecorate() {
         return "char: " + String.valueOf(message);
     }
 
@@ -25,5 +25,10 @@ public class CharCommand {
 
     public boolean isOverflow(Accumulator accumulator) {
         return true;
+    }
+
+    @Override
+    public boolean accumulate(Command accumulator) {
+        return false;
     }
 }

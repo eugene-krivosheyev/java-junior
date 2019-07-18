@@ -3,7 +3,7 @@ package com.acme.edu.command;
 import com.acme.edu.Accumulator;
 import com.acme.edu.Type;
 
-public class IntMas4Command {
+public class IntMas4Command implements Command {
     private int[][][][] message;
     private Type CURRENT_TYPE = Type.INT_MAS4;
 
@@ -15,7 +15,7 @@ public class IntMas4Command {
         return CURRENT_TYPE;
     }
 
-    public String messageDecorate(int value) {
+    public String messageDecorate() {
         String str= "primitives multimatrix: {"+System.lineSeparator();
         for(int[][][] i:message) {
             str=str+"{"+System.lineSeparator();
@@ -45,5 +45,10 @@ public class IntMas4Command {
 
     public boolean isOverflow(Accumulator accumulator) {
         return true;
+    }
+
+    @Override
+    public boolean accumulate(Command accumulator) {
+        return false;
     }
 }

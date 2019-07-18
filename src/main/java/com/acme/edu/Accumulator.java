@@ -3,6 +3,7 @@ package com.acme.edu;
 import com.acme.edu.command.*;
 
 public class Accumulator {
+    /*
     private int intBuff = 0;
     private byte byteBuff = 0;
 
@@ -17,8 +18,8 @@ public class Accumulator {
 
     public String getCurrentMessage() {
         return currentMessage;
-    }
-
+    }*/
+/*
     public boolean accumulate(IntCommand command) {
         if (currentType.equals(Type.NONE))
             currentType = command.getType();
@@ -29,20 +30,8 @@ public class Accumulator {
         } else {
             return false;
         }
-    }
-
-    public boolean accumulate(ByteCommand command) {
-        if (currentType.equals(Type.NONE))
-            currentType = command.getType();
-        if (isAccumulative(command)) {
-            byteBuff += command.getByteValue();
-            currentMessage = command.messageDecorate(byteBuff);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
+    }*/
+/*
     public boolean accumulate(StringCommand command) {
         if (currentType.equals(Type.NONE))
             currentType = command.getType();
@@ -59,7 +48,7 @@ public class Accumulator {
     public boolean accumulate(CharCommand command) {
         if (currentType.equals(Type.NONE))
             currentType = command.getType();
-        if (!isAccumulative(command)) {
+        if (isAccumulative(command)) {
             strBuff = "";
             currentMessage = command.messageDecorate(0);
             return true;
@@ -71,7 +60,7 @@ public class Accumulator {
     public boolean accumulate(IntMasCommand command) {
         if (currentType.equals(Type.NONE))
             currentType = command.getType();
-        if (!isAccumulative(command)) {
+        if (isAccumulative(command)) {
             strBuff = "";
             currentMessage = command.messageDecorate(0);
             return true;
@@ -83,7 +72,7 @@ public class Accumulator {
     public boolean accumulate(IntMas2Command command) {
         if (currentType.equals(Type.NONE))
             currentType = command.getType();
-        if (!isAccumulative(command)) {
+        if (isAccumulative(command)) {
             strBuff = "";
             currentMessage = command.messageDecorate(0);
             return true;
@@ -95,7 +84,7 @@ public class Accumulator {
     public boolean accumulate(IntMas4Command command) {
         if (currentType.equals(Type.NONE))
             currentType = command.getType();
-        if (!isAccumulative(command)) {
+        if (isAccumulative(command)) {
             strBuff = "";
             currentMessage = command.messageDecorate(0);
             return true;
@@ -103,23 +92,11 @@ public class Accumulator {
             return false;
         }
     }
-/*
-    public boolean accumulate(IntMas4Command command) {
-        if (currentType.equals(Type.NONE))
-            currentType = command.getType();
-        if (!isAccumulative(command)) {
-            strBuff = "";
-            currentMessage = command.messageDecorate(0);
-            return true;
-        } else {
-            return false;
-        }
-    }*/
 
     public boolean accumulate(BooleanCommand command) {
         if (currentType.equals(Type.NONE))
             currentType = command.getType();
-        if (!isAccumulative(command)) {
+        if (isAccumulative(command)) {
             strBuff = "";
             currentMessage = command.messageDecorate(0);
             return true;
@@ -131,7 +108,7 @@ public class Accumulator {
     public boolean accumulate(ObjectCommand command) {
         if (currentType.equals(Type.NONE))
             currentType = command.getType();
-        if (!isAccumulative(command)) {
+        if (isAccumulative(command)) {
             strBuff = "";
             currentMessage = command.messageDecorate(0);
             return true;
@@ -140,33 +117,16 @@ public class Accumulator {
         }
     }
 
-    public boolean isAccumulative(IntCommand command) {
-        if (!command.getType().equals(currentType)) {
-            return false;
-        } else {
-            return !command.isOverflow(this);
-        }
-    }
-
     public boolean isAccumulative(IntMasCommand command) {
-        return false;
+        return true;
     }
 
     public boolean isAccumulative(IntMas2Command command) {
-        return false;
+        return true;
     }
 
     public boolean isAccumulative(IntMas4Command command) {
-        return false;
-    }
-
-
-    public boolean isAccumulative(ByteCommand command) {
-        if (!command.getType().equals(currentType)) {
-            return false;
-        } else {
-            return !command.isOverflow(this);
-        }
+        return true;
     }
 
     public boolean isAccumulative(StringCommand command) {
@@ -179,25 +139,25 @@ public class Accumulator {
 
     public boolean isAccumulative(CharCommand command) {
         if (!command.getType().equals(currentType)) {
-            return false;
+            return true;
         } else {
-            return !command.isOverflow(this);
+            return command.isOverflow(this);
         }
     }
 
     public boolean isAccumulative(BooleanCommand command) {
         if (!command.getType().equals(currentType)) {
-            return false;
+            return true;
         } else {
-            return !command.isOverflow(this);
+            return command.isOverflow(this);
         }
     }
 
     public boolean isAccumulative(ObjectCommand command) {
         if (!command.getType().equals(currentType)) {
-            return false;
+            return true;
         } else {
-            return !command.isOverflow(this);
+            return command.isOverflow(this);
         }
     }
 
@@ -224,5 +184,5 @@ public class Accumulator {
 
     public String getStrBuff() {
         return strBuff;
-    }
+    }*/
 }

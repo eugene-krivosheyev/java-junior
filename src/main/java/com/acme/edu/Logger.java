@@ -45,6 +45,41 @@ public class Logger {
     }
 
     public static void log(String... message) {
+        for(String s:message)
+            loggerController.log(new StringCommand(s));
+    }
+
+    public static void log(Boolean message) {
+        loggerController.log(new BooleanCommand(message));
+    }
+
+    public static void log(Object message) {
+        loggerController.log(new ObjectCommand(message));
+    }
+/*
+    public static void log(int... message) {
+        loggerController.log(new IntMasCommand(message));
+    }
+
+    public static void log(int[][] message) {
+        loggerController.log(new IntMas2Command(message));
+    }
+
+    public static void log(int[][][][] message) {
+        loggerController.log(new IntMas4Command(message));
+    }
+
+
+
+    public static void log(char message) {
+        loggerController.log(new CharCommand(message));
+    }
+
+    public static void log(String message) {
+        loggerController.log(new StringCommand(message));
+    }
+
+    public static void log(String... message) {
         for(String s:message){
             loggerController.log(new StringCommand(s));
         }
@@ -58,7 +93,7 @@ public class Logger {
     public static void log(Object message) {
        loggerController.log(new ObjectCommand(message));
     }
-
+*/
 
 /*
     private static void typeLog(String type, String message) {
