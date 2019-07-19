@@ -3,8 +3,7 @@ package com.acme.edu.demo;
 import static junit.framework.Assert.assertEquals;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,8 +61,16 @@ public class ArrayListTest {
         assertThat(result)
                 .contains("test string 1")
                 .contains("test string 3");
-
     }
 
+    @Test
+    public void shouldCallElementsToStringWhenToString() {
+        Object mock = mock(Object.class);
+        sut.add(mock);
+
+        sut.toString();
+
+        verify(mock).toString(); //verify(mock).toString(1); verify(mock, times(1)).toString();
+    }
 
 }
