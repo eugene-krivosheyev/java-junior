@@ -1,8 +1,5 @@
 package com.acme.edu;
 
-import com.sun.javafx.scene.layout.region.Margins;
-import com.sun.xml.internal.ws.commons.xmlutil.Converter;
-
 import static com.acme.edu.MessageTypeName.INT;
 import static java.lang.System.lineSeparator;
 
@@ -26,14 +23,14 @@ public class CommandMessageInt implements CommandMessage {
                 state.setAccumulatedString(accumulatedSum + lineSeparator());
                 state.setAccumulatedSum(Integer.MAX_VALUE);
             } else {
-                state.setAccumulatedSum(message);
+                state.setAccumulatedSum(state.getAccumulatedSum() + message);
             }
         } else {
             if (accumulatedSum < Integer.MIN_VALUE - message) {
                 state.setAccumulatedString(accumulatedSum + lineSeparator());
                 state.setAccumulatedSum(Integer.MIN_VALUE);
             } else {
-                state.setAccumulatedSum(message);
+                state.setAccumulatedSum(state.getAccumulatedSum() + message);
             }
         }
     }
@@ -41,5 +38,6 @@ public class CommandMessageInt implements CommandMessage {
     @Override
     public void typeSwitchUpdate(ControllerState state) {
         state.setAccumulatedString(Integer.toString(state.getAccumulatedSum()));
+        state.setAccumulatedSum(0);
     }
 }

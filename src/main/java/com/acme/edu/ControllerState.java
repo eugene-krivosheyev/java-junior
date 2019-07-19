@@ -30,11 +30,8 @@ public class ControllerState {
     }
 
     public void setAccumulatedSum(int accumulatedSum) {
-        if (accumulatedSum == Integer.MAX_VALUE || accumulatedSum == Integer.MIN_VALUE) {
-            this.accumulatedSum = accumulatedSum;
-        } else {
-            this.accumulatedSum += accumulatedSum;
-        }
+
+        this.accumulatedSum = accumulatedSum;
     }
 
     public void setAccumulatedString(String accumulatedString) {

@@ -34,7 +34,6 @@ public class LoggerController {
     public String getAccumulatedString() {
         String tmp = state.getAccumulatedString();
         state = new ControllerState();
-        logCount = 0;
         return tmp;
     }
 
