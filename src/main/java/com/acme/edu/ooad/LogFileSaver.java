@@ -8,7 +8,7 @@ public class LogFileSaver implements LogSaver {
     }
 
     @Override
-    public void save(Command message) {
-
+    public Object save(Command message) {
+        return null;
     }
 }

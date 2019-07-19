@@ -11,4 +11,14 @@ public class LogSeverityLevelFilter implements LogFilter {
     public boolean allow(Command message) {
         return message.isAllowed(MAX_LEVEL);
     }
+
+    @Override
+    public int getSeverty() {
+        return 0;
+    }
+
+    @Override
+    public int getDoublrSeverity() {
+        return 0;
+    }
 }

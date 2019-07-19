@@ -16,7 +16,11 @@ public class Logger {
 
     public void log(Command message) {
         if (filter.allow(message)) {
-            saver.save(message);
+            try {
+                saver.save(message);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
