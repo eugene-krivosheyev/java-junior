@@ -1,14 +1,10 @@
 package com.acme.edu.demo;
 
-import junit.framework.Assert;
-import org.fest.assertions.Assertions;
+import static junit.framework.Assert.assertEquals;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static junit.framework.Assert.assertEquals;
-import static org.fest.assertions.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Test Case
@@ -30,7 +26,7 @@ public class ArrayListTest {
         org.junit.Assert.assertTrue(sut.contains(dummy));
 
 //        assertThat(sut, Matcher) //Hamcrest
-        assertThat(sut) //Fluent Interface | API
+        org.fest.assertions.Assertions.assertThat(sut) //Fluent Interface | API
                 .hasSize(1)
                 .contains(dummy);
         //endregion
