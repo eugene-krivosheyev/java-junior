@@ -1,10 +1,7 @@
 package com.acme.edu.command;
 
-import com.acme.edu.ControllerState;
-import com.acme.edu.MessageTypeName;
 import com.acme.edu.saver.Saver;
 
-import static com.acme.edu.MessageTypeName.INT;
 import static java.lang.System.lineSeparator;
 
 public class CommandMessageInt implements CommandMessage {
