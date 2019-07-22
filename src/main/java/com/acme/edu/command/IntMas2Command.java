@@ -15,16 +15,18 @@ public class IntMas2Command implements Command {
     }
 
     public String messageDecorate() {
-        String str= "primitives matrix: {"+System.lineSeparator();
-        for(int[] i:message) {
-            str=str+"{";
-            for(int j:i) {
+        String str = "primitives matrix: {" + System.lineSeparator();
+        for (int[] i : message) {
+            str = str + "{";
+            for (int j : i) {
                 str += j + ", ";
             }
-            if(i.length>0)
-            str=str.substring(0,str.length()-2)+"}"+System.lineSeparator();
+            if (i.length > 0)
+                str = str.substring(0, str.length() - 2) + "}" + System.lineSeparator();
+            else
+                str +="}" + System.lineSeparator();
         }
-        str+="}";
+        str += "}";
         return str;
     }
 

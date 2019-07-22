@@ -46,6 +46,7 @@ public class StringCommand implements Command {
             return (message.equals(((StringCommand) command).getStringValue()));
         } else {
             return false;
+
         }
     }
 }
