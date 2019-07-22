@@ -5,7 +5,7 @@ import com.acme.edu.MessageTypeName;
 import com.acme.edu.saver.Saver;
 
 public interface CommandMessage {
-    MessageTypeName getTypeName();
     void flush(Saver saver);
     void update(CommandMessage command, Saver saver);
+    String primitiveDecorator();
 }

@@ -4,9 +4,9 @@ import com.acme.edu.command.CommandMessage;
 import com.acme.edu.saver.Saver;
 
 public class LoggerController {
-    private CommandMessage previousCommand;
     private Saver saver;
-    private int logCounter = 1;
+    private CommandMessage previousCommand;
+    private int logCounter = 0;
 
     LoggerController(Saver saver) {
         this.saver = saver;
@@ -22,11 +22,12 @@ public class LoggerController {
     }
 
     public void flush() {
-        boolean isPrimitive = false;
-        if (logCounter == 1) {
-            isPrimitive = true;
-        }
-        previousCommand.flush(isPrimitive, saver);
+        String primitiveDecoration = logCounter == 1 ? previousCommand.primitiveDecorator() : "";
+        saver.save(primitiveDecoration);
+        previousCommand.flush(saver);
+        //saver.save(lineSeparator());
+        logCounter = 0;
+        previousCommand = null;
     }
 
 }
