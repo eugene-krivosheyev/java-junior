@@ -1,44 +1,33 @@
 package com.acme.edu;
 
+import com.acme.edu.command.CommandMessage;
+import com.acme.edu.saver.Saver;
+
 public class LoggerController {
-    private ControllerState state;
-    private CommandMessage previousMessage = null;
+    private Saver saver;
+    private CommandMessage previousCommand;
+    private int logCounter = 0;
 
-    public boolean getLogCount() {
-        boolean tmp = logCount < 2;
-        logCount = 0;
-        return tmp;
+    LoggerController(Saver saver) {
+        this.saver = saver;
     }
 
-    private int logCount = 0;
-
-    public LoggerController(ControllerState state) {
-        this.state = state;
-    }
-
-    public void proceed(CommandMessage commandMessage) {
-        logCount++;
-        if (previousMessage != null) {
-            if (previousMessage.getTypeName() != commandMessage.getTypeName()) {
-                previousMessage.typeSwitchUpdate(state);
-            }
+    public void log(CommandMessage command) {
+        logCounter++;
+        if (previousCommand != null) {
+            previousCommand.update(command, saver);
         }
-        previousMessage = commandMessage;
-        commandMessage.accumulate(state);
+
+        previousCommand = command;
     }
 
-    public void finishString() {
-        previousMessage.typeSwitchUpdate(state);
+    public void flush() {
+        String primitiveDecoration = logCounter == 1 ? previousCommand.primitiveDecorator() : "";
+        saver.save(primitiveDecoration);
+        previousCommand.flush(saver);
+        //saver.save(lineSeparator());
+        logCounter = 0;
+        previousCommand = null;
     }
 
-    public String getAccumulatedString() {
-        String tmp = state.getAccumulatedString();
-        state = new ControllerState();
-        return tmp;
-    }
-
-    public String decorator(String message, boolean isPrimitive) {
-        if (!isPrimitive) return message;
-        return previousMessage.getTypeName().decoratePrimitive(message);
-    }
 }
