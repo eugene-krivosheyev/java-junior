@@ -2,6 +2,7 @@ package com.acme.edu;
 
 import com.acme.edu.command.CommandMessageInt;
 import com.acme.edu.command.CommandMessageString;
+import com.acme.edu.exceptions.MaxValueReachedException;
 import com.acme.edu.exceptions.NullCommandFlushException;
 import com.acme.edu.saver.ConsoleSaver;
 
@@ -9,7 +10,11 @@ public class Logger {
     private static LoggerController loggerController = new LoggerController(new ConsoleSaver());
 
     public static void log(int message) {
-        loggerController.log(new CommandMessageInt(message));
+        try {
+            loggerController.log(new CommandMessageInt(message));
+        } catch (MaxValueReachedException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void log(byte message) {
@@ -32,7 +37,11 @@ public class Logger {
     }
 
     public static void log(String message) {
-        loggerController.log(new CommandMessageString(message));
+        try {
+            loggerController.log(new CommandMessageString(message));
+        } catch (MaxValueReachedException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void flush() {

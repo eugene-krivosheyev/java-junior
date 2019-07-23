@@ -4,11 +4,13 @@ import com.acme.edu.LoggerController;
 import com.acme.edu.command.CommandMessage;
 import com.acme.edu.command.CommandMessageInt;
 import com.acme.edu.command.CommandMessageString;
+import com.acme.edu.exceptions.MaxValueReachedException;
 import com.acme.edu.exceptions.NullCommandFlushException;
 import com.acme.edu.saver.ConsoleSaver;
 import com.acme.edu.saver.Saver;
 import org.junit.Test;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 public class LoggerControllerTest {
@@ -53,7 +55,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldUpdateWhenPreviousCommandNotNull() {
+    public void shouldUpdateWhenPreviousCommandNotNull() throws MaxValueReachedException {
         Saver stub = mock(Saver.class);
         LoggerController sut = new LoggerController(stub);
         CommandMessage dummy = mock(CommandMessage.class);
@@ -72,5 +74,15 @@ public class LoggerControllerTest {
         LoggerController sut = new LoggerController(stub);
 
         sut.flush();
+    }
+
+    @Test
+    public void shouldLogCounterBeResetWhenOverflowed(){
+        Saver stub = mock(Saver.class);
+        LoggerController sut = new LoggerController(stub);
+
+        sut.setLogCounter(Integer.MAX_VALUE+1);
+
+        assertThat(sut.getLogCounter()).isEqualTo(2);
     }
 }

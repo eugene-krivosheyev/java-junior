@@ -2,6 +2,7 @@ package com.acme.edu.unit;
 
 import com.acme.edu.command.CommandMessageInt;
 import com.acme.edu.command.CommandMessageString;
+import com.acme.edu.exceptions.MaxValueReachedException;
 import com.acme.edu.saver.ConsoleSaver;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ public class CommandMessageStringTest {
     CommandMessageString sut;
 
     @Test
-    public void shouldFlushBeCalledWhenUpdateNonString() {
+    public void shouldFlushBeCalledWhenUpdateNonString() throws MaxValueReachedException {
         sut = new CommandMessageString("test");
 
         //CommandMessageInt stub = new CommandMessageInt(1);
@@ -27,7 +28,7 @@ public class CommandMessageStringTest {
     }
 
     @Test
-    public void shouldFlushBeCalledAndStringCounterAddedWhenUpdateNonString() {
+    public void shouldFlushBeCalledAndStringCounterAddedWhenUpdateNonString() throws MaxValueReachedException {
         sut = new CommandMessageString("test");
 
         CommandMessageInt stub = mock(CommandMessageInt.class);
@@ -40,7 +41,7 @@ public class CommandMessageStringTest {
     }
 
     @Test
-    public void shouldCounterIncreaseWhenSameStringUpdated() {
+    public void shouldCounterIncreaseWhenSameStringUpdated() throws MaxValueReachedException {
         sut = new CommandMessageString("test");
         CommandMessageString stub = mock(CommandMessageString.class);
         ConsoleSaver stubSaver = mock(ConsoleSaver.class);
@@ -54,9 +55,16 @@ public class CommandMessageStringTest {
     }
 
     @Test
-    public void shouldPrimitivePrefixBeCorrect(){
+    public void shouldPrimitivePrefixBeCorrect() {
         CommandMessageString sut = new CommandMessageString("");
 
         assertThat(sut.primitiveDecorator()).isEqualTo("string: ");
+    }
+
+    @Test(expected = MaxValueReachedException.class)
+    public void shouldExceptionBeThrownWhenTooManySameStrings() throws MaxValueReachedException {
+        CommandMessageString sut = new CommandMessageString("");
+
+        sut.setSameStringCount(Integer.MIN_VALUE);
     }
 }

@@ -1,5 +1,6 @@
 package com.acme.edu.command;
 
+import com.acme.edu.exceptions.MaxValueReachedException;
 import com.acme.edu.saver.Saver;
 
 import static java.lang.System.lineSeparator;
@@ -8,8 +9,11 @@ public class CommandMessageString implements CommandMessage {
     private String message;
     private int sameStringCount = 1;
 
-    public void setSameStringCount(int sameStringCount) {
+    public void setSameStringCount(int sameStringCount) throws MaxValueReachedException {
         this.sameStringCount = sameStringCount;
+        if (sameStringCount < 0) {
+            throw new MaxValueReachedException("Number of same strings overflowed value");
+        }
     }
 
     public CommandMessageString(String message) {
@@ -20,7 +24,7 @@ public class CommandMessageString implements CommandMessage {
         return message;
     }
 
-    private void update(CommandMessageString nextCommand, Saver saver) {
+    private void update(CommandMessageString nextCommand, Saver saver) throws MaxValueReachedException {
         if (message.equals(nextCommand.getMessage())) {
             nextCommand.setSameStringCount(sameStringCount + 1);
             return;
@@ -29,8 +33,8 @@ public class CommandMessageString implements CommandMessage {
     }
 
     @Override
-    public void update(CommandMessage nextCommand, Saver saver) {
-        if (nextCommand instanceof CommandMessageString){
+    public void update(CommandMessage nextCommand, Saver saver) throws MaxValueReachedException {
+        if (nextCommand instanceof CommandMessageString) {
             update((CommandMessageString) nextCommand, saver);
             return;
         }
