@@ -8,7 +8,7 @@ public class LoggerController {
     private CommandMessage previousCommand;
     private int logCounter = 0;
 
-    LoggerController(Saver saver) {
+    public LoggerController(Saver saver) {
         this.saver = saver;
     }
 
