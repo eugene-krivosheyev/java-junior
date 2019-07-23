@@ -25,7 +25,6 @@ public class LoggerController {
         String primitiveDecoration = logCounter == 1 ? previousCommand.primitiveDecorator() : "";
         saver.save(primitiveDecoration);
         previousCommand.flush(saver);
-        //saver.save(lineSeparator());
         logCounter = 0;
         previousCommand = null;
     }
