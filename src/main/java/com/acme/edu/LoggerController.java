@@ -12,21 +12,28 @@ public class LoggerController {
         this.saver = saver;
     }
 
+    public void setPreviousCommand(CommandMessage previousCommand) {
+        this.previousCommand = previousCommand;
+    }
+
+    public void setLogCounter(int logCounter) {
+        this.logCounter = logCounter;
+    }
+
     public void log(CommandMessage command) {
         logCounter++;
         if (previousCommand != null) {
             previousCommand.update(command, saver);
         }
-
-        previousCommand = command;
+        setPreviousCommand(command);
     }
 
     public void flush() {
         String primitiveDecoration = logCounter == 1 ? previousCommand.primitiveDecorator() : "";
         saver.save(primitiveDecoration);
         previousCommand.flush(saver);
-        logCounter = 0;
-        previousCommand = null;
+        setLogCounter(0);
+        setPreviousCommand(null);
     }
 
 }

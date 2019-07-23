@@ -39,7 +39,7 @@ public class CommandMessageInt implements CommandMessage {
                 flush(saver);
                 nextCommand.setAccumulator(Integer.MIN_VALUE);
             } else {
-                nextCommand.setAccumulator(accumulator + nextMessage);
+                nextCommand.setAccumulator(accumulator);
             }
         }
     }

@@ -7,16 +7,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static java.lang.System.lineSeparator;
+import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 public class CommandMessageIntTest {
-    private CommandMessageInt sut_positive;
-    private CommandMessageInt sut_negative;
+    private CommandMessageInt sutPositive;
+    private CommandMessageInt sutNegative;
 
     @Before
     public void setUp() {
-        sut_positive = new CommandMessageInt(5);
-        sut_negative = new CommandMessageInt(-5);
+        sutPositive = new CommandMessageInt(5);
+        sutNegative = new CommandMessageInt(-5);
     }
 
     @Test
@@ -25,8 +26,8 @@ public class CommandMessageIntTest {
         Saver saverStub = mock(Saver.class);
         when(nextCommandMock.getMessage()).thenReturn(10);
 
-        sut_positive.setAccumulator(100);
-        sut_positive.update(nextCommandMock, saverStub);
+        sutPositive.setAccumulator(100);
+        sutPositive.update(nextCommandMock, saverStub);
 
         verify(nextCommandMock).setAccumulator(105);
     }
@@ -37,8 +38,8 @@ public class CommandMessageIntTest {
         Saver saverStub = mock(Saver.class);
         when(nextCommandMock.getMessage()).thenReturn(Integer.MAX_VALUE);
 
-        sut_positive.setAccumulator(100);
-        sut_positive.update(nextCommandMock, saverStub);
+        sutPositive.setAccumulator(100);
+        sutPositive.update(nextCommandMock, saverStub);
 
         verify(saverStub).save(105 + lineSeparator());
         verify(nextCommandMock).setAccumulator(Integer.MAX_VALUE);
@@ -50,10 +51,10 @@ public class CommandMessageIntTest {
         Saver saverStub = mock(Saver.class);
         when(nextCommandMock.getMessage()).thenReturn(-5);
 
-        sut_negative.setAccumulator(100);
-        sut_negative.update(nextCommandMock, saverStub);
+        sutNegative.setAccumulator(100);
+        sutNegative.update(nextCommandMock, saverStub);
 
-        verify(nextCommandMock).setAccumulator(90);
+        verify(nextCommandMock).setAccumulator(95);
     }
 
     @Test
@@ -62,8 +63,8 @@ public class CommandMessageIntTest {
         Saver saverStub = mock(Saver.class);
         when(nextCommandMock.getMessage()).thenReturn(Integer.MIN_VALUE);
 
-        sut_negative.setAccumulator(1);
-        sut_negative.update(nextCommandMock, saverStub);
+        sutNegative.setAccumulator(1);
+        sutNegative.update(nextCommandMock, saverStub);
 
         verify(saverStub).save(-4 + lineSeparator());
         verify(nextCommandMock).setAccumulator(Integer.MIN_VALUE);
@@ -74,9 +75,28 @@ public class CommandMessageIntTest {
         CommandMessage nextCommandMock = mock(CommandMessage.class);
         Saver saverStub = mock(Saver.class);
 
-        sut_positive.setAccumulator(10);
-        sut_positive.update(nextCommandMock, saverStub);
+        sutPositive.setAccumulator(10);
+        sutPositive.update(nextCommandMock, saverStub);
 
         verify(saverStub).save(15 + lineSeparator());
+    }
+
+    @Test
+    public void shouldSetAccumulatorBeCalledWhenNexMessageZero() {
+        CommandMessageInt sut = new CommandMessageInt(0);
+        Saver stub = mock(Saver.class);
+        CommandMessageInt nextCommand = mock(CommandMessageInt.class);
+
+        sut.setAccumulator(0);
+        sut.update(nextCommand, stub);
+
+        verify(nextCommand).setAccumulator(0);
+    }
+
+    @Test
+    public void shouldPrimitivePrefixBeCorrect(){
+        CommandMessageInt sut = new CommandMessageInt(3);
+
+        assertThat(sut.primitiveDecorator()).isEqualTo("primitive: ");
     }
 }

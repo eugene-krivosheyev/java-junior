@@ -1,7 +1,5 @@
 package com.acme.edu;
 
-import com.acme.edu.command.CommandMessage;
-import com.acme.edu.command.CommandMessageByte;
 import com.acme.edu.command.CommandMessageInt;
 import com.acme.edu.command.CommandMessageString;
 import com.acme.edu.saver.ConsoleSaver;
@@ -14,7 +12,7 @@ public class Logger {
     }
 
     public static void log(byte message) {
-        loggerController.log(new CommandMessageByte(message));
+        //loggerController.log(new CommandMessageByte(message));
     }
 
     public static void log(char message) {

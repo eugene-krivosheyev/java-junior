@@ -6,6 +6,7 @@ import com.acme.edu.saver.ConsoleSaver;
 import org.junit.Test;
 
 import static java.lang.System.lineSeparator;
+import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 public class CommandMessageStringTest {
@@ -50,5 +51,12 @@ public class CommandMessageStringTest {
         sut.update(stub, stubSaver);
 
         verify(stub).setSameStringCount(3);
+    }
+
+    @Test
+    public void shouldPrimitivePrefixBeCorrect(){
+        CommandMessageString sut = new CommandMessageString("");
+
+        assertThat(sut.primitiveDecorator()).isEqualTo("string: ");
     }
 }
