@@ -1,7 +1,10 @@
 package com.acme.edu.exception;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import static org.mockito.Mockito.*;
 
@@ -14,32 +17,18 @@ public class ExceptionDemo {
 
     public static void moneyTransfer() throws SQLException {
         Connection c = mock(Connection.class);
-        doThrow(new SQLException()).when(c).close();
+        doThrow(new SQLException("deeeeeep")).when(c).close();
 
-        RuntimeException mte = null;
-        try {
-            //
-            save(); //RE("t")
-            //
-        } catch (RuntimeException e) {
-            //log
-            mte = new RuntimeException("MTException", e);
-            throw mte; //re-throw
-        } finally {
-            if (c != null) {
-                try {
-                    c.close();
-                } catch (SQLException e) {
-                    if (mte != null) e.addSuppressed(mte);
-                    throw e;
-                }
-            }
+        try (Connection conn = c) {
+            save();
+        } catch (SQLException e) {
+            throw new RuntimeException("MTE", e);
         }
     }
 
-    private static void save() {
+    private static void save() throws SQLException {
         //
-        throw new RuntimeException("IOException");
+        throw new SQLException("IOException");
         //
     }
 }
