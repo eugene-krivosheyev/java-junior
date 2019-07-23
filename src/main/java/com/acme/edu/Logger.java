@@ -2,6 +2,7 @@ package com.acme.edu;
 
 import com.acme.edu.command.CommandMessageInt;
 import com.acme.edu.command.CommandMessageString;
+import com.acme.edu.exceptions.NullCommandFlushException;
 import com.acme.edu.saver.ConsoleSaver;
 
 public class Logger {
@@ -28,9 +29,6 @@ public class Logger {
     }
 
     public static void log(int[] array) {
-//        System.out.println(("primitives array: " + String.join(lineSeparator(), Arrays.toString(array)))
-//                .replace('[', '{')
-//                .replace(']', '}'));
     }
 
     public static void log(String message) {
@@ -38,6 +36,10 @@ public class Logger {
     }
 
     public static void flush() {
-        loggerController.flush();
+        try {
+            loggerController.flush();
+        } catch (NullCommandFlushException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.acme.edu;
 
 import com.acme.edu.command.CommandMessage;
+import com.acme.edu.exceptions.NullCommandFlushException;
 import com.acme.edu.saver.Saver;
 
 public class LoggerController {
@@ -28,10 +29,14 @@ public class LoggerController {
         setPreviousCommand(command);
     }
 
-    public void flush() {
+    public void flush() throws NullCommandFlushException{
         String primitiveDecoration = logCounter == 1 ? previousCommand.primitiveDecorator() : "";
         saver.save(primitiveDecoration);
-        previousCommand.flush(saver);
+        try {
+            previousCommand.flush(saver);
+        } catch (NullPointerException e){
+            throw new NullCommandFlushException("Failed to flush!", e);
+        }
         setLogCounter(0);
         setPreviousCommand(null);
     }

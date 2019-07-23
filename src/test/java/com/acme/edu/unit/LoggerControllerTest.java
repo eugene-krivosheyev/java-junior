@@ -4,6 +4,7 @@ import com.acme.edu.LoggerController;
 import com.acme.edu.command.CommandMessage;
 import com.acme.edu.command.CommandMessageInt;
 import com.acme.edu.command.CommandMessageString;
+import com.acme.edu.exceptions.NullCommandFlushException;
 import com.acme.edu.saver.ConsoleSaver;
 import com.acme.edu.saver.Saver;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class LoggerControllerTest {
     }*/
 
     @Test
-    public  void  shouldPrimitiveDecorationBeCorrectWhenPrimitive(){
+    public void shouldPrimitiveDecorationBeCorrectWhenPrimitive() throws NullCommandFlushException {
         ConsoleSaver stub = mock(ConsoleSaver.class);
         LoggerController sut = new LoggerController(stub);
         CommandMessageInt stubInt = mock(CommandMessageInt.class);
@@ -37,7 +38,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public  void  shouldPrimitiveDecorationBeCorrectWhenNotPrimitive(){
+    public void shouldPrimitiveDecorationBeCorrectWhenNotPrimitive() throws NullCommandFlushException {
         ConsoleSaver stub = mock(ConsoleSaver.class);
         LoggerController sut = new LoggerController(stub);
         CommandMessageInt stubInt = mock(CommandMessageInt.class);
@@ -63,5 +64,13 @@ public class LoggerControllerTest {
         sut.log(dummy);
 
         verify(dummy1).update(dummy, stub);
+    }
+
+    @Test(expected = NullCommandFlushException.class)
+    public void shouldFlushThrowExceptionWhenPreviousCommandIsNull() throws NullCommandFlushException {
+        Saver stub = mock(Saver.class);
+        LoggerController sut = new LoggerController(stub);
+
+        sut.flush();
     }
 }
