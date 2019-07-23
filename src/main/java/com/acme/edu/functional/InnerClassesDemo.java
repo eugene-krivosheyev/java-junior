@@ -2,18 +2,26 @@ package com.acme.edu.functional;
 
 import com.acme.edu.ooad.*;
 
+import java.util.stream.Stream;
+
+import static java.util.Comparator.comparingInt;
+
 public class InnerClassesDemo {
     public static void main(String[] args) {
         Outer outer = new Outer();
         ChangeAndGetStateable result = outer.m();
 
-        new Logger(new LogSeverityLevelFilter(5),
-            new LogSaver() {
-                @Override
-                public Object save(Command message) throws Exception {
-                    return null;
-                }
-            });
+        LogSaver mySavingFunction = message -> null;
+        new Logger(
+                new LogSeverityLevelFilter(5),
+                mySavingFunction
+        );
+
+        Stream.of(1,6,2,5,3,4)
+            .filter(e -> e % 2 == 0)
+            .map(String::valueOf)
+            .sorted(comparingInt(String::length))
+                .forEach(System.out::println);
     }
 }
 
