@@ -2,6 +2,8 @@ package com.acme.edu.command;
 
 import com.acme.edu.saver.ConsoleLoggerSaver;
 
+import java.io.IOException;
+
 public class IntCommand implements Command {
     private int message = 0;
     private ConsoleLoggerSaver saver = null;
@@ -26,7 +28,7 @@ public class IntCommand implements Command {
 
     }
 
-    private boolean isAccumulative(Command command) {
+    private boolean isAccumulative(Command command)  {
         if (command instanceof IntCommand) {
             int intBuff = ((IntCommand) command).message;
             if (intBuff > 0 && (Integer.MAX_VALUE - intBuff < message)) return false;
@@ -42,7 +44,13 @@ public class IntCommand implements Command {
 
     @Override
     public void flush() {
-        saver.save(prevCommand.messageDecorate());
+        try {
+            saver.save(prevCommand.messageDecorate());
+        }catch (IOException e){
+            e.printStackTrace();
+            return;
+        }
+
         prevCommand = this;
     }
 

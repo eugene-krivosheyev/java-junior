@@ -1,9 +1,9 @@
 package com.acme.edu.saver;
 
-import com.acme.edu.command.Command;
+import java.io.IOException;
 
-public class ConsoleLoggerSaver {
-    public void save(String message){
+public class ConsoleLoggerSaver{
+    public void save(String message) throws IOException{
         System.out.println(message);
     }
 }

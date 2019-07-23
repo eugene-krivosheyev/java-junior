@@ -19,7 +19,7 @@ public class ConsoleLoggerSaverTest implements SysoutCaptureAndAssertionAbility 
     }
 
     @Test
-    public void shouldPrintToConsoleWhenUseSave() {
+    public void shouldPrintToConsoleWhenUseSave() throws IOException {
         Object stub = mock(Command.class);
         when(((Command) stub)
                 .messageDecorate())

@@ -1,15 +1,17 @@
 package com.acme.edu.command;
 
-import com.acme.edu.Type;
 import com.acme.edu.saver.ConsoleLoggerSaver;
+
+import java.io.IOException;
 
 public class NoneCommand implements Command {
     @Override
-    public void accumulate(Command accumulator, ConsoleLoggerSaver saver) {
+    public void accumulate(Command accumulator, ConsoleLoggerSaver saver)  {
+
     }
 
     @Override
-    public void flush() {
+    public void flush() throws IOException {
     }
 
     @Override

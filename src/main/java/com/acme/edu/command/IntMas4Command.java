@@ -3,6 +3,8 @@ package com.acme.edu.command;
 import com.acme.edu.Type;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 
+import java.io.IOException;
+
 public class IntMas4Command implements Command {
     private int[][][][] message ;
     private ConsoleLoggerSaver saver = null;
@@ -49,7 +51,12 @@ public class IntMas4Command implements Command {
 
     @Override
     public void flush() {
-        saver.save(prevCommand.messageDecorate());
+        try {
+            saver.save(prevCommand.messageDecorate());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        };
         prevCommand = this;
     }
 

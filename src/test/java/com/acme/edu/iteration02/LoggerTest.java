@@ -27,7 +27,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogSequentIntegersAsSum() throws IOException {
+    public void shouldLogSequentIntegersAsSum() throws Exception {
         //region when
         Logger.log("str 1");
         Logger.log(1);
@@ -49,7 +49,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
+    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws Exception {
         //region when
         Logger.log("str 1");
         Logger.log(10);
@@ -72,7 +72,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
+    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() throws Exception {
         //region when
         Logger.log("str 1");
         Logger.log((byte) 10);
@@ -95,7 +95,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
+    public void shouldLogSameSubsequentStringsWithoutRepeat() throws Exception {
         //region when
         Logger.log("str 1");
         Logger.log("str 2");
@@ -121,7 +121,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogCorrectMinusIntOverflow() throws IOException {
+    public void shouldLogCorrectMinusIntOverflow() throws Exception {
         Logger.log(-10);
         Logger.log(Integer.MAX_VALUE);
         Logger.close();
@@ -130,7 +130,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogCorrectMinusIntOverflowWithMinValue() throws IOException {
+    public void shouldLogCorrectMinusIntOverflowWithMinValue() throws Exception {
         Logger.log(-10);
         Logger.log(Integer.MIN_VALUE);
         Logger.close();
@@ -140,7 +140,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogCorrectMinusByteOverflow() throws IOException {
+    public void shouldLogCorrectMinusByteOverflow() throws Exception {
         Logger.log((byte) -10);
         Logger.log(Byte.MAX_VALUE);
         Logger.close();
@@ -149,7 +149,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogCorrectMinusByteOverflowWithMinValue() throws IOException {
+    public void shouldLogCorrectMinusByteOverflowWithMinValue() throws Exception {
         Logger.log((byte) -10);
         Logger.log(Byte.MIN_VALUE);
         Logger.close();

@@ -28,7 +28,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogIntegersArray() throws IOException {
+    public void shouldLogIntegersArray() throws Exception {
         //region when
         Logger.log(new int[]{-1, 0, 1});
         Logger.close();
@@ -42,7 +42,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogIntegersMatrix() throws IOException {
+    public void shouldLogIntegersMatrix() throws Exception {
         //region when
         Logger.log((int[][])(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}}));
         Logger.close();
@@ -60,7 +60,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogIntegersMulitidimentionalArray() throws IOException {
+    public void shouldLogIntegersMulitidimentionalArray() throws Exception {
         //region when
         Logger.log((int[][][][])(new int[][][][]{{{{0}}}}));
         Logger.close();
@@ -77,7 +77,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogStringsWithOneMethodCall() throws IOException {
+    public void shouldLogStringsWithOneMethodCall() throws Exception {
         //region when
         Logger.log("str1", "string 2", "str 3");
         Logger.close();
@@ -89,7 +89,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogIntegersWithOneMethodCall() throws IOException {
+    public void shouldLogIntegersWithOneMethodCall() throws Exception {
         //region when
         Logger.log(-1, 0, 1, 3);
         Logger.close();
@@ -101,7 +101,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException {
+    public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws Exception {
         //region when
         Logger.log(1);
         Logger.log("str");

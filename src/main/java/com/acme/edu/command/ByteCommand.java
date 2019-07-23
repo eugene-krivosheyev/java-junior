@@ -2,6 +2,8 @@ package com.acme.edu.command;
 
 import com.acme.edu.saver.ConsoleLoggerSaver;
 
+import java.io.IOException;
+
 public class ByteCommand implements Command {
     private byte message = 0;
     private ConsoleLoggerSaver saver = null;
@@ -12,7 +14,7 @@ public class ByteCommand implements Command {
     }
 
     @Override
-    public void accumulate(Command command, ConsoleLoggerSaver saver) {
+    public void accumulate(Command command, ConsoleLoggerSaver saver){
         this.saver = saver;
         if (command instanceof NoneCommand) {
             prevCommand = this;
@@ -42,8 +44,12 @@ public class ByteCommand implements Command {
 
     @Override
     public void flush() {
-        saver.save(prevCommand.messageDecorate());
-        prevCommand = this;
+        try {
+            saver.save(prevCommand.messageDecorate());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
     }
 
     @Override
