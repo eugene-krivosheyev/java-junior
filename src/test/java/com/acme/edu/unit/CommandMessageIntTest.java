@@ -1,5 +1,6 @@
 package com.acme.edu.unit;
 
+import com.acme.edu.command.CommandMessage;
 import com.acme.edu.command.CommandMessageInt;
 import com.acme.edu.saver.Saver;
 import org.junit.Before;
@@ -66,5 +67,16 @@ public class CommandMessageIntTest {
 
         verify(saverStub).save(-4 + lineSeparator());
         verify(nextCommandMock).setAccumulator(Integer.MIN_VALUE);
+    }
+
+    @Test
+    public void shouldFlushWhenTypeSwitched() {
+        CommandMessage nextCommandMock = mock(CommandMessage.class);
+        Saver saverStub = mock(Saver.class);
+
+        sut_positive.setAccumulator(10);
+        sut_positive.update(nextCommandMock, saverStub);
+
+        verify(saverStub).save(15 + lineSeparator());
     }
 }
