@@ -1,20 +1,24 @@
 package com.acme.edu.command;
 
 import com.acme.edu.Type;
+import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class NoneCommand implements Command {
     @Override
-    public boolean accumulate(Command accumulator) {
-        return false;
+    public void accumulate(Command accumulator, ConsoleLoggerSaver saver) {
     }
 
     @Override
-    public Type getType() {
-        return Type.NONE;
+    public void flush() {
+    }
+
+    @Override
+    public Command getPrevCommand() {
+        return this;
     }
 
     @Override
     public String messageDecorate() {
-        return "None command";
+        return null;
     }
 }

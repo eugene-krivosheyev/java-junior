@@ -1,29 +1,39 @@
 package com.acme.edu.command;
 
-import com.acme.edu.Type;
+import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class ObjectCommand implements Command {
-    private Object message ;
-    private Type CURRENT_TYPE = Type.OBJECT;
+    private Object message = ' ';
+    private ConsoleLoggerSaver saver = null;
+    private Command prevCommand = null ;
 
     public ObjectCommand(Object message) {
         this.message = message;
     }
 
-    public Type getType() {
-        return CURRENT_TYPE;
+    @Override
+    public void accumulate(Command command, ConsoleLoggerSaver saver) {
+        this.saver = saver;
+        if (command instanceof NoneCommand) {
+            prevCommand = this;
+        } else {
+            prevCommand = command;
+            flush();
+        }
     }
 
     public String messageDecorate() {
         return "reference: " + message.toString();
     }
 
-    public Object getObjectValue() {
-        return message;
+    @Override
+    public void flush() {
+        saver.save(prevCommand.messageDecorate());
+        prevCommand = this;
     }
 
     @Override
-    public boolean accumulate(Command accumulator) {
-        return false;
+    public Command getPrevCommand() {
+        return prevCommand;
     }
 }

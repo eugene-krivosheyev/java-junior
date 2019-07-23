@@ -1,17 +1,26 @@
 package com.acme.edu.command;
 
 import com.acme.edu.Type;
+import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class IntMas2Command implements Command {
-    private int[][] message;
-    private Type CURRENT_TYPE = Type.INT_MAS2;
+    private int[][] message ;
+    private ConsoleLoggerSaver saver = null;
+    private Command prevCommand = null ;
 
     public IntMas2Command(int[][] message) {
         this.message = message;
     }
 
-    public Type getType() {
-        return CURRENT_TYPE;
+    @Override
+    public void accumulate(Command command, ConsoleLoggerSaver saver) {
+        this.saver = saver;
+        if (command instanceof NoneCommand) {
+            prevCommand = this;
+        } else {
+            prevCommand = command;
+            flush();
+        }
     }
 
     public String messageDecorate() {
@@ -30,12 +39,14 @@ public class IntMas2Command implements Command {
         return str;
     }
 
-    public int[][] getIntMasValue() {
-        return message;
+    @Override
+    public void flush() {
+        saver.save(prevCommand.messageDecorate());
+        prevCommand = this;
     }
 
     @Override
-    public boolean accumulate(Command accumulator) {
-        return false;
+    public Command getPrevCommand() {
+        return prevCommand;
     }
 }

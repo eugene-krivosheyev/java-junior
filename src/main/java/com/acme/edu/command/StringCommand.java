@@ -1,18 +1,16 @@
 package com.acme.edu.command;
 
 import com.acme.edu.Type;
+import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class StringCommand implements Command {
     private String message = "";
     private int count = 1;
-    private Type CURRENT_TYPE = Type.STRING;
+    private ConsoleLoggerSaver saver = null;
+    private Command prevCommand = null;
 
     public StringCommand(String message) {
         this.message = message;
-    }
-
-    public Type getType() {
-        return CURRENT_TYPE;
     }
 
     public String messageDecorate() {
@@ -23,30 +21,36 @@ public class StringCommand implements Command {
         }
     }
 
-    public String getStringValue() {
-        return message;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
     @Override
-    public boolean accumulate(Command command) {
-        if (isAccumulative(command)) {
-            count = ((StringCommand) command).getCount() + 1;
-            return true;
+    public void accumulate(Command command, ConsoleLoggerSaver saver) {
+        this.saver = saver;
+        if (command instanceof NoneCommand) {
+            prevCommand = this;
+        } else if (isAccumulative(command)) {
+            count = ((StringCommand) command).count + 1;
+            prevCommand = this;
         } else {
-            return false;
+            prevCommand = command;
+            flush();
         }
     }
 
     private boolean isAccumulative(Command command) {
-        if (command.getType().equals(CURRENT_TYPE)) {
-            return (message.equals(((StringCommand) command).getStringValue()));
+        if (command instanceof StringCommand) {
+            return (message.equals(((StringCommand) command).message));
         } else {
             return false;
-
         }
+    }
+
+    @Override
+    public void flush() {
+        saver.save(prevCommand.messageDecorate());
+        prevCommand = this;
+    }
+
+    @Override
+    public Command getPrevCommand() {
+        return prevCommand;
     }
 }

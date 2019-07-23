@@ -1,29 +1,34 @@
 package com.acme.edu.command;
 
-import com.acme.edu.Type;
+import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class ByteCommand implements Command {
     private byte message = 0;
-    private Type CURRENT_TYPE = Type.BYTE;
+    private ConsoleLoggerSaver saver = null;
+    private Command prevCommand = null;
 
     public ByteCommand(byte message) {
         this.message = message;
     }
 
     @Override
-    public boolean accumulate(Command command) {
-        if (isAccumulative(command)) {
-            byte commandValue = ((ByteCommand)command).getByteValue();
-            setByteValue((byte)(commandValue+message));
-            return true;
+    public void accumulate(Command command, ConsoleLoggerSaver saver) {
+        this.saver = saver;
+        if (command instanceof NoneCommand) {
+            prevCommand = this;
+        } else if (isAccumulative(command)) {
+            message = (byte) (message + ((ByteCommand) command).message);
+            prevCommand = this;
         } else {
-            return false;
+            prevCommand = command;
+            flush();
         }
+
     }
 
     private boolean isAccumulative(Command command) {
-        if (command.getType().equals(CURRENT_TYPE)) {
-            byte byteBuff = ((ByteCommand) command).getByteValue();
+        if (command instanceof ByteCommand) {
+            int byteBuff = ((ByteCommand) command).message;
             if (byteBuff > 0 && (Byte.MAX_VALUE - byteBuff < message)) return false;
             if (byteBuff <= 0 && (Byte.MIN_VALUE - byteBuff > message)) return false;
             return true;
@@ -31,18 +36,18 @@ public class ByteCommand implements Command {
         return false;
     }
 
-    public Type getType() {
-        return CURRENT_TYPE;
+    public String messageDecorate() {
+        return String.valueOf(message);
     }
 
-    public String messageDecorate() { return String.valueOf(message);
+    @Override
+    public void flush() {
+        saver.save(prevCommand.messageDecorate());
+        prevCommand = this;
     }
 
-    public byte getByteValue() {
-        return message;
-    }
-
-    public void setByteValue(byte value) {
-        message = value;
+    @Override
+    public Command getPrevCommand() {
+        return prevCommand;
     }
 }

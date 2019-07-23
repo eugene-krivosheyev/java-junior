@@ -25,7 +25,7 @@ public class ConsoleLoggerSaverTest implements SysoutCaptureAndAssertionAbility 
                 .messageDecorate())
                 .thenReturn("string 1");
         ConsoleLoggerSaver consoleLoggerSaver = new ConsoleLoggerSaver();
-        consoleLoggerSaver.save((Command) stub);
+        consoleLoggerSaver.save(((Command) stub).messageDecorate());
         assertSysoutEquals("string 1" + System.lineSeparator());
     }
 }

@@ -6,8 +6,9 @@ import com.acme.edu.command.Command;
 import org.junit.Test;
 
 public class BooleanCommandTest {
+    
     @Test
-    public void shouldntAccumulateWhenTypeBool() {
+    public void shouldntAccumulateWhenTypeBool(){
         Command dummy1 = new BooleanCommand(true);
         Command dummy2 = new BooleanCommand(false);
         boolean result = dummy1.accumulate(dummy2);
@@ -16,7 +17,7 @@ public class BooleanCommandTest {
     }
 
     @Test
-    public void shouldGetType() {
+    public void shouldGetType(){
         Command dummy1 = new BooleanCommand(true);
         Type result = dummy1.getType();
 
@@ -24,7 +25,7 @@ public class BooleanCommandTest {
     }
 
     @Test
-    public void shouldDecorateBoolMessageWhenMessageDecorate() {
+    public void shouldDecorateBoolMessageWhenMessageDecorate(){
         Command dummy1 = new BooleanCommand(true);
         String result = dummy1.messageDecorate();
 
@@ -32,10 +33,10 @@ public class BooleanCommandTest {
     }
 
     @Test
-    public void shouldGetMessage() {
+    public void shouldGetMessage(){
         Command dummy1 = new BooleanCommand(true);
         boolean result = ((BooleanCommand) dummy1).getBooleanValue();
 
-        assert result == true;
+        assert result==true;
     }
 }

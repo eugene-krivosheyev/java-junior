@@ -3,6 +3,7 @@ package com.acme.edu.iteration7.commandTest;
 import com.acme.edu.command.ByteCommand;
 import com.acme.edu.command.Command;
 import com.acme.edu.command.StringCommand;
+import com.acme.edu.saver.ConsoleLoggerSaver;
 import org.junit.Test;
 
 public class StringCommandTest {
@@ -41,7 +42,7 @@ public class StringCommandTest {
 
         String result = dummy1.messageDecorate();
 
-        assert result.equals("string abc (x2)");
+        assert ("string abc (x2)").equals(result);
     }
 
     @Test

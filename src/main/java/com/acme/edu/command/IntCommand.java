@@ -1,29 +1,34 @@
 package com.acme.edu.command;
 
-import com.acme.edu.Type;
+import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class IntCommand implements Command {
     private int message = 0;
-    private Type CURRENT_TYPE = Type.INT;
+    private ConsoleLoggerSaver saver = null;
+    private Command prevCommand = null;
 
     public IntCommand(int message) {
         this.message = message;
     }
 
     @Override
-    public boolean accumulate(Command command) {
-        if (isAccumulative(command)) {
-            int commandValue = ((IntCommand)command).getIntValue();
-            setIntValue(commandValue+message);
-            return true;
+    public void accumulate(Command command, ConsoleLoggerSaver saver) {
+        this.saver = saver;
+        if (command instanceof NoneCommand) {
+            prevCommand = this;
+        } else if (isAccumulative(command)) {
+            message = message + ((IntCommand) command).message;
+            prevCommand = this;
         } else {
-            return false;
+            prevCommand = command;
+            flush();
         }
+
     }
 
     private boolean isAccumulative(Command command) {
-        if (command.getType().equals(CURRENT_TYPE)) {
-            int intBuff = ((IntCommand) command).getIntValue();
+        if (command instanceof IntCommand) {
+            int intBuff = ((IntCommand) command).message;
             if (intBuff > 0 && (Integer.MAX_VALUE - intBuff < message)) return false;
             if (intBuff <= 0 && (Integer.MIN_VALUE - intBuff > message)) return false;
             return true;
@@ -31,19 +36,18 @@ public class IntCommand implements Command {
         return false;
     }
 
-    public Type getType() {
-        return CURRENT_TYPE;
+    public String messageDecorate() {
+        return String.valueOf(message);
     }
 
-    public String messageDecorate() { return String.valueOf(message);
+    @Override
+    public void flush() {
+        saver.save(prevCommand.messageDecorate());
+        prevCommand = this;
     }
 
-    public int getIntValue() {
-        return message;
+    @Override
+    public Command getPrevCommand() {
+        return prevCommand;
     }
-
-    public void setIntValue(int value) {
-        message = value;
-    }
-
 }
