@@ -1,37 +1,47 @@
 package com.acme.edu.functional;
 
+import com.acme.edu.ooad.*;
+
 public class InnerClassesDemo {
     public static void main(String[] args) {
         Outer outer = new Outer();
         ChangeAndGetStateable result = outer.m();
+
+        new Logger(new LogSeverityLevelFilter(5),
+            new LogSaver() {
+                @Override
+                public Object save(Command message) throws Exception {
+                    return null;
+                }
+            });
     }
 }
 
 /**
  * Top-level
+ *
  */
 class Outer {
     private static int staticOuterState = 0;
     private int instanceOuterState = 0;
 
     public ChangeAndGetStateable m() {
-        int localVar = 0;
+        final int localVar = fm();
 
-        class Inner implements ChangeAndGetStateable {
-            private int innerState = 0;
-
+        ChangeAndGetStateable closure = new ChangeAndGetStateable() {
+            @Override
             public int changeAndGetState() {
-                innerState = 1;
-                staticOuterState = 1;
-                Outer.this.instanceOuterState = 1;
-
-                System.out.println(localVar); //!!
-
-                return innerState;
+                System.out.println(localVar);
+                return localVar + 1;
             }
-        }
+        };
+        //Registry.register(closure);
 
-        return new Inner();
+        return closure;
+    }
+
+    private int fm() {
+        return 0;
     }
 }
 
