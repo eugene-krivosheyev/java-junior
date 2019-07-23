@@ -74,4 +74,8 @@ public class ArrayListTest {
         verify(mock).toString(); //verify(mock).toString(1); verify(mock, times(1)).toString();
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenCornerCase() {
+//        saver.save(null);
+    }
 }
