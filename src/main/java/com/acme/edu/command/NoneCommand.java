@@ -2,8 +2,6 @@ package com.acme.edu.command;
 
 import com.acme.edu.saver.ConsoleLoggerSaver;
 
-import java.io.IOException;
-
 public class NoneCommand implements Command {
     @Override
     public void accumulate(Command accumulator, ConsoleLoggerSaver saver)  {

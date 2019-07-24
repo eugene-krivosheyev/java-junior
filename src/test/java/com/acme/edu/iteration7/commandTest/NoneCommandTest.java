@@ -1,6 +1,5 @@
 package com.acme.edu.iteration7.commandTest;
 
-import com.acme.edu.Type;
 import com.acme.edu.command.BooleanCommand;
 import com.acme.edu.command.Command;
 import com.acme.edu.command.IntCommand;

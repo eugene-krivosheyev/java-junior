@@ -1,6 +1,5 @@
 package com.acme.edu.iteration7.commandTest;
 
-import com.acme.edu.Type;
 import com.acme.edu.command.*;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 import org.junit.Assert;

@@ -1,7 +1,6 @@
 package com.acme.edu.command;
 
-import com.acme.edu.Type;
-import com.acme.edu.saver.ConsoleLoggerSaver;
+import com.acme.edu.saver.*;
 
 import java.io.IOException;
 
