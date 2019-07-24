@@ -1,26 +1,34 @@
 package com.acme.edu.iteration7.commandTest;
 
 import com.acme.edu.Type;
+import com.acme.edu.command.BooleanCommand;
 import com.acme.edu.command.Command;
+import com.acme.edu.command.IntCommand;
 import com.acme.edu.command.NoneCommand;
+import com.acme.edu.saver.ConsoleLoggerSaver;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
-public class NoneCommandTest {
-    @Test
-    public void shouldntAccumulateWhenTypeNone() {
-        Command dummy1 = new NoneCommand();
-        Command dummy2 = new NoneCommand();
-        boolean result = dummy1.accumulate(dummy2);
+import java.io.IOException;
 
-        assert !result;
+import static org.mockito.Mockito.mock;
+
+public class NoneCommandTest {
+    private Object stub = mock(ConsoleLoggerSaver.class);
+    private ConsoleLoggerSaver saver = new ConsoleLoggerSaver();
+
+    @Before
+    public void setUpObjects(){
     }
 
     @Test
-    public void shouldGetType() {
-        Command dummy1 = new NoneCommand();
-        Type result = dummy1.getType();
+    public void shouldGetRightPrevCommandWhenNone() throws IOException {
+        Command sut1 = new NoneCommand();
+        Command sut2 = new BooleanCommand(true);
+        sut2.accumulate(sut1,(ConsoleLoggerSaver) stub);
 
-        assert result.equals(Type.NONE);
+        Assert.assertEquals(sut2,sut2.getPrevCommand());
     }
 
     @Test
@@ -28,6 +36,6 @@ public class NoneCommandTest {
         Command dummy1 = new NoneCommand();
         String result = dummy1.messageDecorate();
 
-        assert result.equals("None command");
+        Assert.assertEquals(result,null);
     }
 }

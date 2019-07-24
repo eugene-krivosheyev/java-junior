@@ -10,7 +10,7 @@ public class LoggerController {
     private Command prevCommand;
     private ConsoleLoggerSaver loggerSaver;
 
-    public void log(Command command) throws EmptySaverException{
+    public void log(Command command) throws EmptySaverException, IOException {
         if(loggerSaver==null)
             throw new EmptySaverException("Saver is null");
         command.accumulate(prevCommand,loggerSaver);

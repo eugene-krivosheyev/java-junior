@@ -15,7 +15,7 @@ public class IntMas2Command implements Command {
     }
 
     @Override
-    public void accumulate(Command command, ConsoleLoggerSaver saver){
+    public void accumulate(Command command, ConsoleLoggerSaver saver) throws IOException {
         this.saver = saver;
         if (command instanceof NoneCommand) {
             prevCommand = this;
@@ -42,13 +42,8 @@ public class IntMas2Command implements Command {
     }
 
     @Override
-    public void flush()  {
-        try {
-            saver.save(prevCommand.messageDecorate());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        };
+    public void flush() throws IOException {
+        saver.save(prevCommand.messageDecorate());
         prevCommand = this;
     }
 

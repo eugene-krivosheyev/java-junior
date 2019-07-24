@@ -1,26 +1,56 @@
 package com.acme.edu.iteration7.commandTest;
 
 import com.acme.edu.Type;
-import com.acme.edu.command.Command;
-import com.acme.edu.command.ObjectCommand;
+import com.acme.edu.command.*;
+import com.acme.edu.saver.ConsoleLoggerSaver;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
-public class ObjectCommandTest {
-    @Test
-    public void shouldntAccumulateWhenTypeObject() {
-        Command dummy1 = new ObjectCommand('a');
-        Command dummy2 = new ObjectCommand('b');
-        boolean result = dummy1.accumulate(dummy2);
+import java.io.IOException;
 
-        assert !result;
+import static org.mockito.Mockito.mock;
+
+public class ObjectCommandTest {
+    private Object stub = mock(ConsoleLoggerSaver.class);
+    private ConsoleLoggerSaver saver = new ConsoleLoggerSaver();
+
+    @Before
+    public void setUpObjects(){
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void shouldDownWhenNullSaver() throws IOException {
+        Command sut = new ObjectCommand(new Object());
+
+        sut.flush();
     }
 
     @Test
-    public void shouldGetType() {
-        Command dummy1 = new ObjectCommand('a');
-        Type result = dummy1.getType();
+    public void shouldGetRightPrevCommandWhenBooleans() throws IOException {
+        Command sut1 = new ObjectCommand(new Object());
+        Command sut2 = new ObjectCommand(new Object());
+        sut2.accumulate(sut1,(ConsoleLoggerSaver) stub);
 
-        assert result.equals(Type.OBJECT);
+        Assert.assertEquals(sut2,sut2.getPrevCommand());
+    }
+
+    @Test
+    public void shouldGetRightPrevCommandWhenOtherType() throws IOException {
+        Command sut1 = new ObjectCommand(new Object());
+        Command sut2 = new IntCommand(1);
+        sut2.accumulate(sut1,(ConsoleLoggerSaver) stub);
+
+        Assert.assertEquals(sut2,sut2.getPrevCommand());
+    }
+
+    @Test
+    public void shouldGetRightPrevCommandWhenNone() throws IOException {
+        Command sut1 = new NoneCommand();
+        Command sut2 = new ObjectCommand(new Object());
+        sut2.accumulate(sut1,(ConsoleLoggerSaver) stub);
+
+        Assert.assertEquals(sut2,sut2.getPrevCommand());
     }
 
     @Test
@@ -28,14 +58,6 @@ public class ObjectCommandTest {
         Command dummy1 = new ObjectCommand('a');
         String result = dummy1.messageDecorate();
 
-        assert result.equals("reference: a");
-    }
-
-    @Test
-    public void shouldGetMessage() {
-        Command dummy1 = new ObjectCommand('a');
-        Object result = ((ObjectCommand) dummy1).getObjectValue();
-
-        assert result.equals('a');
+        Assert.assertEquals(result,"reference: a");
     }
 }

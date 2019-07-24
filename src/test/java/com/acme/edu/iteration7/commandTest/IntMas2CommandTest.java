@@ -1,37 +1,68 @@
 package com.acme.edu.iteration7.commandTest;
 
 import com.acme.edu.Type;
-import com.acme.edu.command.Command;
-import com.acme.edu.command.IntMas2Command;
+import com.acme.edu.command.*;
+import com.acme.edu.saver.ConsoleLoggerSaver;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.IOException;
+
+import static org.mockito.Mockito.mock;
 
 public class IntMas2CommandTest {
     private String separator = System.lineSeparator();
+    private int[][] mas1 = new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}};
+    private int[][] mas2 = new int[][]{{1, 1, 2}, {2, 3, 3}, {-1, -2, -3}};
 
-    @Test
-    public void shouldntAccumulateWhenTypeIntMas2() {
-        Command dummy1 = new IntMas2Command((new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}}));
-        Command dummy2 = new IntMas2Command((new int[][]{{1, 1, 2}, {2, 3, 3}, {-1, -2, -3}}));
-        boolean result = dummy1.accumulate(dummy2);
+    private Object stub = mock(ConsoleLoggerSaver.class);
+    private ConsoleLoggerSaver saver = new ConsoleLoggerSaver();
 
-        assert !result;
+    @Before
+    public void setUpObjects(){
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void shouldDownWhenNullSaver() throws IOException {
+        Command sut = new IntMas2Command(mas1);
+
+        sut.flush();
     }
 
     @Test
-    public void shouldGetType() {
-        Command dummy1 = new IntMas2Command((new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}}));
-        Type result = dummy1.getType();
+    public void shouldGetRightPrevCommandWhenIntMas2() throws IOException {
+        Command sut1 = new IntMas2Command(mas1);
+        Command sut2 = new IntMas2Command(mas2);
+        sut2.accumulate(sut1,(ConsoleLoggerSaver) stub);
 
-        assert result.equals(Type.INT_MAS2);
+        Assert.assertEquals(sut2,sut2.getPrevCommand());
     }
 
     @Test
-    public void shouldDecorateIntMas2MessageWhenMessageDecorate() {
-        Command dummy1 = new IntMas2Command((new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}}));
-        String result = dummy1.messageDecorate();
+    public void shouldGetRightPrevCommandWhenOtherType() throws IOException {
+        Command sut1 = new IntMas2Command(mas1);
+        Command sut2 = new IntCommand(1);
+        sut2.accumulate(sut1,(ConsoleLoggerSaver) stub);
 
-        assert result.equals("primitives matrix: {" + separator +
+        Assert.assertEquals(sut2,sut2.getPrevCommand());
+    }
+
+    @Test
+    public void shouldGetRightPrevCommandWhenNone() throws IOException {
+        Command sut1 = new NoneCommand();
+        Command sut2 = new IntMas2Command(mas1);
+        sut2.accumulate(sut1,(ConsoleLoggerSaver) stub);
+
+        Assert.assertEquals(sut2,sut2.getPrevCommand());
+    }
+
+    @Test
+    public void shouldDecorateBoolMessageWhenMessageDecorate(){
+        Command command = new IntMas2Command(mas1);
+        String result = command.messageDecorate();
+
+        Assert.assertEquals(result,"primitives matrix: {" + separator +
                 "{-1, 0, 1}" + separator +
                 "{1, 2, 3}" + separator +
                 "{-1, -2, -3}" + separator +
@@ -40,21 +71,13 @@ public class IntMas2CommandTest {
 
     @Test
     public void shouldDecorateIntMas2MessageWithZeroLengthArrayWhenMessageDecorate() {
-        Command dummy1 = new IntMas2Command((new int[][]{{-1, 0, 1}, {}, {-1, -2, -3}}));
-        String result = dummy1.messageDecorate();
+        Command command = new IntMas2Command(new int[][]{{-1,0,1},{},{-1,-2,-3}});
+        String result = command.messageDecorate();
 
-        assert result.equals("primitives matrix: {" + separator +
+        Assert.assertEquals(result,"primitives matrix: {" + separator +
                 "{-1, 0, 1}" + separator +
                 "{}" + separator +
                 "{-1, -2, -3}" + separator +
                 "}");
-    }
-
-    @Test
-    public void shouldGetMessage() {
-        Command dummy1 = new IntMas2Command((new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}}));
-        int[][] result = ((IntMas2Command) dummy1).getIntMasValue();
-
-        Assert.assertArrayEquals(result, new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
     }
 }

@@ -1,34 +1,65 @@
 package com.acme.edu.iteration7.commandTest;
 
 import com.acme.edu.Type;
-import com.acme.edu.command.Command;
-import com.acme.edu.command.IntMas4Command;
+import com.acme.edu.command.*;
+import com.acme.edu.saver.ConsoleLoggerSaver;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.IOException;
+
+import static org.mockito.Mockito.mock;
 
 public class IntMas4CommandTest {
     private String separator = System.lineSeparator();
+    private int[][][][] mas1 = new int[][][][]{{{{0}}}};
+    private int[][][][] mas2 = new int[][][][]{{{{}}}};
 
-    @Test
-    public void shouldntAccumulateWhenTypeIntMas4() {
-        Command dummy1 = new IntMas4Command(new int[][][][]{{{{0}}}});
-        Command dummy2 = new IntMas4Command(new int[][][][]{{{{0}}}});
-        boolean result = dummy1.accumulate(dummy2);
+    private Object stub = mock(ConsoleLoggerSaver.class);
+    private ConsoleLoggerSaver saver = new ConsoleLoggerSaver();
 
-        assert !result;
+    @Before
+    public void setUpObjects(){
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void shouldDownWhenNullSaver() throws IOException {
+        Command sut = new IntMas4Command(mas1);
+
+        sut.flush();
     }
 
     @Test
-    public void shouldGetType() {
-        Command dummy1 = new IntMas4Command(new int[][][][]{{{{0}}}});
-        Type result = dummy1.getType();
+    public void shouldGetRightPrevCommandWhenIntMas2() throws IOException {
+        Command sut1 = new IntMas4Command(mas1);
+        Command sut2 = new IntMas4Command(mas2);
+        sut2.accumulate(sut1,(ConsoleLoggerSaver) stub);
 
-        assert result.equals(Type.INT_MAS4);
+        Assert.assertEquals(sut2,sut2.getPrevCommand());
+    }
+
+    @Test
+    public void shouldGetRightPrevCommandWhenOtherType() throws IOException {
+        Command sut1 = new IntMas4Command(mas1);
+        Command sut2 = new IntCommand(1);
+        sut2.accumulate(sut1,(ConsoleLoggerSaver) stub);
+
+        Assert.assertEquals(sut2,sut2.getPrevCommand());
+    }
+
+    @Test
+    public void shouldGetRightPrevCommandWhenNone() throws IOException {
+        Command sut1 = new NoneCommand();
+        Command sut2 = new IntMas4Command(mas1);
+        sut2.accumulate(sut1,(ConsoleLoggerSaver) stub);
+
+        Assert.assertEquals(sut2,sut2.getPrevCommand());
     }
 
     @Test
     public void shouldDecorateCharMessageWhenMessageDecorate() {
-        Command dummy1 = new IntMas4Command(new int[][][][]{{{{0}}}});
+        Command dummy1 = new IntMas4Command(mas1);
         String result = dummy1.messageDecorate();
 
         assert result.equals("primitives multimatrix: {" + separator +
@@ -40,7 +71,7 @@ public class IntMas4CommandTest {
 
     @Test
     public void shouldDecorateIntMas2MessageWhenMessageDecorate() {
-        Command dummy1 = new IntMas4Command(new int[][][][]{{{{}}}});
+        Command dummy1 = new IntMas4Command(mas2);
         String result = dummy1.messageDecorate();
 
         assert result.equals("primitives multimatrix: {" + separator +
@@ -49,11 +80,4 @@ public class IntMas4CommandTest {
                 "}");
     }
 
-    @Test
-    public void shouldGetMessage() {
-        Command dummy1 = new IntMas4Command(new int[][][][]{{{{0}}}});
-        int[][][][] result = ((IntMas4Command) dummy1).getIntMasValue();
-
-        Assert.assertArrayEquals(result, new int[][][][]{{{{0}}}});
-    }
 }

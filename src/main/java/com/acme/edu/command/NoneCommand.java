@@ -11,7 +11,7 @@ public class NoneCommand implements Command {
     }
 
     @Override
-    public void flush() throws IOException {
+    public void flush() {
     }
 
     @Override
