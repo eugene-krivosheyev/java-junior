@@ -3,6 +3,8 @@ package com.acme.edu.command;
 import com.acme.edu.exceptions.MaxValueReachedException;
 import com.acme.edu.saver.Saver;
 
+import java.io.IOException;
+
 import static java.lang.System.lineSeparator;
 
 public class CommandMessageString implements CommandMessage {
@@ -24,7 +26,7 @@ public class CommandMessageString implements CommandMessage {
         return message;
     }
 
-    private void update(CommandMessageString nextCommand, Saver saver) throws MaxValueReachedException {
+    private void update(CommandMessageString nextCommand, Saver saver) throws MaxValueReachedException, IOException {
         if (message.equals(nextCommand.getMessage())) {
             nextCommand.setSameStringCount(sameStringCount + 1);
             return;
@@ -33,7 +35,7 @@ public class CommandMessageString implements CommandMessage {
     }
 
     @Override
-    public void update(CommandMessage nextCommand, Saver saver) throws MaxValueReachedException {
+    public void update(CommandMessage nextCommand, Saver saver) throws MaxValueReachedException, IOException {
         if (nextCommand instanceof CommandMessageString) {
             update((CommandMessageString) nextCommand, saver);
             return;
@@ -47,7 +49,7 @@ public class CommandMessageString implements CommandMessage {
     }
 
     @Override
-    public void flush(Saver saver) {
+    public void flush(Saver saver) throws IOException {
         saver.save(message + (sameStringCount == 1 ? "" : " (x" + sameStringCount + ")") + lineSeparator());
         sameStringCount = 1;
     }

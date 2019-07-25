@@ -5,6 +5,8 @@ import com.acme.edu.exceptions.NullCommandFlushException;
 import com.acme.edu.exceptions.MaxValueReachedException;
 import com.acme.edu.saver.Saver;
 
+import java.io.IOException;
+
 public class LoggerController {
     private Saver saver;
     private CommandMessage previousCommand;
@@ -34,7 +36,7 @@ public class LoggerController {
         }
     }
 
-    public void log(CommandMessage command) throws MaxValueReachedException {
+    public void log(CommandMessage command) throws MaxValueReachedException, IOException {
         setLogCounter(logCounter + 1);
         if (previousCommand != null) {
             previousCommand.update(command, saver);
@@ -42,11 +44,12 @@ public class LoggerController {
         setPreviousCommand(command);
     }
 
-    public void flush() throws NullCommandFlushException {
+    public void flush() throws NullCommandFlushException, IOException {
         try {
             String primitiveDecoration = logCounter == 1 ? previousCommand.primitiveDecorator() : "";
             saver.save(primitiveDecoration);
             previousCommand.flush(saver);
+            saver.newLog();
         } catch (NullPointerException e) {
             throw new NullCommandFlushException("Failed to flush!", e);
         }
@@ -54,4 +57,7 @@ public class LoggerController {
         setPreviousCommand(null);
     }
 
+    public void deleteLog() throws IOException {
+        saver.delete();
+    }
 }

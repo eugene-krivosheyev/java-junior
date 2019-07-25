@@ -34,6 +34,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 1");
         Logger.log(1);
         Logger.log(2);
+        Logger.deleteLog();
         Logger.log("str 2");
         Logger.log(0);
         Logger.flush();
@@ -52,7 +53,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
+    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws IOException {
         //region when
         Logger.log("str 1");
         Logger.log(10);
@@ -74,7 +75,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
+    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() throws IOException {
         //region when
         Logger.log("str 1");
         Logger.log((byte)10);

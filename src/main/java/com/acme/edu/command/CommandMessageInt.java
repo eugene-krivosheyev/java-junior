@@ -2,6 +2,8 @@ package com.acme.edu.command;
 
 import com.acme.edu.saver.Saver;
 
+import java.io.IOException;
+
 import static java.lang.System.lineSeparator;
 
 public class CommandMessageInt implements CommandMessage {
@@ -25,7 +27,7 @@ public class CommandMessageInt implements CommandMessage {
         this.accumulator = message;
     }
 
-    private void update(CommandMessageInt nextCommand, Saver saver) {
+    private void update(CommandMessageInt nextCommand, Saver saver) throws IOException {
         int nextMessage = nextCommand.getMessage();
         if (nextMessage > 0) {
             if (accumulator > Integer.MAX_VALUE - nextMessage) {
@@ -45,7 +47,7 @@ public class CommandMessageInt implements CommandMessage {
     }
 
     @Override
-    public void update(CommandMessage nextCommand, Saver saver) {
+    public void update(CommandMessage nextCommand, Saver saver) throws IOException {
         if (nextCommand instanceof CommandMessageInt) {
             update((CommandMessageInt) nextCommand, saver);
             return;
@@ -59,7 +61,7 @@ public class CommandMessageInt implements CommandMessage {
     }
 
     @Override
-    public void flush(Saver saver) {
+    public void flush(Saver saver) throws IOException {
         saver.save(accumulator + lineSeparator());
         accumulator = 0;
     }

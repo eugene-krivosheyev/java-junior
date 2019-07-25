@@ -10,6 +10,8 @@ import com.acme.edu.saver.ConsoleSaver;
 import com.acme.edu.saver.Saver;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -25,7 +27,7 @@ public class LoggerControllerTest {
     }*/
 
     @Test
-    public void shouldPrimitiveDecorationBeCorrectWhenPrimitive() throws NullCommandFlushException {
+    public void shouldPrimitiveDecorationBeCorrectWhenPrimitive() throws NullCommandFlushException, IOException {
         ConsoleSaver stub = mock(ConsoleSaver.class);
         LoggerController sut = new LoggerController(stub);
         CommandMessageInt stubInt = mock(CommandMessageInt.class);
@@ -40,7 +42,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldPrimitiveDecorationBeCorrectWhenNotPrimitive() throws NullCommandFlushException {
+    public void shouldPrimitiveDecorationBeCorrectWhenNotPrimitive() throws NullCommandFlushException, IOException {
         ConsoleSaver stub = mock(ConsoleSaver.class);
         LoggerController sut = new LoggerController(stub);
         CommandMessageInt stubInt = mock(CommandMessageInt.class);
@@ -55,7 +57,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldUpdateWhenPreviousCommandNotNull() throws MaxValueReachedException {
+    public void shouldUpdateWhenPreviousCommandNotNull() throws MaxValueReachedException, IOException {
         Saver stub = mock(Saver.class);
         LoggerController sut = new LoggerController(stub);
         CommandMessage dummy = mock(CommandMessage.class);
@@ -69,7 +71,7 @@ public class LoggerControllerTest {
     }
 
     @Test(expected = NullCommandFlushException.class)
-    public void shouldFlushThrowExceptionWhenPreviousCommandIsNull() throws NullCommandFlushException {
+    public void shouldFlushThrowExceptionWhenPreviousCommandIsNull() throws NullCommandFlushException, IOException {
         Saver stub = mock(Saver.class);
         LoggerController sut = new LoggerController(stub);
 

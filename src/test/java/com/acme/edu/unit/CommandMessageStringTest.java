@@ -6,6 +6,8 @@ import com.acme.edu.exceptions.MaxValueReachedException;
 import com.acme.edu.saver.ConsoleSaver;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static java.lang.System.lineSeparator;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -15,7 +17,7 @@ public class CommandMessageStringTest {
     CommandMessageString sut;
 
     @Test
-    public void shouldFlushBeCalledWhenUpdateNonString() throws MaxValueReachedException {
+    public void shouldFlushBeCalledWhenUpdateNonString() throws MaxValueReachedException, IOException {
         sut = new CommandMessageString("test");
 
         //CommandMessageInt stub = new CommandMessageInt(1);
@@ -28,7 +30,7 @@ public class CommandMessageStringTest {
     }
 
     @Test
-    public void shouldFlushBeCalledAndStringCounterAddedWhenUpdateNonString() throws MaxValueReachedException {
+    public void shouldFlushBeCalledAndStringCounterAddedWhenUpdateNonString() throws MaxValueReachedException, IOException {
         sut = new CommandMessageString("test");
 
         CommandMessageInt stub = mock(CommandMessageInt.class);
@@ -41,7 +43,7 @@ public class CommandMessageStringTest {
     }
 
     @Test
-    public void shouldCounterIncreaseWhenSameStringUpdated() throws MaxValueReachedException {
+    public void shouldCounterIncreaseWhenSameStringUpdated() throws MaxValueReachedException, IOException {
         sut = new CommandMessageString("test");
         CommandMessageString stub = mock(CommandMessageString.class);
         ConsoleSaver stubSaver = mock(ConsoleSaver.class);

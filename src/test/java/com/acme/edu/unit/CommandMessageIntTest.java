@@ -6,6 +6,8 @@ import com.acme.edu.saver.Saver;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static java.lang.System.lineSeparator;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -21,7 +23,7 @@ public class CommandMessageIntTest {
     }
 
     @Test
-    public void shouldUpdateWhenPositiveMessageAndNoOverflow() {
+    public void shouldUpdateWhenPositiveMessageAndNoOverflow() throws IOException {
         CommandMessageInt nextCommandMock = mock(CommandMessageInt.class);
         Saver saverStub = mock(Saver.class);
         when(nextCommandMock.getMessage()).thenReturn(10);
@@ -33,7 +35,7 @@ public class CommandMessageIntTest {
     }
 
     @Test
-    public void shouldUpdateWhenPositiveMessageAndOverflow() {
+    public void shouldUpdateWhenPositiveMessageAndOverflow() throws IOException {
         CommandMessageInt nextCommandMock = mock(CommandMessageInt.class);
         Saver saverStub = mock(Saver.class);
         when(nextCommandMock.getMessage()).thenReturn(Integer.MAX_VALUE);
@@ -46,7 +48,7 @@ public class CommandMessageIntTest {
     }
 
     @Test
-    public void shouldUpdateWhenNegativeMessageAndNoOverflow() {
+    public void shouldUpdateWhenNegativeMessageAndNoOverflow() throws IOException {
         CommandMessageInt nextCommandMock = mock(CommandMessageInt.class);
         Saver saverStub = mock(Saver.class);
         when(nextCommandMock.getMessage()).thenReturn(-5);
@@ -58,7 +60,7 @@ public class CommandMessageIntTest {
     }
 
     @Test
-    public void shouldUpdateWhenNegativeMessageAndOverflow() {
+    public void shouldUpdateWhenNegativeMessageAndOverflow() throws IOException {
         CommandMessageInt nextCommandMock = mock(CommandMessageInt.class);
         Saver saverStub = mock(Saver.class);
         when(nextCommandMock.getMessage()).thenReturn(Integer.MIN_VALUE);
@@ -71,7 +73,7 @@ public class CommandMessageIntTest {
     }
 
     @Test
-    public void shouldFlushWhenTypeSwitched() {
+    public void shouldFlushWhenTypeSwitched() throws IOException {
         CommandMessage nextCommandMock = mock(CommandMessage.class);
         Saver saverStub = mock(Saver.class);
 
@@ -82,7 +84,7 @@ public class CommandMessageIntTest {
     }
 
     @Test
-    public void shouldSetAccumulatorBeCalledWhenNexMessageZero() {
+    public void shouldSetAccumulatorBeCalledWhenNexMessageZero() throws IOException {
         CommandMessageInt sut = new CommandMessageInt(0);
         Saver stub = mock(Saver.class);
         CommandMessageInt nextCommand = mock(CommandMessageInt.class);
