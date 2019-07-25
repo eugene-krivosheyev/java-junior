@@ -60,4 +60,8 @@ public class LoggerController {
     public void deleteLog() throws IOException {
         saver.delete();
     }
+
+    public void closeLog() throws IOException {
+        saver.close();
+    }
 }

@@ -15,6 +15,11 @@ public class ConsoleSaver implements Saver {
     }
 
     @Override
+    public void close() throws IOException {
+
+    }
+
+    @Override
     public void delete() throws IOException {
 
     }
