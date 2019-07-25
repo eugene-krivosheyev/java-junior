@@ -35,6 +35,14 @@ public class CollectionsDemo {
 
         Collections.sort(elements, (o1, o2) -> o2 - o1);
         Collections.unmodifiableList(elements).add(null);
+
+
+        Map<Dog, String> chips = new HashMap<>();
+        Dog dog = new Dog(1, "name");
+        chips.put(null, "name2");
+
+        chips.forEach((d,n) -> System.out.println(d + ":" + n));
+        System.out.println(chips.get(null));
     }
 }
 
