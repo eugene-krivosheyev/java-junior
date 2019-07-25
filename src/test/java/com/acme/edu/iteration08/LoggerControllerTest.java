@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.mockito.internal.matchers.Null;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class LoggerControllerTest {
 
@@ -18,7 +19,6 @@ public class LoggerControllerTest {
         LoggerController loggerController = new LoggerController(null);
         loggerController.log(new IntCommand(1));
     }
-
     @Test
     public void  shoudntDownWhenNoneCommand() throws IOException{
         LoggerController loggerController = new LoggerController(new ConsoleLoggerSaver());

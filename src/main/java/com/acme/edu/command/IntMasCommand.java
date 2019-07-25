@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class IntMasCommand implements Command {
     private int[] message ;
-    private ConsoleLoggerSaver saver = null;
+    private Saver saver = null;
     private Command prevCommand = null ;
 
     public IntMasCommand(int[] message) {
@@ -14,7 +14,7 @@ public class IntMasCommand implements Command {
     }
 
     @Override
-    public void accumulate(Command command, ConsoleLoggerSaver saver) throws IOException {
+    public void accumulate(Command command, Saver saver) throws IOException {
         this.saver = saver;
         if (command instanceof NoneCommand) {
             prevCommand = this;

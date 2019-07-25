@@ -1,10 +1,11 @@
 package com.acme.edu.command;
 
 import com.acme.edu.saver.ConsoleLoggerSaver;
+import com.acme.edu.saver.Saver;
 
 public class NoneCommand implements Command {
     @Override
-    public void accumulate(Command accumulator, ConsoleLoggerSaver saver)  {
+    public void accumulate(Command accumulator, Saver saver)  {
 
     }
 

@@ -14,6 +14,7 @@ public class Logger {
 
     public static void close() throws IOException {
         flush();
+        loggerController.close();
         loggerController = new LoggerController(new ConsoleLoggerSaver());
     }
 

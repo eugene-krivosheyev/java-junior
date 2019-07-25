@@ -1,13 +1,14 @@
 package com.acme.edu.command;
 
 import com.acme.edu.saver.ConsoleLoggerSaver;
+import com.acme.edu.saver.Saver;
 
 import java.io.IOException;
 
 public class StringCommand implements Command {
     private String message = "";
     private int count = 1;
-    private ConsoleLoggerSaver saver = null;
+    private Saver saver = null;
     private Command prevCommand = null;
 
     public StringCommand(String message) {
@@ -23,7 +24,7 @@ public class StringCommand implements Command {
     }
 
     @Override
-    public void accumulate(Command command, ConsoleLoggerSaver saver) throws IOException {
+    public void accumulate(Command command, Saver saver) throws IOException {
         this.saver = saver;
         if (command instanceof NoneCommand) {
             prevCommand = this;

@@ -3,12 +3,13 @@ package com.acme.edu;
 import com.acme.edu.command.*;
 import com.acme.edu.exceptions.EmptySaverException;
 import com.acme.edu.saver.ConsoleLoggerSaver;
+import com.acme.edu.saver.Saver;
 
 import java.io.IOException;
 
 public class LoggerController {
     private Command prevCommand;
-    private ConsoleLoggerSaver loggerSaver;
+    private Saver loggerSaver;
 
     public void log(Command command) throws EmptySaverException, IOException {
         if(loggerSaver==null)
@@ -22,8 +23,12 @@ public class LoggerController {
         prevCommand=new NoneCommand();
     }
 
-    public LoggerController(ConsoleLoggerSaver consoleLoggerSaver) {
-        this.loggerSaver = consoleLoggerSaver;
+    public void close() throws IOException {
+        loggerSaver.close();
+    }
+
+    public LoggerController(Saver saver) {
+        this.loggerSaver = saver;
         this.prevCommand = new NoneCommand();
     }
 }
