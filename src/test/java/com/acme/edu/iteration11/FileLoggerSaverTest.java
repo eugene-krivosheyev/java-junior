@@ -1,8 +1,5 @@
 package com.acme.edu.iteration11;
 
-import com.acme.edu.LoggerController;
-import com.acme.edu.command.IntCommand;
-import com.acme.edu.command.StringCommand;
 import com.acme.edu.exceptions.EmptySaverException;
 import com.acme.edu.saver.FileLoggerSaver;
 import org.junit.After;
@@ -13,14 +10,12 @@ import org.junit.Test;
 import java.io.*;
 
 public class FileLoggerSaverTest {
-    FileLoggerSaver fileLoggerSaver;
-    LoggerController loggerController;
-    BufferedReader in;
+    private FileLoggerSaver fileLoggerSaver;
+    private BufferedReader in;
 
     @Before
     public void setUp() throws IOException {
         fileLoggerSaver = new FileLoggerSaver("journal.txt");
-        loggerController = new LoggerController(fileLoggerSaver);
     }
 
     @After
@@ -30,21 +25,27 @@ public class FileLoggerSaverTest {
 
     @Test
     public void shouldSaveStringToFileWhenLog() throws EmptySaverException, IOException {
-        loggerController.log(new StringCommand("Кирилл"));
-        loggerController.flush();
-        loggerController.close();
-        in = new BufferedReader(new InputStreamReader(new BufferedInputStream(new FileInputStream("journal.txt")),"UTF-16"));
+        fileLoggerSaver.save("Кирилл");
+        fileLoggerSaver.close();
+
+        setUpReader();
+
         String str = in.readLine();
-        Assert.assertEquals("Кирилл",str);
+        Assert.assertEquals("Кирилл", str);
     }
 
     @Test
     public void shouldSaveIntToFileWhenLog() throws EmptySaverException, IOException {
-        loggerController.log(new IntCommand(1));
-        loggerController.flush();
-        loggerController.close();
-        in = new BufferedReader(new InputStreamReader(new BufferedInputStream(new FileInputStream("journal.txt")),"UTF-16"));
+        fileLoggerSaver.save("1");
+        fileLoggerSaver.close();
+
+        setUpReader();
+
         String str = in.readLine();
-        Assert.assertEquals("1",str);
+        Assert.assertEquals("1", str);
+    }
+
+    private void setUpReader() throws IOException {
+        in = new BufferedReader(new InputStreamReader(new BufferedInputStream(new FileInputStream("journal.txt")), "UTF-16"));
     }
 }

@@ -2,11 +2,16 @@ package com.acme.edu;
 
 import com.acme.edu.command.*;
 import com.acme.edu.saver.ConsoleLoggerSaver;
+import com.acme.edu.saver.Saver;
 
 import java.io.IOException;
 
 public class Logger {
     private static LoggerController loggerController = new LoggerController(new ConsoleLoggerSaver());
+
+    public static void setSaver(Saver saver){
+        loggerController.setLoggerSaver(saver);
+    }
 
     public static void flush() throws IOException {
         loggerController.flush();
@@ -15,7 +20,6 @@ public class Logger {
     public static void close() throws IOException {
         flush();
         loggerController.close();
-        loggerController = new LoggerController(new ConsoleLoggerSaver());
     }
 
     public static void log(int message) throws Exception {

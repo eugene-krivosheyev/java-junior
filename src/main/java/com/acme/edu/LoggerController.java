@@ -11,24 +11,28 @@ public class LoggerController {
     private Command prevCommand;
     private Saver loggerSaver;
 
+    public LoggerController(Saver saver) {
+        this.loggerSaver = saver;
+        this.prevCommand = new NoneCommand();
+    }
+
     public void log(Command command) throws EmptySaverException, IOException {
-        if(loggerSaver==null)
-            throw new EmptySaverException("Saver is null");
-        command.accumulate(prevCommand,loggerSaver);
+        if (loggerSaver == null) throw new EmptySaverException("Saver is not provided");
+        command.accumulate(prevCommand, loggerSaver);
         prevCommand = command.getPrevCommand();
     }
 
     public void flush() throws IOException {
         prevCommand.flush();
-        prevCommand=new NoneCommand();
+        prevCommand = new NoneCommand();
     }
 
     public void close() throws IOException {
+        this.flush();
         loggerSaver.close();
     }
 
-    public LoggerController(Saver saver) {
-        this.loggerSaver = saver;
-        this.prevCommand = new NoneCommand();
+    public void setLoggerSaver(Saver saver){
+        loggerSaver = saver;
     }
 }
