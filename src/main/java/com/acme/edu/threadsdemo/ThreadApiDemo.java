@@ -5,8 +5,20 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class ThreadApiDemo {
-    public static void main(String[] args) throws InterruptedException {
-        Thread thread = new Thread(() -> System.out.println("HW!"));
+    public static void main(String[] args) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!Thread.interrupted()) {
+                    System.out.println("thread-1");
+                    try {
+                        Thread.sleep(10_000);
+                    } catch (InterruptedException e) { }
+                }
+            }
+        });
+        thread.isInterrupted();
+
         thread.start();
 
         thread.stop();
@@ -18,6 +30,25 @@ public class ThreadApiDemo {
         System.out.println(Thread.currentThread().getName());
         Thread.yield();
 
-        //TODO interrupt, states
+        thread.interrupt(); // != stop()
+        //TODO interrupt
+        //Thread States: NEW -> RUNNABLE <-> RUNNING -> IO Blocked, Sleep, Syncronized, Wait pool -> DEAD
+
+
+        try {
+            Thread.sleep(10_000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class Delayer {
+    public void delay(int s) {
+        try {
+            Thread.sleep(s);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
