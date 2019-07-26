@@ -4,12 +4,10 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-//NIO2: Async/non-blocking IO + native
 public class Server {
     public static void main(String[] args) {
         try (final ServerSocket serverSocket = new ServerSocket(666)) {
             while (true) {
-//                serverSocket.setSoTimeout(10_000);
                 Socket client = serverSocket.accept();
 
                 try (BufferedReader in =
