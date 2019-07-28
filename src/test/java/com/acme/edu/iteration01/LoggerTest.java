@@ -1,19 +1,27 @@
 package com.acme.edu.iteration01;
 
 import com.acme.edu.Logger;
+import com.acme.edu.LoggerRegistry;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.saver.ConsoleSaver;
+import com.acme.edu.saver.FileSaver;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.*;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
+    final public static String LS = System.lineSeparator();
     @Before
     public void setUpSystemOut() throws IOException {
         resetOut();
         captureSysout();
+        new LoggerRegistry(new ConsoleSaver());
+        Logger.reset();
+        Logger.setDecoration(true);
     }
 
     @After
@@ -32,7 +40,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutContains("primitive: ");
-        assertSysoutEquals("primitive: 1\nprimitive: 0\nprimitive: -1\n");
+        assertSysoutEquals("primitive: 1" + LS + "primitive: 0" + LS + "primitive: -1" + LS);
         //endregion
     }
 
@@ -53,8 +61,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     /*
-    TODO: implement Logger solution to match specification as tests
-
     @Test
     public void shouldLogChar() throws IOException {
         //region when
@@ -68,7 +74,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("b");
         //endregion
     }
-
+*/
     @Test
     public void shouldLogString() throws IOException {
         //region when
@@ -82,7 +88,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("other str");
         //endregion
     }
-
+/*
     @Test
     public void shouldLogBoolean() throws IOException {
         //region when
