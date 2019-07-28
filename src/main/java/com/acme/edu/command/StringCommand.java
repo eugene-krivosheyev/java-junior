@@ -8,7 +8,7 @@ public class StringCommand extends CommonCommand<String> {
 
     public StringCommand(String message) {
         this.message = message;
-        this.counter = 1;
+        resetCounter();
     }
 
     @Override
@@ -37,7 +37,7 @@ public class StringCommand extends CommonCommand<String> {
             counter += previousCommand.getCounter();
         } else {
             result = previousCommand.flush();
-            counter = 1;
+            resetCounter();
         }
         return result;
     }
@@ -49,5 +49,9 @@ public class StringCommand extends CommonCommand<String> {
             result += " (x" + counter + ")";
         }
         return result;
+    }
+
+    private void resetCounter() {
+        counter = 1;
     }
 }
