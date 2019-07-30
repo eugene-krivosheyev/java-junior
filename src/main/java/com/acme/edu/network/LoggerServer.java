@@ -1,7 +1,6 @@
 package com.acme.edu.network;
 
 import com.acme.edu.Logger;
-import com.acme.edu.command.IntCommand;
 import com.acme.edu.saver.FileLoggerSaver;
 
 import java.io.*;
@@ -36,8 +35,13 @@ public class LoggerServer {
                         out.write("fine");
                         out.newLine();
                         out.flush();
-                        String[] commandParse = message.split(",");
-                        parseMessage(commandParse);
+                        ServerKeyWords keyWord = ProtocolHandler.acceptMessage(message);
+                        if(!keyWord.equals(ServerKeyWords.LOG)) {
+                            manageServer(keyWord);
+                        } else {
+                            String[] commandParse = message.split(",");
+                            logMessage(commandParse);
+                        }
                     }
 
                 } catch (IOException e) {
@@ -53,27 +57,18 @@ public class LoggerServer {
         }
     }
 
-    private static void parseMessage(String[] message) throws Exception {
-        if (message.length < 1) {
-            return;
-        }
-        if (message[0].equals("flush")) {
+    private static void manageServer(ServerKeyWords keyWords) throws IOException {
+        if (keyWords.equals(ServerKeyWords.FLUSH)) {
             Logger.flush();
             return;
         }
-        if (message[0].equals("close")) {
+        if (keyWords.equals(ServerKeyWords.CLOSE)) {
             workWithClient = false;
-            Logger.close();
             return;
         }
-        if(message[0].equals("exit")){
+        if (keyWords.equals(ServerKeyWords.EXIT)) {
             isWork = false;
             workWithClient = false;
-            Logger.close();
-            return;
-        }
-        if (message.length > 1) {
-            logMessage(message);
             return;
         }
     }
