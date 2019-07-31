@@ -3,7 +3,7 @@ package com.acme.edu.network;
 import java.io.*;
 import java.net.Socket;
 
-public class ClientStub{
+public class ClientStub implements AutoCloseable{
     private Socket server;
     private BufferedReader in;
     private BufferedWriter out;
@@ -26,7 +26,9 @@ public class ClientStub{
         out.write(message);
         out.newLine();
         out.flush();
-        return in.readLine();
+        String answer = in.readLine();
+        System.out.println(answer);
+        return answer;
     }
 
     public void flush() throws IOException {
@@ -34,7 +36,7 @@ public class ClientStub{
     }
 
     public void close() throws IOException {
-        System.out.println(sendAndGetAnswer("close"));
+        sendAndGetAnswer("close");
         in.close();
         out.close();
     }
