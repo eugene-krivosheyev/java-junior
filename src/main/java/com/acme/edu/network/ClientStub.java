@@ -34,7 +34,7 @@ public class ClientStub{
     }
 
     public void close() throws IOException {
-        sendAndGetAnswer("close");
+        System.out.println(sendAndGetAnswer("close"));
         in.close();
         out.close();
     }
