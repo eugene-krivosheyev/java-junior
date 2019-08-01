@@ -61,6 +61,14 @@
           <targetTests>
             <param>com.acme.*</param>
           </targetTests>
+          <outputFormats>
+                        <outputFormat>XML</outputFormat>
+                        <outputFormat>HTML</outputFormat>
+                    </outputFormats>
+                    <reportsDirectory>
+                        target/pit-reports
+                    </reportsDirectory>
+                    <timestampedReports>false</timestampedReports>
         </configuration>
         <executions>
           <execution>
