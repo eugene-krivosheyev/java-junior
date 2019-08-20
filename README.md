@@ -5,7 +5,7 @@ Team:
 
 Mashurin Vladislav  
 Repina Anastasia  
-Kavalkov Anton  
+Kavalkou Anton  
 
 ---
 
