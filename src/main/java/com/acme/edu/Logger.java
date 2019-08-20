@@ -14,6 +14,8 @@ import static com.acme.edu.Logger.*;
  * @see java.lang.String#String()
  */
 public class Logger {
+    private static int classState;
+
     static {
         System.out.println("AAaaaa!!!!! WTF!!!!!!");
     }
@@ -25,11 +27,13 @@ public class Logger {
     }
 
     public static void log(byte message) {
+        int local = 0; //stack, temp, auto
+        System.out.println(local);
         System.out.println("primitive: " + message);
     }
 
     public static void main(String[] args) {
-        log(0);
+        System.out.println(1 + 2 + "3" + 4 + 5);
     }
 }
 
