@@ -34,7 +34,7 @@ public class Logger {
 }
 
 class Superman {
-    private static Superman theOne;
+    private static Superman theOne = new Superman();
 
     public static Superman getTheOne() {
         return theOne;
