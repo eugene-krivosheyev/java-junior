@@ -1,6 +1,8 @@
 package com.acme.edu;
 
 public class Logger {
+
+    //Bad code style
     public static void log(int message) {
         System.out.println("primitive: " + message);
     }
