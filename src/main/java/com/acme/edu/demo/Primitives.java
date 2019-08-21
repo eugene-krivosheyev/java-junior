@@ -39,6 +39,9 @@ public class Primitives {
         byte newCounter = counter;
         System.out.println(counter);
 
+        byte newVar = (byte) result; //> 128
+        Byte.parseByte("123");
+
         //Precision Loss:
         System.out.println(.1 + .2);
     }
