@@ -8,7 +8,7 @@ public class Logger {
 
 
     public static void  log(Object message) {
-        if (message instanceof Boolean || message instanceof Long || message instanceof Integer || message instanceof Byte)
+        if (isPrimitive(message))
             decorateString(primitivePrefix, message);
         else if (message instanceof String)
             decorateString(stringPrefix, message);
@@ -17,6 +17,11 @@ public class Logger {
         else
             decorateString(referencePrefix, message);
     }
+
+    private static boolean isPrimitive(Object message){
+        return  message instanceof Boolean || message instanceof Long || message instanceof Integer || message instanceof Byte;
+    }
+
 
     private static void decorateString(String prefix, Object message) {
         System.out.println(prefix + message);
