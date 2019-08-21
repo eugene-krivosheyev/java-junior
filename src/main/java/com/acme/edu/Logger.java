@@ -16,10 +16,6 @@ import static com.acme.edu.Logger.*;
 public class Logger {
     private static int classState;
 
-    static {
-        System.out.println("AAaaaa!!!!! WTF!!!!!!");
-    }
-
     public static void log(int message) {
         //region Main
         System.out.println("primitive: " + message);
@@ -27,9 +23,25 @@ public class Logger {
     }
 
     public static void log(byte message) {
-        int local = 0; //stack, temp, auto
-        System.out.println(local);
         System.out.println("primitive: " + message);
+    }
+
+    public static void log(char message) {
+        System.out.println("char: " + message);
+    }
+
+    public static void log(String message) {
+        System.out.println("string: " + message);
+    }
+
+
+    public static void log(boolean message) {
+        System.out.println("primitive: " + message);
+    }
+
+
+    public static void log(Object message) {
+        System.out.println("reference: " + message);
     }
 
     public static void main(String[] args) {
