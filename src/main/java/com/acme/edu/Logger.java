@@ -20,18 +20,22 @@ public class Logger {
     }
 
     public static void log(char message) {
-        System.out.println(CHAR_PREFIX + message);
+        printToStdout(CHAR_PREFIX + message);
     }
 
     public static void log(String message) {
-        System.out.println(STRING_PREFIX + message);
+        printToStdout(STRING_PREFIX + message);
     }
 
     public static void log(Object message) {
-        System.out.println(REFERENCE_PREFIX + message);
+        printToStdout(REFERENCE_PREFIX + message);
     }
 
     private static void logPrimitive(String message) {
-        System.out.println(PRIMITIVE_PREFIX + message);
+        printToStdout(PRIMITIVE_PREFIX + message);
+    }
+
+    private static void printToStdout(String message) {
+        System.out.println(message);
     }
 }
