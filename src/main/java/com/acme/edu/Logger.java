@@ -1,20 +1,25 @@
 package com.acme.edu;
 
-
-import java.lang.reflect.Type;
-import java.util.function.Function;
-import java.util.*;
 public class Logger {
+    private static final String primitivePrefix = "primitive: ";
+    private static final String stringPrefix = "string: ";
+    private static final String charPrefix = "char: ";
+    private static final String referencePrefix = "reference: ";
+
 
     public static void  log(Object message) {
         if (message instanceof Boolean || message instanceof Long || message instanceof Integer || message instanceof Byte)
-            System.out.println("primitive: " + message);
+            decorateString(primitivePrefix, message);
         else if (message instanceof String)
-            System.out.println("string: " + message);
+            decorateString(stringPrefix, message);
         else if (message instanceof Character)
-            System.out.println("char: " + message);
+            decorateString(charPrefix, message);
         else
-            System.out.println("reference: " + message);
+            decorateString(referencePrefix, message);
+    }
+
+    private static void decorateString(String prefix, Object message) {
+        System.out.println(prefix + message);
     }
 
 
