@@ -14,15 +14,15 @@ public class Logger {
     private static final String OBJECT_PREFIX = "reference: ";
 
     public static void log(int message) {
-        decoratePrimitive(String.valueOf(message));
+        save(decoratePrimitive(String.valueOf(message)));
     }
 
     public static void log(byte message) {
-        decoratePrimitive(String.valueOf(message));
+        save(decoratePrimitive(String.valueOf(message)));
     }
 
     public static void log(boolean message) {
-        decoratePrimitive(String.valueOf(message));
+        save(decoratePrimitive(String.valueOf(message)));
     }
 
     public static void log(char message) {
@@ -37,11 +37,11 @@ public class Logger {
         save(OBJECT_PREFIX + message);
     }
 
-    private static void decoratePrimitive(String message) {
-        save(PRIMITIVE_PREFIX + message);
+    private static String decoratePrimitive(String message) {
+        return PRIMITIVE_PREFIX + message;
     }
 
     private static void save(String message) {
-        System.out.print(message + System.lineSeparator());
+        System.out.println(message);
     }
 }
