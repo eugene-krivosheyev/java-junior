@@ -1,8 +1,12 @@
 # Java Junior Developer Training Course.
-88 hours training + 32 hours work project = 120 hr.
 
+88 hours training + 32 hours work project = 120 hr.
+[Reading List](http://tinyurl.com/skilltrekreadinglist)
 Nikita Kapralov
 Olga Poliakova
+
+
+
 ---
 
 # Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice)

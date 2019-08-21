@@ -1,7 +1,21 @@
 package com.acme.edu;
 
+//Single line
+/*
+Multi-line comment
+ */
+
+import static com.acme.edu.Logger.*;
+
+/**
+ * JavaDoc comment
+ * Class Logger has unnecessarily comment.
+ * <strong>bold</strong>
+ * @see java.lang.String#String()
+ */
 
 public class Logger {
+
     public static void log(int message) {
         System.out.println("primitive: " + message);
     }
@@ -25,4 +39,5 @@ public class Logger {
     public static void log(Object message) {
         System.out.println("reference: " + message);
     }
+
 }
