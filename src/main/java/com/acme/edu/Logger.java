@@ -1,37 +1,21 @@
 package com.acme.edu;
 
 
+import java.lang.reflect.Type;
+import java.util.function.Function;
+import java.util.*;
 public class Logger {
-    public static void log(int message) {
-        System.out.println("primitive: " + message);
+
+    public static void  log(Object message) {
+        if (message instanceof Boolean || message instanceof Long || message instanceof Integer || message instanceof Byte)
+            System.out.println("primitive: " + message);
+        else if (message instanceof String)
+            System.out.println("string: " + message);
+        else if (message instanceof Character)
+            System.out.println("char: " + message);
+        else
+            System.out.println("reference: " + message);
     }
-
-    public static void log(byte message) {
-        System.out.println("primitive: " + message);
-    }
-
-    public static void log(String message) {
-        System.out.println("string: " + message);
-    }
-
-    public static void log(Object message) {
-        System.out.println("reference: " + message.toString());
-    }
-
-    public static void log(boolean message) {
-        System.out.println("primitive: " + message);
-    }
-
-    public static void log(char message) {
-        System.out.println("char: " + message);
-    }
-
-
-    public static void main(String[] args) {
-
-
-    }
-
 
 
 }
