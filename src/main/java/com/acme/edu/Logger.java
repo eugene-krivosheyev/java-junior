@@ -6,7 +6,6 @@ public class Logger {
     private static final String charPrefix = "char: ";
     private static final String referencePrefix = "reference: ";
 
-
     public static void  log(Object message) {
         if (isPrimitive(message))
             decorateString(primitivePrefix, message);
@@ -22,10 +21,7 @@ public class Logger {
         return  message instanceof Boolean || message instanceof Long || message instanceof Integer || message instanceof Byte;
     }
 
-
     private static void decorateString(String prefix, Object message) {
         System.out.println(prefix + message);
     }
-
-
 }
