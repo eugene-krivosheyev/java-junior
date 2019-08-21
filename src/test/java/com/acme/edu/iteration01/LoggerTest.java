@@ -31,21 +31,22 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("primitive: ");
-        assertSysoutEquals("primitive: 1\nprimitive: 0\nprimitive: -1\n");
+        assertSysoutContains(Logger.PRIMITIVE_PREFIX);
+        assertSysoutEquals(String.format("%s1\n%s0\n%s-1\n",
+                Logger.PRIMITIVE_PREFIX, Logger.PRIMITIVE_PREFIX, Logger.PRIMITIVE_PREFIX));
         //endregion
     }
 
     @Test
     public void shouldLogByte() throws IOException {
         //region when
-        Logger.log((byte)1);
-        Logger.log((byte)0);
-        Logger.log((byte)-1);
+        Logger.log((byte) 1);
+        Logger.log((byte) 0);
+        Logger.log((byte) -1);
         //endregion
 
         //region then
-        assertSysoutContains("primitive: ");
+        assertSysoutContains(Logger.PRIMITIVE_PREFIX);
         assertSysoutContains("1");
         assertSysoutContains("0");
         assertSysoutContains("-1");
@@ -61,7 +62,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("char: ");
+        assertSysoutContains(Logger.CHAR_PREFIX);
         assertSysoutContains("a");
         assertSysoutContains("b");
         //endregion
@@ -75,7 +76,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("string: ");
+        assertSysoutContains(Logger.STRING_PREFIX);
         assertSysoutContains("test string 1");
         assertSysoutContains("other str");
         //endregion
@@ -89,7 +90,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("primitive: ");
+        assertSysoutContains(Logger.PRIMITIVE_PREFIX);
         assertSysoutContains("true");
         assertSysoutContains("false");
         //endregion
@@ -102,7 +103,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("reference: ");
+        assertSysoutContains(Logger.REFERENCE_PREFIX);
         assertSysoutContains("@");
         //endregion
     }
