@@ -1,62 +1,47 @@
 package com.acme.edu;
 
-//Single line
-/*
-Multi-line comment
- */
-
-import static com.acme.edu.Logger.*;
-
 /**
  * JavaDoc comment
  * Class Logger has unnecessarily comment.
  * <strong>bold</strong>
+ *
  * @see java.lang.String#String()
  */
 public class Logger {
-    private static int classState;
+    private static final String PRIMITIVE_PREFIX = "primitive: ";
+    private static final String CHAR_PREFIX = "char: ";
+    private static final String STRING_PREFIX = "string: ";
+    private static final String OBJECT_PREFIX = "reference: ";
 
     public static void log(int message) {
-        //region Main
-        System.out.println("primitive: " + message);
-        //endregion
+        decoratePrimitive(String.valueOf(message));
     }
 
     public static void log(byte message) {
-        System.out.println("primitive: " + message);
+        decoratePrimitive(String.valueOf(message));
+    }
+
+    public static void log(boolean message) {
+        decoratePrimitive(String.valueOf(message));
     }
 
     public static void log(char message) {
-        System.out.println("char: " + message);
+        save(CHAR_PREFIX + message);
     }
 
     public static void log(String message) {
-        System.out.println("string: " + message);
+        save(STRING_PREFIX + message);
     }
-
-
-    public static void log(boolean message) {
-        System.out.println("primitive: " + message);
-    }
-
 
     public static void log(Object message) {
-        System.out.println("reference: " + message);
+        save(OBJECT_PREFIX + message);
     }
 
-    public static void main(String[] args) {
-        System.out.println(1 + 2 + "3" + 4 + 5);
-    }
-}
-
-class Superman {
-    private static Superman theOne = new Superman();
-
-    public static Superman getTheOne() {
-        return theOne;
+    private static void decoratePrimitive(String message) {
+        save(PRIMITIVE_PREFIX + message);
     }
 
-    //=========
-
-    private Superman() { }
+    private static void save(String message) {
+        System.out.print(message + System.lineSeparator());
+    }
 }
