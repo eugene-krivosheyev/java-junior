@@ -22,7 +22,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    @Test
+    @Test //FIXME lkdfjlgkdfjglj
     public void shouldLogInteger() throws IOException {
         //region when
         Logger.log(1);
