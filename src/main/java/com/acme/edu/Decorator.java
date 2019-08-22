@@ -32,7 +32,6 @@ public class Decorator {
         StringBuilder finalMessage = new StringBuilder("{\n");
         for (int[] integers : message) {
             finalMessage.append(Arrays.toString(integers)).append("\n");
-
         }
         finalMessage.append("}");
         return finalMessage.toString();
@@ -47,7 +46,6 @@ public class Decorator {
         for(int[][][] array3d : message) {
             finalMessage.append("{\n");
             for (int[][] array2d : array3d) {
-
                 finalMessage.append(decorateArray2D(array2d).replace("[", "{\n").replace("]", "\n}"));
             }
             finalMessage.append("\n}\n");
