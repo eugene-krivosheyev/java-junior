@@ -26,14 +26,20 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogInteger() throws IOException {
         //region when
         Logger.log(1);
+        Logger.flush();
+
         Logger.log(0);
+        Logger.flush();
+
         Logger.log(-1);
+        Logger.flush();
         //endregion
 
         //region then
         assertSysoutContains(Logger.PRIMITIVE_PREFIX);
-        assertSysoutEquals(String.format("%s1\n%s0\n%s-1\n",
-                Logger.PRIMITIVE_PREFIX, Logger.PRIMITIVE_PREFIX, Logger.PRIMITIVE_PREFIX));
+        assertSysoutContains(Logger.PRIMITIVE_PREFIX + 1);
+        assertSysoutContains(Logger.PRIMITIVE_PREFIX + 0);
+        assertSysoutContains(Logger.PRIMITIVE_PREFIX + -1);
         //endregion
     }
 
@@ -41,8 +47,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogByte() throws IOException {
         //region when
         Logger.log((byte) 1);
+        Logger.flush();
+
         Logger.log((byte) 0);
+        Logger.flush();
+
         Logger.log((byte) -1);
+        Logger.flush();
         //endregion
 
         //region then
