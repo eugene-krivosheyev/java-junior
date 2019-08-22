@@ -76,8 +76,8 @@ public class Logger {
 
     private static String decorateArray(int [][] array) {
         StringBuilder result = new StringBuilder("{\n");
-        for (int i = 0; i < array.length ; i++) {
-            result.append(Arrays.toString(array[i]).replace("[", "{").replace("]", "}") +"\n");
+        for (int[] anArray : array) {
+            result.append(Arrays.toString(anArray).replace("[", "{").replace("]", "}")).append("\n");
         }
         return result +"}\n";
     }
