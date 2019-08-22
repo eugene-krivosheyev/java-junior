@@ -4,24 +4,26 @@ package com.acme.edu;
 public class Logger {
 
     private final static String PRIMITIVE_PREFIX = "primitive: ";
-    private final static String CHAR_PREFIX = "char: ";
-    private final static String STRING_PREFIX = "string: ";
-    private final static String REFERENCE_PREFIX = "reference: ";
-    private final static String PRIMITIVES_ARRAY_PREFIX = "primitives array: ";
-    private final static String PRIMITIVES_MATRIX_PREFIX = "primitives matrix: ";
-    private final static String PRIMITIVES_MULTIMATRIX_PREFIX = "primitives multimatrix: ";
     public static final String DELIMETER = ", ";
 
     private static enum Type {
-        UNDEFINED,
-        INTEGER,
-        BYTE,
-        BOOLEAN,
-        CHAR,
-        STRING,
-        OBJECT,
-        ARRAY,
-        MATRIX
+        UNDEFINED(""),
+        INTEGER(PRIMITIVE_PREFIX),
+        BYTE(PRIMITIVE_PREFIX),
+        BOOLEAN(PRIMITIVE_PREFIX),
+        CHAR("char: "),
+        STRING("string: "),
+        OBJECT("reference: "),
+        ARRAY("primitives array: "),
+        MATRIX("primitives matrix: ");
+
+        private String prefix;
+        Type(String prefix){
+            this.prefix = prefix;
+        }
+        public String getPrefix() {
+            return prefix;
+        }
     }
 
     private static Type currentType = Type.UNDEFINED;
@@ -32,45 +34,54 @@ public class Logger {
     private static long numberBuffer = 0;
     private static boolean isNumberBufferNotEmpty = false;
 
+    // region Log methods
     public static void log(String message) {
-        flashAndChangeTypeIfNeeded(Type.STRING);
+        flushBufferAndChangeTypeIfNeeded(Type.STRING);
         accumulate(message);
     }
 
     public static void log(int message) {
-        flashAndChangeTypeIfNeeded(Type.INTEGER);
+        flushBufferAndChangeTypeIfNeeded(Type.INTEGER);
         accumulate(message);
     }
 
     public static void log(byte message) {
-        flashAndChangeTypeIfNeeded(Type.BYTE);
+        flushBufferAndChangeTypeIfNeeded(Type.BYTE);
         accumulate(message);
     }
 
     public static void log(boolean message) {
-        flashAndChangeTypeIfNeeded(Type.BOOLEAN);
+        flushBufferAndChangeTypeIfNeeded(Type.BOOLEAN);
         decorateAndPrintPrimitive(String.valueOf(message));
     }
 
     public static void log(char message) {
-        flashAndChangeTypeIfNeeded(Type.CHAR);
+        flushBufferAndChangeTypeIfNeeded(Type.CHAR);
         decorateAndPrintChar(String.valueOf(message));
     }
 
     public static void log(Object message) {
-        flashAndChangeTypeIfNeeded(Type.OBJECT);
+        flushBufferAndChangeTypeIfNeeded(Type.OBJECT);
         decorateAndPrintObject(String.valueOf(message));
     }
 
     public static void log(int[] array) {
-        flashAndChangeTypeIfNeeded(Type.ARRAY);
+        flushBufferAndChangeTypeIfNeeded(Type.ARRAY);
         decorateAndPrintArray(convertArrayToString(array));
     }
 
     public static void log(int[][] matrix) {
-        flashAndChangeTypeIfNeeded(Type.MATRIX);
+        flushBufferAndChangeTypeIfNeeded(Type.MATRIX);
         decorateAndPrintMatrix(convertMatrixToString(matrix));
     }
+
+    public static void log(String... strings) {
+        for(String str : strings) {
+            flushBufferAndChangeTypeIfNeeded(Type.STRING);
+            accumulate(str);
+        }
+    }
+    // endregion
 
     private static String convertArrayToString(int[] array) {
         String temp = "{";
@@ -91,12 +102,11 @@ public class Logger {
         return temp;
     }
 
-    private static void flashAndChangeTypeIfNeeded(Type type) {
-        final boolean shouldTypeBeChanged = (type != currentType);
-        if (shouldTypeBeChanged) {
-            flush();
-            currentType = type;
-        }
+    private static void flushBufferAndChangeTypeIfNeeded(Type type) {
+        if (type == currentType) return;
+
+        flush();
+        currentType = type;
     }
 
     public static void flush() {
@@ -105,24 +115,14 @@ public class Logger {
                 break;
             case INTEGER:
             case BYTE:
-                if (isNumberBufferNotEmpty) {
-                    decorateAndPrintPrimitive(String.valueOf(numberBuffer));
-                }
-                numberBuffer = 0;
-                isNumberBufferNotEmpty = false;
+                flushByteState();
                 break;
             case BOOLEAN:
                 break;
             case CHAR:
                 break;
             case STRING:
-                if (stringBuffer == null) break;
-                String message = stringBuffer;
-                if (stringCounter > 1) {
-                    message += " (x" + stringCounter + ")";
-                }
-                decorateAndPrintString(message);
-                stringBuffer = null;
+                flushStringType();
                 break;
             case OBJECT:
                 break;
@@ -131,6 +131,24 @@ public class Logger {
             case MATRIX:
                 break;
         }
+    }
+
+    private static void flushStringType() {
+        if (stringBuffer == null) return;
+        String message = stringBuffer;
+        if (stringCounter > 1) {
+            message += " (x" + stringCounter + ")";
+        }
+        decorateAndPrintString(message);
+        stringBuffer = null;
+    }
+
+    private static void flushByteState() {
+        if (isNumberBufferNotEmpty) {
+            decorateAndPrintPrimitive(String.valueOf(numberBuffer));
+        }
+        numberBuffer = 0;
+        isNumberBufferNotEmpty = false;
     }
 
     private static void initializeStringBuffer(String message) {
@@ -170,53 +188,53 @@ public class Logger {
 
     // region Decorators
     private static String decoratePrimitive(String message) {
-        return PRIMITIVE_PREFIX + message;
+        return Type.INTEGER.getPrefix() + message;
     }
 
     private static String decorateString(String message) {
-        return STRING_PREFIX + message;
+        return Type.STRING.getPrefix() + message;
     }
 
     private static String decorateReference(String message) {
-        return REFERENCE_PREFIX + message;
+        return Type.OBJECT.getPrefix() + message;
     }
 
     private static String decorateChar(String message) {
-        return CHAR_PREFIX + message;
+        return Type.CHAR.getPrefix() + message;
     }
 
     private static String decorateArray(String message) {
-        return PRIMITIVES_ARRAY_PREFIX + message;
+        return Type.ARRAY.getPrefix() + message;
     }
 
     private static String decorateMatrix(String message) {
-        return PRIMITIVES_MATRIX_PREFIX + message;
+        return Type.MATRIX.getPrefix() + message;
     }
     // endregion
 
-    // region Loggers for each type
+    // region Print decorated messages
     private static void decorateAndPrintPrimitive(String message) {
-        Printer.print(decoratePrimitive(message));
+        Saver.save(decoratePrimitive(message));
     }
 
     private static void decorateAndPrintChar(String message) {
-        Printer.print(decorateChar(message));
+        Saver.save(decorateChar(message));
     }
 
     private static void decorateAndPrintString(String message) {
-        Printer.print(decorateString(message));
+        Saver.save(decorateString(message));
     }
 
     private static void decorateAndPrintObject(String message) {
-        Printer.print(decorateReference(message));
+        Saver.save(decorateReference(message));
     }
 
     private static void decorateAndPrintArray(String message) {
-        Printer.print(decorateArray(message));
+        Saver.save(decorateArray(message));
     }
 
     private static void decorateAndPrintMatrix(String message) {
-        Printer.print(decorateMatrix(message));
+        Saver.save(decorateMatrix(message));
     }
     // endregion
 }
