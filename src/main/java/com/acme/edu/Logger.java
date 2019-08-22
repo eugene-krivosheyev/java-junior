@@ -1,13 +1,16 @@
 package com.acme.edu;
 
 
-
 public class Logger {
 
     private final static String PRIMITIVE_PREFIX = "primitive: ";
     private final static String CHAR_PREFIX = "char: ";
     private final static String STRING_PREFIX = "string: ";
     private final static String REFERENCE_PREFIX = "reference: ";
+    private final static String PRIMITIVES_ARRAY_PREFIX = "primitives array: ";
+    private final static String PRIMITIVES_MATRIX_PREFIX = "primitives matrix: ";
+    private final static String PRIMITIVES_MULTIMATRIX_PREFIX = "primitives multimatrix: ";
+    public static final String DELIMETER = ", ";
 
     private static enum Type {
         UNDEFINED,
@@ -16,7 +19,9 @@ public class Logger {
         BOOLEAN,
         CHAR,
         STRING,
-        OBJECT
+        OBJECT,
+        ARRAY,
+        MATRIX
     }
 
     private static Type currentType = Type.UNDEFINED;
@@ -25,6 +30,7 @@ public class Logger {
     private static int stringCounter = 0;
 
     private static long numberBuffer = 0;
+    private static boolean isNumberBufferNotEmpty = false;
 
     public static void log(String message) {
         flashAndChangeTypeIfNeeded(Type.STRING);
@@ -43,17 +49,46 @@ public class Logger {
 
     public static void log(boolean message) {
         flashAndChangeTypeIfNeeded(Type.BOOLEAN);
-        logPrimitive(String.valueOf(message));
+        decorateAndPrintPrimitive(String.valueOf(message));
     }
 
     public static void log(char message) {
         flashAndChangeTypeIfNeeded(Type.CHAR);
-        logChar(String.valueOf(message));
+        decorateAndPrintChar(String.valueOf(message));
     }
 
     public static void log(Object message) {
         flashAndChangeTypeIfNeeded(Type.OBJECT);
-        logObject(String.valueOf(message));
+        decorateAndPrintObject(String.valueOf(message));
+    }
+
+    public static void log(int[] array) {
+        flashAndChangeTypeIfNeeded(Type.ARRAY);
+        decorateAndPrintArray(convertArrayToString(array));
+    }
+
+    public static void log(int[][] matrix) {
+        flashAndChangeTypeIfNeeded(Type.MATRIX);
+        decorateAndPrintMatrix(convertMatrixToString(matrix));
+    }
+
+    private static String convertArrayToString(int[] array) {
+        String temp = "{";
+        for (int i = 0; i < array.length - 1; i++) {
+            temp += array[i] + DELIMETER;
+        }
+        temp += array[array.length - 1] + "}";
+        return temp;
+
+    }
+
+    private static String convertMatrixToString(int[][] matrix) {
+        String temp = "{\n";
+        for (int[] array : matrix) {
+            temp += convertArrayToString(array) + "\n";
+        }
+        temp += "}";
+        return temp;
     }
 
     private static void flashAndChangeTypeIfNeeded(Type type) {
@@ -70,8 +105,11 @@ public class Logger {
                 break;
             case INTEGER:
             case BYTE:
-                logPrimitive(String.valueOf(numberBuffer));
+                if (isNumberBufferNotEmpty) {
+                    decorateAndPrintPrimitive(String.valueOf(numberBuffer));
+                }
                 numberBuffer = 0;
+                isNumberBufferNotEmpty = false;
                 break;
             case BOOLEAN:
                 break;
@@ -83,37 +121,49 @@ public class Logger {
                 if (stringCounter > 1) {
                     message += " (x" + stringCounter + ")";
                 }
-                logString(message);
+                decorateAndPrintString(message);
                 stringBuffer = null;
                 break;
             case OBJECT:
                 break;
+            case ARRAY:
+                break;
+            case MATRIX:
+                break;
         }
+    }
+
+    private static void initializeStringBuffer(String message) {
+        stringBuffer = message;
+        stringCounter = 1;
     }
 
     private static void accumulate(String message) {
         if (stringBuffer == null) {
-            stringBuffer = message;
-            stringCounter = 1;
+            initializeStringBuffer(message);
         } else if (stringBuffer.equals(message)) {
             stringCounter++;
         } else {
             flush();
-            stringBuffer = message;
-            stringCounter = 1;
+            initializeStringBuffer(message);
         }
     }
 
     private static void accumulate(int number) {
-        if (numberBuffer + number >= Integer.MAX_VALUE) {
-            flush();
-        }
-        numberBuffer += number;
+        accumulateNumberConcerningMaxValue(number, Integer.MAX_VALUE);
     }
 
     private static void accumulate(byte number) {
-        if (numberBuffer + number >= Byte.MAX_VALUE) {
+        accumulateNumberConcerningMaxValue(number, Byte.MAX_VALUE);
+    }
+
+    private static void accumulateNumberConcerningMaxValue(int number, int maxValue) {
+        if (!isNumberBufferNotEmpty) {
+            isNumberBufferNotEmpty = true;
+        }
+        if (numberBuffer + number >= maxValue) {
             flush();
+            isNumberBufferNotEmpty = true;
         }
         numberBuffer += number;
     }
@@ -134,23 +184,39 @@ public class Logger {
     private static String decorateChar(String message) {
         return CHAR_PREFIX + message;
     }
+
+    private static String decorateArray(String message) {
+        return PRIMITIVES_ARRAY_PREFIX + message;
+    }
+
+    private static String decorateMatrix(String message) {
+        return PRIMITIVES_MATRIX_PREFIX + message;
+    }
     // endregion
 
     // region Loggers for each type
-    private static void logPrimitive(String message) {
+    private static void decorateAndPrintPrimitive(String message) {
         Printer.print(decoratePrimitive(message));
     }
 
-    private static void logChar(String message) {
+    private static void decorateAndPrintChar(String message) {
         Printer.print(decorateChar(message));
     }
 
-    private static void logString(String message) {
+    private static void decorateAndPrintString(String message) {
         Printer.print(decorateString(message));
     }
 
-    private static void logObject(String message) {
+    private static void decorateAndPrintObject(String message) {
         Printer.print(decorateReference(message));
+    }
+
+    private static void decorateAndPrintArray(String message) {
+        Printer.print(decorateArray(message));
+    }
+
+    private static void decorateAndPrintMatrix(String message) {
+        Printer.print(decorateMatrix(message));
     }
     // endregion
 }
