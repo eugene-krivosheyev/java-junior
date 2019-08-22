@@ -23,22 +23,37 @@ public class Decorator {
         return CHAR.getType() + message;
     }
 
-    static String decorateArray(String message) {
-        return ARRAY.getType() + message;
+    static String decorateArray(int[] message) {
+        String finalMessage = Arrays.toString(message);
+        return ARRAY.getType() + finalMessage.replace("[", "{").replace("]", "}");
     }
 
-    static String decorateMatrix(int[][] message) {
+    private static String decorateArray2D(int[][] message) {
         StringBuilder finalMessage = new StringBuilder("{\n");
         for (int[] integers : message) {
             finalMessage.append(Arrays.toString(integers)).append("\n");
 
         }
         finalMessage.append("}");
-        return MATRIX.getType() + finalMessage.toString().replace("[", "{").replace("]", "}");
+        return finalMessage.toString();
     }
 
-    static String decorateMultiMatrix(String message) {
-        return MULTIMATRIX.getType() + message;
+    static String decorateMatrix(int[][] message) {
+        return MATRIX.getType() + decorateArray2D(message).replace("[", "{").replace("]", "}");
+    }
+
+    static String decorateMultiMatrix(int[][][][] message) {
+        StringBuilder finalMessage = new StringBuilder("{\n");
+        for(int[][][] array3d : message) {
+            finalMessage.append("{\n");
+            for (int[][] array2d : array3d) {
+
+                finalMessage.append(decorateArray2D(array2d).replace("[", "{\n").replace("]", "\n}"));
+            }
+            finalMessage.append("\n}\n");
+        }
+        finalMessage.append("}");
+        return MULTIMATRIX.getType() + finalMessage;
     }
 
     static String decorateStringArray(String[] messages) {

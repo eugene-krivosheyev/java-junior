@@ -24,12 +24,16 @@ public class Logger {
         Printer.save(Decorator.decorateIntegerArray(messages));
     }
 
-    public static void log(Integer[][][][] messages) {
-//        Printer.save(Decorator.decorateMultiMatrix(messages));
+    public static void log(int[][][][] messages) {
+        Printer.save(Decorator.decorateMultiMatrix(messages));
     }
 
     public static void log(int[][] messages) {
         Printer.save(Decorator.decorateMatrix(messages));
+    }
+
+    public static void log(int[] messages) {
+        Printer.save(Decorator.decorateArray(messages));
     }
 
     public static void log(boolean message) {
