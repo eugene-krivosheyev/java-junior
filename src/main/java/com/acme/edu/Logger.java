@@ -1,38 +1,171 @@
 package com.acme.edu;
 
 public class Logger {
-    private static final String primitivePrefix = "primitive: ";
-    private static final String stringPrefix = "string: ";
-    private static final String charPrefix = "char: ";
-    private static final String referencePrefix = "reference: ";
+    private static final String PRIMITIVE_PREFIX = "primitive: ";
+    private static final String STRING_PREFIX = "string: ";
+    private static final String CHAR_PREFIX = "char: ";
+    private static final String REFERENCE_PREFIX = "reference: ";
 
-    public static void log(Object message) {
-        decorateString(referencePrefix, message);
-    }
+    private static byte[] byteBuffer = new byte[1];
+    private static int[] intBuffer = new int[1];
+    private static String[] stringBuffer = new String[1];
 
-    public static void log(String message) {
-        decorateString(stringPrefix, message);
-    }
+    private static int counterOfStrings = 0;
+
+    private static State state = State.NONE;
+
+    // -------------- METHODS FOR LOG ------------------
+
+    public static void log(Object message) { decorateString(REFERENCE_PREFIX, message); }
 
     public static void log(char message) {
-       decorateString(charPrefix, message);
+       decorateString(CHAR_PREFIX, message);
     }
 
     public static void log(boolean message) {
-        decorateString(primitivePrefix, message);
+        decorateString(PRIMITIVE_PREFIX, message);
     }
 
     public static void log(byte message) {
-        decorateString(primitivePrefix, message);
+        if(state != State.BYTE) {
+            changeState(State.BYTE);
+        }
+        addBuffer(message);
+        decorateString(PRIMITIVE_PREFIX, message);
     }
 
-    public static void  log(Integer message) {
-        decorateString(primitivePrefix, message);
+    public static void log(int message) {
+        if(state != State.INT) {
+            changeState(State.INT);
+        }
+        addBuffer(message);
+        decorateString(PRIMITIVE_PREFIX, message);
     }
+
+    public static void log(String message) {
+        if(state != State.STR) {
+            changeState(State.STR);
+        }
+        addBuffer(message);
+        decorateString(STRING_PREFIX, message);
+    }
+
+    // -------------- ADD BUFFER ------------------
+
+    private static void addBuffer(String message) {
+        if(message.equals(stringBuffer[0])) {
+            counterOfStrings++;
+        }
+        else {
+            if (stringBuffer[0] != null) {
+                clearStr();
+            }
+            stringBuffer[0] = message;
+            counterOfStrings = 1;
+        }
+    }
+
+    private static void addBuffer(int message) {
+        int result = maxOrMinIfOverflow(message);
+        if (result == Integer.MAX_VALUE || result == Integer.MIN_VALUE) {
+            clearInt();
+            intBuffer[0] = result;
+        }
+        else {
+            intBuffer[0] += result;
+        }
+    }
+
+    private static void addBuffer(byte message) {
+        byte result = maxOrMinIfOverflow(message);
+        if (result == Byte.MAX_VALUE || result == Byte.MIN_VALUE) {
+            clearInt();
+            byteBuffer[0] = result;
+        }
+        else {
+            byteBuffer[0] += result;
+        }
+    }
+
+    // -------------- DECORATE STRING ------------------
 
     private static void decorateString(String prefix, Object message) {
         System.out.println(prefix + message);
     }
+
+    // -------------- CLEAR METHODS ------------------
+
+    private static void clearByte() {
+        System.out.println(byteBuffer[0]);
+        byteBuffer[0] = 0;
+    }
+
+    private static void clearStr() {
+        if(counterOfStrings > 1) {
+            System.out.println(stringBuffer[0] + " (x" + counterOfStrings + ")");
+        }
+        else {
+            System.out.println(stringBuffer[0]);
+        }
+        stringBuffer[0] = null;
+        counterOfStrings = 0;
+    }
+
+    private static void clearInt() {
+        System.out.println(intBuffer[0]);
+        intBuffer[0] = 0;
+    }
+
+    // -------------- CHANGE STATE------------------
+
+    private static void changeState(State newState) {
+        switch (state){
+            case BYTE:
+                clearByte();
+                break;
+            case INT:
+                clearInt();
+                break;
+            case STR:
+                clearStr();
+                break;
+            default:
+                break;
+        }
+        state = newState;
+    }
+
+    // -------------- CHECK OVERFLOW ------------------
+
+    private static int maxOrMinIfOverflow(int value) {
+        if(value > 0 && Integer.MAX_VALUE - value <= intBuffer[0]) {
+            return Integer.MAX_VALUE;
+        }
+        else if(value < 0 && Integer.MIN_VALUE - value >= intBuffer[0]){
+            return Integer.MIN_VALUE;
+        }
+        return value;
+    }
+
+    private static byte maxOrMinIfOverflow(byte value) {
+        if(value > 0 && Byte.MAX_VALUE - value <= byteBuffer[0]) {
+            return Byte.MAX_VALUE;
+        }
+        else if(value < 0 && Byte.MIN_VALUE - value >= byteBuffer[0]){
+            return Byte.MIN_VALUE;
+        }
+        return value;
+    }
+
+    // -------------- CLOSE------------------
+
+    public static void close() { changeState(State.NONE); }
 }
 
+enum State {
+    BYTE,
+    INT,
+    STR,
+    NONE
+}
 
