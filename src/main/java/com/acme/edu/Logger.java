@@ -1,7 +1,5 @@
 package com.acme.edu;
 
-import java.util.Arrays;
-
 public class Logger {
 
     public static final String PRIMITIVE_PREFIX = "primitive: ";
@@ -22,7 +20,7 @@ public class Logger {
 
     public static void log(boolean message) {
         flush();
-        printToStdout(PRIMITIVE_PREFIX + message);
+        PrintUtils.printToStdout(PRIMITIVE_PREFIX + message);
     }
 
     public static void log(byte message) {
@@ -32,7 +30,7 @@ public class Logger {
 
     public static void log(char message) {
         flush();
-        printToStdout(CHAR_PREFIX + message);
+        PrintUtils.printToStdout(CHAR_PREFIX + message);
     }
 
     public static void log(int message) {
@@ -42,42 +40,38 @@ public class Logger {
 
     public static void log(String message) {
         flush();
-        printToStdout(STRING_PREFIX + message);
+        PrintUtils.printToStdout(STRING_PREFIX + message);
     }
 
     public static void log(int[] array) {
         flush();
-        printToStdout(PR_ARRAY_PREFIX + arrayToString(array));
+        PrintUtils.printToStdout(PR_ARRAY_PREFIX + PrintUtils.arrayToString(array));
     }
 
     public static void log(int[][] array) {
         flush();
-        printToStdout(PR_MATRIX_PREFIX + arrayToString(array));
+        PrintUtils.printToStdout(PR_MATRIX_PREFIX + PrintUtils.arrayToString(array));
     }
 
     public static void log(Object message) {
         flush();
-        printToStdout(REFERENCE_PREFIX + message);
+        PrintUtils.printToStdout(REFERENCE_PREFIX + message);
     }
 
     public static void flush() {
         switch (bufferState) {
             case BYTE:
-                printToStdout(PRIMITIVE_PREFIX + byteBuffer);
+                PrintUtils.printToStdout(PRIMITIVE_PREFIX + byteBuffer);
                 byteBuffer = 0;
                 break;
             case INT:
-                printToStdout(PRIMITIVE_PREFIX + intBuffer);
+                PrintUtils.printToStdout(PRIMITIVE_PREFIX + intBuffer);
                 intBuffer = 0;
                 break;
             case FLUSHED:
                 break;
         }
         bufferState = BufferState.FLUSHED;
-    }
-
-    private static void printToStdout(String message) {
-        System.out.println(message);
     }
 
     private static void setBufferState(BufferState bufferState) {
@@ -89,21 +83,6 @@ public class Logger {
             flush();
             setBufferState(state);
         }
-    }
-
-    private static String arrayToString(int[] array) {
-        return Arrays.toString(array)
-                .replace("[", "{")
-                .replace("]", "}");
-    }
-
-    private static String arrayToString(int[][] array) {
-        StringBuilder sb = new StringBuilder("{\n");
-        for (int[] subArray : array) {
-            sb.append(arrayToString(subArray)).append("\n");
-        }
-        sb.append("}");
-        return sb.toString();
     }
 
     private enum BufferState {
