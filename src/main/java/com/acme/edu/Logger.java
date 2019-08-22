@@ -39,6 +39,36 @@ class Buffer {
     private Integer integerBuffer = 0;
     private Types previousType = null;
 
+    public void save(int message) {
+        if ((previousType != null && !comparePreviousType(Types.PRIMITIVE)) ||
+                (long) message + integerBuffer > Integer.MAX_VALUE ||
+                (long) message + integerBuffer < Integer.MIN_VALUE) {
+            flushBuffer();
+            integerBuffer = message;
+            previousType = Types.PRIMITIVE;
+            return;
+        }
+        integerBuffer += message;
+        previousType = Types.PRIMITIVE;
+    }
+
+    public void save(String message) {
+        if ((previousType != null && !comparePreviousType(Types.STRING)) ||
+                !stringBuffer.equals(message)) {
+            flushBuffer();
+            stringBuffer = message;
+            stringCounter = 1;
+            previousType = Types.STRING;
+            return;
+        }
+        stringCounter++;
+        previousType = Types.STRING;
+    }
+
+    private boolean comparePreviousType(Types currentType) {
+        return currentType.equals(previousType);
+    }
+
     public void flushBuffer() {
         String decoratedMessage = "";
         if (Types.PRIMITIVE.equals(previousType)) {
@@ -59,32 +89,5 @@ class Buffer {
         stringCounter = 0;
         integerBuffer = 0;
         previousType = null;
-    }
-
-    public void save(int message) {
-        if (previousType != null && !comparePreviousType(Types.PRIMITIVE)) {
-            flushBuffer();
-            integerBuffer = message;
-            previousType = Types.PRIMITIVE;
-            return;
-        }
-        integerBuffer += message;
-        previousType = Types.PRIMITIVE;
-    }
-
-    public void save(String message) {
-        if (previousType != null && !comparePreviousType(Types.STRING) || !stringBuffer.equals(message)) {
-            flushBuffer();
-            stringBuffer = message;
-            stringCounter = 1;
-            previousType = Types.STRING;
-            return;
-        }
-        stringCounter++;
-        previousType = Types.STRING;
-    }
-
-    private boolean comparePreviousType(Types currentType) {
-        return currentType.equals(previousType);
     }
 }
