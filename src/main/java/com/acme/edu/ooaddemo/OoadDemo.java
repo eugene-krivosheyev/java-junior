@@ -11,8 +11,8 @@ public class OoadDemo {
 }
 
 class Logger {
-    //Abstract Factory [GoF]
-    private LoggerFilter filter = FactoryOfFilterFactory.create().create();
+    //Registry [PoEEA]
+    private LoggerFilter filter = Registry.create().create();
     private LoggerSaver saver = new ConsoleLoggerSaver();
 
     public void log(String message, int severityLevel) {
