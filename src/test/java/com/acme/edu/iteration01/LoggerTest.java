@@ -26,8 +26,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogInteger() throws IOException {
         //region when
         Logger.log(1);
+        Logger.close();
         Logger.log(0);
+        Logger.close();
         Logger.log(-1);
+        Logger.close();
         //endregion
 
         //region then
@@ -72,7 +75,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogString() throws IOException {
         //region when
         Logger.log("test string 1");
+        Logger.close();
         Logger.log("other str");
+        Logger.close();
         //endregion
 
         //region then
