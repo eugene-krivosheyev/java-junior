@@ -1,19 +1,32 @@
 package com.acme.edu.ooaddemo;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Optional;
-
-public class OoadDemo {
+public class OoadDIFramework {
     public static void main(String[] args) {
+        //Framework responsibility 1 : app building
+        final Logger logger = new Logger(
+            new SeverityLevelLoggerFilter(5),
+            new ConsoleLoggerSaver()
+        ); // -> xml, json, yaml: build on configuration!
 
+        //Framework responsibility 2 : request handling
     }
 }
 
 class Logger {
-    //Registry [PoEEA]
-    private LoggerFilter filter = Registry.create().create();
-    private LoggerSaver saver = new ConsoleLoggerSaver();
+    //Filed DI (Reflection API -> CGLib | ByteBuddy)
+    private LoggerFilter filter;
+    private LoggerSaver saver;
+
+    //Constructor DI
+    Logger(LoggerFilter filter, LoggerSaver saver) {
+        this.filter = filter;
+        this.saver = saver;
+    }
+
+    //Setter DI
+    public void setSaver(LoggerSaver saver) {
+        this.saver = saver;
+    }
 
     public void log(String message, int severityLevel) {
         if (!filter.isFiltered(message, severityLevel)) {
