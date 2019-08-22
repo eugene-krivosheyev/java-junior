@@ -1,14 +1,21 @@
 package com.acme.edu.ooaddemo;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Optional;
+
 public class OoadDemo {
     public static void main(String[] args) {
-
+        //FM:
+        Arrays.asList();
+        Collections.emptyList();
+        Optional.of(0);
     }
 }
 
 class Logger {
-    //Creator [GRASP]
-    private LoggerFilter filter = new SeverityLevelLoggerFilter(5);
+    //Factory Method [GoF]
+    private LoggerFilter filter = XmlConfigFilterFactory.create(5);
     private LoggerSaver saver = new ConsoleLoggerSaver();
 
     public void log(String message, int severityLevel) {
