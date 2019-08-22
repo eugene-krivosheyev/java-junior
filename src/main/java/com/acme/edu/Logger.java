@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import java.util.Arrays;
+
 public class Logger {
     private static final String PRIMITIVE_PREFIX = "primitive: ";
     private static final String STRING_PREFIX = "string: ";
@@ -7,7 +9,8 @@ public class Logger {
     private static final String REFERENCE_PREFIX = "reference: ";
 
     private static final String PRIMITIVE_PREFIX_FOR_ARRAY = "primitives array: ";
-    private static final String PRIMITIVE_PREFIX_FOR_MATRIX= "primitives matrix: ";
+    private static final String PRIMITIVE_PREFIX_FOR_MATRIX = "primitives matrix: ";
+    private static final String PRIMITIVE_PREFIX_FOR_MULTI_MATRIX = "primitives multimatrix: ";
 
     private static byte[] byteBuffer = new byte[1];
     private static int[] intBuffer = new int[1];
@@ -61,25 +64,44 @@ public class Logger {
         System.out.println(PRIMITIVE_PREFIX_FOR_MATRIX + decorateArray(array));
     }
 
+    public static void log(int[][][][] array) {
+        System.out.println(PRIMITIVE_PREFIX_FOR_MULTI_MATRIX + decorateArray(array));
+    }
+
     // -------------- DECORATE ARRAY ------------------
 
     private static String decorateArray(int [] array) {
-        StringBuilder result = new StringBuilder("{");
-        for (int i = 0; i < array.length; i++) {
-            result.append(array[i]);
-            if (i < array.length - 1)  {
-                result.append(", ");
-            }
-        }
-        return result + "}\n";
+        return Arrays.toString(array).replace("[", "{").replace("]", "}") +"\n";
     }
 
     private static String decorateArray(int [][] array) {
         StringBuilder result = new StringBuilder("{\n");
+        for (int i = 0; i < array.length ; i++) {
+            result.append(Arrays.toString(array[i]).replace("[", "{").replace("]", "}") +"\n");
+        }
+        return result +"}\n";
+    }
+
+    private static String decorateArray(int[][][][] array) {
+        StringBuilder result = new StringBuilder("{\n");
         for (int i = 0; i < array.length; i++) {
-            result.append("{");
+            result.append("{\n");
             for (int j = 0; j < array[i].length; j++) {
-                result.append(array[i][j]);
+                result.append("{\n");
+                for (int k = 0; k < array[i][j].length; k++) {
+                    result.append("{\n");
+                    for (int m = 0; m < array[i][j][k].length; m++) {
+                        result.append(array[i][j][k][m]);
+                        if (m == array[i][j][k].length - 1) {
+                            result.append("\n");
+                        }
+                    }
+                    result.append("}\n");
+                    if (k < array[i][j].length - 1) {
+                        result.append(", ");
+                    }
+                }
+                result.append("}\n");
                 if (j < array[i].length - 1) {
                     result.append(", ");
                 }
