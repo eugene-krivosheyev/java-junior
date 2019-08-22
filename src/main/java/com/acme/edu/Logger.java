@@ -6,22 +6,33 @@ public class Logger {
     private static final String charPrefix = "char: ";
     private static final String referencePrefix = "reference: ";
 
-    public static void  log(Object message) {
-        if (isPrimitive(message))
-            decorateString(primitivePrefix, message);
-        else if (message instanceof String)
-            decorateString(stringPrefix, message);
-        else if (message instanceof Character)
-            decorateString(charPrefix, message);
-        else
-            decorateString(referencePrefix, message);
+    public static void log(Object message) {
+        decorateString(referencePrefix, message);
     }
 
-    private static boolean isPrimitive(Object message){
-        return  message instanceof Boolean || message instanceof Long || message instanceof Integer || message instanceof Byte;
+    public static void log(String message) {
+        decorateString(stringPrefix, message);
+    }
+
+    public static void log(char message) {
+       decorateString(charPrefix, message);
+    }
+
+    public static void log(boolean message) {
+        decorateString(primitivePrefix, message);
+    }
+
+    public static void log(byte message) {
+        decorateString(primitivePrefix, message);
+    }
+
+    public static void  log(Integer message) {
+        decorateString(primitivePrefix, message);
     }
 
     private static void decorateString(String prefix, Object message) {
         System.out.println(prefix + message);
     }
 }
+
+
