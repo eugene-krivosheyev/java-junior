@@ -33,7 +33,7 @@ public class Logger {
         if(state != Buffer_State.BYTE) {
             changeState(Buffer_State.BYTE);
         }
-        addBuffer(message);
+        addInBuffer(message);
         decorateString(PRIMITIVE_PREFIX, message);
     }
 
@@ -41,7 +41,7 @@ public class Logger {
         if(state != Buffer_State.INT) {
             changeState(Buffer_State.INT);
         }
-        addBuffer(message);
+        addInBuffer(message);
         decorateString(PRIMITIVE_PREFIX, message);
     }
 
@@ -49,7 +49,7 @@ public class Logger {
         if(state != Buffer_State.STR) {
             changeState(Buffer_State.STR);
         }
-        addBuffer(message);
+        addInBuffer(message);
         decorateString(STRING_PREFIX, message);
     }
 
@@ -91,23 +91,23 @@ public class Logger {
 
     // -------------- ADD BUFFER ------------------
 
-    private static void addBuffer(String message) {
+    private static void addInBuffer(String message) {
         if(message.equals(stringBuffer[0])) {
             counterOfStrings++;
         }
         else {
             if (stringBuffer[0] != null) {
-                clearStr();
+                clearBufferStr();
             }
             stringBuffer[0] = message;
             counterOfStrings = 1;
         }
     }
 
-    private static void addBuffer(int message) {
+    private static void addInBuffer(int message) {
         int result = maxOrMinIfOverflow(message);
         if (result == Integer.MAX_VALUE || result == Integer.MIN_VALUE) {
-            clearInt();
+            clearBufferInt();
             intBuffer[0] = result;
         }
         else {
@@ -115,10 +115,10 @@ public class Logger {
         }
     }
 
-    private static void addBuffer(byte message) {
+    private static void addInBuffer(byte message) {
         byte result = maxOrMinIfOverflow(message);
         if (result == Byte.MAX_VALUE || result == Byte.MIN_VALUE) {
-            clearInt();
+            clearBufferInt();
             byteBuffer[0] = result;
         }
         else {
@@ -134,12 +134,12 @@ public class Logger {
 
     // -------------- CLEAR METHODS ------------------
 
-    private static void clearByte() {
+    private static void clearBufferByte() {
         System.out.println(byteBuffer[0]);
         byteBuffer[0] = 0;
     }
 
-    private static void clearStr() {
+    private static void clearBufferStr() {
         if(counterOfStrings > 1) {
             System.out.println(stringBuffer[0] + " (x" + counterOfStrings + ")");
         }
@@ -150,7 +150,7 @@ public class Logger {
         counterOfStrings = 0;
     }
 
-    private static void clearInt() {
+    private static void clearBufferInt() {
         System.out.println(intBuffer[0]);
         intBuffer[0] = 0;
     }
@@ -160,13 +160,13 @@ public class Logger {
     private static void changeState(Buffer_State newState) {
         switch (state){
             case BYTE:
-                clearByte();
+                clearBufferByte();
                 break;
             case INT:
-                clearInt();
+                clearBufferInt();
                 break;
             case STR:
-                clearStr();
+                clearBufferStr();
                 break;
             default:
                 break;
@@ -198,7 +198,7 @@ public class Logger {
 
     // -------------- CLOSE------------------
 
-    public static void close() { changeState(Buffer_State.NONE); }
+    public static void closeBuffer() { changeState(Buffer_State.NONE); }
 }
 
 enum Buffer_State {
