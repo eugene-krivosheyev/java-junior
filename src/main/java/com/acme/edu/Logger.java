@@ -1,11 +1,18 @@
 package com.acme.edu;
 
+import java.util.Arrays;
+
 public class Logger {
 
     public static final String PRIMITIVE_PREFIX = "primitive: ";
     public static final String CHAR_PREFIX = "char: ";
     public static final String STRING_PREFIX = "string: ";
     public static final String REFERENCE_PREFIX = "reference: ";
+
+    private static final String PRIMITIVES_PREFIX = "primitives ";
+    public static final String PR_ARRAY_PREFIX = PRIMITIVES_PREFIX + "array: ";
+    public static final String PR_MATRIX_PREFIX = PRIMITIVES_PREFIX + "matrix: ";
+    public static final String PR_MULTIMATRIX_PREFIX = PRIMITIVES_PREFIX + "multimatrix: ";
 
     private static byte byteBuffer = 0;
     private static int intBuffer = 0;
@@ -36,6 +43,16 @@ public class Logger {
     public static void log(String message) {
         flush();
         printToStdout(STRING_PREFIX + message);
+    }
+
+    public static void log(int[] array) {
+        flush();
+        printToStdout(PR_ARRAY_PREFIX + arrayToString(array));
+    }
+
+    public static void log(int[][] array) {
+        flush();
+        printToStdout(PR_MATRIX_PREFIX + arrayToString(array));
     }
 
     public static void log(Object message) {
@@ -72,6 +89,21 @@ public class Logger {
             flush();
             setBufferState(state);
         }
+    }
+
+    private static String arrayToString(int[] array) {
+        return Arrays.toString(array)
+                .replace("[", "{")
+                .replace("]", "}");
+    }
+
+    private static String arrayToString(int[][] array) {
+        StringBuilder sb = new StringBuilder("{\n");
+        for (int[] subArray : array) {
+            sb.append(arrayToString(subArray)).append("\n");
+        }
+        sb.append("}");
+        return sb.toString();
     }
 
     private enum BufferState {
