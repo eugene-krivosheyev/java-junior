@@ -15,7 +15,7 @@ public class Logger {
 
     private static int counterOfStrings = 0;
 
-    private static State state = State.NONE;
+    private static Buffer_State state = Buffer_State.NONE;
 
     // -------------- METHODS FOR LOG ------------------
 
@@ -30,24 +30,24 @@ public class Logger {
     }
 
     public static void log(byte message) {
-        if(state != State.BYTE) {
-            changeState(State.BYTE);
+        if(state != Buffer_State.BYTE) {
+            changeState(Buffer_State.BYTE);
         }
         addBuffer(message);
         decorateString(PRIMITIVE_PREFIX, message);
     }
 
     public static void log(int message) {
-        if(state != State.INT) {
-            changeState(State.INT);
+        if(state != Buffer_State.INT) {
+            changeState(Buffer_State.INT);
         }
         addBuffer(message);
         decorateString(PRIMITIVE_PREFIX, message);
     }
 
     public static void log(String message) {
-        if(state != State.STR) {
-            changeState(State.STR);
+        if(state != Buffer_State.STR) {
+            changeState(Buffer_State.STR);
         }
         addBuffer(message);
         decorateString(STRING_PREFIX, message);
@@ -157,7 +157,7 @@ public class Logger {
 
     // -------------- CHANGE STATE------------------
 
-    private static void changeState(State newState) {
+    private static void changeState(Buffer_State newState) {
         switch (state){
             case BYTE:
                 clearByte();
@@ -198,10 +198,10 @@ public class Logger {
 
     // -------------- CLOSE------------------
 
-    public static void close() { changeState(State.NONE); }
+    public static void close() { changeState(Buffer_State.NONE); }
 }
 
-enum State {
+enum Buffer_State {
     BYTE,
     INT,
     STR,
