@@ -19,4 +19,16 @@ public class Decorator {
     static String decorateChar(String message) {
         return CHAR.getType() + message;
     }
+
+    static String decorateArray(String message) {
+        return ARRAY.getType() + message;
+    }
+
+    static String decorateMatrix(String message) {
+        return MATRIX.getType() + message;
+    }
+
+    static String decorateMultiMatrix(String message) {
+        return MULTIMATRIX.getType() + message;
+    }
 }

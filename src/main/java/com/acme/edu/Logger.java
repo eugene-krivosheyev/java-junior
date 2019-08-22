@@ -1,6 +1,12 @@
 package com.acme.edu;
 
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Stream;
+
 public class Logger {
     private static Buffer buffer = new Buffer();
 
@@ -14,6 +20,24 @@ public class Logger {
 
     public static void log(String message) {
         buffer.save(message);
+    }
+
+    public static void log(String... messages) {
+        String message = String.join("\n", messages);
+        Printer.save(Decorator.decorateString(message));
+    }
+
+    public static void log(Integer... messages) {
+        String message = Stream.of(messages).reduce(0, Integer::sum).toString();
+        Printer.save(Decorator.decoratePrimitive(message));
+    }
+
+    public static void log(Integer[][][][] messages) {
+//        Printer.save(Decorator.decorateMultiMatrix(messages));
+    }
+
+    public static void log(Integer[][] messages) {
+//        Printer.save(Decorator.decorateMatrix(messages));
     }
 
     public static void log(boolean message) {
