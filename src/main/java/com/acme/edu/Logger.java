@@ -1,12 +1,6 @@
 package com.acme.edu;
 
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Stream;
-
 public class Logger {
     private static Buffer buffer = new Buffer();
 
@@ -23,21 +17,19 @@ public class Logger {
     }
 
     public static void log(String... messages) {
-        String message = String.join("\n", messages);
-        Printer.save(Decorator.decorateString(message));
+        Printer.save(Decorator.decorateStringArray(messages));
     }
 
     public static void log(Integer... messages) {
-        String message = Stream.of(messages).reduce(0, Integer::sum).toString();
-        Printer.save(Decorator.decoratePrimitive(message));
+        Printer.save(Decorator.decorateIntegerArray(messages));
     }
 
     public static void log(Integer[][][][] messages) {
 //        Printer.save(Decorator.decorateMultiMatrix(messages));
     }
 
-    public static void log(Integer[][] messages) {
-//        Printer.save(Decorator.decorateMatrix(messages));
+    public static void log(int[][] messages) {
+        Printer.save(Decorator.decorateMatrix(messages));
     }
 
     public static void log(boolean message) {
@@ -61,13 +53,13 @@ class Buffer {
     private String stringBuffer = "";
     private Integer stringCounter = 0;
     private Integer integerBuffer = 0;
-    private Types previousType = null;
+    private LoggerType previousType = null;
 
     public void save(int message) {
-        if (previousType != null && !comparePreviousType(Types.PRIMITIVE)) {
+        if (previousType != null && !comparePreviousType(LoggerType.PRIMITIVE)) {
             flushBuffer();
             integerBuffer = message;
-            previousType = Types.PRIMITIVE;
+            previousType = LoggerType.PRIMITIVE;
             return;
         }
         if ((long) message + integerBuffer > Integer.MAX_VALUE) {
@@ -83,33 +75,33 @@ class Buffer {
         } else {
             integerBuffer += message;
         }
-        previousType = Types.PRIMITIVE;
+        previousType = LoggerType.PRIMITIVE;
     }
 
     public void save(String message) {
-        if ((previousType != null && !comparePreviousType(Types.STRING)) ||
+        if ((previousType != null && !comparePreviousType(LoggerType.STRING)) ||
                 !stringBuffer.equals(message)) {
             flushBuffer();
             stringBuffer = message;
             stringCounter = 1;
-            previousType = Types.STRING;
+            previousType = LoggerType.STRING;
             return;
         }
         stringCounter++;
-        previousType = Types.STRING;
+        previousType = LoggerType.STRING;
     }
 
-    private boolean comparePreviousType(Types currentType) {
+    private boolean comparePreviousType(LoggerType currentType) {
         return currentType.equals(previousType);
     }
 
     public void flushBuffer() {
         String decoratedMessage = "";
-        if (Types.PRIMITIVE.equals(previousType)) {
+        if (LoggerType.PRIMITIVE.equals(previousType)) {
             String message = String.valueOf(integerBuffer);
             decoratedMessage = Decorator.decoratePrimitive(message);
         }
-        if (Types.STRING.equals(previousType)) {
+        if (LoggerType.STRING.equals(previousType)) {
             String message = stringCounter == 1 ? stringBuffer : stringBuffer + " (x" + stringCounter + ")";
             decoratedMessage = Decorator.decorateString(message);
         }
