@@ -6,6 +6,9 @@ public class Logger {
     private static final String CHAR_PREFIX = "char: ";
     private static final String REFERENCE_PREFIX = "reference: ";
 
+    private static final String PRIMITIVE_PREFIX_FOR_ARRAY = "primitives array: ";
+    private static final String PRIMITIVE_PREFIX_FOR_MATRIX= "primitives matrix: ";
+
     private static byte[] byteBuffer = new byte[1];
     private static int[] intBuffer = new int[1];
     private static String[] stringBuffer = new String[1];
@@ -48,6 +51,42 @@ public class Logger {
         }
         addBuffer(message);
         decorateString(STRING_PREFIX, message);
+    }
+
+    public static void log(int [] array) {
+        System.out.println(PRIMITIVE_PREFIX_FOR_ARRAY + decorateArray(array));
+    }
+
+    public static void log(int [][] array) {
+        System.out.println(PRIMITIVE_PREFIX_FOR_MATRIX + decorateArray(array));
+    }
+
+    // -------------- DECORATE ARRAY ------------------
+
+    private static String decorateArray(int [] array) {
+        StringBuilder result = new StringBuilder("{");
+        for (int i = 0; i < array.length; i++) {
+            result.append(array[i]);
+            if (i < array.length - 1)  {
+                result.append(", ");
+            }
+        }
+        return result + "}\n";
+    }
+
+    private static String decorateArray(int [][] array) {
+        StringBuilder result = new StringBuilder("{\n");
+        for (int i = 0; i < array.length; i++) {
+            result.append("{");
+            for (int j = 0; j < array[i].length; j++) {
+                result.append(array[i][j]);
+                if (j < array[i].length - 1) {
+                    result.append(", ");
+                }
+            }
+            result.append("}\n");
+        }
+        return result + "}\n";
     }
 
     // -------------- ADD BUFFER ------------------
