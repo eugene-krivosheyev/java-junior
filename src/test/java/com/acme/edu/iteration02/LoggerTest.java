@@ -23,6 +23,23 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test
+    public void extraBoundariesTest() throws IOException {
+        //region when
+        Logger.log(1);
+        Logger.log(2);
+        Logger.log(Integer.MAX_VALUE);
+        Logger.log(3);
+        Logger.log(0);
+        Logger.close();
+        //endregion
+
+        //region then
+        assertSysoutContains(Integer.MAX_VALUE + "\n");
+        assertSysoutContains("6\n");
+        //endregion
+    }
+
+    @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
         Logger.log("str 1");
@@ -54,8 +71,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutContains("str 1\n");
-        assertSysoutContains("10\n");
         assertSysoutContains(Integer.MAX_VALUE + "\n");
+        assertSysoutContains("10\n");
         assertSysoutContains("str 2\n");
         assertSysoutContains("0\n");
         //endregion

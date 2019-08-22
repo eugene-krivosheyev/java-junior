@@ -40,15 +40,25 @@ class Buffer {
     private Types previousType = null;
 
     public void save(int message) {
-        if ((previousType != null && !comparePreviousType(Types.PRIMITIVE)) ||
-                (long) message + integerBuffer > Integer.MAX_VALUE ||
-                (long) message + integerBuffer < Integer.MIN_VALUE) {
+        if (previousType != null && !comparePreviousType(Types.PRIMITIVE)) {
             flushBuffer();
             integerBuffer = message;
             previousType = Types.PRIMITIVE;
             return;
         }
-        integerBuffer += message;
+        if ((long) message + integerBuffer > Integer.MAX_VALUE) {
+            int temp = message + integerBuffer - Integer.MAX_VALUE;
+            integerBuffer = Integer.MAX_VALUE;
+            flushBuffer();
+            integerBuffer = temp;
+        } else if ((long) message + integerBuffer < Integer.MIN_VALUE) {
+            int temp = message + integerBuffer - Integer.MIN_VALUE;
+            integerBuffer = Integer.MIN_VALUE;
+            flushBuffer();
+            integerBuffer = temp;
+        } else {
+            integerBuffer += message;
+        }
         previousType = Types.PRIMITIVE;
     }
 
@@ -81,7 +91,10 @@ class Buffer {
         }
         //todo add more types
         Printer.save(decoratedMessage);
-        clean();
+        if (!decoratedMessage.contains(String.valueOf(Integer.MAX_VALUE)) &
+                !decoratedMessage.contains(String.valueOf(Integer.MIN_VALUE))) {
+            clean();
+        }
     }
 
     private void clean() {
