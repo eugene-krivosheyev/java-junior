@@ -4,7 +4,7 @@ public class OoadDIFramework {
     public static void main(String[] args) {
         //Framework responsibility 1 : app building
         final Logger logger = new Logger(
-            new SeverityLevelLoggerFilter(5),
+            new SeverityLevelLoggerFilter(),
             new ConsoleLoggerSaver()
         ); // -> xml, json, yaml: build on configuration!
 
@@ -36,11 +36,7 @@ class Logger {
 }
 
 class SeverityLevelLoggerFilter implements LoggerFilter {
-    private final int MAX_ALLOWED_SEVERITY;
-
-    SeverityLevelLoggerFilter(int max_allowed_severity) {
-        MAX_ALLOWED_SEVERITY = max_allowed_severity;
-    }
+    private static final int MAX_ALLOWED_SEVERITY = 5;
 
     @Override
     public boolean isFiltered(String message, int severityLevel) {
