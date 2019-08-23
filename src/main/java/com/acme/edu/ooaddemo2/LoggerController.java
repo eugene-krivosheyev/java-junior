@@ -11,7 +11,7 @@ public class LoggerController {
 
     public void log(Command command) {
         if (!filter.isFiltered(command)) {
-            saver.save(command.getMessage());
+            saver.save(command.getDecorated());
         }
     }
 }
