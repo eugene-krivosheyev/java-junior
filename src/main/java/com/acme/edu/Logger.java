@@ -1,9 +1,7 @@
 package com.acme.edu;
 
 
-import static com.acme.edu.Buffer.addInBuffer;
-import static com.acme.edu.Buffer.setState;
-import static com.acme.edu.Buffer.getState;
+import static com.acme.edu.Buffer.*;
 import static com.acme.edu.Decorator.decorateArray;
 import static com.acme.edu.Decorator.decorateString;
 import static com.acme.edu.Saver.printToConsole;
@@ -25,25 +23,19 @@ public class Logger {
     public static void log(boolean message) { printToConsole(decorateString(PRIMITIVE_PREFIX, message)); }
 
     public static void log(byte message) {
-        if(getState() != BufferState.BYTE) {
-            setState(BufferState.BYTE);
-        }
+        changeState(BufferState.BYTE);
         addInBuffer(message);
         printToConsole(decorateString(PRIMITIVE_PREFIX, message));
     }
 
     public static void log(int message) {
-        if(getState() != BufferState.INT) {
-            setState(BufferState.INT);
-        }
+        changeState(BufferState.INT);
         addInBuffer(message);
         printToConsole(decorateString(PRIMITIVE_PREFIX, message));
     }
 
     public static void log(String message) {
-        if(getState() != BufferState.STR) {
-            setState(BufferState.STR);
-        }
+        changeState(BufferState.STR);
         addInBuffer(message);
         printToConsole(decorateString(STRING_PREFIX, message));
     }
@@ -54,7 +46,9 @@ public class Logger {
 
     public static void log(int[][][][] array) { printToConsole(PRIMITIVE_PREFIX_FOR_MULTI_MATRIX + decorateArray(array)); }
 
-    public static void closeLogger() { setState(BufferState.NONE); }
+    public static void closeLogger() { changeState(BufferState.NONE); }
+
+
 }
 
 
