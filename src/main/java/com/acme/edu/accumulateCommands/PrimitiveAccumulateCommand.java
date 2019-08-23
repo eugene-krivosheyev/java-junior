@@ -18,19 +18,20 @@ public class PrimitiveAccumulateCommand implements AccumulateCommand {
     public AccumulateCommand accumulate(AccumulateCommand prevCommand, Printer printer) {
         int prevBuffer = ((PrimitiveAccumulateCommand) prevCommand).getBuffer();
         if ((long) buffer + prevBuffer > Integer.MAX_VALUE) {
-            int temp = buffer + prevBuffer - Integer.MAX_VALUE;
-            buffer = Integer.MAX_VALUE;
-            flush(printer);
-            buffer = temp;
+            cornerCase(Integer.MAX_VALUE, printer, prevBuffer);
         } else if ((long) buffer + prevBuffer < Integer.MIN_VALUE) {
-            int temp = buffer + prevBuffer - Integer.MIN_VALUE;
-            buffer = Integer.MIN_VALUE;
-            flush(printer);
-            buffer = temp;
-        }else {
+            cornerCase(Integer.MIN_VALUE, printer, prevBuffer);
+        } else {
             buffer += prevBuffer;
         }
         return this;
+    }
+
+    private void cornerCase(int cornerValue, Printer printer, int prevBuffer) {
+        int temp = buffer + prevBuffer - cornerValue;
+        buffer = cornerValue;
+        flush(printer);
+        buffer = temp;
     }
 
     @Override
