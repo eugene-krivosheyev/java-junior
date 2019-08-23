@@ -5,9 +5,23 @@ package com.acme.edu;
  */
 public class LoggerController {
     Saver saver = new ConsoleSaver();
+    Command previousCommand = null;
 
     public void log(Command command) {
-        command.accumulate();
-        saver.save(command.decorate());
+        if (previousCommand == null) {
+            previousCommand = command;
+            return;
+        }
+        if (previousCommand.isTypeEqual(command)) {
+            previousCommand = previousCommand.accumulate(command);
+        } else {
+            flush();
+            previousCommand = command;
+        }
+    }
+
+    public void flush() {
+        previousCommand.cleanBuffer();
+        saver.save(previousCommand.decorate());
     }
 }

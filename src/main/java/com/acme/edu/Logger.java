@@ -5,31 +5,11 @@ public class Logger {
 
     static LoggerController loggerController = new LoggerController();
 
-    private final static String PRIMITIVE_PREFIX = "primitive: ";
     public static final String DELIMETER = ", ";
 
-    private enum Type {
-        UNDEFINED(""),
-        INTEGER(PRIMITIVE_PREFIX),
-        BYTE(PRIMITIVE_PREFIX),
-        BOOLEAN(PRIMITIVE_PREFIX),
-        CHAR("char: "),
-        STRING("string: "),
-        OBJECT("reference: "),
-        ARRAY("primitives array: "),
-        MATRIX("primitives matrix: ");
-
-        private String prefix;
-        Type(String prefix){
-            this.prefix = prefix;
-        }
-        public String getPrefix() {
-            return prefix;
-        }
+    public static void flush() {
+        loggerController.flush();
     }
-
-    private static Type currentType = Type.UNDEFINED;
-
 
     // region Log methods
     public static void log(String message) {
@@ -40,9 +20,9 @@ public class Logger {
         loggerController.log(new IntCommand(message));
     }
 
-    public static void log(byte message) {
-        loggerController.log(new ByteCommand(message));
-    }
+//    public static void log(byte message) {
+//        loggerController.log(new ByteCommand(message));
+//    }
 
 //    public static void log(boolean message) {
 //        flushBufferAndChangeTypeIfNeeded(Type.BOOLEAN);
@@ -76,61 +56,25 @@ public class Logger {
 //        }
 //    }
     // endregion
-
-    private static String convertArrayToString(int[] array) {
-        String temp = "{";
-        for (int i = 0; i < array.length - 1; i++) {
-            temp += array[i] + DELIMETER;
-        }
-        temp += array[array.length - 1] + "}";
-        return temp;
-
-    }
-
-    private static String convertMatrixToString(int[][] matrix) {
-        String temp = "{\n";
-        for (int[] array : matrix) {
-            temp += convertArrayToString(array) + "\n";
-        }
-        temp += "}";
-        return temp;
-    }
-
-    private static void flushBufferAndChangeTypeIfNeeded(Type type) {
-        if (type == currentType) return;
-
-        flush();
-        currentType = type;
-    }
-
-    public static void flush() {
-        switch (currentType) {
-            case UNDEFINED:
-                break;
-            case INTEGER:
-            case BYTE:
-                flushByteState();
-                break;
-            case BOOLEAN:
-                break;
-            case CHAR:
-                break;
-            case STRING:
-                flushStringType();
-                break;
-            case OBJECT:
-                break;
-            case ARRAY:
-                break;
-            case MATRIX:
-                break;
-        }
-    }
-
-
-    private static void accumulate(byte number) {
-        accumulateNumberConcerningMaxValue(number, Byte.MAX_VALUE);
-    }
+//
+//    private static String convertArrayToString(int[] array) {
+//        String temp = "{";
+//        for (int i = 0; i < array.length - 1; i++) {
+//            temp += array[i] + DELIMETER;
+//        }
+//        temp += array[array.length - 1] + "}";
+//        return temp;
+//
+//    }
+//
+//    private static String convertMatrixToString(int[][] matrix) {
+//        String temp = "{\n";
+//        for (int[] array : matrix) {
+//            temp += convertArrayToString(array) + "\n";
+//        }
+//        temp += "}";
+//        return temp;
+//    }
 
     // endregion
 
