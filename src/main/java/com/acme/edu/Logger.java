@@ -6,7 +6,7 @@ public class Logger {
     private final static String PRIMITIVE_PREFIX = "primitive: ";
     public static final String DELIMETER = ", ";
 
-    private static enum Type {
+    private enum Type {
         UNDEFINED(""),
         INTEGER(PRIMITIVE_PREFIX),
         BYTE(PRIMITIVE_PREFIX),
@@ -147,6 +147,10 @@ public class Logger {
         if (isNumberBufferNotEmpty) {
             decorateAndPrintPrimitive(String.valueOf(numberBuffer));
         }
+        cleanNumberBuffer();
+    }
+
+    private static void cleanNumberBuffer() {
         numberBuffer = 0;
         isNumberBufferNotEmpty = false;
     }
@@ -176,13 +180,10 @@ public class Logger {
     }
 
     private static void accumulateNumberConcerningMaxValue(int number, int maxValue) {
-        if (!isNumberBufferNotEmpty) {
-            isNumberBufferNotEmpty = true;
-        }
         if (numberBuffer + number >= maxValue) {
             flush();
-            isNumberBufferNotEmpty = true;
         }
+        isNumberBufferNotEmpty = true;
         numberBuffer += number;
     }
 
