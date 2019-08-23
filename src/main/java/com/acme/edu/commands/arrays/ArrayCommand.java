@@ -4,7 +4,7 @@ import com.acme.edu.commands.Command;
 
 import java.util.Arrays;
 
-abstract class ArrayCommand implements Command {
+abstract class ArrayCommand implements Command<String> {
     private static final String PRIMITIVE_PREFIX_FOR_ARRAY = "primitives array: ";
     private static final String PRIMITIVE_PREFIX_FOR_MATRIX = "primitives matrix: ";
     private static final String PRIMITIVE_PREFIX_FOR_MULTI_MATRIX = "primitives multimatrix: ";

@@ -1,6 +1,8 @@
 package com.acme.edu.commands.types.primitive;
 
-public class IntCommand extends PrimitiveCommand {
+import com.acme.edu.commands.Command;
+
+public class IntCommand extends PrimitiveCommand implements Command<Integer> {
     private int message;
 
     public IntCommand(int message) {
@@ -13,5 +15,5 @@ public class IntCommand extends PrimitiveCommand {
     }
 
     @Override
-    public String getMessage() { return String.valueOf(message); }
+    public Integer getMessage() { return message; }
 }

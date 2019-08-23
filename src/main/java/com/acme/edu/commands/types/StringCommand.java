@@ -2,7 +2,7 @@ package com.acme.edu.commands.types;
 
 import com.acme.edu.commands.Command;
 
-public class StringCommand implements Command {
+public class StringCommand implements Command<String> {
     private static final String STRING_PREFIX = "string: ";
     private String message;
 

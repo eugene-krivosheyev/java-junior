@@ -1,6 +1,8 @@
 package com.acme.edu.commands.types.primitive;
 
-public class BooleanCommand extends PrimitiveCommand {
+import com.acme.edu.commands.Command;
+
+public class BooleanCommand extends PrimitiveCommand implements Command<Boolean> {
     private boolean message;
 
     public BooleanCommand(boolean message) {
@@ -14,5 +16,5 @@ public class BooleanCommand extends PrimitiveCommand {
 
 
     @Override
-    public String getMessage() { return String.valueOf(message); }
+    public Boolean getMessage() { return message; }
 }

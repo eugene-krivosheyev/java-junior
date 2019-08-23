@@ -2,7 +2,7 @@ package com.acme.edu.commands.types;
 
 import com.acme.edu.commands.Command;
 
-public class ReferenceCommand implements Command {
+public class ReferenceCommand implements Command<Object> {
     private static final String REFERENCE_PREFIX = "reference: ";
     private Object message;
 
@@ -16,5 +16,5 @@ public class ReferenceCommand implements Command {
     }
 
     @Override
-    public String getMessage() { return message.toString(); }
+    public Object getMessage() { return message; }
 }

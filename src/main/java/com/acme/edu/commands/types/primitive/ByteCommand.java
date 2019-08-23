@@ -1,6 +1,8 @@
 package com.acme.edu.commands.types.primitive;
 
-public class ByteCommand extends PrimitiveCommand {
+import com.acme.edu.commands.Command;
+
+public class ByteCommand extends PrimitiveCommand implements Command<Byte> {
     private byte message;
 
     public ByteCommand(byte message) {
@@ -13,5 +15,5 @@ public class ByteCommand extends PrimitiveCommand {
     }
 
     @Override
-    public String getMessage() { return String.valueOf(message); }
+    public Byte getMessage() { return message; }
 }

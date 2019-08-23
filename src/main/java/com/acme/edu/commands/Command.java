@@ -1,6 +1,6 @@
 package com.acme.edu.commands;
 
-public interface Command {
+public interface Command<T> {
     String decorate();
-    String getMessage();
+    T getMessage();
 }

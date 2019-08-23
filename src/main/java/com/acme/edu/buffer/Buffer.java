@@ -1,5 +1,6 @@
 package com.acme.edu.buffer;
 
+import com.acme.edu.commands.Command;
 import com.acme.edu.commands.types.StringCommand;
 import com.acme.edu.commands.types.primitive.ByteCommand;
 import com.acme.edu.commands.types.primitive.IntCommand;
@@ -45,6 +46,8 @@ public class Buffer {
     public static void addInBuffer(byte message) {
         ControllerOverflow.controlOverflow(message, () -> new ConsoleSaver().saveWithoutPrefix(new ByteCommand(clearBufferByte())), buffer.byteBuffer);
     }
+
+
 
     private static Byte clearBufferByte() {
         Byte result = buffer.byteBuffer[0];
