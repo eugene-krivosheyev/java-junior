@@ -1,13 +1,13 @@
-package com.acme.edu.comands;
+package com.acme.edu.decorateComands;
 
 import java.util.Arrays;
 
 import static com.acme.edu.LoggerType.ARRAY;
 
-public class ArrayCommand implements Command {
+public class ArrayDecorateCommand implements DecorateCommand {
     private int[] message;
 
-    public ArrayCommand(int[] message) {
+    public ArrayDecorateCommand(int[] message) {
         this.message = message;
     }
 

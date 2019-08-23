@@ -1,13 +1,13 @@
-package com.acme.edu.comands;
+package com.acme.edu.decorateComands;
 
 import com.acme.edu.Decorate;
 
 import static com.acme.edu.LoggerType.MATRIX;
 
-public class MatrixCommand implements Command, Decorate {
+public class MatrixDecorateCommand implements DecorateCommand, Decorate {
     private int[][] message;
 
-    public MatrixCommand(int[][] message) {
+    public MatrixDecorateCommand(int[][] message) {
         this.message = message;
     }
 

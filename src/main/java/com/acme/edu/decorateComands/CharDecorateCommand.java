@@ -1,11 +1,11 @@
-package com.acme.edu.comands;
+package com.acme.edu.decorateComands;
 
 import static com.acme.edu.LoggerType.CHAR;
 
-public class CharCommand implements Command {
+public class CharDecorateCommand implements DecorateCommand {
     private String message;
 
-    public CharCommand(String message) {
+    public CharDecorateCommand(String message) {
         this.message = message;
     }
 

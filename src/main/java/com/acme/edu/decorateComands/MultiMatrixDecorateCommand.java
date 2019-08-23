@@ -1,13 +1,13 @@
-package com.acme.edu.comands;
+package com.acme.edu.decorateComands;
 
 import com.acme.edu.Decorate;
 
 import static com.acme.edu.LoggerType.MULTIMATRIX;
 
-public class MultiMatrixCommand implements Command, Decorate {
+public class MultiMatrixDecorateCommand implements DecorateCommand, Decorate {
     private int[][][][] message;
 
-    public MultiMatrixCommand(int[][][][] message) {
+    public MultiMatrixDecorateCommand(int[][][][] message) {
         this.message = message;
     }
 
