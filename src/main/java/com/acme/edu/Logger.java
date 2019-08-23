@@ -1,5 +1,9 @@
 package com.acme.edu;
 
+import java.util.Arrays;
+
+import static com.acme.edu.Constants.*;
+
 /**
  * JavaDoc comment
  * Class Logger has unnecessarily comment.
@@ -8,33 +12,43 @@ package com.acme.edu;
  * @see java.lang.String#String()
  */
 public class Logger {
-    private static final String PRIMITIVE_PREFIX = "primitive: ";
-    private static final String CHAR_PREFIX = "char: ";
-    private static final String STRING_PREFIX = "string: ";
-    private static final String OBJECT_PREFIX = "reference: ";
+    private static LoggerController loggerController = new LoggerController();
 
     public static void log(int message) {
-        save(decoratePrimitive(String.valueOf(message)));
+        loggerController.log(new IntCommand(message));
     }
 
     public static void log(byte message) {
-        save(decoratePrimitive(String.valueOf(message)));
+        loggerController.log(new ByteCommand(message));
     }
 
     public static void log(boolean message) {
-        save(decoratePrimitive(String.valueOf(message)));
+        loggerController.log(new BooleanCommand(message));
     }
 
     public static void log(char message) {
-        save(CHAR_PREFIX + message);
+        loggerController.log(new CharCommand(message));
     }
 
-    public static void log(String message) {
-        save(STRING_PREFIX + message);
+    public static void log(String message)
+    {
+        loggerController.log(new StringCommand(message));
     }
 
     public static void log(Object message) {
-        save(OBJECT_PREFIX + message);
+        loggerController.log(new ObjectCommand(message));
+    }
+
+    public static void log(int[] message) {
+        loggerController.log(new ArrayCommand(message));
+    }
+
+    public static void log(int[][] message) {
+        loggerController.log(new MatrixCommand(message));
+    }
+
+    public static void log(int[][][][] message) {
+        loggerController.log(new MultiMatrixCommand(message));
     }
 
     private static String decoratePrimitive(String message) {
@@ -44,4 +58,5 @@ public class Logger {
     private static void save(String message) {
         System.out.println(message);
     }
+
 }
