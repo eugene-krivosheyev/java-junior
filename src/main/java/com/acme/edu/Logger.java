@@ -1,71 +1,70 @@
 package com.acme.edu;
 
+import com.acme.edu.command.*;
+
 public class Logger {
-
-    public static final String PRIMITIVE_PREFIX = "primitive: ";
-    public static final String CHAR_PREFIX = "char: ";
-    public static final String STRING_PREFIX = "string: ";
-    public static final String REFERENCE_PREFIX = "reference: ";
-
-    private static final String PRIMITIVES_PREFIX = "primitives ";
-    public static final String PR_ARRAY_PREFIX = PRIMITIVES_PREFIX + "array: ";
-    public static final String PR_MATRIX_PREFIX = PRIMITIVES_PREFIX + "matrix: ";
-    public static final String PR_MULTIMATRIX_PREFIX = PRIMITIVES_PREFIX + "multimatrix: ";
-
     private static byte byteBuffer = 0;
     private static int intBuffer = 0;
 
     private static BufferState bufferState = BufferState.FLUSHED;
 
+    private static SuperSaver saver = new ConsoleSaver();
 
     public static void log(boolean message) {
-        flush();
-        PrintUtils.printToStdout(PRIMITIVE_PREFIX + message);
+//        flush();
+        Command command = new BooleanCommand(message);
+        saver.save(command.getDecorated());
     }
 
     public static void log(byte message) {
-        flushIfOtherState(BufferState.BYTE);
-        byteBuffer += message;
+//        flushIfOtherState(BufferState.BYTE);
+//        byteBuffer += message;
+        Command command = new ByteCommand(message);
+        saver.save(command.getDecorated());
     }
 
     public static void log(char message) {
-        flush();
-        PrintUtils.printToStdout(CHAR_PREFIX + message);
+//        flush();
+        Command command = new CharCommand(message);
+        saver.save(command.getDecorated());
     }
 
     public static void log(int message) {
-        flushIfOtherState(BufferState.INT);
-        intBuffer += message;
+//        flushIfOtherState(BufferState.INT);
+//        intBuffer += message;
+        Command command = new IntCommand(message);
+        saver.save(command.getDecorated());
     }
 
     public static void log(String message) {
-        flush();
-        PrintUtils.printToStdout(STRING_PREFIX + message);
+//        flush();
+        Command command = new StringCommand(message);
+        saver.save(command.getDecorated());
     }
 
     public static void log(int[] array) {
-        flush();
-        PrintUtils.printToStdout(PR_ARRAY_PREFIX + PrintUtils.arrayToString(array));
+//        flush();
+        saver.save(Decorator.PR_ARRAY_PREFIX + PrintUtils.arrayToString(array));
     }
 
     public static void log(int[][] array) {
-        flush();
-        PrintUtils.printToStdout(PR_MATRIX_PREFIX + PrintUtils.arrayToString(array));
+//        flush();
+        saver.save(Decorator.PR_MATRIX_PREFIX + PrintUtils.arrayToString(array));
     }
 
     public static void log(Object message) {
-        flush();
-        PrintUtils.printToStdout(REFERENCE_PREFIX + message);
+//        flush();
+        saver.save(Decorator.decorate(message));
     }
 
     public static void flush() {
         switch (bufferState) {
             case BYTE:
-                PrintUtils.printToStdout(PRIMITIVE_PREFIX + byteBuffer);
+                saver.save(Decorator.decorate(byteBuffer));
                 byteBuffer = 0;
                 break;
             case INT:
-                PrintUtils.printToStdout(PRIMITIVE_PREFIX + intBuffer);
+                saver.save(Decorator.decorate(intBuffer));
                 intBuffer = 0;
                 break;
             case FLUSHED:

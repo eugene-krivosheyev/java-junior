@@ -3,7 +3,6 @@ package com.acme.edu;
 import java.util.Arrays;
 
 class PrintUtils {
-
     private PrintUtils() {
         throw new IllegalStateException("Utility class");
     }

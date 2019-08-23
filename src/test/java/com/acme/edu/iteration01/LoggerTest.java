@@ -1,7 +1,6 @@
 package com.acme.edu.iteration01;
 
-import com.acme.edu.Logger;
-import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,10 +35,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(Logger.PRIMITIVE_PREFIX);
-        assertSysoutContains(Logger.PRIMITIVE_PREFIX + 1);
-        assertSysoutContains(Logger.PRIMITIVE_PREFIX + 0);
-        assertSysoutContains(Logger.PRIMITIVE_PREFIX + -1);
+        assertSysoutContains(Decorator.PRIMITIVE_PREFIX);
+        assertSysoutContains(Decorator.PRIMITIVE_PREFIX + 1);
+        assertSysoutContains(Decorator.PRIMITIVE_PREFIX + 0);
+        assertSysoutContains(Decorator.PRIMITIVE_PREFIX + -1);
         //endregion
     }
 
@@ -57,7 +56,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(Logger.PRIMITIVE_PREFIX);
+        assertSysoutContains(Decorator.PRIMITIVE_PREFIX);
         assertSysoutContains("1");
         assertSysoutContains("0");
         assertSysoutContains("-1");
@@ -73,7 +72,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(Logger.CHAR_PREFIX);
+        assertSysoutContains(Decorator.CHAR_PREFIX);
         assertSysoutContains("a");
         assertSysoutContains("b");
         //endregion
@@ -87,7 +86,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(Logger.STRING_PREFIX);
+        assertSysoutContains(Decorator.STRING_PREFIX);
         assertSysoutContains("test string 1");
         assertSysoutContains("other str");
         //endregion
@@ -101,7 +100,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(Logger.PRIMITIVE_PREFIX);
+        assertSysoutContains(Decorator.PRIMITIVE_PREFIX);
         assertSysoutContains("true");
         assertSysoutContains("false");
         //endregion
@@ -114,7 +113,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(Logger.REFERENCE_PREFIX);
+        assertSysoutContains(Decorator.REFERENCE_PREFIX);
         assertSysoutContains("@");
         //endregion
     }
