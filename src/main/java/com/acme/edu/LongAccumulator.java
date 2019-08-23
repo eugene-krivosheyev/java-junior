@@ -4,13 +4,12 @@ import com.acme.edu.Logger.LoggingType;
 
 public class LongAccumulator {
     private final static String PREFIX_PRIMITIVE = "primitive: ";
-
     private LoggingType type;
-    long sum;
-    long min;
-    long max;
-    boolean flushed;
-    long previousSum;
+    private long sum;
+    private long min;
+    private long max;
+    private boolean flushed;
+    private long previousSum;
 
     public LongAccumulator(LoggingType type, long min, long max) {
         this.type = type;
@@ -43,5 +42,8 @@ public class LongAccumulator {
         return res;
     }
 
+    public LoggingType getType() {
+        return type;
+    }
 
 }

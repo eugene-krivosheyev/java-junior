@@ -1,6 +1,7 @@
 package com.acme.edu;
 
-import com.acme.edu.Logger.LoggingType;
+import com.acme.edu.Commands.Command;
+import com.acme.edu.Commands.IntArrayCommand;
 import com.acme.edu.Saver.Saver;
 
 public class Controller {
@@ -10,13 +11,10 @@ public class Controller {
     private final static String PREFIX_STRING = "string: ";
     private final static String PREFIX_REFERENCE = "reference: ";
 
-    private int sum = 0;
-    private long maxValue = 0;
-
     private int count = 0;
     private String loggedString = "";
 
-    private LoggingType lastType = LoggingType.NOTHING;
+    Command command = null;
 
     private Saver saver;
 
@@ -24,13 +22,16 @@ public class Controller {
         this.saver = saver;
     }
 
-    public void logArray(Command command) {
-        saver.save(command.decorate());
+    public void log(Command command) {
+
+        saver.save(command.flush());
     }
 
-    public void logPrimitive(int message) {
+
+    public void logPrimitive(IntArrayCommand command) {
 
     }
+
 
 
 
