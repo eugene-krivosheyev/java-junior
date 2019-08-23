@@ -1,7 +1,7 @@
-package com.acme.edu;
+package com.acme.edu.buffer;
+
 
 class ControllerOverflow {
-
 
    static void controlOverflow(int value, CleanerBuffer cleanerBuffer, int[] buffer) {
         if(value > 0 && Integer.MAX_VALUE - value <=  buffer[0]) { value = Integer.MAX_VALUE; }
