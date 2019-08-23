@@ -17,21 +17,19 @@ class Buffer {
             counterOfStrings++;
         }
         else {
-            if (stringBuffer[0] != null) {
-                printToConsole(clearBufferStr());
-            }
+            if (stringBuffer[0] != null) { printToConsole(clearBufferStr()); }
             stringBuffer[0] = message;
             counterOfStrings = 1;
         }
     }
 
     static void addInBuffer(int message) {
-        maxOrMinIfOverflow(message, () -> printToConsole(clearBufferInt()), intBuffer);
+        maxOrMinIfOverflow(message, () -> printToConsole(clearBufferInt()), Integer.MAX_VALUE, Integer.MIN_VALUE);
     }
 
 
     static void addInBuffer(byte message) {
-        maxOrMinIfOverflow(message, () -> printToConsole(clearBufferByte()), byteBuffer);
+        maxOrMinIfOverflow(message, () -> printToConsole(clearBufferByte()), Byte.MAX_VALUE, Byte.MIN_VALUE);
     }
 
     static Byte clearBufferByte() {
@@ -60,38 +58,21 @@ class Buffer {
     }
 
 
-    private static void maxOrMinIfOverflow(int value, CleanerBuffer cleanerBuffer, int[] intBuffer) {
-        if(value > 0 && Integer.MAX_VALUE - value <= intBuffer[0]) {
-            value = Integer.MAX_VALUE;
-        }
-        else if(value < 0 && Integer.MIN_VALUE - value >= intBuffer[0]){
-            value = Integer.MIN_VALUE;
-        }
+    private static void maxOrMinIfOverflow(int value, CleanerBuffer cleanerBuffer, int maxValue, int minValue) {
+        if(value > 0 && maxValue - value <=  intBuffer[0] && maxValue == Integer.MAX_VALUE && minValue == Integer.MIN_VALUE) { value = maxValue; }
+        else if(value < 0 && minValue - value >= intBuffer[0] && maxValue == Integer.MAX_VALUE && minValue == Integer.MIN_VALUE){ value = minValue; }
+        else if(value > 0 && maxValue - value <= byteBuffer[0] && maxValue == Byte.MAX_VALUE && minValue == Byte.MIN_VALUE) { value = maxValue; }
+        else if(value < 0 && minValue - value >= byteBuffer[0] && maxValue == Byte.MAX_VALUE && minValue == Byte.MIN_VALUE){ value = minValue; }
 
-        if (value == Integer.MAX_VALUE || value == Integer.MIN_VALUE) {
+        if ((value == maxValue || value == minValue) && maxValue == Integer.MAX_VALUE && minValue == Integer.MIN_VALUE) {
+            cleanerBuffer.clear();
+            intBuffer[0] = value;
+        } else if (maxValue == Integer.MAX_VALUE && minValue == Integer.MIN_VALUE) { intBuffer[0] += value;
+        } else if ((value == maxValue || value == minValue) && maxValue == Byte.MAX_VALUE && minValue == Byte.MIN_VALUE) {
             cleanerBuffer.clear();
             intBuffer[0] = value;
         }
-        else {
-            intBuffer[0] += value;
-        }
-    }
-
-    private static void maxOrMinIfOverflow(byte value, CleanerBuffer cleanerBuffer, byte[] byteBuffer) {
-        if(value > 0 && Byte.MAX_VALUE - value <= byteBuffer[0]) {
-            value = Byte.MAX_VALUE;
-        }
-        else if(value < 0 && Byte.MIN_VALUE - value >= byteBuffer[0]){
-            value = Byte.MIN_VALUE;
-        }
-
-        if (value == Byte.MAX_VALUE || value == Byte.MIN_VALUE) {
-            cleanerBuffer.clear();
-            byteBuffer[0] = value;
-        }
-        else {
-            byteBuffer[0] += value;
-        }
+        else if (maxValue == Byte.MAX_VALUE && minValue == Byte.MIN_VALUE) { intBuffer[0] += value; }
     }
 
     static void setState(BufferState newState) {
@@ -111,11 +92,5 @@ class Buffer {
         state = newState;
     }
 
-    static BufferState getState() {
-        return state;
-    }
-
-    public static void main(String[] args) {
-
-    }
+    static BufferState getState() { return state; }
 }
