@@ -1,8 +1,6 @@
 package com.acme.edu;
 
-import com.acme.edu.ArrayLogger.ArrayCommand;
 import com.acme.edu.Logger.LoggingType;
-import com.acme.edu.PrimitiveLogger.PrimitiveLogger;
 import com.acme.edu.Saver.Saver;
 
 public class Controller {
@@ -19,8 +17,6 @@ public class Controller {
     private String loggedString = "";
 
     private LoggingType lastType = LoggingType.NOTHING;
-    private PrimitiveLogger primitiveLogger = null;
-
 
     private Saver saver;
 
@@ -28,11 +24,13 @@ public class Controller {
         this.saver = saver;
     }
 
-    public void arrayLog(ArrayCommand command, Logger.LoggingType type) {
+    public void logArray(Command command) {
         saver.save(command.decorate());
-        lastType = type;
     }
 
+    public void logPrimitive(int message) {
+
+    }
 
 
 

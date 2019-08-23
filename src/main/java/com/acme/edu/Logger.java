@@ -5,7 +5,6 @@ package com.acme.edu;
 Multi-line comment
  */
 
-import com.acme.edu.ArrayLogger.IntArrayCommand;
 import com.acme.edu.Saver.ConsoleSaver;
 
 import java.util.Objects;
@@ -65,9 +64,8 @@ public class Logger {
 
     public static void log(int[] message) {
         //makeLog(intArrayToString(message), LoggingType.INTARRAY);
-        controller.arrayLog(
-                new IntArrayCommand(message),
-                LoggingType.INTARRAY
+        controller.logArray(
+                new Command(message)
         );
     }
 
