@@ -1,10 +1,14 @@
 package com.acme.edu;
 
+import com.acme.edu.comands.PrimitiveCommand;
+import com.acme.edu.comands.StringCommand;
+
 public class Buffer {
     private String stringBuffer = "";
     private Integer stringCounter = 0;
     private Integer integerBuffer = 0;
     private LoggerType previousType = null;
+    private static Printer printer = new Printer();
 
     public void save(int message) {
         if (previousType != null && !comparePreviousType(LoggerType.PRIMITIVE)) {
@@ -50,16 +54,16 @@ public class Buffer {
         String decoratedMessage = "";
         if (LoggerType.PRIMITIVE.equals(previousType)) {
             String message = String.valueOf(integerBuffer);
-            decoratedMessage = Decorator.decoratePrimitive(message);
+            decoratedMessage = new PrimitiveCommand(message).decorate();
         }
         if (LoggerType.STRING.equals(previousType)) {
             String message = stringCounter == 1 ? stringBuffer : stringBuffer + " (x" + stringCounter + ")";
-            decoratedMessage = Decorator.decorateString(message);
+            decoratedMessage = new StringCommand(message).decorate();
         }
 
         //TODO: add more types
 
-        Printer.save(decoratedMessage);
+        printer.save(decoratedMessage);
         if (!decoratedMessage.contains(String.valueOf(Integer.MAX_VALUE)) &
                 !decoratedMessage.contains(String.valueOf(Integer.MIN_VALUE))) {
             clean();
