@@ -5,7 +5,10 @@ package com.acme.edu;
 Multi-line comment
  */
 
-import static com.acme.edu.Logger.*;
+import com.acme.edu.ArrayLogger.IntArrayCommand;
+import com.acme.edu.Saver.ConsoleSaver;
+
+import java.util.Objects;
 
 /**
  * JavaDoc comment
@@ -15,42 +18,141 @@ import static com.acme.edu.Logger.*;
  */
 
 public class Logger {
-    private static String HEADER_PRIMITIVE = "primitive: ";
-    private static String HEADER_CHAR = "char: ";
-    private static String HEADER_STRING = "string: ";
-    private static String HEADER_REFERENCE = "reference: ";
+    private static String PREFIX_PRIMITIVE = "primitive: ";
+    private static String PREFIX_PRIMITIVES_ARRAY = "primitives array: ";
+    private static String PREFIX_CHAR = "char: ";
+    private static String PREFIX_STRING = "string: ";
+    private static String PREFIX_REFERENCE = "reference: ";
 
+    private static Controller controller = new Controller(new ConsoleSaver());
 
-    private static String generateLog(String header, String message) {
-        return header + message;
+    enum LoggingType {
+        INT,
+        CHAR,
+        STRING,
+        BYTE,
+        BOOLEAN,
+        OBJECT,
+        INTARRAY,
+        NOTHING
     }
+    private static int sum = 0;
+    private static long maxValue = 0;
 
-    private static void printLog(String header, String message) {
-        System.out.println(generateLog(header, message));
-    }
+    private static int count = 0;
+    private static String loggedString = "";
+
+    private static LoggingType lastType = LoggingType.NOTHING;
 
     public static void log(int message) {
-        printLog(HEADER_PRIMITIVE, Integer.toString(message));
+        makeLog(Integer.toString(message), LoggingType.INT);
     }
 
     public static void log(byte message) {
-        printLog(HEADER_PRIMITIVE, Byte.toString(message));
+        makeLog(Byte.toString(message), LoggingType.BYTE);
     }
 
-    public static void log(char message) {
-        printLog(HEADER_CHAR, Character.toString(message));
+    private static String intArrayToString(int[] array) {
+        String res = "{";
+        for(int i = 0; i < array.length; ++i) {
+            res += Integer.toString(array[i]);
+            if (i < array.length - 1) {
+                res += ", ";
+            }
+        }
+        return res + "}";
     }
 
-    public static void log(String message) {
-        printLog(HEADER_STRING, message);
+    public static void log(int[] message) {
+        //makeLog(intArrayToString(message), LoggingType.INTARRAY);
+        controller.arrayLog(
+                new IntArrayCommand(message),
+                LoggingType.INTARRAY
+        );
     }
 
     public static void log(boolean message) {
-        printLog(HEADER_PRIMITIVE, Boolean.toString(message));
+        makeLog(Boolean.toString(message), LoggingType.BOOLEAN);
+    }
+
+    public static void log(char message) {
+        makeLog(Character.toString(message), LoggingType.CHAR);
+    }
+
+    public static void log(String message) {
+        makeLog(message, LoggingType.STRING);
     }
 
     public static void log(Object message) {
-        printLog(HEADER_REFERENCE, message.toString());
+        makeLog(message.toString(), LoggingType.OBJECT);
+    }
+
+    public static void flush(){
+        if ((lastType == LoggingType.INT) || (lastType == LoggingType.BYTE)){
+            printDecoratedLog(Long.toString(sum), LoggingType.INT);
+            sum = 0;
+            lastType = LoggingType.NOTHING;
+        }
+        if (lastType == LoggingType.STRING){
+            if (count > 1) {
+                loggedString += " (x" + count + ")";
+            }
+            printDecoratedLog(loggedString, LoggingType.STRING);
+            count = 0;
+            loggedString = "";
+            lastType = LoggingType.NOTHING;
+        }
+    }
+
+    private static String decorateLog(String message, LoggingType type) {
+        String prefix = "";
+        if (type == LoggingType.INT || type == LoggingType.BYTE || type == LoggingType.BOOLEAN) {
+            prefix = PREFIX_PRIMITIVE;
+        } else if (type == LoggingType.CHAR) {
+            prefix = PREFIX_CHAR;
+        } else if (type == LoggingType.STRING) {
+            prefix = PREFIX_STRING;
+        } else if (type == LoggingType.INTARRAY) {
+          prefix = PREFIX_PRIMITIVES_ARRAY;
+        } else  {
+            prefix = PREFIX_REFERENCE;
+        }
+        return prefix + message;
+    }
+
+
+    private static void makeLog(String message, LoggingType type) {
+        if ((type == LoggingType.INT) || (type == LoggingType.BYTE)) {
+            if (type == lastType) {
+                int current = Integer.parseInt(message);
+                if ((long) current + sum >= maxValue) {
+                    flush();
+                }
+                sum += current;
+            } else {
+                if (lastType != LoggingType.NOTHING) {
+                    flush();
+                }
+                maxValue = type == LoggingType.INT ? Integer.MAX_VALUE : Byte.MAX_VALUE;
+                sum = Integer.parseInt(message);
+            }
+        } else if (type == LoggingType.STRING){
+            if ((type == lastType) && (Objects.equals(message,loggedString))){
+                count += 1;
+            } else {
+                flush();
+                loggedString = message;
+                count = 1;
+            }
+        }
+        else {
+            printDecoratedLog(message, type);
+        }
+        lastType = type;
+    }
+
+    private static void printDecoratedLog(String message, LoggingType type) {
+        System.out.println(decorateLog(message, type));
     }
 
 }
