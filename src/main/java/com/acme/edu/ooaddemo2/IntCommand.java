@@ -18,4 +18,19 @@ public class IntCommand implements Command {
     public String getDecorated() {
         return "primitive: " + message;
     }
+
+    @Override
+    public boolean isTypeEquals(Command other) {
+        return other instanceof IntCommand;
+    }
+
+    @Override
+    public Command accumulate(Command other) {
+        return null;
+    }
+
+    @Override
+    public Object getDta() {
+        return message;
+    }
 }
