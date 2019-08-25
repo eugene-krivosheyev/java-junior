@@ -1,6 +1,7 @@
 package com.acme.edu;
 
 import com.acme.edu.Commands.Command;
+import com.acme.edu.Commands.CommandAccumulateInfo;
 import com.acme.edu.Commands.IntArrayCommand;
 import com.acme.edu.Saver.Saver;
 
@@ -14,7 +15,7 @@ public class Controller {
     private int count = 0;
     private String loggedString = "";
 
-    Command command = null;
+    Command lastCommand = null;
 
     private Saver saver;
 
@@ -23,10 +24,33 @@ public class Controller {
     }
 
     public void log(Command command) {
+        if (lastCommand == null) {
+            lastCommand = command;
+            return;
+        }
 
-        saver.save(command.flush());
+        if (command.isTypeEquals(lastCommand)) {
+            CommandAccumulateInfo info = command.accumulate(lastCommand);
+            lastCommand = info.getCommand();
+
+            String message = info.getMessage();
+            if (message != null) {
+                saver.save(message);
+            }
+        } else {
+            saver.save(command.flush());
+            lastCommand = command;
+        }
+
     }
 
+    public void flush() {
+        if (lastCommand != null) {
+            String message = lastCommand.flush();
+            saver.save(message);
+        }
+        lastCommand = null;
+    }
 
     public void logPrimitive(IntArrayCommand command) {
 

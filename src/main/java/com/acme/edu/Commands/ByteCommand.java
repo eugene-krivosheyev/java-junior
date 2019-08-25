@@ -1,20 +1,17 @@
 package com.acme.edu.Commands;
 
-import com.acme.edu.Logger.LoggingType;
+import com.acme.edu.Logger;
 
-import java.util.Objects;
-import java.util.function.Predicate;
-
-public class IntCommand implements Command {
+public class ByteCommand implements Command{
     private static String PREFIX_PRIMITIVE = "primitive: ";
 
-    private int message;
-    private LoggingType type;
+    private byte message;
+    private Logger.LoggingType type;
 
 
-    public IntCommand(int message) {
+    public ByteCommand(byte message) {
         this.message = message;
-        type = LoggingType.INT;
+        type = Logger.LoggingType.BYTE;
     }
 
     @Override
@@ -24,13 +21,13 @@ public class IntCommand implements Command {
 
     @Override
     public String flush() {
-        int tmp_message = message;
+        byte tmp_message = message;
         message = 0;
         return PREFIX_PRIMITIVE + tmp_message;
     }
 
     @Override
-    public LoggingType getType() {
+    public Logger.LoggingType getType() {
         return type;
     }
 
@@ -42,11 +39,11 @@ public class IntCommand implements Command {
     @Override
     public CommandAccumulateInfo accumulate(Command other) {
         if (other == null) return new CommandAccumulateInfo(this, null, -1);
-        if (! (other instanceof IntCommand)) return new CommandAccumulateInfo(other, null, -1);
+        if (! (other instanceof ByteCommand)) return new CommandAccumulateInfo(other, null, -1);
         String returnMessage = null;
-        int otherMessage = (Integer)(other.getMessage());
+        int otherMessage = (Byte)(other.getMessage());
         long sum = (long)message + otherMessage;
-        if(Integer.MIN_VALUE > sum || sum > Integer.MAX_VALUE) {
+        if(Byte.MIN_VALUE > sum || sum > Byte.MAX_VALUE) {
             returnMessage = PREFIX_PRIMITIVE + message;
             sum = otherMessage;
         }

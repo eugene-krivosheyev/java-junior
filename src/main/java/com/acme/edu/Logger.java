@@ -5,7 +5,7 @@ package com.acme.edu;
 Multi-line comment
  */
 
-import com.acme.edu.Commands.IntArrayCommand;
+import com.acme.edu.Commands.*;
 import com.acme.edu.Saver.ConsoleSaver;
 
 import java.util.Objects;
@@ -45,22 +45,25 @@ public class Logger {
     private static LoggingType lastType = LoggingType.NOTHING;
 
     public static void log(int message) {
-        makeLog(Integer.toString(message), LoggingType.INT);
+        //makeLog(Integer.toString(message), LoggingType.INT);
+        controller.log(new IntCommand(message));
+
+        if(lastType != LoggingType.INT) {
+            flush();
+        }
+
+        lastType = LoggingType.INT;
     }
 
     public static void log(byte message) {
-        makeLog(Byte.toString(message), LoggingType.BYTE);
-    }
+        //makeLog(Byte.toString(message), LoggingType.BYTE);
+        controller.log(new ByteCommand(message));
 
-    private static String intArrayToString(int[] array) {
-        String res = "{";
-        for(int i = 0; i < array.length; ++i) {
-            res += Integer.toString(array[i]);
-            if (i < array.length - 1) {
-                res += ", ";
-            }
+        if(lastType != LoggingType.BYTE) {
+            flush();
         }
-        return res + "}";
+
+        lastType = LoggingType.BYTE;
     }
 
     public static void log(int[] message) {
@@ -68,6 +71,7 @@ public class Logger {
         controller.log(
                 new IntArrayCommand(message)
         );
+        lastType = LoggingType.INTARRAY;
     }
 
     public static void log(boolean message) {
@@ -79,7 +83,9 @@ public class Logger {
     }
 
     public static void log(String message) {
-        makeLog(message, LoggingType.STRING);
+        //makeLog(message, LoggingType.STRING);
+        controller.log(new StringCommand(message));
+        lastType = LoggingType.STRING;
     }
 
     public static void log(Object message) {
@@ -87,12 +93,16 @@ public class Logger {
     }
 
     public static void flush(){
-        if ((lastType == LoggingType.INT) || (lastType == LoggingType.BYTE)){
-            printDecoratedLog(Long.toString(sum), LoggingType.INT);
-            sum = 0;
-            lastType = LoggingType.NOTHING;
+        if (lastType == LoggingType.INT || lastType == LoggingType.STRING) {
+            controller.flush();
         }
-        if (lastType == LoggingType.STRING){
+        if (lastType == LoggingType.BYTE){
+            //printDecoratedLog(Long.toString(sum), LoggingType.INT);
+            //sum = 0;
+            //lastType = LoggingType.NOTHING;
+            controller.flush();
+        }
+        if (false) {//lastType == LoggingType.STRING){
             if (count > 1) {
                 loggedString += " (x" + count + ")";
             }
