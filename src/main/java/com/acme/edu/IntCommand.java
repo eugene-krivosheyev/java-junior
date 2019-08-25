@@ -6,15 +6,9 @@ package com.acme.edu;
 public class IntCommand implements Command {
 
     int message;
-    private long numberBuffer = 0;
 
     public IntCommand(int message) {
         this.message = message;
-        if (isNumberBufferEmpty) {
-            numberBuffer = message;
-            isNumberBufferEmpty = false;
-        }
-
     }
 
     public Integer getMessage() {
@@ -23,7 +17,7 @@ public class IntCommand implements Command {
 
     @Override
     public String decorate() {
-        return "primitive: " + numberBuffer;
+        return "primitive: " + message;
     }
 
     @Override
@@ -31,44 +25,15 @@ public class IntCommand implements Command {
         return other instanceof IntCommand;
     }
 
-    @Override
-    public void cleanBuffer() {
-        isNumberBufferEmpty = true;
-    }
-
-    ///////////////
-
-
-    private boolean isNumberBufferEmpty = true;
 
     @Override
-    public Command accumulate(Command command) {
-        if (isNumberBufferEmpty) {
-            numberBuffer = 0;
+    public CommandWrapper accumulate(Command command) {
+        int newMessage = ((IntCommand) command).getMessage();
+        long currentMessageToLong = message;
+        if (currentMessageToLong + newMessage >= Integer.MAX_VALUE) {
+            return new CommandWrapper(new IntCommand(newMessage), true);
         }
-        accumulateNumberConcerningMaxValue(((IntCommand) command).getMessage(), Integer.MAX_VALUE);
-        // TODO
-        // return new Command();
-        return this;
+        message += newMessage;
+        return new CommandWrapper(new IntCommand(this.message), false);
     }
-
-    private void accumulateNumberConcerningMaxValue(int number, int maxValue) {
-        //if (numberBuffer + number >= maxValue) {
-            //flushIntState();
-        //}
-        //isNumberBufferNotEmpty = true;
-        numberBuffer += number;
-    }
-
-//    private void flushIntState() {
-//        if (isNumberBufferNotEmpty) {
-//            result = (String.valueOf(numberBuffer));
-//        }
-//        cleanNumberBuffer();
-//    }
-
-//    private void cleanNumberBuffer() {
-//        numberBuffer = 0;
-//        isNumberBufferNotEmpty = false;
-//    }
 }

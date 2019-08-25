@@ -7,21 +7,31 @@ public class LoggerController {
     Saver saver = new ConsoleSaver();
     Command previousCommand = null;
 
-    public void log(Command command) {
+    public LoggerController() { }
+
+    public LoggerController(Saver saver) {
+        this.saver = saver;
+    }
+
+    public void log(Command newCommand) {
         if (previousCommand == null) {
-            previousCommand = command;
+            previousCommand = newCommand;
             return;
         }
-        if (previousCommand.isTypeEqual(command)) {
-            previousCommand = previousCommand.accumulate(command);
+        if (previousCommand.isTypeEqual(newCommand)) {
+            CommandWrapper result = previousCommand.accumulate(newCommand);
+            if (result.shouldBeFlushed) {
+                flush();
+            }
+            previousCommand = result.getCommand();
         } else {
             flush();
-            previousCommand = command;
+            previousCommand = newCommand;
         }
     }
 
     public void flush() {
-        previousCommand.cleanBuffer();
         saver.save(previousCommand.decorate());
+        previousCommand = null;
     }
 }

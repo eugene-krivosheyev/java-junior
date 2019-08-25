@@ -5,9 +5,7 @@ package com.acme.edu;
  */
 public interface Command {
     Object getMessage();
-    Command accumulate(Command command);
+    CommandWrapper accumulate(Command command);
     String decorate();
     boolean isTypeEqual(Command other);
-
-    void cleanBuffer();
 }
