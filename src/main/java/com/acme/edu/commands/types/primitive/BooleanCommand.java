@@ -1,5 +1,6 @@
 package com.acme.edu.commands.types.primitive;
 
+import com.acme.edu.buffer.BufferState;
 import com.acme.edu.commands.Command;
 
 public class BooleanCommand extends PrimitiveCommand implements Command<Boolean> {
@@ -14,7 +15,13 @@ public class BooleanCommand extends PrimitiveCommand implements Command<Boolean>
         return super.getPrimitivePrefix() + message;
     }
 
+    @Override
+    public Command<Boolean> accumulate(Command command) { return null; }
 
     @Override
     public Boolean getMessage() { return message; }
+
+
+    @Override
+    public BufferState getState() { return BufferState.NONE; }
 }

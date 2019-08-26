@@ -1,27 +1,34 @@
 package com.acme.edu.buffer;
 
 
-class ControllerOverflow {
+import com.acme.edu.commands.types.primitive.ByteCommand;
+import com.acme.edu.commands.types.primitive.IntCommand;
+import com.acme.edu.saver.ConsoleSaver;
 
-   static void controlOverflow(int value, CleanerBuffer cleanerBuffer, int[] buffer) {
-        if(value > 0 && Integer.MAX_VALUE - value <=  buffer[0]) { value = Integer.MAX_VALUE; }
-        else if(value < 0 && Integer.MIN_VALUE - value >= buffer[0]){ value = Integer.MIN_VALUE; }
+public class ControllerOverflow {
+
+   public static void controlOverflow(int value,  IntCommand command) {
+        if(value > 0 && Integer.MAX_VALUE - value <=  command.getMessage()) { value = Integer.MAX_VALUE; }
+        else if(value < 0 && Integer.MIN_VALUE - value >= command.getMessage()){ value = Integer.MIN_VALUE; }
 
         if (value == Integer.MAX_VALUE || value == Integer.MIN_VALUE) {
-            cleanerBuffer.clear();
-            buffer[0] = value;
-        } else { buffer[0] += value; }
+            new ConsoleSaver().saveWithoutPrefix(command);
+            command.setMessage(value);
+        } else { command.setMessage(command.getMessage() + value); }
     }
 
 
 
-    static void controlOverflow(byte value, CleanerBuffer cleanerBuffer, byte[] buffer) {
-        if(value > 0 && Byte.MAX_VALUE - value <=  buffer[0]) { value = Byte.MAX_VALUE; }
-        else if(value < 0 && Byte.MIN_VALUE - value >= buffer[0]){ value = Byte.MIN_VALUE; }
+    public static void controlOverflow(byte value, ByteCommand command) {
+        if(value > 0 && Byte.MAX_VALUE - value <=  command.getMessage()) { value = Byte.MAX_VALUE; }
+        else if(value < 0 && Byte.MIN_VALUE - value >= command.getMessage()){ value = Byte.MIN_VALUE; }
 
         if (value == Byte.MAX_VALUE || value == Byte.MIN_VALUE) {
-            cleanerBuffer.clear();
-            buffer[0] = value;
-        } else { buffer[0] += value; }
+            new ConsoleSaver().saveWithoutPrefix(command);
+            command.setMessage(value);
+        } else {
+            int b = command.getMessage() + value;
+            command.setMessage((byte) b);
+        }
     }
 }

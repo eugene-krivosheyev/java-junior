@@ -8,93 +8,66 @@ import com.acme.edu.saver.ConsoleSaver;
 
 public class Buffer {
 
-    private byte[] byteBuffer;
-    private int[] intBuffer;
-    private String[] stringBuffer;
+    private Command<String> stringCommand;
+    private Command<Integer> intCommand;
+    private Command<Byte> byteCommand;
+    private Command[] buffers;
+    private BufferState state;
 
-    private int counterOfStrings;
-
-    private static BufferState state;
-
-    private static final Buffer buffer = new Buffer();
-
-    private Buffer() {
+    public Buffer() {
         state = BufferState.NONE;
-        counterOfStrings = 0;
-        byteBuffer = new byte[1];
-        intBuffer = new int[1];
-        stringBuffer = new String[1];
+        stringCommand = null;
+        intCommand = null;
+        byteCommand = null;
+        buffers = new Command[]{byteCommand, intCommand, stringCommand};
     }
 
-    public static Buffer getInstance() { return buffer; }
-
-    public static void addInBuffer(String message) {
-        if(message.equals(buffer.stringBuffer[0])) {
-            buffer.counterOfStrings++;
-        }
-        else {
-            if (buffer.stringBuffer[0] != null) { new ConsoleSaver().saveWithoutPrefix(new StringCommand(clearBufferStr())); }
-            buffer.stringBuffer[0] = message;
-            buffer.counterOfStrings = 1;
-        }
-    }
-
-    public static void addInBuffer(int message) {
-        ControllerOverflow.controlOverflow(message, () -> new ConsoleSaver().saveWithoutPrefix(new IntCommand(clearBufferInt())), buffer.intBuffer);
-    }
-
-    public static void addInBuffer(byte message) {
-        ControllerOverflow.controlOverflow(message, () -> new ConsoleSaver().saveWithoutPrefix(new ByteCommand(clearBufferByte())), buffer.byteBuffer);
-    }
-
-
-
-    private static Byte clearBufferByte() {
-        Byte result = buffer.byteBuffer[0];
-        buffer.byteBuffer[0] = 0;
-        return result;
-    }
-
-    private static String clearBufferStr() {
-        String result;
-        if(buffer.counterOfStrings > 1) {
-            result = buffer.stringBuffer[0] + " (x" + buffer.counterOfStrings + ")";
-        }
-        else {
-            result = buffer.stringBuffer[0];
-        }
-        buffer.stringBuffer[0] = null;
-        buffer.counterOfStrings = 0;
-        return result;
-    }
-
-    private static int clearBufferInt() {
-        int result = buffer.intBuffer[0];
-        buffer.intBuffer[0] = 0;
-        return result;
-    }
-
-    private static void setState(BufferState newState) {
-        switch (state){
+    public void addBuffer(Command newCommand) {
+        switch (newCommand.getState()) {
             case BYTE:
-                new ConsoleSaver().saveWithoutPrefix(new ByteCommand(clearBufferByte()));
+                ByteCommand newByteCommand = new ByteCommand((Byte)newCommand.getMessage());
+                if (byteCommand == null) { byteCommand = newByteCommand;
+                } else byteCommand = byteCommand.accumulate(newByteCommand);
                 break;
             case INT:
-                new ConsoleSaver().saveWithoutPrefix(new IntCommand(clearBufferInt()));
+                IntCommand newIntCommand = new IntCommand((Integer) newCommand.getMessage());
+                if (intCommand == null) { intCommand = newIntCommand;
+                } else intCommand = intCommand.accumulate(newIntCommand);
                 break;
             case STR:
-                new ConsoleSaver().saveWithoutPrefix(new StringCommand(clearBufferStr()));
+                StringCommand newStringCommand = new StringCommand((String) newCommand.getMessage());
+                if (stringCommand == null) { stringCommand = newStringCommand;
+                } else stringCommand = stringCommand.accumulate(newStringCommand);
                 break;
-            default:
-                break;
+             default:
+                 break;
         }
-        state = newState;
+        state = newCommand.getState();
     }
 
-    private static BufferState getState() { return state; }
+    private void flush(BufferState state) {
+        printCommands(buffers);
+        clearBuffer(buffers);
+        this.state = state;
+    }
+
+    private void printCommands(Command... commands) {
+        for (Command command: commands) {
+            if (command != null) new ConsoleSaver().saveWithoutPrefix(command);
+        }
+    }
+
+    private void clearBuffer(Command... commands) {
+        for (Command command: commands) { command = null; }
+    }
+
+    private BufferState getState() { return state; }
 
     public void changeState(BufferState state, AdderBuffer adderBuffer) {
-        if(getState() != state) setState(state);
-        if (adderBuffer!=null) adderBuffer.add();
+        if(getState() != state) {
+            flush(state);
+        }
+        if (adderBuffer!=null)
+            adderBuffer.add();
     }
 }

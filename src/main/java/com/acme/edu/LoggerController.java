@@ -1,20 +1,29 @@
 package com.acme.edu;
 
+import com.acme.edu.buffer.Buffer;
+import com.acme.edu.commands.Command;
 import com.acme.edu.saver.Saver;
 
-public class LoggerController {
-
+class LoggerController {
     private Saver saver;
+    private Buffer buffer;
 
-    public LoggerController(Saver saver) {
+    LoggerController(Saver saver, Buffer buffer) {
         this.saver = saver;
+        this.buffer = buffer;
     }
 
-    public Saver getSaver() {
+    Saver getSaver() {
         return saver;
     }
 
-    public void setSaver(Saver saver) {
-        this.saver = saver;
+    Buffer getBuffer() { return buffer; }
+
+    void addCommand(Command command) {
+        buffer.changeState(command.getState(), () -> buffer.addBuffer(command));
+        saver.saveWithPrefix(command);
     }
+
+
+
 }

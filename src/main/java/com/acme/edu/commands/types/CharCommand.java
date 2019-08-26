@@ -1,5 +1,6 @@
 package com.acme.edu.commands.types;
 
+import com.acme.edu.buffer.BufferState;
 import com.acme.edu.commands.Command;
 
 public class CharCommand implements Command<Character> {
@@ -16,5 +17,11 @@ public class CharCommand implements Command<Character> {
     }
 
     @Override
+    public Command<Character> accumulate(Command command) { return null; }
+
+    @Override
     public Character getMessage() { return message; }
+
+    @Override
+    public BufferState getState() { return BufferState.NONE; }
 }
