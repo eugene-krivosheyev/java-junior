@@ -25,7 +25,5 @@ public class MatrixIntArrayCommand extends ArrayCommand {
     public String getMessage() { return String.valueOf(message); }
 
     @Override
-    public BufferState getState() {
-        return BufferState.NONE;
-    }
+    public BufferState getState() { return BufferState.NONE; }
 }

@@ -34,7 +34,7 @@ public class Logger {
 
     public static void log(int[][][][] array) { loggerController.addCommand(new MultimatrixIntCommand(array)); }
 
-    public static void closeLogger() { loggerController.getBuffer().changeState(BufferState.NONE, null); }
+    public static void closeLogger() { loggerController.getBuffer().close(); }
 }
 
 
