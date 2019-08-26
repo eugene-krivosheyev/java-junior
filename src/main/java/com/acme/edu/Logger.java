@@ -53,7 +53,7 @@ public class Logger {
 
     public static void log(byte message) {
         //makeLog(Byte.toString(message), LoggingType.BYTE);
-        controller.log(new PrimitiveCommand(message, Byte.MIN_VALUE, Byte.MAX_VALUE, LoggingType.BYTE));
+        controller.log(new IntegerCommand(message, Byte.MIN_VALUE, Byte.MAX_VALUE, LoggingType.BYTE));
         lastType = LoggingType.BYTE;
     }
 
@@ -66,7 +66,8 @@ public class Logger {
     }
 
     public static void log(boolean message) {
-        makeLog(Boolean.toString(message), LoggingType.BOOLEAN);
+        //makeLog(Boolean.toString(message), LoggingType.BOOLEAN);
+        controller.log(new BooleanCommand(message));
     }
 
     public static void log(char message) {
