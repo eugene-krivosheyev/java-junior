@@ -9,6 +9,9 @@ import org.jetbrains.annotations.Nullable;
 
 import static com.acme.edu.commands.AccumulateCommand.isTypeTheSame;
 
+/**
+ * Stateless, Application scope
+ */
 public class LoggerController {
     private Saver saver = new ConsoleSaver();
     @Nullable

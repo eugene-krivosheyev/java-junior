@@ -13,7 +13,7 @@ public class Logger {
     }
 
     public static void log(byte message) {
-        loggerController.run((DecorateCommand)new PrimitiveCommand(String.valueOf(message)));
+        loggerController.run((DecorateCommand) new PrimitiveCommand(String.valueOf(message)));
     }
 
     public static void log(String message) {
@@ -21,11 +21,13 @@ public class Logger {
     }
 
     public static void log(String... messages) {
-        loggerController.run((DecorateCommand)new StringCommand(String.join("\n", messages)));
+        loggerController.run((DecorateCommand) new StringCommand(String.join("\n", messages)));
     }
 
     public static void log(Integer... messages) {
-        loggerController.run((DecorateCommand)new PrimitiveCommand(Stream.of(messages).reduce(0, Integer::sum).toString()));
+        loggerController.run(
+                (DecorateCommand) new PrimitiveCommand(Stream.of(messages).reduce(0, Integer::sum).toString())
+        );
     }
 
     public static void log(int[][][][] messages) {
@@ -41,7 +43,7 @@ public class Logger {
     }
 
     public static void log(boolean message) {
-        loggerController.run((DecorateCommand)new PrimitiveCommand(String.valueOf(message)));
+        loggerController.run((DecorateCommand) new PrimitiveCommand(String.valueOf(message)));
     }
 
     public static void log(Object message) {
