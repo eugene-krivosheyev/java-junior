@@ -1,15 +1,15 @@
 package com.acme.edu.decorateComands;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public interface DecorateArray {
     static String collectData(int[][] message) {
-        StringBuilder finalMessage = new StringBuilder("{\n");
-        for (int[] integers : message) {
-            finalMessage.append(Arrays.toString(integers)).append("\n");
-        }
-        finalMessage.append("}");
-        return finalMessage.toString();
+        return "{\n" +
+                Arrays.stream(message)
+                .map(Arrays::toString)
+                .collect(Collectors.joining("\n")) +
+                "\n}";
     }
 
     String decorate(int[][] message);

@@ -4,10 +4,15 @@ import com.acme.edu.accumulateCommands.AccumulateCommand;
 import com.acme.edu.decorateComands.DecorateCommand;
 import com.acme.edu.savers.ConsoleSaver;
 import com.acme.edu.savers.Saver;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import static com.acme.edu.accumulateCommands.AccumulateCommand.isTypeTheSame;
 
 public class LoggerController {
     private static Saver saver = new ConsoleSaver();
-    private AccumulateCommand prevCommand = null;
+    @Nullable
+    private AccumulateCommand prevCommand;
 
     public void run(DecorateCommand decorateCommand) {
         if (prevCommand != null) {
@@ -16,10 +21,10 @@ public class LoggerController {
         saver.save(decorateCommand.decorate());
     }
 
-    public void run(AccumulateCommand accumulateCommand) {
+    public void run(@NotNull AccumulateCommand accumulateCommand) {
         if (prevCommand == null) {
             prevCommand = accumulateCommand;
-        } else if (accumulateCommand.getClass().equals(prevCommand.getClass())) {
+        } else if (isTypeTheSame(accumulateCommand, prevCommand)) {
             prevCommand = accumulateCommand.accumulate(prevCommand, saver);
         } else {
             prevCommand.flush(saver);
@@ -28,7 +33,9 @@ public class LoggerController {
     }
 
     public void close(){
-        prevCommand.flush(saver);
+        if (prevCommand != null) {
+            prevCommand.flush(saver);
+        }
         prevCommand = null;
     }
 }

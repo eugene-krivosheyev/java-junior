@@ -14,6 +14,8 @@ public class ArrayDecorateCommand implements DecorateCommand {
     @Override
     public String decorate() {
         String finalMessage = Arrays.toString(message);
-        return ARRAY.getType() + finalMessage.replace("[", "{").replace("]", "}");
+        return ARRAY.getType() + finalMessage
+                .replace("[", "{")
+                .replace("]", "}");
     }
 }
