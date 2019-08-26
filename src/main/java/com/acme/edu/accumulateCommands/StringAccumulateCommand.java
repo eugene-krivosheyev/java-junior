@@ -1,7 +1,7 @@
 package com.acme.edu.accumulateCommands;
 
-import com.acme.edu.Printer;
 import com.acme.edu.decorateComands.StringDecorateCommand;
+import com.acme.edu.savers.Saver;
 
 public class StringAccumulateCommand implements AccumulateCommand {
     private String buffer;
@@ -21,9 +21,9 @@ public class StringAccumulateCommand implements AccumulateCommand {
     }
 
     @Override
-    public AccumulateCommand accumulate(AccumulateCommand prevCommand, Printer printer) {
+    public AccumulateCommand accumulate(AccumulateCommand prevCommand, Saver saver) {
         if (!buffer.equals(((StringAccumulateCommand) prevCommand).getBuffer())) {
-            prevCommand.flush(printer);
+            prevCommand.flush(saver);
         } else {
             counter = ((StringAccumulateCommand) prevCommand).getCounter() + 1;
         }
@@ -31,11 +31,11 @@ public class StringAccumulateCommand implements AccumulateCommand {
     }
 
     @Override
-    public void flush(Printer printer) {
+    public void flush(Saver saver) {
         String message = counter == 1 ? buffer : buffer + " (x" + counter + ")";
         counter = 0;
         buffer = "";
         String decorated = new StringDecorateCommand(message).decorate();
-        printer.save(decorated);
+        saver.save(decorated);
     }
 }

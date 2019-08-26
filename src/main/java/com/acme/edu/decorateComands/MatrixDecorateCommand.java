@@ -1,7 +1,5 @@
 package com.acme.edu.decorateComands;
 
-import com.acme.edu.Decorate;
-
 import static com.acme.edu.LoggerType.MATRIX;
 
 public class MatrixDecorateCommand implements DecorateCommand, Decorate {

@@ -1,4 +1,4 @@
-package com.acme.edu;
+package com.acme.edu.decorateComands;
 
 import java.util.Arrays;
 

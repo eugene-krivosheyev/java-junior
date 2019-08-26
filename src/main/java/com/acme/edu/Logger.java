@@ -8,7 +8,7 @@ import com.acme.edu.decorateComands.*;
 import java.util.stream.Stream;
 
 public class Logger {
-    private static LoggerController loggerController = new LoggerController();
+    private static LoggerController loggerController = new LoggerController(); //Stateless
 
     public static void log(int message) {
         loggerController.run(new PrimitiveAccumulateCommand(message));

@@ -1,7 +1,6 @@
-package com.acme.edu;
+package com.acme.edu.savers;
 
-
-public class Printer {
+public class ConsoleSaver implements Saver {
     public void save(String message) {
         System.out.println(message);
     }

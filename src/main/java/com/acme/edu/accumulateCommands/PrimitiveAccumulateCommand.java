@@ -1,7 +1,7 @@
 package com.acme.edu.accumulateCommands;
 
-import com.acme.edu.Printer;
 import com.acme.edu.decorateComands.PrimitiveDecorateCommand;
+import com.acme.edu.savers.Saver;
 
 public class PrimitiveAccumulateCommand implements AccumulateCommand {
     private Integer buffer;
@@ -15,30 +15,30 @@ public class PrimitiveAccumulateCommand implements AccumulateCommand {
     }
 
     @Override
-    public AccumulateCommand accumulate(AccumulateCommand prevCommand, Printer printer) {
+    public AccumulateCommand accumulate(AccumulateCommand prevCommand, Saver saver) {
         int prevBuffer = ((PrimitiveAccumulateCommand) prevCommand).getBuffer();
         if ((long) buffer + prevBuffer > Integer.MAX_VALUE) {
-            cornerCase(Integer.MAX_VALUE, printer, prevBuffer);
+            cornerCase(Integer.MAX_VALUE, saver, prevBuffer);
         } else if ((long) buffer + prevBuffer < Integer.MIN_VALUE) {
-            cornerCase(Integer.MIN_VALUE, printer, prevBuffer);
+            cornerCase(Integer.MIN_VALUE, saver, prevBuffer);
         } else {
             buffer += prevBuffer;
         }
         return this;
     }
 
-    private void cornerCase(int cornerValue, Printer printer, int prevBuffer) {
+    private void cornerCase(int cornerValue, Saver saver, int prevBuffer) {
         int temp = buffer + prevBuffer - cornerValue;
         buffer = cornerValue;
-        flush(printer);
+        flush(saver);
         buffer = temp;
     }
 
     @Override
-    public void flush(Printer printer) {
+    public void flush(Saver saver) {
         String message = String.valueOf(buffer);
         buffer = 0;
         String decorated = new PrimitiveDecorateCommand(message).decorate();
-        printer.save(decorated);
+        saver.save(decorated);
     }
 }
