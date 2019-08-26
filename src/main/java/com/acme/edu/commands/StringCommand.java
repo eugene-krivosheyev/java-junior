@@ -1,6 +1,5 @@
-package com.acme.edu.Commands;
+package com.acme.edu.commands;
 
-import com.acme.edu.Logger;
 import com.acme.edu.Logger.LoggingType;
 
 import java.util.Objects;

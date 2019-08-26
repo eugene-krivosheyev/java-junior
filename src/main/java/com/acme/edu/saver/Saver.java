@@ -1,4 +1,4 @@
-package com.acme.edu.Saver;
+package com.acme.edu.saver;
 
 public interface Saver {
     public void save(String string);

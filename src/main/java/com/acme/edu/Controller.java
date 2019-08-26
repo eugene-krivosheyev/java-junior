@@ -1,9 +1,9 @@
 package com.acme.edu;
 
-import com.acme.edu.Commands.Command;
-import com.acme.edu.Commands.CommandAccumulateInfo;
-import com.acme.edu.Commands.IntArrayCommand;
-import com.acme.edu.Saver.Saver;
+import com.acme.edu.commands.Command;
+import com.acme.edu.commands.CommandAccumulateInfo;
+import com.acme.edu.commands.IntArrayCommand;
+import com.acme.edu.saver.Saver;
 
 public class Controller {
     private final static String PREFIX_PRIMITIVE = "primitive: ";

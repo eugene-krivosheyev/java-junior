@@ -1,4 +1,4 @@
-package com.acme.edu.Commands;
+package com.acme.edu.commands;
 
 public class CommandAccumulateInfo {
     private Command command;
