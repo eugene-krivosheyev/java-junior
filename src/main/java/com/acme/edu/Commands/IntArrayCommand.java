@@ -1,7 +1,6 @@
 package com.acme.edu.Commands;
 
 import com.acme.edu.Logger.LoggingType;
-import com.acme.edu.LongAccumulator;
 
 public class IntArrayCommand implements Command {
     private final static String PREFIX_PRIMITIVES_ARRAY = "primitives array: ";
