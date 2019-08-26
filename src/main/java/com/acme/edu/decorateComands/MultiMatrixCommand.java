@@ -2,23 +2,21 @@ package com.acme.edu.decorateComands;
 
 import static com.acme.edu.LoggerType.MULTIMATRIX;
 
-public class MultiMatrixDecorateCommand implements DecorateCommand, Decorate {
+public class MultiMatrixCommand implements DecorateCommand {
     private int[][][][] message;
 
-    public MultiMatrixDecorateCommand(int[][][][] message) {
+    public MultiMatrixCommand(int[][][][] message) {
         this.message = message;
     }
 
     @Override
     public String decorate() {
+        DecorateArray decorateMultiMatrix = new DecorateMultiMatrix();
         StringBuilder finalMessage = new StringBuilder("{\n");
         for (int[][][] array3d : message) {
             finalMessage.append("{\n");
             for (int[][] array2d : array3d) {
-                String decoratedMsg = Decorate.decorateArray2D(array2d)
-                        .replace("[", "{\n")
-                        .replace("]", "\n}");
-                finalMessage.append(decoratedMsg);
+                finalMessage.append(decorateMultiMatrix.decorate(array2d));
             }
             finalMessage.append("\n}\n");
         }

@@ -31,11 +31,11 @@ public class Logger {
     }
 
     public static void log(int[][][][] messages) {
-        loggerController.run(new MultiMatrixDecorateCommand(messages));
+        loggerController.run(new MultiMatrixCommand(messages));
     }
 
     public static void log(int[][] messages) {
-        loggerController.run(new MatrixDecorateCommand(messages));
+        loggerController.run(new MatrixCommand(messages));
     }
 
     public static void log(int[] messages) {
@@ -55,6 +55,6 @@ public class Logger {
     }
 
     public static void close() {
-       loggerController.close();
+        loggerController.close();
     }
 }
