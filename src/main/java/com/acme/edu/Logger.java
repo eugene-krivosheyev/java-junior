@@ -1,8 +1,6 @@
 package com.acme.edu;
 
-import java.util.Arrays;
-
-import static com.acme.edu.Constants.*;
+import com.acme.edu.commands.*;
 
 /**
  * JavaDoc comment
@@ -51,12 +49,7 @@ public class Logger {
         loggerController.log(new MultiMatrixCommand(message));
     }
 
-    private static String decoratePrimitive(String message) {
-        return PRIMITIVE_PREFIX + message;
+    public static void flush() {
+        loggerController.flush();
     }
-
-    private static void save(String message) {
-        System.out.println(message);
-    }
-
 }

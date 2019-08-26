@@ -1,5 +1,7 @@
-package com.acme.edu;
+package com.acme.edu.commands;
 
+
+import com.acme.edu.Constants;
 
 public class MatrixCommand implements Command {
     private final int[][] message;
@@ -11,6 +13,21 @@ public class MatrixCommand implements Command {
     @Override
     public String getDecorated() {
         return Constants.MATRIX_PREFIX + arrayToString(message);
+    }
+
+    @Override
+    public boolean isTypeEqual(Command command) {
+        return command instanceof MatrixCommand;
+    }
+
+    @Override
+    public void accumulate(Command command) {
+
+    }
+
+    @Override
+    public boolean isSaveRequired(Command command) {
+        return true;
     }
 
     private String arrayToString(int[][] array) {

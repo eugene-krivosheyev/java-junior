@@ -1,5 +1,7 @@
-package com.acme.edu;
+package com.acme.edu.commands;
 
+
+import com.acme.edu.Constants;
 
 import java.util.Arrays;
 
@@ -13,6 +15,21 @@ public class MultiMatrixCommand implements Command {
     @Override
     public String getDecorated() {
         return Constants.MULTIMATRIX_PREFIX + arrayToString(message);
+    }
+
+    @Override
+    public boolean isTypeEqual(Command command) {
+        return command instanceof MultiMatrixCommand;
+    }
+
+    @Override
+    public void accumulate(Command command) {
+
+    }
+
+    @Override
+    public boolean isSaveRequired(Command command) {
+        return true;
     }
 
     static String arrayToString(int[][][][] array) {
