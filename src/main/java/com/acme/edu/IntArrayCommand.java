@@ -4,8 +4,8 @@ package com.acme.edu;
  * Created by kate-c on 25/08/2019.
  */
 public class IntArrayCommand implements Command {
-    int[] messageArray;
-    static final String DELIMETER = ", ";
+    private int[] messageArray;
+    private static final String DELIMETER = ", ";
 
     public IntArrayCommand(int[] messageArray) {
         this.messageArray = messageArray;
@@ -13,6 +13,11 @@ public class IntArrayCommand implements Command {
 
     public Object getMessage() {
         return messageArray;
+    }
+
+    @Override
+    public void setMessage(Object message) {
+        this.messageArray = (int[]) message;
     }
 
     @Override
@@ -26,7 +31,7 @@ public class IntArrayCommand implements Command {
     }
 
     @Override
-    public CommandWrapper accumulate(Command command) {
+    public MayBeFlushableCommand accumulate(Command command) {
         throw new UnsupportedOperationException("Integer arrays can't be accumulated!");
     }
 

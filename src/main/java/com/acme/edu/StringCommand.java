@@ -6,7 +6,7 @@ import java.util.Objects;
  * Created by kate-c on 23/08/2019.
  */
 public class StringCommand implements Command {
-    String message;
+    private String message;
     private int stringCounter = 1;
 
     public StringCommand(String message) {
@@ -23,6 +23,10 @@ public class StringCommand implements Command {
         return message;
     }
 
+    @Override
+    public void setMessage(Object message) {
+        this.message = message.toString();
+    }
 
     @Override
     public boolean isTypeEqual(Command other) {
@@ -41,26 +45,13 @@ public class StringCommand implements Command {
     //////////////////////
 
     @Override
-    public CommandWrapper accumulate(Command command) {
-//        String message = ((StringCommand)command).getMessage();
-//        if (stringBuffer == null) {
-//            initializeStringBuffer(message);
-//        } else if (stringBuffer.equals(message)) {
-//            stringCounter++;
-//        } else {
-//            flush();
-//            initializeStringBuffer(message);
-//        }
-
-        //return this;
-
-
+    public MayBeFlushableCommand accumulate(Command command) {
         String newMessage = ((StringCommand)command).getMessage();
         if (this.isTypeEqual(command)) {
             stringCounter += 1;
-            return new CommandWrapper(new StringCommand(message, stringCounter), false);
+            return new MayBeFlushableCommand(new StringCommand(message, stringCounter), false);
         }
-        return new CommandWrapper(new StringCommand(newMessage, stringCounter), true);
+        return new MayBeFlushableCommand(new StringCommand(newMessage, stringCounter), true);
     }
 
 }

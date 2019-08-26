@@ -16,6 +16,11 @@ public class BooleanCommand implements Command {
     }
 
     @Override
+    public void setMessage(Object message) {
+        this.message = (boolean)message;
+    }
+
+    @Override
     public String decorate() {
         return "primitive: " + message;
     }
@@ -27,7 +32,7 @@ public class BooleanCommand implements Command {
 
 
     @Override
-    public CommandWrapper accumulate(Command command) {
+    public MayBeFlushableCommand accumulate(Command command) {
         throw new UnsupportedOperationException("Booleans can't be accumulated!");
     }
 }

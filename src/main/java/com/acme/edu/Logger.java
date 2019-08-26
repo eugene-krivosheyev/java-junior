@@ -3,7 +3,7 @@ package com.acme.edu;
 
 public class Logger {
 
-    static LoggerController loggerController = new LoggerController();
+    private static LoggerController loggerController = new LoggerController();
 
     public static void flush() {
         loggerController.flush();

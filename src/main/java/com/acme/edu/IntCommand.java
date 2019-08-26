@@ -5,7 +5,7 @@ package com.acme.edu;
  */
 public class IntCommand implements Command {
 
-    int message;
+    private int message;
 
     public IntCommand(int message) {
         this.message = message;
@@ -13,6 +13,11 @@ public class IntCommand implements Command {
 
     public Integer getMessage() {
         return message;
+    }
+
+    @Override
+    public void setMessage(Object message) {
+        this.message = (int)message;
     }
 
     @Override
@@ -27,13 +32,13 @@ public class IntCommand implements Command {
 
 
     @Override
-    public CommandWrapper accumulate(Command command) {
+    public MayBeFlushableCommand accumulate(Command command) {
         int newMessage = ((IntCommand) command).getMessage();
         long currentMessageToLong = message;
         if (currentMessageToLong + newMessage >= Integer.MAX_VALUE) {
-            return new CommandWrapper(new IntCommand(newMessage), true);
+            return new MayBeFlushableCommand(new IntCommand(newMessage), true);
         }
         message += newMessage;
-        return new CommandWrapper(new IntCommand(this.message), false);
+        return new MayBeFlushableCommand(new IntCommand(this.message), false);
     }
 }

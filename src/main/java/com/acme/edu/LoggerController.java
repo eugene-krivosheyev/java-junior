@@ -4,8 +4,8 @@ package com.acme.edu;
  * Created by kate-c on 23/08/2019.
  */
 public class LoggerController {
-    Saver saver = new ConsoleSaver();
-    Command previousCommand = null;
+    private Saver saver = new ConsoleSaver();
+    private Command previousCommand = null;
 
     public LoggerController() { }
 
@@ -19,8 +19,8 @@ public class LoggerController {
             return;
         }
         if (previousCommand.isTypeEqual(newCommand)) {
-            CommandWrapper result = previousCommand.accumulate(newCommand);
-            if (result.shouldBeFlushed) {
+            MayBeFlushableCommand result = previousCommand.accumulate(newCommand);
+            if (result.shouldBeFlushed()) {
                 flush();
             }
             previousCommand = result.getCommand();

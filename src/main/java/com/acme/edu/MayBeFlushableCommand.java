@@ -3,11 +3,11 @@ package com.acme.edu;
 /**
  * Created by kate-c on 25/08/2019.
  */
-public class CommandWrapper {
-    Command command;
-    boolean shouldBeFlushed = false;
+public class MayBeFlushableCommand {
+    private Command command;
+    private boolean shouldBeFlushed = false;
 
-    public CommandWrapper(Command command, boolean shouldBeFlushed) {
+    public MayBeFlushableCommand(Command command, boolean shouldBeFlushed) {
         this.command = command;
         this.shouldBeFlushed = shouldBeFlushed;
     }
@@ -16,7 +16,7 @@ public class CommandWrapper {
         return command;
     }
 
-    public boolean isShouldBeFlushed() {
+    public boolean shouldBeFlushed() {
         return shouldBeFlushed;
     }
 }

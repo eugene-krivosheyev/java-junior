@@ -5,7 +5,8 @@ package com.acme.edu;
  */
 public interface Command {
     Object getMessage();
-    CommandWrapper accumulate(Command command);
+    void setMessage(Object message);
+    MayBeFlushableCommand accumulate(Command command);
     String decorate();
     boolean isTypeEqual(Command other);
 }
