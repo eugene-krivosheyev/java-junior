@@ -10,7 +10,10 @@ public class StringCommand implements AccumulateCommand {
         this.buffer = message;
         this.counter = 1;
     }
-
+    private StringCommand(String message, int counter) {
+        this.buffer = message;
+        this.counter = counter;
+    }
     @Override
     public String decorate() {
         return "string: " + buffer;
@@ -28,10 +31,10 @@ public class StringCommand implements AccumulateCommand {
     public AccumulateCommand accumulate(AccumulateCommand prevCommand, Saver saver) {
         if (!buffer.equals(((StringCommand) prevCommand).getBuffer())) {
             prevCommand.flush(saver);
+            return this;
         } else {
-            counter = ((StringCommand) prevCommand).getCounter() + 1;
+            return new StringCommand(buffer, ((StringCommand) prevCommand).getCounter() + 1);
         }
-        return this;
     }
 
     @Override
