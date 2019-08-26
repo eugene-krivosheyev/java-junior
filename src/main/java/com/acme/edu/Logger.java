@@ -34,6 +34,18 @@ public class Logger {
 
     public static void log(int[][][][] array) { loggerController.addCommand(new MultimatrixIntCommand(array)); }
 
+    public static void log(String... messages) {
+        for(String message: messages) {
+            loggerController.addCommand(new StringCommand(message));
+        }
+    }
+
+    public static void log(Integer... messages) {
+        for(int message: messages) {
+            loggerController.addCommand(new IntCommand(message));
+        }
+    }
+
     public static void closeLogger() { loggerController.getBuffer().close(); }
 }
 
