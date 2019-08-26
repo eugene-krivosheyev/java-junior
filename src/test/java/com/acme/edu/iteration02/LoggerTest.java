@@ -59,6 +59,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("0\n");
         //endregion
     }
+
     /*
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {

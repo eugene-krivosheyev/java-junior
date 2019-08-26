@@ -1,8 +1,6 @@
 package com.acme.edu.commands;
 
-import com.acme.edu.Decorator;
-
-public class ByteCommand implements Command {
+public class ByteCommand implements PrimitiveCommand {
     private byte message;
 
     public ByteCommand(byte message) {
@@ -11,7 +9,7 @@ public class ByteCommand implements Command {
 
     @Override
     public String getDecorated() {
-        return Decorator.decorate(message);
+        return PRIMITIVE_PREFIX + message;
     }
 
     @Override
@@ -21,11 +19,7 @@ public class ByteCommand implements Command {
 
     @Override
     public ByteCommand accumulate(Command other) {
-        message += ((ByteCommand) other).getMessage();
+        message += ((ByteCommand) other).message;
         return this;
-    }
-
-    public byte getMessage() {
-        return message;
     }
 }

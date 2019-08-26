@@ -1,6 +1,5 @@
 package com.acme.edu.iteration03;
 
-import com.acme.edu.Decorator;
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
@@ -31,7 +30,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutContains(
-                Decorator.PR_ARRAY_PREFIX + "{-1, 0, 1}\n"
+                Logger.PR_ARRAY_PREFIX + "{-1, 0, 1}\n"
         );
         //endregion
     }
@@ -44,7 +43,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutContains(
-                Decorator.PR_MATRIX_PREFIX + "{\n" +
+                Logger.PR_MATRIX_PREFIX + "{\n" +
                         "{-1, 0, 1}\n" +
                         "{1, 2, 3}\n" +
                         "{-1, -2, -3}\n" +
@@ -109,6 +108,5 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains(11);
         //endregion
     }
-
     */
 }

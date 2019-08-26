@@ -1,8 +1,6 @@
 package com.acme.edu.commands;
 
-import com.acme.edu.Decorator;
-
-public class IntCommand implements Command {
+public class IntCommand implements PrimitiveCommand {
     private int message;
 
     public IntCommand(int message) {
@@ -11,7 +9,7 @@ public class IntCommand implements Command {
 
     @Override
     public String getDecorated() {
-        return Decorator.decorate(message);
+        return PRIMITIVE_PREFIX + message;
     }
 
     @Override
@@ -21,11 +19,7 @@ public class IntCommand implements Command {
 
     @Override
     public IntCommand accumulate(Command other) {
-        message += ((IntCommand) other).getMessage();
+        message += ((IntCommand) other).message;
         return this;
-    }
-
-    public int getMessage() {
-        return message;
     }
 }
