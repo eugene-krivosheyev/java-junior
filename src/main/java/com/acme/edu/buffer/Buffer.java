@@ -8,41 +8,38 @@ import com.acme.edu.saver.ConsoleSaver;
 
 public class Buffer {
 
-    private Command<String> stringCommand;
-    private Command<Integer> intCommand;
-    private Command<Byte> byteCommand;
-    private Command[] buffers;
+    private Command<String> stringCommand = null;
+    private Command<Integer> intCommand = null;
+    private Command<Byte> byteCommand = null;
+    private Command[] buffers = {byteCommand, intCommand, stringCommand};
     private BufferState state;
 
     public Buffer() {
         state = BufferState.NONE;
-        stringCommand = null;
-        intCommand = null;
-        byteCommand = null;
-        buffers = new Command[]{byteCommand, intCommand, stringCommand};
     }
 
-    public void addBuffer(Command newCommand) {
-        switch (newCommand.getState()) {
-            case BYTE:
-                ByteCommand newByteCommand = new ByteCommand((Byte)newCommand.getMessage());
-                if (byteCommand == null) { byteCommand = newByteCommand;
-                } else byteCommand = byteCommand.accumulate(newByteCommand);
-                break;
-            case INT:
-                IntCommand newIntCommand = new IntCommand((Integer) newCommand.getMessage());
-                if (intCommand == null) { intCommand = newIntCommand;
-                } else intCommand = intCommand.accumulate(newIntCommand);
-                break;
-            case STR:
-                StringCommand newStringCommand = new StringCommand((String) newCommand.getMessage());
-                if (stringCommand == null) { stringCommand = newStringCommand;
-                } else stringCommand = stringCommand.accumulate(newStringCommand);
-                break;
-             default:
-                 break;
-        }
-        state = newCommand.getState();
+    public void addBuffer(ByteCommand newCommand) {
+        state = BufferState.BYTE;
+        if (byteCommand == null) {
+            byteCommand = newCommand;
+        } else byteCommand = byteCommand.accumulate(newCommand);
+
+    }
+
+    public void addBuffer(IntCommand newCommand) {
+        state = BufferState.INT;
+        if (intCommand == null) {
+            intCommand = newCommand;
+        } else intCommand = intCommand.accumulate(newCommand);
+
+    }
+
+    public void addBuffer(StringCommand newCommand) {
+        state = BufferState.STR;
+        if (stringCommand == null) {
+            stringCommand = newCommand;
+        } else stringCommand = stringCommand.accumulate(newCommand);
+
     }
 
     private void flush(BufferState state) {
@@ -53,7 +50,8 @@ public class Buffer {
 
     private void printCommands(Command... commands) {
         for (Command command: commands) {
-            if (command != null) new ConsoleSaver().saveWithoutPrefix(command);
+            if (command != null)
+                new ConsoleSaver().saveWithoutPrefix(command);
         }
     }
 
