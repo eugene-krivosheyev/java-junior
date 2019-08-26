@@ -2,9 +2,6 @@ package com.acme.edu;
 
 import com.acme.edu.buffer.Buffer;
 import com.acme.edu.commands.Command;
-import com.acme.edu.commands.types.StringCommand;
-import com.acme.edu.commands.types.primitive.ByteCommand;
-import com.acme.edu.commands.types.primitive.IntCommand;
 import com.acme.edu.saver.Saver;
 
 class LoggerController {
@@ -22,27 +19,8 @@ class LoggerController {
 
     Buffer getBuffer() { return buffer; }
 
-    void addCommand(IntCommand command) {
+    void handleCommand(Command command) {
         buffer.changeState(command.getState(), () -> buffer.addBuffer(command));
         saver.saveWithPrefix(command);
     }
-
-
-    void addCommand(ByteCommand command) {
-        buffer.changeState(command.getState(), () -> buffer.addBuffer(command));
-        saver.saveWithPrefix(command);
-    }
-
-
-    void addCommand(StringCommand command) {
-        buffer.changeState(command.getState(), () -> buffer.addBuffer(command));
-        saver.saveWithPrefix(command);
-    }
-
-
-    void addCommand(Command command) {
-        saver.saveWithPrefix(command);
-    }
-
-
 }
