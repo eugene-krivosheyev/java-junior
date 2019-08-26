@@ -7,9 +7,7 @@ public class ReferenceCommand implements Command<Object> {
     private static final String REFERENCE_PREFIX = "reference: ";
     private Object message;
 
-    public ReferenceCommand(Object message) {
-        this.message = message;
-    }
+    public ReferenceCommand(Object message) { this.message = message; }
 
     @Override
     public String decorate() {

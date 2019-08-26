@@ -45,7 +45,7 @@ public class Logger {
         }
     }
 
-    public static void closeLogger() { loggerController.getBuffer().close(); }
+    public static void closeLogger() { loggerController.close(); }
 }
 
 

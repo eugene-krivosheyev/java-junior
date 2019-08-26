@@ -13,14 +13,10 @@ class LoggerController {
         this.buffer = buffer;
     }
 
-    Saver getSaver() {
-        return saver;
-    }
-
-    Buffer getBuffer() { return buffer; }
-
     void handleCommand(Command command) {
         buffer.changeState(command.getState(), () -> buffer.addBuffer(command));
         saver.saveWithPrefix(command);
     }
+
+    void close() { buffer.close(); }
 }
