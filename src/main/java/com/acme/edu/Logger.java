@@ -3,7 +3,7 @@ package com.acme.edu;
 import com.acme.edu.commands.*;
 
 public class Logger {
-    private static final SuperSaver saver = new ConsoleSaver();
+    private static final Saver saver = new ConsoleSaver();
     private static final LoggerController loggerController = new LoggerController(saver);
 
     public static void log(byte message) {

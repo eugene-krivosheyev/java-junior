@@ -3,10 +3,10 @@ package com.acme.edu;
 import com.acme.edu.commands.Command;
 
 class LoggerController {
-    private SuperSaver saver;
+    private Saver saver;
     private Command currentState;
 
-    LoggerController(SuperSaver saver) {
+    LoggerController(Saver saver) {
         this.saver = saver;
     }
 

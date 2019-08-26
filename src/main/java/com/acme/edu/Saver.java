@@ -1,5 +1,5 @@
 package com.acme.edu;
 
-public interface SuperSaver {
+public interface Saver {
     void save(String message);
 }
