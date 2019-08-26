@@ -28,25 +28,20 @@ public class PrimitiveCommand implements AccumulateCommand {
         int prevBuffer = ((PrimitiveCommand) prevCommand).getBuffer();
         if ((long) buffer + prevBuffer > Integer.MAX_VALUE) {
             return cornerCase(Integer.MAX_VALUE, saver, prevBuffer);
-        } else if ((long) buffer + prevBuffer < Integer.MIN_VALUE) {
-            return cornerCase(Integer.MIN_VALUE, saver, prevBuffer);
-        } else {
-            return new PrimitiveCommand(buffer + prevBuffer);
         }
+        if ((long) buffer + prevBuffer < Integer.MIN_VALUE) {
+            return cornerCase(Integer.MIN_VALUE, saver, prevBuffer);
+        }
+        return new PrimitiveCommand(buffer + prevBuffer);
     }
 
     private PrimitiveCommand cornerCase(int cornerValue, Saver saver, int prevBuffer) {
-        int temp = buffer + prevBuffer - cornerValue;
-        buffer = cornerValue;
-        flush(saver);
-        return new PrimitiveCommand(temp);
+        new PrimitiveCommand(cornerValue).flush(saver);
+        return new PrimitiveCommand(buffer + prevBuffer - cornerValue);
     }
 
     @Override
     public void flush(Saver saver) {
-        String message = String.valueOf(buffer);
-        buffer = 0;
-        String decorated = new PrimitiveCommand(message).decorate();
-        saver.save(decorated);
+        saver.save(new PrimitiveCommand(String.valueOf(buffer)).decorate());
     }
 }

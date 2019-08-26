@@ -40,9 +40,6 @@ public class StringCommand implements AccumulateCommand {
     @Override
     public void flush(Saver saver) {
         String message = counter == 1 ? buffer : buffer + " (x" + counter + ")";
-        counter = 0;
-        buffer = "";
-        String decorated = new StringCommand(message).decorate();
-        saver.save(decorated);
+        saver.save(new StringCommand(message).decorate());
     }
 }
