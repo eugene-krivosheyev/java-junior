@@ -1,6 +1,4 @@
-package com.acme.edu.decorateComands;
-
-import static com.acme.edu.LoggerType.MATRIX;
+package com.acme.edu.commands;
 
 public class MatrixCommand implements DecorateCommand {
     private int[][] message;
@@ -11,7 +9,7 @@ public class MatrixCommand implements DecorateCommand {
 
     @Override
     public String decorate() {
-        DecorateArray decorateArray = new DecorateMatrix();
-        return MATRIX.getType() + decorateArray.decorate(message);
+        DecorateArray decorateArray = new MatrixDecorator();
+        return "primitives matrix: " + decorateArray.decorate(message);
     }
 }

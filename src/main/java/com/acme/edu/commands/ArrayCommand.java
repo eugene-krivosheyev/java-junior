@@ -1,20 +1,18 @@
-package com.acme.edu.decorateComands;
+package com.acme.edu.commands;
 
 import java.util.Arrays;
 
-import static com.acme.edu.LoggerType.ARRAY;
-
-public class ArrayDecorateCommand implements DecorateCommand {
+public class ArrayCommand implements DecorateCommand {
     private int[] message;
 
-    public ArrayDecorateCommand(int[] message) {
+    public ArrayCommand(int[] message) {
         this.message = message;
     }
 
     @Override
     public String decorate() {
         String finalMessage = Arrays.toString(message);
-        return ARRAY.getType() + finalMessage
+        return "primitives array: " + finalMessage
                 .replace("[", "{")
                 .replace("]", "}");
     }

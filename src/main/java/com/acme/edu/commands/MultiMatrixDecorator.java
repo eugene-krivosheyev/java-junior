@@ -1,6 +1,6 @@
-package com.acme.edu.decorateComands;
+package com.acme.edu.commands;
 
-public class DecorateMultiMatrix implements DecorateArray {
+public class MultiMatrixDecorator implements DecorateArray {
     @Override
     public String decorate(int[][] message) {
         return DecorateArray.collectData(message)

@@ -1,4 +1,4 @@
-package com.acme.edu.decorateComands;
+package com.acme.edu.commands;
 
 public interface DecorateCommand {
     String decorate();

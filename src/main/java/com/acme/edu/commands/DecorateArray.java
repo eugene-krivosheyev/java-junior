@@ -1,4 +1,4 @@
-package com.acme.edu.decorateComands;
+package com.acme.edu.commands;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;

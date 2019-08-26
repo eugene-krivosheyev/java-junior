@@ -1,15 +1,19 @@
-package com.acme.edu.accumulateCommands;
+package com.acme.edu.commands;
 
-import com.acme.edu.decorateComands.StringDecorateCommand;
 import com.acme.edu.savers.Saver;
 
-public class StringAccumulateCommand implements AccumulateCommand {
+public class StringCommand implements AccumulateCommand {
     private String buffer;
     private Integer counter;
 
-    public StringAccumulateCommand(String message) {
+    public StringCommand(String message) {
         this.buffer = message;
         this.counter = 1;
+    }
+
+    @Override
+    public String decorate() {
+        return "string: " + buffer;
     }
 
     private String getBuffer() {
@@ -22,10 +26,10 @@ public class StringAccumulateCommand implements AccumulateCommand {
 
     @Override
     public AccumulateCommand accumulate(AccumulateCommand prevCommand, Saver saver) {
-        if (!buffer.equals(((StringAccumulateCommand) prevCommand).getBuffer())) {
+        if (!buffer.equals(((StringCommand) prevCommand).getBuffer())) {
             prevCommand.flush(saver);
         } else {
-            counter = ((StringAccumulateCommand) prevCommand).getCounter() + 1;
+            counter = ((StringCommand) prevCommand).getCounter() + 1;
         }
         return this;
     }
@@ -35,7 +39,7 @@ public class StringAccumulateCommand implements AccumulateCommand {
         String message = counter == 1 ? buffer : buffer + " (x" + counter + ")";
         counter = 0;
         buffer = "";
-        String decorated = new StringDecorateCommand(message).decorate();
+        String decorated = new StringCommand(message).decorate();
         saver.save(decorated);
     }
 }

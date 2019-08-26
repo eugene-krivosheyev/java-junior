@@ -1,6 +1,6 @@
-package com.acme.edu.decorateComands;
+package com.acme.edu.commands;
 
-public class DecorateMatrix implements DecorateArray {
+public class MatrixDecorator implements DecorateArray {
     public String decorate(int[][] message){
         return DecorateArray.collectData(message)
                 .replace("[", "{")

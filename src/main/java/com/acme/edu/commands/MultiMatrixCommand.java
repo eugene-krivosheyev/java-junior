@@ -1,9 +1,7 @@
-package com.acme.edu.decorateComands;
+package com.acme.edu.commands;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
-
-import static com.acme.edu.LoggerType.MULTIMATRIX;
 
 public class MultiMatrixCommand implements DecorateCommand {
     private int[][][][] message;
@@ -14,7 +12,7 @@ public class MultiMatrixCommand implements DecorateCommand {
 
     @Override
     public String decorate() {
-        DecorateArray decorateMultiMatrix = new DecorateMultiMatrix();
+        DecorateArray decorateMultiMatrix = new MultiMatrixDecorator();
         StringBuilder finalMessage = new StringBuilder("{\n");
         for (int[][][] array3d : message) {
             finalMessage
@@ -25,6 +23,6 @@ public class MultiMatrixCommand implements DecorateCommand {
                     .append("\n}\n");
         }
         finalMessage.append("}");
-        return MULTIMATRIX.getType() + finalMessage;
+        return "primitives multimatrix: " + finalMessage;
     }
 }

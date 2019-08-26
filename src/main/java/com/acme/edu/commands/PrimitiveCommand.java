@@ -1,13 +1,22 @@
-package com.acme.edu.accumulateCommands;
+package com.acme.edu.commands;
 
-import com.acme.edu.decorateComands.PrimitiveDecorateCommand;
 import com.acme.edu.savers.Saver;
 
-public class PrimitiveAccumulateCommand implements AccumulateCommand {
+public class PrimitiveCommand implements AccumulateCommand {
+    private String message;
     private Integer buffer;
 
-    public PrimitiveAccumulateCommand(int message) {
+    public PrimitiveCommand(String message) {
+        this.message = message;
+    }
+
+    public PrimitiveCommand(int message) {
         this.buffer = message;
+    }
+
+    @Override
+    public String decorate() {
+        return "primitive: " + message;
     }
 
     private int getBuffer() {
@@ -16,7 +25,7 @@ public class PrimitiveAccumulateCommand implements AccumulateCommand {
 
     @Override
     public AccumulateCommand accumulate(AccumulateCommand prevCommand, Saver saver) {
-        int prevBuffer = ((PrimitiveAccumulateCommand) prevCommand).getBuffer();
+        int prevBuffer = ((PrimitiveCommand) prevCommand).getBuffer();
         if ((long) buffer + prevBuffer > Integer.MAX_VALUE) {
             cornerCase(Integer.MAX_VALUE, saver, prevBuffer);
         } else if ((long) buffer + prevBuffer < Integer.MIN_VALUE) {
@@ -38,7 +47,7 @@ public class PrimitiveAccumulateCommand implements AccumulateCommand {
     public void flush(Saver saver) {
         String message = String.valueOf(buffer);
         buffer = 0;
-        String decorated = new PrimitiveDecorateCommand(message).decorate();
+        String decorated = new PrimitiveCommand(message).decorate();
         saver.save(decorated);
     }
 }
