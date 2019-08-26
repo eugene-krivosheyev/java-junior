@@ -1,5 +1,8 @@
 package com.acme.edu.demo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PolymorphismDemo {
     public static void main(String[] args) {
         Object[] objects = new Object[] {
@@ -47,7 +50,7 @@ class Duck extends Animal {
     }
 }
 
-abstract class Animal {
+abstract class Animal implements Aoeucariot {
     //region For Reuse
     private int age;
 
@@ -62,5 +65,25 @@ abstract class Animal {
 
     //region For Polymorphism
     public abstract void sound();
+    //endregion
+
+    @Override
+    public Aoeucariot split() {
+        return null;
+    }
+}
+
+interface Aoeucariot {
+    public static final int i = 0;
+    Aoeucariot split();
+
+    //region Defender methods
+    static void breath() {
+
+    }
+
+    default void doSomeWeirdStaff() {
+        this.split();
+    }
     //endregion
 }
