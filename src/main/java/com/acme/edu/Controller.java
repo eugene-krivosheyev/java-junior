@@ -28,20 +28,7 @@ public class Controller {
             lastCommand = command;
             return;
         }
-/*
-        if (command.isTypeEquals(lastCommand)) {
-            CommandAccumulateInfo info = command.accumulate(lastCommand);
-            lastCommand = info.getCommand();
 
-            String message = info.getMessage();
-            if (message != null) {
-                saver.save(message);
-            }
-        } else {
-            saver.save(command.flush());
-            lastCommand = command;
-        }
-*/
         CommandAccumulateInfo info = command.accumulate(lastCommand);
 
         String message = info.getMessage();

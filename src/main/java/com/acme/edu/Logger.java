@@ -85,24 +85,7 @@ public class Logger {
     }
 
     public static void flush(){
-        if (lastType == LoggingType.INT || lastType == LoggingType.STRING) {
-            controller.flush();
-        }
-        if (lastType == LoggingType.BYTE){
-            //printDecoratedLog(Long.toString(sum), LoggingType.INT);
-            //sum = 0;
-            //lastType = LoggingType.NOTHING;
-            controller.flush();
-        }
-        if (false) {//lastType == LoggingType.STRING){
-            if (count > 1) {
-                loggedString += " (x" + count + ")";
-            }
-            printDecoratedLog(loggedString, LoggingType.STRING);
-            count = 0;
-            loggedString = "";
-            lastType = LoggingType.NOTHING;
-        }
+        controller.flush();
     }
 
     private static String decorateLog(String message, LoggingType type) {
