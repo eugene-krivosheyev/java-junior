@@ -3,10 +3,9 @@ package com.acme.edu.demo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@Component
+//@Component
 public class EncapsulationDemo {
-    @Inject private Saver saver;
-
+//    @Inject private Saver saver;
 }
 
 class Base {
