@@ -1,6 +1,7 @@
 package com.acme.edu.iteration01;
 
 import com.acme.edu.*;
+import com.acme.edu.commands.StringCommand;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -83,10 +84,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log("test string 1");
         Logger.log("other str");
+        Logger.flush();
         //endregion
 
         //region then
-        assertSysoutContains(Decorator.STRING_PREFIX);
+        assertSysoutContains(StringCommand.STRING_PREFIX);
         assertSysoutContains("test string 1");
         assertSysoutContains("other str");
         //endregion

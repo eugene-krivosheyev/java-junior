@@ -1,8 +1,12 @@
 package com.acme.edu.commands;
 
-import com.acme.edu.Decorator;
+import java.util.Objects;
 
 public class StringCommand implements Command {
+    public static final String STRING_PREFIX = "string: ";
+
+    private int counter = 1;
+    private String buffer = "";
     private String message;
 
     public StringCommand(String message) {
@@ -11,7 +15,8 @@ public class StringCommand implements Command {
 
     @Override
     public String getDecorated() {
-        return Decorator.decorate(message);
+        updateBuffer(null);
+        return buffer.replaceFirst("\n", "");
     }
 
     @Override
@@ -21,11 +26,27 @@ public class StringCommand implements Command {
 
     @Override
     public StringCommand accumulate(Command other) {
-        message += ((StringCommand) other).getMessage();
+        StringCommand otherStringCommand = (StringCommand) other;
+
+        if (Objects.equals(message, otherStringCommand.message)) {
+            ++counter;
+        } else {
+            updateBuffer(otherStringCommand.message);
+        }
         return this;
     }
 
-    public String getMessage() {
-        return message;
+    private void updateBuffer(String newMessage) {
+        buffer += decorate(message, counter);
+        message = newMessage;
+        counter = 1;
+    }
+
+    private static String decorate(String message, int counter) {
+        String result = "\n" + STRING_PREFIX + message;
+        if (counter > 1) {
+            result += " (x" + counter + ")";
+        }
+        return result;
     }
 }

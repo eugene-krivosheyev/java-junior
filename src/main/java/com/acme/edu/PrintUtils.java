@@ -7,10 +7,6 @@ class PrintUtils {
         throw new IllegalStateException("Utility class");
     }
 
-    static void printToStdout(String message) {
-        System.out.println(message);
-    }
-
     static String arrayToString(int[] array) {
         return Arrays.toString(array)
                 .replace("[", "{")

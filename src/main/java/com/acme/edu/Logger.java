@@ -19,21 +19,17 @@ public class Logger {
     public static void log(String message) {
         Command command = new StringCommand(message);
         loggerController.log(command);
-        loggerController.flush();
     }
 
     public static void log(int[] array) {
-//        flush();
         saver.save(Decorator.PR_ARRAY_PREFIX + PrintUtils.arrayToString(array));
     }
 
     public static void log(int[][] array) {
-//        flush();
         saver.save(Decorator.PR_MATRIX_PREFIX + PrintUtils.arrayToString(array));
     }
 
     public static void log(Object message) {
-//        flush();
         saver.save(Decorator.decorate(message));
     }
 
