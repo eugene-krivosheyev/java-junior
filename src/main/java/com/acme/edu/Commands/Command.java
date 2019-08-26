@@ -5,7 +5,6 @@ import com.acme.edu.Logger.LoggingType;
 import java.util.Objects;
 
 public interface Command {
-    public String flush();
 
     public LoggingType getType();
 
@@ -14,5 +13,7 @@ public interface Command {
     public CommandAccumulateInfo accumulate(Command other);
 
     public Object getMessage();
+
+    public String getDecoratedMessage();
 }
 

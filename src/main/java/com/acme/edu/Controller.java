@@ -28,7 +28,7 @@ public class Controller {
             lastCommand = command;
             return;
         }
-
+/*
         if (command.isTypeEquals(lastCommand)) {
             CommandAccumulateInfo info = command.accumulate(lastCommand);
             lastCommand = info.getCommand();
@@ -41,12 +41,19 @@ public class Controller {
             saver.save(command.flush());
             lastCommand = command;
         }
+*/
+        CommandAccumulateInfo info = command.accumulate(lastCommand);
 
+        String message = info.getMessage();
+        if (message != null) {
+            saver.save(message);
+        }
+        lastCommand = command;
     }
 
     public void flush() {
         if (lastCommand != null) {
-            String message = lastCommand.flush();
+            String message = lastCommand.getDecoratedMessage();
             saver.save(message);
         }
         lastCommand = null;

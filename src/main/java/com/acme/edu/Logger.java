@@ -7,6 +7,7 @@ Multi-line comment
 
 import com.acme.edu.Commands.*;
 import com.acme.edu.Saver.ConsoleSaver;
+import com.sun.javafx.image.impl.ByteRgb;
 
 import java.util.Objects;
 
@@ -48,21 +49,12 @@ public class Logger {
         //makeLog(Integer.toString(message), LoggingType.INT);
         controller.log(new IntCommand(message));
 
-        if(lastType != LoggingType.INT) {
-            flush();
-        }
-
         lastType = LoggingType.INT;
     }
 
     public static void log(byte message) {
         //makeLog(Byte.toString(message), LoggingType.BYTE);
-        controller.log(new ByteCommand(message));
-
-        if(lastType != LoggingType.BYTE) {
-            flush();
-        }
-
+        controller.log(new PrimitiveCommand(message, Byte.MIN_VALUE, Byte.MAX_VALUE, LoggingType.BYTE));
         lastType = LoggingType.BYTE;
     }
 

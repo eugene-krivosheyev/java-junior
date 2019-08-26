@@ -18,7 +18,7 @@ public class IntArrayCommand implements Command {
 
     public String flush() {
         if(type == LoggingType.INTARRAY) {
-            return PREFIX_PRIMITIVES_ARRAY + intArrayToString();
+            return getDecoratedMessage();
         }
         return "";
     }
@@ -50,5 +50,10 @@ public class IntArrayCommand implements Command {
     @Override
     public Object getMessage() {
         return message;
+    }
+
+    @Override
+    public String getDecoratedMessage() {
+        return PREFIX_PRIMITIVES_ARRAY + intArrayToString();
     }
 }
