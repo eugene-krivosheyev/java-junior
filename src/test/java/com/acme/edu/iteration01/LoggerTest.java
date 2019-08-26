@@ -64,19 +64,19 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
 
-    @Test
-    public void shouldLogChar() throws IOException {
-        //region when
-        Logger.log('a');
-        Logger.log('b');
-        //endregion
-
-        //region then
-        assertSysoutContains(Decorator.CHAR_PREFIX);
-        assertSysoutContains("a");
-        assertSysoutContains("b");
-        //endregion
-    }
+//    @Test
+//    public void shouldLogChar() throws IOException {
+//        //region when
+//        Logger.log('a');
+//        Logger.log('b');
+//        //endregion
+//
+//        //region then
+//        assertSysoutContains(Decorator.CHAR_PREFIX);
+//        assertSysoutContains("a");
+//        assertSysoutContains("b");
+//        //endregion
+//    }
 
     @Test
     public void shouldLogString() throws IOException {
@@ -92,19 +92,19 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test
-    public void shouldLogBoolean() throws IOException {
-        //region when
-        Logger.log(true);
-        Logger.log(false);
-        //endregion
-
-        //region then
-        assertSysoutContains(Decorator.PRIMITIVE_PREFIX);
-        assertSysoutContains("true");
-        assertSysoutContains("false");
-        //endregion
-    }
+//    @Test
+//    public void shouldLogBoolean() throws IOException {
+//        //region when
+//        Logger.log(true);
+//        Logger.log(false);
+//        //endregion
+//
+//        //region then
+//        assertSysoutContains(Decorator.PRIMITIVE_PREFIX);
+//        assertSysoutContains("true");
+//        assertSysoutContains("false");
+//        //endregion
+//    }
 
     @Test
     public void shouldLogReference() throws IOException {
