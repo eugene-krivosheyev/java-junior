@@ -4,28 +4,13 @@ import com.acme.edu.LoggerController;
 import com.acme.edu.commands.AccumulateCommand;
 import com.acme.edu.commands.CharCommand;
 import com.acme.edu.commands.PrimitiveCommand;
-import com.acme.edu.commands.ReferenceCommand;
 import com.acme.edu.savers.ConsoleSaver;
 import org.junit.Test;
 import org.mockito.internal.util.reflection.Whitebox;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
-public class UnitTest {
-    @Test
-    public void shouldDecorateChar() {
-        CharCommand sut = new CharCommand("a");
-        assertEquals("char: a",  sut.decorate());
-    }
-
-    @Test
-    public void shouldDecorateReference() {
-        ReferenceCommand sut = new ReferenceCommand(String.valueOf(new Object()));
-        assertTrue(sut.decorate().contains("@"));
-    }
-
+public class LoggerControllerTest {
     @Test
     public void shouldRunFlushWhenPrevCommandNull() {
         AccumulateCommand mockAccumulate = mock(AccumulateCommand.class);
