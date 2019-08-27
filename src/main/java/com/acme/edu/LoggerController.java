@@ -27,5 +27,6 @@ public class LoggerController {
 
     void flush() {
         saver.save(currentState.getDecorated());
+        currentState = null;
     }
 }
