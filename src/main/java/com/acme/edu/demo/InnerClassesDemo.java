@@ -3,24 +3,24 @@ package com.acme.edu.demo;
 public class InnerClassesDemo {
     public static void main(String[] args) {
         Outer outer = new Outer();
-        Outer.Inner inner = outer.new Inner();
-
-        Outer.Inner inn = new Outer().new Inner();
-
+        System.out.println(outer.m(5).toString());
     }
 }
 
 class Outer {
     private static int staticState = 1;
-    private int shadedInstanceState = 2;
+    private int instanceState = 2;
 
-    public class Inner {
-        public void m(int shadedInstanceState) {
-            staticState = 2;
-            System.out.println(staticState);
-            new Outer();
+    public Object m(int param) {
+        int localVar = param;
 
-            Outer.this.shadedInstanceState = 3;
+        class Inner extends Object {
+            @Override
+            public String toString() {
+                return staticState + " " + instanceState + " " + localVar;
+            }
         }
+
+        return new Inner();
     }
 }
