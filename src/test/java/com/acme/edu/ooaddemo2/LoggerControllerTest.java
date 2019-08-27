@@ -23,6 +23,7 @@ public class LoggerControllerTest {
 
         when(firstStubCommand.getMessage()).thenReturn(1);
         when(secondStubCommand.getMessage()).thenReturn(2);
+        doReturn(2).when(secondStubCommand).getMessage();
 
         /*
         new CommandBuilder()
