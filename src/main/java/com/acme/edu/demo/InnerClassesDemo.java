@@ -1,6 +1,5 @@
 package com.acme.edu.demo;
 
-import com.acme.edu.Logger;
 import com.acme.edu.ooaddemo2.*;
 
 public class InnerClassesDemo {
