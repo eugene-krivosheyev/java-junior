@@ -5,4 +5,5 @@ public interface Command {
     String getDecorated();
     Object getMessage();
     boolean isTypeEquals(Command previous);
+    boolean isOverflow();
 }

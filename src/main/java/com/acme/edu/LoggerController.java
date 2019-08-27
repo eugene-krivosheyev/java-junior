@@ -16,7 +16,12 @@ public class LoggerController {
 
     public void log(Command command) {
         if (command.isTypeEquals(currentState)) {
-            currentState = currentState.accumulate(command);
+            if (currentState.accumulate(command).isOverflow()) {
+                flush();
+                currentState = command;
+            } else {
+                currentState = currentState.accumulate(command);
+            }
         } else {
             if (currentState != null) {
                 flush();

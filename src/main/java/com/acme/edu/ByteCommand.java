@@ -14,6 +14,11 @@ public class ByteCommand implements Command {
     }
 
     @Override
+    public boolean isOverflow() {
+        return message < 0;
+    }
+
+    @Override
     public Command accumulate(Command other) {
         return new ByteCommand((byte) (this.message + (byte)other.getMessage()));
     }

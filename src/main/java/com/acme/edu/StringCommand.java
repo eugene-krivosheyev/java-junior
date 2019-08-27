@@ -27,4 +27,9 @@ public class StringCommand implements Command {
     public boolean isTypeEquals(Command other) {
         return other instanceof StringCommand;
     }
+
+    @Override
+    public boolean isOverflow() {
+        return false;
+    }
 }

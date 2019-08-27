@@ -14,6 +14,11 @@ public class IntCommand implements Command {
     }
 
     @Override
+    public boolean isOverflow() {
+        return message < 0;
+    }
+
+    @Override
     public Command accumulate(Command other) {
         return new IntCommand(this.message + (int)other.getMessage());
     }
