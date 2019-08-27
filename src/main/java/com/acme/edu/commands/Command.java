@@ -1,4 +1,6 @@
-package com.acme.edu;
+package com.acme.edu.commands;
+
+import com.acme.edu.CommandAndFlushOptional;
 
 /**
  * Created by kate-c on 23/08/2019.
@@ -6,7 +8,7 @@ package com.acme.edu;
 public interface Command {
     Object getMessage();
     void setMessage(Object message);
-    MayBeFlushableCommand accumulate(Command command);
+    CommandAndFlushOptional accumulate(Command command);
     String decorate();
     boolean isTypeEqual(Command other);
 }

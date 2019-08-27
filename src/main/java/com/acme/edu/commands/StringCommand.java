@@ -1,4 +1,6 @@
-package com.acme.edu;
+package com.acme.edu.commands;
+
+import com.acme.edu.CommandAndFlushOptional;
 
 import java.util.Objects;
 
@@ -45,13 +47,14 @@ public class StringCommand implements Command {
     //////////////////////
 
     @Override
-    public MayBeFlushableCommand accumulate(Command command) {
+    public CommandAndFlushOptional accumulate(Command command) {
         String newMessage = ((StringCommand)command).getMessage();
         if (this.isTypeEqual(command)) {
             stringCounter += 1;
-            return new MayBeFlushableCommand(new StringCommand(message, stringCounter), false);
+            return new CommandAndFlushOptional(new StringCommand(message, stringCounter), false);
         }
-        return new MayBeFlushableCommand(new StringCommand(newMessage, stringCounter), true);
+        return new CommandAndFlushOptional(new StringCommand(newMessage, stringCounter), true);
+        // TODO один return
     }
 
 }

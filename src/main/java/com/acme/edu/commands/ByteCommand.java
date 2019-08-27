@@ -1,4 +1,6 @@
-package com.acme.edu;
+package com.acme.edu.commands;
+
+import com.acme.edu.CommandAndFlushOptional;
 
 /**
  * Created by kate-c on 25/08/2019.
@@ -31,14 +33,14 @@ public class ByteCommand implements Command {
 
 
     @Override
-    public MayBeFlushableCommand accumulate(Command command) {
+    public CommandAndFlushOptional accumulate(Command command) {
         byte newMessage = ((ByteCommand) command).getMessage();
         long currentMessageToLong = message;
         if (currentMessageToLong + newMessage >= Byte.MAX_VALUE) {
-            return new MayBeFlushableCommand(new ByteCommand(newMessage), true);
+            return new CommandAndFlushOptional(new ByteCommand(newMessage), true);
         }
         message += newMessage;
 
-        return new MayBeFlushableCommand(new ByteCommand(this.message), false);
+        return new CommandAndFlushOptional(new ByteCommand(this.message), false);
     }
 }

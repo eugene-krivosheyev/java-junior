@@ -1,4 +1,6 @@
-package com.acme.edu;
+package com.acme.edu.commands;
+
+import com.acme.edu.CommandAndFlushOptional;
 
 /**
  * Created by kate-c on 25/08/2019.
@@ -31,7 +33,7 @@ public class IntArrayCommand implements Command {
     }
 
     @Override
-    public MayBeFlushableCommand accumulate(Command command) {
+    public CommandAndFlushOptional accumulate(Command command) {
         throw new UnsupportedOperationException("Integer arrays can't be accumulated!");
     }
 

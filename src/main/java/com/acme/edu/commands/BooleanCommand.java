@@ -1,4 +1,6 @@
-package com.acme.edu;
+package com.acme.edu.commands;
+
+import com.acme.edu.CommandAndFlushOptional;
 
 /**
  * Created by kate-c on 25/08/2019.
@@ -32,7 +34,8 @@ public class BooleanCommand implements Command {
 
 
     @Override
-    public MayBeFlushableCommand accumulate(Command command) {
+    public CommandAndFlushOptional accumulate(Command command) {
+        // TODO
         throw new UnsupportedOperationException("Booleans can't be accumulated!");
     }
 }

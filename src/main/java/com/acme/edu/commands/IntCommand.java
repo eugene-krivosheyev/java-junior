@@ -1,4 +1,6 @@
-package com.acme.edu;
+package com.acme.edu.commands;
+
+import com.acme.edu.CommandAndFlushOptional;
 
 /**
  * Created by kate-c on 23/08/2019.
@@ -32,13 +34,13 @@ public class IntCommand implements Command {
 
 
     @Override
-    public MayBeFlushableCommand accumulate(Command command) {
+    public CommandAndFlushOptional accumulate(Command command) {
         int newMessage = ((IntCommand) command).getMessage();
         long currentMessageToLong = message;
         if (currentMessageToLong + newMessage >= Integer.MAX_VALUE) {
-            return new MayBeFlushableCommand(new IntCommand(newMessage), true);
+            return new CommandAndFlushOptional(new IntCommand(newMessage), true);
         }
         message += newMessage;
-        return new MayBeFlushableCommand(new IntCommand(this.message), false);
+        return new CommandAndFlushOptional(new IntCommand(this.message), false);
     }
 }

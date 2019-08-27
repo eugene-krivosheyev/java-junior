@@ -1,11 +1,14 @@
 package com.acme.edu;
 
+import com.acme.edu.commands.Command;
+import com.sun.istack.internal.Nullable;
+
 /**
  * Created by kate-c on 23/08/2019.
  */
 public class LoggerController {
     private Saver saver = new ConsoleSaver();
-    private Command previousCommand = null;
+    @Nullable private Command previousCommand = null;
 
     public LoggerController() { }
 
@@ -18,9 +21,11 @@ public class LoggerController {
             previousCommand = newCommand;
             return;
         }
+
         if (previousCommand.isTypeEqual(newCommand)) {
-            MayBeFlushableCommand result = previousCommand.accumulate(newCommand);
-            if (result.shouldBeFlushed()) {
+            // TODO -> tell not ask
+            CommandAndFlushOptional result = previousCommand.accumulate(newCommand);
+            if (result.ifFlushNeeded()) {
                 flush();
             }
             previousCommand = result.getCommand();

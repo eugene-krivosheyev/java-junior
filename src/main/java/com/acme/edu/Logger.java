@@ -1,6 +1,8 @@
 package com.acme.edu;
 
 
+import com.acme.edu.commands.*;
+
 public class Logger {
 
     private static LoggerController loggerController = new LoggerController();
