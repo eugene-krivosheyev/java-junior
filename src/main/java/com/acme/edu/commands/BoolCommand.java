@@ -1,7 +1,7 @@
 package com.acme.edu.commands;
 
 public class BoolCommand implements Command {
-    private boolean value;
+    private final boolean value;
 
     public BoolCommand(boolean value) {
         this.value = value;

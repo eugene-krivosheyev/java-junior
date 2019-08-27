@@ -1,7 +1,7 @@
 package com.acme.edu.commands;
 
 public class CharCommand implements Command {
-    private char value;
+    private final char value;
 
     public CharCommand(char value) {
         this.value = value;

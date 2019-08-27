@@ -8,8 +8,8 @@ import java.util.Objects;
  * Created by kate-c on 23/08/2019.
  */
 public class StringCommand implements Command {
-    private String message;
-    private int count;
+    private final String message;
+    private final int count;
 
     public StringCommand(String message) {
         this.message = message;

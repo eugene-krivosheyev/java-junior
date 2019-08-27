@@ -1,7 +1,7 @@
 package com.acme.edu.commands;
 
 public class ObjectCommand implements Command {
-    private Object value;
+    private final Object value;
 
     public ObjectCommand(Object message) {
         value = message;

@@ -4,8 +4,8 @@ package com.acme.edu.commands;
  * Created by kate-c on 23/08/2019.
  */
 public class ByteCommand implements Command {
-    private long message;
-    private final long UP_LIMIT = Byte.MAX_VALUE;
+    private final long message;
+    private static final long UP_LIMIT = Byte.MAX_VALUE;
 
     public ByteCommand(byte message) {
         this.message = message;

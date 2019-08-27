@@ -3,7 +3,7 @@ package com.acme.edu.commands;
 import com.acme.edu.ArraysFormatter;
 
 public class ArrayCommand implements Command {
-    private int[] value;
+    private final int[] value;
 
     public ArrayCommand(int[] value) {
         this.value = value;

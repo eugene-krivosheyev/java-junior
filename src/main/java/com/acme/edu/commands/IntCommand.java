@@ -4,8 +4,8 @@ package com.acme.edu.commands;
  * Created by kate-c on 23/08/2019.
  */
 public class IntCommand implements Command {
-    private long message;
-    private final long UP_LIMIT = Integer.MAX_VALUE;
+    private final long message;
+    private static final long UP_LIMIT = Integer.MAX_VALUE;
 
     public IntCommand(int message) {
         this.message = message;
