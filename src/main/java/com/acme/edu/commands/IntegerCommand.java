@@ -23,9 +23,9 @@ public class IntegerCommand extends PrimitiveCommand{
 
 
     public CommandAccumulateInfo accumulate(Command other) {
-        if (other == null) return new CommandAccumulateInfo(this, null, -1);
-        if (! (other instanceof IntegerCommand)) return new CommandAccumulateInfo(this, other.getDecoratedMessage(), -1);
-        if (!isTypeEquals(other)) return new CommandAccumulateInfo(this, other.getDecoratedMessage(), 0);
+        if (other == null) return new CommandAccumulateInfo(this, null);
+        if (! (other instanceof IntegerCommand)) return new CommandAccumulateInfo(this, other.getDecoratedMessage());
+        if (!isTypeEquals(other)) return new CommandAccumulateInfo(this, other.getDecoratedMessage());
 
         String returnMessage = null;
         long otherMessage = (Long)other.getMessage();
@@ -36,7 +36,7 @@ public class IntegerCommand extends PrimitiveCommand{
             message += otherMessage;
         }
 
-        return new CommandAccumulateInfo(this, returnMessage, 0);
+        return new CommandAccumulateInfo(this, returnMessage);
     }
 
 

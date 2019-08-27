@@ -3,8 +3,8 @@ package com.acme.edu.commands;
 public class CommandAccumulateInfo {
     private Command command;
     private String message;
-    int code;
-    public CommandAccumulateInfo(Command command, String message, int code) {
+
+    public CommandAccumulateInfo(Command command, String message) {
         this.command = command;
         this.message = message;
     }

@@ -14,7 +14,7 @@ public class BooleanCommand extends PrimitiveCommand {
 
     @Override
     public CommandAccumulateInfo accumulate(Command other) {
-        return new CommandAccumulateInfo(this, other.getDecoratedMessage(), 0);
+        return new CommandAccumulateInfo(this, other.getDecoratedMessage());
     }
 
     @Override

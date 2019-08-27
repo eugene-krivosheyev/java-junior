@@ -43,7 +43,7 @@ public class IntArrayCommand implements Command {
         return other instanceof IntArrayCommand && other.getType() == type;
     }
     public CommandAccumulateInfo accumulate(Command other) {
-        return new CommandAccumulateInfo(other, null, 0);
+        return new CommandAccumulateInfo(other, null);
     }
 
     @Override

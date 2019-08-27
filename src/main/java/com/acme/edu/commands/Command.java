@@ -8,6 +8,11 @@ public interface Command {
 
     public boolean isTypeEquals(Command other);
 
+    /**
+     *
+     * @param other another command
+     * @return wrapper with modified Command and message
+     */
     public CommandAccumulateInfo accumulate(Command other);
 
     public Object getMessage();

@@ -37,14 +37,14 @@ public class StringCommand implements Command {
 
     @Override
     public CommandAccumulateInfo accumulate(Command other) {
-        if (other == null) return new CommandAccumulateInfo(this, null, -1);
-        if (! (other instanceof StringCommand)) return new CommandAccumulateInfo(this, other.getDecoratedMessage(), -1);
+        if (other == null) return new CommandAccumulateInfo(this, null);
+        if (! (other instanceof StringCommand)) return new CommandAccumulateInfo(this, other.getDecoratedMessage());
 
-        if (!isTypeEquals(other)) return new CommandAccumulateInfo(this, other.getDecoratedMessage(), 0);
+        if (!isTypeEquals(other)) return new CommandAccumulateInfo(this, other.getDecoratedMessage());
         this.count += ((StringCommand) other).count;
         String returnMessage = (String) this.getMessage();
 
-        return new CommandAccumulateInfo(this, null, 0);
+        return new CommandAccumulateInfo(this, null);
     }
 
     @Override
