@@ -2,16 +2,16 @@ package com.acme.edu;
 
 import commands.Command;
 
-class LoggerController {
+public class LoggerController {
 
     private Saver saver;
     private Command notLogged = null;
 
-    LoggerController(Saver saver) {
+    public LoggerController(Saver saver) {
         this.saver = saver;
     }
 
-    void log(Command command) {
+    public void log(Command command) {
 
         if (notLogged == null)
             notLogged = command;
@@ -24,7 +24,7 @@ class LoggerController {
 
     }
 
-    void flush() {
+    public void flush() {
         saver.save(notLogged.getDecorated());
         notLogged = null;
     }

@@ -4,9 +4,15 @@ import java.util.Arrays;
 
 public class MultiDimMatrixCommand extends Command {
     private static final String MULTI_DIM_MATRIX_PREFIX = "primitives multimatrix: ";
+    private final int[][][][] message;
 
     public MultiDimMatrixCommand(int[][][][] multiDimMatrix) {
-        super.message = multiDimMatrix;
+        this.message = multiDimMatrix;
+    }
+
+    @Override
+    public int[][][][] getMessage() {
+        return message;
     }
 
     // todo make ok

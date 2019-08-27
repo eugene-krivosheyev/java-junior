@@ -3,11 +3,17 @@ package commands;
 public class StringCommand extends Command {
 
     private final static String STRING_PREFIX = "string: ";
+    private final String message;
     private int repeat;
 
     public StringCommand(String message, int repeat) {
-        super.message = message;
+        this.message = message;
         this.repeat = repeat;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
     }
 
     @Override
@@ -24,7 +30,7 @@ public class StringCommand extends Command {
 
     @Override
     public Boolean equalsCommand(Command other) {
-        return other instanceof StringCommand && message.equals(other.message) ;
+        return other instanceof StringCommand && message.equals(other.getMessage()) ;
     }
 
 }

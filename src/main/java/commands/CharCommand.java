@@ -2,22 +2,27 @@ package commands;
 
 public class CharCommand extends Command {
     private static final String CHAR_PREFIX = "char: ";
-    private char symbol;
+    private char message;
 
-    public CharCommand(char symbol) {
-        this.symbol = symbol;
+    public CharCommand(char message) {
+        this.message = message;
+    }
+
+    @Override
+    public Character getMessage() {
+        return message;
     }
 
     @Override
     public String getDecorated() {
 
-        return CHAR_PREFIX + symbol;
+        return CHAR_PREFIX + message;
     }
     // todo separate interface
 
     @Override
     public Command getAccumulated(Command other) {
-        return new CharCommand(symbol);
+        return new CharCommand(message);
     }
 
     @Override

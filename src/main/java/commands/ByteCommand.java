@@ -3,20 +3,26 @@ package commands;
 public class ByteCommand extends Command {
 
     private static final String PRIMITIVE_PREFIX = "primitive: ";
+    private final byte message;
 
     public ByteCommand(byte message) {
-        super.message = message;
+        this.message = message;
+    }
+
+    @Override
+    public Byte getMessage() {
+        return message;
     }
 
     // todo common logic to another class
     @Override
     public String getDecorated() {
-        return PRIMITIVE_PREFIX + (byte)message;
+        return PRIMITIVE_PREFIX + message;
     }
 
     @Override
     public Command getAccumulated(Command other) {
-        return new ByteCommand((byte) ((byte)message + (byte)other.getMessage()));
+        return new ByteCommand((byte) (message + (byte)other.getMessage()));
 
     }
 

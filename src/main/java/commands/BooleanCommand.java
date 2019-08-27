@@ -10,6 +10,11 @@ public class BooleanCommand extends Command {
     }
 
     @Override
+    public Boolean getMessage() {
+        return message;
+    }
+
+    @Override
     public String getDecorated() {
         return PRIMITIVE_PREFIX + message;
     }

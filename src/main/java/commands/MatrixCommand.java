@@ -4,9 +4,15 @@ import java.util.Arrays;
 
 public class MatrixCommand extends Command {
     private static final String MATRIX_PREFIX = "primitives matrix: ";
+    private final int[][] message;
 
     public MatrixCommand(int[][] matrix) {
-        super.message = matrix;
+        this.message = matrix;
+    }
+
+    @Override
+    public int[][] getMessage() {
+        return message;
     }
 
     @Override

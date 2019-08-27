@@ -3,19 +3,25 @@ package commands;
 public class IntCommand extends Command {
 
     private static final String PRIMITIVE_PREFIX = "primitive: ";
+    private final int message;
 
     public IntCommand(int message) {
-        super.message = message;
+        this.message = message;
+    }
+
+    @Override
+    public Integer getMessage() {
+        return message;
     }
 
     @Override
     public String getDecorated() {
-        return PRIMITIVE_PREFIX + (int)message;
+        return PRIMITIVE_PREFIX + message;
     }
 
     @Override
-    public Command getAccumulated(Command other) {
-        return new IntCommand((int)message + (int)other.getMessage());
+    public IntCommand getAccumulated(Command other) {
+        return new IntCommand(message + (int)other.getMessage());
     }
 
     @Override

@@ -2,11 +2,7 @@ package commands;
 
 public abstract class Command {
 
-    Object message;
-
-    public Object getMessage() {
-        return message;
-    }
+    public abstract Object getMessage();
 
     public abstract String getDecorated();
 

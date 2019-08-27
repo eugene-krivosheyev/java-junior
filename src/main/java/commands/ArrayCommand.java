@@ -5,14 +5,20 @@ import java.util.Arrays;
 public class ArrayCommand extends Command {
 
     private static final String ARRAY_PREFIX = "primitives array: ";
+    private final int[] message;
 
     public ArrayCommand(int[] message) {
-        super.message = message;
+        this.message = message;
+    }
+
+    @Override
+    public int[] getMessage() {
+        return message;
     }
 
     @Override
     public String getDecorated() {
-        return ARRAY_PREFIX + Arrays.toString(((int[]) message));
+        return ARRAY_PREFIX + Arrays.toString(message);
     }
 
     @Override
