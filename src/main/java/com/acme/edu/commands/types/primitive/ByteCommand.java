@@ -1,7 +1,7 @@
 package com.acme.edu.commands.types.primitive;
 
-import com.acme.edu.buffer.BufferState;
-import com.acme.edu.buffer.ControllerOverflow;
+import com.acme.edu.StateCommand;
+import com.acme.edu.overflow.ControllerOverflow;
 import com.acme.edu.commands.Command;
 
 public class ByteCommand extends PrimitiveCommand implements Command<Byte> {
@@ -33,5 +33,5 @@ public class ByteCommand extends PrimitiveCommand implements Command<Byte> {
     public void setMessage(byte message) { this.message = message; }
 
     @Override
-    public BufferState getState() { return BufferState.BYTE; }
+    public StateCommand getState() { return StateCommand.BYTE; }
 }

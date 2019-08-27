@@ -1,6 +1,5 @@
 package com.acme.edu;
 
-import com.acme.edu.buffer.Buffer;
 import com.acme.edu.commands.arrays.ArrayIntCommand;
 import com.acme.edu.commands.arrays.MatrixIntArrayCommand;
 import com.acme.edu.commands.arrays.MultimatrixIntCommand;
@@ -13,7 +12,7 @@ import com.acme.edu.saver.ConsoleSaver;
 
 
 public class Logger {
-    private static LoggerController loggerController = new LoggerController(new ConsoleSaver(), new Buffer());
+    private static LoggerController loggerController = new LoggerController(new ConsoleSaver());
 
     public static void log(Object message) { loggerController.handleCommand(new ReferenceCommand(message)); }
 

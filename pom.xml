@@ -23,32 +23,87 @@
         </configuration>
       </plugin>
       <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.3</version>
         <configuration>
-          <archive>
-            <manifest>
-              <addClasspath>true</addClasspath>
-              <classpathPrefix>lib</classpathPrefix>
-              <mainClass>com.acme.edu.Logger</mainClass>
-            </manifest>
-          </archive>
+          <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
+          <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
+          <excludes>
+            <exclude>java/lang/*</exclude>
+            <exclude>java/util/*</exclude>
+          </excludes>
         </configuration>
+        <executions>
+          <execution>
+            <id>jacoco-initialize</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>jacoco-site</id>
+            <phase>package</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <version>1.4.5</version>
+        <configuration>
+          <targetClasses>
+            <param>com.acme.edu.*</param>
+          </targetClasses>
+          <targetTests>
+            <param>com.acme.edu.*</param>
+          </targetTests>
+        </configuration>
+        <executions>
+          <execution>
+            <id>mutation-coverage</id>
+            <goals>
+              <goal>mutationCoverage</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>mutation-report</id>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
 
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.easytesting</groupId>
-      <artifactId>fest-assert</artifactId>
-      <version>1.4</version>
-      <scope>test</scope>
-    </dependency>
+  <dependency>
+    <groupId>org.jetbrains</groupId>
+    <artifactId>annotations</artifactId>
+    <version>17.0.0</version>
+  </dependency>
+  <dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>org.easytesting</groupId>
+    <artifactId>fest-assert</artifactId>
+    <version>1.4</version>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-all</artifactId>
+    <version>1.10.19</version>
+    <scope>test</scope>
+  </dependency>
   </dependencies>
+
 </project>

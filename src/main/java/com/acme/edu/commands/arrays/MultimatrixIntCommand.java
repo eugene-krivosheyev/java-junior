@@ -1,6 +1,6 @@
 package com.acme.edu.commands.arrays;
 
-import com.acme.edu.buffer.BufferState;
+import com.acme.edu.StateCommand;
 import com.acme.edu.commands.Command;
 
 public class MultimatrixIntCommand extends ArrayCommand {
@@ -24,5 +24,5 @@ public class MultimatrixIntCommand extends ArrayCommand {
     public String getMessage() { return String.valueOf(message); }
 
     @Override
-    public BufferState getState() { return BufferState.NONE; }
+    public StateCommand getState() { return StateCommand.NONE; }
 }

@@ -1,6 +1,6 @@
 package com.acme.edu.commands.types.primitive;
 
-import com.acme.edu.buffer.BufferState;
+import com.acme.edu.StateCommand;
 import com.acme.edu.commands.Command;
 
 public class BooleanCommand extends PrimitiveCommand implements Command<Boolean> {
@@ -23,5 +23,5 @@ public class BooleanCommand extends PrimitiveCommand implements Command<Boolean>
 
 
     @Override
-    public BufferState getState() { return BufferState.NONE; }
+    public StateCommand getState() { return StateCommand.NONE; }
 }

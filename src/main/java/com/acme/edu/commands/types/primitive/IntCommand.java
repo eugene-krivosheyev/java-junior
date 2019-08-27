@@ -1,7 +1,7 @@
 package com.acme.edu.commands.types.primitive;
 
-import com.acme.edu.buffer.BufferState;
-import com.acme.edu.buffer.ControllerOverflow;
+import com.acme.edu.StateCommand;
+import com.acme.edu.overflow.ControllerOverflow;
 import com.acme.edu.commands.Command;
 
 public class IntCommand extends PrimitiveCommand implements Command<Integer> {
@@ -32,6 +32,6 @@ public class IntCommand extends PrimitiveCommand implements Command<Integer> {
     public void setMessage(int message) { this.message = message; }
 
     @Override
-    public BufferState getState() { return BufferState.INT; }
+    public StateCommand getState() { return StateCommand.INT; }
 
 }

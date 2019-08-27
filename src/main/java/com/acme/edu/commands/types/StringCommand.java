@@ -1,6 +1,6 @@
 package com.acme.edu.commands.types;
 
-import com.acme.edu.buffer.BufferState;
+import com.acme.edu.StateCommand;
 import com.acme.edu.commands.Command;
 import com.acme.edu.saver.ConsoleSaver;
 
@@ -53,7 +53,7 @@ public class StringCommand implements Command<String> {
     }
 
     @Override
-    public BufferState getState() { return BufferState.STR; }
+    public StateCommand getState() { return StateCommand.STR; }
 
 }
 

@@ -1,6 +1,6 @@
 package com.acme.edu.commands.types;
 
-import com.acme.edu.buffer.BufferState;
+import com.acme.edu.StateCommand;
 import com.acme.edu.commands.Command;
 
 public class CharCommand implements Command<Character> {
@@ -23,5 +23,5 @@ public class CharCommand implements Command<Character> {
     public Character getMessage() { return message; }
 
     @Override
-    public BufferState getState() { return BufferState.NONE; }
+    public StateCommand getState() { return StateCommand.NONE; }
 }
