@@ -21,8 +21,8 @@ public class MatrixCommand implements Command {
     }
 
     @Override
-    public void accumulate(Command command) {
-
+    public MatrixCommand accumulate(Command command) {
+        return this;
     }
 
     @Override

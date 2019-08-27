@@ -21,7 +21,8 @@ public class BooleanCommand extends PrimitiveCommand {
     }
 
     @Override
-    public void accumulate(Command command) {
+    public BooleanCommand accumulate(Command command) {
+        return this;
     }
 
     @Override

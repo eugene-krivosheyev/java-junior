@@ -22,9 +22,9 @@ public class ByteCommand extends PrimitiveCommand {
     }
 
     @Override
-    public void accumulate(Command command) {
-        byte newMessage = ((ByteCommand) command).getMessage();
-        message += newMessage;
+    public ByteCommand accumulate(Command command) {
+        byte newMessage = (byte) (message + ((ByteCommand) command).getMessage());
+        return new ByteCommand(newMessage);
     }
 
     @Override

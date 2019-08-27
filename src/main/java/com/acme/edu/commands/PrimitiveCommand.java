@@ -6,7 +6,7 @@ import com.acme.edu.commands.Command;
 public abstract class PrimitiveCommand implements Command {
     @Override
     public String getDecorated() {
-        return Constants.PRIMITIVE_PREFIX + String.valueOf(getStringMessage());
+        return Constants.PRIMITIVE_PREFIX + getStringMessage();
     }
 
     abstract public String getStringMessage();

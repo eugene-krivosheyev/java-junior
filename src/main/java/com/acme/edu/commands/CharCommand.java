@@ -24,8 +24,8 @@ public class CharCommand implements Command {
     }
 
     @Override
-    public void accumulate(Command command) {
-
+    public CharCommand accumulate(Command command) {
+        return this;
     }
 
     @Override

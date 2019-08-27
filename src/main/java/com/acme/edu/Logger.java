@@ -10,7 +10,12 @@ import com.acme.edu.commands.*;
  * @see java.lang.String#String()
  */
 public class Logger {
-    private static LoggerController loggerController = new LoggerController();
+    private static LoggerController loggerController;
+
+    static {
+        SuperSaver saver = new ConcoleSaver();
+        loggerController = new LoggerController(saver);
+    }
 
     public static void log(int message) {
         loggerController.log(new IntCommand(message));

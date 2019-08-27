@@ -20,7 +20,8 @@ public class ObjectCommand implements Command {
     }
 
     @Override
-    public void accumulate(Command command) {
+    public ObjectCommand accumulate(Command command) {
+        return this;
     }
 
     @Override

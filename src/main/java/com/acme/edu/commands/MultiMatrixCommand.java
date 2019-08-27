@@ -23,8 +23,8 @@ public class MultiMatrixCommand implements Command {
     }
 
     @Override
-    public void accumulate(Command command) {
-
+    public MultiMatrixCommand accumulate(Command command) {
+        return this;
     }
 
     @Override

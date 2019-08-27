@@ -22,7 +22,8 @@ public class ArrayCommand implements Command {
     }
 
     @Override
-    public void accumulate(Command command) {
+    public ArrayCommand accumulate(Command command) {
+        return this;
     }
 
     @Override

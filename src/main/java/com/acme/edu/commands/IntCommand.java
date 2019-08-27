@@ -11,6 +11,7 @@ public class IntCommand extends PrimitiveCommand {
         return String.valueOf(message);
     }
 
+    // TODO: 2019-08-27 int -> Integer
     public int getMessage() {
         return message;
     }
@@ -21,9 +22,9 @@ public class IntCommand extends PrimitiveCommand {
     }
 
     @Override
-    public void accumulate(Command command) {
+    public IntCommand accumulate(Command command) {
         int newMessage = ((IntCommand) command).getMessage();
-        message += newMessage;
+        return new IntCommand(message + newMessage);
     }
 
     @Override
