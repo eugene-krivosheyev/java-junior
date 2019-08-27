@@ -9,13 +9,13 @@ import static org.junit.Assert.assertTrue;
 
 public class CommandsTest {
     @Test
-    public void shouldDecorateChar() {
+    public void shouldDecorateCharCommand() {
         CharCommand sut = new CharCommand("a");
         assertEquals("char: a", sut.decorate());
     }
 
     @Test
-    public void shouldDecorateReference() {
+    public void shouldDecorateReferenceCommand() {
         ReferenceCommand sut = new ReferenceCommand(String.valueOf(new Object()));
         assertTrue(sut.decorate().contains("@"));
     }
