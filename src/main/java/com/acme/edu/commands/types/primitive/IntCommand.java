@@ -12,14 +12,17 @@ public class IntCommand extends PrimitiveCommand implements Command<Integer> {
     }
 
     @Override
-    public String decorate() {
-        return super.getPrimitivePrefix() + message;
-    }
+    public String decorate() { return super.getPrimitivePrefix() + message; }
 
     @Override
     public Command<Integer> accumulate(Command command) {
-        ControllerOverflow.controlOverflow((Integer) command.getMessage(), this);
-        return this;
+        if (command instanceof IntCommand) {
+            ControllerOverflow.controlOverflow((Integer) command.getMessage(), this);
+            return new IntCommand(message);
+        }
+        else {
+            throw new IllegalArgumentException("Wrong command!");
+        }
     }
 
     @Override

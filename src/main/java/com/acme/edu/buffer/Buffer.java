@@ -4,21 +4,21 @@ import com.acme.edu.commands.Command;
 import com.acme.edu.saver.ConsoleSaver;
 
 public class Buffer {
-    private Command command = null;
+    private Command currentCommand = null;
     private BufferState state = BufferState.NONE;
 
     public Buffer() { }
 
     public void addBuffer(Command newCommand) {
-        if (command == null) {
-            command = newCommand;
-        } else command = command.accumulate(newCommand);
+        if (currentCommand == null) {
+            currentCommand = newCommand;
+        } else currentCommand = currentCommand.accumulate(newCommand);
     }
 
     private void flush(BufferState state) {
-        if (command!=null) {
-            new ConsoleSaver().saveWithoutPrefix(command);
-            command = null;
+        if (currentCommand !=null) {
+            new ConsoleSaver().saveWithoutPrefix(currentCommand);
+            currentCommand = null;
         }
         this.state = state;
     }

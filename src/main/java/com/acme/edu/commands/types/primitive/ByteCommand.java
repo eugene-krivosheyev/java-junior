@@ -1,6 +1,5 @@
 package com.acme.edu.commands.types.primitive;
 
-import com.acme.edu.Logger;
 import com.acme.edu.buffer.BufferState;
 import com.acme.edu.buffer.ControllerOverflow;
 import com.acme.edu.commands.Command;
@@ -19,8 +18,13 @@ public class ByteCommand extends PrimitiveCommand implements Command<Byte> {
 
     @Override
     public Command<Byte> accumulate(Command command) {
-        ControllerOverflow.controlOverflow((Byte) command.getMessage(), this);
-        return this;
+        if (command instanceof ByteCommand) {
+            ControllerOverflow.controlOverflow((Byte) command.getMessage(), this);
+            return new ByteCommand(message);
+        }
+        else {
+            throw new IllegalArgumentException("Wrong command!");
+        }
     }
 
     @Override

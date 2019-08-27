@@ -6,10 +6,16 @@ import com.acme.edu.saver.ConsoleSaver;
 
 public class StringCommand implements Command<String> {
     private String message;
-    private int counterOfStrings = 1;
+    private int counterOfStrings;
 
     public StringCommand(String message) {
         this.message = message;
+        this.counterOfStrings = 1;
+    }
+
+    public StringCommand(String message, int counterOfStrings) {
+        this.message = message;
+        this.counterOfStrings = counterOfStrings;
     }
 
     @Override
@@ -19,18 +25,25 @@ public class StringCommand implements Command<String> {
 
     @Override
     public Command<String> accumulate(Command command) {
-        if(command.getMessage().equals(message)) {
-            counterOfStrings++;
+        if (command instanceof StringCommand) {
+            if (command.getMessage().equals(message)) {
+                counterOfStrings++;
+            } else {
+                if (message != null) {
+                    if (counterOfStrings > 1) {
+                        new ConsoleSaver().saveWithoutPrefix(new StringCommand(getMessage()));
+                    } else {
+                        new ConsoleSaver().saveWithoutPrefix(new StringCommand(getMessage()));
+                    }
+                }
+                counterOfStrings = 1;
+                message = (String) command.getMessage();
+            }
+            return new StringCommand(message, counterOfStrings);
         }
         else {
-            if (message != null) {
-                if (counterOfStrings > 1) { new ConsoleSaver().saveWithoutPrefix(new StringCommand(message + " (x" + counterOfStrings + ")"));
-                } else { new ConsoleSaver().saveWithoutPrefix(new StringCommand(message)); }
-            }
-            counterOfStrings = 1;
-            message = (String) command.getMessage();
+            throw new IllegalArgumentException("Wrong command!");
         }
-        return this;
     }
 
     @Override
