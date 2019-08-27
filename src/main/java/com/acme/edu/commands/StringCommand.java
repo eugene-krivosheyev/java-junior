@@ -13,10 +13,20 @@ public class StringCommand implements Command {
         this.message = message;
     }
 
+    private StringCommand(String buffer, String message) {
+        this.buffer = buffer;
+        this.message = message;
+    }
+
+    private StringCommand(int counter, String buffer, String message) {
+        this.counter = counter;
+        this.buffer = buffer;
+        this.message = message;
+    }
+
     @Override
     public String getDecorated() {
-        updateBuffer(null);
-        return buffer.replaceFirst("\n", "");
+        return buffer.replaceFirst("\n", "") + decorate(message, counter);
     }
 
     @Override
@@ -26,20 +36,26 @@ public class StringCommand implements Command {
 
     @Override
     public StringCommand accumulate(Command other) {
-        StringCommand otherStringCommand = (StringCommand) other;
+        String otherMessage = ((StringCommand) other).getMessage();
 
-        if (Objects.equals(message, otherStringCommand.message)) {
-            ++counter;
+        if (Objects.equals(message, otherMessage)) {
+            return getIncrementedCopy();
         } else {
-            updateBuffer(otherStringCommand.message);
+            return getCopyWithResolvedBuffer(otherMessage);
         }
-        return this;
     }
 
-    private void updateBuffer(String newMessage) {
-        buffer += decorate(message, counter);
-        message = newMessage;
-        counter = 1;
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
+    private StringCommand getIncrementedCopy() {
+        return new StringCommand(this.counter + 1, this.buffer, this.message);
+    }
+
+    private StringCommand getCopyWithResolvedBuffer(String newMessage) {
+        return new StringCommand(this.buffer + decorate(this.message, this.counter), newMessage);
     }
 
     private static String decorate(String message, int counter) {

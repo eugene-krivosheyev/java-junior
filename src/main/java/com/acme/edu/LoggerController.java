@@ -1,6 +1,7 @@
 package com.acme.edu;
 
 import com.acme.edu.commands.Command;
+import com.acme.edu.savers.Saver;
 
 class LoggerController {
     private Saver saver;

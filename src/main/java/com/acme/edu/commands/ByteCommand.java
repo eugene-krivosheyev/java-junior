@@ -19,7 +19,15 @@ public class ByteCommand implements PrimitiveCommand {
 
     @Override
     public ByteCommand accumulate(Command other) {
-        message += ((ByteCommand) other).message;
-        return this;
+        if (other instanceof ByteCommand) {
+            return new ByteCommand((byte) (this.message + ((ByteCommand) other).getMessage()));
+        } else {
+            throw new IllegalArgumentException("Can't accumulate ByteCommand with other Command subclass");
+        }
+    }
+
+    @Override
+    public Byte getMessage() {
+        return message;
     }
 }

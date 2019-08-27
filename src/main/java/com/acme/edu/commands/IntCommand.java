@@ -19,7 +19,15 @@ public class IntCommand implements PrimitiveCommand {
 
     @Override
     public IntCommand accumulate(Command other) {
-        message += ((IntCommand) other).message;
-        return this;
+        if (other instanceof IntCommand) {
+            return new IntCommand(this.message + ((IntCommand) other).getMessage());
+        } else {
+            throw new IllegalArgumentException("Can't accumulate IntCommand with other Command subclass");
+        }
+    }
+
+    @Override
+    public Integer getMessage() {
+        return message;
     }
 }

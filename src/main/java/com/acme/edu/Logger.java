@@ -1,6 +1,8 @@
 package com.acme.edu;
 
 import com.acme.edu.commands.*;
+import com.acme.edu.savers.ConsoleSaver;
+import com.acme.edu.savers.Saver;
 
 public class Logger {
     private static final String PRIMITIVES_PREFIX = "primitives ";
