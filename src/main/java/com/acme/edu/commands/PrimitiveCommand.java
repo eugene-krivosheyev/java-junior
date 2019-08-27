@@ -2,7 +2,7 @@ package com.acme.edu.commands;
 
 import com.acme.edu.savers.Saver;
 
-public class PrimitiveCommand implements AccumulateCommand {
+public class PrimitiveCommand extends AccumulateCommand {
     private String message;
     private Integer buffer;
 
