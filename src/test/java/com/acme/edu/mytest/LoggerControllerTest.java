@@ -8,11 +8,12 @@ import com.acme.edu.*;
 import static org.mockito.Mockito.*;
 
 public class LoggerControllerTest {
+
     @Test
     public void shouldSaveWithPrefixCommand() {
         ConsoleSaver mockSaver = mock(ConsoleSaver.class);
 
-        Command firstStubCommand = mock(IntCommand.class);
+        IntCommand firstStubCommand = mock(IntCommand.class);
         when(firstStubCommand.decorate()).thenReturn("primitive: 1");
         when(firstStubCommand.getState()).thenReturn(StateCommand.INT);
 
@@ -29,11 +30,10 @@ public class LoggerControllerTest {
     public void shouldSaveWithoutPrefixCommand() {
         ConsoleSaver mockSaver = mock(ConsoleSaver.class);
 
-        Command firstStubCommand = mock(IntCommand.class);
+        IntCommand firstStubCommand = mock(IntCommand.class);
         when(firstStubCommand.decorate()).thenReturn("primitive: 1");
-        when(firstStubCommand.getState()).thenReturn(StateCommand.INT);
-
         when(firstStubCommand.getMessage()).thenReturn(1);
+        when(firstStubCommand.getState()).thenReturn(StateCommand.INT);
 
         LoggerController loggerController = new LoggerController(mockSaver);
 
