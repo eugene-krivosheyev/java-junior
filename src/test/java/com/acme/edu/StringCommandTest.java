@@ -16,11 +16,11 @@ public class StringCommandTest {
 
         CommandAccumulateInfo info = sut.accumulate(accumulateCommand);
 
-        String message = sut.getDecoratedMessage();
+        String decoratedMessage = sut.getDecoratedMessage();
 
-        assertThat(message)
+        assertThat(decoratedMessage)
                 .isEqualTo("string: str 1 (x2)");
-        assertThat(info.getMessage()).isNull();
+        assertThat(info.isFlushNeeded()).isFalse();
 
         assertThat(info.getCommand()).isEqualTo(sut);
     }
@@ -31,9 +31,9 @@ public class StringCommandTest {
 
         CommandAccumulateInfo info = sut.accumulate(lastCommand);
 
-        String message = sut.getDecoratedMessage();
+        String decoratedMessage = sut.getDecoratedMessage();
 
-        assertThat(message)
+        assertThat(decoratedMessage)
                 .isEqualTo("string: str 1");
         assertThat(info.getMessage())
                 .isEqualTo("string: str prev");

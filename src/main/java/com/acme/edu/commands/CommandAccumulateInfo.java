@@ -17,4 +17,8 @@ public class CommandAccumulateInfo {
     public String getMessage() {
         return message;
     }
+
+    public boolean isFlushNeeded() {
+        return message != null;
+    }
 }

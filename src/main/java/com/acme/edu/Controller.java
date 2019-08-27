@@ -30,6 +30,7 @@ public class Controller {
         }
 
         CommandAccumulateInfo info = command.accumulate(lastCommand);
+        lastCommand = info.getCommand();
 
         String message = info.getMessage();
         if (message != null) {
@@ -45,12 +46,4 @@ public class Controller {
         }
         lastCommand = null;
     }
-
-    public void logPrimitive(IntArrayCommand command) {
-
-    }
-
-
-
-
 }
