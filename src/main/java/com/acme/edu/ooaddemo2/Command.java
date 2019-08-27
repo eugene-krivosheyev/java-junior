@@ -5,5 +5,5 @@ public interface Command {
     String getDecorated();
     boolean isTypeEquals(Command previous);
     Command accumulate(Command other);
-    Object getDta();
+    Object getMessage();
 }

@@ -32,8 +32,8 @@ public class ArrayListTest {
         //endregion
 
         //region Then
-        assertEquals( 1, sut.size());
-        assertThat(sut)
+        Assert.assertEquals( 1, sut.size());
+        assertThat(sut) //assert-j
                 .hasSize(1)
                 .containsExactly(dummy)
                 .endsWith(dummy);

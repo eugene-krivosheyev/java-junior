@@ -10,16 +10,18 @@ public class LoggerController {
         this.saver = saver;
     }
 
+    Command getCurrentState() {
+        return currentState;
+    }
+
     public void log(Command command) {
-        if (currentState.isTypeEquals(command)) {
+        if (command.isTypeEquals(currentState)) {
             currentState = currentState.accumulate(command);
         } else {
-            saver.save(command.getDecorated());
             currentState = command;
-        }
-
-        if (!filter.isFiltered(command)) {
-            saver.save(command.getDecorated());
+            if (!filter.isFiltered(command)) {
+                saver.save(command.getDecorated());
+            }
         }
     }
 }

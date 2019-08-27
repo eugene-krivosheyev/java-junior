@@ -39,11 +39,6 @@ public class StringCommand implements Command {
         return null;
     }
 
-    @Override
-    public Object getDta() {
-        return message;
-    }
-
 
     private boolean areMessagesEqual(StringCommand other) {
         return Objects.equals(this.message, other.getMessage());

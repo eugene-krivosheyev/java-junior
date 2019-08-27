@@ -24,13 +24,21 @@ public class IntCommand implements Command {
         return other instanceof IntCommand;
     }
 
+    /**
+     * @param other please check type for ...
+     * @return
+     */
     @Override
-    public Command accumulate(Command other) {
-        return null;
+    public IntCommand accumulate(Command other) {
+        if (other instanceof IntCommand) {
+            return new IntCommand(this.message + ((IntCommand) other).getMessage(), this.severity);
+        } else {
+            throw new IllegalArgumentException("other");
+        }
     }
 
     @Override
-    public Object getDta() {
+    public Integer getMessage() {
         return message;
     }
 }
