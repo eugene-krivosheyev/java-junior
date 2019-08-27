@@ -25,7 +25,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldAccumulateWhenSameIntCommand() {
+    public void shouldAccumulateWhenTwoIntCommands() {
 
         Command secondCommand = mock(IntCommand.class);
 
@@ -43,13 +43,13 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldReturnIntTypeMessageWhenFlushing() {
-        when(firstCommand.getDecorated()).thenReturn("5");
+    public void shouldReturnOneDecoratedMessageWhenFlushingAfterPassingOneCommand() {
+        when(firstCommand.getDecorated()).thenReturn("deco: 5");
         logger.log(firstCommand);
 
         logger.flush();
 
-        verify(mockSaver).save("5");
+        verify(mockSaver).save("deco: 5");
 
     }
 }

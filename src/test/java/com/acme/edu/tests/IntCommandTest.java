@@ -20,7 +20,7 @@ public class IntCommandTest {
 
 
     @Test
-    public void shouldAccumulateWhenSameIntType() {
+    public void shouldAccumulateWhenTwoIntCommands() {
         Command secondCommand = new IntCommand(6);
 
         Command accumulatedCommand = firstCommand.getAccumulated(secondCommand);
@@ -30,7 +30,7 @@ public class IntCommandTest {
     }
 
     @Test
-    public void shouldDecorateIntType() {
+    public void shouldDecorateIntCommand() {
 
         String decoratedMessage = firstCommand.getDecorated();
 
@@ -38,7 +38,7 @@ public class IntCommandTest {
     }
 
     @Test
-    public void shouldReturnIntWhenGetMessage() {
+    public void shouldReturnMessageWhenGetMessage() {
 
         int firstCommandMessage = firstCommand.getMessage();
 
