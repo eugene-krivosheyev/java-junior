@@ -16,13 +16,16 @@ public class LoggerController {
 
     void log(Command command) {
         if (command.isTypeEquals(currentState)) {
-            if (currentState.accumulate(command).isOverflow()) {
+            try {
+                currentState.accumulate(command);
+            }
+            catch (ArithmeticException e) {
+                e.printStackTrace();
                 flush();
                 currentState = command;
-                throw new ArithmeticException();
-            } else {
+            }
+            finally {
                 currentState = currentState.accumulate(command);
-                throw new ArithmeticException();
             }
         } else {
             if (currentState != null) {

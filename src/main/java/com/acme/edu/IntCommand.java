@@ -4,7 +4,7 @@ public class IntCommand implements Command {
     private final static String PRIMITIVE_PREFIX = "primitive: ";
     private int message;
 
-    public IntCommand(int message) {
+    IntCommand(int message) {
         this.message = message;
     }
 
@@ -15,11 +15,21 @@ public class IntCommand implements Command {
 
     @Override
     public boolean isOverflow() {
-        return message < 0;
+        if (message < 0) {
+            throw new ArithmeticException();
+        }
+        return false;
     }
 
     @Override
     public Command accumulate(Command other) {
+        try {
+            (new IntCommand((int)this.getMessage() + (int)other.getMessage())).isOverflow();
+        }
+        catch (ArithmeticException e) {
+            e.printStackTrace();
+            throw new ArithmeticException("Overflow");
+        }
         return new IntCommand((int)this.getMessage() + (int)other.getMessage());
     }
 

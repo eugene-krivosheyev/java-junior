@@ -59,13 +59,4 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
         loggerController.log(new IntCommand(1));
         loggerController.log(new IntCommand(Integer.MAX_VALUE));
     }
-
-    @Test(expected = ArithmeticException.class)
-    public void shouldThrowArithmeticExceptionWhenNotOverflow() {
-        final SuperCurrentAccumulator superCurrentAccumulator = new SuperCurrentAccumulator();
-        final SuperConsoleSaver superConsoleSaver = new SuperConsoleSaver();
-        final LoggerController loggerController = new LoggerController(superCurrentAccumulator, superConsoleSaver);
-        loggerController.log(new IntCommand(1));
-        loggerController.log(new IntCommand(2));
-    }
 }
