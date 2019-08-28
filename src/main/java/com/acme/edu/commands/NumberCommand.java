@@ -25,7 +25,7 @@ public abstract class NumberCommand extends Command {
                                        Command accumulatedCommand, Command newCommand) {
         long currentMessageToLong = message;
         try {
-            if (currentMessageToLong + newMessage >= maxValue || currentMessageToLong + newMessage <= minValue) {
+            if (currentMessageToLong + newMessage > maxValue || currentMessageToLong + newMessage < minValue) {
                 throw new ArithmeticException("Overflow!");
             }
         }

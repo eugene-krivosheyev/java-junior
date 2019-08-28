@@ -11,8 +11,15 @@ public class Logger {
         loggerController.flush();
     }
 
-    public static void log(String message) {
-        loggerController.log(new StringCommand(message));
+    public static void log(String message) throws Exception {
+        // TODO
+        try {
+            loggerController.log(new StringCommand(message));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Operation was not done");
+        }
     }
 
     public static void log(int message) {
