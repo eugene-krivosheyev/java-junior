@@ -25,14 +25,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    @Test @Ignore
+    @Test
     public void shouldLogInteger() throws IOException {
         //region when
-        IntCommand command = new IntCommand(1);
-        //LoggerController.log(command);
-        //Logger.log(1);
-        //Logger.log(0);
-        //Logger.log(-1);
+        Logger.log(1);
+        Logger.log(0);
+        Logger.log(-1);
         //endregion
 
         //region then
@@ -41,7 +39,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test @Ignore
+    @Test
     public void shouldLogByte() throws IOException {
         //region when
         Logger.log((byte)1);
@@ -59,7 +57,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     // TODO: implement Logger solution to match specification as tests
 
-    @Test @Ignore
+    @Test
     public void shouldLogChar() throws IOException {
         //region when
         Logger.log('a');
@@ -73,7 +71,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test @Ignore
+    @Test
     public void shouldLogString() throws IOException {
         //region when
         Logger.log("test string 1");
@@ -87,7 +85,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test @Ignore
+    @Test
     public void shouldLogBoolean() throws IOException {
         //region when
         Logger.log(true);
@@ -101,10 +99,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test @Ignore
+    @Test
     public void shouldLogReference() throws IOException {
         //region when
-        //Logger.log(new Object());
+        Logger.log(new Object());
         //endregion
 
         //region then

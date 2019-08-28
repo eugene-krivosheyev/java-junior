@@ -15,7 +15,7 @@ public class StringCommandTest {
     @Test
     public void shouldNotBeOverflow() {
         final StringCommand sut = new StringCommand("str");
-        assertThat(sut.isOverflow()).isEqualTo(false);
+        assertThat(sut.isOverflow()).isEqualTo(true);
     }
 
     @Test

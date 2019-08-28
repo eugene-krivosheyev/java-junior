@@ -4,13 +4,13 @@ public class StringCommand implements Command {
     private final static String STRING_PREFIX = "string: ";
     private String message;
 
-    public StringCommand(String message) {
+    StringCommand(String message) {
         this.message = message;
     }
 
     @Override
     public Command accumulate(Command other) {
-        return null;
+        return other;
     }
 
     @Override
@@ -30,6 +30,6 @@ public class StringCommand implements Command {
 
     @Override
     public boolean isOverflow() {
-        return false;
+        return true;
     }
 }
