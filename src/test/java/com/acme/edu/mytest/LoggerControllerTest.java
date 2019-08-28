@@ -3,6 +3,7 @@ package com.acme.edu.mytest;
 import com.acme.edu.commands.Command;
 import com.acme.edu.commands.types.primitive.IntCommand;
 import com.acme.edu.saver.ConsoleSaver;
+import org.junit.Ignore;
 import org.junit.Test;
 import com.acme.edu.*;
 import static org.mockito.Mockito.*;
@@ -26,7 +27,7 @@ public class LoggerControllerTest {
         verify(mockSaver).saveWithPrefix(firstStubCommand);
     }
 
-    @Test
+    @Test @Ignore
     public void shouldSaveWithoutPrefixCommand() {
         ConsoleSaver mockSaver = mock(ConsoleSaver.class);
 

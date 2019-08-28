@@ -16,7 +16,15 @@ public class BooleanCommand extends PrimitiveCommand implements Command<Boolean>
     }
 
     @Override
-    public Command<Boolean> accumulate(Command command) { return null; }
+    public Command<Boolean> accumulate(Command command) {
+        try {
+            if (!(command instanceof BooleanCommand))
+                throw new IllegalArgumentException("Not boolean command!");
+        }catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        return new BooleanCommand(message);
+    }
 
     @Override
     public Boolean getMessage() { return message; }

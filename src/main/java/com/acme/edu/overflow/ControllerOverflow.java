@@ -7,8 +7,11 @@ import com.acme.edu.saver.ConsoleSaver;
 
 public class ControllerOverflow {
 
-   public static void controlOverflow(int value,  IntCommand command) {
-        if(value > 0 && Integer.MAX_VALUE - value <=  command.getMessage()) { value = Integer.MAX_VALUE; }
+   public static void controlOverflow(int value,  IntCommand command) throws OverflowException {
+        if(value > 0 && Integer.MAX_VALUE - value <=  command.getMessage()) {
+            value = Integer.MAX_VALUE;
+            throw new OverflowException("Int overflow");
+        }
         else if(value < 0 && Integer.MIN_VALUE - value >= command.getMessage()){ value = Integer.MIN_VALUE; }
 
         if (value == Integer.MAX_VALUE || value == Integer.MIN_VALUE) {
@@ -19,8 +22,11 @@ public class ControllerOverflow {
 
 
 
-    public static void controlOverflow(byte value, ByteCommand command) {
-        if(value > 0 && Byte.MAX_VALUE - value <=  command.getMessage()) { value = Byte.MAX_VALUE; }
+    public static void controlOverflow(byte value, ByteCommand command) throws OverflowException {
+        if(value > 0 && Byte.MAX_VALUE - value <=  command.getMessage()) {
+            value = Byte.MAX_VALUE;
+            throw new OverflowException("Byte overflow");
+        }
         else if(value < 0 && Byte.MIN_VALUE - value >= command.getMessage()){ value = Byte.MIN_VALUE; }
 
         if (value == Byte.MAX_VALUE || value == Byte.MIN_VALUE) {

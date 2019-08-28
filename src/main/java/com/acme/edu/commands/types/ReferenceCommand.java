@@ -15,7 +15,15 @@ public class ReferenceCommand implements Command<Object> {
     }
 
     @Override
-    public Command<Object> accumulate(Command command) { return null; }
+    public Command<Object> accumulate(Command command) {
+        try {
+            if (!(command instanceof ReferenceCommand))
+                throw new IllegalArgumentException("Not a reference command!");
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        return new ReferenceCommand(message);
+    }
 
     @Override
     public Object getMessage() { return message; }

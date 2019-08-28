@@ -3,6 +3,7 @@ package com.acme.edu.commands.types.primitive;
 import com.acme.edu.StateCommand;
 import com.acme.edu.overflow.ControllerOverflow;
 import com.acme.edu.commands.Command;
+import com.acme.edu.overflow.OverflowException;
 
 public class ByteCommand extends PrimitiveCommand implements Command<Byte> {
     private Byte message;
@@ -18,13 +19,15 @@ public class ByteCommand extends PrimitiveCommand implements Command<Byte> {
 
     @Override
     public Command<Byte> accumulate(Command command) {
-        if (command instanceof ByteCommand) {
-            ControllerOverflow.controlOverflow((Byte) command.getMessage(), this);
-            return new ByteCommand(message);
+        try {
+            if (command instanceof ByteCommand)
+                ControllerOverflow.controlOverflow((Byte) command.getMessage(), this);
+            else
+                throw new IllegalArgumentException("Not a byte command!");
+        } catch (IllegalArgumentException | OverflowException e) {
+            e.printStackTrace();
         }
-        else {
-            throw new IllegalArgumentException("Wrong command!");
-        }
+        return new ByteCommand(message);
     }
 
     @Override

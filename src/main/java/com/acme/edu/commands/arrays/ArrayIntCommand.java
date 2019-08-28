@@ -17,7 +17,13 @@ public class ArrayIntCommand extends ArrayCommand {
 
     @Override
     public Command<String> accumulate(Command command) {
-        return null;
+        try {
+            if (!(command instanceof ArrayIntCommand))
+                throw new IllegalArgumentException("Not a array int command!");
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        return new ArrayIntCommand(message);
     }
 
     @Override

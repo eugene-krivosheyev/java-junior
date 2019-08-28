@@ -2,9 +2,12 @@ package com.acme.edu.mytest;
 
 import com.acme.edu.commands.Command;
 import com.acme.edu.commands.types.StringCommand;
+import com.acme.edu.commands.types.primitive.ByteCommand;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
 
 public class StringCommandTest {
 
@@ -29,5 +32,15 @@ public class StringCommandTest {
         final Command sut = new StringCommand("str 1");
         final String decorateResult = sut.decorate();
         assertThat(decorateResult).isEqualTo("string: str 1");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentExceptionIfSummStringAndByte() {
+        final Command sutString = mock(StringCommand.class);
+        ((StringCommand) sutString).setMessage("tst 1");
+        final Command sutByte = mock(ByteCommand.class);
+        ((ByteCommand) sutByte).setMessage((byte) 1);
+        doThrow(IllegalArgumentException.class).when(sutString).accumulate(sutByte);
+        sutString.accumulate(sutByte);
     }
 }
