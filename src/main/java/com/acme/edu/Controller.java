@@ -3,6 +3,7 @@ package com.acme.edu;
 import com.acme.edu.commands.Command;
 import com.acme.edu.commands.CommandAccumulateInfo;
 import com.acme.edu.commands.IntArrayCommand;
+import com.acme.edu.commands.Integer.IntegerOverflowException;
 import com.acme.edu.saver.Saver;
 
 public class Controller {
@@ -29,14 +30,20 @@ public class Controller {
             return;
         }
 
-        CommandAccumulateInfo accumulateInfo = command.accumulate(lastCommand);
-
-
-        //String message = info.getMessage();
-        if (accumulateInfo.isFlushNeeded()) {
-            saver.save(accumulateInfo.getMessage());
+        try {
+            CommandAccumulateInfo accumulateInfo = command.accumulate(lastCommand);
+            //String message = info.getMessage();
+            if (accumulateInfo.isFlushNeeded()) {
+                saver.save(accumulateInfo.getMessage());
+            }
+            lastCommand = command;
+        } catch (IntegerOverflowException e) {
+            //e.printStackTrace();
+            flush();
+            lastCommand = command;
         }
-        lastCommand = command;
+
+
     }
 
     public void flush() {

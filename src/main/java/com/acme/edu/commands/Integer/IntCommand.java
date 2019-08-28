@@ -1,4 +1,4 @@
-package com.acme.edu.commands;
+package com.acme.edu.commands.Integer;
 
 import com.acme.edu.Logger.LoggingType;
 

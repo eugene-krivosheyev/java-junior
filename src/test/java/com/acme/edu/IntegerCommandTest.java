@@ -1,9 +1,11 @@
 package com.acme.edu;
 
 import com.acme.edu.commands.*;
+import com.acme.edu.commands.Integer.ByteCommand;
+import com.acme.edu.commands.Integer.IntCommand;
+import com.acme.edu.commands.Integer.IntegerOverflowException;
 import org.junit.Test;
 
-import static org.fest.reflect.core.Reflection.*;
 import static org.fest.assertions.Assertions.*;
 
 public class IntegerCommandTest {
@@ -24,7 +26,7 @@ public class IntegerCommandTest {
     }
 
 
-    @Test
+    @Test(expected = IntegerOverflowException.class)
     public void shouldFlushAccumulatedInfoIfUpperOverflow() {
         final ByteCommand sut = new ByteCommand((byte)1);
         final ByteCommand accumulateCommand = new ByteCommand((byte)2);

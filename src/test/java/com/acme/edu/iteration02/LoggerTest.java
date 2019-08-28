@@ -2,6 +2,7 @@ package com.acme.edu.iteration02;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.commands.Integer.IntegerOverflowException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -25,10 +26,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
 
-    /*
-    TODO: implement Logger solution to match specification as tests
-    */
-    // FIXME test fails
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
@@ -51,7 +48,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test
+    @Test(expected = IntegerOverflowException.class)
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
         Logger.log("str 1");
@@ -74,7 +71,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test
+    @Test(expected = IntegerOverflowException.class)
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
         Logger.log("str 1");

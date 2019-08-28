@@ -1,7 +1,7 @@
 package com.acme.edu;
 
 import com.acme.edu.commands.CommandAccumulateInfo;
-import com.acme.edu.commands.IntCommand;
+import com.acme.edu.commands.Integer.IntCommand;
 import com.acme.edu.commands.StringCommand;
 import com.acme.edu.saver.Saver;
 import org.junit.Before;

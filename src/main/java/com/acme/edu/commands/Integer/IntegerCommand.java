@@ -1,8 +1,11 @@
-package com.acme.edu.commands;
+package com.acme.edu.commands.Integer;
 
 import com.acme.edu.Logger.LoggingType;
+import com.acme.edu.commands.Command;
+import com.acme.edu.commands.CommandAccumulateInfo;
+import com.acme.edu.commands.PrimitiveCommand;
 
-public class IntegerCommand extends PrimitiveCommand{
+public class IntegerCommand extends PrimitiveCommand {
     private static String PREFIX_PRIMITIVE = "primitive: ";
     private LoggingType type;
 
@@ -30,8 +33,11 @@ public class IntegerCommand extends PrimitiveCommand{
         String returnMessage = null;
         long otherMessage = (Long)other.getMessage();
         long sum = (Long)(getMessage()) + otherMessage;
-        if(MIN_VALUE > sum || sum > MAX_VALUE) {
-            returnMessage = other.getDecoratedMessage();
+        if(MIN_VALUE > sum /*|| sum > MAX_VALUE*/) {
+            //returnMessage = other.getDecoratedMessage();
+            throw new IntegerOverflowException("Lower overflow");
+        } else if(sum > MAX_VALUE) {
+            throw new IntegerOverflowException("Upper overflow");
         } else {
             message += otherMessage;
         }
@@ -41,3 +47,4 @@ public class IntegerCommand extends PrimitiveCommand{
 
 
 }
+

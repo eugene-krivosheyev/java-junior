@@ -6,6 +6,8 @@ Multi-line comment
  */
 
 import com.acme.edu.commands.*;
+import com.acme.edu.commands.Integer.IntCommand;
+import com.acme.edu.commands.Integer.IntegerCommand;
 import com.acme.edu.saver.ConsoleSaver;
 
 import java.util.Objects;
