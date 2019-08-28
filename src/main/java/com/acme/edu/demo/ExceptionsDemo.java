@@ -4,18 +4,9 @@ import java.io.*;
 
 public class ExceptionsDemo {
     public static void main(String[] args) {
-        try (
-                final Controller controller = new Controller();
-                final FileOutputStream fileInputStream = new FileOutputStream("a.txt")
-        ) {
-
+        try (final Controller controller = new Controller()) {
             controller.log();
-
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (LogOperationException e) {
             e.printStackTrace();
         }
     }
@@ -25,12 +16,11 @@ class Controller implements AutoCloseable  {
     private PuperSaver saver = new PuperSaver();
     private PuperDecorator decorator = new PuperDecorator();
 
-    public void log() {
+    public void log() throws LogOperationException {
         try {
             saver.save(decorator.decorate());
-        } catch (IllegalArgumentException e) {
-//            e.printStackTrace();
-            throw new LogOperationException(e); //re-throw
+        } catch (IOException e) {
+            throw new LogOperationException("Super useful message", e); //re-throw
         }
     }
 
@@ -41,9 +31,8 @@ class Controller implements AutoCloseable  {
 }
 
 class PuperSaver {
-    public void save(String decoratedMessage) {
-        if (decoratedMessage == null)
-            throw new IllegalArgumentException("decMess must not be null!");
+    public void save(String decoratedMessage) throws IOException {
+        throw new IOException();
     }
 }
 
@@ -53,7 +42,11 @@ class PuperDecorator {
     }
 }
 
-class LogOperationException extends RuntimeException {
+class LogOperationException extends Exception {
+    public LogOperationException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
     public LogOperationException(Throwable cause) {
         super(cause);
     }
