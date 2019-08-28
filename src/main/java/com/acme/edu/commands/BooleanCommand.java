@@ -1,12 +1,11 @@
 package com.acme.edu.commands;
 
-import com.acme.edu.CommandAndFlushOptional;
+import com.acme.edu.savers.Saver;
 
 /**
  * Created by kate-c on 25/08/2019.
  */
-public class BooleanCommand implements Command {
-
+public class BooleanCommand extends Command {
     boolean message;
 
     public BooleanCommand(boolean message) {
@@ -15,11 +14,6 @@ public class BooleanCommand implements Command {
 
     public Boolean getMessage() {
         return message;
-    }
-
-    @Override
-    public void setMessage(Object message) {
-        this.message = (boolean)message;
     }
 
     @Override
@@ -32,10 +26,9 @@ public class BooleanCommand implements Command {
         return other instanceof BooleanCommand;
     }
 
-
     @Override
-    public CommandAndFlushOptional accumulate(Command command) {
-        // TODO
+    public Command accumulate(Command command, Saver saver) {
         throw new UnsupportedOperationException("Booleans can't be accumulated!");
     }
+
 }

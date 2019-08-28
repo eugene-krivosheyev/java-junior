@@ -1,27 +1,41 @@
 package com.acme.edu.commands;
+import com.acme.edu.savers.Saver;
 
-import com.acme.edu.CommandAndFlushOptional;
 
 /**
  * Created by kate-c on 26/08/2019.
  */
-public abstract class NumberCommand implements Command {
+public abstract class NumberCommand extends Command {
+
+    protected long message;
+
+    public NumberCommand(long message) {
+        this.message = message;
+    }
+
     @Override
     public String decorate() {
-        return "primitive: " + getMessage();
+        return "primitive: " + message;
     }
 
-    @Override
-    public CommandAndFlushOptional accumulate(Command command) {
-        byte newMessage = ((ByteCommand) command).getMessage();
-        long currentMessageToLong = (long)getMessage();
-        if (currentMessageToLong + newMessage >= getMaxValue()) {
-            return new CommandAndFlushOptional(new ByteCommand(newMessage), true);
+
+    public Command accumulatorTemplate(long message, long newMessage,
+                                       long minValue, long maxValue,
+                                       Saver saver,
+                                       Command accumulatedCommand, Command newCommand) {
+        long currentMessageToLong = message;
+        try {
+            if (currentMessageToLong + newMessage >= maxValue || currentMessageToLong + newMessage <= minValue) {
+                throw new ArithmeticException("Overflow!");
+            }
         }
-        setMessage(newMessage);
-
-        return new CommandAndFlushOptional(new ByteCommand((byte)getMessage()), false);
+        catch(ArithmeticException e) {
+            e.printStackTrace();
+            this.flush(saver);
+            return newCommand;
+        }
+        return accumulatedCommand;
     }
 
-    public abstract long getMaxValue();
 }
+

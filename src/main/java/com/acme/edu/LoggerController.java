@@ -1,7 +1,9 @@
 package com.acme.edu;
 
 import com.acme.edu.commands.Command;
-import com.sun.istack.internal.Nullable;
+import com.acme.edu.savers.ConsoleSaver;
+import com.acme.edu.savers.Saver;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by kate-c on 23/08/2019.
@@ -23,20 +25,15 @@ public class LoggerController {
         }
 
         if (previousCommand.isTypeEqual(newCommand)) {
-            // TODO -> tell not ask
-            CommandAndFlushOptional result = previousCommand.accumulate(newCommand);
-            if (result.ifFlushNeeded()) {
-                flush();
-            }
-            previousCommand = result.getCommand();
+            previousCommand = previousCommand.accumulate(newCommand, saver);
         } else {
-            flush();
+            previousCommand.flush(saver);
             previousCommand = newCommand;
         }
     }
 
     public void flush() {
-        saver.save(previousCommand.decorate());
+        previousCommand.flush(saver);
         previousCommand = null;
     }
 }

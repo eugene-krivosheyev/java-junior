@@ -1,18 +1,19 @@
 package com.acme.edu.commands;
 
-import com.acme.edu.CommandAndFlushOptional;
+import com.acme.edu.savers.Saver;
 
 import java.util.Objects;
 
 /**
  * Created by kate-c on 23/08/2019.
  */
-public class StringCommand implements Command {
+public class StringCommand extends Command {
     private String message;
-    private int stringCounter = 1;
+    private int stringCounter;
 
     public StringCommand(String message) {
         this.message = message;
+        this.stringCounter = 1;
     }
 
     private StringCommand(String message, int stringCounter) {
@@ -23,11 +24,6 @@ public class StringCommand implements Command {
     @Override
     public String getMessage() {
         return message;
-    }
-
-    @Override
-    public void setMessage(Object message) {
-        this.message = message.toString();
     }
 
     @Override
@@ -44,17 +40,20 @@ public class StringCommand implements Command {
         return temp;
     }
 
-    //////////////////////
 
     @Override
-    public CommandAndFlushOptional accumulate(Command command) {
-        String newMessage = ((StringCommand)command).getMessage();
-        if (this.isTypeEqual(command)) {
-            stringCounter += 1;
-            return new CommandAndFlushOptional(new StringCommand(message, stringCounter), false);
+    public Command accumulate(Command command, Saver saver) {
+        if (command == null) {
+            throw new IllegalArgumentException("Null argument");
         }
-        return new CommandAndFlushOptional(new StringCommand(newMessage, stringCounter), true);
-        // TODO один return
+        if (!(command instanceof StringCommand)) {
+            throw new IllegalArgumentException("Not the same type of message");
+        }
+        String newMessage = ((StringCommand)command).getMessage();
+        if (!this.isTypeEqual(command)) {
+            this.flush(saver);
+            return new StringCommand(newMessage, 1);
+        }
+        return new StringCommand(message, stringCounter + 1);
     }
-
 }

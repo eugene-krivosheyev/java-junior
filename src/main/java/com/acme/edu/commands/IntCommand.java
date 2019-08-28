@@ -1,30 +1,21 @@
 package com.acme.edu.commands;
 
-import com.acme.edu.CommandAndFlushOptional;
+import com.acme.edu.savers.Saver;
 
 /**
  * Created by kate-c on 23/08/2019.
  */
-public class IntCommand implements Command {
-
-    private int message;
+public class IntCommand extends NumberCommand {
+    //private int message;
+    private final static int MAX_VALUE = Integer.MAX_VALUE;
+    private final static int MIN_VALUE = Integer.MIN_VALUE;
 
     public IntCommand(int message) {
-        this.message = message;
+        super(message);
     }
 
     public Integer getMessage() {
-        return message;
-    }
-
-    @Override
-    public void setMessage(Object message) {
-        this.message = (int)message;
-    }
-
-    @Override
-    public String decorate() {
-        return "primitive: " + message;
+        return (int)message;
     }
 
     @Override
@@ -32,15 +23,20 @@ public class IntCommand implements Command {
         return other instanceof IntCommand;
     }
 
-
     @Override
-    public CommandAndFlushOptional accumulate(Command command) {
-        int newMessage = ((IntCommand) command).getMessage();
-        long currentMessageToLong = message;
-        if (currentMessageToLong + newMessage >= Integer.MAX_VALUE) {
-            return new CommandAndFlushOptional(new IntCommand(newMessage), true);
+    public Command accumulate(Command command, Saver saver) {
+        if (command == null) {
+            throw new IllegalArgumentException("Null argument");
         }
-        message += newMessage;
-        return new CommandAndFlushOptional(new IntCommand(this.message), false);
+        if (!(command instanceof IntCommand)) {
+            throw new IllegalArgumentException("Not the same type of message");
+        }
+        int newMessage = ((IntCommand) command).getMessage();
+        return accumulatorTemplate(this.message, newMessage,
+                                   MIN_VALUE, MAX_VALUE,
+                                   saver,
+                                   new IntCommand((int)message + newMessage),
+                                   new IntCommand(newMessage));
+
     }
 }

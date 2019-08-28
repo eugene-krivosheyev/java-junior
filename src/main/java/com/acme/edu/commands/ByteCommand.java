@@ -1,29 +1,20 @@
 package com.acme.edu.commands;
 
-import com.acme.edu.CommandAndFlushOptional;
+import com.acme.edu.savers.Saver;
 
 /**
  * Created by kate-c on 25/08/2019.
  */
-public class ByteCommand implements Command {
-
-    private byte message;
+public class ByteCommand extends NumberCommand {
+    private final static byte MAX_VALUE = Byte.MAX_VALUE;
+    private final static byte MIN_VALUE = Byte.MIN_VALUE;
 
     public ByteCommand(byte message) {
-        this.message = message;
+        super(message);
     }
 
     public Byte getMessage() {
-        return message;
-    }
-
-    @Override
-    public void setMessage(Object message) {
-        this.message = (byte)message;
-    }
-    @Override
-    public String decorate() {
-        return "primitive: " + message;
+        return (byte)message;
     }
 
     @Override
@@ -31,16 +22,20 @@ public class ByteCommand implements Command {
         return other instanceof ByteCommand;
     }
 
-
     @Override
-    public CommandAndFlushOptional accumulate(Command command) {
-        byte newMessage = ((ByteCommand) command).getMessage();
-        long currentMessageToLong = message;
-        if (currentMessageToLong + newMessage >= Byte.MAX_VALUE) {
-            return new CommandAndFlushOptional(new ByteCommand(newMessage), true);
+    public Command accumulate(Command command, Saver saver) {
+        if (command == null) {
+            throw new IllegalArgumentException("Null argument");
         }
-        message += newMessage;
+        if (!(command instanceof ByteCommand)) {
+            throw new IllegalArgumentException("Not the same type of message");
+        }
+        byte newMessage = ((ByteCommand) command).getMessage();
+        return accumulatorTemplate(this.message, newMessage,
+                MIN_VALUE, MAX_VALUE,
+                saver,
+                new ByteCommand((byte)((byte)message + newMessage)),
+                new ByteCommand(newMessage));
 
-        return new CommandAndFlushOptional(new ByteCommand(this.message), false);
     }
 }

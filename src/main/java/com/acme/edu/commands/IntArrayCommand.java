@@ -1,13 +1,14 @@
 package com.acme.edu.commands;
+import com.acme.edu.savers.Saver;
 
-import com.acme.edu.CommandAndFlushOptional;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * Created by kate-c on 25/08/2019.
  */
-public class IntArrayCommand implements Command {
+public class IntArrayCommand extends Command {
     private int[] messageArray;
-    private static final String DELIMETER = ", ";
 
     public IntArrayCommand(int[] messageArray) {
         this.messageArray = messageArray;
@@ -18,13 +19,11 @@ public class IntArrayCommand implements Command {
     }
 
     @Override
-    public void setMessage(Object message) {
-        this.messageArray = (int[]) message;
-    }
-
-    @Override
     public String decorate() {
-        return "primitives array: " + convertArrayToString(messageArray);
+        return "primitives array: " + Arrays.stream(messageArray)
+                                        .boxed()
+                                        .map(Object::toString)
+                                        .collect(Collectors.joining(", ", "{", "}"));
     }
 
     @Override
@@ -33,17 +32,7 @@ public class IntArrayCommand implements Command {
     }
 
     @Override
-    public CommandAndFlushOptional accumulate(Command command) {
+    public Command accumulate(Command command, Saver saver) {
         throw new UnsupportedOperationException("Integer arrays can't be accumulated!");
-    }
-
-    private static String convertArrayToString(int[] array) {
-        String temp = "{";
-        for (int i = 0; i < array.length - 1; i++) {
-            temp += array[i] + DELIMETER;
-        }
-        temp += array[array.length - 1] + "}";
-        return temp;
-
     }
 }

@@ -4,6 +4,7 @@ import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
 
-    @Test
+    @Test @Ignore
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
         Logger.log("str 1");
@@ -44,8 +45,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
 
-    @Test
-    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
+    @Test @Ignore
+    public void shouldLogCorrectlyIntegerUpperOverflowWhenSequentIntegers() {
         //region when
         Logger.log("str 1");
         Logger.log(1);
@@ -67,7 +68,30 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test
+    @Test @Ignore
+    public void shouldLogCorrectlyIntegerLowerOverflowWhenSequentIntegers() {
+        //region when
+        Logger.log("str 1");
+        Logger.log(-1);
+        Logger.log(-10);
+        Logger.log(Integer.MIN_VALUE);
+        Logger.log(-15);
+        Logger.log("str 2");
+        Logger.log(0);
+        Logger.flush();
+        //endregion
+
+        //region then
+        assertSysoutContains("str 1\n");
+        assertSysoutContains("-11\n");
+        assertSysoutContains(Integer.MIN_VALUE + "\n");
+        assertSysoutContains("-15\n");
+        assertSysoutContains("str 2\n");
+        assertSysoutContains("0\n");
+        //endregion
+    }
+
+    @Test @Ignore
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
         Logger.log("str 1");
@@ -88,7 +112,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
 
-    @Test
+    @Test @Ignore
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
         //region when
         Logger.log("str 1");

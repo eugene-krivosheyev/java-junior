@@ -56,10 +56,10 @@
         <version>1.4.5</version>
         <configuration>
           <targetClasses>
-            <param>com.acme.edu.ooaddemo2.*</param>
+            <param>com.acme.edu.*</param>
           </targetClasses>
           <targetTests>
-            <param>com.acme.edu.ooaddemo2.*</param>
+            <param>com.acme.edu.*</param>
           </targetTests>
         </configuration>
         <executions>
