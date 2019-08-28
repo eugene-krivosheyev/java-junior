@@ -13,7 +13,11 @@ public class LoggerController {
 
     public void log(Command command) {
         if (command.isTypeEquals(currentState)) {
-            currentState = currentState.accumulate(command);
+            try {
+                currentState = currentState.accumulate(command);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
             if (currentState != null) {
                 saver.save(currentState.getDecorated());

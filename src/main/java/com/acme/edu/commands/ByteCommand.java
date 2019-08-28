@@ -1,6 +1,6 @@
 package com.acme.edu.commands;
 
-public class ByteCommand implements PrimitiveCommand {
+public class ByteCommand implements Command {
     private byte message;
 
     public ByteCommand(byte message) {
@@ -9,7 +9,7 @@ public class ByteCommand implements PrimitiveCommand {
 
     @Override
     public String getDecorated() {
-        return PRIMITIVE_PREFIX + message;
+        return Command.PRIMITIVE_PREFIX + message;
     }
 
     @Override

@@ -1,8 +1,7 @@
 package com.acme.edu.mytest;
 
 import com.acme.edu.LoggerController;
-import com.acme.edu.commands.IntCommand;
-import com.acme.edu.commands.StringCommand;
+import com.acme.edu.commands.Command;
 import com.acme.edu.savers.ConsoleSaver;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +9,7 @@ import org.junit.Test;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verify;
 
-public class IntCommandTest {
+public class LoggerControllerTest {
     private LoggerController sut;
 
     @Before
@@ -20,8 +19,8 @@ public class IntCommandTest {
 
     @Test
     public void shouldTypeEqualsReturnTrueIfTypesAreEqual() {
-        IntCommand firstStubCommand = mock(IntCommand.class);
-        IntCommand secondStubCommand = mock(IntCommand.class);
+        Command firstStubCommand = mock(Command.class);
+        Command secondStubCommand = mock(Command.class);
 
         when(firstStubCommand.isTypeEquals(null)).thenReturn(false);
         when(secondStubCommand.isTypeEquals(firstStubCommand)).thenReturn(true);

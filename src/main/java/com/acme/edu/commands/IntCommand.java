@@ -1,6 +1,6 @@
 package com.acme.edu.commands;
 
-public class IntCommand implements PrimitiveCommand {
+public class IntCommand implements Command {
     private int message;
 
     public IntCommand(int message) {
@@ -9,7 +9,7 @@ public class IntCommand implements PrimitiveCommand {
 
     @Override
     public String getDecorated() {
-        return PRIMITIVE_PREFIX + message;
+        return Command.PRIMITIVE_PREFIX + message;
     }
 
     @Override
@@ -20,7 +20,11 @@ public class IntCommand implements PrimitiveCommand {
     @Override
     public IntCommand accumulate(Command other) {
         if (other instanceof IntCommand) {
-            return new IntCommand(this.message + ((IntCommand) other).getMessage());
+            int otherMessage = ((IntCommand) other).getMessage();
+            if ((long) otherMessage + this.message > Integer.MAX_VALUE) {
+                throw new IllegalArgumentException("Overflow accumulation is not supported yet");
+            }
+            return new IntCommand(this.message + otherMessage);
         } else {
             throw new IllegalArgumentException("Can't accumulate IntCommand with other Command subclass");
         }

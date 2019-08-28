@@ -37,7 +37,6 @@ public class StringCommand implements Command {
     @Override
     public StringCommand accumulate(Command other) {
         String otherMessage = ((StringCommand) other).getMessage();
-
         if (Objects.equals(message, otherMessage)) {
             return getIncrementedCopy();
         } else {
