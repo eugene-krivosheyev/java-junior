@@ -1,34 +1,27 @@
 package com.acme.edu.demo;
 
+import java.io.*;
+
 public class ExceptionsDemo {
     public static void main(String[] args) {
-        final Controller controller = new Controller();
-        LogOperationException logOperationException = null;
-        try {
-            controller.log();
-        } catch (IllegalArgumentException | ArithmeticException e) {
-//            e.printStackTrace();
-        } catch (RuntimeException e) {
-//            e.printStackTrace();
-            logOperationException = new LogOperationException(e);
-            throw logOperationException;
-        } finally {
-            if (controller != null) {
-                try {
-                    controller.close();
-                } catch (RuntimeException e) {
-                    if (logOperationException != null) {
-                        e.addSuppressed(logOperationException);
-                    }
-                    throw e;
-                }
-            }
-        }
+        try (
+                final Controller controller = new Controller();
+                final FileOutputStream fileInputStream = new FileOutputStream("a.txt")
+        ) {
 
+            controller.log();
+
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
-class Controller {
+class Controller implements AutoCloseable  {
     private PuperSaver saver = new PuperSaver();
     private PuperDecorator decorator = new PuperDecorator();
 
@@ -41,6 +34,7 @@ class Controller {
         }
     }
 
+    @Override
     public void close() {
         throw new RuntimeException("close");
     }
