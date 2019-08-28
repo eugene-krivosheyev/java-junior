@@ -2,6 +2,7 @@ package com.acme.edu;
 
 import com.acme.edu.commands.AccumulateCommand;
 import com.acme.edu.commands.DecorateCommand;
+import com.acme.edu.exceptions.SaverException;
 import com.acme.edu.savers.ConsoleSaver;
 import com.acme.edu.savers.Saver;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +29,7 @@ public class LoggerController {
         this.prevCommand = accumulate;
     }
 
-    public void run(@NotNull DecorateCommand decorateCommand) {
+    public void run(@NotNull DecorateCommand decorateCommand) throws SaverException {
         if (prevCommand != null) {
             prevCommand.flush(saver);
         }
@@ -36,7 +37,7 @@ public class LoggerController {
         saver.save(decoratedMessage);
     }
 
-    public void run(@NotNull AccumulateCommand accumulateCommand) {
+    public void run(@NotNull AccumulateCommand accumulateCommand) throws SaverException {
         if (prevCommand == null) {
             prevCommand = accumulateCommand;
         } else if (prevCommand.isTypeTheSame(accumulateCommand)) {
@@ -47,7 +48,7 @@ public class LoggerController {
         }
     }
 
-    public void close(){
+    public void close() throws SaverException {
         if (prevCommand != null) {
             prevCommand.flush(saver);
             prevCommand = null;

@@ -4,6 +4,7 @@ import com.acme.edu.LoggerController;
 import com.acme.edu.commands.AccumulateCommand;
 import com.acme.edu.commands.CharCommand;
 import com.acme.edu.commands.PrimitiveCommand;
+import com.acme.edu.exceptions.SaverException;
 import com.acme.edu.savers.ConsoleSaver;
 import org.junit.Test;
 import org.mockito.internal.util.reflection.Whitebox;
@@ -12,7 +13,7 @@ import static org.mockito.Mockito.*;
 
 public class LoggerControllerTest {
     @Test
-    public void shouldRunFlushWhenPrevCommandNull() {
+    public void shouldRunFlushWhenPrevCommandNull() throws SaverException {
         AccumulateCommand mockAccumulate = mock(AccumulateCommand.class);
         PrimitiveCommand stubIntCommand = mock(PrimitiveCommand.class);
         Whitebox.setInternalState(stubIntCommand, "buffer", 1);
@@ -26,7 +27,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldFlushWhenCloseAndPrevCommandNotNull() {
+    public void shouldFlushWhenCloseAndPrevCommandNotNull() throws SaverException {
         PrimitiveCommand stubIntCommand = mock(PrimitiveCommand.class);
         Whitebox.setInternalState(stubIntCommand, "buffer", 1);
         ConsoleSaver dummySaver = mock(ConsoleSaver.class);
@@ -39,7 +40,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldNotFlushWhenCloseAndPrevCommandNull() {
+    public void shouldNotFlushWhenCloseAndPrevCommandNull() throws SaverException {
         PrimitiveCommand stubIntCommand = mock(PrimitiveCommand.class);
         ConsoleSaver dummySaver = mock(ConsoleSaver.class);
 
@@ -50,7 +51,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldFlushAccumulatedWhenSwitchedToDecorated() {
+    public void shouldFlushAccumulatedWhenSwitchedToDecorated() throws SaverException {
         AccumulateCommand mockAccumulate = mock(AccumulateCommand.class);
         AccumulateCommand mockAccumulate2 = mock(AccumulateCommand.class);
         PrimitiveCommand stubIntCommand = mock(PrimitiveCommand.class);
@@ -68,7 +69,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldAccumulateWhenCommandsAreEquals() {
+    public void shouldAccumulateWhenCommandsAreEquals() throws SaverException {
         AccumulateCommand stubIntCommand = mock(PrimitiveCommand.class);
         Whitebox.setInternalState(stubIntCommand, "buffer", 1);
         ConsoleSaver mockSaver = mock(ConsoleSaver.class);

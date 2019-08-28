@@ -1,5 +1,6 @@
 package com.acme.edu.commands;
 
+import com.acme.edu.exceptions.SaverException;
 import com.acme.edu.savers.Saver;
 
 public class StringCommand extends AccumulateCommand {
@@ -10,10 +11,12 @@ public class StringCommand extends AccumulateCommand {
         this.buffer = message;
         this.counter = 1;
     }
+
     private StringCommand(String message, int counter) {
         this.buffer = message;
         this.counter = counter;
     }
+
     @Override
     public String decorate() {
         return "string: " + buffer;
@@ -28,7 +31,7 @@ public class StringCommand extends AccumulateCommand {
     }
 
     @Override
-    public AccumulateCommand accumulate(AccumulateCommand prevCommand, Saver saver) {
+    public AccumulateCommand accumulate(AccumulateCommand prevCommand, Saver saver) throws SaverException {
         if (!buffer.equals(((StringCommand) prevCommand).getBuffer())) {
             prevCommand.flush(saver);
             return this;
@@ -38,7 +41,7 @@ public class StringCommand extends AccumulateCommand {
     }
 
     @Override
-    public void flush(Saver saver) {
+    public void flush(Saver saver) throws SaverException {
         String message = counter == 1 ? buffer : buffer + " (x" + counter + ")";
         saver.save(new StringCommand(message).decorate());
     }
