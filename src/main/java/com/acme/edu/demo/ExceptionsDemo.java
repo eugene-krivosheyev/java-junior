@@ -8,6 +8,9 @@ public class ExceptionsDemo {
             controller.log();
         } catch (LogOperationException e) {
             e.printStackTrace();
+        } catch (Throwable all) {
+            all.printStackTrace();
+            //userController.sendGenericError
         }
     }
 }
