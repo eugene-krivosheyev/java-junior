@@ -124,6 +124,34 @@ public class IntegerCommandTest {
         CommandAccumulateInfo accumulateInfo = sut.accumulate(nullComand);
 
         assertThat(accumulateInfo.getCommand()).isEqualTo(sut);
-        //TODO
+        assertThat(accumulateInfo.isFlushNeeded()).isFalse();
+        assertThat(accumulateInfo.getMessage()).isNull();
+    }
+
+
+    @Test
+    public void ifOtherIsAnotherIntegerTypeThenFlushIsNeeded() {
+        final ByteCommand firstCommand = new ByteCommand((byte)1);
+        final IntCommand sut = new IntCommand(2);
+
+        CommandAccumulateInfo accumulateInfo = sut.accumulate(firstCommand);
+
+        assertThat(accumulateInfo.getCommand()).isEqualTo(sut);
+        assertThat(accumulateInfo.isFlushNeeded()).isTrue();
+        assertThat(accumulateInfo.getMessage()).isEqualTo("primitive: 1");
+    }
+
+
+
+    @Test
+    public void ifGetAnotherCommandTypeThenFlushIsNeeded() {
+        final IntCommand sut = new IntCommand(1);
+        final StringCommand anotherCommand = new StringCommand("str: 1");
+
+        CommandAccumulateInfo accumulateInfo = sut.accumulate(anotherCommand);
+
+        assertThat(accumulateInfo.getCommand()).isEqualTo(sut);
+        assertThat(accumulateInfo.isFlushNeeded()).isTrue();
+        assertThat(accumulateInfo.getMessage()).contains("str: 1");
     }
 }

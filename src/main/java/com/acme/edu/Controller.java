@@ -29,20 +29,19 @@ public class Controller {
             return;
         }
 
-        CommandAccumulateInfo info = command.accumulate(lastCommand);
-        lastCommand = info.getCommand();
+        CommandAccumulateInfo accumulateInfo = command.accumulate(lastCommand);
 
-        String message = info.getMessage();
-        if (message != null) {
-            saver.save(message);
+
+        //String message = info.getMessage();
+        if (accumulateInfo.isFlushNeeded()) {
+            saver.save(accumulateInfo.getMessage());
         }
         lastCommand = command;
     }
 
     public void flush() {
         if (lastCommand != null) {
-            String message = lastCommand.getDecoratedMessage();
-            saver.save(message);
+            saver.save(lastCommand.getDecoratedMessage());
         }
         lastCommand = null;
     }
