@@ -20,7 +20,7 @@ public class IntCommand implements Command {
 
     @Override
     public Command accumulate(Command other) {
-        return new IntCommand(this.message + (int)other.getMessage());
+        return new IntCommand((int)this.getMessage() + (int)other.getMessage());
     }
 
     @Override

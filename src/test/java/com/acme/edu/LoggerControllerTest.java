@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verify;
 
@@ -29,27 +30,25 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
 
         IntCommand firstStubCommand = mock(IntCommand.class);
         when(firstStubCommand.isTypeEquals(null)).thenReturn(false);
-        // when(firstStubCommand.getDecorated()).thenReturn("first command");
 
         IntCommand secondStubCommand = mock(IntCommand.class);
+        IntCommand thirdStubCommand = mock(IntCommand.class);
         when(secondStubCommand.isTypeEquals(null)).thenReturn(false);
         when(secondStubCommand.isTypeEquals(firstStubCommand)).thenReturn(true);
-        when(firstStubCommand.accumulate(secondStubCommand).isOverflow()).thenReturn(false);
-
-        //when(firstStubCommand.getMessage()).thenReturn(1);
-        //when(secondStubCommand.getMessage()).thenReturn(2);
-        //doReturn(2).when(secondStubCommand).getMessage();
+        when(firstStubCommand.getMessage()).thenReturn(1);
+        when(secondStubCommand.getMessage()).thenReturn(2);
+        when(firstStubCommand.accumulate(secondStubCommand)).thenReturn(thirdStubCommand);
+        when(thirdStubCommand.isOverflow()).thenReturn(false);
 
         final LoggerController sut = new LoggerController(dummyAccumulator, mockSaver);
 
         sut.log(firstStubCommand);
         sut.log(secondStubCommand);
+        sut.flush();
 
         //Interaction-based testing:
         verify(firstStubCommand).isTypeEquals(null);
-        //verify(mockSaver).save("first command");
-        //verify(secondStubCommand).isTypeEquals(firstStubCommand);
-        //verify(firstStubCommand).accumulate(secondStubCommand);
+        verify(secondStubCommand).isTypeEquals(firstStubCommand);
 
     }
 }
