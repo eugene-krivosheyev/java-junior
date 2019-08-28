@@ -18,15 +18,12 @@ public class ByteCommand extends PrimitiveCommand implements Command<Byte> {
     }
 
     @Override
-    public Command<Byte> accumulate(Command command) {
-        try {
-            if (command instanceof ByteCommand)
-                ControllerOverflow.controlOverflow((Byte) command.getMessage(), this);
-            else
-                throw new IllegalArgumentException("Not a byte command!");
-        } catch (IllegalArgumentException | OverflowException e) {
-            e.printStackTrace();
-        }
+    public Command<Byte> accumulate(Command command) throws IllegalArgumentException, OverflowException {
+        if (command instanceof ByteCommand)
+            ControllerOverflow.controlOverflow((Byte) command.getMessage(), this);
+        else
+            throw new IllegalArgumentException("Not a byte command!");
+
         return new ByteCommand(message);
     }
 

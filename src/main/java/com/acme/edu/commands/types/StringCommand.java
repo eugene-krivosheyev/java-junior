@@ -25,23 +25,19 @@ public class StringCommand implements Command<String> {
 
     @Override
     public Command<String> accumulate(Command command) {
-        try {
-            if (command instanceof StringCommand) {
-                if (command.getMessage().equals(message)) counterOfStrings++;
-                else {
-                    if (message != null) {
-                        if (counterOfStrings > 1)
-                            new ConsoleSaver().saveWithoutPrefix(new StringCommand(getMessage()));
-                        else
-                            new ConsoleSaver().saveWithoutPrefix(new StringCommand(getMessage()));
-                    }
-                    counterOfStrings = 1;
-                    message = (String) command.getMessage();
+        if (command instanceof StringCommand) {
+            if (command.getMessage().equals(message)) counterOfStrings++;
+            else {
+                if (message != null) {
+                    if (counterOfStrings > 1)
+                        new ConsoleSaver().saveWithoutPrefix(new StringCommand(getMessage()));
+                    else
+                        new ConsoleSaver().saveWithoutPrefix(new StringCommand(getMessage()));
                 }
-            } else throw new IllegalArgumentException("Wrong command!");
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
+                counterOfStrings = 1;
+                message = (String) command.getMessage();
+            }
+        } else throw new IllegalArgumentException("Not a string command!");
         return new StringCommand(message, counterOfStrings);
     }
 

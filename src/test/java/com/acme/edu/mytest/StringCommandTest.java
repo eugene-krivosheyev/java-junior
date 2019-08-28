@@ -3,6 +3,7 @@ package com.acme.edu.mytest;
 import com.acme.edu.commands.Command;
 import com.acme.edu.commands.types.StringCommand;
 import com.acme.edu.commands.types.primitive.ByteCommand;
+import com.acme.edu.overflow.OverflowException;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -12,14 +13,14 @@ import static org.mockito.Mockito.mock;
 public class StringCommandTest {
 
     @Test
-    public void shouldAccumulateWithSameCommand() {
+    public void shouldAccumulateWithSameCommand() throws OverflowException, IllegalArgumentException {
         final Command sut = new StringCommand("str 1");
         final Command accumulateResult = sut.accumulate(sut);
         assertThat(accumulateResult.getMessage()).isEqualTo("str 1 (x2)");
     }
 
     @Test
-    public void shouldAccumulateWithNewCommand() {
+    public void shouldAccumulateWithNewCommand() throws OverflowException, IllegalArgumentException {
         final Command firstSut = new StringCommand("str 1");
         final Command secondSut = new StringCommand("str 2");
         assertThat(firstSut.getMessage()).isEqualTo("str 1");
@@ -35,7 +36,7 @@ public class StringCommandTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowIllegalArgumentExceptionIfSummStringAndByte() {
+    public void shouldThrowIllegalArgumentExceptionIfSumStringAndByte() throws IllegalArgumentException, OverflowException {
         final Command sutString = mock(StringCommand.class);
         ((StringCommand) sutString).setMessage("tst 1");
         final Command sutByte = mock(ByteCommand.class);

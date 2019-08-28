@@ -6,6 +6,8 @@ public class SaverException extends Exception {
         super(message);
     }
 
+    public SaverException(Throwable throwable){ super(throwable); }
+
     public SaverException(String message, Throwable cause) {
         super(message, cause);
     }

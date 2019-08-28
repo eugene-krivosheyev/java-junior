@@ -17,13 +17,9 @@ public class CharCommand implements Command<Character> {
     }
 
     @Override
-    public Command<Character> accumulate(Command command) {
-        try {
-            if (!(command instanceof CharCommand))
-                throw new IllegalArgumentException("Not a char command!");
-        }catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
+    public Command<Character> accumulate(Command command) throws IllegalArgumentException{
+        if (!(command instanceof CharCommand))
+            throw new IllegalArgumentException("Not a char command!");
         return new CharCommand(message);
     }
 

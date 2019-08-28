@@ -16,15 +16,12 @@ public class IntCommand extends PrimitiveCommand implements Command<Integer> {
     public String decorate() { return super.getPrimitivePrefix() + message; }
 
     @Override
-    public Command<Integer> accumulate(Command command) {
-        try {
-            if (command instanceof IntCommand)
-                ControllerOverflow.controlOverflow((Integer) command.getMessage(), this);
-            else
-                throw new IllegalArgumentException("Not a int command!");
-        } catch (IllegalArgumentException | OverflowException e) {
-            e.printStackTrace();
-        }
+    public Command<Integer> accumulate(Command command) throws IllegalArgumentException, OverflowException {
+        if (command instanceof IntCommand)
+            ControllerOverflow.controlOverflow((Integer) command.getMessage(), this);
+        else
+            throw new IllegalArgumentException("Not a int command!");
+
         return new IntCommand(message);
     }
 
