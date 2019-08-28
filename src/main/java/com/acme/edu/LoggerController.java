@@ -25,7 +25,12 @@ public class LoggerController {
         }
 
         if (previousCommand.isTypeEqual(newCommand)) {
-            previousCommand = previousCommand.accumulate(newCommand, saver);
+            try {
+                previousCommand = previousCommand.accumulate(newCommand, saver);
+            }
+            catch(IllegalArgumentException e) {
+                e.printStackTrace();
+            }
         } else {
             previousCommand.flush(saver);
             previousCommand = newCommand;
