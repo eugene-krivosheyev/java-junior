@@ -18,6 +18,7 @@ public class ExceptionsTest {
         Whitebox.setInternalState(stubIntCommand, "buffer", 1);
         ConsoleSaver mockSaver = mock(ConsoleSaver.class);
         doCallRealMethod().when(stubIntCommand).flush(mockSaver);
+        //TODO add any
         doThrow(SaverException.class).when(mockSaver).save("primitive: 1");
 
         final LoggerController sut = new LoggerController(mockSaver);

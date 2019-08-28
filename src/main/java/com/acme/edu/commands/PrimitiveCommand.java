@@ -29,12 +29,12 @@ public class PrimitiveCommand extends AccumulateCommand {
     @Override
     public AccumulateCommand accumulate(AccumulateCommand prevCommand, Saver saver) throws SaverException {
         int prevBuffer = ((PrimitiveCommand) prevCommand).getBuffer();
-        try{
+        try {
             checkOverflow(prevBuffer);
-        }catch (IntegerMinOverflowException e){
-            return cornerCase(Integer.MIN_VALUE, saver, prevBuffer);
-        }catch (IntegerMaxOverflowException e){
-            return cornerCase(Integer.MAX_VALUE, saver, prevBuffer);
+        } catch (IntegerMinOverflowException e) {
+            return handleOverflow(Integer.MIN_VALUE, saver, prevBuffer);
+        } catch (IntegerMaxOverflowException e) {
+            return handleOverflow(Integer.MAX_VALUE, saver, prevBuffer);
         }
         return new PrimitiveCommand(buffer + prevBuffer);
     }
@@ -49,7 +49,7 @@ public class PrimitiveCommand extends AccumulateCommand {
         }
     }
 
-    private PrimitiveCommand cornerCase(int cornerValue, Saver saver, int prevBuffer) throws SaverException {
+    private PrimitiveCommand handleOverflow(int cornerValue, Saver saver, int prevBuffer) throws SaverException {
         new PrimitiveCommand(cornerValue).flush(saver);
         return new PrimitiveCommand(buffer + prevBuffer - cornerValue);
     }

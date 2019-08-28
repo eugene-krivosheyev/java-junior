@@ -146,6 +146,7 @@ public class CommandsTest {
 
     @Test
     public void shouldPrimitiveBufferEqualsToOneWhenFirstAccumulatedValuePassed() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
+        //TODO change to Fest-reflect
         Constructor[] declaredConstructors = PrimitiveCommand.class.getDeclaredConstructors();
         Constructor constructor = declaredConstructors[1];
         constructor.setAccessible(true);
