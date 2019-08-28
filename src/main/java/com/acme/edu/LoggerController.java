@@ -5,7 +5,7 @@ public class LoggerController {
     private SuperSaver saver;
     private Command currentState = null;
 
-    public LoggerController(SuperAccumulator accumulator, SuperSaver saver) {
+    LoggerController(SuperAccumulator accumulator, SuperSaver saver) {
         this.accumulator = accumulator;
         this.saver = saver;
     }
@@ -14,13 +14,15 @@ public class LoggerController {
         return currentState;
     }
 
-    public void log(Command command) {
+    void log(Command command) {
         if (command.isTypeEquals(currentState)) {
             if (currentState.accumulate(command).isOverflow()) {
                 flush();
                 currentState = command;
+                throw new ArithmeticException();
             } else {
                 currentState = currentState.accumulate(command);
+                throw new ArithmeticException();
             }
         } else {
             if (currentState != null) {
