@@ -22,9 +22,11 @@ public class LoggerControllerTest {
         IntCommand secondStubCommand = mock(IntCommand.class);
         when(firstStubCommand.isTypeEqual(secondStubCommand)).thenReturn(true);
         when(secondStubCommand.getMessage()).thenReturn(2);
+        StringCommand differentCommand = new StringCommand("str1");
 
         sut.log(firstStubCommand);
         sut.log(secondStubCommand);
+        sut.log(differentCommand);
 
         verify(firstStubCommand).isTypeEqual(secondStubCommand);
         verify(firstStubCommand).accumulate(secondStubCommand,mockSaver);

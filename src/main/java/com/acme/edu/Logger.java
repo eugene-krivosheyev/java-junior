@@ -3,6 +3,8 @@ package com.acme.edu;
 
 import com.acme.edu.commands.*;
 
+import java.io.IOException;
+
 public class Logger {
 
     private static LoggerController loggerController = new LoggerController();
@@ -11,14 +13,14 @@ public class Logger {
         loggerController.flush();
     }
 
-    public static void log(String message) throws Exception {
+    public static void log(String message) throws IOException {
         // TODO
         try {
             loggerController.log(new StringCommand(message));
         }
         catch (Exception e) {
             e.printStackTrace();
-            throw new Exception("Operation was not done");
+            throw new IOException("Operation was not done");
         }
     }
 

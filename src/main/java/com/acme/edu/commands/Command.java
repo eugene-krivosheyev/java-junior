@@ -5,7 +5,7 @@ import com.acme.edu.savers.Saver;
 /**
  * Created by kate-c on 23/08/2019.
  */
-public abstract class Command {
+public abstract class Command{
     public abstract Object getMessage();
     public abstract Command accumulate(Command command, Saver saver);
     public abstract String decorate();

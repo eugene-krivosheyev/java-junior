@@ -25,7 +25,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
 
-    @Test @Ignore
+    @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
         Logger.log(new int[] {-1, 0, 1});
@@ -87,7 +87,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 */
 
 
-    @Test @Ignore
+    @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
         Logger.log("str1", "string 2", "str 3");
@@ -101,7 +101,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test @Ignore
+    @Test
     public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException {
         //region when
         Logger.log(1);
