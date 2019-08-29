@@ -1,6 +1,8 @@
 package com.acme.edu.unittests;
 
+import com.acme.edu.Logger;
 import com.acme.edu.commands.*;
+import com.acme.edu.exceptions.LogOperationException;
 import com.acme.edu.exceptions.SaverException;
 import com.acme.edu.savers.ConsoleSaver;
 import com.acme.edu.savers.Saver;
@@ -16,6 +18,18 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class CommandsTest {
+    @Test
+    public void shouldWriteToLogs(){
+        try {
+            Logger.log(1);
+            Logger.log(2);
+            Logger.log("2");
+            Logger.close();
+        } catch (LogOperationException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Test
     public void shouldDecorateCharCommand() {
         CharCommand sut = new CharCommand("a");
@@ -146,15 +160,14 @@ public class CommandsTest {
 
     @Test
     public void shouldPrimitiveBufferEqualsToOneWhenFirstAccumulatedValuePassed() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
-        //TODO change to Fest-reflect
         Constructor[] declaredConstructors = PrimitiveCommand.class.getDeclaredConstructors();
-        Constructor constructor = declaredConstructors[1];
+        Constructor constructor = declaredConstructors[0];
         constructor.setAccessible(true);
-        PrimitiveCommand sut = (PrimitiveCommand) constructor.newInstance(1);
+        PrimitiveCommand sut = (PrimitiveCommand) constructor.newInstance("1");
 
         Method m = sut.getClass().getDeclaredMethod("getBuffer");
         m.setAccessible(true);
 
-        assertEquals(1, m.invoke(sut));
+        assertEquals("1", m.invoke(sut));
     }
 }

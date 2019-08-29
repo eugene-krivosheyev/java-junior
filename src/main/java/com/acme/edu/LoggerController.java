@@ -16,11 +16,6 @@ public class LoggerController {
     @Nullable
     private AccumulateCommand prevCommand;
 
-    //TODO remove later
-    public LoggerController(){
-        saver = new ConsoleSaver();
-    }
-
     public LoggerController(Saver saver) {
         this.saver = saver;
     }

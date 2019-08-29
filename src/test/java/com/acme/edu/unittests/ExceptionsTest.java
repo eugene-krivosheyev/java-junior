@@ -18,7 +18,6 @@ public class ExceptionsTest {
         Whitebox.setInternalState(stubIntCommand, "buffer", 1);
         ConsoleSaver mockSaver = mock(ConsoleSaver.class);
         doCallRealMethod().when(stubIntCommand).flush(mockSaver);
-        //TODO add any
         doThrow(SaverException.class).when(mockSaver).save("primitive: 1");
 
         final LoggerController sut = new LoggerController(mockSaver);
@@ -33,7 +32,7 @@ public class ExceptionsTest {
 
         doThrow(IntegerMaxOverflowException.class).when(stubIntCommand).checkOverflow(1);
 
-        final PrimitiveCommand sut = new PrimitiveCommand(Integer.MAX_VALUE);
+        final PrimitiveCommand sut = new PrimitiveCommand(String.valueOf(Integer.MAX_VALUE));
         sut.checkOverflow(1);
     }
 
@@ -44,7 +43,7 @@ public class ExceptionsTest {
 
         doThrow(IntegerMaxOverflowException.class).when(stubIntCommand).checkOverflow(-1);
 
-        final PrimitiveCommand sut = new PrimitiveCommand(Integer.MIN_VALUE);
+        final PrimitiveCommand sut = new PrimitiveCommand(String.valueOf(Integer.MIN_VALUE));
         sut.checkOverflow(-1);
     }
 

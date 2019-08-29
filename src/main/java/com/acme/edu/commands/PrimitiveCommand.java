@@ -6,29 +6,25 @@ import com.acme.edu.exceptions.SaverException;
 import com.acme.edu.savers.Saver;
 
 public class PrimitiveCommand extends AccumulateCommand {
-    private String message;
-    private Integer buffer;
+    private String buffer;
 
-    public PrimitiveCommand(String message) {
-        this.message = message;
-    }
-
-    public PrimitiveCommand(int message) {
-        this.buffer = message;
+    public PrimitiveCommand(String buffer) {
+        this.buffer = buffer;
     }
 
     @Override
     public String decorate() {
-        return "primitive: " + message;
+        return "primitive: " + buffer;
     }
 
-    private int getBuffer() {
+    private String getBuffer() {
         return buffer;
     }
 
     @Override
     public AccumulateCommand accumulate(AccumulateCommand prevCommand, Saver saver) throws SaverException {
-        int prevBuffer = ((PrimitiveCommand) prevCommand).getBuffer();
+        String prevBufferStr = ((PrimitiveCommand) prevCommand).getBuffer();
+        int prevBuffer = Integer.parseInt(prevBufferStr);
         try {
             checkOverflow(prevBuffer);
         } catch (IntegerMinOverflowException e) {
@@ -39,19 +35,18 @@ public class PrimitiveCommand extends AccumulateCommand {
         return new PrimitiveCommand(buffer + prevBuffer);
     }
 
-    //TODO change public to private later
     public void checkOverflow(int prevBuffer) throws IntegerMaxOverflowException, IntegerMinOverflowException {
-        if ((long) buffer + prevBuffer > Integer.MAX_VALUE) {
+        if ((long) Integer.parseInt(buffer) + prevBuffer > Integer.MAX_VALUE) {
             throw new IntegerMaxOverflowException("Integer Max overflow");
         }
-        if ((long) buffer + prevBuffer < Integer.MIN_VALUE) {
+        if ((long) Integer.parseInt(buffer) + prevBuffer < Integer.MIN_VALUE) {
             throw new IntegerMinOverflowException("Integer Min overflow");
         }
     }
 
     private PrimitiveCommand handleOverflow(int cornerValue, Saver saver, int prevBuffer) throws SaverException {
-        new PrimitiveCommand(cornerValue).flush(saver);
-        return new PrimitiveCommand(buffer + prevBuffer - cornerValue);
+        new PrimitiveCommand(String.valueOf(cornerValue)).flush(saver);
+        return new PrimitiveCommand(String.valueOf(Integer.parseInt(buffer) + prevBuffer - cornerValue));
     }
 
     @Override
