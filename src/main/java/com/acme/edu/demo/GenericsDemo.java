@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class GenericsDemo {
     public static void main(String[] args) {
         final Optional<Integer> maybeObject = Optional.<Integer>of(1);
@@ -29,6 +30,8 @@ public class GenericsDemo {
                 return 0;
             }
         };
+
+        List<String> list1 = new ArrayList();
     }
 }
 
