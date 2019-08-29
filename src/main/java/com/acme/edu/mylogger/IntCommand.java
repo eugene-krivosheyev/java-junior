@@ -25,8 +25,7 @@ public class IntCommand implements Command {
     public Command accumulate(Command other) {
         try {
             (new IntCommand((int)this.getMessage() + (int)other.getMessage())).isOverflow();
-        }
-        catch (ArithmeticException e) {
+        } catch (ArithmeticException e) {
             //e.printStackTrace();
             throw new ArithmeticException("Overflow");
         }

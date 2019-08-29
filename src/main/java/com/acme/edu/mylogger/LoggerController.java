@@ -1,6 +1,5 @@
 package com.acme.edu.mylogger;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -8,12 +7,12 @@ public class LoggerController {
     private SuperAccumulator accumulator;
     private SuperSaver saver;
     private Command currentState = null;
-    private Queue<Command> commandCollection;
+    private Queue<Command> commandQueue;
 
     LoggerController(SuperAccumulator accumulator, SuperSaver saver) {
         this.accumulator = accumulator;
         this.saver = saver;
-        this.commandCollection = new LinkedList<>();
+        this.commandQueue = new LinkedList<>();
     }
 
     Command getCurrentState() {
@@ -25,24 +24,22 @@ public class LoggerController {
             /*
             try {
                 currentState.accumulate(command);
-            }
-            catch (ArithmeticException e) {
+            } catch (ArithmeticException e) {
                 e.printStackTrace();
                 flush();
                 currentState = command;
-            }
-            finally {
+            } finally {
                 currentState = currentState.accumulate(command);
             }
              */
             currentState = command;
-            commandCollection.add(command);
+            commandQueue.add(command);
         } else {
             if (currentState != null) {
                 flush();
             }
             currentState = command;
-            commandCollection.add(command);
+            commandQueue.add(command);
         }
     }
 
@@ -51,15 +48,14 @@ public class LoggerController {
         /*
         try {
             saver.save(new IntCommand(accumulator.accumulate(commandCollection)).getDecorated());
-        }
-        catch (ArithmeticException e) {
+        } catch (ArithmeticException e) {
             saver.save(new IntCommand(accumulator.getPrevSum()).getDecorated());
             e.printStackTrace();
         }
          */
         //saver.save(accumulator.accumulate(commandCollection).getDecorated());
-        accumulator.accumulate(commandCollection).ifPresent(e -> saver.save(e.getDecorated()));
+        accumulator.accumulate(commandQueue).ifPresent(e -> saver.save(e.getDecorated()));
         currentState = null;
-        commandCollection.clear();
+        commandQueue.clear();
     }
 }
