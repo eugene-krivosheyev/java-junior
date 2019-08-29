@@ -26,11 +26,9 @@ public class ByteCommandTest {
 
     @Test(expected = ArithmeticException.class)
     public void shouldBeOverflow() {
-        final ByteCommand sut1 = new ByteCommand((byte)-1);
-        final ByteCommand sut2 = new ByteCommand((byte)1);
-        final ByteCommand sut3 = new ByteCommand(Byte.MAX_VALUE);
-        assertThat(sut1.isOverflow()).isEqualTo(true);
-        assertThat(sut2.accumulate(sut3).isOverflow()).isEqualTo(true);
+        final ByteCommand sut1 = new ByteCommand((byte)1);
+        final ByteCommand sut2 = new ByteCommand(Byte.MAX_VALUE);
+        assertThat(sut1.accumulate(sut2).isOverflow()).isEqualTo(true);
     }
 
     @Test

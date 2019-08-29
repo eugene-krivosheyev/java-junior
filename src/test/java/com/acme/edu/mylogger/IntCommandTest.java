@@ -26,11 +26,9 @@ public class IntCommandTest {
 
     @Test(expected = ArithmeticException.class)
     public void shouldBeOverflow() {
-        final IntCommand sut1 = new IntCommand(-1);
-        final IntCommand sut2 = new IntCommand(1);
-        final IntCommand sut3 = new IntCommand(Integer.MAX_VALUE);
-        assertThat(sut1.isOverflow()).isEqualTo(true);
-        assertThat(sut2.accumulate(sut3).isOverflow()).isEqualTo(true);
+        final IntCommand sut1 = new IntCommand(1);
+        final IntCommand sut2 = new IntCommand(Integer.MAX_VALUE);
+        assertThat(sut1.accumulate(sut2).isOverflow()).isEqualTo(true);
     }
 
     @Test
