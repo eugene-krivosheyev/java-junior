@@ -22,8 +22,10 @@ public class Test {
         //loggerController.flush();
         //loggerController.log(new IntCommand(1));
         //loggerController.log(new IntCommand(1));
-        loggerController.log(new StringCommand("str"));
-        loggerController.log(new StringCommand("str"));
+        loggerController.log(new StringCommand("str 1"));
+        loggerController.log(new StringCommand("str 2"));
+        loggerController.log(new StringCommand("str 1"));
+        loggerController.log(new StringCommand("str 1"));
         loggerController.log(new IntCommand(1));
         loggerController.log(new IntCommand(Integer.MAX_VALUE));
         //loggerController.flush();
