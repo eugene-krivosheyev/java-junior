@@ -5,7 +5,7 @@ import com.acme.edu.overflow.OverflowException;
 
 public interface Command<T>  {
     String decorate();
-    Command<T> accumulate(Command command) throws OverflowException, IllegalArgumentException;
+    Command<T> accumulate(Command command) throws OverflowException;
     T getMessage();
     StateCommand getState();
 }

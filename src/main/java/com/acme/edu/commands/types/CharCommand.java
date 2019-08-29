@@ -17,7 +17,7 @@ public class CharCommand implements Command<Character> {
     }
 
     @Override
-    public Command<Character> accumulate(Command command) throws IllegalArgumentException{
+    public Command<Character> accumulate(Command command) {
         return new CharCommand(message);
     }
 

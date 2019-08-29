@@ -15,7 +15,7 @@ public class ReferenceCommand implements Command<Object> {
     }
 
     @Override
-    public Command<Object> accumulate(Command command) throws IllegalArgumentException {
+    public Command<Object> accumulate(Command command) {
         return new ReferenceCommand(message);
     }
 
