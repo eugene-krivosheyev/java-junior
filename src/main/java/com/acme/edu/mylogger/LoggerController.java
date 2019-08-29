@@ -47,6 +47,7 @@ public class LoggerController {
 
     void flush() {
         //saver.save(currentState.getDecorated());
+        /*
         try {
             saver.save(new IntCommand(accumulator.accumulate(commandCollection)).getDecorated());
         }
@@ -54,6 +55,9 @@ public class LoggerController {
             saver.save(new IntCommand(accumulator.getPrevSum()).getDecorated());
             e.printStackTrace();
         }
+         */
+        //saver.save(accumulator.accumulate(commandCollection).getDecorated());
+        accumulator.accumulate(commandCollection).ifPresent(e -> saver.save(e.getDecorated()));
         currentState = null;
         commandCollection.clear();
     }

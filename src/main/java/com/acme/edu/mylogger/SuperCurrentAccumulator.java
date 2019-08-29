@@ -1,13 +1,13 @@
 package com.acme.edu.mylogger;
 
 import java.util.Collection;
-import java.util.stream.Stream;
+import java.util.Optional;
 
 public class SuperCurrentAccumulator implements SuperAccumulator {
     private static int sum;
 
     @Override
-    public int accumulate(Collection<Command> collection) {
+    public Optional<Command> accumulate(Collection<Command> collection) {
         //Stream.of(collection).parallel().reduce((e1, e2) -> e1.);
         //collection.stream().reduce((e1, e2) -> (int)e1.getMessage() + (int)e2.getMessage());
         //int sum = collection.stream().mapToInt().sum();
@@ -22,11 +22,14 @@ public class SuperCurrentAccumulator implements SuperAccumulator {
         }
          */
         //return sum;
+        /*
         try {
             return collection.stream().mapToInt(e -> (int) e.getMessage()).sum();
         } catch (ClassCastException exs) {
             return collection.stream().mapToInt(e -> (byte) e.getMessage()).sum();
         }
+         */
+        return collection.stream().reduce(Command::accumulate);
         //return collection.stream().mapToInt(e -> (int) e.getMessage()).sum();
     }
 
