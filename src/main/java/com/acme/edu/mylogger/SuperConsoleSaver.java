@@ -1,4 +1,4 @@
-package com.acme.edu;
+package com.acme.edu.mylogger;
 
 public class SuperConsoleSaver implements SuperSaver {
     @Override

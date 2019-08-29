@@ -1,4 +1,4 @@
-package com.acme.edu;
+package com.acme.edu.mylogger;
 
 public class ByteCommand implements Command {
     private final static String PRIMITIVE_PREFIX = "primitive: ";

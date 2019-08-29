@@ -1,4 +1,4 @@
-package com.acme.edu;
+package com.acme.edu.mylogger;
 
 public class StringCommand implements Command {
     private final static String STRING_PREFIX = "string: ";

@@ -56,10 +56,10 @@
         <version>1.4.5</version>
         <configuration>
           <targetClasses>
-            <param>com.acme.edu.*</param>
+            <param>com.acme.edu.mylogger.*</param>
           </targetClasses>
           <targetTests>
-            <param>com.acme.edu.*</param>
+            <param>com.acme.edu.mylogger.*</param>
           </targetTests>
         </configuration>
         <executions>

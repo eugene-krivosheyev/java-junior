@@ -1,5 +1,6 @@
-package com.acme.edu;
+package com.acme.edu.mylogger;
 
+import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;

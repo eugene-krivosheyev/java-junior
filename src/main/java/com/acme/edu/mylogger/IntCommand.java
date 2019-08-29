@@ -1,4 +1,4 @@
-package com.acme.edu;
+package com.acme.edu.mylogger;
 
 public class IntCommand implements Command {
     private final static String PRIMITIVE_PREFIX = "primitive: ";
@@ -27,7 +27,7 @@ public class IntCommand implements Command {
             (new IntCommand((int)this.getMessage() + (int)other.getMessage())).isOverflow();
         }
         catch (ArithmeticException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             throw new ArithmeticException("Overflow");
         }
         return new IntCommand((int)this.getMessage() + (int)other.getMessage());
