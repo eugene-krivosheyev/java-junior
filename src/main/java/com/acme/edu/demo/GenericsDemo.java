@@ -5,10 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @SuppressWarnings("unchecked")
 public class GenericsDemo {
@@ -59,6 +56,7 @@ class Optional<T extends Number & Serializable> {
     //.......
 }
 
+@Deprecated
 interface Comparable<T> {
     int compare(T o);
 }
