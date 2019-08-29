@@ -7,11 +7,11 @@ import com.acme.edu.commands.types.*;
 import com.acme.edu.commands.types.primitive.BooleanCommand;
 import com.acme.edu.commands.types.primitive.ByteCommand;
 import com.acme.edu.commands.types.primitive.IntCommand;
-import com.acme.edu.overflow.OverflowException;
 import com.acme.edu.saver.ConsoleSaver;
 import com.acme.edu.saver.SaverException;
 
 import java.util.logging.Level;
+import java.util.stream.Stream;
 
 
 public class Logger {
@@ -91,31 +91,27 @@ public class Logger {
     }
 
     public static void log(String... messages) {
-        for(String message: messages) {
+        Stream.of(messages).forEach( m -> {
             try {
-                loggerController.handleCommand(new StringCommand(message));
+                loggerController.handleCommand(new StringCommand(m));
             } catch (SaverException e) {
                 LOGGER.log(Level.SEVERE, "Error in saver");
             }
-        }
+        });
     }
 
     public static void log(Integer... messages) {
-        for(int message: messages) {
+        Stream.of(messages).forEach(m -> {
             try {
-                loggerController.handleCommand(new IntCommand(message));
+                loggerController.handleCommand(new IntCommand(m));
             } catch (SaverException e) {
                 LOGGER.log(Level.SEVERE, "Error in saver");
             }
-        }
+        });
     }
 
     public static void closeLogger() {
-        try {
-            loggerController.close();
-        } catch (OverflowException e) {
-            LOGGER.log(Level.SEVERE, "Error in close logger");
-        }
+        loggerController.close();
     }
 }
 
