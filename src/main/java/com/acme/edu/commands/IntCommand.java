@@ -1,15 +1,25 @@
 package com.acme.edu.commands;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class IntCommand implements Command {
     private int message;
+    private List<Integer> buffer = new LinkedList<>();
 
     public IntCommand(int message) {
         this.message = message;
+        this.buffer.add(message);
+    }
+
+    private IntCommand(int message, List<Integer> buffer) {
+        this.message = message;
+        this.buffer = buffer;
     }
 
     @Override
     public String getDecorated() {
-        return Command.PRIMITIVE_PREFIX + message;
+        return Command.PRIMITIVE_PREFIX + getBufferSum();
     }
 
     @Override
@@ -21,10 +31,9 @@ public class IntCommand implements Command {
     public IntCommand accumulate(Command other) {
         if (other instanceof IntCommand) {
             int otherMessage = ((IntCommand) other).getMessage();
-            if ((long) otherMessage + this.message > Integer.MAX_VALUE) {
-                throw new IllegalArgumentException("Overflow accumulation is not supported yet");
-            }
-            return new IntCommand(this.message + otherMessage);
+            buffer.add(otherMessage);
+
+            return new IntCommand(otherMessage, buffer);
         } else {
             throw new IllegalArgumentException("Can't accumulate IntCommand with other Command subclass");
         }
@@ -33,5 +42,13 @@ public class IntCommand implements Command {
     @Override
     public Integer getMessage() {
         return message;
+    }
+
+    private int getBufferSum() {
+        long sum = this.buffer.stream().mapToLong(Integer::longValue).sum();
+        if (sum > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("Overflow accumulation is not supported yet");
+        }
+        return (int) sum;
     }
 }

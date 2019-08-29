@@ -12,7 +12,7 @@ public class IntCommandTest {
         IntCommand firstCommand = new IntCommand(10);
         IntCommand secondCommand = new IntCommand(Integer.MAX_VALUE);
 
-        firstCommand.accumulate(secondCommand);
+        firstCommand.accumulate(secondCommand).getDecorated();
 
     }
 
@@ -22,7 +22,6 @@ public class IntCommandTest {
         ByteCommand secondCommand = new ByteCommand((byte) 10);
 
         firstCommand.accumulate(secondCommand);
-
     }
 
     @Test
@@ -31,7 +30,6 @@ public class IntCommandTest {
         ByteCommand secondCommand = new ByteCommand((byte) 10);
 
         Assertions.assertThat(firstCommand.isTypeEquals(secondCommand)).isEqualTo(false);
-
     }
 
     @Test
@@ -40,7 +38,6 @@ public class IntCommandTest {
         IntCommand secondCommand = new IntCommand(10);
 
         Assertions.assertThat(firstCommand.isTypeEquals(secondCommand)).isEqualTo(true);
-
     }
 
     @Test
@@ -48,7 +45,6 @@ public class IntCommandTest {
         IntCommand command = new IntCommand(10);
 
         Assertions.assertThat(command.getDecorated()).isEqualTo(Command.PRIMITIVE_PREFIX + "10");
-
     }
 
     @Test
@@ -57,6 +53,6 @@ public class IntCommandTest {
         IntCommand secondCommand = new IntCommand(20);
 
         IntCommand result = firstCommand.accumulate(secondCommand);
-        Assertions.assertThat(result.getMessage()).isEqualTo(30);
+        Assertions.assertThat(result.getDecorated()).isEqualTo(Command.PRIMITIVE_PREFIX + "30");
     }
 }
