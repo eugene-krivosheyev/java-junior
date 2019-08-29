@@ -110,9 +110,7 @@ public class Logger {
         });
     }
 
-    public static void closeLogger() {
-        loggerController.close();
-    }
+    public static void closeLogger() { loggerController.close(); }
 }
 
 
