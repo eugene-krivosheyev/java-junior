@@ -32,6 +32,9 @@ public class Test {
         loggerController.log(new ByteCommand((byte)1));
         loggerController.log(new ByteCommand((byte)1));
         loggerController.log(new ByteCommand(Byte.MAX_VALUE));
+        loggerController.log(new CharCommand('a'));
+        loggerController.log(new CharCommand('a'));
+        loggerController.log(new CharCommand('a'));
         loggerController.flush();
     }
 }

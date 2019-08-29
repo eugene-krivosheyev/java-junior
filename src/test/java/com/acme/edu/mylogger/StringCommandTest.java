@@ -44,7 +44,7 @@ public class StringCommandTest {
     public void shouldBeDecoratedWhenRepeatsMoreThanOnce() {
         final String STRING_PREFIX = "string: ";
         final StringCommand sut = new StringCommand("str", 2);
-        assertThat(sut.getDecorated()).isEqualTo(STRING_PREFIX + "str x2");
+        assertThat(sut.getDecorated()).isEqualTo(STRING_PREFIX + "str (x2)");
     }
 
     @Test

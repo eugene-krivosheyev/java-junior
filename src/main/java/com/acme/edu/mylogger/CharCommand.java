@@ -10,7 +10,7 @@ public class CharCommand implements Command {
 
     @Override
     public Command accumulate(Command other) {
-        return null;
+        return other;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class CharCommand implements Command {
 
     @Override
     public boolean isTypeEquals(Command other) {
-        return other instanceof CharCommand;
+        return false;
     }
 
     @Override

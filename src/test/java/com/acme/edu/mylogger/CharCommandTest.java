@@ -9,7 +9,7 @@ public class CharCommandTest {
     @Test
     public void shouldBeEqualToTheSameCommand() {
         final CharCommand sut = new CharCommand('a');
-        assertThat(sut.isTypeEquals(sut)).isEqualTo(true);
+        assertThat(sut.isTypeEquals(sut)).isEqualTo(false);
     }
 
     @Test
@@ -34,6 +34,6 @@ public class CharCommandTest {
     @Test
     public void shouldNotBeAccumulated() {
         final CharCommand sut = new CharCommand('a');
-        assertThat(sut.accumulate(sut)).isEqualTo(null);
+        assertThat(sut.accumulate(sut)).isEqualTo(sut);
     }
 }
