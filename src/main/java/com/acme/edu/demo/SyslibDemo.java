@@ -3,6 +3,7 @@ package com.acme.edu.demo;
 import java.io.IOException;
 import java.util.Date; //nope!
 import java.time.Instant; //joda time - yep!
+import java.util.Objects;
 import java.util.Properties;
 
 public class SyslibDemo {
@@ -31,6 +32,7 @@ public class SyslibDemo {
         final Geeraff burzum = new Geeraff("burzum", 1);
         final Geeraff mgla = burzum.clone();
         System.out.println(mgla);
+
 
     }
 }
@@ -65,5 +67,25 @@ class Geeraff extends Object implements Cloneable {
                 "name='" + name + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Geeraff geeraff = (Geeraff) o;
+
+        if (age != geeraff.age) return false;
+        if (!Objects.equals(name, geeraff.name)) return false;
+        return Objects.equals(theFriend, geeraff.theFriend);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + age;
+        result = 31 * result + (theFriend != null ? theFriend.hashCode() : 0);
+        return result;
     }
 }
