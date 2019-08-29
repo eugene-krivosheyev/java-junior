@@ -6,6 +6,7 @@ import com.acme.edu.saver.Saver;
 import com.acme.edu.saver.SaverException;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class LoggerController {
@@ -16,7 +17,7 @@ public class LoggerController {
 
     public LoggerController(Saver saver) {
         this.saver = saver;
-        this.buffer = new ArrayList<>();
+        this.buffer = new LinkedList<>();
         this.state = StateCommand.NONE;
     }
 
@@ -39,7 +40,7 @@ public class LoggerController {
             for (int i = 1; i < buffer.size(); i++)
                 curCommand = curCommand.accumulate(buffer.get(i));
             saver.saveWithoutPrefix(curCommand);
-            buffer = new ArrayList<>();
+            buffer = new LinkedList<>();
         }
         this.state = state;
     }
