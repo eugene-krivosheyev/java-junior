@@ -10,7 +10,7 @@ public class StringCommand implements Command {
         this.repeats = 1;
     }
 
-    public StringCommand(String message, int repeats) {
+    StringCommand(String message, int repeats) {
         this.message = message;
         this.repeats = repeats;
     }
@@ -28,6 +28,10 @@ public class StringCommand implements Command {
     @Override
     public Object getMessage() {
         return message;
+    }
+
+    int getRepeats() {
+        return repeats;
     }
 
     @Override
