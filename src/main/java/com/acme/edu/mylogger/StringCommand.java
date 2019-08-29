@@ -4,7 +4,7 @@ public class StringCommand implements Command {
     private final static String STRING_PREFIX = "string: ";
     private String message;
 
-    StringCommand(String message) {
+    public StringCommand(String message) {
         this.message = message;
     }
 
@@ -25,7 +25,8 @@ public class StringCommand implements Command {
 
     @Override
     public boolean isTypeEquals(Command other) {
-        return other instanceof StringCommand;
+        //return other instanceof StringCommand;
+        return false;
     }
 
     @Override

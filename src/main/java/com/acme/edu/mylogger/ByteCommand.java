@@ -4,7 +4,7 @@ public class ByteCommand implements Command {
     private final static String PRIMITIVE_PREFIX = "primitive: ";
     private byte message;
 
-    ByteCommand(byte message) {
+    public ByteCommand(byte message) {
         this.message = message;
     }
 

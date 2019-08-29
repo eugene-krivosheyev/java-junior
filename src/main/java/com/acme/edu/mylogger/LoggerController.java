@@ -3,13 +3,13 @@ package com.acme.edu.mylogger;
 import java.util.LinkedList;
 import java.util.Queue;
 
-class LoggerController {
+public class LoggerController {
     private SuperAccumulator accumulator;
     private SuperSaver saver;
     private Command currentState = null;
     private Queue<Command> commandQueue;
 
-    LoggerController(SuperAccumulator accumulator, SuperSaver saver) {
+    public LoggerController(SuperAccumulator accumulator, SuperSaver saver) {
         this.accumulator = accumulator;
         this.saver = saver;
         this.commandQueue = new LinkedList<>();
@@ -19,7 +19,7 @@ class LoggerController {
         return currentState;
     }
 
-    void log(Command command) {
+    public void log(Command command) {
         if (command.isTypeEquals(currentState)) {
             try {
                 accumulator.addToQueue(command);
@@ -42,7 +42,7 @@ class LoggerController {
         }
     }
 
-    void flush() {
+    public void flush() {
         try {
             accumulator.accumulate(commandQueue).ifPresent(e -> saver.save(e.getDecorated()));
         } catch (ArithmeticException e) {

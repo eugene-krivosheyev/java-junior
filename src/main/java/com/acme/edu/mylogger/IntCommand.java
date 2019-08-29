@@ -4,7 +4,7 @@ public class IntCommand implements Command {
     private final static String PRIMITIVE_PREFIX = "primitive: ";
     private int message;
 
-    IntCommand(int message) {
+    public IntCommand(int message) {
         this.message = message;
     }
 

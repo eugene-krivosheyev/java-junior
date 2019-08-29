@@ -1,4 +1,6 @@
-package com.acme.edu.mylogger;
+package com.acme.edu;
+
+import com.acme.edu.mylogger.*;
 
 public class Test {
 
