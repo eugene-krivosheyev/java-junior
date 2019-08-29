@@ -3,6 +3,10 @@ package com.acme.edu.commands.arrays;
 import com.acme.edu.commands.Command;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.joining;
 
 abstract class ArrayCommand implements Command<String> {
     private static final String PRIMITIVE_PREFIX_FOR_ARRAY = "primitives array: ";
@@ -10,7 +14,9 @@ abstract class ArrayCommand implements Command<String> {
     private static final String PRIMITIVE_PREFIX_FOR_MULTI_MATRIX = "primitives multimatrix: ";
 
 
-    String decorateArray(int[] array) { return PRIMITIVE_PREFIX_FOR_ARRAY + Arrays.toString(array).replace("[", "{").replace("]", "}") +"\n"; }
+    String decorateArray(int[] array) {
+        return PRIMITIVE_PREFIX_FOR_ARRAY + Arrays.toString(array).replace("[", "{").replace("]", "}") + "\n";
+    }
 
     String decorateArray(int[][] array) {
         StringBuilder result = new StringBuilder("{\n");
