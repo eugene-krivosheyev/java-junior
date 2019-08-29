@@ -24,7 +24,7 @@ public class ByteCommandTest {
         assertThat(sut.isOverflow()).isEqualTo(false);
     }
 
-    @Test
+    @Test(expected = ArithmeticException.class)
     public void shouldBeOverflow() {
         final ByteCommand sut1 = new ByteCommand((byte)-1);
         final ByteCommand sut2 = new ByteCommand((byte)1);

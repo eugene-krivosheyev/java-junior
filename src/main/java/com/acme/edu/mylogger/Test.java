@@ -14,6 +14,9 @@ public class Test {
         //loggerController.flush();
         loggerController.log(new IntCommand(Integer.MAX_VALUE - 3));
         loggerController.log(new IntCommand(1));
+        loggerController.log(new IntCommand(1));
+        loggerController.log(new IntCommand(Integer.MAX_VALUE - 400));
+        loggerController.log(new IntCommand(5));
         //loggerController.flush();
         //loggerController.log(new IntCommand(1));
         //loggerController.log(new IntCommand(1));
@@ -24,7 +27,7 @@ public class Test {
         //loggerController.flush();
         loggerController.log(new ByteCommand((byte)1));
         loggerController.log(new ByteCommand((byte)1));
-        loggerController.log(new ByteCommand((byte)1));
+        loggerController.log(new ByteCommand(Byte.MAX_VALUE));
         loggerController.flush();
     }
 }

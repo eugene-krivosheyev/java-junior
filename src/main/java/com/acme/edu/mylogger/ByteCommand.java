@@ -15,12 +15,20 @@ public class ByteCommand implements Command {
 
     @Override
     public boolean isOverflow() {
-        return message < 0;
+        if (message < 0) {
+            throw new ArithmeticException();
+        }
+        return false;
     }
 
     @Override
     public Command accumulate(Command other) {
-        return new ByteCommand((byte) (this.message + (byte)other.getMessage()));
+        try {
+            (new ByteCommand((byte) ((byte)this.getMessage() + (byte)other.getMessage()))).isOverflow();
+        } catch (ArithmeticException e) {
+            throw new ArithmeticException("ByteOverflow");
+        }
+        return new ByteCommand((byte) ((byte)this.getMessage() + (byte)other.getMessage()));
     }
 
     @Override
