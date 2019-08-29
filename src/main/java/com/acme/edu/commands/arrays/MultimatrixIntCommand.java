@@ -17,12 +17,6 @@ public class MultimatrixIntCommand extends ArrayCommand {
 
     @Override
     public Command<String> accumulate(Command command) {
-        try {
-            if (!(command instanceof MultimatrixIntCommand))
-                throw new IllegalArgumentException("Not a multimatrix int command!");
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
         return new MultimatrixIntCommand(message);
     }
 

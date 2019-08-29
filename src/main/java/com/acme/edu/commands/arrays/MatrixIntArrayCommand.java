@@ -18,12 +18,6 @@ public class MatrixIntArrayCommand extends ArrayCommand {
 
     @Override
     public Command<String> accumulate(Command command) {
-        try {
-            if (!(command instanceof MatrixIntArrayCommand))
-                throw new IllegalArgumentException("Not a matrix int command!");
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
         return new MatrixIntArrayCommand(message);
     }
 

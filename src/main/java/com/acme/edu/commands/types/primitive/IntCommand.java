@@ -16,12 +16,8 @@ public class IntCommand extends PrimitiveCommand implements Command<Integer> {
     public String decorate() { return super.getPrimitivePrefix() + message; }
 
     @Override
-    public Command<Integer> accumulate(Command command) throws IllegalArgumentException, OverflowException {
-        if (command instanceof IntCommand)
-            ControllerOverflow.controlOverflow((Integer) command.getMessage(), this);
-        else
-            throw new IllegalArgumentException("Not a int command!");
-
+    public Command<Integer> accumulate(Command command) throws OverflowException {
+        ControllerOverflow.controlOverflow((Integer) command.getMessage(), this);
         return new IntCommand(message);
     }
 

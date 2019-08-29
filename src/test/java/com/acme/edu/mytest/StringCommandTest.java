@@ -5,7 +5,6 @@ import com.acme.edu.commands.types.StringCommand;
 import com.acme.edu.commands.types.primitive.ByteCommand;
 import com.acme.edu.overflow.OverflowException;
 import org.junit.Test;
-
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;

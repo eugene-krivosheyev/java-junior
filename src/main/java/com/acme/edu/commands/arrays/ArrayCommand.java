@@ -14,11 +14,9 @@ abstract class ArrayCommand implements Command<String> {
 
     String decorateArray(int[][] array) {
         StringBuilder result = new StringBuilder("{\n");
-        for (int[] anArray : array) {
+        for (int[] anArray : array)
             result.append(Arrays.toString(anArray).replace("[", "{").replace("]", "}")).append("\n");
-        }
         return PRIMITIVE_PREFIX_FOR_MATRIX + result + "}";
-        //return PRIMITIVE_PREFIX_FOR_MATRIX + Arrays.deepToString(array).replace("[", "{").replace("],", "}\n").replace("]", "}");
     }
 
     String decorateArray(int[][][][] array) { return PRIMITIVE_PREFIX_FOR_MULTI_MATRIX + Arrays.deepToString(array).replace("[", "{\n").replace("]", "\n}"); }

@@ -5,6 +5,7 @@ import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import sun.rmi.runtime.Log;
 
 import java.io.IOException;
 
@@ -29,6 +30,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersArray() throws IOException {
         //region when
         Logger.log(new int[] {-1, 0, 1});
+        Logger.closeLogger();
         //endregion
 
         //region then
@@ -44,6 +46,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
         Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        Logger.closeLogger();
         //endregion
 
         //region then
@@ -62,6 +65,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
         Logger.log(new int[][][][] {{{{0}}}});
+        Logger.closeLogger();
         //endregion
 
         //region then
@@ -80,6 +84,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
         Logger.log("str1", "string 2", "str 3");
+        Logger.closeLogger();
         //endregion
 
         //region then
@@ -94,6 +99,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
         Logger.log(-1, 0, 1, 3);
+        Logger.closeLogger();
         //endregion
 
         //region then
@@ -107,14 +113,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(1);
         Logger.log("str");
         Logger.log(Integer.MAX_VALUE - 10);
-        Logger.log(11);
+        Logger.log(9);
+        Logger.closeLogger();
         //endregion
 
         //region then
         assertSysoutContains(String.valueOf(1));
         assertSysoutContains("str");
         assertSysoutContains(String.valueOf(Integer.MAX_VALUE - 10));
-        assertSysoutContains(String.valueOf(11));
+        assertSysoutContains(String.valueOf(9));
         //endregion
     }
 

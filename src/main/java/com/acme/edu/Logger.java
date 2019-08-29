@@ -7,6 +7,7 @@ import com.acme.edu.commands.types.*;
 import com.acme.edu.commands.types.primitive.BooleanCommand;
 import com.acme.edu.commands.types.primitive.ByteCommand;
 import com.acme.edu.commands.types.primitive.IntCommand;
+import com.acme.edu.overflow.OverflowException;
 import com.acme.edu.saver.ConsoleSaver;
 import com.acme.edu.saver.SaverException;
 
@@ -109,7 +110,13 @@ public class Logger {
         }
     }
 
-    public static void closeLogger() { loggerController.close();  }
+    public static void closeLogger() {
+        try {
+            loggerController.close();
+        } catch (OverflowException e) {
+            LOGGER.log(Level.SEVERE, "Error in close logger");
+        }
+    }
 }
 
 
