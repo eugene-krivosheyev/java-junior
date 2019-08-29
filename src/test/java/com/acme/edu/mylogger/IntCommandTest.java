@@ -24,7 +24,7 @@ public class IntCommandTest {
         assertThat(sut.isOverflow()).isEqualTo(false);
     }
 
-    @Test
+    @Test(expected = ArithmeticException.class)
     public void shouldBeOverflow() {
         final IntCommand sut1 = new IntCommand(-1);
         final IntCommand sut2 = new IntCommand(1);

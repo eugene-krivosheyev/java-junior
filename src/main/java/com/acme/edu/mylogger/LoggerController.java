@@ -2,12 +2,13 @@ package com.acme.edu.mylogger;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class LoggerController {
     private SuperAccumulator accumulator;
     private SuperSaver saver;
     private Command currentState = null;
-    private Collection<Command> commandCollection;
+    private Queue<Command> commandCollection;
 
     LoggerController(SuperAccumulator accumulator, SuperSaver saver) {
         this.accumulator = accumulator;

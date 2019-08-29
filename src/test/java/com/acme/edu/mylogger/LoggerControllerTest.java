@@ -59,5 +59,6 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
         final LoggerController loggerController = new LoggerController(superCurrentAccumulator, superConsoleSaver);
         loggerController.log(new IntCommand(1));
         loggerController.log(new IntCommand(Integer.MAX_VALUE));
+        loggerController.flush();
     }
 }
