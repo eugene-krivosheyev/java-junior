@@ -22,7 +22,7 @@ public class StringCommand implements Command {
 
     @Override
     public String getDecorated() {
-        return this.repeats > 1 ? STRING_PREFIX + this.message + " x" + repeats : STRING_PREFIX + this.message;
+        return this.repeats > 1 ? STRING_PREFIX + this.message + " (x" + repeats + ")" : STRING_PREFIX + this.message;
     }
 
     @Override
