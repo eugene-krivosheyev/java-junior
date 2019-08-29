@@ -13,9 +13,6 @@ import java.util.stream.Stream;
 public class Logger {
     private static LoggerController loggerController = new LoggerController(new ConsoleSaver()); //Stateless
     private final static java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(Logger.class.getName());
-    private static Collection<DecorateCommand> commandsBuffer = new LinkedList<>();
-    private static DecorateCommand lastCommand;
-
 
     static {
         System.setProperty("java.util.logging.config.file", "logging.properties");
@@ -27,11 +24,7 @@ public class Logger {
 
     private static void processCommand(DecorateCommand newCommand) throws LogOperationException {
         try {
-            if (isFlushNeeded(newCommand)) {
-                flushBuffer();
-            }
-            commandsBuffer.add(newCommand);
-            lastCommand = newCommand;
+            loggerController.run(newCommand);
         } catch (SaverException e) {
             saveToLog(e);
             throw new LogOperationException(e);
@@ -86,21 +79,8 @@ public class Logger {
         processCommand(new CharCommand(String.valueOf(message)));
     }
 
-    private static boolean isFlushNeeded(DecorateCommand newCommand) {
-        if (commandsBuffer.size() == 0) {
-            return false;
-        }
-        return !lastCommand.getClass().equals(newCommand.getClass());
-    }
-
-    private static void flushBuffer() {
-        commandsBuffer.forEach(loggerController::run);
-        commandsBuffer.clear();
-    }
-
     public static void close() throws LogOperationException {
         try {
-            flushBuffer();
             loggerController.close();
         } catch (SaverException e) {
             saveToLog(e);

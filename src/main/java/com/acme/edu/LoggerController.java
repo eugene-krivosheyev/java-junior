@@ -8,13 +8,20 @@ import com.acme.edu.savers.Saver;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Optional;
+import java.util.concurrent.LinkedBlockingDeque;
+
 /**
  * Stateless, Application scope
  */
 public class LoggerController {
     private Saver saver;
     @Nullable
-    private AccumulateCommand prevCommand;
+    private static DecorateCommand lastCommand;
+    private static Collection<DecorateCommand> commandsBuffer = new LinkedList<>();
+
 
     public LoggerController(Saver saver) {
         this.saver = saver;
@@ -22,32 +29,56 @@ public class LoggerController {
 
     public LoggerController(Saver saver, @Nullable AccumulateCommand accumulate) {
         this.saver = saver;
-        this.prevCommand = accumulate;
+        lastCommand = accumulate;
     }
 
     public void run(@NotNull DecorateCommand decorateCommand) throws SaverException {
-        if (prevCommand != null) {
-            prevCommand.flush(saver);
+        if (lastCommand != null && isFlushNeeded(decorateCommand)) {
+            flushDecoratedBuffer();
         }
-        String decoratedMessage = decorateCommand.decorate();
-        saver.save(decoratedMessage);
+        commandsBuffer.add(decorateCommand);
+        lastCommand = decorateCommand;
     }
 
     public void run(@NotNull AccumulateCommand accumulateCommand) throws SaverException {
-        if (prevCommand == null) {
-            prevCommand = accumulateCommand;
-        } else if (prevCommand.isTypeTheSame(accumulateCommand)) {
-            prevCommand = accumulateCommand.accumulate(prevCommand, saver);
-        } else {
-            prevCommand.flush(saver);
-            prevCommand = accumulateCommand;
+        if (lastCommand != null) {
+            if (!lastCommand.getClass().equals(AccumulateCommand.class)) {
+                flushDecoratedBuffer();
+            } else if (!((AccumulateCommand) lastCommand).isTypeTheSame(accumulateCommand)) {
+                flushAccumulatedBuffer();
+            }
+        }
+        lastCommand = accumulateCommand;
+        commandsBuffer.add(accumulateCommand);
+    }
+
+    private boolean isFlushNeeded(DecorateCommand newCommand) {
+        if (commandsBuffer.size() == 0) {
+            return false;
+        }
+        return !(lastCommand != null && lastCommand.getClass().equals(newCommand.getClass()));
+    }
+
+    private void flushDecoratedBuffer() {
+        commandsBuffer.forEach(command -> saver.save(command.decorate()));
+        commandsBuffer.clear();
+    }
+
+    private void flushAccumulatedBuffer() {
+        if (lastCommand != null) {
+            commandsBuffer.stream()
+                    .reduce((accumulatedCommand, command) ->
+                            ((AccumulateCommand) accumulatedCommand).accumulate((AccumulateCommand) command, saver))
+                    .ifPresent(result -> ((AccumulateCommand) result).flush(saver));
+            commandsBuffer.clear();
         }
     }
 
     public void close() throws SaverException {
-        if (prevCommand != null) {
-            prevCommand.flush(saver);
-            prevCommand = null;
+        if (lastCommand != null) {
+            ((AccumulateCommand) lastCommand).flush(saver);
+            lastCommand = null;
         }
+        flushAccumulatedBuffer();
     }
 }

@@ -12,7 +12,7 @@ import org.mockito.internal.util.reflection.Whitebox;
 import static org.mockito.Mockito.*;
 
 public class ExceptionsTest {
-    @Test(expected = SaverException.class)
+    @Test(expected = RuntimeException.class)
     public void shouldThrowSaverExceptionWhenSaveErrorHappens() throws SaverException {
         PrimitiveCommand stubIntCommand = mock(PrimitiveCommand.class);
         Whitebox.setInternalState(stubIntCommand, "buffer", 1);
@@ -25,7 +25,7 @@ public class ExceptionsTest {
         sut.close();
     }
 
-    @Test(expected = IntegerMaxOverflowException.class)
+    @Test(expected = RuntimeException.class)
     public void shouldThrowIntegerMaxOverflowExceptionWhenOverflowHappens() throws IntegerMaxOverflowException, IntegerMinOverflowException {
         PrimitiveCommand stubIntCommand = mock(PrimitiveCommand.class);
         Whitebox.setInternalState(stubIntCommand, "buffer", Integer.MAX_VALUE);
@@ -36,7 +36,7 @@ public class ExceptionsTest {
         sut.checkOverflow(1);
     }
 
-    @Test(expected = IntegerMinOverflowException.class)
+    @Test(expected = RuntimeException.class)
     public void shouldThrowIntegerMinOverflowExceptionWhenOverflowHappens() throws IntegerMaxOverflowException, IntegerMinOverflowException {
         PrimitiveCommand stubIntCommand = mock(PrimitiveCommand.class);
         Whitebox.setInternalState(stubIntCommand, "buffer", Integer.MIN_VALUE);
