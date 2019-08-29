@@ -6,16 +6,16 @@ import com.acme.edu.exceptions.LogOperationException;
 import com.acme.edu.exceptions.SaverException;
 import com.acme.edu.savers.ConsoleSaver;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.stream.Stream;
 
 public class Logger {
     private static LoggerController loggerController = new LoggerController(new ConsoleSaver()); //Stateless
     private final static java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(Logger.class.getName());
-    private static List<DecorateCommand> commandsBuffer = new ArrayList<>();
+    private static Collection<DecorateCommand> commandsBuffer = new LinkedList<>();
+    private static DecorateCommand lastCommand;
+
 
     static {
         System.setProperty("java.util.logging.config.file", "logging.properties");
@@ -31,6 +31,7 @@ public class Logger {
                 flushBuffer();
             }
             commandsBuffer.add(newCommand);
+            lastCommand = newCommand;
         } catch (SaverException e) {
             saveToLog(e);
             throw new LogOperationException(e);
@@ -89,7 +90,7 @@ public class Logger {
         if (commandsBuffer.size() == 0) {
             return false;
         }
-        return !commandsBuffer.get(0).getClass().equals(newCommand.getClass());
+        return !lastCommand.getClass().equals(newCommand.getClass());
     }
 
     private static void flushBuffer() {
