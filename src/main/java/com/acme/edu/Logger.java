@@ -110,7 +110,13 @@ public class Logger {
         });
     }
 
-    public static void closeLogger() { loggerController.close(); }
+    public static void closeLogger() {
+        try {
+            loggerController.close();
+        } catch (SaverException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 
