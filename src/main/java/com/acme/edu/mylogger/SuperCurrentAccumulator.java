@@ -1,45 +1,43 @@
 package com.acme.edu.mylogger;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;
 
 public class SuperCurrentAccumulator implements SuperAccumulator {
-    private static int sum;
+    private Queue<Command> commandQueue = new LinkedList<>();
 
     @Override
     public Optional<Command> accumulate(Queue<Command> collection) {
-        //Stream.of(collection).parallel().reduce((e1, e2) -> e1.);
-        //collection.stream().reduce((e1, e2) -> (int)e1.getMessage() + (int)e2.getMessage());
-        //int sum = collection.stream().mapToInt().sum();
-        makeZero();
-        /*
-        for (Command element : collection) {
-            int newSum = sum + (int)element.getMessage();
-            if (newSum < 0) {
-                throw new ArithmeticException("Overflow");
-            }
-            sum+=(int)element.getMessage();
-        }
-         */
-        //return sum;
-        /*
         try {
-            return collection.stream().mapToInt(e -> (int) e.getMessage()).sum();
-        } catch (ClassCastException exs) {
-            return collection.stream().mapToInt(e -> (byte) e.getMessage()).sum();
+            collection.stream().reduce(Command::accumulate);
+        } catch (ArithmeticException e) {
+            throw new ArithmeticException(e.getLocalizedMessage());
         }
-         */
         return collection.stream().reduce(Command::accumulate);
-        //return collection.stream().mapToInt(e -> (int) e.getMessage()).sum();
     }
 
     @Override
-    public int getPrevSum() {
-        return sum;
+    public void addToQueue(Command command) {
+        try {
+            Queue<Command> newQueue = new LinkedList<>(commandQueue);
+            newQueue.add(command);
+            newQueue.stream().reduce(Command::accumulate);
+        } catch (ArithmeticException e) {
+            throw new ArithmeticException(e.getLocalizedMessage());
+        } finally {
+            commandQueue.add(command);
+        }
     }
 
-    public void makeZero() {
-        sum = 0;
+    @Override
+    public void clearQueue() {
+        commandQueue.clear();
+    }
+
+    @Override
+    public Queue<Command> getCommandQueue() {
+        return commandQueue;
     }
 }
