@@ -18,13 +18,8 @@ public class FileSaver implements Saver {
     }
 
     private void saveToFile(String message) {
-        StringBuilder fileName = new StringBuilder("log.txt");
-        int countLogFiles = 0;
-        while (fileName.length() > 24) {
-            countLogFiles++;
-            fileName.append(countLogFiles);
-        }
-        try(FileWriter fileWriter = new FileWriter(fileName.toString(), true)) {
+        String fileName = "log.txt";
+        try(FileWriter fileWriter = new FileWriter(fileName, true)) {
             fileWriter.append(message).append("\n");
         } catch (IOException e) {
             e.printStackTrace();
