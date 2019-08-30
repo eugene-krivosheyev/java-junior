@@ -1,12 +1,14 @@
 package com.acme.edu.savers;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FileSaver implements Saver {
-    private String filename;
+    private Path filePath;
 
     public FileSaver(String filename) {
-        this.filename = filename;
+        this.filePath = Paths.get(filename);
     }
 
     @Override
@@ -15,7 +17,7 @@ public class FileSaver implements Saver {
                      new PrintWriter(
                              new OutputStreamWriter(
                                      new BufferedOutputStream(
-                                             new FileOutputStream(filename, true))))) {
+                                             new FileOutputStream(this.filePath.toString(), true))))) {
             out.println(message);
         } catch (IOException e) {
             e.printStackTrace();
