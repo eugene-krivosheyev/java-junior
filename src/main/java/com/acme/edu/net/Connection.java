@@ -34,10 +34,10 @@ public class Connection {
         out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         thread = new Thread((() -> {
             try {
-                listener.onConnectionReady(Connection.this);
+                listener.onConnect(Connection.this);
                 while (!thread.isInterrupted()) {
                     String msg = in.readLine();
-                    listener.onReceiveString(Connection.this, msg);
+                    listener.onReceiveMessage(Connection.this, msg);
                 }
             } catch (IOException ex) {
                 log.error("Ошибка создания соединения: " + ex);

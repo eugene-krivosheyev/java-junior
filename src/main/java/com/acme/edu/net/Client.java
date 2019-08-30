@@ -26,12 +26,12 @@ public class Client implements ConnectionListener {
     }
 
     @Override
-    public synchronized void onConnectionReady(Connection connection) {
+    public synchronized void onConnect(Connection connection) {
         log.info("Соединение открыто");
     }
 
     @Override
-    public synchronized void onReceiveString(Connection connection, String message) {
+    public synchronized void onReceiveMessage(Connection connection, String message) {
         log.info("Пришло сообщение: " + message);
     }
 

@@ -24,12 +24,12 @@ public class NetManager implements ConnectionListener {
     public NetManager() { server = new Server( this, 8102); }
 
     @Override
-    public synchronized void onConnectionReady(Connection connection) {
+    public synchronized void onConnect(Connection connection) {
         server.getConnections().add(connection);
     }
 
     @Override
-    public synchronized void onReceiveString(Connection connection, String message) {
+    public synchronized void onReceiveMessage(Connection connection, String message) {
         log.info("Пришло сообщение: " + message + ", от: " + connection.toString());
         try {
             loggerController.handleCommand(selectComand(message));
