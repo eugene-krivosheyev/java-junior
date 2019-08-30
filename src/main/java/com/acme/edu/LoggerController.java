@@ -3,7 +3,6 @@ package com.acme.edu;
 import com.acme.edu.commands.AccumulateCommand;
 import com.acme.edu.commands.DecorateCommand;
 import com.acme.edu.exceptions.SaverException;
-import com.acme.edu.savers.ConsoleSaver;
 import com.acme.edu.savers.Saver;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

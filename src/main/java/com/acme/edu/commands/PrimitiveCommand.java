@@ -32,7 +32,7 @@ public class PrimitiveCommand extends AccumulateCommand {
         } catch (IntegerMaxOverflowException e) {
             return handleOverflow(Integer.MAX_VALUE, saver, prevBuffer);
         }
-        return new PrimitiveCommand(buffer + prevBuffer);
+        return new PrimitiveCommand(String.valueOf(Integer.parseInt(buffer) + prevBuffer));
     }
 
     public void checkOverflow(int prevBuffer) throws IntegerMaxOverflowException, IntegerMinOverflowException {
