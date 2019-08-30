@@ -12,32 +12,6 @@ import org.mockito.internal.util.reflection.Whitebox;
 import static org.mockito.Mockito.*;
 
 public class LoggerControllerTest {
-    @Test
-    public void shouldRunFlushWhenPrevCommandNull() throws SaverException {
-        AccumulateCommand mockAccumulate = mock(AccumulateCommand.class);
-        PrimitiveCommand stubIntCommand = mock(PrimitiveCommand.class);
-        Whitebox.setInternalState(stubIntCommand, "buffer", 1);
-        ConsoleSaver mockSaver = mock(ConsoleSaver.class);
-        when(stubIntCommand.decorate()).thenReturn("primitive: 1");
-
-        final LoggerController sut = new LoggerController(mockSaver, mockAccumulate);
-        sut.run(stubIntCommand);
-
-        verify(mockAccumulate).flush(mockSaver);
-    }
-
-    @Test
-    public void shouldFlushWhenCloseAndPrevCommandNotNull() throws SaverException {
-        PrimitiveCommand stubIntCommand = mock(PrimitiveCommand.class);
-        Whitebox.setInternalState(stubIntCommand, "buffer", 1);
-        ConsoleSaver dummySaver = mock(ConsoleSaver.class);
-
-        final LoggerController sut = new LoggerController(dummySaver);
-        sut.run(stubIntCommand);
-        sut.close();
-
-        verify(stubIntCommand).flush(dummySaver);
-    }
 
     @Test
     public void shouldNotFlushWhenCloseAndPrevCommandNull() throws SaverException {
@@ -56,7 +30,7 @@ public class LoggerControllerTest {
         AccumulateCommand mockAccumulate2 = mock(AccumulateCommand.class);
         PrimitiveCommand stubIntCommand = mock(PrimitiveCommand.class);
         CharCommand stubCharCommand = mock(CharCommand.class);
-        Whitebox.setInternalState(stubIntCommand, "buffer", 1);
+        Whitebox.setInternalState(stubIntCommand, "buffer", "1");
         Whitebox.setInternalState(stubCharCommand, "message", "a");
         ConsoleSaver mockSaver = mock(ConsoleSaver.class);
         when(mockAccumulate.isTypeTheSame(mockAccumulate2)).thenReturn(false);
@@ -71,7 +45,7 @@ public class LoggerControllerTest {
     @Test
     public void shouldAccumulateWhenCommandsAreEquals() throws SaverException {
         AccumulateCommand stubIntCommand = mock(PrimitiveCommand.class);
-        Whitebox.setInternalState(stubIntCommand, "buffer", 1);
+        Whitebox.setInternalState(stubIntCommand, "buffer", "1");
         ConsoleSaver mockSaver = mock(ConsoleSaver.class);
         when(stubIntCommand.isTypeTheSame(stubIntCommand)).thenReturn(true);
 

@@ -4,18 +4,22 @@ package com.acme.edu;
 import com.acme.edu.commands.*;
 import com.acme.edu.exceptions.LogOperationException;
 import com.acme.edu.exceptions.SaverException;
-import com.acme.edu.savers.ConsoleSaver;
+import com.acme.edu.savers.FileSaver;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.stream.Stream;
 
 public class Logger {
-    private static LoggerController loggerController = new LoggerController(new ConsoleSaver()); //Stateless
+    private static final int MAX_CHARACTERS_NUMBER = 100;
+    private static final String FILENAME = "result";
+    private static final String FILETYPE = "txt";
+    private static LoggerController loggerController = new LoggerController(new FileSaver(FILENAME, FILETYPE, MAX_CHARACTERS_NUMBER)); //Stateless
     private final static java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(Logger.class.getName());
     private static Collection<DecorateCommand> commandsBuffer = new LinkedList<>();
     private static DecorateCommand lastCommand;
-
 
     static {
         System.setProperty("java.util.logging.config.file", "logging.properties");
@@ -43,19 +47,19 @@ public class Logger {
     }
 
     public static void log(byte message) throws LogOperationException {
-        processCommand((DecorateCommand) new PrimitiveCommand(String.valueOf(message)));
+        processCommand(new PrimitiveCommand(String.valueOf(message)));
     }
 
     public static void log(String message) throws LogOperationException {
-        processCommand(new StringCommand(message));
+        processCommand((AccumulateCommand)new StringCommand(message));
     }
 
     public static void log(String... messages) throws LogOperationException {
-        processCommand((DecorateCommand) new StringCommand(String.join("\n", messages)));
+        processCommand(new StringCommand(String.join("\n", messages)));
     }
 
     public static void log(Integer... messages) throws LogOperationException {
-        processCommand((DecorateCommand) new PrimitiveCommand(
+        processCommand(new PrimitiveCommand(
                 Stream.of(messages)
                         .reduce(0, Integer::sum)
                         .toString())
@@ -75,7 +79,7 @@ public class Logger {
     }
 
     public static void log(boolean message) throws LogOperationException {
-        processCommand((DecorateCommand) new PrimitiveCommand(String.valueOf(message)));
+        processCommand(new PrimitiveCommand(String.valueOf(message)));
     }
 
     public static void log(Object message) throws LogOperationException {
