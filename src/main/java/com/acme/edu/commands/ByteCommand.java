@@ -11,6 +11,7 @@ public class ByteCommand implements Command {
         this.message = message;
         this.buffer.add(message);
     }
+
     private ByteCommand(byte message, List<Byte> buffer) {
         this.message = message;
         this.buffer = buffer;

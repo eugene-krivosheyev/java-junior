@@ -1,7 +1,7 @@
 package com.acme.edu;
 
 import com.acme.edu.commands.*;
-import com.acme.edu.savers.ConsoleSaver;
+import com.acme.edu.savers.FileSaver;
 import com.acme.edu.savers.Saver;
 
 public class Logger {
@@ -10,7 +10,7 @@ public class Logger {
     public static final String PR_MATRIX_PREFIX = PRIMITIVES_PREFIX + "matrix: ";
     public static final String PR_MULTIMATRIX_PREFIX = PRIMITIVES_PREFIX + "multimatrix: ";
 
-    private static final Saver saver = new ConsoleSaver();
+    private static final Saver saver = new FileSaver("file.txt");
     private static final LoggerController loggerController = new LoggerController(saver);
 
     public static void log(byte message) {
