@@ -22,7 +22,7 @@ public class NetManager  implements ConnectionListener {
     private LoggerController loggerController = new LoggerController(new ConsoleSaver());
     private Server server;
 
-    public NetManager() { server = new Server( this, 8101); }
+    public NetManager() { server = new Server( this, 8102); }
 
     @Override
     public synchronized void onConnectionReady(Connection connection) {

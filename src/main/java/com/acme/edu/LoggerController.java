@@ -19,7 +19,6 @@ public class LoggerController {
     }
 
     public void handleCommand(Command command) throws SaverException {
-        System.out.println(command.getMessage().toString() + command.getState() + "________");
         try {
             if(state != command.getState())
                 flush(command.getState());
@@ -41,6 +40,7 @@ public class LoggerController {
                     break;
                 }
             }
+            saver.saveWithoutPrefix(curCommand);
         }
         else if (buffer.size() == 1) saver.saveWithoutPrefix(buffer.get(0));
 

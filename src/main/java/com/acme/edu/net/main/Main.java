@@ -1,6 +1,5 @@
 package com.acme.edu.net.main;
 
-import com.acme.edu.commands.Command;
 import com.acme.edu.commands.types.StringCommand;
 import com.acme.edu.commands.types.primitive.ByteCommand;
 import com.acme.edu.commands.types.primitive.IntCommand;

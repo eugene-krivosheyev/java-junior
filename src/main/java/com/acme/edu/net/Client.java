@@ -13,7 +13,7 @@ public class Client implements ConnectionListener {
     private static final Logger log = LoggerFactory.getLogger(Connection.class);
 
     private static final String ip = "localhost";
-    private static final int port = 8101;
+    private static final int port = 8102;
     private Connection connection;
 
     public Client() {
