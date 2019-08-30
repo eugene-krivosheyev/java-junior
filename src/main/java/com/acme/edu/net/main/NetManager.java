@@ -33,7 +33,7 @@ public class NetManager implements ConnectionListener {
         log.info("Пришло сообщение: " + message + ", от: " + connection.toString());
         try {
             loggerController.handleCommand(selectComand(message));
-            sendMessage("Cообщение: " + message + " - было отправлено", connection);
+            sendMessage("Cообщение залогировано: " + message, connection);
         } catch (SaverException e) {
             log.error("Ошибка создания соединения: " + e);
         }
