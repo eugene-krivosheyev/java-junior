@@ -16,7 +16,7 @@ public class Test {
         //loggerController.flush();
         loggerController.log(new IntCommand(Integer.MAX_VALUE - 3));
         loggerController.log(new IntCommand(1));
-        loggerController.log(new IntCommand(1));
+        loggerController.log(new IntCommand(7));
         loggerController.log(new IntCommand(Integer.MAX_VALUE - 400));
         loggerController.log(new IntCommand(5));
         //loggerController.flush();

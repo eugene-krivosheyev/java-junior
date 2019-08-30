@@ -2,8 +2,11 @@ package com.acme.edu.mylogger;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LoggerController {
+    private static final Logger LOGGER = Logger.getLogger(LoggerController.class.getName());
     private SuperAccumulator accumulator;
     private SuperSaver saver;
     private Command currentState = null;
@@ -24,7 +27,7 @@ public class LoggerController {
             try {
                 accumulator.addToQueue(command);
             } catch (ArithmeticException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, "Overflow", e);
                 flush();
                 currentState = command;
                 accumulator.addToQueue(command);
@@ -46,7 +49,7 @@ public class LoggerController {
         try {
             accumulator.accumulate(commandQueue).ifPresent(e -> saver.save(e.getDecorated()));
         } catch (ArithmeticException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Overflow", e);
         }
         currentState = null;
         commandQueue.clear();
