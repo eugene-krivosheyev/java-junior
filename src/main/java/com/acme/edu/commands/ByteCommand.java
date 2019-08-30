@@ -14,7 +14,7 @@ public class ByteCommand extends NumberCommand {
     }
 
     public Byte getMessage() {
-        return (byte)message;
+        return (byte) message;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ByteCommand extends NumberCommand {
         return accumulatorTemplate(this.message, newMessage,
                 MIN_VALUE, MAX_VALUE,
                 saver,
-                new ByteCommand((byte)((byte)message + newMessage)),
+                new ByteCommand((byte) ((byte) message + newMessage)),
                 new ByteCommand(newMessage));
 
     }

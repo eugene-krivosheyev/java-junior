@@ -4,6 +4,7 @@ import com.acme.edu.commands.Command;
 import com.acme.edu.commands.IntCommand;
 import com.acme.edu.commands.StringCommand;
 import com.acme.edu.savers.ConsoleSaver;
+import com.acme.edu.savers.FileSaver;
 import com.acme.edu.savers.Saver;
 import org.junit.Test;
 
@@ -20,7 +21,7 @@ public class IntCommandTest {
     @Test
     public void shouldAccumulateWithSameCommandWithoutOverflow() {
         final IntCommand sut = new IntCommand(1);
-        final Saver dummySaver = mock(ConsoleSaver.class);
+        final Saver dummySaver = mock(FileSaver.class);
         final Command accumulateResult = sut.accumulate(sut, dummySaver);
 
         assertThat(accumulateResult.getMessage())
@@ -31,7 +32,7 @@ public class IntCommandTest {
     public void shouldAccumulateWithSameCommandWithUpperOverflow() {
         final Command sut = new IntCommand(Integer.MAX_VALUE - 1);
         final Command otherSut = new IntCommand(2);
-        final Saver dummySaver = mock(ConsoleSaver.class);
+        final Saver dummySaver = mock(FileSaver.class);
         final Command accumulateResult = sut.accumulate(sut, dummySaver);
 
         assertThat(accumulateResult.getMessage())
@@ -42,7 +43,7 @@ public class IntCommandTest {
     public void shouldAccumulateWithSameCommandWithLowerOverflow() {
         final Command sut = new IntCommand(Integer.MIN_VALUE + 1);
         final Command otherSut = new IntCommand(-2);
-        final Saver dummySaver = mock(ConsoleSaver.class);
+        final Saver dummySaver = mock(FileSaver.class);
         final Command accumulateResult = sut.accumulate(sut, dummySaver);
 
         assertThat(accumulateResult.getMessage())
@@ -52,14 +53,14 @@ public class IntCommandTest {
     @Test (expected = IllegalArgumentException.class)
     public void shouldNotAccumulateWithNullCommand() {
         final Command sut = new IntCommand(0);
-        final Saver dummySaver = mock(ConsoleSaver.class);
+        final Saver dummySaver = mock(FileSaver.class);
         final Command accumulateResult = sut.accumulate(null, dummySaver);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void shouldNotAccumulateWithOtherTypeCommand() {
         final Command sut = new IntCommand(0);
-        final Saver dummySaver = mock(ConsoleSaver.class);
+        final Saver dummySaver = mock(FileSaver.class);
         final StringCommand dummyOtherTypeCommand = mock(StringCommand.class);
         final Command accumulateResult = sut.accumulate(dummyOtherTypeCommand, dummySaver);
     }
@@ -87,7 +88,7 @@ public class IntCommandTest {
     @Test
     public void shouldDecorateCorrectly() {
         final Command sut = new IntCommand(1);
-        final Saver dummySaver = mock(ConsoleSaver.class);
+        final Saver dummySaver = mock(FileSaver.class);
         final Command accumulateResult = sut.accumulate(sut, dummySaver);
 
         assertThat(accumulateResult.decorate())

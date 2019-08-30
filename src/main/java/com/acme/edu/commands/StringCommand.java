@@ -49,7 +49,7 @@ public class StringCommand extends Command {
         if (!(command instanceof StringCommand)) {
             throw new IllegalArgumentException("Not the same type of message");
         }
-        String newMessage = ((StringCommand)command).getMessage();
+        String newMessage = ((StringCommand) command).getMessage();
         if (!this.isTypeEqual(command)) {
             this.flush(saver);
             return new StringCommand(newMessage, 1);

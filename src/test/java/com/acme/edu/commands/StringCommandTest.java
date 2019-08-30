@@ -10,9 +10,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by kate-c on 28/08/2019.
@@ -53,10 +51,10 @@ public class StringCommandTest {
 
     @Test @Ignore
     public void shouldFlushCommandsWithDifferentMessages() {
-        final Command firstStubCommand = mock(StringCommand.class);
+        final Command firstStubCommand = spy(new StringCommand("str1"));
+
         final Command secondStubCommand = mock(StringCommand.class);
 
-        when(firstStubCommand.getMessage()).thenReturn("str1");
         when(secondStubCommand.getMessage()).thenReturn("str2");
         when(firstStubCommand.isTypeEqual(secondStubCommand)).thenReturn(false);
 

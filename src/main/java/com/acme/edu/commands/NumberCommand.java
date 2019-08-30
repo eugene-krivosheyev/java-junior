@@ -1,4 +1,5 @@
 package com.acme.edu.commands;
+
 import com.acme.edu.savers.Saver;
 
 
@@ -28,8 +29,7 @@ public abstract class NumberCommand extends Command {
             if (currentMessageToLong + newMessage > maxValue || currentMessageToLong + newMessage < minValue) {
                 throw new ArithmeticException("Overflow!");
             }
-        }
-        catch(ArithmeticException e) {
+        } catch (ArithmeticException e) {
             e.printStackTrace();
             this.flush(saver);
             return newCommand;

@@ -7,6 +7,8 @@ import java.io.IOException;
 
 public class Logger {
 
+    //private java.util.logging.Logger jul = new java.util.logging.Logger();
+
     private static LoggerController loggerController = new LoggerController();
 
     public static void flush() {
@@ -17,8 +19,7 @@ public class Logger {
         // TODO
         try {
             loggerController.log(new StringCommand(message));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new IOException("Operation was not done");
         }
@@ -41,7 +42,7 @@ public class Logger {
     }
 
     public static void log(String... strings) {
-        for(String str : strings) {
+        for (String str : strings) {
             loggerController.log(new StringCommand(str));
         }
     }

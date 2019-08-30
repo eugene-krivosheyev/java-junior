@@ -15,7 +15,7 @@ public class IntCommand extends NumberCommand {
     }
 
     public Integer getMessage() {
-        return (int)message;
+        return (int) message;
     }
 
     @Override
@@ -33,10 +33,10 @@ public class IntCommand extends NumberCommand {
         }
         int newMessage = ((IntCommand) command).getMessage();
         return accumulatorTemplate(this.message, newMessage,
-                                   MIN_VALUE, MAX_VALUE,
-                                   saver,
-                                   new IntCommand((int)message + newMessage),
-                                   new IntCommand(newMessage));
+                MIN_VALUE, MAX_VALUE,
+                saver,
+                new IntCommand((int) message + newMessage),
+                new IntCommand(newMessage));
 
     }
 }

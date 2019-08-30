@@ -1,4 +1,5 @@
 package com.acme.edu.commands;
+
 import com.acme.edu.savers.Saver;
 
 import java.util.Arrays;
@@ -21,9 +22,9 @@ public class IntArrayCommand extends Command {
     @Override
     public String decorate() {
         return "primitives array: " + Arrays.stream(messageArray)
-                                        .boxed()
-                                        .map(Object::toString)
-                                        .collect(Collectors.joining(", ", "{", "}"));
+                .boxed()
+                .map(Object::toString)
+                .collect(Collectors.joining(", ", "{", "}"));
     }
 
     @Override
