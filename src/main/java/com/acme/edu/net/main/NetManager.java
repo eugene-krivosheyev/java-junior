@@ -2,6 +2,7 @@ package com.acme.edu.net.main;
 
 import com.acme.edu.LoggerController;
 import com.acme.edu.commands.Command;
+import com.acme.edu.commands.types.ReferenceCommand;
 import com.acme.edu.commands.types.StringCommand;
 import com.acme.edu.commands.types.primitive.ByteCommand;
 import com.acme.edu.commands.types.primitive.IntCommand;
@@ -21,12 +22,7 @@ public class NetManager  implements ConnectionListener {
     private LoggerController loggerController = new LoggerController(new ConsoleSaver());
     private Server server;
 
-    public NetManager() { server = new Server( this, 8100); }
-
-    public static void main(String[] args) {
-        new Thread(() -> new NetManager()).start();
-        new Client();
-    }
+    public NetManager() { server = new Server( this, 8101); }
 
     @Override
     public synchronized void onConnectionReady(Connection connection) {
@@ -59,17 +55,16 @@ public class NetManager  implements ConnectionListener {
     }
 
     private Command selectComand(String message) {
-        try {
-            byte result = Byte.parseByte(message);
-            return new ByteCommand(result);
-        } catch (NumberFormatException e) {
-            try {
-                int result = Integer.parseInt(message);
-                return new IntCommand(result);
-            } catch (NumberFormatException t) {
-                String result = String.valueOf(message);
-                return new StringCommand(result);
-            }
+        String[] arr = message.split(":");
+        switch (arr[1]) {
+            case "STR":
+                return new StringCommand(arr[0]);
+            case "INT":
+                return new IntCommand(Integer.parseInt(arr[0]));
+            case "BYTE":
+                return new ByteCommand(Byte.parseByte(arr[0]));
+            default:
+                return new ReferenceCommand(arr[0]);
         }
     }
 }

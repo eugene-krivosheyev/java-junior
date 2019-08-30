@@ -1,31 +1,33 @@
 package com.acme.edu.net;
 
+import com.acme.edu.commands.Command;
+import com.acme.edu.commands.types.StringCommand;
+import com.acme.edu.commands.types.primitive.ByteCommand;
+import com.acme.edu.commands.types.primitive.IntCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Client implements ConnectionListener {
     private static final Logger log = LoggerFactory.getLogger(Connection.class);
 
     private static final String ip = "localhost";
-    private static final int port = 8100;
+    private static final int port = 8101;
     private Connection connection;
 
     public Client() {
-        Scanner scan = new Scanner(System.in);
         try {
-            String msg = "";
             connection = new Connection(this, ip, port);
-            while(!msg.equals("exit")) {
-                msg = scan.nextLine();
-                connection.sendMessage(msg);
-            }
         }catch (IOException ex) {
-            log.info("Ошибка создания соединенич: " + ex);
+            log.info("Ошибка создания соединения: " + ex);
         }
     }
+
+    public void sendCommand(Command command) {
+        connection.sendMessage(command.getMessage() + ":" + command.getState().toString());
+    }
+
 
     @Override
     public synchronized void onConnectionReady(Connection connection) {

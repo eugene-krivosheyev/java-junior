@@ -19,6 +19,7 @@ public class LoggerController {
     }
 
     public void handleCommand(Command command) throws SaverException {
+        System.out.println(command.getMessage().toString() + command.getState() + "________");
         try {
             if(state != command.getState())
                 flush(command.getState());
