@@ -7,21 +7,23 @@ import com.acme.edu.commands.types.*;
 import com.acme.edu.commands.types.primitive.BooleanCommand;
 import com.acme.edu.commands.types.primitive.ByteCommand;
 import com.acme.edu.commands.types.primitive.IntCommand;
+import com.acme.edu.net.Connection;
 import com.acme.edu.saver.ConsoleSaver;
 import com.acme.edu.saver.SaverException;
-import java.util.logging.Level;
+import org.slf4j.LoggerFactory;
+
 
 
 
 public class Logger {
     private static LoggerController loggerController = new LoggerController(new ConsoleSaver());
-    private static java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(Logger.class.getName());
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(Logger.class);
 
     public static void log(Object message) throws LogOperationException {
         try {
             loggerController.handleCommand(new ReferenceCommand(message));
         } catch (SaverException e) {
-            LOGGER.log(Level.SEVERE, "Error in saver");
+            log.error("Error in saver");
             throw new LogOperationException("Log operation exception",e);
         }
     }
@@ -30,7 +32,7 @@ public class Logger {
         try {
             loggerController.handleCommand(new CharCommand(message));
         } catch (SaverException e) {
-            LOGGER.log(Level.SEVERE, "Error in saver");
+            log.error("Error in saver");
             throw new LogOperationException("Log operation exception",e);
         }
     }
@@ -39,7 +41,7 @@ public class Logger {
         try {
             loggerController.handleCommand(new BooleanCommand(message));
         } catch (SaverException e) {
-            LOGGER.log(Level.SEVERE, "Error in saver");
+            log.error("Error in saver");
             throw new LogOperationException("Log operation exception",e);
         }
     }
@@ -48,7 +50,7 @@ public class Logger {
         try {
             loggerController.handleCommand(new ByteCommand(message));
         } catch (SaverException e) {
-            LOGGER.log(Level.SEVERE, "Error in saver");
+            log.error("Error in saver");
             throw new LogOperationException("Log operation exception",e);
         }
     }
@@ -57,16 +59,17 @@ public class Logger {
         try {
             loggerController.handleCommand(new IntCommand(message));
         } catch (SaverException e) {
-            LOGGER.log(Level.SEVERE, "Error in saver");
+            log.error("Error in saver");
             throw new LogOperationException("Log operation exception",e);
         }
     }
 
-    public static void log(String message) {
+    public static void log(String message) throws LogOperationException {
         try {
             loggerController.handleCommand(new StringCommand(message));
         } catch (SaverException e) {
-            LOGGER.log(Level.SEVERE, "Error in saver");
+            log.error("Error in saver");
+            throw new LogOperationException("Log operation exception",e);
         }
     }
 
@@ -74,7 +77,7 @@ public class Logger {
         try {
             loggerController.handleCommand(new ArrayIntCommand(array));
         } catch (SaverException e) {
-            LOGGER.log(Level.SEVERE, "Error in saver");
+            log.error("Error in saver");
             throw new LogOperationException("Log operation exception",e);
         }
     }
@@ -83,7 +86,7 @@ public class Logger {
         try {
             loggerController.handleCommand(new MatrixIntArrayCommand(array));
         } catch (SaverException e) {
-            LOGGER.log(Level.SEVERE, "Error in saver");
+            log.error("Error in saver");
             throw new LogOperationException("Log operation exception",e);
         }
     }
@@ -92,7 +95,7 @@ public class Logger {
         try {
             loggerController.handleCommand(new MultimatrixIntCommand(array));
         } catch (SaverException e) {
-            LOGGER.log(Level.SEVERE, "Error in saver");
+            log.error("Error in saver");
             throw new LogOperationException("Log operation exception",e);
         }
     }
@@ -102,7 +105,7 @@ public class Logger {
             try {
                 loggerController.handleCommand(new StringCommand(message));
             } catch (SaverException e) {
-                LOGGER.log(Level.SEVERE, "Error in saver");
+                log.error("Error in saver");
                 throw new LogOperationException("Log operation exception",e);
             }
         }
@@ -113,7 +116,7 @@ public class Logger {
             try {
                 loggerController.handleCommand(new IntCommand(message));
             } catch (SaverException e) {
-                LOGGER.log(Level.SEVERE, "Error in saver");
+                log.error("Error in saver");
                 throw new LogOperationException("Log operation exception",e);
             }
         }
