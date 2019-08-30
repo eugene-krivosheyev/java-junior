@@ -2,35 +2,44 @@ package com.acme.edu;
 
 import com.acme.edu.mylogger.*;
 
+import java.io.IOException;
+
 public class Test {
 
-    public static void main(String[] args) {
-        //LoggerController loggerController = new LoggerController(
-        //        new SuperCurrentAccumulator(), new SuperConsoleSaver());
+    public static void main(String[] args) throws IOException {
+
+        Client.main(new String[] {"Integer 1"});
+        Client.main(new String[] {"Integer 1"});
+        Client.main(new String[] {"Integer 1"});
+        Client.main(new String[] {"Integer " + Integer.MAX_VALUE});
+        Client.main(new String[] {"Integer 1"});
+        Client.main(new String[] {"Integer 1"});
+        Client.main(new String[] {"Integer 1"});
+        Client.main(new String[] {"flush"});
+        Client.main(new String[] {"String str1"});
+        Client.main(new String[] {"String str2"});
+        Client.main(new String[] {"String str2"});
+        Client.main(new String[] {"flush"});
+
         LoggerController loggerController = new LoggerController(
-                new SuperCurrentAccumulator(), new SuperFileSaver());
-        loggerController.log(new IntCommand(1));
-        //loggerController.flush();
-        //loggerController.log(new IntCommand(Integer.MAX_VALUE));
+                new SuperCurrentAccumulator(), new SuperFileSaver("logger.txt"));
+        loggerController.log(new StringCommand("str 1"));
         loggerController.log(new IntCommand(1));
         loggerController.log(new IntCommand(1));
         loggerController.log(new IntCommand(1));
-        //loggerController.flush();
+        loggerController.log(new IntCommand(1));
         loggerController.log(new IntCommand(Integer.MAX_VALUE - 3));
         loggerController.log(new IntCommand(1));
         loggerController.log(new IntCommand(7));
         loggerController.log(new IntCommand(Integer.MAX_VALUE - 400));
         loggerController.log(new IntCommand(5));
-        //loggerController.flush();
-        //loggerController.log(new IntCommand(1));
-        //loggerController.log(new IntCommand(1));
+        loggerController.flush();
         loggerController.log(new StringCommand("str 1"));
         loggerController.log(new StringCommand("str 2"));
         loggerController.log(new StringCommand("str 1"));
         loggerController.log(new StringCommand("str 1"));
         loggerController.log(new IntCommand(1));
         loggerController.log(new IntCommand(Integer.MAX_VALUE));
-        //loggerController.flush();
         loggerController.log(new ByteCommand((byte)1));
         loggerController.log(new ByteCommand((byte)1));
         loggerController.log(new ByteCommand(Byte.MAX_VALUE));
@@ -38,5 +47,7 @@ public class Test {
         loggerController.log(new CharCommand('a'));
         loggerController.log(new CharCommand('a'));
         loggerController.flush();
+
     }
+
 }

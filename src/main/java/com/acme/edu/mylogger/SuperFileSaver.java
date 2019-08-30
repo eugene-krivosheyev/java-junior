@@ -4,13 +4,11 @@ import java.io.*;
 import java.nio.charset.Charset;
 
 public class SuperFileSaver implements SuperSaver {
-    private File file;
+    private String fileName;
 
-    /*
-    public SuperFileSaver(File file) {
-        this.file = file;
+    public SuperFileSaver(String fileName) {
+        this.fileName = fileName;
     }
-    */
 
     @Override
     public void save(String message) throws IOException {
@@ -18,7 +16,7 @@ public class SuperFileSaver implements SuperSaver {
         try (final PrintWriter out = new PrintWriter(
                 new OutputStreamWriter(
                         new BufferedOutputStream(
-                                new FileOutputStream("logger.txt", true)), win))) {
+                                new FileOutputStream(this.fileName, true)), win))) {
             out.println(message);
 
         } catch (IOException e) {

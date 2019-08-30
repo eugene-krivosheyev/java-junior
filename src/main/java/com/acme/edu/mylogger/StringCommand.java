@@ -38,7 +38,9 @@ public class StringCommand implements Command {
 
     @Override
     public boolean isTypeEquals(Command other) {
-        //return other instanceof StringCommand;
+        if (other == null) {
+            return false;
+        }
         return this.message == other.getMessage();
     }
 
