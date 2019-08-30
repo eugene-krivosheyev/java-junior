@@ -6,16 +6,10 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Server{
-
-    private List<Connection> connections = new ArrayList<>();
     private static final Logger log = LoggerFactory.getLogger(Server.class);
-
     private ConnectionListener connectionListener;
-    private Connection connection;
     private ServerSocket serverSocket;
 
     public Server(ConnectionListener manager, int port) {
@@ -25,7 +19,7 @@ public class Server{
             try  {
                 serverSocket = new ServerSocket(port);
                 Socket socket = serverSocket.accept();
-                connection = new Connection(connectionListener, socket);
+                Connection connection = new Connection(connectionListener, socket);
                 while (true) {
                     if (connection.isClosed()) {
                         socket = serverSocket.accept();
@@ -39,7 +33,6 @@ public class Server{
         }).start();
     }
 
-
     public void destroy() { if (serverSocket != null && !serverSocket.isClosed()) close(); }
 
     private void close() {
@@ -49,8 +42,4 @@ public class Server{
             throw new RuntimeException(e);
         }
     }
-
-    public List<Connection> getConnections() { return connections; }
-
-
 }

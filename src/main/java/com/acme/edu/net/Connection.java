@@ -8,7 +8,6 @@ import java.net.Socket;
 
 public class Connection {
     private static final Logger log = LoggerFactory.getLogger(Connection.class);
-
     private Thread thread;
     private ConnectionListener listener;
     private Socket socket;
@@ -34,7 +33,6 @@ public class Connection {
         out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         thread = new Thread((() -> {
             try {
-                listener.onConnect(Connection.this);
                 while (!thread.isInterrupted()) {
                     String msg = in.readLine();
                     listener.onReceiveMessage(Connection.this, msg);
@@ -42,7 +40,7 @@ public class Connection {
             } catch (IOException ex) {
                 log.error("Ошибка создания соединения: " + ex);
             } finally {
-                listener.onDisconnect(Connection.this);
+                disconnect();
             }
         }));
         thread.start();
