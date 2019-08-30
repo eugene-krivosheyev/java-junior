@@ -40,7 +40,7 @@ public class Connection {
                     listener.onReceiveString(Connection.this, msg);
                 }
             } catch (IOException ex) {
-                listener.onException(Connection.this, ex);
+                log.error("Ошибка создания соединения: " + ex);
             } finally {
                 listener.onDisconnect(Connection.this);
             }
@@ -53,7 +53,7 @@ public class Connection {
             out.write(msg + "\r\n");
             out.flush();
         } catch (IOException e) {
-            listener.onException(Connection.this, e);
+            log.error("Ошибка создания соединения: " + e);
         }
     }
 
@@ -62,7 +62,7 @@ public class Connection {
         try {
             socket.close();
         } catch (IOException e) {
-            listener.onException(Connection.this, e);
+            log.error("Ошибка создания соединения: " + e);
         }
     }
 

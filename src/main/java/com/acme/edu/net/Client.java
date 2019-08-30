@@ -1,9 +1,6 @@
 package com.acme.edu.net;
 
 import com.acme.edu.commands.Command;
-import com.acme.edu.commands.types.StringCommand;
-import com.acme.edu.commands.types.primitive.ByteCommand;
-import com.acme.edu.commands.types.primitive.IntCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +16,7 @@ public class Client implements ConnectionListener {
     public Client() {
         try {
             connection = new Connection(this, ip, port);
-        }catch (IOException ex) {
+        } catch (IOException ex) {
             log.info("Ошибка создания соединения: " + ex);
         }
     }
@@ -27,7 +24,6 @@ public class Client implements ConnectionListener {
     public void sendCommand(Command command) {
         connection.sendMessage(command.getMessage() + ":" + command.getState().toString());
     }
-
 
     @Override
     public synchronized void onConnectionReady(Connection connection) {
@@ -44,8 +40,4 @@ public class Client implements ConnectionListener {
         log.info("Соединение закрыто");
     }
 
-    @Override
-    public synchronized void onException(Connection connection, Exception ex) {
-        log.info("Ошибка создания соединенич: " + ex);
-    }
 }

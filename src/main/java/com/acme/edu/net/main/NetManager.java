@@ -6,7 +6,6 @@ import com.acme.edu.commands.types.ReferenceCommand;
 import com.acme.edu.commands.types.StringCommand;
 import com.acme.edu.commands.types.primitive.ByteCommand;
 import com.acme.edu.commands.types.primitive.IntCommand;
-import com.acme.edu.net.Client;
 import com.acme.edu.net.Connection;
 import com.acme.edu.net.ConnectionListener;
 import com.acme.edu.net.Server;
@@ -16,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class NetManager  implements ConnectionListener {
+public class NetManager implements ConnectionListener {
 
     private static final Logger log = LoggerFactory.getLogger(NetManager.class);
     private LoggerController loggerController = new LoggerController(new ConsoleSaver());
@@ -34,20 +33,15 @@ public class NetManager  implements ConnectionListener {
         log.info("Пришло сообщение: " + message + ", от: " + connection.toString());
         try {
             loggerController.handleCommand(selectComand(message));
+            sendMessage("Cообщение: " + message + " - было отправлено", connection);
         } catch (SaverException e) {
-            onException(connection, e);
+            log.error("Ошибка создания соединения: " + e);
         }
-        sendMessage("Cообщение: " + message + " - было отправлено", connection);
     }
 
     @Override
     public synchronized void onDisconnect(Connection connection) {
         server.getConnections().remove(connection);
-    }
-
-    @Override
-    public synchronized void onException(Connection connection, Exception ex) {
-        log.error("Ошибка создания соединения: " + ex);
     }
 
     private void sendMessage(String msg, Connection connection) {
