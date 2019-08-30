@@ -18,16 +18,14 @@ public class Client {
                         new InputStreamReader(
                                 new BufferedInputStream(socket.getInputStream())))
         ) {
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Enter the data for logs or type \"close\" to exit");
-            while (sc.hasNextLine()) {
-                String message = sc.nextLine();
-                out.writeUTF(message);
-                out.flush();
-                System.out.println(in.readLine());
-            }
+            String message = ""; //todo
+            out.writeUTF(message);
+            out.flush();
+            System.out.println(in.readLine());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 }
