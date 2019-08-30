@@ -1,5 +1,6 @@
 package com.acme.edu.mylogger;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.logging.Level;
@@ -47,7 +48,13 @@ public class LoggerController {
 
     public void flush() {
         try {
-            accumulator.accumulate(commandQueue).ifPresent(e -> saver.save(e.getDecorated()));
+            accumulator.accumulate(commandQueue).ifPresent(e -> {
+                try {
+                    saver.save(e.getDecorated());
+                } catch (IOException ex) {
+                    LOGGER.log(Level.SEVERE, "IOException", e);
+                }
+            });
         } catch (ArithmeticException e) {
             LOGGER.log(Level.SEVERE, "Overflow", e);
         }
