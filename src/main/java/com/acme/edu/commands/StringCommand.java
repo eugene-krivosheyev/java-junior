@@ -1,8 +1,11 @@
 package com.acme.edu.commands;
 
+import com.acme.edu.savers.Saver;
+
 import java.util.Objects;
 
-public class StringCommand implements Command {
+// TODO: Rework whole class!
+public class StringCommand implements Command, AccumulableCommand {
     public static final String STRING_PREFIX = "string: ";
 
     private int counter = 1;
@@ -30,12 +33,7 @@ public class StringCommand implements Command {
     }
 
     @Override
-    public boolean isTypeEquals(Command other) {
-        return other instanceof StringCommand;
-    }
-
-    @Override
-    public StringCommand accumulate(Command other) {
+    public StringCommand accumulate(Command other, Saver saver) {
         String otherMessage = ((StringCommand) other).getMessage();
         if (Objects.equals(message, otherMessage)) {
             return getIncrementedCopy();
@@ -44,8 +42,7 @@ public class StringCommand implements Command {
         }
     }
 
-    @Override
-    public String getMessage() {
+    private String getMessage() {
         return message;
     }
 

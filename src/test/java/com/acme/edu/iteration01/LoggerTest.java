@@ -1,7 +1,8 @@
 package com.acme.edu.iteration01;
 
 import com.acme.edu.*;
-import com.acme.edu.commands.Command;
+import com.acme.edu.commands.CharCommand;
+import com.acme.edu.commands.numeric.NumericCommand;
 import com.acme.edu.commands.StringCommand;
 import org.junit.After;
 import org.junit.Before;
@@ -37,10 +38,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(Command.PRIMITIVE_PREFIX);
-        assertSysoutContains(Command.PRIMITIVE_PREFIX + 1);
-        assertSysoutContains(Command.PRIMITIVE_PREFIX + 0);
-        assertSysoutContains(Command.PRIMITIVE_PREFIX + -1);
+        assertSysoutContains(NumericCommand.PRIMITIVE_PREFIX);
+        assertSysoutContains(NumericCommand.PRIMITIVE_PREFIX + 1);
+        assertSysoutContains(NumericCommand.PRIMITIVE_PREFIX + 0);
+        assertSysoutContains(NumericCommand.PRIMITIVE_PREFIX + -1);
         //endregion
     }
 
@@ -58,28 +59,27 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(Command.PRIMITIVE_PREFIX);
+        assertSysoutContains(NumericCommand.PRIMITIVE_PREFIX);
         assertSysoutContains("1");
         assertSysoutContains("0");
         assertSysoutContains("-1");
         //endregion
     }
 
-    /*
     @Test
     public void shouldLogChar() throws IOException {
         //region when
         Logger.log('a');
         Logger.log('b');
+        Logger.flush();
         //endregion
 
         //region then
-        assertSysoutContains(Decorator.CHAR_PREFIX);
+        assertSysoutContains(CharCommand.CHAR_PREFIX);
         assertSysoutContains("a");
         assertSysoutContains("b");
         //endregion
     }
-    */
 
     @Test
     public void shouldLogString() throws IOException {

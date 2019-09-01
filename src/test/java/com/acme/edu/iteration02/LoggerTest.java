@@ -60,7 +60,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    /*
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
@@ -84,8 +83,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
         Logger.log("str 1");
-        Logger.log((byte)10);
-        Logger.log((byte)Byte.MAX_VALUE);
+        Logger.log((byte) 10);
+        Logger.log(Byte.MAX_VALUE);
         Logger.log("str 2");
         Logger.log(0);
         //endregion
@@ -98,7 +97,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("0\n");
         //endregion
     }
-    */
 
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
