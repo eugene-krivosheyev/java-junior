@@ -5,25 +5,38 @@ import java.util.Arrays;
 public class ArrayCommand extends Command {
 
     private static final String ARRAY_PREFIX = "primitives array: ";
-    private final int[] message;
+    private final Object message;
 
-    public ArrayCommand(int[] message) {
+    public ArrayCommand(Object message) {
         this.message = message;
     }
 
     @Override
-    public int[] getMessage() {
+    public Object getMessage() {
         return message;
     }
 
+    // todo
     @Override
     public String getDecorated() {
-        return ARRAY_PREFIX + Arrays.toString(message);
+        String output = ARRAY_PREFIX;
+
+        if (message instanceof int[]) {
+            output = Arrays.toString((int[])message);    //int[] overload
+        }
+        else  if (message instanceof String[]){
+            output = Arrays.toString((String[])message);
+        } else if (message instanceof Object[]) {
+            output = Arrays.toString((Object[])message); //Object[] overload
+        }
+
+
+        return ARRAY_PREFIX + output;
     }
 
     @Override
     public Command getAccumulated(Command other) {
-        return new ArrayCommand((int[]) other.getMessage());
+        return new ArrayCommand(other.getMessage());
     }
 
     @Override

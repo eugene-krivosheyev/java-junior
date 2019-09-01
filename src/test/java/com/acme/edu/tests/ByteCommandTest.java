@@ -2,35 +2,36 @@ package com.acme.edu.tests;
 
 import commands.BooleanCommand;
 import commands.Command;
-import commands.IntCommand;
+import commands.ByteCommand;
+import exceptions.VarOverflowException;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class IntCommandTest {
-    private IntCommand firstCommand;
+public class ByteCommandTest {
+    private ByteCommand firstCommand;
 
     @Before
     public void setUp() {
 
-        firstCommand = new IntCommand(5);
+        firstCommand = new ByteCommand((byte) 5);
 
     }
 
 
     @Test
-    public void shouldAccumulateWhenTwoIntCommands() {
-        Command secondCommand = new IntCommand(6);
+    public void shouldAccumulateWhenTwoByteCommands() {
+        Command secondCommand = new ByteCommand((byte) 6);
 
         Command accumulatedCommand = firstCommand.getAccumulated(secondCommand);
 
-        assertThat(accumulatedCommand.getMessage()).isEqualTo(11);
+        assertThat(accumulatedCommand.getMessage()).isEqualTo((byte) 11);
 
     }
 
     @Test
-    public void shouldDecorateIntCommand() {
+    public void shouldDecorateByteCommand() {
 
         String decoratedMessage = firstCommand.getDecorated();
 
@@ -47,7 +48,7 @@ public class IntCommandTest {
 
     @Test
     public void shouldReturnTrueWhenComparingSameIntType() {
-        Command secondCommand = new IntCommand(6);
+        Command secondCommand = new ByteCommand((byte) 6);
 
         boolean areCommandsEqual = firstCommand.equalsCommand(secondCommand);
 
@@ -64,4 +65,22 @@ public class IntCommandTest {
         assertThat(areCommandsEqual).isEqualTo(false);
 
     }
+
+    @Test(expected = VarOverflowException.class)
+    public void shouldThrowExceptionIfOverflow() {
+        Command secondCommand = new ByteCommand((byte) 127);
+
+        firstCommand.checkOverflow(secondCommand);
+    }
+
+    @Test
+    public void shouldNotThrowExceptionIfNoOverflow() {
+        Command secondCommand = new ByteCommand((byte) 120);
+
+
+        Command result = firstCommand.checkOverflow(secondCommand);
+
+        assertThat(result.getMessage()).isEqualTo((byte) 125);
+    }
+
 }

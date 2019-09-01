@@ -7,14 +7,16 @@ import commands.IntCommand;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.mockito.Mockito.*;
 
 public class LoggerControllerTest {
 
 
-    Saver mockSaver;
-    LoggerController logger;
-    Command firstCommand;
+    private Saver mockSaver;
+    private LoggerController logger;
+    private Command firstCommand;
 
     @Before
     public void setUp() {
@@ -25,7 +27,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldAccumulateWhenTwoIntCommands() {
+    public void shouldAccumulateWhenTwoIntCommands() throws IOException {
 
         Command secondCommand = mock(IntCommand.class);
 

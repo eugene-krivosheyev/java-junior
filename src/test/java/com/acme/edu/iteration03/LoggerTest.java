@@ -60,6 +60,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+    @Ignore
     @Test
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
@@ -79,17 +80,18 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
 // todo ask
-//    @Test
-//    public void shouldLogStringsWithOneMethodCall() throws IOException {
-//        //region when
-//        Logger.log("str1", "string 2", "str 3");
-//        Logger.flush();
-//        //endregion
-//
-//        //region then
-//        assertSysoutContains("str1\nstring 2\nstr 3");
-//        //endregion
-//    }
+    @Ignore
+    @Test
+    public void shouldLogStringsWithOneMethodCall() throws IOException {
+        //region when
+        Logger.log("str1", "string 2", "str 3");
+        Logger.flush();
+        //endregion
+
+        //region then
+        assertSysoutContains("str1\nstring 2\nstr 3");
+        //endregion
+    }
 
     // todo ask
     @Test
@@ -103,6 +105,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("3");
         //endregion
     }
+
 
     @Ignore
     @Test

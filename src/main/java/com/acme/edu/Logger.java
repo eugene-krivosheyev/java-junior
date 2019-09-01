@@ -5,7 +5,7 @@ import commands.*;
 public class Logger {
 
 
-    private static LoggerController logger = new LoggerController(new ConsoleSaver());
+    private static LoggerController logger = new LoggerController(new FileSaver(10, 10));
 
     public static void log(int message) {
         logger.log(new IntCommand(message));
@@ -27,7 +27,7 @@ public class Logger {
         logger.log(new BooleanCommand(message));
     }
 
-    public static void log(int... array) {
+    public static void log(Object... array) {
         logger.log(new ArrayCommand(array));
     }
 

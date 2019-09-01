@@ -1,9 +1,12 @@
 package commands;
 
+import exceptions.VarOverflowException;
+
 public class ByteCommand extends Command {
 
     private static final String PRIMITIVE_PREFIX = "primitive: ";
     private final byte message;
+    private byte maxValue = Byte.MAX_VALUE;
 
     public ByteCommand(byte message) {
         this.message = message;
@@ -29,16 +32,12 @@ public class ByteCommand extends Command {
     // todo how to do best??
     
     public Command checkOverflow(Command other){
-        byte maxValue = Byte.MAX_VALUE;
-
-        if ((int)message + (int)other.getMessage() > maxValue){
-
-        } else {
-
+        if ((int) message + Integer.valueOf(other.getMessage().toString()) > maxValue){
+            throw new VarOverflowException("Overflow");
         }
 
-        return new ByteCommand((Byte) other.getMessage());
-        
+        return new ByteCommand((byte) ((Byte) other.getMessage() + message));
+
     }
 
     @Override

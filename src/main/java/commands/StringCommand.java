@@ -11,6 +11,11 @@ public class StringCommand extends Command {
         this.repeat = repeat;
     }
 
+    public StringCommand(String message) {
+        this(message, 0);
+    }
+
+
     @Override
     public String getMessage() {
         return message;
@@ -25,7 +30,7 @@ public class StringCommand extends Command {
 
     @Override
     public Command getAccumulated(Command other) {
-        return new StringCommand((String) message, repeat + 1);
+        return new StringCommand(message, repeat + 1);
     }
 
     @Override

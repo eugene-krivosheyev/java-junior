@@ -61,9 +61,9 @@
           </targetClasses>
           <targetTests>
             <param>com.acme.edu.tests.*</param>
-<!--            <param>com.acme.edu.iteration01.*</param>-->
-<!--            <param>com.acme.edu.iteration02.*</param>-->
-<!--            <param>com.acme.edu.iteration03.*</param>-->
+            <param>com.acme.edu.iteration01.*</param>
+            <param>com.acme.edu.iteration02.*</param>
+            <param>com.acme.edu.iteration03.*</param>
           </targetTests>
         </configuration>
         <executions>

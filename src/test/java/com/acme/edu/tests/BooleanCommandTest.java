@@ -8,46 +8,46 @@ import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class IntCommandTest {
-    private IntCommand firstCommand;
+public class BooleanCommandTest {
+    private BooleanCommand firstCommand;
 
     @Before
     public void setUp() {
 
-        firstCommand = new IntCommand(5);
+        firstCommand = new BooleanCommand(true);
 
     }
 
 
     @Test
-    public void shouldAccumulateWhenTwoIntCommands() {
-        Command secondCommand = new IntCommand(6);
+    public void shouldAccumulateWhenTwoBooleanCommands() {
+        Command secondCommand = new BooleanCommand(true);
 
         Command accumulatedCommand = firstCommand.getAccumulated(secondCommand);
 
-        assertThat(accumulatedCommand.getMessage()).isEqualTo(11);
+        assertThat(accumulatedCommand.getMessage()).isEqualTo(true);
 
     }
 
     @Test
-    public void shouldDecorateIntCommand() {
+    public void shouldDecorateBooleanCommand() {
 
         String decoratedMessage = firstCommand.getDecorated();
 
-        assertThat(decoratedMessage).isEqualToIgnoringCase("primitive: 5");
+        assertThat(decoratedMessage).isEqualToIgnoringCase("primitive: true");
     }
 
     @Test
     public void shouldReturnMessageWhenGetMessage() {
 
-        int firstCommandMessage = firstCommand.getMessage();
+        boolean firstCommandMessage = firstCommand.getMessage();
 
-        assertThat(firstCommandMessage).isEqualTo(5);
+        assertThat(firstCommandMessage).isEqualTo(true);
     }
 
     @Test
     public void shouldReturnTrueWhenComparingSameIntType() {
-        Command secondCommand = new IntCommand(6);
+        Command secondCommand = new BooleanCommand(true);
 
         boolean areCommandsEqual = firstCommand.equalsCommand(secondCommand);
 
@@ -57,7 +57,7 @@ public class IntCommandTest {
 
     @Test
     public void shouldReturnFalseWhenComparingDifferentTypes() {
-        Command secondCommand = new BooleanCommand(true);
+        Command secondCommand = new IntCommand(5);
 
         boolean areCommandsEqual = firstCommand.equalsCommand(secondCommand);
 
