@@ -28,15 +28,15 @@ public class LoggerController {
 
     private void addCommand(Command newCommand) { buffer.add(newCommand); }
 
-    private void flush(StateCommand state) {
-        buffer.forEach(cr -> saver.saveWithPrefix(cr));
+    private void flush(StateCommand state) throws SaverException{
+        for(Command c: buffer) { saver.saveWithPrefix(c); }
         if (buffer.size() > 1) {
             Command curCommand = buffer.get(0);
             for (int i = 1; i < buffer.size(); i++) {
                 try {
                     curCommand = curCommand.accumulate(buffer.get(i));
                 } catch (OverflowException e) {
-                    buffer.forEach(cr -> saver.saveWithoutPrefix(cr));
+                    for(Command c: buffer) { saver.saveWithoutPrefix(c); }
                     break;
                 }
             }
@@ -48,6 +48,6 @@ public class LoggerController {
         this.state = state;
     }
 
-    public void close()  { flush(StateCommand.NONE); }
+    public void close() throws SaverException { flush(StateCommand.NONE); }
 
 }

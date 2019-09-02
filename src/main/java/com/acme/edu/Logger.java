@@ -7,7 +7,6 @@ import com.acme.edu.commands.types.*;
 import com.acme.edu.commands.types.primitive.BooleanCommand;
 import com.acme.edu.commands.types.primitive.ByteCommand;
 import com.acme.edu.commands.types.primitive.IntCommand;
-import com.acme.edu.net.Connection;
 import com.acme.edu.saver.ConsoleSaver;
 import com.acme.edu.saver.SaverException;
 import org.slf4j.LoggerFactory;
@@ -122,7 +121,14 @@ public class Logger {
         }
     }
 
-    public static void close()  { loggerController.close(); }
+    public static void close() throws LogOperationException {
+        try {
+            loggerController.close();
+        } catch (SaverException e) {
+            log.error("Error in saver");
+            throw new LogOperationException("Log operation exception",e);
+        }
+    }
 }
 
 
