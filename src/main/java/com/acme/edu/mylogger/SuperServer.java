@@ -48,7 +48,7 @@ public class SuperServer {
                 loggerController.log(new IntCommand(Integer.parseInt(command[1])));
             } else if ("Byte".equals(command[0])) {
                 loggerController.log(new ByteCommand(Byte.parseByte(command[1])));
-            } else if ("flush".equals(command[0])) {
+            } else if ("Flush".equals(command[0])) {
                 loggerController.flush();
             }
         }

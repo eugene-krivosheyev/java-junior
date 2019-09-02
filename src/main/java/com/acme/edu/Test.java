@@ -23,7 +23,7 @@ public class Test {
         TimeUnit.SECONDS.sleep(1);
         Client.main(new String[] {"Integer 1"});
         TimeUnit.SECONDS.sleep(1);
-        Client.main(new String[] {"flush"});
+        Client.main(new String[] {"Flush"});
         TimeUnit.SECONDS.sleep(1);
         Client.main(new String[] {"String str1"});
         TimeUnit.SECONDS.sleep(1);
@@ -31,7 +31,7 @@ public class Test {
         TimeUnit.SECONDS.sleep(1);
         Client.main(new String[] {"String str2"});
         TimeUnit.SECONDS.sleep(1);
-        Client.main(new String[] {"flush"});
+        Client.main(new String[] {"Flush"});
 /*
         LoggerController loggerController = new LoggerController(
                 new SuperCurrentAccumulator(), new SuperFileSaver("logger.txt"));
