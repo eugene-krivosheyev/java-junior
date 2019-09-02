@@ -14,8 +14,8 @@ public class Server{
     private Thread thread;
 
     public Server(ConnectionListener manager, int port) {
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> { if (!thread.isInterrupted()) thread.interrupt(); }));
-        System.out.println("Сервер запускается...");
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> { if (!thread.isInterrupted()) { destroy(); thread.interrupt();} }));
+        log.info("Сервер запускается...");
         this.connectionListener = manager;
         this.thread = new Thread(() -> {
             try {

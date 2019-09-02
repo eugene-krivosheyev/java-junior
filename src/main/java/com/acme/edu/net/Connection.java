@@ -25,15 +25,15 @@ public class Connection {
         this.out = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
     }
 
-    public synchronized void init() {
+    public void init() {
         thread = new Thread((() -> {
             try {
-                while (!thread.isInterrupted()) {
+                while (!thread.isInterrupted() && !socket.isClosed()) {
                     String msg = in.readLine();
                     listener.onReceiveMessage(Connection.this, msg);
                 }
             } catch (IOException ex) {
-                log.error("Ошибка создания соединения: " + ex);
+                log.error("Ошибка чтения: " + ex);
                 throw new ConnectionException(ex);
             } finally {
                 disconnect();
@@ -58,7 +58,8 @@ public class Connection {
                 log.info("Закрываем сокет: " + socket.toString());
                 socket.close();
             }
-            if (!thread.isInterrupted()) thread.interrupt();
+            if (!thread.isInterrupted())
+                thread.interrupt();
         } catch (IOException e) {
             log.error("Сокет не может быть закрыт: " + e);
             throw new ConnectionException(e);

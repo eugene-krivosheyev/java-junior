@@ -28,7 +28,9 @@ public class CommandImplListener implements ConnectionListener {
                 log.info("Пришло сообщение: " + message + ", от: " + connection.toString());
                 loggerController.handleCommand(selectCommand(message));
                 sendMessage("Cообщение залогировано: " + message, connection);
-            } else connection.disconnect();
+            } else {
+                connection.disconnect();
+            }
         } catch (SaverException e) {
             log.error("Ошибка cохранения: " + e);
         }
