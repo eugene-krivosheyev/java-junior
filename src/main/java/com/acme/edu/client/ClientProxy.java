@@ -2,7 +2,6 @@ package com.acme.edu.client;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class ClientProxy {
     private static final String HOST = "localhost";
@@ -25,6 +24,4 @@ public class ClientProxy {
             e.printStackTrace();
         }
     }
-
-
 }

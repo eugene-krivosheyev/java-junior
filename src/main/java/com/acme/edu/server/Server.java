@@ -2,16 +2,11 @@ package com.acme.edu.server;
 
 import com.acme.edu.Logger;
 import com.acme.edu.exceptions.LogOperationException;
-import sun.rmi.runtime.Log;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -109,7 +104,6 @@ public class Server {
         }
 
         public void run() {
-            //todo add tests which will emulate at least 2 clients (not JUNIT) and sends data within an interval
             try (final PrintWriter out = new PrintWriter(
                     new OutputStreamWriter(
                             new BufferedOutputStream(
