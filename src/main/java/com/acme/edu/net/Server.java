@@ -14,7 +14,7 @@ public class Server{
     private Thread thread;
 
     public Server(ConnectionListener manager, int port) {
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> { destroy(); }));
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> { if (!thread.isInterrupted()) thread.interrupt(); }));
         System.out.println("Сервер запускается...");
         this.connectionListener = manager;
         this.thread = new Thread(() -> {
@@ -36,13 +36,12 @@ public class Server{
         thread.start();
     }
 
-    public void destroy() { if (serverSocket != null && !serverSocket.isClosed()) close(); }
+    public void destroy()  { if (serverSocket != null && !serverSocket.isClosed()) close(); }
 
     private void close() {
         try {
             log.info("Сервер закрывается...");
             serverSocket.close();
-            if (!thread.isInterrupted()) thread.interrupt();
         } catch (IOException e) {
             log.error("Невозможно корректно завершить работу сервера!!!");
             throw new RuntimeException(e);
