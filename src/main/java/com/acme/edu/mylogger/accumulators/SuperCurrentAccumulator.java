@@ -1,6 +1,7 @@
-package com.acme.edu.mylogger;
+package com.acme.edu.mylogger.accumulators;
 
-import java.util.Collection;
+import com.acme.edu.mylogger.commands.Command;
+
 import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;

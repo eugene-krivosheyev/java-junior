@@ -1,7 +1,6 @@
-package com.acme.edu.mylogger;
+package com.acme.edu.mylogger.savers;
 
 import java.io.*;
-import java.nio.charset.Charset;
 
 public class SuperFileSaver implements SuperSaver {
     private File fileName;

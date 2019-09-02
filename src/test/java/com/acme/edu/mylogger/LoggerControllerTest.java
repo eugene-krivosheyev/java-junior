@@ -1,6 +1,11 @@
 package com.acme.edu.mylogger;
 
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.mylogger.accumulators.SuperAccumulator;
+import com.acme.edu.mylogger.accumulators.SuperCurrentAccumulator;
+import com.acme.edu.mylogger.commands.IntCommand;
+import com.acme.edu.mylogger.savers.SuperConsoleSaver;
+import com.acme.edu.mylogger.savers.SuperSaver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;

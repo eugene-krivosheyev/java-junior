@@ -1,6 +1,6 @@
 package com.acme.edu.mylogger;
 
-import org.junit.Ignore;
+import com.acme.edu.mylogger.commands.StringCommand;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;

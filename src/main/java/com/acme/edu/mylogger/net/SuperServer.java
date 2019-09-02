@@ -1,4 +1,11 @@
-package com.acme.edu.mylogger;
+package com.acme.edu.mylogger.net;
+
+import com.acme.edu.mylogger.LoggerController;
+import com.acme.edu.mylogger.accumulators.SuperCurrentAccumulator;
+import com.acme.edu.mylogger.commands.ByteCommand;
+import com.acme.edu.mylogger.commands.IntCommand;
+import com.acme.edu.mylogger.commands.StringCommand;
+import com.acme.edu.mylogger.savers.SuperFileSaver;
 
 import java.io.*;
 import java.net.ServerSocket;

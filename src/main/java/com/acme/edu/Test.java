@@ -1,7 +1,15 @@
 package com.acme.edu;
 
 import com.acme.edu.mylogger.*;
+import com.acme.edu.mylogger.accumulators.SuperCurrentAccumulator;
+import com.acme.edu.mylogger.commands.ByteCommand;
+import com.acme.edu.mylogger.commands.CharCommand;
+import com.acme.edu.mylogger.commands.IntCommand;
+import com.acme.edu.mylogger.commands.StringCommand;
+import com.acme.edu.mylogger.net.Client;
+import com.acme.edu.mylogger.savers.SuperFileSaver;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -32,9 +40,10 @@ public class Test {
         Client.main(new String[] {"String str2"});
         TimeUnit.SECONDS.sleep(1);
         Client.main(new String[] {"Flush"});
-/*
+
+
         LoggerController loggerController = new LoggerController(
-                new SuperCurrentAccumulator(), new SuperFileSaver("logger.txt"));
+                new SuperCurrentAccumulator(), new SuperFileSaver(new File("logger.txt")));
         loggerController.log(new StringCommand("str 1"));
         loggerController.log(new IntCommand(1));
         loggerController.log(new IntCommand(1));
@@ -59,7 +68,5 @@ public class Test {
         loggerController.log(new CharCommand('a'));
         loggerController.log(new CharCommand('a'));
         loggerController.flush();
-*/
     }
-
 }

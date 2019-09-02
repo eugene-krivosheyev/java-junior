@@ -1,4 +1,4 @@
-package com.acme.edu.mylogger;
+package com.acme.edu.mylogger.net;
 
 import java.io.*;
 import java.net.Socket;

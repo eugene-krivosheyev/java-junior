@@ -1,4 +1,4 @@
-package com.acme.edu.mylogger;
+package com.acme.edu.mylogger.commands;
 
 public interface Command {
     Command accumulate(Command other);

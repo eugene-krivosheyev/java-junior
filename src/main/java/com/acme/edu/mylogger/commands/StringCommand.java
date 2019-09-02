@@ -1,4 +1,4 @@
-package com.acme.edu.mylogger;
+package com.acme.edu.mylogger.commands;
 
 public class StringCommand implements Command {
     private final static String STRING_PREFIX = "string: ";
@@ -10,7 +10,7 @@ public class StringCommand implements Command {
         this.repeats = 1;
     }
 
-    StringCommand(String message, int repeats) {
+    public StringCommand(String message, int repeats) {
         this.message = message;
         this.repeats = repeats;
     }
@@ -32,7 +32,7 @@ public class StringCommand implements Command {
         return message;
     }
 
-    int getRepeats() {
+    public int getRepeats() {
         return repeats;
     }
 

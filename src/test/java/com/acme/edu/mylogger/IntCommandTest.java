@@ -1,5 +1,6 @@
 package com.acme.edu.mylogger;
 
+import com.acme.edu.mylogger.commands.IntCommand;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;

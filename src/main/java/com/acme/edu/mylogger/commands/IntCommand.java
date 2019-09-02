@@ -1,4 +1,4 @@
-package com.acme.edu.mylogger;
+package com.acme.edu.mylogger.commands;
 
 public class IntCommand implements Command {
     private final static String PRIMITIVE_PREFIX = "primitive: ";

@@ -1,5 +1,9 @@
 package com.acme.edu.mylogger;
 
+import com.acme.edu.mylogger.accumulators.SuperAccumulator;
+import com.acme.edu.mylogger.commands.Command;
+import com.acme.edu.mylogger.savers.SuperSaver;
+
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;

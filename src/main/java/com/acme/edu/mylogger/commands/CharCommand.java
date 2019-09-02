@@ -1,4 +1,4 @@
-package com.acme.edu.mylogger;
+package com.acme.edu.mylogger.commands;
 
 public class CharCommand implements Command {
     private final static String CHAR_PREFIX = "char: ";
