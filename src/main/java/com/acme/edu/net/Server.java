@@ -20,7 +20,7 @@ public class Server{
         this.thread = new Thread(() -> {
             try {
                 serverSocket = new ServerSocket(port);
-                while (!thread.isInterrupted()) {
+                while (true) {
                     Socket socket = serverSocket.accept();
                     Connection connection = new Connection(connectionListener, socket);
                     connection.init();
