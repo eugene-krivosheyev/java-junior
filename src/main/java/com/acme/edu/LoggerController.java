@@ -41,6 +41,7 @@ public class LoggerController {
                     .reduce((command, command2) -> command.accumulate(command2, saver));
             accumulatedCommand.orElseThrow(() -> new Exception()).flush(saver);
             commandBuffer = new LinkedList<>();
+            saver.close();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {

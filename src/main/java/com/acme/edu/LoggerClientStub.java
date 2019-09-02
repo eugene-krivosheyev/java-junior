@@ -7,8 +7,18 @@ import java.util.Scanner;
 /**
  * Created by kate-c on 30/08/2019.
  */
-public class LoggerClient {
+public class LoggerClientStub {
     public static void main(String[] args) {
+        for (int i = 0; i < 5; ++i) {
+            final int j = i;
+            final Thread thread2 = new Thread(() -> {
+                clientTest(j);
+            });
+            thread2.run();
+        }
+    }
+
+    private static void clientTest(int i) {
         try (
                 final Socket socket = new Socket("localhost", 666);
                 final PrintWriter out = new PrintWriter(
@@ -17,20 +27,12 @@ public class LoggerClient {
                 final BufferedReader in = new BufferedReader(
                         new InputStreamReader(
                                 new BufferedInputStream(socket.getInputStream())));
-                //final Scanner scanner = new Scanner(System.in);
                 )
         {
-//            String message = "";
-//            while (!message.equals("exit")) {
-//                message = scanner.nextLine();
-//                out.println(message);
-//                out.flush();
-//            }
-            out.println("IntCommand 2");
-            out.println("IntCommand 3");
-            out.println("IntCommand 8");
-            out.println("ByteCommand 8");
-            out.println("StringCommand eto message");
+            out.println("IntCommand " + (i * 10 + 1));
+            out.println("IntCommand " + (i * 10 + 2));
+            out.println("IntCommand " + (i * 10 + 3));
+            out.println("StringCommand eto message" + i);
             out.println("Flush Sooqa!");
             out.flush();
 

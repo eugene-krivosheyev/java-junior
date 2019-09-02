@@ -10,6 +10,8 @@ public class FileSaver implements Saver {
     private final String fileNameBase = "file";
     private final String fileExtension = ".txt";
 
+    private PrintWriter out = null;
+
     private int currentNumberOfFlushes;
     private int currentFileNameIndex;
 
@@ -23,22 +25,30 @@ public class FileSaver implements Saver {
         if (currentNumberOfFlushes == MAX_NUMBER_OF_FLUSHES) {
             currentNumberOfFlushes = 0;
             currentFileNameIndex++;
+
+            try {
+                out = getNewOutStream();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
-        try (final PrintWriter out = new PrintWriter(
-                new OutputStreamWriter(
-                        new BufferedOutputStream(
-                                new FileOutputStream(getFileName(), true))))) {
+
+        if (out == null) {
+            try {
+                out = getNewOutStream();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
 
             out.println(message);
             currentNumberOfFlushes++;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private String getFileName() {
         return fileNameBase + currentFileNameIndex + fileExtension;
     }
+
     private String getFileName(int index) {
         return fileNameBase + index + fileExtension;
     }
@@ -56,5 +66,19 @@ public class FileSaver implements Saver {
         while (f.exists());
 
         return index;
+    }
+
+    private PrintWriter getNewOutStream() throws FileNotFoundException {
+        return new PrintWriter(
+                new OutputStreamWriter(
+                        new BufferedOutputStream(
+                                new FileOutputStream(getFileName(), true))));
+    }
+
+    @Override
+    public void close() throws IOException {
+        out.flush();
+        out.close();
+        out = null;
     }
 }

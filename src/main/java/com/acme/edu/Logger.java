@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class Logger {
 
-    //private java.util.logging.Logger jul = new java.util.logging.Logger();
+    //private java.util.logging.Logger jul = new java.util.logging.Logger(LoggerController.class.getName());
 
     private static LoggerController loggerController = new LoggerController();
 
