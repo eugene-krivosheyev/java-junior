@@ -2,6 +2,7 @@ package com.acme.edu.iteration03;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.commands.vector.IntArrayCommand;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +31,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutContains(
-                Logger.PR_ARRAY_PREFIX + "{-1, 0, 1}\n"
+                IntArrayCommand.PR_ARRAY_PREFIX + "{-1, 0, 1}\n"
         );
         //endregion
     }
