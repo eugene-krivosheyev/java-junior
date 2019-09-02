@@ -12,24 +12,31 @@ public class ThreadsDemo {
         final Thread thread1 = new Thread() {
             @Override
             public void run() {
-                while (!this.isInterrupted())
-                    System.out.println(
-                            currentThread().getName()
-                    );
+                while (!this.isInterrupted()) {
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                    Thread.yield();
             }
         };
         final Thread thread2 = new Thread(() -> {
             while (!Thread.interrupted()) {
-                System.out.println(
-                        currentThread().getName()
-                );
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Thread.yield();
             }
         });
         thread1.setDaemon(true);
         thread1.start();
         thread2.start();
 
-        Thread.sleep(1_000);
+        Thread.sleep(100_000);
 
         thread1.stop(); thread1.interrupt();
         thread2.interrupt();
