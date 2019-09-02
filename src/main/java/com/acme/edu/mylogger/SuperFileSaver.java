@@ -12,11 +12,10 @@ public class SuperFileSaver implements SuperSaver {
 
     @Override
     public void save(String message) throws IOException {
-        final Charset win = Charset.forName("windows-1251");
         try (final PrintWriter out = new PrintWriter(
                 new OutputStreamWriter(
                         new BufferedOutputStream(
-                                new FileOutputStream(this.fileName, true)), win))) {
+                                new FileOutputStream(this.fileName, true))))) {
             out.println(message);
 
         } catch (IOException e) {
