@@ -52,28 +52,4 @@ public class Logger {
     public static void flush() {
         loggerController.flush();
     }
-
-    public static void main(String[] args) {
-        Logger.log(123);
-        Logger.log(321);
-        Logger.log((byte) 100);
-        Logger.log('P');
-        Logger.log((byte) 11);
-        Logger.log(Byte.MAX_VALUE);
-        Logger.log((byte) 120);
-        Logger.log((byte) 1);
-        Logger.log("Yusuf");
-        Logger.log("BASHA");
-        Logger.log("BASHA");
-        Logger.log("BASHA");
-        Logger.log("smth");
-        Logger.log('A');
-        Logger.log("smth");
-        Logger.log("smth");
-        Logger.log(new int[]{-1, 0, 1});
-        Logger.log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
-        Logger.log("str1", "string 2", "str 3");
-        Logger.log(-1, 0, 1, 3);
-        Logger.flush();
-    }
 }
