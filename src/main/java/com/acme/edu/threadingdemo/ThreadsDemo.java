@@ -5,25 +5,35 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import static java.lang.Thread.currentThread;
+
 public class ThreadsDemo {
-    public static void main(String[] args) {
-        ExecutorService pool = Executors.newFixedThreadPool(8);
-        pool.execute(() -> System.out.println("HW1"));
-        pool.execute(() -> System.out.println("HW2"));
-        pool.execute(() -> System.out.println("HW3"));
-        pool.execute(() -> System.out.println("HW4"));
-
-        final Future<Integer> futureInt = pool.submit(() -> {
-            return 2 + 2;
+    public static void main(String[] args) throws InterruptedException {
+        final Thread thread1 = new Thread() {
+            @Override
+            public void run() {
+                while (!this.isInterrupted())
+                    System.out.println(
+                            currentThread().getName()
+                    );
+            }
+        };
+        final Thread thread2 = new Thread(() -> {
+            while (!Thread.interrupted()) {
+                System.out.println(
+                        currentThread().getName()
+                );
+            }
         });
+        thread1.start();
+        thread2.start();
 
-//        futureInt.get();
-        futureInt.isDone();
-        futureInt.cancel(true);
+        Thread.sleep(1_000);
 
-        pool.shutdown();
+        thread1.stop(); thread1.interrupt();
+        thread2.interrupt();
 
-
+        thread1.suspend(); thread1.resume();
 
 
     }
