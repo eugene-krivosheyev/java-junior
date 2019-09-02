@@ -15,6 +15,7 @@ public class FileSaver implements Saver {
     public FileSaver(String filename, String filetype, int maxCharactersNumber){
         this.filename = filename;
         this.filetype = filetype;
+        this.filePath = filename + "." + filetype;
         this.maxCharactersNumber = maxCharactersNumber;
         this.currentCharactersNumber = 0;
         this.fileNumberCounter = 1;

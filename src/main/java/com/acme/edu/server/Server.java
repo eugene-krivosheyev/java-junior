@@ -14,6 +14,7 @@ public class Server {
     private static final int PORT = 8080;
 
     public static void main(String[] args) {
+        System.out.println("Server is running");
         Runtime.getRuntime().addShutdownHook(new Thread(() -> System.out.println("Good bye!")));
         try (final ServerSocket connectionListener = new ServerSocket(PORT)) {
             ExecutorService threadPool = Executors.newFixedThreadPool(20);
@@ -31,6 +32,10 @@ public class Server {
     }
 
     private static void processTypesAndLogCommands(String readLine) throws LogOperationException {
+        if (readLine.equals("close")) {
+            Logger.close();
+            return;
+        }
         String data = readLine.substring(0, readLine.indexOf("_"));
         String type = readLine.substring(readLine.indexOf("_") + 1);
         switch (type) {
@@ -58,7 +63,7 @@ public class Server {
                 break;
             case "integerArray4D": {
                 int[][][][] formedData = new int[data.split("}, ?").length][][][];
-               //todo
+                //todo
                 Logger.log(formedData);
                 break;
             }
@@ -90,16 +95,13 @@ public class Server {
             case "char":
                 Logger.log(data.charAt(0));
                 break;
-            case "close":
-                Logger.close();
-                break;
         }
     }
 
     private static class ClientHandler implements Runnable {
         private final Socket socket;
 
-        public ClientHandler(Socket socket) {
+        ClientHandler(Socket socket) {
             this.socket = socket;
         }
 
@@ -112,13 +114,11 @@ public class Server {
                          new DataInputStream(
                                  new BufferedInputStream(
                                          socket.getInputStream()))) {
-                while (true) {
-                    final String readLine = in.readUTF();
-                    System.out.println("debug: " + readLine);
-                    processTypesAndLogCommands(readLine);
-                    out.println("OK");
-                    out.flush();
-                }
+                final String readLine = in.readUTF();
+                System.out.println("debug: " + readLine);
+                processTypesAndLogCommands(readLine);
+                out.println("OK");
+                out.flush();
             } catch (LogOperationException | IOException e) {
                 e.printStackTrace();
             }
