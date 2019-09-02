@@ -15,7 +15,7 @@ public class Server {
 
     public static void main(String[] args) {
         System.out.println("Server is running");
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> System.out.println("Good bye!")));
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> System.out.println("Good bye!"))); //todo update
         try (final ServerSocket connectionListener = new ServerSocket(PORT)) {
             ExecutorService threadPool = Executors.newFixedThreadPool(20);
             try {
