@@ -25,6 +25,7 @@ public class ThreadsDemo {
                 );
             }
         });
+        thread1.setDaemon(true);
         thread1.start();
         thread2.start();
 
@@ -35,6 +36,14 @@ public class ThreadsDemo {
 
         thread1.suspend(); thread1.resume();
 
+        thread1.setPriority(Thread.MAX_PRIORITY);
+        thread2.setPriority(Thread.MIN_PRIORITY);
 
+        thread1.join();
+        thread2.join();
+        System.out.println("Выжил только один!!!!");
+        System.out.println(thread1.isAlive());
+        System.out.println(thread2.isAlive());
+        System.out.println(currentThread().isAlive());
     }
 }
