@@ -15,8 +15,11 @@ public class IntArrayCommand implements Command {
 
     @Override
     public String getDecorated() {
-        return PR_ARRAY_PREFIX
-                + Arrays.toString(message)
+        return PR_ARRAY_PREFIX + arrayToString(message);
+    }
+
+    public static String arrayToString(int[] array) {
+        return Arrays.toString(array)
                 .replace("[", "{")
                 .replace("]", "}");
     }

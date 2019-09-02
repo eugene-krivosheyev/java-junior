@@ -3,6 +3,7 @@ package com.acme.edu.iteration03;
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.commands.vector.IntArrayCommand;
+import com.acme.edu.commands.vector.IntMatrixCommand;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +45,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutContains(
-                Logger.PR_MATRIX_PREFIX + "{\n" +
+                IntMatrixCommand.PR_MATRIX_PREFIX + "{\n" +
                         "{-1, 0, 1}\n" +
                         "{1, 2, 3}\n" +
                         "{-1, -2, -3}\n" +
