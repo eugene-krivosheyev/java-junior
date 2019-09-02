@@ -10,10 +10,11 @@ public class ConcurrencyDemo {
         final Account account1 = new Account(100_000);
         final Account account2 = new Account(0);
         final Transaction tx = new Transaction();
-        final ExecutorService pool = Executors.newFixedThreadPool(10);
+        final ExecutorService pool = Executors.newFixedThreadPool(1000);
 
-        for (int i = 0; i < 100_000; i++) {
+        for (int i = 0; i < 50_000; i++) {
             pool.submit(() -> tx.transaction(account1, account2, 1));
+            pool.submit(() -> tx.transaction(account2, account1, 2));
         }
 
         pool.shutdown();
@@ -53,10 +54,18 @@ class Counter {
 class Transaction {
     /**
      * Ok for consistency, but performance fail
+     * a1 = id01
+     * a2 = id02
+     * tx(01, 02, 1)
+     * tx(02, 01, 1)
      */
     public synchronized void transaction(Account a1, Account a2, int amount) {
-        a1.withdraw(amount);
-        a2.credit(amount);
+        synchronized (a1) {
+            synchronized (a2) {
+                a1.withdraw(amount);
+                a2.credit(amount);
+            }
+        }
     }
 }
 
@@ -71,11 +80,11 @@ class Account {
         return amount;
     }
 
-    public void withdraw(int amount) {
+    public synchronized void withdraw(int amount) {
         this.amount -= amount;
     }
 
-    public void credit(int amount) {
+    public synchronized void credit(int amount) {
         this.amount += amount;
     }
 }
