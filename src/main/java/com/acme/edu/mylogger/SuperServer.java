@@ -6,7 +6,7 @@ import java.net.Socket;
 
 public class SuperServer {
     private static LoggerController loggerController = new LoggerController(
-            new SuperCurrentAccumulator(), new SuperFileSaver("logger2.txt"));
+            new SuperCurrentAccumulator(), new SuperFileSaver(new File("logger2.txt")));
 
     public static void main(String[] args) {
 

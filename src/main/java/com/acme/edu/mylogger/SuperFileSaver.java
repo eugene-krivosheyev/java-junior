@@ -4,9 +4,9 @@ import java.io.*;
 import java.nio.charset.Charset;
 
 public class SuperFileSaver implements SuperSaver {
-    private String fileName;
+    private File fileName;
 
-    public SuperFileSaver(String fileName) {
+    public SuperFileSaver(File fileName) {
         this.fileName = fileName;
     }
 
