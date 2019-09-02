@@ -1,57 +1,56 @@
 package com.acme.edu.client;
 
-import com.acme.edu.commands.*;
-import com.acme.edu.exceptions.LogOperationException;
-import com.acme.edu.exceptions.SaverException;
-
-import java.util.stream.Stream;
+import java.util.Arrays;
 
 public class LoggerClient {
-    public static void log(int message) throws LogOperationException {
-      // run(message + "_int");
+    private static ClientProxy proxy = new ClientProxy();
+
+    public static void log(int message) {
+        proxy.run(message + "_int");
     }
 
-    public static void log(byte message) throws LogOperationException {
-
+    public static void log(byte message) {
+        proxy.run(message + "_byte");
     }
 
-    public static void log(String message) throws LogOperationException {
-
+    public static void log(String message) {
+        proxy.run(message + "_string");
     }
 
-    public static void log(String... messages) throws LogOperationException {
-
+    public static void log(String... messages) {
+        proxy.run(Arrays.toString(messages) + "_stringVarArgs");
     }
 
-    public static void log(Integer... messages) throws LogOperationException {
-
+    public static void log(Integer... messages) {
+        proxy.run(Arrays.toString(messages) + "_integerVarArgs");
     }
 
-    public static void log(int[][][][] messages) throws LogOperationException {
-
-    }
-
-    public static void log(int[][] messages) throws LogOperationException {
-
-    }
-
-    public static void log(int[] messages) throws LogOperationException {
+    public static void log(int[][][][] messages) {
+        proxy.run(Arrays.toString(messages) + "_integerArray4D");
 
     }
 
-    public static void log(boolean message) throws LogOperationException {
-
+    public static void log(int[][] messages) {
+        proxy.run(Arrays.toString(messages) + "_integerArray2D");
     }
 
-    public static void log(Object message) throws LogOperationException {
-
+    public static void log(int[] messages) {
+        proxy.run(Arrays.toString(messages) + "_integerArray1D");
     }
 
-    public static void log(char message) throws LogOperationException {
-
+    public static void log(boolean message) {
+        proxy.run(message + "_boolean");
     }
 
-    public static void close() throws LogOperationException {
+    public static void log(Object message) {
+        proxy.run(message + "_object");
+    }
 
+    public static void log(char message) {
+        proxy.run(message + "_char");
+    }
+
+    public static void close() {
+        proxy.run("close");
     }
 }

@@ -40,7 +40,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 ////    @Test
 ////    public void shouldLogIntegersMatrix() throws LogOperationException {
 ////        //region when
-////        Logger.log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+////        Logger.log(new int[][]{{0}});
 ////        Logger.close();
 ////        //endregion
 ////

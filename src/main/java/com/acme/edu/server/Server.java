@@ -5,33 +5,30 @@ import com.acme.edu.exceptions.LogOperationException;
 import sun.rmi.runtime.Log;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Server {
     private static final int PORT = 8080;
+
     public static void main(String[] args) {
-        try(final ServerSocket connectionListener = new ServerSocket(PORT)) {
-            final Socket socket = connectionListener.accept();
-            try (final PrintWriter out = new PrintWriter(
-                    new OutputStreamWriter(
-                            new BufferedOutputStream(
-                                    socket.getOutputStream())));
-                 final DataInputStream in =
-                         new DataInputStream(
-                                 new BufferedInputStream(
-                                         socket.getInputStream()))) {
-                while(true) {
-                    final String readLine = in.readUTF();
-                    System.out.println("debug: " + readLine);
-                    processTypesAndLogCommands(readLine);
-                    out.println("OK");
-                    out.flush();
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> System.out.println("Good bye!")));
+        try (final ServerSocket connectionListener = new ServerSocket(PORT)) {
+            ExecutorService threadPool = Executors.newFixedThreadPool(20);
+            try {
+                while (!Thread.currentThread().isInterrupted()) {
+                    final Socket socket = connectionListener.accept();
+                    threadPool.submit(new ClientHandler(socket));
                 }
-            } catch (LogOperationException | IOException e) {
-                e.printStackTrace();
+            } finally {
+                threadPool.shutdown();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -64,11 +61,24 @@ public class Server {
                         .split(","))
                         .map(Integer::parseInt));
                 break;
-            case "integerArray4D":
-                Logger.log(data); // todo parse Array4D
+            case "integerArray4D": {
+                int[][][][] formedData = new int[data.split("}, ?").length][][][];
+               //todo
+                Logger.log(formedData);
                 break;
-            case "integerArray2D":
+            }
+            case "integerArray2D": {
+                int[][] formedData = new int[data.split("}, ?").length][];
+                int index = 0;
+                for (String str : data.split("}, ?")) {
+                    String temp = str.replace("{", "").replace("}", "");
+                    String[] strArray = temp.split(",");
+                    int[] intArray = Arrays.stream(strArray).mapToInt(Integer::parseInt).toArray();
+                    formedData[index++] = intArray;
+                }
+                Logger.log(formedData);
                 break;
+            }
             case "integerArray1D":
                 Logger.log(Arrays.stream(data
                         .replace("[", "")
@@ -85,6 +95,39 @@ public class Server {
             case "char":
                 Logger.log(data.charAt(0));
                 break;
+            case "close":
+                Logger.close();
+                break;
+        }
+    }
+
+    private static class ClientHandler implements Runnable {
+        private final Socket socket;
+
+        public ClientHandler(Socket socket) {
+            this.socket = socket;
+        }
+
+        public void run() {
+            //todo add tests which will emulate at least 2 clients (not JUNIT) and sends data within an interval
+            try (final PrintWriter out = new PrintWriter(
+                    new OutputStreamWriter(
+                            new BufferedOutputStream(
+                                    socket.getOutputStream())));
+                 final DataInputStream in =
+                         new DataInputStream(
+                                 new BufferedInputStream(
+                                         socket.getInputStream()))) {
+                while (true) {
+                    final String readLine = in.readUTF();
+                    System.out.println("debug: " + readLine);
+                    processTypesAndLogCommands(readLine);
+                    out.println("OK");
+                    out.flush();
+                }
+            } catch (LogOperationException | IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
