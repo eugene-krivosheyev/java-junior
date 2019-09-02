@@ -15,11 +15,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class NetManager implements ConnectionListener {
-    private static final Logger log = LoggerFactory.getLogger(NetManager.class);
+public class CommandImplListener implements ConnectionListener {
+    private static final Logger log = LoggerFactory.getLogger(CommandImplListener.class);
     private LoggerController loggerController = new LoggerController(new ConsoleSaver());
 
-    public NetManager() { Server server = new Server( this, 8102); }
+    public CommandImplListener(int port) { new Server( this, port); }
 
     @Override
     public synchronized void onReceiveMessage(Connection connection, String message) {
@@ -28,7 +28,7 @@ public class NetManager implements ConnectionListener {
             loggerController.handleCommand(selectCommand(message));
             sendMessage("Cообщение залогировано: " + message, connection);
         } catch (SaverException e) {
-            log.error("Ошибка создания соединения: " + e);
+            log.error("Ошибка cохранения: " + e);
         }
     }
 

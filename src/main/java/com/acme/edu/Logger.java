@@ -11,9 +11,6 @@ import com.acme.edu.saver.ConsoleSaver;
 import com.acme.edu.saver.SaverException;
 import org.slf4j.LoggerFactory;
 
-
-
-
 public class Logger {
     private static LoggerController loggerController = new LoggerController(new ConsoleSaver());
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(Logger.class);

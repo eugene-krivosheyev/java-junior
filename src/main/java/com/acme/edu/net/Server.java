@@ -11,26 +11,28 @@ public class Server{
     private static final Logger log = LoggerFactory.getLogger(Server.class);
     private ConnectionListener connectionListener;
     private ServerSocket serverSocket;
+    private Thread thread;
 
     public Server(ConnectionListener manager, int port) {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> { if (!thread.isInterrupted()) thread.interrupt();System.out.println("Сервер работу завершил!!!"); }));
         System.out.println("Сервер запускается...");
         this.connectionListener = manager;
-        new Thread(() -> {
+        this.thread = new Thread(() -> {
             try  {
                 serverSocket = new ServerSocket(port);
-                Socket socket = serverSocket.accept();
-                Connection connection = new Connection(connectionListener, socket);
                 while (true) {
-                    if (connection.isClosed()) {
-                        socket = serverSocket.accept();
-                        connection = new Connection(connectionListener, socket);
-                    } else Thread.yield();
+                    Socket socket = serverSocket.accept();
+                    Connection connection = new Connection(connectionListener, socket);
+                    connection.init();
                 }
             } catch (IOException ex) {
                 log.error("Ошибка создания нового соединения!");
-                throw new RuntimeException(ex);
+                throw new ConnectionException(ex);
+            } finally {
+                destroy();
             }
-        }).start();
+        });
+        thread.start();
     }
 
     public void destroy() { if (serverSocket != null && !serverSocket.isClosed()) close(); }
@@ -38,6 +40,7 @@ public class Server{
     private void close() {
         try {
             serverSocket.close();
+            thread.interrupt();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

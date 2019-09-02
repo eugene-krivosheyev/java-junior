@@ -8,15 +8,14 @@ import java.io.IOException;
 
 public class Client implements ConnectionListener {
     private static final Logger log = LoggerFactory.getLogger(Connection.class);
-    private static final String ip = "localhost";
-    private static final int port = 8102;
     private Connection connection;
 
-    public Client() {
+    public Client(String ip, int port) {
         try {
             connection = new Connection(this, ip, port);
         } catch (IOException ex) {
             log.info("Ошибка создания соединения: " + ex);
+            throw new ConnectionException(ex);
         }
     }
 

@@ -15,22 +15,18 @@ public class Connection {
     private BufferedWriter out;
 
     public Connection(ConnectionListener listener, String ip, int port) throws IOException {
-        try {
-            this.socket = new Socket(ip, port);
-        } catch (IOException e) { throw new RuntimeException(e); }
-        init(listener, socket);
+        this(listener, new Socket(ip, port));
     }
 
     public Connection(ConnectionListener listener, Socket socket) throws IOException {
-        this.socket = socket;
-        init(listener, socket);
-    }
-
-    private void init(ConnectionListener listener, Socket socket) throws IOException{
         this.listener = listener;
         this.socket = socket;
-        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+        this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+        this.out = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
+    }
+
+    public void init() {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> { if (!thread.isInterrupted()) thread.interrupt(); }));
         thread = new Thread((() -> {
             try {
                 while (!thread.isInterrupted()) {
@@ -39,6 +35,7 @@ public class Connection {
                 }
             } catch (IOException ex) {
                 log.error("Ошибка создания соединения: " + ex);
+                throw new ConnectionException(ex);
             } finally {
                 disconnect();
             }
@@ -51,21 +48,19 @@ public class Connection {
             out.write(msg + "\r\n");
             out.flush();
         } catch (IOException e) {
-            log.error("Ошибка создания соединения: " + e);
+            log.error("Ошибка отправки сообщения: " + e);
+            throw new ConnectionException(e);
         }
     }
 
-    public synchronized void disconnect() {
+    public synchronized void disconnect()  {
         thread.interrupt();
         try {
             socket.close();
         } catch (IOException e) {
-            log.error("Ошибка создания соединения: " + e);
+            log.error("Сокет не может быть закрыт: " + e);
+            throw new ConnectionException(e);
         }
-    }
-
-    public boolean isClosed() {
-        return socket.isClosed();
     }
 
     @Override
