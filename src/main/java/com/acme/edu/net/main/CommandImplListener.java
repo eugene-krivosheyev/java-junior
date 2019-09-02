@@ -23,10 +23,12 @@ public class CommandImplListener implements ConnectionListener {
 
     @Override
     public synchronized void onReceiveMessage(Connection connection, String message) {
-        log.info("Пришло сообщение: " + message + ", от: " + connection.toString());
         try {
-            loggerController.handleCommand(selectCommand(message));
-            sendMessage("Cообщение залогировано: " + message, connection);
+            if (message != null) {
+                log.info("Пришло сообщение: " + message + ", от: " + connection.toString());
+                loggerController.handleCommand(selectCommand(message));
+                sendMessage("Cообщение залогировано: " + message, connection);
+            } else connection.disconnect();
         } catch (SaverException e) {
             log.error("Ошибка cохранения: " + e);
         }

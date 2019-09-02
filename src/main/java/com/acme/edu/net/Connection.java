@@ -25,8 +25,7 @@ public class Connection {
         this.out = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
     }
 
-    public void init() {
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> { if (!thread.isInterrupted()) thread.interrupt(); }));
+    public synchronized void init() {
         thread = new Thread((() -> {
             try {
                 while (!thread.isInterrupted()) {
@@ -54,9 +53,12 @@ public class Connection {
     }
 
     public synchronized void disconnect()  {
-        thread.interrupt();
         try {
-            socket.close();
+            if (socket!=null && !socket.isClosed()) {
+                log.info("Закрываем сокет: " + socket.toString());
+                socket.close();
+            }
+            if (!thread.isInterrupted()) thread.interrupt();
         } catch (IOException e) {
             log.error("Сокет не может быть закрыт: " + e);
             throw new ConnectionException(e);

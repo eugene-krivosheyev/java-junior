@@ -7,9 +7,7 @@ import com.acme.edu.net.Client;
 
 public class Main {
 
-    public static void main(String[] args) {
-        new Thread(() -> new CommandImplListener(8102)).start();
-
+    public static void main(String[] args) throws InterruptedException {
         Client client = new Client("localhost", 8102);
         IntCommand commad = new IntCommand(8);
         IntCommand commad2 = new IntCommand(8123);
@@ -20,6 +18,5 @@ public class Main {
         client.sendCommand(commad2);
         client.sendCommand(commad3);
         client.sendCommand(commad4);
-        client.sendCommand(commad5);
     }
 }

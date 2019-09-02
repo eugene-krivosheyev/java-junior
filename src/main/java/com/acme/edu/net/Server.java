@@ -14,16 +14,17 @@ public class Server{
     private Thread thread;
 
     public Server(ConnectionListener manager, int port) {
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> { if (!thread.isInterrupted()) thread.interrupt();System.out.println("Сервер работу завершил!!!"); }));
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> { destroy(); }));
         System.out.println("Сервер запускается...");
         this.connectionListener = manager;
         this.thread = new Thread(() -> {
-            try  {
+            try {
                 serverSocket = new ServerSocket(port);
-                while (true) {
+                while (!thread.isInterrupted()) {
                     Socket socket = serverSocket.accept();
                     Connection connection = new Connection(connectionListener, socket);
                     connection.init();
+                    log.info("Новый клиент: " + socket.toString());
                 }
             } catch (IOException ex) {
                 log.error("Ошибка создания нового соединения!");
@@ -39,9 +40,11 @@ public class Server{
 
     private void close() {
         try {
+            log.info("Сервер закрывается...");
             serverSocket.close();
-            thread.interrupt();
+            if (!thread.isInterrupted()) thread.interrupt();
         } catch (IOException e) {
+            log.error("Невозможно корректно завершить работу сервера!!!");
             throw new RuntimeException(e);
         }
     }
