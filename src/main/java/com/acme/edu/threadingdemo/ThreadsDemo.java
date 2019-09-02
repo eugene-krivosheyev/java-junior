@@ -45,5 +45,9 @@ public class ThreadsDemo {
         System.out.println(thread1.isAlive());
         System.out.println(thread2.isAlive());
         System.out.println(currentThread().isAlive());
+
+        for (Thread.State state : Thread.State.values()) {
+            System.out.println(state.name());
+        }
     }
 }
