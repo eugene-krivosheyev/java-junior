@@ -1,16 +1,16 @@
-package com.acme.edu.unittests;
+package com.acme.edu.systemtest;
 
-import com.acme.edu.client.LoggerClient;
+import com.acme.edu.client.Proxy;
 
 public class ThreadsTest {
     public static void main(String[] args) throws InterruptedException {
         Thread thread1 = new Thread(() -> {
-            LoggerClient.log(1);
-            LoggerClient.close();
+            Proxy.log(1);
+            Proxy.close();
         });
         Thread thread2 = new Thread(() -> {
-            LoggerClient.log(2);
-            LoggerClient.close();
+            Proxy.log(2);
+            Proxy.close();
         });
         thread1.start();
         thread2.start();

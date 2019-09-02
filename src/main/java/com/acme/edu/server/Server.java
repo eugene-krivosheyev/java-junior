@@ -15,7 +15,6 @@ public class Server {
 
     public static void main(String[] args) {
         System.out.println("Server is running");
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> System.out.println("Good bye!"))); //todo update
         try (final ServerSocket connectionListener = new ServerSocket(PORT)) {
             ExecutorService threadPool = Executors.newFixedThreadPool(20);
             try {
@@ -106,18 +105,18 @@ public class Server {
         }
 
         public void run() {
-            try (final PrintWriter out = new PrintWriter(
+            try (final BufferedWriter out = new BufferedWriter(
                     new OutputStreamWriter(
                             new BufferedOutputStream(
                                     socket.getOutputStream())));
-                 final DataInputStream in =
-                         new DataInputStream(
-                                 new BufferedInputStream(
+                 final BufferedReader in =
+                         new BufferedReader(
+                                 new InputStreamReader(
                                          socket.getInputStream()))) {
-                final String readLine = in.readUTF();
+                final String readLine = in.readLine();
                 System.out.println("debug: " + readLine);
                 processTypesAndLogCommands(readLine);
-                out.println("OK");
+                out.write("OK");
                 out.flush();
             } catch (LogOperationException | IOException e) {
                 e.printStackTrace();
