@@ -8,6 +8,7 @@ public class ClientProxy {
     private static final int PORT = 8080;
 
     public void run(String message) {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> System.out.println("Good bye!"))); //todo update
         try (
                 final Socket socket = new Socket(HOST, PORT);
                 final DataOutputStream out =
