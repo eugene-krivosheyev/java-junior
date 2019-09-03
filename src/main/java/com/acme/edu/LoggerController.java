@@ -4,8 +4,6 @@ import com.acme.edu.commands.Command;
 import com.acme.edu.overflow.OverflowException;
 import com.acme.edu.saver.Saver;
 import com.acme.edu.saver.SaverException;
-
-import java.nio.Buffer;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,12 +22,12 @@ public class LoggerController {
         } catch (Exception e) { throw new SaverException(e); }
     }
 
-    private synchronized List<Command> addCommand(Command newCommand, List<Command> buffer) {
+    private List<Command> addCommand(Command newCommand, List<Command> buffer) {
         buffer.add(newCommand);
         return buffer;
     }
 
-    private synchronized List<Command> flush(List<Command> buffer) throws SaverException{
+    private List<Command> flush(List<Command> buffer) throws SaverException{
         for(Command c: buffer) {
             saver.saveWithPrefix(c);
         }

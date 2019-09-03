@@ -11,24 +11,18 @@ public class FileSaver implements Saver {
     private static final String fileName = "log.txt";
 
     @Override
-    public synchronized void saveWithoutPrefix(Command command) throws SaverException {
+    public void saveWithoutPrefix(Command command) throws SaverException {
         saveToFile(command.getMessage().toString());
     }
 
     @Override
-    public synchronized void saveWithPrefix(Command command) throws SaverException {
+    public void saveWithPrefix(Command command) throws SaverException {
         saveToFile(command.decorate());
     }
 
     private synchronized void saveToFile(String message) throws SaverException {
-        try {
-            File file = new File(fileName);
-            FileWriter fileReader = new FileWriter(file, true); // поток который подключается к текстовому файлу
-            BufferedWriter bufferedWriter = new BufferedWriter(fileReader); // соединяем FileWriter с BufferedWriter
-
+        try ( BufferedWriter bufferedWriter = new BufferedWriter( new FileWriter(new File(fileName), true))) {
             bufferedWriter.write(message + "\n");
-
-            bufferedWriter.close(); // закрываем поток
         } catch (Exception e) {
             throw new SaverException(e);
         }
