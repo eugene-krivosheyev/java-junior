@@ -25,7 +25,7 @@ public class Connection {
         this.out = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
     }
 
-    public void init() {
+    public synchronized void init() {
         thread = new Thread((() -> {
             try {
                 while (!thread.isInterrupted() && !socket.isClosed()) {
@@ -34,7 +34,6 @@ public class Connection {
                 }
             } catch (IOException ex) {
                 log.error("Ошибка чтения: " + ex);
-                throw new ConnectionException(ex);
             } finally {
                 disconnect();
             }

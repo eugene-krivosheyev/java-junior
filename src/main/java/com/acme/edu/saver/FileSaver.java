@@ -1,27 +1,35 @@
 package com.acme.edu.saver;
 
 import com.acme.edu.commands.Command;
+
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 
 public class FileSaver implements Saver {
 
     private static final String fileName = "log.txt";
 
     @Override
-    public void saveWithoutPrefix(Command command) throws SaverException {
-        saveToFile((String) command.getMessage());
+    public synchronized void saveWithoutPrefix(Command command) throws SaverException {
+        saveToFile(command.getMessage().toString());
     }
 
     @Override
-    public void saveWithPrefix(Command command) throws SaverException {
+    public synchronized void saveWithPrefix(Command command) throws SaverException {
         saveToFile(command.decorate());
     }
 
-    private void saveToFile(String message) throws SaverException {
-        try(FileWriter fileWriter = new FileWriter(fileName, true)) {
-            fileWriter.append(message).append("\n");
-        } catch (IOException e) {
+    private synchronized void saveToFile(String message) throws SaverException {
+        try {
+            File file = new File(fileName);
+            FileWriter fileReader = new FileWriter(file, true); // поток который подключается к текстовому файлу
+            BufferedWriter bufferedWriter = new BufferedWriter(fileReader); // соединяем FileWriter с BufferedWriter
+
+            bufferedWriter.write(message + "\n");
+
+            bufferedWriter.close(); // закрываем поток
+        } catch (Exception e) {
             throw new SaverException(e);
         }
     }

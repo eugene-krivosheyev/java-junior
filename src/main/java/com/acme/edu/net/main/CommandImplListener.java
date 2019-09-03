@@ -9,15 +9,21 @@ import com.acme.edu.commands.types.primitive.IntCommand;
 import com.acme.edu.net.Connection;
 import com.acme.edu.net.ConnectionListener;
 import com.acme.edu.net.Server;
-import com.acme.edu.saver.ConsoleSaver;
+import com.acme.edu.saver.FileSaver;
 import com.acme.edu.saver.SaverException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 
 public class CommandImplListener implements ConnectionListener {
     private static final Logger log = LoggerFactory.getLogger(CommandImplListener.class);
-    private LoggerController loggerController = new LoggerController(new ConsoleSaver());
+    private LoggerController loggerController = new LoggerController(new FileSaver());
+    private Map<Connection, List<Command>> bufferForConnection = new HashMap();
 
     public CommandImplListener(int port) { new Server( this, port); }
 
@@ -26,7 +32,10 @@ public class CommandImplListener implements ConnectionListener {
         try {
             if (message != null) {
                 log.info("Пришло сообщение: " + message + ", от: " + connection.toString());
-                loggerController.handleCommand(selectCommand(message));
+                if (!bufferForConnection.keySet().contains(connection))
+                    bufferForConnection.put(connection, new LinkedList<>());
+                bufferForConnection.put(connection,
+                        loggerController.handleCommand(selectCommand(message), bufferForConnection.get(connection)));
                 sendMessage("Cообщение залогировано: " + message, connection);
             } else {
                 connection.disconnect();
@@ -36,7 +45,7 @@ public class CommandImplListener implements ConnectionListener {
         }
     }
 
-    private void sendMessage(String msg, Connection connection) {
+    private synchronized void sendMessage(String msg, Connection connection) {
         connection.sendMessage(msg);
     }
 

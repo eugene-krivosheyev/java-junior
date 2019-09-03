@@ -19,7 +19,7 @@ public class Client implements ConnectionListener {
         }
     }
 
-    public void sendCommand(Command command) {
+    public synchronized void sendCommand(Command command) {
         connection.sendMessage(command.getMessage() + ":" + command.getState().toString());
     }
 

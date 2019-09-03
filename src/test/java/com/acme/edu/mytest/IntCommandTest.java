@@ -4,6 +4,7 @@ import com.acme.edu.commands.Command;
 import com.acme.edu.commands.types.primitive.ByteCommand;
 import com.acme.edu.commands.types.primitive.IntCommand;
 import com.acme.edu.overflow.OverflowException;
+import com.acme.edu.saver.SaverException;
 import org.junit.Test;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.doThrow;
@@ -12,14 +13,14 @@ import static org.mockito.Mockito.mock;
 public class IntCommandTest {
 
     @Test
-    public void shouldAccumulateWithSameCommand() throws OverflowException, IllegalArgumentException {
+    public void shouldAccumulateWithSameCommand() throws OverflowException, IllegalArgumentException, SaverException {
         final Command sut = new IntCommand(1);
         final Command accumulateResult = sut.accumulate(sut);
         assertThat(accumulateResult.getMessage()).isEqualTo(2);
     }
 
     @Test
-    public void shouldAccumulateWithNewCommand() throws OverflowException, IllegalArgumentException {
+    public void shouldAccumulateWithNewCommand() throws OverflowException, IllegalArgumentException, SaverException {
         final Command firstSut = new IntCommand(1);
         final Command secondSut = new IntCommand(2);
         final Command accumulateResult = firstSut.accumulate(secondSut);
@@ -34,7 +35,7 @@ public class IntCommandTest {
     }
 
     @Test(expected = OverflowException.class)
-    public void shouldThrowIntegerOverflowException() throws OverflowException, IllegalArgumentException {
+    public void shouldThrowIntegerOverflowException() throws OverflowException, IllegalArgumentException, SaverException {
         final IntCommand intCommand = new IntCommand(Integer.MAX_VALUE);
         final Command sut = mock(IntCommand.class);
         ((IntCommand) sut).setMessage(10);
@@ -43,7 +44,7 @@ public class IntCommandTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowIllegalArgumentExceptionIfSummIntAndByte() throws OverflowException, IllegalArgumentException {
+    public void shouldThrowIllegalArgumentExceptionIfSummIntAndByte() throws OverflowException, IllegalArgumentException, SaverException {
         final Command sutInt = mock(IntCommand.class);
         ((IntCommand) sutInt).setMessage(1);
         final Command sutByte = mock(ByteCommand.class);

@@ -3,6 +3,8 @@ package com.acme.edu.commands.types;
 import com.acme.edu.StateCommand;
 import com.acme.edu.commands.Command;
 import com.acme.edu.saver.ConsoleSaver;
+import com.acme.edu.saver.FileSaver;
+import com.acme.edu.saver.SaverException;
 
 public class StringCommand implements Command<String> {
     private String message;
@@ -24,14 +26,11 @@ public class StringCommand implements Command<String> {
     }
 
     @Override
-    public Command<String> accumulate(Command command) {
+    public Command<String> accumulate(Command command) throws SaverException {
         if (command.getMessage().equals(message)) counterOfStrings++;
         else {
             if (message != null) {
-                if (counterOfStrings > 1)
-                    new ConsoleSaver().saveWithoutPrefix(new StringCommand(getMessage()));
-                else
-                    new ConsoleSaver().saveWithoutPrefix(new StringCommand(getMessage()));
+                new FileSaver().saveWithoutPrefix(new StringCommand(getMessage()));
             }
             counterOfStrings = 1;
             message = (String) command.getMessage();

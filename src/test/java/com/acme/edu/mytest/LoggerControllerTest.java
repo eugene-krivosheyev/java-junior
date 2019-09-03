@@ -6,6 +6,9 @@ import com.acme.edu.saver.SaverException;
 import org.junit.Ignore;
 import org.junit.Test;
 import com.acme.edu.*;
+
+import java.util.LinkedList;
+
 import static org.mockito.Mockito.*;
 
 public class LoggerControllerTest {
@@ -18,7 +21,7 @@ public class LoggerControllerTest {
         when(firstStubCommand.getState()).thenReturn(StateCommand.INT);
         when(firstStubCommand.getMessage()).thenReturn(1);
         LoggerController loggerController = new LoggerController(mockSaver);
-        loggerController.handleCommand(firstStubCommand);
+        loggerController.handleCommand(firstStubCommand, new LinkedList<>());
         verify(mockSaver).saveWithPrefix(firstStubCommand);
     }
 
@@ -30,7 +33,7 @@ public class LoggerControllerTest {
         when(firstStubCommand.getMessage()).thenReturn(1);
         when(firstStubCommand.getState()).thenReturn(StateCommand.INT);
         LoggerController loggerController = new LoggerController(mockSaver);
-        loggerController.handleCommand(firstStubCommand);
+        loggerController.handleCommand(firstStubCommand, new LinkedList<>());
         verify(mockSaver).saveWithoutPrefix(firstStubCommand);
     }
 }

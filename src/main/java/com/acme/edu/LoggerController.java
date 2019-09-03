@@ -4,32 +4,35 @@ import com.acme.edu.commands.Command;
 import com.acme.edu.overflow.OverflowException;
 import com.acme.edu.saver.Saver;
 import com.acme.edu.saver.SaverException;
+
+import java.nio.Buffer;
 import java.util.LinkedList;
 import java.util.List;
 
 public class LoggerController {
     private Saver saver;
-    private StateCommand state;
-    private List<Command> buffer;
 
     public LoggerController(Saver saver) {
         this.saver = saver;
-        this.buffer = new LinkedList<>();
-        this.state = StateCommand.NONE;
     }
 
-    public void handleCommand(Command command) throws SaverException {
+    public synchronized List<Command> handleCommand(Command command, List<Command> buffer) throws SaverException {
         try {
-            if(state != command.getState())
-                flush(command.getState());
-            addCommand(command);
+            if (buffer.size() != 0 && buffer.get(0).getState() != command.getState())
+                buffer = flush(buffer);
+            return addCommand(command, buffer);
         } catch (Exception e) { throw new SaverException(e); }
     }
 
-    private void addCommand(Command newCommand) { buffer.add(newCommand); }
+    private synchronized List<Command> addCommand(Command newCommand, List<Command> buffer) {
+        buffer.add(newCommand);
+        return buffer;
+    }
 
-    private void flush(StateCommand state) throws SaverException{
-        for(Command c: buffer) { saver.saveWithPrefix(c); }
+    private synchronized List<Command> flush(List<Command> buffer) throws SaverException{
+        for(Command c: buffer) {
+            saver.saveWithPrefix(c);
+        }
         if (buffer.size() > 1) {
             Command curCommand = buffer.get(0);
             for (int i = 1; i < buffer.size(); i++) {
@@ -44,10 +47,9 @@ public class LoggerController {
         }
         else if (buffer.size() == 1) saver.saveWithoutPrefix(buffer.get(0));
 
-        buffer = new LinkedList<>();
-        this.state = state;
+        return new LinkedList<>();
     }
 
-    public void close() throws SaverException { flush(StateCommand.NONE); }
+    public void close(List<Command> buffer) throws SaverException { flush(buffer); }
 
 }
