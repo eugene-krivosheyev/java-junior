@@ -4,7 +4,6 @@ package com.acme.edu;
 import com.acme.edu.commands.*;
 import com.acme.edu.exceptions.LogOperationException;
 import com.acme.edu.exceptions.SaverException;
-import com.acme.edu.savers.ConsoleSaver;
 import com.acme.edu.savers.FileSaver;
 
 import java.util.Arrays;
@@ -32,7 +31,7 @@ public class Logger {
         LOGGER.log(Level.SEVERE, Arrays.toString(e.getStackTrace()));
     }
 
-    private static void processCommand(DecorateCommand newCommand) throws LogOperationException {
+    private static synchronized void processCommand(DecorateCommand newCommand) throws LogOperationException {
         try {
             if (isFlushNeeded(newCommand)) {
                 if (commandsAccumulatedBuffer.size() != 0) {
@@ -49,7 +48,7 @@ public class Logger {
         }
     }
 
-    private static void processAccumulatedCommand(AccumulateCommand newCommand) throws LogOperationException {
+    private static synchronized void processAccumulatedCommand(AccumulateCommand newCommand) throws LogOperationException {
         try {
             if (isFlushNeeded(newCommand)) {
                 flushAccumulatedBuffer();

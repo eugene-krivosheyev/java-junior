@@ -1,9 +1,18 @@
 package com.acme.edu.client;
 
+import java.io.IOException;
 import java.util.Arrays;
 
-public class LoggerClient {
-    private static ClientProxy proxy = new ClientProxy();
+public class Proxy {
+    private static DataTransformer proxy;
+
+    static {
+        try {
+            proxy = new DataTransformer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void log(int message) {
         proxy.run(message + "_int");

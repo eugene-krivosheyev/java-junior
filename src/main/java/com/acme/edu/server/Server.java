@@ -7,27 +7,53 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Server {
     private static final int PORT = 8080;
+    private static ServerSocket connectionListener;
 
     public static void main(String[] args) {
         System.out.println("Server is running");
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> System.out.println("Good bye!"))); //todo update
-        try (final ServerSocket connectionListener = new ServerSocket(PORT)) {
-            ExecutorService threadPool = Executors.newFixedThreadPool(20);
-            try {
-                while (!Thread.currentThread().isInterrupted()) {
-                    final Socket socket = connectionListener.accept();
-                    threadPool.submit(new ClientHandler(socket));
+        try {
+            connectionListener = new ServerSocket(PORT);
+            try (final Socket socket = connectionListener.accept();
+                 final PrintWriter out = new PrintWriter(
+                         new OutputStreamWriter(
+                                 new BufferedOutputStream(
+                                         socket.getOutputStream())));
+                 final DataInputStream in =
+                         new DataInputStream(
+                                 new BufferedInputStream(
+                                         socket.getInputStream()))) {
+                while (true) {
+                    final String readLine = in.readUTF();
+                    System.out.println("debug: " + readLine);
+                    processTypesAndLogCommands(readLine);
+                    out.println("OK");
+                    out.flush();
                 }
+            } catch (LogOperationException | IOException e) {
+                e.printStackTrace();
             } finally {
-                threadPool.shutdown();
+                disconnect();
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            disconnect();
+        }
+    }
+
+    private static void disconnect() {
+        if (connectionListener != null && !connectionListener.isClosed())
+            close();
+    }
+
+    private static void close() {
+        try {
+            connectionListener.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -95,33 +121,6 @@ public class Server {
             case "char":
                 Logger.log(data.charAt(0));
                 break;
-        }
-    }
-
-    private static class ClientHandler implements Runnable {
-        private final Socket socket;
-
-        ClientHandler(Socket socket) {
-            this.socket = socket;
-        }
-
-        public void run() {
-            try (final PrintWriter out = new PrintWriter(
-                    new OutputStreamWriter(
-                            new BufferedOutputStream(
-                                    socket.getOutputStream())));
-                 final DataInputStream in =
-                         new DataInputStream(
-                                 new BufferedInputStream(
-                                         socket.getInputStream()))) {
-                final String readLine = in.readUTF();
-                System.out.println("debug: " + readLine);
-                processTypesAndLogCommands(readLine);
-                out.println("OK");
-                out.flush();
-            } catch (LogOperationException | IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
