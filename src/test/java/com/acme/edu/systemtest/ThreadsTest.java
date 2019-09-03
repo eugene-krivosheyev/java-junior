@@ -13,10 +13,10 @@ public class ThreadsTest {
             Proxy.close();
         });
         thread1.start();
-        thread2.start();
 
         Thread.sleep(10000);
-        Thread.sleep(10000);
+
+        thread2.start();
 
         thread1.join();
         thread2.join();

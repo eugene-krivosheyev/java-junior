@@ -1,56 +1,49 @@
 package com.acme.edu.client;
 
-import com.acme.edu.exceptions.ConnectionException;
-
 import java.io.*;
 import java.net.Socket;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class DataTransformer {
+    private static final String HOST = "localhost";
+    private static final int PORT = 8080;
+    private ExecutorService executor;
+    private DataOutputStream out;
     private BufferedReader in;
-    private BufferedWriter out;
-    private Executor executor;
     private Socket socket;
 
-    DataTransformer(Socket socket) throws IOException {
-        this.socket = socket;
-        out = new BufferedWriter(
-                new OutputStreamWriter(
-                        new BufferedOutputStream(socket.getOutputStream())));
-        in = new BufferedReader(
+    DataTransformer() throws IOException {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> System.out.println("Good bye!")));
+        this.socket = new Socket(HOST, PORT);
+        this.out =
+                new DataOutputStream(
+                        new BufferedOutputStream(socket.getOutputStream()));
+        this.in = new BufferedReader(
                 new InputStreamReader(
                         new BufferedInputStream(socket.getInputStream())));
-        executor = Executors.newSingleThreadExecutor();
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            disconnect();
-            System.out.println("Good bye!");
-        }));
+        this.executor = Executors.newSingleThreadExecutor();
     }
 
-    public void transform(String message) {
-        //todo add encoding
-        executor.execute(() -> {
+    public void run(String message) {
+        executor.submit(() -> {
             try {
-                out.write(message);
+                out.writeUTF(message);
                 out.flush();
                 System.out.println(in.readLine());
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
-                throw new ConnectionException(e);
             }
         });
-
     }
 
-    private void disconnect() {
+    public void disconnect() {
         try {
-            in.close();
-            out.close();
-            socket.close();
+            if (socket != null && !socket.isClosed()) {
+                socket.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
-            throw new ConnectionException(e);
         }
     }
 }
