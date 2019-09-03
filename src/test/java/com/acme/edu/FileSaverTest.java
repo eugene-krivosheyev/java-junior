@@ -26,7 +26,6 @@ public class FileSaverTest {
         //endregion
     }
 
-
     @Test
     public void shouldLog2() throws IOException {
         //region when

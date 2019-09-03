@@ -1,8 +1,6 @@
 package com.acme.edu;
 
 import com.acme.edu.commands.Command;
-import com.acme.edu.savers.ConsoleSaver;
-import com.acme.edu.savers.FileSaver;
 import com.acme.edu.savers.Saver;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,13 +10,10 @@ import java.util.*;
  * Created by kate-c on 23/08/2019.
  */
 public class LoggerController {
-    private Saver saver = new FileSaver(5);
+    private Saver saver;
     @Nullable
     private Command previousCommand = null;
     private Queue<Command> commandBuffer = new LinkedList<>();
-
-    public LoggerController() {
-    }
 
     public LoggerController(Saver saver) {
         this.saver = saver;
@@ -41,7 +36,7 @@ public class LoggerController {
                     .reduce((command, command2) -> command.accumulate(command2, saver));
             accumulatedCommand.orElseThrow(() -> new Exception()).flush(saver);
             commandBuffer = new LinkedList<>();
-            saver.close();
+            //saver.close();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {

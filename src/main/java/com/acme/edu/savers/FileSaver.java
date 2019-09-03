@@ -22,17 +22,6 @@ public class FileSaver implements Saver {
 
     @Override
     public void save(String message) {
-        if (currentNumberOfFlushes == MAX_NUMBER_OF_FLUSHES) {
-            currentNumberOfFlushes = 0;
-            currentFileNameIndex++;
-
-            try {
-                out = getNewOutStream();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-
         if (out == null) {
             try {
                 out = getNewOutStream();
@@ -41,8 +30,15 @@ public class FileSaver implements Saver {
             }
         }
 
-            out.println(message);
-            currentNumberOfFlushes++;
+        out.println(message);
+        currentNumberOfFlushes++;
+
+        if (currentNumberOfFlushes == MAX_NUMBER_OF_FLUSHES) {
+            currentNumberOfFlushes = 0;
+            currentFileNameIndex++;
+            out = null;
+        }
+
     }
 
     private String getFileName() {
@@ -75,10 +71,10 @@ public class FileSaver implements Saver {
                                 new FileOutputStream(getFileName(), true))));
     }
 
-    @Override
-    public void close() throws IOException {
-        out.flush();
-        out.close();
-        out = null;
-    }
+//    @Override
+//    public void close() throws IOException {
+//        out.flush();
+//        out.close();
+//        out = null;
+//    }
 }

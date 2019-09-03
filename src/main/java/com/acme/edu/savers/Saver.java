@@ -6,7 +6,6 @@ import java.io.IOException;
 /**
  * Created by kate-c on 23/08/2019.
  */
-public interface Saver extends Closeable {
+public interface Saver {
     void save(String message);
-    void close() throws IOException;
 }

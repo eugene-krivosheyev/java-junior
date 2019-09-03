@@ -11,8 +11,4 @@ public class ConsoleSaver implements Saver {
         System.out.println(message);
     }
 
-    @Override
-    public void close() throws IOException {
-
-    }
 }

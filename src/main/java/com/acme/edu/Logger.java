@@ -2,6 +2,7 @@ package com.acme.edu;
 
 
 import com.acme.edu.commands.*;
+import com.acme.edu.savers.ConsoleSaver;
 
 import java.io.IOException;
 
@@ -9,7 +10,7 @@ public class Logger {
 
     //private java.util.logging.Logger jul = new java.util.logging.Logger(LoggerController.class.getName());
 
-    private static LoggerController loggerController = new LoggerController();
+    private static LoggerController loggerController = new LoggerController(new ConsoleSaver());
 
     public static void flush() {
         loggerController.flush();
