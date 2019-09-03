@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Main1 {
     public static void main(String[] args) throws InterruptedException {
-        new CommandImplListener(8102);
+        new CommandsProtocol(8102);
         Thread.sleep(1000);
     }
 

@@ -20,12 +20,12 @@ import java.util.List;
 import java.util.Map;
 
 
-public class CommandImplListener implements ConnectionListener {
-    private static final Logger log = LoggerFactory.getLogger(CommandImplListener.class);
+public class CommandsProtocol implements ConnectionListener {
+    private static final Logger log = LoggerFactory.getLogger(CommandsProtocol.class);
     private LoggerController loggerController = new LoggerController(new FileSaver());
     private Map<Connection, List<Command>> bufferForConnection = new HashMap();
 
-    public CommandImplListener(int port) { new Server( this, port); }
+    public CommandsProtocol(int port) { new Server( this, port); }
 
     @Override
     public synchronized void onReceiveMessage(Connection connection, String message) {
