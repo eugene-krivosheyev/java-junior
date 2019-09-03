@@ -20,20 +20,30 @@ public class ServerAppDemo {
 
 class ServerController {
     private Set<Integer> data = new HashSet<>();
+    private ReadWriteLock rwl = new ReentrantReadWriteLock(true);
 
     /**
      * Concurrent execution
      */
     public void executeAdd(int param) {
-        synchronized (this) {
+        try {
+            rwl.writeLock().lock();
             data.add(param);
+        } catch (Exception e ) {
+            e.printStackTrace();
+        } finally {
+            rwl.writeLock().unlock();
         }
     }
 
     public int executeSum() {
-        synchronized (this) {
+        try {
+            rwl.readLock().lock();
             return data.stream()
                     .reduce(0, Integer::sum);
+
+        } finally {
+            rwl.readLock().unlock();
         }
     }
 }
