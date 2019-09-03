@@ -1,4 +1,4 @@
-package com.acme.edu;
+package com.acme.edu.Saver;
 
 public class ConcoleSaver implements SuperSaver {
     @Override

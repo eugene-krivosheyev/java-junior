@@ -31,7 +31,14 @@ public class ClientApp {
     }
 
     private static void sendMessage(PrintWriter out, BufferedReader in) throws IOException {
-        out.println(currentThread().getName() + ": 1 2");
+        String name = currentThread().getName();
+        for(int i=0; i< 1000; i++){
+            out.println(name + " StringCommand nertrfd");
+            out.println(name + " StringCommand gkjfdgkjd");
+            out.println(name + " IntCommand 12");
+            out.println(name + " IntCommand 7");
+            out.flush();
+        }
         out.println("close");
         out.flush();
         System.out.println(in.readLine());
