@@ -15,16 +15,23 @@ public class JmmDemo {
 }
 
 class StopableThread extends Thread {
-    private volatile boolean stopped = false;
+    private boolean stopped = false;
 
-    public void setStopped(boolean stopped) {
+    public synchronized void setStopped(boolean stopped) {
         this.stopped = stopped;
+    }
+
+    public boolean isStopped() {
+        return stopped;
     }
 
     @Override
     public void run() {
-        while (!stopped) {
+        //https://docs.oracle.com/javase/specs/jls/se7/html/jls-17.html#jls-17.4.5
+        synchronized (this) {
+            while (!isStopped()) {
 
+            }
         }
     }
 }
