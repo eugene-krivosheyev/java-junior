@@ -49,7 +49,7 @@ class Counter {
 }
 
 class Transaction {
-    public void syncWithFileLevelLockingTransaction(Account a1, Account a2, int amount) {
+    public void syncWithFineGrainedLevelLockingTransaction(Account a1, Account a2, int amount) {
         synchronized (a1) {
             synchronized (a2) {
                 int amount1 = a1.getAmount();
@@ -68,10 +68,8 @@ class Transaction {
     }
 
     public void noLockingTransaction(Account a1, Account a2, int amount) {
-        int amount1 = a1.getAmount();
-        a1.setAmount(amount1 - amount);
-        int amount2 = a2.getAmount();
-        a2.setAmount(amount2 + amount);
+        a1.setAmount(a1.getAmount() - amount);
+        a2.setAmount(a2.getAmount() + amount);
     }
 }
 
