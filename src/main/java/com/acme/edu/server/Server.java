@@ -11,36 +11,46 @@ import java.util.Arrays;
 public class Server {
     private static final int PORT = 8080;
     private static ServerSocket connectionListener;
+    private static Socket socket;
+    private static PrintWriter out;
+    private static DataInputStream in;
+
+
+    Server() throws IOException {
+        System.out.println("Server is running");
+        connectionListener = new ServerSocket(PORT);
+        socket = connectionListener.accept();
+        out = new PrintWriter(
+                new OutputStreamWriter(
+                        new BufferedOutputStream(
+                                socket.getOutputStream())));
+        in = new DataInputStream(
+                new BufferedInputStream(
+                        socket.getInputStream()));
+    }
 
     public static void main(String[] args) {
-        System.out.println("Server is running");
         try {
-            connectionListener = new ServerSocket(PORT);
-            try (final Socket socket = connectionListener.accept();
-                 final PrintWriter out = new PrintWriter(
-                         new OutputStreamWriter(
-                                 new BufferedOutputStream(
-                                         socket.getOutputStream())));
-                 final DataInputStream in =
-                         new DataInputStream(
-                                 new BufferedInputStream(
-                                         socket.getInputStream()))) {
-                while (true) {
-                    final String readLine = in.readUTF();
-                    System.out.println("debug: " + readLine);
-                    processTypesAndLogCommands(readLine);
-                    out.println("OK");
-                    out.flush();
-                }
+            Server s = new Server();
+            s.run();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void run(){
+        while (true) {
+            try {
+                final String readLine = in.readUTF();
+                System.out.println("debug: " + readLine);
+                processTypesAndLogCommands(readLine);
+                out.println("OK");
+                out.flush();
             } catch (LogOperationException | IOException e) {
                 e.printStackTrace();
-            } finally {
                 disconnect();
+                break;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            disconnect();
         }
     }
 
@@ -51,6 +61,9 @@ public class Server {
 
     private static void close() {
         try {
+            in.close();
+            out.close();
+            socket.close();
             connectionListener.close();
         } catch (IOException e) {
             throw new RuntimeException(e);

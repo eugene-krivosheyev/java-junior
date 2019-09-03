@@ -26,21 +26,30 @@ public class DataTransformer {
     }
 
     public void run(String message) {
-        executor.submit(() -> {
-            try {
-                out.writeUTF(message);
-                out.flush();
-                System.out.println(in.readLine());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+        try {
+            executor.submit(() -> {
+                try {
+                    out.writeUTF(message);
+                    out.flush();
+                    System.out.println(in.readLine());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    disconnect();
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+            disconnect();
+        }
     }
 
     public void disconnect() {
         try {
             if (socket != null && !socket.isClosed()) {
+                in.close();
+                out.close();
                 socket.close();
+                executor.shutdownNow();
             }
         } catch (IOException e) {
             e.printStackTrace();
