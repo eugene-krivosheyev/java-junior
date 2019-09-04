@@ -1,10 +1,8 @@
 package com.acme.edu;
 
-import com.acme.edu.commands.Command;
-import com.acme.edu.commands.StringCommand;
 import com.acme.edu.commands.CommandAccumulateInfo;
+import com.acme.edu.commands.StringCommand;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -16,13 +14,12 @@ public class StringCommandTest {
 
         CommandAccumulateInfo info = sut.accumulate(accumulateCommand);
 
-        String decoratedMessage = sut.getDecoratedMessage();
+        String decoratedMessage = info.getCommand().getDecoratedMessage();
 
         assertThat(decoratedMessage)
                 .isEqualTo("string: str 1 (x2)");
         assertThat(info.isFlushNeeded()).isFalse();
 
-        assertThat(info.getCommand()).isEqualTo(sut);
     }
     @Test
     public void shouldFlushDifferentStrings() {

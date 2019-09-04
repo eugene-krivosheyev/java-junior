@@ -56,7 +56,7 @@
             <version>1.4.5</version>
             <configuration>
                 <targetClasses>
-                    <param>com.acme.edu.Controller</param>
+                    <param>com.acme.edu.controller.LocalController</param>
                     <param>com.acme.edu.commands.*</param>
                     <param>com.acme.edu.Logger</param>
                 </targetClasses>
@@ -104,18 +104,17 @@
           <scope>test</scope>
       </dependency>
 
-
-      <dependency>
-          <groupId>org.easytesting</groupId>
-          <artifactId>fest-assert</artifactId>
-          <version>1.4</version>
-          <scope>test</scope>
-      </dependency>
       <dependency>
           <groupId>org.mockito</groupId>
           <artifactId>mockito-all</artifactId>
           <version>1.10.19</version>
           <scope>test</scope>
+      </dependency>
+
+      <dependency>
+          <groupId>com.googlecode.json-simple</groupId>
+          <artifactId>json-simple</artifactId>
+          <version>1.1.1</version>
       </dependency>
 
   </dependencies>

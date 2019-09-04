@@ -5,9 +5,13 @@ package com.acme.edu;
 Multi-line comment
  */
 
-import com.acme.edu.commands.*;
+import com.acme.edu.commands.BooleanCommand;
+import com.acme.edu.commands.IntArrayCommand;
 import com.acme.edu.commands.Integer.IntCommand;
 import com.acme.edu.commands.Integer.IntegerCommand;
+import com.acme.edu.commands.StringCommand;
+import com.acme.edu.controller.Controller;
+import com.acme.edu.controller.LocalController;
 import com.acme.edu.saver.ConsoleSaver;
 
 import java.util.Objects;
@@ -26,7 +30,9 @@ public class Logger {
     private static String PREFIX_STRING = "string: ";
     private static String PREFIX_REFERENCE = "reference: ";
 
-    private static Controller controller = new Controller(new ConsoleSaver());
+
+
+    public static Controller controller = new LocalController(new ConsoleSaver());
 
     public enum LoggingType {
         INT,

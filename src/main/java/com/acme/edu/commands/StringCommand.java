@@ -16,6 +16,11 @@ public class StringCommand implements Command {
         this.type = LoggingType.STRING;
     }
 
+    public StringCommand(String message, int count) {
+        this.message = message;
+        this.type = LoggingType.STRING;
+        this.count = count;
+    }
 
     @Override
     public LoggingType getType() {
@@ -39,12 +44,12 @@ public class StringCommand implements Command {
     public CommandAccumulateInfo accumulate(Command other) {
         if (other == null) return new CommandAccumulateInfo(this, null);
         if (! (other instanceof StringCommand)) return new CommandAccumulateInfo(this, other.getDecoratedMessage());
-
         if (!isTypeEquals(other)) return new CommandAccumulateInfo(this, other.getDecoratedMessage());
-        this.count += ((StringCommand) other).count;
-        String returnMessage = (String) this.getMessage();
 
-        return new CommandAccumulateInfo(this, null);
+        String resString = (String)this.getMessage();
+        int resCount = this.count + ((StringCommand) other).count;
+
+        return new CommandAccumulateInfo(new StringCommand(resString, resCount), null);
     }
 
     @Override

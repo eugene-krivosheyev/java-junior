@@ -17,40 +17,38 @@ public class IntegerCommandTest {
 
         CommandAccumulateInfo info = sut.accumulate(accumulateCommand);
 
-        String decoratedMessage = sut.getDecoratedMessage();
+        String decoratedMessage = info.getCommand().getDecoratedMessage();
 
         assertThat(decoratedMessage).isEqualTo("primitive: 3");
         assertThat(info.isFlushNeeded()).isFalse();
 
-        assertThat(info.getCommand()).isEqualTo(sut);
     }
 
 
     @Test(expected = IntegerOverflowException.class)
-    public void shouldFlushAccumulatedInfoIfUpperOverflow() {
+    public void shouldRaiseExceptionWhenUpperOverflow() {
         final ByteCommand sut = new ByteCommand((byte)1);
         final ByteCommand accumulateCommand = new ByteCommand((byte)2);
         final ByteCommand overflowCommand = new ByteCommand((byte)125);
 
 
         CommandAccumulateInfo info = sut.accumulate(accumulateCommand);
-        CommandAccumulateInfo overflowInfo = overflowCommand.accumulate(sut);
+        CommandAccumulateInfo overflowInfo = overflowCommand.accumulate(info.getCommand());
 
-        String message = overflowCommand.getDecoratedMessage();
+        String message = overflowInfo.getCommand().getDecoratedMessage();
 
 
         assertThat(info.isFlushNeeded()).isFalse();
         assertThat(message).isEqualTo("primitive: 125");
         assertThat(overflowInfo.getMessage()).isEqualTo("primitive: 3");
 
-        assertThat(info.getCommand()).isEqualTo(sut);
         assertThat(overflowInfo.getCommand()).isEqualTo(overflowCommand);
         assertThat(overflowInfo.isFlushNeeded()).isTrue();
     }
 
 
-    @Test
-    public void shouldFlushAccumulatedInfoIfLowerOverflow() {
+    @Test(expected = IntegerOverflowException.class)
+    public void shouldRaiseExceptionWhenULoverOverflow() {
         final ByteCommand sut = new ByteCommand((byte)-1);
         final ByteCommand accumulateCommand = new ByteCommand((byte)-2);
         final ByteCommand overflowCommand = new ByteCommand((byte)-128);
@@ -66,7 +64,6 @@ public class IntegerCommandTest {
         assertThat(decoratedMessage).isEqualTo("primitive: -128");
         assertThat(overflowInfo.getMessage()).isEqualTo("primitive: -3");
 
-        assertThat(info.getCommand()).isEqualTo(sut);
         assertThat(overflowInfo.getCommand()).isEqualTo(overflowCommand);
         assertThat(overflowInfo.isFlushNeeded()).isTrue();
 
@@ -84,17 +81,16 @@ public class IntegerCommandTest {
 
 
         CommandAccumulateInfo info = sut.accumulate(accumulateCommand);
-        CommandAccumulateInfo notOverflowInfo = notOverflowCommand.accumulate(sut);
+        CommandAccumulateInfo notOverflowInfo = notOverflowCommand.accumulate(info.getCommand());
 
-        String message = notOverflowCommand.getDecoratedMessage();
+        String message = notOverflowInfo.getCommand().getDecoratedMessage();
 
 
         assertThat(info.isFlushNeeded()).isFalse();
         assertThat(message).isEqualTo("primitive: 127");
 
         assertThat(info.isFlushNeeded()).isFalse();
-        assertThat(info.getCommand()).isEqualTo(sut);
-        assertThat(notOverflowInfo.getCommand()).isEqualTo(notOverflowCommand);
+
     }
 
 
@@ -105,17 +101,16 @@ public class IntegerCommandTest {
         final ByteCommand notOverflowCommand = new ByteCommand((byte)-125);
 
         CommandAccumulateInfo info = sut.accumulate(accumulateCommand);
-        CommandAccumulateInfo notOverflowInfo = notOverflowCommand.accumulate(sut);
+        CommandAccumulateInfo notOverflowInfo = notOverflowCommand.accumulate(info.getCommand());
 
-        String message = notOverflowCommand.getDecoratedMessage();
+        String message = notOverflowInfo.getCommand().getDecoratedMessage();
 
 
         assertThat(info.isFlushNeeded()).isFalse();
         assertThat(message).isEqualTo("primitive: -128");
 
         assertThat(info.isFlushNeeded()).isFalse();
-        assertThat(info.getCommand()).isEqualTo(sut);
-        assertThat(notOverflowInfo.getCommand()).isEqualTo(notOverflowCommand);
+
     }
 
     @Test
@@ -125,7 +120,6 @@ public class IntegerCommandTest {
 
         CommandAccumulateInfo accumulateInfo = sut.accumulate(nullComand);
 
-        assertThat(accumulateInfo.getCommand()).isEqualTo(sut);
         assertThat(accumulateInfo.isFlushNeeded()).isFalse();
         assertThat(accumulateInfo.getMessage()).isNull();
     }
@@ -152,7 +146,6 @@ public class IntegerCommandTest {
 
         CommandAccumulateInfo accumulateInfo = sut.accumulate(anotherCommand);
 
-        assertThat(accumulateInfo.getCommand()).isEqualTo(sut);
         assertThat(accumulateInfo.isFlushNeeded()).isTrue();
         assertThat(accumulateInfo.getMessage()).contains("str: 1");
     }

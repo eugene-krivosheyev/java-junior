@@ -10,6 +10,6 @@ public class StringDemo {
 
         Integer i1 = -129; //new Integer(??) + intern()
         Integer i2 = -129;
-        System.out.println( i1 == i2 ); //FIXME NEVER!!!!
+        System.out.println( i1 == i2 );
     }
 }
