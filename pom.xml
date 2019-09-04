@@ -77,6 +77,26 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-maven-plugin</artifactId>
+        <version>3.7.0</version>
+        <configuration>
+          <propertyFile>src/test/resources/liquibase.properties</propertyFile>
+          <changeLogFile>src/test/resources/test-changelog.xml</changeLogFile>
+          <verbose>true</verbose>
+          <logging>INFO</logging>
+          <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>process-test-resources</phase>
+            <goals>
+              <goal>update</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -86,6 +106,12 @@
       <artifactId>annotations</artifactId>
       <version>17.0.0</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.derby</groupId>
+      <artifactId>derbyclient</artifactId> <!-- for db server -->
+      <version>10.14.2.0</version>
+    </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -102,6 +128,18 @@
       <groupId>org.mockito</groupId>
       <artifactId>mockito-all</artifactId>
       <version>1.10.19</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+      <version>3.6.3</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.derby</groupId>
+      <artifactId>derby</artifactId> <!-- for embedded db -->
+      <version>10.14.2.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

@@ -1,0 +1,31 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+
+    <changeSet id="ddl" author="author">
+        <sql>
+            create table CLIENT (
+                ID bigint not null generated always as identity primary key,
+                LOGIN varchar(50) not null,
+                SECRET varchar(100) not null,
+                SALT varchar(12) not null,
+                CREATED timestamp not null default CURRENT_TIMESTAMP,
+                ENABLED boolean not null default TRUE
+            );
+            create unique index CLIENT_LOGIN_INDEX on CLIENT(LOGIN);
+
+            create table ACCOUNT (
+                ID bigint not null generated always as identity primary key,
+                AMOUNT decimal(31, 16) not null,
+                CREATE_STAMP timestamp not null default CURRENT_TIMESTAMP,
+                CLIENT_ID bigint not null constraint ACCOUNT_CLIENT_FK references CLIENT
+                    on update restrict on delete restrict
+            );
+        </sql>
+        <rollback>
+            drop table ACCOUNT;
+            drop index CLIENT_LOGIN_INDEX;
+            drop table CLIENT;
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
