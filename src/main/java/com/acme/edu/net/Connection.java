@@ -34,6 +34,7 @@ public class Connection {
                 }
             } catch (IOException ex) {
                 log.error("Ошибка чтения: " + ex);
+                throw new ConnectionException(ex);
             } finally {
                 disconnect();
             }

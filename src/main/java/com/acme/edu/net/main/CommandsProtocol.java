@@ -28,7 +28,7 @@ public class CommandsProtocol implements ConnectionListener {
     public CommandsProtocol(int port) { new Server( this, port); }
 
     @Override
-    public synchronized void onReceiveMessage(Connection connection, String message) {
+    public void onReceiveMessage(Connection connection, String message)  {
         try {
             if (message != null) {
                 log.info("Пришло сообщение: " + message + ", от: " + connection.toString());
@@ -36,7 +36,6 @@ public class CommandsProtocol implements ConnectionListener {
                     bufferForConnection.put(connection, new LinkedList<>());
                 bufferForConnection.put(connection,
                         loggerController.handleCommand(selectCommand(message), bufferForConnection.get(connection)));
-                sendMessage("Cообщение залогировано: " + message, connection);
             } else {
                 connection.disconnect();
             }

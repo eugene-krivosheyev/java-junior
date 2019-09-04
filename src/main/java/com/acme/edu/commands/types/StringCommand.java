@@ -2,7 +2,6 @@ package com.acme.edu.commands.types;
 
 import com.acme.edu.StateCommand;
 import com.acme.edu.commands.Command;
-import com.acme.edu.saver.ConsoleSaver;
 import com.acme.edu.saver.FileSaver;
 import com.acme.edu.saver.SaverException;
 

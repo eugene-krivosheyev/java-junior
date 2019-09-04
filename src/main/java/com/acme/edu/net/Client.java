@@ -24,7 +24,7 @@ public class Client implements ConnectionListener {
     }
 
     @Override
-    public synchronized void onReceiveMessage(Connection connection, String message) {
+    public void onReceiveMessage(Connection connection, String message) {
         log.info("Пришло сообщение: " + message);
     }
 }
