@@ -632,7 +632,7 @@ assertMessageEquals("3")
 
 ---
 
-# JDBC API (6/2)
+# [JDBC API (6/2)](https://zoom.us/j/969078914)
 - SQL recap: DDL and DML
 - DB schema design
 - Overview of JDBC API
