@@ -641,6 +641,7 @@ assertMessageEquals("3")
 - Basic interfaces
 - Retrieving data
 - Transactions
+- [JDBC Intro Webinar Video Record](https://www.dropbox.com/s/uu6beei2zv4yyun/2019-09-05%2010.57.32%20JDBC%20API%20Intro.mp4?dl=0)
 
 ## Course Project Iteration 18: Logging to database
 - FR: As a developer I want log messages to DB
