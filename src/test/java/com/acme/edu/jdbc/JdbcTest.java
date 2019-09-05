@@ -55,7 +55,7 @@ public class JdbcTest {
                         "insert into CLIENT(LOGIN, SECRET, SALT) values(?,?,?)");
         ) {
 
-            statement.setString(1, "login1");
+            statement.setString(1, "login2");
             statement.setString(2, "secret2");
             statement.setString(3, "salt2");
             final int rowsAffected = statement.executeUpdate();
@@ -102,6 +102,7 @@ public class JdbcTest {
             statement.setBoolean(1, true);
             try (final ResultSet resultSet = statement.executeQuery()) {
 
+                statement.setFetchSize(100);
                 while (resultSet.next()) {
                     System.out.print(resultSet.getLong("ID") + ", ");
                     System.out.print(resultSet.getString("LOGIN") + ", ");
@@ -158,7 +159,8 @@ public class JdbcTest {
         }
 
         try (final Connection connection = DriverManager.getConnection(dbUrl)) {
-            connection.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
+            //https://arbinada.com/en/node/619
+            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             connection.setAutoCommit(false);
 
             try (
