@@ -689,3 +689,6 @@ assertMessageEquals("3")
 - PM and Business Customers accept product with six demo sessions
 
 ---
+##Authors
+Anna Beliyeva
+Max Dotsenko
