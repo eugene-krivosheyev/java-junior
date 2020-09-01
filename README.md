@@ -1,6 +1,8 @@
 # Java Junior Developer Training Course.
 88 hours training + 32 hours work project = 120 hr.
 
+# Fork by Kharitonova, Shvyrkova
+ 
 ---
 
 # Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice)
