@@ -48,7 +48,7 @@ Hello, world!
 ---
 
 # Development infrastructure: Git (1.5/0.5)
-- Intro to GIT
+- Intro GIT
 - Repos
 - Commits
 - Shortly about branches, conflicts and merges
