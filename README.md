@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Team02: Gavrilova Darya
+=======
+Team02: Skorobogatova Evgenia
+>>>>>>> 423b20d68b4b508e544090a783f2ef8d7f7306ec
 
 # Java Junior Developer Training Course.
 88 hours training + 32 hours work project = 120 hr.
