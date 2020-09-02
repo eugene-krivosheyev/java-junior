@@ -18,7 +18,7 @@ public class Logger {
      * @throws
      * @param message
      */
-    public static void complexName(int message) {
+    public static void log(int message) {
         System.out.println("primitive: " + message);
     }
 
