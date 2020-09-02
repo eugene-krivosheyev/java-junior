@@ -5,7 +5,6 @@ import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
