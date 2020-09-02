@@ -6,7 +6,7 @@
     <artifactId>javajunior</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-
+    <!--team02-->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -50,6 +50,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
@@ -77,6 +78,7 @@
                     </execution>
                 </executions>
             </plugin>
+           -->
         </plugins>
     </build>
 
