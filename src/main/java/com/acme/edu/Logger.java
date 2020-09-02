@@ -1,5 +1,8 @@
 package com.acme.edu;
 
+import static java.lang.Math.random;
+import static java.lang.Math.PI;
+
 /**
  * jlkjlkjflghkj
  * <code>gfgjfkj</code>
@@ -11,6 +14,10 @@ package com.acme.edu;
  * @since
  */
 public class Logger {
+    static {
+        System.out.println("????");
+    }
+
     public static final String FILE_NAME = "a.txt";
     //method for ....
 
@@ -28,6 +35,8 @@ public class Logger {
     kdfjgdkjghdkjgfh
      */
     public static void log(byte message) {
+        random();
+        System.out.println(PI);
         System.out.println("primitive: " + message);
     }
 }
