@@ -23,9 +23,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
 
-    /*
-    TODO: implement Logger solution to match specification as tests
-
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
@@ -38,13 +35,16 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "3\n" +
-            "str 2\n" +
-            "0\n"
+            "str 1" + System.lineSeparator() +
+            "3" + System.lineSeparator() +
+            "str 2" + System.lineSeparator() +
+            "0" + System.lineSeparator()
         );
         //endregion
     }
+
+    /*
+    TODO: implement Logger solution to match specification as tests
 
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
