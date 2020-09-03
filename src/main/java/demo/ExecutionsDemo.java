@@ -23,13 +23,41 @@ public class ExecutionsDemo {
         //endregion
 
         //region switch
-        String i = "1";
+        String i = ???;
         switch (i) {
             case "1" + "1": System.out.println("1");
             case "2": System.out.println("2");
             default: System.out.println("n/a");
         }
+        while (true) {
+            System.out.println("");
+            if ()
+        }
         //endregion
+
+//        for (;;) {}
+        for (int counter = 0, j = 1; counter < 10; counter++, j--) {
+
+        }
+
+        do {
+            if (???) break;
+            if (???) continue;
+                ///
+        } while (1 != 1);
+
+        outer: while(true) {
+            while() {
+                for () {
+                    if (??) break outer;
+                    if (??) continue outer;
+                }
+            }
+        }
+
+        for (String current : args) {
+            System.out.println(current);
+        }
 
 
     }
