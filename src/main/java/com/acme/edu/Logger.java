@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import com.sun.org.apache.bcel.internal.generic.SWITCH;
+
 public class Logger {
 
     private static String primitiveType = "primitive: ";
@@ -14,8 +16,30 @@ public class Logger {
         System.out.println(message);
     }
 
+    static int savedInt = 0;
+    static String savedString = "";
+    static byte savedByte = 0;
+    static types last = null;
+
+    enum types {
+        INTEGER ,
+        BYTE ,
+        STRING
+    }
+
     public static void log(int message) {
-        printMessage(primitiveType + message);
+        if(last == types.INTEGER){
+            savedInt += message;
+        }
+        else{
+            if(last == types.BYTE){
+                last = types.BYTE;
+
+            }
+            else{
+
+            }
+        }
     }
 
     public static void log(byte message) {
