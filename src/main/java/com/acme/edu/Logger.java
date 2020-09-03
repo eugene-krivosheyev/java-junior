@@ -37,7 +37,7 @@ public class Logger {
         int var = 8; //local, temp, stack, auto
         System.out.println(var);
         writeMessage(PRIMITIVE_PREFIX + message);
-        incrementC();
+//        incrementC();
     }
 
     /*
@@ -55,9 +55,9 @@ public class Logger {
         return PRIMITIVE_PREFIX + message;
     }
 
-    public static void log(???? m) {
-        writeMessage(PRIMITIVE_PREFIX + message);
-    }
+//    public static void log(???? m) {
+//        writeMessage(PRIMITIVE_PREFIX + message);
+//    }
 
     private static void writeMessage(String s) {
         System.out.println(s);
