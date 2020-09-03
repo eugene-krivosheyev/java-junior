@@ -7,27 +7,31 @@ public class Logger {
             PREFIX_REFERENCE = "reference: ",
             PREFIX_PRIMITIVE = "primitive: ";
 
-   public static void log(int message) {
-        System.out.println(": " + message);
+    public static void log(int message) {
+        directToOutput(PREFIX_PRIMITIVE + message);
     }
 
     public static void log(byte message) {
-        System.out.println("primitive: " + message);
+        directToOutput(PREFIX_PRIMITIVE + message);
     }
 
     public static void log(char message) {
-        System.out.println("char: " + message);
+        directToOutput(PREFIX_CHAR + message);
     }
 
     public static void log(String message) {
-        System.out.println("string: " + message);
+        directToOutput(PREFIX_STRING + message);
     }
 
     public static void log(boolean message) {
-        System.out.println("primitive: " + message);
+        directToOutput(PREFIX_PRIMITIVE + message);
     }
 
     public static void log(Object message) {
-        System.out.println("reference: " + message);
-    }*/
+        directToOutput(PREFIX_REFERENCE + message);
+    }
+
+    static void directToOutput (String outputString){
+        System.out.println(outputString);
+    }
 }
