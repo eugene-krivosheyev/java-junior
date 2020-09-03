@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import org.jetbrains.annotations.NotNull;
+
 import static java.lang.Math.random;
 import static java.lang.Math.PI;
 
@@ -35,6 +37,7 @@ public class Logger {
         int var = 8; //local, temp, stack, auto
         System.out.println(var);
         writeMessage(PRIMITIVE_PREFIX + message);
+        incrementC();
     }
 
     /*
@@ -44,6 +47,15 @@ public class Logger {
      */
     public static void log(byte message) {
         random();
+        writeMessage(decorateMessage(message));
+    }
+
+    @NotNull
+    private static String decorateMessage(byte message) {
+        return PRIMITIVE_PREFIX + message;
+    }
+
+    public static void log(???? m) {
         writeMessage(PRIMITIVE_PREFIX + message);
     }
 
