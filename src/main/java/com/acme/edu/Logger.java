@@ -1,49 +1,48 @@
 package com.acme.edu;
 
 public class Logger {
-    private static String separator = ": ";
+    enum MessageTypePrefix {
+        PRIMITIVE("primitive: "),
+        CHAR("char: "),
+        STRING("string: "),
+        REFERENCE("reference: ");
+
+        private String typePrefix;
+
+        MessageTypePrefix(String typePrefix) {
+            this.typePrefix = typePrefix;
+        }
+
+        String getTypePrefix() {
+            return typePrefix;
+        }
+    }
 
     public static void log(int message) {
-        printMessageWithType(MessageType.PRIMITIVE.getType() + separator + message);
+        printMessageWithType(MessageTypePrefix.PRIMITIVE.getTypePrefix() + message);
     }
 
     public static void log(byte message) {
-        printMessageWithType(MessageType.PRIMITIVE.getType() + separator + message);
+        printMessageWithType(MessageTypePrefix.PRIMITIVE.getTypePrefix() + message);
     }
 
     public static void log(char message) {
-        printMessageWithType(MessageType.CHAR.getType() + separator + message);
+        printMessageWithType(MessageTypePrefix.CHAR.getTypePrefix() + message);
     }
 
     public static void log(String message) {
-        printMessageWithType(MessageType.STRING.getType() + separator + message);
+        printMessageWithType(MessageTypePrefix.STRING.getTypePrefix() + message);
     }
 
     public static void log(boolean message) {
-        printMessageWithType(MessageType.PRIMITIVE.getType() + separator + message);
+        printMessageWithType(MessageTypePrefix.PRIMITIVE.getTypePrefix() + message);
     }
 
     public static void log(Object message) {
-        printMessageWithType(MessageType.REFERENCE.getType() + separator + message);
+        printMessageWithType(MessageTypePrefix.REFERENCE.getTypePrefix() + message);
     }
 
     private static void printMessageWithType(String message) {
         System.out.println(message);
-    }
-}
-
-enum MessageType {
-    PRIMITIVE("primitive"),
-    CHAR("char"),
-    STRING("string"),
-    REFERENCE("reference");
-
-    private String type;
-    MessageType(String type) {
-        this.type = type;
-    }
-
-    String getType() {
-        return type;
     }
 }
