@@ -33,4 +33,18 @@ public class Logger {
     public static void log(String message) {
         System.out.println("string: " + message);
     }
+
+    /**
+     * @param message a Boolean value to be logged
+     */
+    public static void log(boolean message) {
+        System.out.println("primitive: " + message);
+    }
+
+    /**
+     * @param message an Object value to be logged
+     */
+    public static void log(Object message) {
+        System.out.println("reference: " + message);
+    }
 }
