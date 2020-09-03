@@ -23,7 +23,7 @@ public class ExecutionsDemo {
         //endregion
 
         //region switch
-        String i = ???;
+        String i = "1";
         switch (i) {
             case "1" + "1": System.out.println("1");
             case "2": System.out.println("2");
@@ -31,7 +31,6 @@ public class ExecutionsDemo {
         }
         while (true) {
             System.out.println("");
-            if ()
         }
         //endregion
 
@@ -40,6 +39,7 @@ public class ExecutionsDemo {
 
         }
 
+        /*
         do {
             if (???) break;
             if (???) continue;
@@ -54,12 +54,11 @@ public class ExecutionsDemo {
                 }
             }
         }
+        */
 
         for (String current : args) {
             System.out.println(current);
         }
-
-
     }
 
     String m() {
