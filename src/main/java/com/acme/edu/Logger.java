@@ -12,6 +12,11 @@ public class Logger {
     public static void log(char message) {
         printMessage("char: " + message);
     }
+
+    public static void log(String message) {
+        printMessage("string: " + message);
+    }
+
     private static void printMessage(String message){
         System.out.println(message);
     }
