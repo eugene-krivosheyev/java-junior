@@ -1,53 +1,54 @@
 package com.acme.edu;
 
-import static java.lang.Math.random;
-import static java.lang.Math.PI;
 
-/**
- * jlkjlkjflghkj
- * <code>gfgjfkj</code>
- * <h1>fgkjfkjgh</h1>
- * @author EKR
- * @see AnotherClass
- * @deprecated
- * @param Inut param
- * @since
- */
 public class Logger {
-    static int var = 0; //class field, global var
+    private static final String PRIMITIVE = "primitive: ";
+    private static final String STRING = "string: ";
+    private static final String CHAR = "char: ";
+    private static final String REFERENCE = "reference: ";
 
-    static {
-        System.out.println("????");
-    }
-
-    public static final String FILE_NAME = "a.txt";
-    //method for ....
-
-    /** 10Msloc: 10к global vars
-     * @throws
-     * @param message
-     */
     public static void log(int message) {
-        System.out.println(Logger.var);
-
-        int var = 8; //local, temp, stack, auto
-        System.out.println(var);
-        System.out.println("primitive: " + message);
+        print(PRIMITIVE + message);
     }
 
-    /*
-    dghdkjfghkdfjg
-    dkgjhdkjfghdfkgj
-    kdfjgdkjghdkjgfh
-     */
     public static void log(byte message) {
-        random();
-        System.out.println(PI);
-        System.out.println("primitive: " + message);
+        print(PRIMITIVE + message);
     }
 
+    public static void log(String message) {
+        print(STRING + message);
+    }
+
+    public static void log(boolean message) {
+        print(PRIMITIVE + message);
+    }
+
+    public static void log(char message) {
+        print(CHAR + message);
+    }
+
+    public static void log(Object message) {
+        print(REFERENCE + message);
+    }
+
+    private static void print(String message) {
+        System.out.println(message);
+    }
+
+
+
     /*
-    int m(int p) { return 0; }
-    byte m(int p) { return 0; }
-    */
+    private static String getTypeMessage(Object message) {
+        if (message instanceof String) {
+            return "string";
+        } else if (message instanceof Character) {
+            return "char";
+        } else if (message instanceof Boolean || message instanceof Byte || message instanceof Integer) {
+            return "primitive";
+        } else {
+            return "reference";
+        }
+    }*/
+
+
 }
