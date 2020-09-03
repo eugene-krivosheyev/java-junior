@@ -1,8 +1,14 @@
 package com.acme.edu;
 
 public class Logger {
-    public static void log(int message) {
-        System.out.println("primitive: " + message);
+    final static String
+            PREFIX_CHAR = "char: ",
+            PREFIX_STRING = "string: ",
+            PREFIX_REFERENCE = "reference: ",
+            PREFIX_PRIMITIVE = "primitive: ";
+
+   public static void log(int message) {
+        System.out.println(": " + message);
     }
 
     public static void log(byte message) {
@@ -23,5 +29,5 @@ public class Logger {
 
     public static void log(Object message) {
         System.out.println("reference: " + message);
-    }
+    }*/
 }
