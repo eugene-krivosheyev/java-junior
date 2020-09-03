@@ -67,8 +67,26 @@ public class PrimitivesDemo {
         //region Reference types
         Object object = new Object();
         Object object2 = object;
+        System.out.println( object == object2 );
         subMethod(object2);
         //endregion
+
+        //region String
+        String str1 = "abc"; //new String("abc") -> string pool
+        String str2 = "abc"; //str2 = str1
+        System.out.println( str1 == str2 );
+
+        final String newStr = str1.toUpperCase();
+        System.out.println(str1);
+
+        String s1 = new String("abc");
+        String s2 = new String("abc");
+        //String.intern
+        System.out.println( s1 == s2 );
+        //endregion
+
+        String strResult = "a" + "b" + "c";
+        // -> StringBuffer/StringBuilder
     }
 
     private static void subMethod(Object toPrint) {
