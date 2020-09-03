@@ -63,5 +63,24 @@ public class PrimitivesDemo {
         // -> BigDecimal
         //endregion
         //endregion
+
+        //region Reference types
+        Object object = new Object();
+        Object object2 = object;
+        subMethod(object2);
+        //endregion
     }
+
+    private static void subMethod(Object toPrint) {
+        System.out.println(toPrint);
+    }
+}
+
+class Employee {
+    private static String companyName = "";
+
+    //-.-.-.-.-.-.-.-.-.-.-
+
+    private int id;
+    private Employee boss;
 }
