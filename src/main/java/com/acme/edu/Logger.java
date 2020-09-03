@@ -14,10 +14,12 @@ import static java.lang.Math.PI;
  * @since
  */
 public class Logger {
+    public static final String PRIMITIVE_PREFIX = "primitive: ";
+
     static int var = 0; //class field, global var
 
     static {
-        System.out.println("????");
+        writeMessage("????");
     }
 
     public static final String FILE_NAME = "a.txt";
@@ -28,11 +30,11 @@ public class Logger {
      * @param message
      */
     public static void log(int message) {
-        System.out.println(Logger.var);
+        writeMessage(Integer.toString(Logger.var));
 
         int var = 8; //local, temp, stack, auto
         System.out.println(var);
-        System.out.println("primitive: " + message);
+        writeMessage(PRIMITIVE_PREFIX + message);
     }
 
     /*
@@ -42,12 +44,23 @@ public class Logger {
      */
     public static void log(byte message) {
         random();
-        System.out.println(PI);
-        System.out.println("primitive: " + message);
+        writeMessage(PRIMITIVE_PREFIX + message);
+    }
+
+    private static void writeMessage(String s) {
+        System.out.println(s);
     }
 
     /*
     int m(int p) { return 0; }
     byte m(int p) { return 0; }
     */
+
+    public static void log(Object message) {
+        if (message instanceof String) {
+            if (message.getClass().getName().equals("String")) {
+                //?????
+            }
+        }
+    }
 }
