@@ -1,7 +1,11 @@
 package demo;
 
+import java.util.stream.IntStream;
+
+import static java.util.stream.IntStream.range;
+
 public class PrimitivesDemo {
-    public static void main(String[] args) {
+    public static strictfp void main(String[] args) {
         //region Целые
         byte b = 07; //0b100
         short s = 1_000;
@@ -41,6 +45,22 @@ public class PrimitivesDemo {
         int smallIntValue = Byte.MAX_VALUE + 1;
         byte smallByteValue = (byte) smallIntValue;
         System.out.println(smallByteValue);
+        //endregion
+        //endregion
+
+        //region Troubles!!!!
+        //region Silent Type Overflow для целых
+        byte accumulator = Byte.MIN_VALUE;
+        for (int counter = 0; counter <= 257; counter++) {
+            accumulator++;
+        }
+        System.out.println(accumulator);
+        // -> BigInteger
+        //endregion
+
+        //region Precision Loss для fp
+        System.out.println( .1 + .2 ); //IEEE 754
+        // -> BigDecimal
         //endregion
         //endregion
     }
