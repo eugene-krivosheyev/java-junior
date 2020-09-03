@@ -17,6 +17,9 @@ public class Logger {
         printMessage("string: " + message);
     }
 
+    public static void log(boolean message){
+        printMessage("primitive: " + message);
+    }
     private static void printMessage(String message){
         System.out.println(message);
     }
