@@ -1,45 +1,33 @@
 package com.acme.edu;
 
 public class Logger {
-    enum MessageTypePrefix {
-        PRIMITIVE("primitive: "),
-        CHAR("char: "),
-        STRING("string: "),
-        REFERENCE("reference: ");
-
-        private String typePrefix;
-
-        MessageTypePrefix(String typePrefix) {
-            this.typePrefix = typePrefix;
-        }
-
-        String getTypePrefix() {
-            return typePrefix;
-        }
-    }
+    private static final String PRIMITIVE_PREFIX = "primitive: ";
+    private static final String CHAR_PREFIX = "char: ";
+    private static final String STRING_PREFIX = "string: ";
+    private static final String REFERENCE_PREFIX = "reference: ";
 
     public static void log(int message) {
-        printMessageWithType(MessageTypePrefix.PRIMITIVE.getTypePrefix() + message);
+        printMessageWithType(PRIMITIVE_PREFIX + message);
     }
 
     public static void log(byte message) {
-        printMessageWithType(MessageTypePrefix.PRIMITIVE.getTypePrefix() + message);
+        printMessageWithType(PRIMITIVE_PREFIX + message);
     }
 
     public static void log(char message) {
-        printMessageWithType(MessageTypePrefix.CHAR.getTypePrefix() + message);
+        printMessageWithType(CHAR_PREFIX + message);
     }
 
     public static void log(String message) {
-        printMessageWithType(MessageTypePrefix.STRING.getTypePrefix() + message);
+        printMessageWithType(STRING_PREFIX + message);
     }
 
     public static void log(boolean message) {
-        printMessageWithType(MessageTypePrefix.PRIMITIVE.getTypePrefix() + message);
+        printMessageWithType(PRIMITIVE_PREFIX + message);
     }
 
     public static void log(Object message) {
-        printMessageWithType(MessageTypePrefix.REFERENCE.getTypePrefix() + message);
+        printMessageWithType(REFERENCE_PREFIX + message);
     }
 
     private static void printMessageWithType(String message) {
