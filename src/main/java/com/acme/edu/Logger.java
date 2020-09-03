@@ -2,25 +2,30 @@ package com.acme.edu;
 
 public class Logger {
     public static void log(int message) {
-        printMessage("primitive: " + message);
+        printMessageWithType("primitive: " + message);
     }
 
     public static void log(byte message) {
-        printMessage("primitive: " + message);
+        printMessageWithType("primitive: " + message);
     }
 
     public static void log(char message) {
-        printMessage("char: " + message);
+        printMessageWithType("char: " + message);
     }
 
     public static void log(String message) {
-        printMessage("string: " + message);
+        printMessageWithType("string: " + message);
     }
 
     public static void log(boolean message){
-        printMessage("primitive: " + message);
+        printMessageWithType("primitive: " + message);
     }
-    private static void printMessage(String message){
+
+    public static void log(Object message){
+        printMessageWithType("reference: " + message);
+    }
+
+    private static void printMessageWithType(String message){
         System.out.println(message);
     }
 }
