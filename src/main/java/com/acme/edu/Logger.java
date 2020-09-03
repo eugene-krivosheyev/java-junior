@@ -2,37 +2,37 @@ package com.acme.edu;
 
 public class Logger {
 
-    static String primitivePrefix = "primitive";
-    static String charPrefix = "char";
-    static String stringPrefix = "string";
-    static String objPrefix = "reference";
+    final public static String PRIMITIVE_PREFIX = "primitive: ";
+    final public static String CHAR_PREFIX = "char: ";
+    final public static String STRING_PREFIX = "string: ";
+    final public static String OBJ_PREFIX = "reference: ";
 
     public static void log(int message) {
-        printLogMessage(primitivePrefix, message);
+        printLogMessage(PRIMITIVE_PREFIX + message);
     }
 
     public static void log(byte message) {
-        printLogMessage(primitivePrefix, message);
+        printLogMessage(PRIMITIVE_PREFIX + message);
     }
 
     public static void log(char message) {
-        printLogMessage(charPrefix, message);
+        printLogMessage(CHAR_PREFIX + message);
     }
 
     public static void log(String message) {
-        printLogMessage(stringPrefix, message);
+        printLogMessage(STRING_PREFIX + message);
     }
 
     public static void log(boolean message) {
-        printLogMessage(primitivePrefix, message);
+        printLogMessage(PRIMITIVE_PREFIX + message);
     }
 
     public static void log(Object message) {
-        printLogMessage(objPrefix, message);
+        printLogMessage(OBJ_PREFIX + message);
     }
 
-    public static void printLogMessage(String prefix, Object message) {
-        System.out.println(prefix + ": " + message.toString());
+    public static void printLogMessage(String message) {
+        System.out.println(message);
     }
 
 }
