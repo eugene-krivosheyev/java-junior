@@ -2,7 +2,7 @@ package com.acme.edu;
 
 /**
  * This is a simple logger for some standard Java types.
- * @version 1.0.1
+ * @version 1.0.2
  */
 public class Logger {
     static String logMessage;
@@ -11,7 +11,7 @@ public class Logger {
     static final String REFERENCE_PREFIX = "reference: ";
     static final String PRIMITIVE_PREFIX = "primitive: ";
 
-    static void consoleLogger() {
+    private static void writeMessage() {
         System.out.println(logMessage);
     }
 
@@ -20,7 +20,7 @@ public class Logger {
      */
     public static void log(int message) {
         logMessage = PRIMITIVE_PREFIX + message;
-        consoleLogger();
+        writeMessage();
     }
 
     /**
@@ -28,7 +28,7 @@ public class Logger {
      */
     public static void log(byte message) {
         logMessage = PRIMITIVE_PREFIX + message;
-        consoleLogger();
+        writeMessage();
     }
 
     /**
@@ -36,7 +36,7 @@ public class Logger {
      */
     public static void log(boolean message) {
         logMessage = PRIMITIVE_PREFIX + message;
-        consoleLogger();
+        writeMessage();
     }
 
     /**
@@ -44,7 +44,7 @@ public class Logger {
      */
     public static void log(char message) {
         logMessage = CHAR_PREFIX + message;
-        consoleLogger();
+        writeMessage();
     }
 
     /**
@@ -52,7 +52,7 @@ public class Logger {
      */
     public static void log(String message) {
         logMessage = STRING_PREFIX + message;
-        consoleLogger();
+        writeMessage();
     }
 
     /**
@@ -60,6 +60,6 @@ public class Logger {
      */
     public static void log(Object message) {
         logMessage = REFERENCE_PREFIX + message;
-        consoleLogger();
+        writeMessage();
     }
 }
