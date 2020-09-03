@@ -4,6 +4,7 @@ public class Logger {
     private static void printMessage(String message) {
         System.out.println(message);
     }
+
     public static void log(int message) {
         printMessage("primitive: " + message);
     }
@@ -22,5 +23,9 @@ public class Logger {
 
     public static void log(boolean message) {
         printMessage("primitive: " + message);
+    }
+
+    public static void log(Object message) {
+        printMessage("reference: " + message);
     }
 }
