@@ -8,30 +8,30 @@ public class Logger {
             PREFIX_PRIMITIVE = "primitive: ";
 
     public static void log(int message) {
-        directToOutput(PREFIX_PRIMITIVE + message);
+        writeMessage(PREFIX_PRIMITIVE + message);
     }
 
     public static void log(char message) {
-        directToOutput(PREFIX_CHAR + message);
+        writeMessage(PREFIX_CHAR + message);
     }
 
     public static void log(boolean message) {
-        directToOutput(PREFIX_PRIMITIVE + message);
+        writeMessage(PREFIX_PRIMITIVE + message);
     }
 
     public static void log(Object message) {
-        directToOutput(PREFIX_REFERENCE + message);
+        writeMessage(PREFIX_REFERENCE + message);
     }
 
     public static void log(String message) {
-        directToOutput(PREFIX_STRING + message);
+        writeMessage(PREFIX_STRING + message);
     }
 
     public static void log(byte message) {
-        directToOutput(PREFIX_PRIMITIVE + message);
+        writeMessage(PREFIX_PRIMITIVE + message);
     }
 
-    static void directToOutput (String outputString){
+    static void writeMessage(String outputString){
         System.out.println(outputString);
     }
 }
