@@ -1,7 +1,7 @@
 package com.acme.edu;
 
 public class Logger {
-    final static String
+    private final static String
             PREFIX_CHAR = "char: ",
             PREFIX_STRING = "string: ",
             PREFIX_REFERENCE = "reference: ",
