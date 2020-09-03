@@ -16,6 +16,26 @@ public class Logger {
         System.out.println(message);
     }
 
+    private static void printBuffer(types last) {
+        switch (last) {
+            case INTEGER:
+                printMessage(primitiveType + savedInt);
+                break;
+            case BYTE:
+                printMessage(primitiveType + savedByte);
+                break;
+            case STRING:
+                printMessage(stringType + savedString);
+                break;
+        }
+    }
+
+    private static void resetBuffer() {
+        savedString = "";
+        savedInt = 0;
+        savedByte = 0;
+    }
+
     static int savedInt = 0;
     static String savedString = "";
     static byte savedByte = 0;
@@ -24,26 +44,33 @@ public class Logger {
     enum types {
         INTEGER ,
         BYTE ,
-        STRING
+        STRING,
+        NONE
+    }
+
+    public static void main(String[] args) {
+        //System.out.println("djsj");
+        log(10);
+        log(3);
+        log("12");
     }
 
     public static void log(int message) {
-        if(last == types.INTEGER){
-            savedInt += message;
+        if (last != types.INTEGER && last != null) {
+            printBuffer(last);
+            resetBuffer();
         }
-        else{
-            if(last == types.BYTE){
-                last = types.BYTE;
-
-            }
-            else{
-
-            }
-        }
+        savedInt += message;
+        last = types.INTEGER;
     }
 
     public static void log(byte message) {
-        printMessage(primitiveType + message);
+        if (last != types.BYTE) {
+            printBuffer(last);
+            resetBuffer();
+        }
+        savedByte += message;
+        last = types.BYTE;
     }
 
     public static void log(char message) {
@@ -51,7 +78,12 @@ public class Logger {
     }
 
     public static void log(String message) {
-        printMessage(stringType + message);
+        if (last != types.STRING) {
+            printBuffer(last);
+            resetBuffer();
+        }
+        savedString += message;
+        last = types.STRING;
     }
 
     public static void log(boolean message) {
