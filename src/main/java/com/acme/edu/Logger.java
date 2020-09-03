@@ -1,53 +1,36 @@
 package com.acme.edu;
 
-import static java.lang.Math.random;
-import static java.lang.Math.PI;
-
 /**
- * jlkjlkjflghkj
- * <code>gfgjfkj</code>
- * <h1>fgkjfkjgh</h1>
- * @author EKR
- * @see AnotherClass
- * @deprecated
- * @param Inut param
- * @since
+ * This is a simple logger for some standard Java types.
+ * @version 1.0
  */
 public class Logger {
-    static int var = 0; //class field, global var
 
-    static {
-        System.out.println("????");
-    }
-
-    public static final String FILE_NAME = "a.txt";
-    //method for ....
-
-    /** 10Msloc: 10к global vars
-     * @throws
-     * @param message
+    /**
+     * @param  message  an integer value to be logged
      */
     public static void log(int message) {
-        System.out.println(Logger.var);
-
-        int var = 8; //local, temp, stack, auto
-        System.out.println(var);
         System.out.println("primitive: " + message);
     }
 
-    /*
-    dghdkjfghkdfjg
-    dkgjhdkjfghdfkgj
-    kdfjgdkjghdkjgfh
+    /**
+     * @param  message  a byte value to be logged
      */
     public static void log(byte message) {
-        random();
-        System.out.println(PI);
         System.out.println("primitive: " + message);
     }
 
-    /*
-    int m(int p) { return 0; }
-    byte m(int p) { return 0; }
-    */
+    /**
+     * @param  message  a char value to be logged
+     */
+    public static void log(char message) {
+        System.out.println("char: " + message);
+    }
+
+    /**
+     * @param  message  a String value to be logged
+     */
+    public static void log(String message) {
+        System.out.println("string: " + message);
+    }
 }
