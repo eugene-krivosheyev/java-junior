@@ -5,6 +5,7 @@ import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import sun.rmi.runtime.Log;
 
 import java.io.IOException;
 
@@ -87,32 +88,31 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-    /*
-    TODO: implement Logger solution to match specification as tests
 
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
         //region when
         Logger.log("str 1");
+        Logger.flush();
         Logger.log("str 2");
         Logger.log("str 2");
         Logger.log(0);
         Logger.log("str 2");
+        Logger.flush();
         Logger.log("str 3");
         Logger.log("str 3");
         Logger.log("str 3");
+        Logger.flush();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "str 2 (x2)\n" +
-            "0\n" +
-            "str 2\n" +
-            "str 3 (x3)\n"
+            "string: str 1" + System.lineSeparator() +
+            "string: str 2 (x2)" + System.lineSeparator() +
+            "primitive: 0" + System.lineSeparator() +
+            "string: str 2" + System.lineSeparator() +
+            "string: str 3 (x3)" + System.lineSeparator()
         );
         //endregion
     }
-
-    */
 }
