@@ -7,6 +7,7 @@ public class Logger {
     public static final String PREFIX_STRING = "string: ";
     public static final String PREFIX_REFERENCE = "reference: ";
     public static final String PREFIX_MATRIX = "primitives matrix: ";
+    public static final String PREFIX_ARRAY = "primitives array: ";
 
     public static String type = "";
     public static int int_buffer = 0;
@@ -96,6 +97,16 @@ public class Logger {
         }
         messageString.append("}");
         System.out.println(messageString);
+    }
+
+    public static void log(int[] array) {
+        StringBuilder builder = new StringBuilder("{");
+        for (int num: array) {
+            builder.append(num + ", ");
+        }
+        builder.delete(builder.length() - 2, builder.length());
+        builder.append("}");
+        writeMessage(PREFIX_ARRAY + builder);
     }
 
     private static void writeMessage(String message) {
