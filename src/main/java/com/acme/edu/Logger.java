@@ -61,22 +61,15 @@ public class Logger {
             string_buffer = message;
         } else {
             if ("string".equals(type)) {
-                string_buffer +=message;
+                string_buffer += message;
             } else {
                 Method();
                 type = "string";
                 string_buffer = message;
             }
         }
-        if (counter == 0) {
-            writeMessage(PREFIX_STRING + message);
-            counter = 1;
-        }
-        else{
-            if (type.equals("")) {
-                type = "String";
-                value = message;
-            } else {
+    }
+        /*
                 if ("String".equals(type)) {
                     if (message.equals(value)) {
                         counter = 2;
@@ -94,6 +87,7 @@ public class Logger {
             }
         }
     }
+*/
 
     public static void log(Object message) {
         Method();
@@ -127,6 +121,8 @@ public class Logger {
                 string_buffer="";
                 break;
             }
+            case "":
+                break;
         }
     }
 }
