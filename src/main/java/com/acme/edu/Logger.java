@@ -105,7 +105,7 @@ public class Logger {
         System.out.println(message);
     }
 
-    public static void flash() {
+    public static void flush() {
         Method();
         type="";
 

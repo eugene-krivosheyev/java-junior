@@ -36,14 +36,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-                "string: "+"str 1\n" +
-                        "primitive: "+"3\n" +
-                        "string: "+"str 2\n" +
-                        "primitive: "+"0\n"
-            "str 1" + System.lineSeparator() +
-            "3" + System.lineSeparator() +
-            "str 2" + System.lineSeparator() +
-            "0" + System.lineSeparator()
+                "string: str 1" + System.lineSeparator() +
+                        "primitive: 3" + System.lineSeparator() +
+                        "string: str 2" + System.lineSeparator() +
+                        "primitive: 0" + System.lineSeparator()
         );
         //endregion
     }
