@@ -23,70 +23,93 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
 
-    /*
-    TODO: implement Logger solution to match specification as tests
 
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
         Logger.log("str 1");
+        Logger.flush();
         Logger.log(1);
         Logger.log(2);
+        Logger.flush();
         Logger.log("str 2");
+        Logger.flush();
         Logger.log(0);
+        Logger.flush();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "3\n" +
-            "str 2\n" +
-            "0\n"
+            "string: str 1" + System.lineSeparator() +
+            "primitive: 3" + System.lineSeparator() +
+            "string: str 2" + System.lineSeparator() +
+            "primitive: 0" + System.lineSeparator()
         );
         //endregion
     }
+
+
+
 
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
         Logger.log("str 1");
+        Logger.flush();
         Logger.log(10);
-        Logger.log(Integer.MAX_VALUE);
+        Logger.log(Integer.MAX_VALUE-1);
+        Logger.log(Integer.MAX_VALUE-2);
+        Logger.flush();
         Logger.log("str 2");
+        Logger.flush();
         Logger.log(0);
+        Logger.flush();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "10\n" +
-            Integer.MAX_VALUE + "\n" +
-            "str 2\n" +
-            "0\n"
+            "string: str 1" + System.lineSeparator() +
+            "primitive: " + Integer.MAX_VALUE + System.lineSeparator() +
+            "primitive: " + Integer.MAX_VALUE + System.lineSeparator() +
+            "primitive: 7" + System.lineSeparator() +
+            "string: str 2" + System.lineSeparator() +
+            "primitive: 0" + System.lineSeparator()
         );
         //endregion
     }
+
+
 
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
         Logger.log("str 1");
+        Logger.flush();
         Logger.log((byte)10);
-        Logger.log((byte)Byte.MAX_VALUE);
+        Logger.log(Byte.MAX_VALUE);
+        Logger.flush();
         Logger.log("str 2");
+        Logger.flush();
         Logger.log(0);
+        Logger.flush();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "10\n" +
-            Byte.MAX_VALUE + "\n" +
-            "str 2\n" +
-            "0\n"
+            "string: str 1" + System.lineSeparator() +
+            "primitive: " + Byte.MAX_VALUE + System.lineSeparator() +
+            "primitive: 10" + System.lineSeparator() +
+            "string: str 2" + System.lineSeparator() +
+            "primitive: 0" + System.lineSeparator()
         );
         //endregion
     }
+
+/*
+    TODO: implement Logger solution to match specification as tests
+
+
+
 
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
