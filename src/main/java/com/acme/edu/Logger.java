@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import static java.lang.System.lineSeparator;
+
 public class Logger {
 
     public static final String PREFIX_PRIMITIVE = "primitive: ";
@@ -86,27 +88,28 @@ public class Logger {
     }
 
     public static void log(int[][] matrix){
-        StringBuilder messageString = new StringBuilder(PREFIX_MATRIX+"{"+System.lineSeparator());
-        for(int i=0; i<matrix[0].length; i++){
-            messageString.append("{");
-            for(int num : matrix[i]){
-                messageString.append(num+", ");
-            }
-            messageString.delete(messageString.length()-2,messageString.length());
-            messageString.append("}"+System.lineSeparator());
+        StringBuilder message = new StringBuilder("{"+ lineSeparator());
+        for(int i = 0; i < matrix[0].length; i++){
+            message.append("{");
+            fillStringWithArray(matrix[i], message);
+            message.append("}" + lineSeparator());
         }
-        messageString.append("}");
-        System.out.println(messageString);
+        message.append("}");
+        writeMessage(PREFIX_MATRIX + message);
     }
 
     public static void log(int[] array) {
-        StringBuilder builder = new StringBuilder("{");
-        for (int num: array) {
-            builder.append(num + ", ");
+        StringBuilder message = new StringBuilder("{");
+        fillStringWithArray(array, message);
+        message.append("}");
+        writeMessage(PREFIX_ARRAY + message);
+    }
+
+    private static void fillStringWithArray(int[] array, StringBuilder message) {
+        for (int num : array) {
+            message.append(num + ", ");
         }
-        builder.delete(builder.length() - 2, builder.length());
-        builder.append("}");
-        writeMessage(PREFIX_ARRAY + builder);
+        message.delete(message.length() - 2, message.length());
     }
 
     private static void writeMessage(String message) {
