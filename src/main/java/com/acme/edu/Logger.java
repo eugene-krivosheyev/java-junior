@@ -7,10 +7,11 @@ public class Logger {
     public static final String PREFIX_STRING = "string: ";
     public static final String PREFIX_REFERENCE = "reference: ";
 
-    public static String type="";
-    public static int int_buffer=0;
-    public static byte byte_buffer=0;
-    public static String string_buffer="";
+    public static String type = "";
+    public static int int_buffer = 0;
+    public static byte byte_buffer = 0;
+    public static String string_buffer = "";
+    public static int counter = 0;
 
 
     public static void log(int message) {
@@ -19,7 +20,7 @@ public class Logger {
                 int_buffer = message;
             } else {
                     if ("int".equals(type)) {
-                        int_buffer +=message;
+                        int_buffer += message;
                     } else {
                         Method();
                         type = "int";
@@ -34,7 +35,7 @@ public class Logger {
             byte_buffer = message;
         } else {
             if ("byte".equals(type)) {
-                byte_buffer +=message;
+                byte_buffer += message;
             } else {
                 Method();
                 type = "byte";
@@ -61,7 +62,12 @@ public class Logger {
             string_buffer = message;
         } else {
             if ("string".equals(type)) {
-                string_buffer += message;
+                if(string_buffer.contains(message)){
+                    counter++;
+                }
+                else {
+                    string_buffer += "\n"+message;
+                }
             } else {
                 Method();
                 type = "string";
@@ -69,25 +75,6 @@ public class Logger {
             }
         }
     }
-        /*
-                if ("String".equals(type)) {
-                    if (message.equals(value)) {
-                        counter = 2;
-                        message = message + " (x" + counter + ")";
-                    } else {
-                        counter = 1;
-                        message += value;
-                    }
-                } else {
-                    counter = 0;
-                    log(value);
-                    type = "String";
-                    value = message;
-                }
-            }
-        }
-    }
-*/
 
     public static void log(Object message) {
         Method();
@@ -117,8 +104,15 @@ public class Logger {
                 break;
             }
             case "string":{
-                writeMessage(PREFIX_STRING+ string_buffer);
+                if(counter>0) {
+                    counter++;
+                    writeMessage(PREFIX_STRING + string_buffer+" (x"+counter+")");
+                }
+                else {
+                    writeMessage(PREFIX_STRING + string_buffer);
+                }
                 string_buffer="";
+                counter=0;
                 break;
             }
             case "":
