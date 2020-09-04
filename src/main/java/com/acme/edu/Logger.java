@@ -10,9 +10,9 @@ public class Logger {
     private static String stringAcc = "";
 
 
-    private static void writeAcc(String prefix, String type){
+    public static void flush(){
         String acc = "";
-        switch (type){
+        switch (lastType){
             case Type.INT:
                 acc = Integer.toString(intAcc);
                 intAcc = 0;
@@ -22,13 +22,13 @@ public class Logger {
                 stringAcc = "";
                 break;
         }
-        System.out.println(prefix + acc);
+        System.out.println(lastPrefix + acc);
     }
 
     public static void log(int message) {
         intAcc += message;
         if (lastType != null && !lastType.equals(Type.INT)){
-            writeAcc(lastPrefix, lastType);
+            flush();
         }
         lastPrefix = Prefix.PRIMITIVE_PREFIX;
         lastType = Type.INT;
@@ -46,7 +46,7 @@ public class Logger {
     public static void log(String message) {
         stringAcc += message;
         if (lastType!=null && !lastType.equals(Type.STRING)){
-            writeAcc(lastPrefix, lastType);
+            flush();
         }
         lastPrefix = Prefix.STRING_PREFIX;
         lastType = Type.STRING;
@@ -61,7 +61,7 @@ public class Logger {
         writeMessageWithPrefix(Prefix.REFERENCE_PREFIX + message);
     }
 
-    public static void writeMessageWithPrefix(String message){
+    private static void writeMessageWithPrefix(String message){
         System.out.println(message);
     }
 }

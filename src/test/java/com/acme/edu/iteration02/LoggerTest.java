@@ -33,14 +33,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(2);
         Logger.log("str 2");
         Logger.log(0);
+        Logger.flush();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "string: str 1\n" +
-            "primitive: 3\n" +
-            "string: str 2\n" +
-            "primitive: 0\n"
+            "string: str 1" + System.lineSeparator() +
+            "primitive: 3" + System.lineSeparator() +
+            "string: str 2" + System.lineSeparator() +
+            "primitive: 0" + System.lineSeparator()
         );
         //endregion
     }
