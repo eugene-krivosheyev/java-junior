@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 
+import static java.lang.System.lineSeparator;
+
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
@@ -40,10 +42,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "string: str 1" + System.lineSeparator() +
-            "primitive: 3" + System.lineSeparator() +
-            "string: str 2" + System.lineSeparator() +
-            "primitive: 0" + System.lineSeparator()
+            "string: str 1" + lineSeparator() +
+            "primitive: 3" + lineSeparator() +
+            "string: str 2" + lineSeparator() +
+            "primitive: 0" + lineSeparator()
         );
         //endregion
     }
@@ -68,12 +70,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "string: str 1" + System.lineSeparator() +
-            "primitive: " + Integer.MAX_VALUE + System.lineSeparator() +
-            "primitive: " + Integer.MAX_VALUE + System.lineSeparator() +
-            "primitive: 7" + System.lineSeparator() +
-            "string: str 2" + System.lineSeparator() +
-            "primitive: 0" + System.lineSeparator()
+            "string: str 1" + lineSeparator() +
+            "primitive: " + Integer.MAX_VALUE + lineSeparator() +
+            "primitive: " + Integer.MAX_VALUE + lineSeparator() +
+            "primitive: 7" + lineSeparator() +
+            "string: str 2" + lineSeparator() +
+            "primitive: 0" + lineSeparator()
         );
         //endregion
     }
@@ -96,17 +98,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "string: str 1" + System.lineSeparator() +
-            "primitive: " + Byte.MAX_VALUE + System.lineSeparator() +
-            "primitive: 10" + System.lineSeparator() +
-            "string: str 2" + System.lineSeparator() +
-            "primitive: 0" + System.lineSeparator()
+            "string: str 1" + lineSeparator() +
+            "primitive: " + Byte.MAX_VALUE + lineSeparator() +
+            "primitive: 10" + lineSeparator() +
+            "string: str 2" + lineSeparator() +
+            "primitive: 0" + lineSeparator()
         );
         //endregion
     }
-
-/*
-    TODO: implement Logger solution to match specification as tests
 
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
@@ -114,23 +113,24 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 1");
         Logger.log("str 2");
         Logger.log("str 2");
+        Logger.flushStart();
         Logger.log(0);
+        Logger.flushStart();
         Logger.log("str 2");
         Logger.log("str 3");
         Logger.log("str 3");
         Logger.log("str 3");
+        Logger.flushStart();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "str 2 (x2)\n" +
-            "0\n" +
-            "str 2\n" +
-            "str 3 (x3)\n"
+            "string: str 1" + lineSeparator() +
+            "string: str 2 (x2)" + lineSeparator() +
+            "primitive: 0" + lineSeparator() +
+            "string: str 2" + lineSeparator() +
+            "string: str 3 (x3)" + lineSeparator()
         );
         //endregion
     }
-
-    */
 }
