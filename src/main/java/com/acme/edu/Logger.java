@@ -26,6 +26,9 @@ public class Logger {
     }
 
     public static void log(int message) {
+        if (Integer.MAX_VALUE - intAcc < message) {
+            flush();
+        }
         intAcc += message;
         if (lastType != null && !lastType.equals(Type.INT)){
             flush();
