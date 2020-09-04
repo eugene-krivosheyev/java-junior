@@ -1,12 +1,14 @@
 package demo.ooad;
 
-import demo.ooad.Logger;
 import org.junit.Test;
 
 public class LoggerTest {
     @Test
     public void shouldLog() {
-        Logger logger = new Logger();
+        //logger.setSaver(new FileLoggerSaver(""));
+        //logger.saver = new FileLoggerSaver("");
+
+        Logger logger = new Logger(new FileLoggerSaver("filename"));
         logger.log(new LoggerMessage("AAAAA!!", 0));
     }
 }
