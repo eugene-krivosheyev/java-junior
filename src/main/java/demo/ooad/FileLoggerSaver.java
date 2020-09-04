@@ -7,7 +7,7 @@ public class FileLoggerSaver {
         this.filename = filename;
     }
 
-    public void save(String message) {
+    public void save(LoggerMessage message) {
 
     }
 }
