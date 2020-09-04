@@ -8,11 +8,12 @@ public class Logger {
     private static String lastPrefix;
     private static int intAcc = 0;
     private static String stringAcc = "";
+    private static byte byteAcc = (byte) 0;
 
 
-    public static void flush(){
+    public static void flush() {
         String acc = "";
-        switch (lastType){
+        switch (lastType) {
             case Type.INT:
                 acc = Integer.toString(intAcc);
                 intAcc = 0;
@@ -21,16 +22,25 @@ public class Logger {
                 acc = stringAcc;
                 stringAcc = "";
                 break;
+            case Type.BYTE:
+                acc = Byte.toString(byteAcc);
+                byteAcc = (byte) 0;
+                break;
         }
         System.out.println(lastPrefix + acc);
+        lastPrefix = null;
+        lastType = null;
     }
 
     public static void log(int message) {
         if (Integer.MAX_VALUE - intAcc < message) {
+            int diff = message - Integer.MAX_VALUE;
+            intAcc += diff;
+            message -= diff;
             flush();
         }
         intAcc += message;
-        if (lastType != null && !lastType.equals(Type.INT)){
+        if (lastType != null && !lastType.equals(Type.INT)) {
             flush();
         }
         lastPrefix = Prefix.PRIMITIVE_PREFIX;
@@ -39,7 +49,15 @@ public class Logger {
 
 
     public static void log(byte message) {
-        writeMessageWithPrefix(Prefix.PRIMITIVE_PREFIX + message);
+        if (Byte.MAX_VALUE - byteAcc < message) {
+            flush();
+        }
+        byteAcc += message;
+        if (lastType != null && !lastType.equals(Type.BYTE)) {
+            flush();
+        }
+        lastPrefix = Prefix.PRIMITIVE_PREFIX;
+        lastType = Type.BYTE;
     }
 
     public static void log(char message) {
@@ -48,7 +66,7 @@ public class Logger {
 
     public static void log(String message) {
         stringAcc += message;
-        if (lastType!=null && !lastType.equals(Type.STRING)){
+        if (lastType != null && !lastType.equals(Type.STRING)) {
             flush();
         }
         lastPrefix = Prefix.STRING_PREFIX;
@@ -64,7 +82,7 @@ public class Logger {
         writeMessageWithPrefix(Prefix.REFERENCE_PREFIX + message);
     }
 
-    private static void writeMessageWithPrefix(String message){
+    private static void writeMessageWithPrefix(String message) {
         System.out.println(message);
     }
 }
