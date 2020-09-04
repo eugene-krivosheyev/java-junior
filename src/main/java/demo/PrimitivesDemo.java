@@ -5,6 +5,8 @@ import java.util.stream.IntStream;
 import static java.util.stream.IntStream.range;
 
 public class PrimitivesDemo {
+    private static String message = "";
+
     public static strictfp void main(String[] args) {
         //region Целые
         byte b = 07; //0b100
