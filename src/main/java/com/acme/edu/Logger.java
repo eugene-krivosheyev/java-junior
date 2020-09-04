@@ -49,9 +49,9 @@ public class Logger {
     }
 
     public static void main(String[] args) {
-        log(10);
-        log(3);
-        log("12");
+        log((byte)1);
+        log((byte)0);
+        log((byte)-1);
         flush();
     }
 
@@ -70,7 +70,7 @@ public class Logger {
     }
 
     public static void log(byte message) {
-        if (last != types.BYTE) {
+        if (last != types.BYTE && last != null) {
             printBuffer();
             resetBuffer();
         }
@@ -83,7 +83,7 @@ public class Logger {
     }
 
     public static void log(String message) {
-        if (last != types.STRING) {
+        if (last != types.STRING && last != null) {
             printBuffer();
             resetBuffer();
         }
