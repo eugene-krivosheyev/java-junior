@@ -35,10 +35,11 @@ public class ExecutionsDemo {
         //endregion
 
 //        for (;;) {}
+        /*
         for (int counter = 0, j = 1; counter < 10; counter++, j--) {
 
         }
-
+        */
         /*
         do {
             if (???) break;
@@ -54,11 +55,11 @@ public class ExecutionsDemo {
                 }
             }
         }
-        */
 
         for (String current : args) {
             System.out.println(current);
         }
+        */
     }
 
     String m() {
