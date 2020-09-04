@@ -22,7 +22,7 @@ public class Logger {
                     if ("int".equals(type) && (Integer.MAX_VALUE - int_buffer >= message)) {
                         int_buffer += message;
                     } else {
-                        Method();
+                        chooseMessageWriter();
                         type = "int";
                         int_buffer = message;
                     }
@@ -37,7 +37,7 @@ public class Logger {
             if ("byte".equals(type) && (Byte.MAX_VALUE - byte_buffer >= message)) {
                 byte_buffer += message;
             } else {
-                Method();
+                chooseMessageWriter();
                 type = "byte";
                 byte_buffer = message;
             }
@@ -45,15 +45,15 @@ public class Logger {
     }
 
      public static void log(char message) {
-        Method();
+        chooseMessageWriter();
         writeMessage(PREFIX_CHAR + message);
-        type="";
+        type = "";
     }
 
     public static void log(boolean message) {
-        Method();
+        chooseMessageWriter();
         writeMessage(PREFIX_PRIMITIVE + message);
-        type="";
+        type = "";
     }
 
     public static void log(String message) {
@@ -70,7 +70,7 @@ public class Logger {
                     string_buffer = message;
                 }
             } else {
-                Method();
+                chooseMessageWriter();
                 type = "string";
                 string_buffer = message;
             }
@@ -78,9 +78,9 @@ public class Logger {
     }
 
     public static void log(Object message) {
-        Method();
+        chooseMessageWriter();
         writeMessage(PREFIX_REFERENCE + message);
-        type="";
+        type = "";
     }
 
     private static void writeMessage(String message) {
@@ -88,20 +88,21 @@ public class Logger {
     }
 
     public static void flush() {
-        Method();
-        type="";
+        chooseMessageWriter();
+        type = "";
 
     }
-    public static void Method(){
+
+    private static void chooseMessageWriter(){
         switch (type){
             case "int":{
                 writeMessage(PREFIX_PRIMITIVE + int_buffer);
-                int_buffer=0;
+                int_buffer = 0;
                 break;
             }
             case "byte":{
                 writeMessage(PREFIX_PRIMITIVE + byte_buffer);
-                byte_buffer=0;
+                byte_buffer = 0;
                 break;
             }
             case "string":{
@@ -112,8 +113,8 @@ public class Logger {
                 else {
                     writeMessage(PREFIX_STRING + string_buffer);
                 }
-                string_buffer="";
-                counter=0;
+                string_buffer = "";
+                counter = 0;
                 break;
             }
             case "":
