@@ -28,14 +28,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
         Logger.log("str 1");
-        Logger.flush();
+        Logger.flushStart();
         Logger.log(1);
         Logger.log(2);
-        Logger.flush();
+        Logger.flushStart();
         Logger.log("str 2");
-        Logger.flush();
+        Logger.flushStart();
         Logger.log(0);
-        Logger.flush();
+        Logger.flushStart();
         //endregion
 
         //region then
@@ -55,15 +55,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
         Logger.log("str 1");
-        Logger.flush();
+        Logger.flushStart();
         Logger.log(10);
         Logger.log(Integer.MAX_VALUE-1);
         Logger.log(Integer.MAX_VALUE-2);
-        Logger.flush();
+        Logger.flushStart();
         Logger.log("str 2");
-        Logger.flush();
+        Logger.flushStart();
         Logger.log(0);
-        Logger.flush();
+        Logger.flushStart();
         //endregion
 
         //region then
@@ -84,14 +84,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
         Logger.log("str 1");
-        Logger.flush();
+        Logger.flushStart();
         Logger.log((byte)10);
         Logger.log(Byte.MAX_VALUE);
-        Logger.flush();
+        Logger.flushStart();
         Logger.log("str 2");
-        Logger.flush();
+        Logger.flushStart();
         Logger.log(0);
-        Logger.flush();
+        Logger.flushStart();
         //endregion
 
         //region then
@@ -107,9 +107,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 /*
     TODO: implement Logger solution to match specification as tests
-
-
-
 
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {

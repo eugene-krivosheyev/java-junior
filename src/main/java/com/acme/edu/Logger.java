@@ -33,7 +33,6 @@ public class Logger {
     }
 
     public static void log(boolean message) {
-
         logMessage = PRIMITIVE_PREFIX + message;
         writeMessage();
     }
@@ -52,53 +51,48 @@ public class Logger {
         writeMessage();
     }
 
-    public static void flush(){
-        if ( listOfLog.get(0) instanceof Integer ){
-            sumInt();
-        } else if ( listOfLog.get(0) instanceof Byte ){
-            sumByte();
-        } else if( listOfLog.get(0) instanceof String){
-            sumString();
+    public static void flushStart() {
+        Object firstToLog = listOfLog.get(0);
+
+        if (firstToLog instanceof Integer) {
+            flushEnd(PRIMITIVE_PREFIX, sumInt());
+        } else if (firstToLog instanceof Byte) {
+            flushEnd(PRIMITIVE_PREFIX, sumByte());
+        } else if (firstToLog instanceof String) {
+            flushEnd(STRING_PREFIX, firstToLog);
         }
 
+        listOfLog.clear();
     }
 
-    public static void sumInt(){
-        int sum = 0;
-        for (int i = 0; i < listOfLog.size(); i++){
-            if( Integer.MAX_VALUE - sum >= (int)listOfLog.get(i)){
-                sum += (int)listOfLog.get(i);
-            } else{
-                sum = (int)listOfLog.get(i) - (Integer.MAX_VALUE - sum);
-                logMessage = PRIMITIVE_PREFIX + Integer.MAX_VALUE;
-                writeMessage();
+    static void flushEnd(String prefix, Object flushResult) {
+        logMessage = prefix + flushResult;
+        writeMessage();
+    }
+
+    static int sumInt() {
+        int resultIntSum = 0;
+        for (Object currentValue : listOfLog) {
+            if (Integer.MAX_VALUE - resultIntSum < (int) currentValue) {
+                resultIntSum = (int) currentValue - (Integer.MAX_VALUE - resultIntSum);
+                flushEnd(PRIMITIVE_PREFIX, Integer.MAX_VALUE);
+            } else {
+                resultIntSum += (int) currentValue;
             }
         }
-        logMessage = PRIMITIVE_PREFIX + sum;
-        writeMessage();
-        listOfLog.clear();
+        return resultIntSum;
     }
 
-    public static void sumByte(){
-        byte sum = 0;
-        for (int i = 0; i < listOfLog.size(); i++){
-            if( Byte.MAX_VALUE - sum >= (byte)listOfLog.get(i)){
-                sum += (byte)listOfLog.get(i);
-            } else{
-                sum = (byte) ((byte)listOfLog.get(i) - (Byte.MAX_VALUE - sum));
-                logMessage = PRIMITIVE_PREFIX + Byte.MAX_VALUE;
-                writeMessage();
+    static byte sumByte() {
+        byte resultByteSum = 0;
+        for (Object currentValue : listOfLog) {
+            if (Byte.MAX_VALUE - resultByteSum < (byte) currentValue) {
+                resultByteSum = (byte) ((byte) currentValue - (Byte.MAX_VALUE - resultByteSum));
+                flushEnd(PRIMITIVE_PREFIX, Byte.MAX_VALUE);
+            } else {
+                resultByteSum += (byte) currentValue;
             }
         }
-        logMessage = PRIMITIVE_PREFIX + sum;
-        writeMessage();
-        listOfLog.clear();
+        return resultByteSum;
     }
-
-    public static void sumString(){
-        logMessage = STRING_PREFIX + listOfLog.get(0);
-        writeMessage();
-        listOfLog.clear();
-    }
-
 }
