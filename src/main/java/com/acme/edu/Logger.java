@@ -112,8 +112,8 @@ public class Logger {
                 else {
                     writeMessage(PREFIX_STRING + string_buffer);
                 }
-                string_buffer="";
-                counter=0;
+                string_buffer = "";
+                counter = 0;
                 break;
             }
             case "":
