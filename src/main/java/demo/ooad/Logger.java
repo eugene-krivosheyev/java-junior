@@ -1,8 +1,8 @@
 package demo.ooad;
 
 public class Logger {
-    // [GRASP] Creator -> Factory Method
-    private LoggerFilter filter = XmlConfigFilterFactory.create();
+    // [GRASP] Creator -> [GoF] Factory Method -> [GoF] Abstract Factory
+    private LoggerFilter filter = new XmlConfigFilterFactory().create();
     private LoggerSaver saver = new FileLoggerSaver("filename");
 
     /**
