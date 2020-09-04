@@ -1,6 +1,6 @@
 package demo.ooad;
 
-public class ContentLengthLoggerFilter implements LoggerFilter {
+public class ContentLengthLoggerFilter extends NullCheckLoggerFilter implements LoggerFilter {
     private int lengtTreshold;
 
     public ContentLengthLoggerFilter(int lengtTreshold) {
@@ -9,6 +9,9 @@ public class ContentLengthLoggerFilter implements LoggerFilter {
 
     @Override
     public boolean filter(LoggerMessage message) {
+        checkNull(message);
+
         return message.getMessage().length() < lengtTreshold;
     }
+
 }
