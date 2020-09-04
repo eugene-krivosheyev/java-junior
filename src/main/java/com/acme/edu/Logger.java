@@ -11,6 +11,7 @@ public class Logger {
     public static int int_buffer = 0;
     public static byte byte_buffer = 0;
     public static String string_buffer = "";
+    public static int counter = 0;
 
 
     public static void log(int message) {
@@ -61,7 +62,12 @@ public class Logger {
             string_buffer = message;
         } else {
             if ("string".equals(type)) {
-                string_buffer += message;
+                if(string_buffer.contains(message)){
+                    counter++;
+                }
+                else {
+                    string_buffer += "\n"+message;
+                }
             } else {
                 chooseMessageWriter();
                 type = "string";
@@ -85,7 +91,7 @@ public class Logger {
         type = "";
 
     }
-    
+
     private static void chooseMessageWriter(){
         switch (type){
             case "int":{
@@ -99,8 +105,15 @@ public class Logger {
                 break;
             }
             case "string":{
-                writeMessage(PREFIX_STRING+ string_buffer);
-                string_buffer = "";
+                if(counter>0) {
+                    counter++;
+                    writeMessage(PREFIX_STRING + string_buffer+" (x"+counter+")");
+                }
+                else {
+                    writeMessage(PREFIX_STRING + string_buffer);
+                }
+                string_buffer="";
+                counter=0;
                 break;
             }
             case "":
