@@ -69,13 +69,13 @@ public class Logger {
     private static int previousStringSum = 0;
 
     public static void log(String message) {
+        localFlush();
         if (previousString.equals(message)) {
             previousStringSum += 1;
         } else {
             if (previousStringSum >= 2) {
                 print(STRING, message +
                         " (x" + previousStringSum + ")");
-                localFlush();
             } else
                 print(STRING, message);
 
