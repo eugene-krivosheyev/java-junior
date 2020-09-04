@@ -6,6 +6,7 @@ public class Logger {
     public static final String PREFIX_CHAR = "char: ";
     public static final String PREFIX_STRING = "string: ";
     public static final String PREFIX_REFERENCE = "reference: ";
+    public static final String PREFIX_ARRAY = "primitives array: ";
 
     public static String type = "";
     public static int int_buffer = 0;
@@ -66,7 +67,7 @@ public class Logger {
                     counter++;
                 }
                 else {
-                    Method();
+                    chooseMessageWriter();
                     string_buffer = message;
                 }
             } else {
@@ -81,6 +82,16 @@ public class Logger {
         chooseMessageWriter();
         writeMessage(PREFIX_REFERENCE + message);
         type = "";
+    }
+
+    public static void log(int[] array) {
+        StringBuilder builder = new StringBuilder("{");
+        for (int num: array) {
+            builder.append(num + ", ");
+        }
+        builder.delete(builder.length() - 2, builder.length());
+        builder.append("}");
+        writeMessage(PREFIX_ARRAY + builder);
     }
 
     private static void writeMessage(String message) {
