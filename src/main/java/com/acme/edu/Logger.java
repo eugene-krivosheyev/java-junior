@@ -6,17 +6,56 @@ public class Logger {
     private static final String STRING = "string: ";
     private static final String REFERENCE = "reference: ";
 
-    private static void print(String prefix, Object postfix) { System.out.println(prefix + postfix); }
+    private static String final_log = "";
 
-    public static void log(int message) { print(PRIMITIVE, message); }
+    private static void print(String prefix, Object postfix) {
+        final_log = final_log + (prefix + postfix) + System.lineSeparator();
+    }
 
-    public static void log(byte message) { print(PRIMITIVE, message); }
+    public static void flush() {
+        localFlush();
+        System.out.print(final_log);
+        final_log = "";
+    }
 
-    public static void log(char message) { print(CHAR, message); }
+    private static void localFlush() {
+        if (previousIsInt)
+            print(PRIMITIVE, primitiveSumInt);
+        previousIsInt = false;
+        primitiveSumInt = 0;
+    }
 
-    public static void log(String message) { print(STRING, message); }
 
-    public static void log(boolean message) { print(PRIMITIVE, message); }
+    private static long primitiveSumInt = 0;
+    private static boolean previousIsInt = false;
 
-    public static void log(Object message) { print(REFERENCE, message); }
+    public static void log(int message) {
+        previousIsInt = true;
+        primitiveSumInt += message;
+    }
+
+    public static void log(byte message) {
+        localFlush();
+        print(PRIMITIVE, message);
+    }
+
+    public static void log(char message) {
+        localFlush();
+        print(CHAR, message);
+    }
+
+    public static void log(String message) {
+        localFlush();
+        print(STRING, message);
+    }
+
+    public static void log(boolean message) {
+        localFlush();
+        print(PRIMITIVE, message);
+    }
+
+    public static void log(Object message) {
+        localFlush();
+        print(REFERENCE, message);
+    }
 }
