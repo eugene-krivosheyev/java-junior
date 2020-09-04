@@ -16,7 +16,7 @@ public class Logger {
         System.out.println(message);
     }
 
-    private static void printBuffer(types last) {
+    private static void printBuffer() {
         switch (last) {
             case INTEGER:
                 printMessage(primitiveType + savedInt);
@@ -49,15 +49,20 @@ public class Logger {
     }
 
     public static void main(String[] args) {
-        //System.out.println("djsj");
         log(10);
         log(3);
         log("12");
+        flush();
+    }
+
+    public static void flush() {
+        printBuffer();
+        resetBuffer();
     }
 
     public static void log(int message) {
         if (last != types.INTEGER && last != null) {
-            printBuffer(last);
+            printBuffer();
             resetBuffer();
         }
         savedInt += message;
@@ -66,7 +71,7 @@ public class Logger {
 
     public static void log(byte message) {
         if (last != types.BYTE) {
-            printBuffer(last);
+            printBuffer();
             resetBuffer();
         }
         savedByte += message;
@@ -79,7 +84,7 @@ public class Logger {
 
     public static void log(String message) {
         if (last != types.STRING) {
-            printBuffer(last);
+            printBuffer();
             resetBuffer();
         }
         savedString += message;
