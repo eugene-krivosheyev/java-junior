@@ -71,6 +71,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log((byte)Byte.MAX_VALUE);
         Logger.log("str 2");
         Logger.log(0);
+        Logger.flush();
         //endregion
 
         //region then
