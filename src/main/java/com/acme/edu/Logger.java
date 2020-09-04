@@ -1,7 +1,5 @@
 package com.acme.edu;
 
-import com.sun.org.apache.bcel.internal.generic.SWITCH;
-
 public class Logger {
 
     private static String primitiveType = "primitive: ";
@@ -13,7 +11,7 @@ public class Logger {
     private static String referenceType = "reference: ";
 
     private static void printMessage(String message) {
-        System.out.println(message);
+        System.out.print(message);
     }
 
     private static void printBuffer() {
@@ -26,32 +24,39 @@ public class Logger {
                 break;
             case STRING:
                 printMessage(stringType + savedString);
+                if(stringCounter != 1){
+                    System.out.print(" (x" + stringCounter + ")");
+                }
                 break;
         }
+        System.out.println();
     }
 
     private static void resetBuffer() {
         savedString = "";
         savedInt = 0;
         savedByte = 0;
+        stringCounter = 0;
     }
 
     static int savedInt = 0;
     static String savedString = "";
     static byte savedByte = 0;
     static types last = null;
+    static int stringCounter = 0;
 
     enum types {
         INTEGER ,
         BYTE ,
-        STRING,
-        NONE
+        STRING
     }
 
     public static void main(String[] args) {
-        log((byte)1);
-        log((byte)0);
-        log((byte)-1);
+        log("a");
+        log("b");
+        log("b");
+        log("a");
+        log("a");
         flush();
     }
 
@@ -83,11 +88,12 @@ public class Logger {
     }
 
     public static void log(String message) {
-        if (last != types.STRING && last != null) {
+        if ((last != types.STRING && last != null) || (savedString != message && last != null)) {
             printBuffer();
             resetBuffer();
         }
-        savedString += message;
+        savedString = message;
+        stringCounter++;
         last = types.STRING;
     }
 
