@@ -20,7 +20,7 @@ public class ArraysAndVarargsDemo {
 
         int[] hardcodedArray = {1,2,0};
         doSmthWithArray(new int[] {1,2});
-        doSmthWithVararg(1);
+        doSmthWithVararg("", 1);
     }
 
     private static void doSmthWithArray(int[] param) {
