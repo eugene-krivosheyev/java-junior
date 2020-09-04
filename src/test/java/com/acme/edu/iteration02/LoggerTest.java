@@ -64,11 +64,16 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "string: str 1\n" +
-            "10\n" +
-            Integer.MAX_VALUE + "\n" +
-            "string: str 2\n" +
-            "primitive: 0\n"
+            "string: str 1" +
+                    System.lineSeparator() +
+            "primitive: 10" +
+                    System.lineSeparator() +
+            "primitive: " + Integer.MAX_VALUE +
+                    System.lineSeparator() +
+            "string: str 2" +
+                    System.lineSeparator() +
+            "primitive: 0" +
+                    System.lineSeparator()
         );
         //endregion
     }
@@ -86,11 +91,16 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "string: str 1\n" +
-            "10\n" +
-            Byte.MAX_VALUE + "\n" +
-            "string: str 2\n" +
-            "primitive: 0\n"
+            "string: str 1" +
+            System.lineSeparator() +
+            "10" +
+            System.lineSeparator() +
+            Byte.MAX_VALUE +
+            System.lineSeparator() +
+            "string: str 2" +
+            System.lineSeparator() +
+            "primitive: 0" +
+            System.lineSeparator()
         );
         //endregion
     }

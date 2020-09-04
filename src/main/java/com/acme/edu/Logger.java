@@ -70,7 +70,16 @@ public class Logger {
             printBuffer();
             resetBuffer();
         }
-        savedInt += message;
+        long safe = savedInt;
+        safe += message;
+        if(safe > Integer.MAX_VALUE){
+            printBuffer();
+            resetBuffer();
+            savedInt = message;
+        }
+        else {
+            savedInt += message;
+        }
         last = types.INTEGER;
     }
 
