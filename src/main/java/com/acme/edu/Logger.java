@@ -28,6 +28,8 @@ public class Logger {
             lastIntValue += message;
         }
         else{
+            end();
+            //writeMessage(lastType);
             lastIntValue = message;
             lastType = "int";
         }
@@ -67,16 +69,19 @@ public class Logger {
         }
         else {
             counter = 1;
-            writeMessage(lastType);
+            if(!lastType.equals("")){
+                writeMessage(lastType);
+            }
             countedStringValue = message;
             lastStringValue = message;
+            lastType = "str";
         }
     }
 
     public static void log(byte message) {
         if(Byte.MAX_VALUE == message){
             if(isEqualLastType("byte")){
-                writeMessage(PREFIX_PRIMITIVE + lastByteValue);
+                writeMessage(lastType);
             }
             System.out.println(message);
             lastByteValue = 0;
@@ -97,13 +102,29 @@ public class Logger {
     }
 
     static void writeMessage(String lastType){
-        String outputString = "";
-        switch (lastType){
-            case "int": outputString += lastIntValue; break;
-            case "byte": outputString += lastByteValue; break;
-            case "str": outputString = lastStringValue; break;
+        if(!lastType.equals("")){
+            String outputString = "";
+            switch (lastType){
+                case "int": outputString += lastIntValue; break;
+                case "byte": outputString += lastByteValue; break;
+                case "str": outputString = lastStringValue; break;
+            }
+            System.out.println(outputString);
         }
-        System.out.println(outputString);
     }
 
+    public static void end() {
+        if(counter > 1 && lastType.equals("str")){
+            if(countedStringValue.equals(lastStringValue)){
+                lastStringValue += " (x" + counter + ")";
+            }
+            else{
+                writeMessage(lastType);
+                lastStringValue = countedStringValue + " (x" + counter + ")";
+            }
+        }
+        if(!lastType.equals("")){
+            writeMessage(lastType);
+        }
+    }
 }
