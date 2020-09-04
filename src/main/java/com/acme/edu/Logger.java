@@ -37,6 +37,7 @@ public class Logger {
         savedInt = 0;
         savedByte = 0;
         stringCounter = 0;
+        last = null;
     }
 
     static int savedInt = 0;
@@ -88,7 +89,16 @@ public class Logger {
             printBuffer();
             resetBuffer();
         }
-        savedByte += message;
+        long safe = savedByte;
+        safe += message;
+        if(safe > Byte.MAX_VALUE){
+            printBuffer();
+            resetBuffer();
+            savedByte = message;
+        }
+        else {
+            savedByte += message;
+        }
         last = types.BYTE;
     }
 
