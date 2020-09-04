@@ -62,11 +62,12 @@ public class Logger {
             string_buffer = message;
         } else {
             if ("string".equals(type)) {
-                if(string_buffer.contains(message)){
+                if(string_buffer.equals(message)){
                     counter++;
                 }
                 else {
-                    string_buffer += "\n"+message;
+                    Method();
+                    string_buffer = message;
                 }
             } else {
                 Method();
