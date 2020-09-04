@@ -1,6 +1,7 @@
 package com.acme.edu;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.System.lineSeparator;
@@ -14,6 +15,9 @@ public class Logger {
     static final String STRING_PREFIX = "string: ";
     static final String REFERENCE_PREFIX = "reference: ";
     static final String PRIMITIVE_PREFIX = "primitive: ";
+    static final String PRIMITIVE_ARRAY_PREFIX = "primitives array: ";
+    static final String PRIMITIVE_MATRIX_PREFIX = "primitives matrix: ";
+    static final String PRIMITIVE_MULTIMATRIX_PREFIX = "primitives multimatrix: ";
 
     static List<Object> listOfLog = new ArrayList<>();
 
@@ -46,6 +50,29 @@ public class Logger {
 
     public static void log(Object message) {
         prepareAndWriteMessage(REFERENCE_PREFIX, message);
+    }
+
+    public static void log(int[] message) {
+        prepareAndWriteMessage(
+                PRIMITIVE_ARRAY_PREFIX,
+                Arrays.toString(message)
+        );
+    }
+
+    public static void log(int[][] message) {
+        prepareAndWriteMessage(
+                PRIMITIVE_MATRIX_PREFIX,
+                Arrays.deepToString(message).replace("], ", "]" + lineSeparator())
+        );
+    }
+
+    public static void log(int[][][][] message) {
+        prepareAndWriteMessage(
+                PRIMITIVE_MULTIMATRIX_PREFIX,
+                Arrays.deepToString(message)
+                        .replace("]", lineSeparator() + "]")
+                        .replace("[", "[" + lineSeparator())
+        );
     }
 
     /**
