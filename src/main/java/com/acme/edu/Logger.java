@@ -1,9 +1,7 @@
 package com.acme.edu;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static java.lang.System.lineSeparator;
 
@@ -95,14 +93,12 @@ public class Logger {
     static String sumStrings() {
         String templateMultiple = STRING_PREFIX + "%s " + "(x%o)";
         String templateUnique = STRING_PREFIX + "%s";
-        
         StringBuilder resultStringSum = new StringBuilder();
         String prevValue = (String) listOfLog.get(0);
         int counter = 0;
 
         for (int i = 0; i < listOfLog.size(); i++) {
             String currentValue = (String) listOfLog.get(i);
-
             if (i == listOfLog.size() - 1) {
                 resultStringSum
                         .append(counter == 0 ?
