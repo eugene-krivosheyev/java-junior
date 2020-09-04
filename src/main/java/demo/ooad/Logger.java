@@ -1,8 +1,8 @@
 package demo.ooad;
 
 public class Logger {
-    private ContentLengthLoggerFilter filter = new ContentLengthLoggerFilter(10);
-    private FileLoggerSaver saver = new FileLoggerSaver("filename");
+    private LoggerFilter filter = new ContentLengthLoggerFilter(10);
+    private LoggerSaver saver = new FileLoggerSaver("filename");
 
     /**
      * @param message

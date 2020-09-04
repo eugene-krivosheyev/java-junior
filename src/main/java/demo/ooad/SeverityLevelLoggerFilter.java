@@ -1,7 +1,7 @@
 package demo.ooad;
 
 
-public class SeverityLevelLoggerFilter {
+public class SeverityLevelLoggerFilter implements LoggerFilter {
     private int severityLevelTreshold;
 
     public SeverityLevelLoggerFilter(int severityLevelTreshold) {
