@@ -18,8 +18,8 @@ public class Logger {
                 type = "int";
                 int_buffer = message;
             } else {
-                    if ("int".equals(type)) {
-                        int_buffer +=message;
+                    if ("int".equals(type) && (Integer.MAX_VALUE - int_buffer >= message)) {
+                        int_buffer += message;
                     } else {
                         Method();
                         type = "int";
@@ -33,7 +33,7 @@ public class Logger {
             type = "byte";
             byte_buffer = message;
         } else {
-            if ("byte".equals(type)) {
+            if ("byte".equals(type) && (Byte.MAX_VALUE - byte_buffer >= message)) {
                 byte_buffer +=message;
             } else {
                 Method();
