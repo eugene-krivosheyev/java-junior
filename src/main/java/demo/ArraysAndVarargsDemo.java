@@ -1,7 +1,7 @@
 package demo;
 
 public class ArraysAndVarargsDemo {
-    public static void main(String[] args) {
+    public static void main(String... args) {
         /**
          * Guard clauses
          */
@@ -10,7 +10,7 @@ public class ArraysAndVarargsDemo {
             System.out.println(currentPrArg);
         }
 
-        int[] intArray = new int[getSizeFromConfigFile()];
+        int[] intArray = new int[0];
         intArray[0] = 1;
         System.out.println(intArray[9]);
         System.out.println(intArray.length);
@@ -20,6 +20,7 @@ public class ArraysAndVarargsDemo {
 
         int[] hardcodedArray = {1,2,0};
         doSmthWithArray(new int[] {1,2});
+        doSmthWithVararg(1);
     }
 
     private static void doSmthWithArray(int[] param) {
@@ -27,4 +28,11 @@ public class ArraysAndVarargsDemo {
             System.out.println(current);
         }
     }
+
+    private static void doSmthWithVararg(String param, int... args) {
+        for (int current : args) {
+            System.out.println(">>" + current);
+        }
+    }
 }
+
