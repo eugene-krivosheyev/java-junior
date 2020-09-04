@@ -63,15 +63,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "string: str 1" +
-            "primitive: 10\n" +
-            "primitive: " + Integer.MAX_VALUE + "\n" +
-            "string: str 2\n" +
-            "primitive: 0\n"
+            "string: str 1" + System.lineSeparator()+
+            "primitive: 10"+ System.lineSeparator() +
+            "primitive: " + Integer.MAX_VALUE + System.lineSeparator() +
+            "string: str 2"+ System.lineSeparator()+
+            "primitive: 0"+ System.lineSeparator()
         );
         //endregion
     }
-/*
+
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
@@ -80,15 +80,17 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log((byte)Byte.MAX_VALUE);
         Logger.log("str 2");
         Logger.log(0);
+
+        Logger.flush();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "10\n" +
-            Byte.MAX_VALUE + "\n" +
-            "str 2\n" +
-            "0\n"
+            "string: str 1"+ System.lineSeparator() +
+            "primitive: 10"+ System.lineSeparator() +
+            "primitive: " + Byte.MAX_VALUE + System.lineSeparator() +
+            "string: str 2"+ System.lineSeparator() +
+            "primitive: 0"+ System.lineSeparator()
         );
         //endregion
     }
@@ -104,18 +106,20 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 3");
         Logger.log("str 3");
         Logger.log("str 3");
+
+        Logger.flush();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "str 1\n" +
-            "str 2 (x2)\n" +
-            "0\n" +
-            "str 2\n" +
-            "str 3 (x3)\n"
+            "string: str 1"+ System.lineSeparator() +
+            "string: str 2 (x2)"+ System.lineSeparator() +
+            "primitive: 0"+ System.lineSeparator() +
+            "string: str 2"+ System.lineSeparator() +
+            "string: str 3 (x3)"+ System.lineSeparator()
         );
         //endregion
     }
 
-    */
+
 }

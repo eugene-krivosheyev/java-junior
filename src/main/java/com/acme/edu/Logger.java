@@ -23,6 +23,11 @@ public class Logger {
             print(PRIMITIVE, primitiveSumInt);
         previousIsInt = false;
         primitiveSumInt = 0;
+
+        if (previousIsByte)
+            print(PRIMITIVE, primitiveSumByte);
+        previousIsByte = false;
+        primitiveSumByte = 0;
     }
 
 
@@ -31,12 +36,28 @@ public class Logger {
 
     public static void log(int message) {
         previousIsInt = true;
-        primitiveSumInt += message;
+        if (primitiveSumInt + message > Integer.MAX_VALUE) {
+            print(PRIMITIVE, primitiveSumInt);
+            previousIsInt = true;
+            primitiveSumInt = message;
+        } else {
+            primitiveSumInt += message;
+        }
     }
 
+
+    private static int primitiveSumByte = 0;
+    private static boolean previousIsByte = false;
+
     public static void log(byte message) {
-        localFlush();
-        print(PRIMITIVE, message);
+        previousIsByte = true;
+        if (primitiveSumByte + message > Byte.MAX_VALUE) {
+            print(PRIMITIVE, primitiveSumByte);
+            previousIsByte = true;
+            primitiveSumByte = message;
+        } else {
+            primitiveSumByte += message;
+        }
     }
 
     public static void log(char message) {
@@ -44,9 +65,24 @@ public class Logger {
         print(CHAR, message);
     }
 
+    private static String previousString = "";
+    private static int previousStringSum = 0;
+
     public static void log(String message) {
-        localFlush();
-        print(STRING, message);
+        if (previousString.equals(message)) {
+            previousStringSum += 1;
+        } else {
+            if (previousStringSum >= 2) {
+                print(STRING, message +
+                        " (x" + previousStringSum + ")");
+                localFlush();
+            } else
+                print(STRING, message);
+
+            previousStringSum = 0;
+        }
+
+        previousString = message;
     }
 
     public static void log(boolean message) {
