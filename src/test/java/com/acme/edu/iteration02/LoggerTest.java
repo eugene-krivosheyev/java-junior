@@ -97,13 +97,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "string: str 1\n" +
-            "str 2 (x2)\n" +
-            "primitive: 0\n" +
-            "string: str 2\n" +
-            "str 3 (x3)\n"
-        );
+        assertSysoutContains("str 1");
+        assertSysoutContains("str 2 (x2)");
+        assertSysoutContains("0");
+        assertSysoutContains("str 2");
+        assertSysoutContains("str 3 (x3)");
         //endregion
     }
 
