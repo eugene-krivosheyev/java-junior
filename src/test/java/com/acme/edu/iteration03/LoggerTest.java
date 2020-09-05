@@ -6,12 +6,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
-
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
-    public void setUpSystemOut() throws IOException {
+    public void setUpSystemOut() {
         resetOut();
         captureSysout();
     }
@@ -22,35 +20,36 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    /*
-    TODO: implement Logger solution to match specification as tests
 
     @Test
-    public void shouldLogIntegersArray() throws IOException {
+    public void shouldLogIntegersArray() {
         //region when
-        Logger.log(new int[] {-1, 0, 1});
+        Logger.log(new int[]{-1, 0, 1});
         //endregion
 
         //region then
         assertSysoutEquals(
-            "primitives array: {-1, 0, 1}\n"
+                "primitives array: {-1, 0, 1}" + System.lineSeparator()
         );
         //endregion
     }
 
+     /*
+    TODO: implement Logger solution to match specification as tests
+
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
-        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        Logger.log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         //endregion
 
         //region then
         assertSysoutEquals(
-            "primitives matrix: {\n" +
-                "{-1, 0, 1}\n" +
-                "{1, 2, 3}\n" +
-                "{-1, -2, -3}\n" +
-            "}\n"
+                "primitives matrix: {\n" +
+                        "{-1, 0, 1}\n" +
+                        "{1, 2, 3}\n" +
+                        "{-1, -2, -3}\n" +
+                        "}\n"
         );
         //endregion
     }
