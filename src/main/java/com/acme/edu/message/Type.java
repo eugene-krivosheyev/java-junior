@@ -1,4 +1,4 @@
-package com.acme.edu.type;
+package com.acme.edu.message;
 
 public class Type {
     public static final String INT = "int";

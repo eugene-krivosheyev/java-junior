@@ -1,44 +1,42 @@
 package com.acme.edu;
 
-import com.acme.edu.type.Type;
-import com.acme.edu.type.Prefix;
+import com.acme.edu.message.Type;
+import com.acme.edu.message.Prefix;
 
 public class Logger {
-    private static String lastType;
-    private static String lastPrefix;
-    private static int intAcc = 0;
-    private static String stringAcc = "";
-    private static int stringDups = 0;
-    private static byte byteAcc = (byte) 0;
+    private static String previousType;
+    private static String previousPrefix;
+    private static int intAccumulator = 0;
+    private static String stringAccumulator = "";
+    private static int stringDuplicates = 0;
+    private static byte byteAccumulator = (byte) 0;
 
     public static void log(int message) {
-        if (Integer.MAX_VALUE - intAcc < message) {
-            int diff = message - Integer.MAX_VALUE;
-            intAcc += diff;
+        int diff = checkNumberAccumulatorOverflow(Integer.MAX_VALUE, intAccumulator, message);
+        if (Integer.MAX_VALUE - intAccumulator < message) {
+            intAccumulator += diff;
             message -= diff;
             flush();
         }
-        intAcc += message;
-        if (lastType != null && !lastType.equals(Type.INT)) {
+        intAccumulator += message;
+        if (previousType != null && !previousType.equals(Type.INT)) {
             flush();
         }
-        lastPrefix = Prefix.PRIMITIVE_PREFIX;
-        lastType = Type.INT;
+        setPreviousPrefixAndType(Prefix.PRIMITIVE_PREFIX, Type.INT);
     }
 
     public static void log(byte message) {
-        if (Byte.MAX_VALUE - byteAcc < message) {
-            byte diff = (byte) (message - Byte.MAX_VALUE);
-            byteAcc += diff;
+        byte diff = (byte) checkNumberAccumulatorOverflow(Byte.MAX_VALUE, byteAccumulator, message);
+        if (Byte.MAX_VALUE - byteAccumulator < message) {
+            byteAccumulator += diff;
             message -= diff;
             flush();
         }
-        byteAcc += message;
-        if (lastType != null && !lastType.equals(Type.BYTE)) {
+        byteAccumulator += message;
+        if (previousType != null && !previousType.equals(Type.BYTE)) {
             flush();
         }
-        lastPrefix = Prefix.PRIMITIVE_PREFIX;
-        lastType = Type.BYTE;
+        setPreviousPrefixAndType(Prefix.PRIMITIVE_PREFIX, Type.BYTE);
     }
 
     public static void log(char message) {
@@ -46,16 +44,15 @@ public class Logger {
     }
 
     public static void log(String message) {
-        if (message.equals(stringAcc)) {
-            stringDups++;
+        if (message.equals(stringAccumulator)) {
+            stringDuplicates++;
         } else {
-            stringAcc += message;
+            stringAccumulator += message;
         }
-        if (lastType != null && !lastType.equals(Type.STRING)) {
+        if (previousType != null && !previousType.equals(Type.STRING)) {
             flush();
         }
-        lastPrefix = Prefix.STRING_PREFIX;
-        lastType = Type.STRING;
+        setPreviousPrefixAndType(Prefix.STRING_PREFIX, Type.STRING);
     }
 
 
@@ -76,28 +73,42 @@ public class Logger {
     }
 
     public static void flush() {
-        String acc = "";
-        switch (lastType) {
+        String buffer = "";
+        switch (previousType) {
             case Type.INT:
-                acc = Integer.toString(intAcc);
-                intAcc = 0;
+                buffer = clearIntBuffer();
                 break;
             case Type.STRING:
-                acc = stringAcc;
-                if (stringDups != 0) {
-                    acc += " (x" + ++stringDups + ")";
-                }
-                stringAcc = "";
-                stringDups = 0;
+                buffer = clearStringBuffer();
                 break;
             case Type.BYTE:
-                acc = Byte.toString(byteAcc);
-                byteAcc = (byte) 0;
+                buffer = clearByteBuffer();
                 break;
         }
-        writeMessage(lastPrefix + acc);
-        lastPrefix = null;
-        lastType = null;
+        writeMessage(previousPrefix + buffer);
+        setPreviousPrefixAndType(null, null);
+    }
+
+    private static String clearIntBuffer() {
+        String buffer = Integer.toString(intAccumulator);
+        intAccumulator = 0;
+        return buffer;
+    }
+
+    private static String clearStringBuffer() {
+        String buffer = stringAccumulator;
+        if (stringDuplicates != 0) {
+            buffer += " (x" + ++stringDuplicates + ")";
+        }
+        stringAccumulator = "";
+        stringDuplicates = 0;
+        return buffer;
+    }
+
+    private static String clearByteBuffer() {
+        String buffer = Byte.toString(byteAccumulator);
+        byteAccumulator = (byte) 0;
+        return buffer;
     }
 
     private static void writeMessage(String message) {
@@ -115,7 +126,6 @@ public class Logger {
         }
         stringBuilder.append(array[array.length - 1]);
         stringBuilder.append("}");
-
         return stringBuilder.toString();
     }
 
@@ -125,5 +135,18 @@ public class Logger {
             writeMessage(buildArrayStr(array));
         }
         writeMessage("}");
+    }
+
+    private static int checkNumberAccumulatorOverflow(int maxValue, int accumulator, int message) {
+        int diff = 0;
+        if (maxValue - accumulator < message) {
+            diff = message - maxValue;
+        }
+        return diff;
+    }
+
+    private static void setPreviousPrefixAndType(String prefix, String type) {
+        previousPrefix = prefix;
+        previousType = type;
     }
 }

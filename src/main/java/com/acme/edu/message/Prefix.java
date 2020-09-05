@@ -1,4 +1,4 @@
-package com.acme.edu.type;
+package com.acme.edu.message;
 
 public class Prefix {
     public static final String PRIMITIVE_PREFIX = "primitive: ";
