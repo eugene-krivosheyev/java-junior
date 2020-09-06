@@ -2,6 +2,7 @@ package com.acme.edu;
 
 public class Logger {
 
+    public static final String LINE_SEPARATOR = System.lineSeparator();
     public static int INT_BUFFER = 0;
     public static int BYTE_BUFFER = 0;
     public static int STRING_BUFFER = 0;
@@ -13,6 +14,7 @@ public class Logger {
     public static String STRING_PREFIX = "string: ";
     public static String REFERENCE_PREFIX = "reference: ";
     public static String PRIMITIVES_ARRAY_PREFIX = "primitives array: ";
+    public static String PRIMITIVES_MATRIX_PREFIX = "primitives matrix: ";
 
     public static void log(int message) {
         if (Integer.MAX_VALUE - message < INT_BUFFER) {
@@ -64,12 +66,27 @@ public class Logger {
     }
 
     public static void log(int[] arrayMessage) {
+        System.out.println(PRIMITIVES_ARRAY_PREFIX +  displayArray(arrayMessage));
+    }
+
+    public static void log(int[][] arrayMessage) {
         StringBuilder arrayElementsToPrint = new StringBuilder();
-        for (int i = 0; i < arrayMessage.length - 1; i++) {
-            arrayElementsToPrint.append(arrayMessage[i] + ", ");
+        arrayElementsToPrint.append("{").append(LINE_SEPARATOR);
+        for (int[] ints : arrayMessage) {
+            arrayElementsToPrint.append(displayArray(ints)).append(LINE_SEPARATOR);
         }
-        arrayElementsToPrint.append(arrayMessage[arrayMessage.length - 1]);
-        System.out.println(PRIMITIVES_ARRAY_PREFIX + "{" + arrayElementsToPrint + "}");
+        arrayElementsToPrint.append("}");
+        System.out.println(PRIMITIVES_MATRIX_PREFIX + arrayElementsToPrint);
+    }
+
+    public static String displayArray(int[] array) {
+        StringBuilder arrayElementsToPrint = new StringBuilder();
+        for (int i = 0; i < array.length - 1; i++) {
+            arrayElementsToPrint.append(array[i]).append(", ");
+        }
+        arrayElementsToPrint.append(array[array.length - 1]);
+
+        return "{" + arrayElementsToPrint + "}";
     }
 
     public static void printLogMessage(Object message) {

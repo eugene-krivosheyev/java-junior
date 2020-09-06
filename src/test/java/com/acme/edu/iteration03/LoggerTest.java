@@ -7,6 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+
+    public String lineSeparator = System.lineSeparator();
+
     //region given
     @Before
     public void setUpSystemOut() {
@@ -29,33 +32,31 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-                "primitives array: {-1, 0, 1}" + System.lineSeparator()
+                "primitives array: {-1, 0, 1}" + lineSeparator
         );
         //endregion
     }
 
-     /*
-    TODO: implement Logger solution to match specification as tests
 
     @Test
-    public void shouldLogIntegersMatrix() throws IOException {
+    public void shouldLogIntegersMatrix()  {
         //region when
         Logger.log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         //endregion
 
         //region then
         assertSysoutEquals(
-                "primitives matrix: {\n" +
-                        "{-1, 0, 1}\n" +
-                        "{1, 2, 3}\n" +
-                        "{-1, -2, -3}\n" +
-                        "}\n"
+                "primitives matrix: {" + lineSeparator +
+                        "{-1, 0, 1}" + lineSeparator +
+                        "{1, 2, 3}" + lineSeparator +
+                        "{-1, -2, -3}" + lineSeparator +
+                        "}" + lineSeparator
         );
         //endregion
     }
 
     @Test
-    public void shouldLogIntegersMulitidimentionalArray() throws IOException {
+    public void shouldLogIntegersMulitidimentionalArray()  {
         //region when
         Logger.log(new int[][][][] {{{{0}}}});
         //endregion
@@ -70,7 +71,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-
+/*
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
@@ -109,6 +110,5 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains(11);
         //endregion
     }
-
-    */
+*/
 }
