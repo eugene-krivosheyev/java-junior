@@ -1,11 +1,11 @@
 package com.acme.edu;
 
-import com.sun.org.apache.xpath.internal.operations.String;
-
 import static java.lang.System.lineSeparator;
 
 public class Logger {
     private static LoggerController controller = new LoggerController(new LoggerSaver());
+
+
     /*public static final String PREFIX_PRIMITIVE = "primitive: ";
     public static final String PREFIX_CHAR = "char: ";
     public static final String PREFIX_STRING = "string: ";
@@ -23,7 +23,7 @@ public class Logger {
     public static void log(int message) {
         controller.log(new IntCommand(message));
     }
-
+/*
     public static void log(byte message) {
         controller.log(new ByteCommand(message));
     }
@@ -35,11 +35,11 @@ public class Logger {
     public static void log(boolean message) {
         controller.log(new BooleanCommand(message));
     }
-
+*/
     public static void log(String message) {
         controller.log(new StringCommand(message));
     }
-
+/*
     public static void log(Object message) {
         controller.log(new ObjectCommand(message));
     }
@@ -52,13 +52,11 @@ public class Logger {
         controller.log(new ArrayCommand(array));
     }
 /*
-
+*/
     public static void flush() {
-        chooseMessageWriter();
-        type = "";
-
+        controller.flush();
     }
-
+/*
     private static void chooseMessageWriter(){
         switch (type){
             case "int":{

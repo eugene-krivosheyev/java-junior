@@ -1,6 +1,6 @@
 package com.acme.edu;
 
-public class IntCommand extends Message {
+public class IntCommand extends LoggerMessage {
     public static final String PREFIX_PRIMITIVE = "primitive: ";
 
     private int message;
@@ -12,6 +12,18 @@ public class IntCommand extends Message {
     @Override
     public String getMessage() {
         return PREFIX_PRIMITIVE + message;
+    }
+
+    @Override
+    public boolean isSameType(LoggerMessage currentState) {
+        return currentState instanceof IntCommand;
+    }
+
+    @Override
+    public void accumulate(LoggerMessage newMessage) {
+        //if (filter.isNotOverflowed(newMessage)) {
+            super.accumulate(newMessage);
+        //}
     }
 
 /*

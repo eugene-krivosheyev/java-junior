@@ -1,6 +1,6 @@
 package com.acme.edu;
 
-public class ByteCommand extends Message{
+public class ByteCommand extends LoggerMessage {
     /*if (type.equals("")) {
         type = "byte";
         byte_buffer = message;
