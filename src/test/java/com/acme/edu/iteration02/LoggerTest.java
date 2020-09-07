@@ -9,6 +9,8 @@ import org.junit.Test;
 import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+    private static final String LINE_SEP = System.lineSeparator();
+
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
@@ -35,10 +37,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "string: str 1\n" +
-            "primitive: 3\n" +
-            "string: str 2\n" +
-            "primitive: 0\n"
+            "string: str 1" + LINE_SEP +
+            "primitive: 3" + LINE_SEP +
+            "string: str 2" + LINE_SEP +
+            "primitive: 0" + LINE_SEP
         );
         //endregion
     }
@@ -56,11 +58,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "string: str 1\n" +
-            "primitive: 10\nprimitive: " +
-            Integer.MAX_VALUE + "\n" +
-            "string: str 2\n" +
-            "primitive: 0\n"
+            "string: str 1" + LINE_SEP +
+            "primitive: 10" + LINE_SEP + "primitive: " +
+            Integer.MAX_VALUE + LINE_SEP +
+            "string: str 2" + LINE_SEP +
+            "primitive: 0" + LINE_SEP
         );
         //endregion
     }
@@ -78,11 +80,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "string: str 1\n" +
-            "primitive: 10\nprimitive: " +
-            Byte.MAX_VALUE + "\n" +
-            "string: str 2\n" +
-            "primitive: 0\n"
+            "string: str 1" + LINE_SEP +
+            "primitive: 10" + LINE_SEP + "primitive: " +
+            Byte.MAX_VALUE + LINE_SEP +
+            "string: str 2" + LINE_SEP +
+            "primitive: 0" + LINE_SEP
         );
         //endregion
     }
@@ -103,11 +105,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "string: str 1\n" +
-            "string: str 2 (x2)\n" +
-            "primitive: 0\n" +
-            "string: str 2\n" +
-            "string: str 3 (x3)\n"
+            "string: str 1" + LINE_SEP +
+            "string: str 2 (x2)" + LINE_SEP +
+            "primitive: 0" + LINE_SEP +
+            "string: str 2" + LINE_SEP +
+            "string: str 3 (x3)" + LINE_SEP
         );
         //endregion
     }
