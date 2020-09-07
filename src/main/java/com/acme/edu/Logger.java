@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import java.util.Arrays;
+
 public class Logger {
 
     private static String primitiveType = "primitive: ";
@@ -10,8 +12,12 @@ public class Logger {
 
     private static String referenceType = "reference: ";
 
+    private static  String arrayType = "primitives array: ";
+
+    private  static String matrixType = "primitives matrix: ";
+
     private static void printMessage(String message) {
-        System.out.print(message);
+        System.out.println(message);
     }
 
     private static void printBuffer() {
@@ -40,6 +46,15 @@ public class Logger {
         last = null;
     }
 
+    private static  String getStringFromArray(int [] arr) {
+        StringBuilder strForPrint = new StringBuilder("{");
+        for (int i = 0; i < arr.length; i++) {
+            strForPrint.append(arr[i]);
+            if (i< arr.length -1) { strForPrint.append(", ");}
+        }
+        strForPrint.append("}");
+        return strForPrint.toString();
+    }
     static int savedInt = 0;
     static String savedString = "";
     static byte savedByte = 0;
@@ -53,12 +68,7 @@ public class Logger {
     }
 
     public static void main(String[] args) {
-        log("a");
-        log("b");
-        log("b");
-        log("a");
-        log("a");
-        flush();
+
     }
 
     public static void flush() {
@@ -100,6 +110,20 @@ public class Logger {
             savedByte += message;
         }
         last = types.BYTE;
+    }
+
+    public static void log(int[] message) {
+        String strForPrint = getStringFromArray(message);
+        printMessage(arrayType + strForPrint);
+    }
+
+    public static void log(int[][] message) {
+        System.out.println(matrixType + "{");
+        for (int[] arr : message) {
+            String strForPrint = getStringFromArray(arr);
+            printMessage(arrayType + strForPrint);
+        }
+        System.out.println("}");
     }
 
     public static void log(char message) {
