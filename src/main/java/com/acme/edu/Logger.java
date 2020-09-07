@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import com.acme.edu.message.IntMessage;
+
 public class Logger {
 
     private static final LoggerController loggerController = new LoggerController();
@@ -9,7 +11,7 @@ public class Logger {
     }
 
     public static void log(int message) {
-      loggerController.log(message);
+      loggerController.log(new IntMessage(message));
     }
 
     public static void log(byte message) {

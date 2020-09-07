@@ -2,8 +2,12 @@ package com.acme.edu;
 
 import com.acme.edu.data.MessagePrefix;
 import com.acme.edu.data.MessageType;
+import com.acme.edu.message.IntMessage;
+import com.acme.edu.message.LoggerMessage;
 
 public class LoggerController {
+
+
 
     private static int currentIntMessage = 0;
     private static int maxIntValueAmount = 0;
@@ -19,12 +23,9 @@ public class LoggerController {
         printLastUpdatedType();
     }
 
-    public static void log(int message) {
-        if (lastUpdatedType != MessageType.INT) {
-            printLastUpdatedType();
-            lastUpdatedType = MessageType.INT;
-        }
-        addMessage(message);
+    public void log(IntMessage message) {
+        printIfTypeChanged(message);
+        message.addMessage();
     }
 
     private static void addMessage(int message) {
@@ -91,6 +92,13 @@ public class LoggerController {
             print(lineArray);
         }
         print(MessagePrefix.MATRIX_POSTFIX.getPrefixString());
+    }
+
+    private void printIfTypeChanged(LoggerMessage message) {
+        if (lastUpdatedType != message.getMessageType()) {
+            printLastUpdatedType();
+            lastUpdatedType = message.getMessageType();
+        }
     }
 
     private static String createArrayMessage(int[] intArray) {
