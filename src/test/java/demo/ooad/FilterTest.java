@@ -19,7 +19,7 @@ public class FilterTest implements SysoutCaptureAndAssertionAbility  {
         resetOut();
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void shouldCallChildMethodWhenOverriden() {
         NullCheckLoggerFilter filter = new ContentLengthLoggerFilter(4);
         filter.checkNull(new LoggerMessage("", 0));
