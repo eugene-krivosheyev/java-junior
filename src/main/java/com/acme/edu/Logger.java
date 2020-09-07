@@ -1,6 +1,8 @@
 package com.acme.edu;
 
 
+import com.acme.edu.types.MessageType;
+
 public class Logger {
     public static final String PRIMITIVE_PREFIX = "primitive: ";
     public static final String CHAR_PREFIX = "char: ";
@@ -19,26 +21,16 @@ public class Logger {
     private static String currentStringMessage = "";
     private static String lastStringMessage = "";
     private static int sameStringAmount = 0;
-    private static TYPES lastUpdatedType = TYPES.NONE;
+    private static MessageType lastUpdatedType = MessageType.NONE;
 
     public static void postProcessing() {
         printLastUpdatedType();
     }
 
-    private enum TYPES {
-        NONE,
-        INT,
-        BYTE,
-        CHAR,
-        STRING,
-        BOOLEAN,
-        OBJECT
-    }
-
     public static void log(int message) {
-        if (lastUpdatedType != TYPES.INT) {
+        if (lastUpdatedType != MessageType.INT) {
             printLastUpdatedType();
-            lastUpdatedType = TYPES.INT;
+            lastUpdatedType = MessageType.INT;
         }
         addMessage(message);
     }
@@ -54,41 +46,41 @@ public class Logger {
     }
 
     public static void log(byte message) {
-        if (lastUpdatedType != TYPES.BYTE) {
+        if (lastUpdatedType != MessageType.BYTE) {
             printLastUpdatedType();
-            lastUpdatedType = TYPES.BYTE;
+            lastUpdatedType = MessageType.BYTE;
         }
         addMessage(message);
     }
 
     public static void log(char message) {
-        if (lastUpdatedType != TYPES.CHAR) {
+        if (lastUpdatedType != MessageType.CHAR) {
             printLastUpdatedType();
-            lastUpdatedType = TYPES.CHAR;
+            lastUpdatedType = MessageType.CHAR;
         }
         addMessage(message);
     }
 
     public static void log(String message) {
-        if (lastUpdatedType != TYPES.STRING) {
+        if (lastUpdatedType != MessageType.STRING) {
             printLastUpdatedType();
-            lastUpdatedType = TYPES.STRING;
+            lastUpdatedType = MessageType.STRING;
         }
         addMessage(message);
     }
 
     public static void log(boolean message) {
-        if (lastUpdatedType != TYPES.BOOLEAN) {
+        if (lastUpdatedType != MessageType.BOOLEAN) {
             printLastUpdatedType();
-            lastUpdatedType = TYPES.BOOLEAN;
+            lastUpdatedType = MessageType.BOOLEAN;
         }
         print(createMessage(PRIMITIVE_PREFIX, message));
     }
 
     public static void log(Object message) {
-        if (lastUpdatedType != TYPES.OBJECT) {
+        if (lastUpdatedType != MessageType.OBJECT) {
             printLastUpdatedType();
-            lastUpdatedType = TYPES.OBJECT;
+            lastUpdatedType = MessageType.OBJECT;
         }
         print(createMessage(REFERENCE_PREFIX, message));
     }
@@ -187,13 +179,13 @@ public class Logger {
     private static void printLastUpdatedStringMessage() {
         print(createMessage(STRING_PREFIX, currentStringMessage));
         currentStringMessage = "";
-        lastUpdatedType = TYPES.STRING;
+        lastUpdatedType = MessageType.STRING;
     }
 
     private static void printLastUpdatedCharMessage() {
         print(createMessage(CHAR_PREFIX, currentCharMessage));
         currentCharMessage = "";
-        lastUpdatedType = TYPES.NONE;
+        lastUpdatedType = MessageType.NONE;
     }
 
     private static void printLastUpdatedByteMessage() {
@@ -203,7 +195,7 @@ public class Logger {
         }
         currentByteMessage = 0;
         maxByteValueAmount = 0;
-        lastUpdatedType = TYPES.NONE;
+        lastUpdatedType = MessageType.NONE;
     }
 
     private static void printLastUpdatedIntMessage() {
@@ -213,7 +205,7 @@ public class Logger {
         }
         currentIntMessage = 0;
         maxIntValueAmount = 0;
-        lastUpdatedType = TYPES.NONE;
+        lastUpdatedType = MessageType.NONE;
     }
 
 
