@@ -1,5 +1,9 @@
 package demo.ooad;
 
+import demo.ooad.filter.LoggerFilter;
+import demo.ooad.filter.XmlConfigFilterFactory;
+import demo.ooad.saver.LoggerSaver;
+
 public class Logger {
     // [GRASP] Creator -> [GoF] Factory Method -> [GoF] Abstract Factory
     private LoggerFilter filter = new XmlConfigFilterFactory().create();

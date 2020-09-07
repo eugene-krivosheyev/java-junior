@@ -1,5 +1,7 @@
-package demo.ooad;
+package demo.ooad.filter;
 
+
+import demo.ooad.LoggerMessage;
 
 public class SeverityLevelLoggerFilter extends NullCheckLoggerFilter implements LoggerFilter {
     private int severityLevelTreshold;

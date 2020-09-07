@@ -1,4 +1,6 @@
-package demo.ooad;
+package demo.ooad.filter;
+
+import demo.ooad.LoggerMessage;
 
 public class NullCheckLoggerFilter {
     protected void checkNull(LoggerMessage message) {

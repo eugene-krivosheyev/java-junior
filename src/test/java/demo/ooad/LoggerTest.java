@@ -1,5 +1,6 @@
 package demo.ooad;
 
+import demo.ooad.saver.FileLoggerSaver;
 import org.junit.Test;
 
 public class LoggerTest {

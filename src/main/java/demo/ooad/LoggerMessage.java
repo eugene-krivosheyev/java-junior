@@ -1,5 +1,8 @@
 package demo.ooad;
 
+/**
+ * Package-friendly, package-local, default
+ */
 public class LoggerMessage {
     private String message;
     private int severityLevel;

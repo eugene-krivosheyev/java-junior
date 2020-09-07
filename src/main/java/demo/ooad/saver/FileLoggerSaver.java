@@ -1,4 +1,6 @@
-package demo.ooad;
+package demo.ooad.saver;
+
+import demo.ooad.LoggerMessage;
 
 public class FileLoggerSaver implements LoggerSaver {
     private String filename;
