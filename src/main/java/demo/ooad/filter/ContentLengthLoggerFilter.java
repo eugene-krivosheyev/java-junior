@@ -10,8 +10,14 @@ public class ContentLengthLoggerFilter extends NullCheckLoggerFilter implements 
     }
 
     @Override
+    public void checkNull(LoggerMessage message) {
+        System.out.println("WOW!!!!111");
+        super.checkNull(message);
+    }
+
+    @Override
     public boolean filter(LoggerMessage message) {
-        checkNull(message);
+        this.checkNull(message);
 
         return message.getMessage().length() < lengtTreshold;
     }

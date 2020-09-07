@@ -14,7 +14,7 @@ public class SeverityLevelLoggerFilter extends NullCheckLoggerFilter implements 
      * @param message: 0 - Error, 1 - Warning, 2 - Debug
      */
     public boolean filter(LoggerMessage message) {
-        checkNull(message);
+        this.checkNull(message);
 
         return message.getSeverityLevel() < severityLevelTreshold;
     }
