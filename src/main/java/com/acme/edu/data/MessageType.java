@@ -1,4 +1,4 @@
-package com.acme.edu.types;
+package com.acme.edu.data;
 
 public enum MessageType {
     NONE,
