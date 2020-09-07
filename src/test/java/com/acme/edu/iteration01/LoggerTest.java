@@ -14,6 +14,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void setUpSystemOut() throws IOException {
         resetOut();
         captureSysout();
+        Logger.clearLogger();
     }
 
     @After
@@ -74,6 +75,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+
     @Test
     public void shouldLogString() throws IOException {
         //region when
@@ -90,11 +92,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+
     @Test
     public void shouldLogBoolean() throws IOException {
         //region when
         Logger.log(true);
+        Logger.postProcessing();
         Logger.log(false);
+        Logger.postProcessing();
         //endregion
 
         //region then
@@ -109,6 +114,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogReference() throws IOException {
         //region when
         Logger.log(new Object());
+        Logger.postProcessing();
         //endregion
 
         //region then
@@ -116,4 +122,5 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("@");
         //endregion
     }
+
 }

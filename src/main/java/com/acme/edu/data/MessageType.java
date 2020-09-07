@@ -7,5 +7,7 @@ public enum MessageType {
     CHAR,
     STRING,
     BOOLEAN,
-    OBJECT
+    OBJECT,
+    ARRAY,
+    MATRIX
 }
