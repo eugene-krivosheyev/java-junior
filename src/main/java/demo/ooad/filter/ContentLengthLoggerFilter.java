@@ -8,7 +8,13 @@ import java.io.IOException;
 public class ContentLengthLoggerFilter extends NullCheckLoggerFilter implements LoggerFilter {
     private int lengtTreshold;
 
+
+    public ContentLengthLoggerFilter() {
+        super();
+    }
+
     public ContentLengthLoggerFilter(int lengtTreshold) {
+//        super(); | this();
         this.lengtTreshold = lengtTreshold;
     }
 

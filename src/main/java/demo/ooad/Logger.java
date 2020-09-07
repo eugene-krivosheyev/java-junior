@@ -2,12 +2,17 @@ package demo.ooad;
 
 import demo.ooad.filter.LoggerFilter;
 import demo.ooad.filter.XmlConfigFilterFactory;
+import demo.ooad.saver.FileLoggerSaver;
 import demo.ooad.saver.LoggerSaver;
 
 public class Logger {
     // [GRASP] Creator -> [GoF] Factory Method -> [GoF] Abstract Factory
     private LoggerFilter filter = new XmlConfigFilterFactory().create();
     private LoggerSaver saver; //Field DI
+
+    public Logger() {
+        this(new FileLoggerSaver("default.file"));
+    }
 
     // Constructor DI
     public Logger(LoggerSaver saver) {
