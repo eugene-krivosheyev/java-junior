@@ -10,11 +10,17 @@ public class EnumDemo {
         Color.GREEN.ordinal();
         final Color color = Color.valueOf("GREEN");
         final Color[] enumValues = Color.values();
+
+        Color.RED.doSmth();
     }
 }
 
 enum Color {
-    RED, BLUE, GREEN, GRAY
+    RED, BLUE, GREEN, GRAY;
+
+    public void doSmth() {
+
+    }
 }
 
 final class MyColor {
