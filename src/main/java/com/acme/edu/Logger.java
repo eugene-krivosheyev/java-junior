@@ -1,5 +1,8 @@
 package com.acme.edu;
 
+import com.acme.edu.message.ByteMessage;
+import com.acme.edu.message.IntMessage;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +14,8 @@ import static java.lang.System.lineSeparator;
  * @version 1.0.2
  */
 public class Logger {
+    static LogSaver saver = new LogSaver();
+
     static final String CHAR_PREFIX = "char: ";
     static final String STRING_PREFIX = "string: ";
     static final String REFERENCE_PREFIX = "reference: ";
@@ -19,11 +24,7 @@ public class Logger {
     static final String PRIMITIVE_MATRIX_PREFIX = "primitives matrix: ";
     static final String PRIMITIVE_MULTIMATRIX_PREFIX = "primitives multimatrix: ";
 
-    static List<Object> listOfLog = new ArrayList<>();
-
-    static void prepareAndWriteMessage(String prefix, Object message) {
-        System.out.println(prefix + message);
-    }
+    static ArrayList<Object> listOfLog = new ArrayList<>();
 
     /**
      * @param  message  a value to be logged
@@ -37,11 +38,11 @@ public class Logger {
     }
 
     public static void log(boolean message) {
-        prepareAndWriteMessage(PRIMITIVE_PREFIX, message);
+        saver.save(PRIMITIVE_PREFIX, message);
     }
 
     public static void log(char message) {
-        prepareAndWriteMessage(CHAR_PREFIX, message);
+        saver.save(CHAR_PREFIX, message);
     }
 
     public static void log(String message) {
@@ -49,25 +50,25 @@ public class Logger {
     }
 
     public static void log(Object message) {
-        prepareAndWriteMessage(REFERENCE_PREFIX, message);
+        saver.save(REFERENCE_PREFIX, message);
     }
 
     public static void log(int[] message) {
-        prepareAndWriteMessage(
+        saver.save(
                 PRIMITIVE_ARRAY_PREFIX,
                 Arrays.toString(message)
         );
     }
 
     public static void log(int[][] message) {
-        prepareAndWriteMessage(
+        saver.save(
                 PRIMITIVE_MATRIX_PREFIX,
                 Arrays.deepToString(message).replace("], ", "]" + lineSeparator())
         );
     }
 
     public static void log(int[][][][] message) {
-        prepareAndWriteMessage(
+        saver.save(
                 PRIMITIVE_MULTIMATRIX_PREFIX,
                 Arrays.deepToString(message)
                         .replace("]", lineSeparator() + "]")
@@ -82,39 +83,15 @@ public class Logger {
         Object firstToLog = listOfLog.get(0);
 
         if (firstToLog instanceof Integer) {
-            prepareAndWriteMessage(PRIMITIVE_PREFIX, sumInt());
+            IntMessage messageProvider = new IntMessage(listOfLog);
+            saver.save("", messageProvider.messageController.toString());
         } else if (firstToLog instanceof Byte) {
-            prepareAndWriteMessage(PRIMITIVE_PREFIX, sumByte());
+            ByteMessage messageProvider = new ByteMessage(listOfLog);
+            saver.save("", messageProvider.messageController.toString());
         } else if (firstToLog instanceof String) {
-            prepareAndWriteMessage("", sumStrings());
+            saver.save("", sumStrings());
         }
         listOfLog.clear();
-    }
-
-    static int sumInt() {
-        int resultIntSum = 0;
-        for (Object currentValue : listOfLog) {
-            if (Integer.MAX_VALUE - resultIntSum < (int) currentValue) {
-                resultIntSum = (int) currentValue - (Integer.MAX_VALUE - resultIntSum);
-                prepareAndWriteMessage(PRIMITIVE_PREFIX, Integer.MAX_VALUE);
-            } else {
-                resultIntSum += (int) currentValue;
-            }
-        }
-        return resultIntSum;
-    }
-
-    static byte sumByte() {
-        byte resultByteSum = 0;
-        for (Object currentValue : listOfLog) {
-            if (Byte.MAX_VALUE - resultByteSum < (byte) currentValue) {
-                resultByteSum = (byte) ((byte) currentValue - (Byte.MAX_VALUE - resultByteSum));
-                prepareAndWriteMessage(PRIMITIVE_PREFIX, Byte.MAX_VALUE);
-            } else {
-                resultByteSum += (byte) currentValue;
-            }
-        }
-        return resultByteSum;
     }
 
     static String sumStrings() {
