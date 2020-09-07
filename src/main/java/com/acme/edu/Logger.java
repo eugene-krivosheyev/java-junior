@@ -1,10 +1,12 @@
 package com.acme.edu;
 
+import com.sun.org.apache.xpath.internal.operations.String;
+
 import static java.lang.System.lineSeparator;
 
 public class Logger {
-
-    public static final String PREFIX_PRIMITIVE = "primitive: ";
+    private static LoggerController controller = new LoggerController(new LoggerSaver());
+    /*public static final String PREFIX_PRIMITIVE = "primitive: ";
     public static final String PREFIX_CHAR = "char: ";
     public static final String PREFIX_STRING = "string: ";
     public static final String PREFIX_REFERENCE = "reference: ";
@@ -15,106 +17,41 @@ public class Logger {
     public static int int_buffer = 0;
     public static byte byte_buffer = 0;
     public static String string_buffer = "";
-    public static int counter = 0;
+    public static int counter = 0;*/
 
 
     public static void log(int message) {
-        if (type.equals("")) {
-                type = "int";
-                int_buffer = message;
-            } else {
-                    if ("int".equals(type) && (Integer.MAX_VALUE - int_buffer >= message)) {
-                        int_buffer += message;
-                    } else {
-                        chooseMessageWriter();
-                        type = "int";
-                        int_buffer = message;
-                    }
-            }
+        controller.log(new IntCommand(message));
     }
 
     public static void log(byte message) {
-        if (type.equals("")) {
-            type = "byte";
-            byte_buffer = message;
-        } else {
-            if ("byte".equals(type) && (Byte.MAX_VALUE - byte_buffer >= message)) {
-                byte_buffer += message;
-            } else {
-                chooseMessageWriter();
-                type = "byte";
-                byte_buffer = message;
-            }
-        }
+        controller.log(new ByteCommand(message));
     }
 
      public static void log(char message) {
-        chooseMessageWriter();
-        writeMessage(PREFIX_CHAR + message);
-        type = "";
+         controller.log(new CharCommand(message));
     }
 
     public static void log(boolean message) {
-        chooseMessageWriter();
-        writeMessage(PREFIX_PRIMITIVE + message);
-        type = "";
+        controller.log(new BooleanCommand(message));
     }
 
     public static void log(String message) {
-        if (type.equals("")) {
-            type = "string";
-            string_buffer = message;
-        } else {
-            if ("string".equals(type)) {
-                if(string_buffer.equals(message)){
-                    counter++;
-                }
-                else {
-                    chooseMessageWriter();
-                    string_buffer = message;
-                }
-            } else {
-                chooseMessageWriter();
-                type = "string";
-                string_buffer = message;
-            }
-        }
+        controller.log(new StringCommand(message));
     }
 
     public static void log(Object message) {
-        chooseMessageWriter();
-        writeMessage(PREFIX_REFERENCE + message);
-        type = "";
+        controller.log(new ObjectCommand(message));
     }
 
     public static void log(int[][] matrix){
-        StringBuilder message = new StringBuilder("{"+ lineSeparator());
-        for(int i = 0; i < matrix[0].length; i++){
-            message.append("{");
-            fillStringWithArray(matrix[i], message);
-            message.append("}" + lineSeparator());
-        }
-        message.append("}");
-        writeMessage(PREFIX_MATRIX + message);
+        controller.log(new MatrixCommand(matrix));
     }
 
     public static void log(int[] array) {
-        StringBuilder message = new StringBuilder("{");
-        fillStringWithArray(array, message);
-        message.append("}");
-        writeMessage(PREFIX_ARRAY + message);
+        controller.log(new ArrayCommand(array));
     }
-
-    private static void fillStringWithArray(int[] array, StringBuilder message) {
-        for (int num : array) {
-            message.append(num + ", ");
-        }
-        message.delete(message.length() - 2, message.length());
-    }
-
-    private static void writeMessage(String message) {
-        System.out.println(message);
-    }
+/*
 
     public static void flush() {
         chooseMessageWriter();
@@ -149,5 +86,5 @@ public class Logger {
             case "":
                 break;
         }
-    }
+    }*/
 }
