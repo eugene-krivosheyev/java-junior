@@ -17,3 +17,9 @@ public class FinalDemo {
         //intConst++;
     }
 }
+
+final class NotInheritable {
+    public final void m() {
+
+    }
+}
