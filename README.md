@@ -140,7 +140,7 @@ $ git push
 - Class variables and methods, static import
 - Instance variables and methods: later
 
-## Method’s parameters and Overloading
+## Method’strategy parameters and Overloading
 - As local variables
 - Method overloading
 
@@ -464,14 +464,14 @@ $ git push
 ## Given
 - PM
 - Analyst
-- Product's FRs and NFRs
-- System's internal NFRs
+- Product'strategy FRs and NFRs
+- System'strategy internal NFRs
 - CI server
 - Sonar server
 
 ## When
 - Teams formed
-- Every team's git repo visible to PM and is identifiable
+- Every team'strategy git repo visible to PM and is identifiable
 - Teams deliver product with two iterations
 
 ## Then
@@ -675,12 +675,12 @@ assertMessageEquals("3")
 ## Given
 - PM
 - Analyst
-- Product's FRs and NFRs
-- System's internal NFRs
+- Product'strategy FRs and NFRs
+- System'strategy internal NFRs
 - CI server
 - Sonar server
 - Teams formed
-- Every team's git repo visible to PM and is identifiable
+- Every team'strategy git repo visible to PM and is identifiable
 
 ## When
 - Teams deliver product with six iterations
