@@ -3,8 +3,6 @@ package com.acme.edu;
 import com.acme.edu.message.*;
 import com.acme.edu.saver.LogSaver;
 
-import java.util.ArrayList;
-
 /**
  * Facade for logger. Gets different types of message and
  * redirects to specific AbstractMessage implementation.

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Implementation of AbstractMessage for logging Booleans
+ * Implementation of AbstractMessage for logging Booleans.
  * @see AbstractMessage
  */
 public class BoolMessage extends AbstractMessage {

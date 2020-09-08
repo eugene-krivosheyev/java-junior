@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
- * Implementation of AbstractMessage for logging Arrays
+ * Implementation of AbstractMessage for logging Arrays.
  * @see AbstractMessage
  */
 public class ArrayMessage extends AbstractMessage {

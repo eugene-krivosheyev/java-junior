@@ -6,8 +6,7 @@ import static java.lang.System.lineSeparator;
 
 /**
  * Implementation of AbstractMessage for logging Bytes.
- * Supports flushing and type overflow
- *
+ * Supports flushing with type overflow.
  * @see AbstractMessage
  */
 public class ByteMessage extends AbstractMessage {
