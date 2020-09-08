@@ -39,39 +39,39 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test
-    public void shouldLogByte() throws IOException {
-        //region when
-        Logger.log((byte) 1);
-        Logger.flush();
-        Logger.log((byte) 0);
-        Logger.flush();
-        Logger.log((byte) -1);
-        Logger.flush();
-        //endregion
+//    @Test
+//    public void shouldLogByte() throws IOException {
+//        //region when
+//        Logger.log((byte) 1);
+//        Logger.flush();
+//        Logger.log((byte) 0);
+//        Logger.flush();
+//        Logger.log((byte) -1);
+//        Logger.flush();
+//        //endregion
+//
+//        //region then
+//        assertSysoutContains("primitive: ");
+//        assertSysoutContains("1");
+//        assertSysoutContains("0");
+//        assertSysoutContains("-1");
+//        //endregion
+//    }
 
-        //region then
-        assertSysoutContains("primitive: ");
-        assertSysoutContains("1");
-        assertSysoutContains("0");
-        assertSysoutContains("-1");
-        //endregion
-    }
 
-
-    @Test
-    public void shouldLogChar() throws IOException {
-        //region when
-        Logger.log('a');
-        Logger.log('b');
-        //endregion
-
-        //region then
-        assertSysoutContains("char: ");
-        assertSysoutContains("a");
-        assertSysoutContains("b");
-        //endregion
-    }
+//    @Test
+//    public void shouldLogChar() throws IOException {
+//        //region when
+//        Logger.log('a');
+//        Logger.log('b');
+//        //endregion
+//
+//        //region then
+//        assertSysoutContains("char: ");
+//        assertSysoutContains("a");
+//        assertSysoutContains("b");
+//        //endregion
+//    }
 
     @Test
     public void shouldLogString() throws IOException {
@@ -88,29 +88,29 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test
-    public void shouldLogBoolean() throws IOException {
-        //region when
-        Logger.log(true);
-        Logger.log(false);
-        //endregion
-
-        //region then
-        assertSysoutContains("primitive: ");
-        assertSysoutContains("true");
-        assertSysoutContains("false");
-        //endregion
-    }
-
-    @Test
-    public void shouldLogReference() throws IOException {
-        //region when
-        Logger.log(new Object());
-        //endregion
-
-        //region then
-        assertSysoutContains("reference: ");
-        assertSysoutContains("@");
-        //endregion
-    }
+//    @Test
+//    public void shouldLogBoolean() throws IOException {
+//        //region when
+//        Logger.log(true);
+//        Logger.log(false);
+//        //endregion
+//
+//        //region then
+//        assertSysoutContains("primitive: ");
+//        assertSysoutContains("true");
+//        assertSysoutContains("false");
+//        //endregion
+//    }
+//
+//    @Test
+//    public void shouldLogReference() throws IOException {
+//        //region when
+//        Logger.log(new Object());
+//        //endregion
+//
+//        //region then
+//        assertSysoutContains("reference: ");
+//        assertSysoutContains("@");
+//        //endregion
+//    }
 }

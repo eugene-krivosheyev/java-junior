@@ -1,14 +1,8 @@
 package com.acme.edu.command;
 
-public class LoggerCommand {
-    protected String message;
+public interface LoggerCommand {
 
-    public String getMessage(){ return this.message;}
-    public String clearBuffer(){}
+    public boolean isSameType(LoggerCommand currentLoggerCommand);
 
-    public boolean isSameType(LoggerCommand currentLoggerCommand) {
-    }
-
-    public LoggerCommand accumulate(LoggerCommand newLoggerCommand) {
-    }
+    public LoggerCommand accumulate(LoggerCommand newLoggerCommand);
 }

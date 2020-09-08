@@ -1,9 +1,8 @@
 package com.acme.edu;
 
 import com.acme.edu.command.IntCommand;
+import com.acme.edu.command.StringCommand;
 import com.acme.edu.controller.LoggerController;
-import com.acme.edu.message.Type;
-import com.acme.edu.message.Prefix;
 import com.acme.edu.saver.ConsoleSaver;
 
 public class Logger {
@@ -11,9 +10,11 @@ public class Logger {
 
     private static LoggerController loggerController = new LoggerController(new ConsoleSaver());
 
+    public static void flush(){
+        loggerController.flush();
+    }
     public static void log(int message) {
         loggerController.log(new IntCommand(message));
-        //setPreviousPrefixAndType(Prefix.PRIMITIVE_PREFIX, Type.INT);
     }
 
 //    public static void log(byte message) {
@@ -35,7 +36,7 @@ public class Logger {
 //    }
 
     public static void log(String message) {
-
+        loggerController.log(new StringCommand(message));
 //        if (message.equals(stringAccumulator)) {
 //            stringDuplicates++;
 //        } else {

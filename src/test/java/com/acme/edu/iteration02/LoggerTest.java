@@ -67,27 +67,27 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test
-    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
-        //region when
-        Logger.log("str 1");
-        Logger.log((byte)10);
-        Logger.log((byte)Byte.MAX_VALUE);
-        Logger.log("str 2");
-        Logger.log(0);
-        Logger.flush();
-        //endregion
-
-        //region then
-        assertSysoutEquals(
-            "string: str 1" + System.lineSeparator() +
-            "primitive: 10" + System.lineSeparator() +
-            "primitive: " + Byte.MAX_VALUE + System.lineSeparator() +
-            "string: str 2" + System.lineSeparator() +
-            "primitive: 0" + System.lineSeparator()
-        );
-        //endregion
-    }
+//    @Test
+//    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
+//        //region when
+//        Logger.log("str 1");
+//        Logger.log((byte)10);
+//        Logger.log((byte)Byte.MAX_VALUE);
+//        Logger.log("str 2");
+//        Logger.log(0);
+//        Logger.flush();
+//        //endregion
+//
+//        //region then
+//        assertSysoutEquals(
+//            "string: str 1" + System.lineSeparator() +
+//            "primitive: 10" + System.lineSeparator() +
+//            "primitive: " + Byte.MAX_VALUE + System.lineSeparator() +
+//            "string: str 2" + System.lineSeparator() +
+//            "primitive: 0" + System.lineSeparator()
+//        );
+//        //endregion
+//    }
 
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {

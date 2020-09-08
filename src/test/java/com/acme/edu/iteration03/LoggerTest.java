@@ -23,35 +23,35 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
 
-    @Test
-    public void shouldLogIntegersArray() throws IOException {
-        //region when
-        Logger.log(new int[] {-1, 0, 1});
-        //endregion
-
-        //region then
-        assertSysoutEquals(
-            "primitives array: {-1, 0, 1}" + System.lineSeparator()
-        );
-        //endregion
-    }
-
-    @Test
-    public void shouldLogIntegersMatrix() throws IOException {
-        //region when
-        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
-        //endregion
-
-        //region then
-        assertSysoutEquals(
-            "primitives matrix: {" + System.lineSeparator() +
-                "{-1, 0, 1}" + System.lineSeparator() +
-                "{1, 2, 3}" + System.lineSeparator() +
-                "{-1, -2, -3}" + System.lineSeparator() +
-            "}" + System.lineSeparator()
-        );
-        //endregion
-    }
+//    @Test
+//    public void shouldLogIntegersArray() throws IOException {
+//        //region when
+//        Logger.log(new int[] {-1, 0, 1});
+//        //endregion
+//
+//        //region then
+//        assertSysoutEquals(
+//            "primitives array: {-1, 0, 1}" + System.lineSeparator()
+//        );
+//        //endregion
+//    }
+//
+//    @Test
+//    public void shouldLogIntegersMatrix() throws IOException {
+//        //region when
+//        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+//        //endregion
+//
+//        //region then
+//        assertSysoutEquals(
+//            "primitives matrix: {" + System.lineSeparator() +
+//                "{-1, 0, 1}" + System.lineSeparator() +
+//                "{1, 2, 3}" + System.lineSeparator() +
+//                "{-1, -2, -3}" + System.lineSeparator() +
+//            "}" + System.lineSeparator()
+//        );
+//        //endregion
+//    }
 /*
     TODO: implement Logger solution to match specification as tests
     @Test
