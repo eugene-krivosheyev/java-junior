@@ -1,6 +1,20 @@
 package com.acme.edu;
 
-public class ByteCommand extends LoggerMessage {
+public class ByteCommand implements LoggerMessage {
+    @Override
+    public String getMessage() {
+        return null;
+    }
+
+    @Override
+    public boolean isSameType(LoggerMessage currentState) {
+        return false;
+    }
+
+    @Override
+    public void accumulate(LoggerMessage newMessage) {
+
+    }
     /*if (type.equals("")) {
         type = "byte";
         byte_buffer = message;

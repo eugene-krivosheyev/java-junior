@@ -3,7 +3,7 @@ package com.acme.edu;
 import static java.lang.System.lineSeparator;
 
 public class Logger {
-    private static LoggerController controller = new LoggerController(new LoggerSaver());
+    private static LoggerController controller = new LoggerController(new ConsoleSaver());
 
 
     /*public static final String PREFIX_PRIMITIVE = "primitive: ";

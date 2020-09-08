@@ -1,6 +1,6 @@
 package com.acme.edu;
 
-public class ArrayCommand extends LoggerMessage {
+public class ArrayCommand implements LoggerMessage {
     public static final String PREFIX_ARRAY = "primitives array: ";
 
     private int[] array;
@@ -23,6 +23,11 @@ public class ArrayCommand extends LoggerMessage {
     @Override
     public String getMessage() {
         return PREFIX_ARRAY + message;
+    }
+
+    @Override
+    public boolean isSameType(LoggerMessage currentState) {
+        return false;
     }
 
     public void accumulate(LoggerMessage message) {

@@ -1,17 +1,11 @@
 package com.acme.edu;
 
-public class LoggerMessage {
-    public String message;
+public interface LoggerMessage {
+//    public String message;
 
-    public String getMessage() {
-        return message;
-    }
+    String getMessage();
 
-    public boolean isSameType(LoggerMessage currentState) {
-        return false;
-    }
+    boolean isSameType(LoggerMessage currentState);
 
-    public void accumulate(LoggerMessage newMessage) {
-        message += newMessage.message;
-    }
+    void accumulate(LoggerMessage newMessage);
 }
