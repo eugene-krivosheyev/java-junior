@@ -25,13 +25,13 @@ public class LoggerController {
     public void log(LoggerCommand message) {
         if (currentState == null) {
             currentState = message;
-        }
-        else if (currentState.checkFlush(message)) {
+            //TODO message => command
+        } else if (currentState.checkFlush(message)) {
             saver.save(currentState.getDecoratedSelf());
             currentState = message;
-        }
-        else
+        } else {
             currentState.accumulate(message);
+        }
     }
 
     /**
