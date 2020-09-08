@@ -1,17 +1,27 @@
 package com.acme.edu;
 
 public class LogMessageController {
-    static LogPrinter printer;
+    ILogMessage prevMessage;
+    ILogPrinter printer;
 
-    private static final String PRIMITIVE = "primitive: ";
-    private static final String CHAR = "char: ";
-    private static final String STRING = "string: ";
-    private static final String REFERENCE = "reference: ";
 
-    public void log(LogMessage logMessage)
+    public LogMessageController(ILogPrinter printer_) {
+        prevMessage = new StringMessage("");
+        printer = printer_;
+    }
+
+    public void log(ILogMessage logMessage)
     {
+        if (prevMessage.IsSameType(logMessage)) {
+            prevMessage.add(logMessage);
+        } else {
+            printer.writeBuffer(prevMessage.toString());
+            prevMessage = logMessage;
+        }
+    }
 
-        printer.print(logMessage.get());
+    public void flush() {
+        printer.print();
     }
 
 /*
