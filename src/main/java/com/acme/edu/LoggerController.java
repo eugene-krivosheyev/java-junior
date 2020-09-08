@@ -1,43 +1,41 @@
 package com.acme.edu;
 
 import com.acme.edu.message.AbstractMessage;
-import com.acme.edu.message.ByteMessage;
-import com.acme.edu.message.IntMessage;
-import com.acme.edu.message.StringMessage;
 import com.acme.edu.saver.Saver;
 
 import java.util.ArrayList;
 
 public class LoggerController {
     private final Saver saver;
-    static ArrayList<Object> listOfLog = new ArrayList<>();
+    private AbstractMessage currentState = null;
+    static ArrayList<AbstractMessage> listOfLog = new ArrayList<>();
 
     public LoggerController(Saver saver) {
         this.saver = saver;
     }
 
     public void log(AbstractMessage message) {
-        listOfLog.add(message);
-    }
+        if (currentState == null) {
+            currentState = message;
+            return;
+        }
 
-    public void addToLogList(Object message) {
-        listOfLog.add(message);
+        if (currentState.isSameType(message)) {
+            listOfLog.add(message);
+        } else {
+            flushStart();
+            listOfLog.clear();
+        }
+        currentState = message;
     }
 
     public void flushStart() {
-        Object firstToLog = listOfLog.get(0);
+        AbstractMessage firstToLog = listOfLog.get(0);
 
-        if (firstToLog instanceof Integer) {
-            this.saver.save(new IntMessage(listOfLog));
-        } else if (firstToLog instanceof Byte) {
-            this.saver.save(new ByteMessage(listOfLog));
-        } else if (firstToLog instanceof String) {
-            this.saver.save(new StringMessage(listOfLog));
+        if (listOfLog.size() == 1) {
+            this.saver.save(firstToLog);
         } else {
-            for (Object logMessage : listOfLog) {
-                this.saver.save((AbstractMessage) logMessage);
-            }
+            firstToLog.prepareMessage(listOfLog);
         }
-        listOfLog.clear();
     }
 }
