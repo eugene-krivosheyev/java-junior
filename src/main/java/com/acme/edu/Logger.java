@@ -18,6 +18,12 @@ public class Logger {
         loggerController.log(new IntCommand(message));
     }
 
+    public static void log(String message) {
+        loggerController.log(new StringCommand(message));
+    }
+
+//TODO: Implement when customer will ask for these types
+//
 //    public static void log(byte message) {
 //        byte diff = (byte) checkNumberAccumulatorOverflow(Byte.MAX_VALUE, byteAccumulator, message);
 //        if (Byte.MAX_VALUE - byteAccumulator < message) {
@@ -35,11 +41,6 @@ public class Logger {
 //    public static void log(char message) {
 //        writeMessage(Prefix.CHAR_PREFIX + message);
 //    }
-
-    public static void log(String message) {
-        loggerController.log(new StringCommand(message));
-    }
-
 
 //    public static void log(boolean message) {
 //        writeMessage(Prefix.PRIMITIVE_PREFIX + message);
