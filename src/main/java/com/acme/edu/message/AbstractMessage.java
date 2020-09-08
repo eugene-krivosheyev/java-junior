@@ -9,8 +9,12 @@ import java.util.ArrayList;
  * message type.
  */
 public abstract class AbstractMessage {
-    static public String PREFIX = "";
-    public StringBuilder messageController = new StringBuilder();
+    static protected String PREFIX = "";
+    protected StringBuilder messageController = new StringBuilder();
 
-    public abstract void prepareMessage(ArrayList<Object> listOfLog);
+    public String getProcessedMessage() {
+        return messageController.toString();
+    }
+
+    protected abstract void prepareMessage(ArrayList<Object> listOfLog);
 }
