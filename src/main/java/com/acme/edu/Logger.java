@@ -1,17 +1,9 @@
 package com.acme.edu;
 
-import static java.lang.System.lineSeparator;
+
 
 public class Logger {
-    private static LoggerController controller = new LoggerController(new ConsoleSaver());
-
-
-    /*public static final String PREFIX_PRIMITIVE = "primitive: ";
-    public static final String PREFIX_CHAR = "char: ";
-    public static final String PREFIX_STRING = "string: ";
-    public static final String PREFIX_REFERENCE = "reference: ";
-    public static final String PREFIX_MATRIX = "primitives matrix: ";
-    public static final String PREFIX_ARRAY = "primitives array: ";
+    private static LoggerController controller = new LoggerController(new ConsoleLoggerSaver());
 
     public static String type = "";
     public static int int_buffer = 0;

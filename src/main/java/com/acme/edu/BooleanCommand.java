@@ -12,8 +12,8 @@ public class BooleanCommand implements LoggerMessage {
     }
 
     /*chooseMessageWriter();
-        writeMessage(PREFIX_PRIMITIVE + message);
-        type = "";*/
+    writeMessage(PREFIX_PRIMITIVE + message);
+    type = "";*/
     public void accumulate(LoggerMessage message) {
 
     }
