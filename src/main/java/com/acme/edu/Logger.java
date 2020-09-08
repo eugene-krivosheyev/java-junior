@@ -4,6 +4,9 @@ import com.acme.edu.command.IntCommand;
 import com.acme.edu.command.StringCommand;
 import com.acme.edu.saver.ConsoleSaver;
 
+/**
+ * Logger facade
+ */
 public class Logger {
     LoggerController myLoggerController = new LoggerController(new ConsoleSaver());
 

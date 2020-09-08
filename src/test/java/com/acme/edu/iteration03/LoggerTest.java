@@ -11,7 +11,7 @@ import java.io.IOException;
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
-    public void setUpSystemOut() throws IOException {
+    public void setUpSystemOut() {
         resetOut();
         captureSysout();
     }
@@ -21,12 +21,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         resetOut();
     }
     //endregion
-
-    /*
-    TODO: implement Logger solution to match specification as tests
-
+/*
     @Test
-    public void shouldLogIntegersArray() throws IOException {
+    public void shouldLogIntegersArray() {
         //region when
         Logger.log(new int[] {-1, 0, 1});
         //endregion

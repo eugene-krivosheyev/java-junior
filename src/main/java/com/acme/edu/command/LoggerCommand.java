@@ -1,16 +1,25 @@
 package com.acme.edu.command;
 
-public class LoggerCommand {
+/**
+ * Interface for work with different message types
+ */
+public interface LoggerCommand {
 
-    public String getDecoratedSelf() {
-        return "";
-    }
+    /**
+     * @return decorated string according to type
+     */
+    String getDecoratedSelf();
 
-    public boolean checkFlush(LoggerCommand other) {
-        return true;
-    }
+    /**
+     * Checks if it is time for flush
+     * @param other - new incoming message
+     * @return result of the check
+     */
+    boolean checkFlush(LoggerCommand other);
 
-    public void accumulate(LoggerCommand other) {
-        {}
-    }
+    /**
+     * Accumulate current message with new one
+     * @param other - new incoming message
+     */
+    void accumulate(LoggerCommand other);
 }

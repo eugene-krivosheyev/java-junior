@@ -6,15 +6,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
-
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private static final String LINE_SEP = System.lineSeparator();
     Logger myTestLogger = new Logger();
 
     //region given
     @Before
-    public void setUpSystemOut() throws IOException {
+    public void setUpSystemOut() {
         resetOut();
         captureSysout();
     }
@@ -26,7 +24,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test
-    public void shouldLogSequentIntegersAsSum() throws IOException {
+    public void shouldLogSequentIntegersAsSum() {
         //region when
         myTestLogger.log("str 1");
         myTestLogger.log(1);
@@ -93,7 +91,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     */
 
     @Test
-    public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
+    public void shouldLogSameSubsequentStringsWithoutRepeat() {
         //region when
         myTestLogger.log("str 1");
         myTestLogger.log("str 2");

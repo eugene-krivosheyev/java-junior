@@ -1,11 +1,15 @@
 package com.acme.edu.command;
 
-public class IntCommand extends LoggerCommand {
+/**
+ * @see LoggerCommand
+ */
+
+public class IntCommand implements LoggerCommand {
     private int value;
     final static String
             PREFIX_PRIMITIVE = "primitive: ";
 
-    public IntCommand (int message) {
+    public IntCommand(int message) {
         this.value = message;
     }
 
