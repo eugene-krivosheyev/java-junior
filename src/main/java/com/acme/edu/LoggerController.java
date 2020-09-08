@@ -1,39 +1,31 @@
 package com.acme.edu;
 
-import com.acme.edu.message.IntCommand;
-import com.acme.edu.message.LogMessage;
-import com.acme.edu.saver.ConsoleSaver;
+import com.acme.edu.command.LoggerCommand;
 import com.acme.edu.saver.LoggerSaver;
 
 public class LoggerController {
-    LoggerSaver saver = new ConsoleSaver();
+    LoggerSaver saver;
+    LoggerCommand currentState;
 
-//    private void flushBuffer(LogMessage message, boolean flushInt, boolean flushStr, boolean flushByte) {
-//        if (IntCommand.intFlag) {
-//            saver.save(message.getDecoratedSelf());
-//            IntCommand.reset();
-//        }
-//        if (flushByte) {
-//            directToOutput(PREFIX_PRIMITIVE + byteBuffer);
-//            byteFlag = false;
-//            byteBuffer = 0;
-//        }
-//        if (flushStr) {
-//            if (counterSameStr > 1)
-//                directToOutput(PREFIX_STRING + strBuffer + " (x" + counterSameStr + ")");
-//            if (counterSameStr == 1)
-//                directToOutput(PREFIX_STRING + strBuffer);
-//            strFlag = false;
-//            strBuffer = "";
-//            counterSameStr = 0;
-//        }
-//    }
+    public LoggerController(LoggerSaver saver) {
+        this.saver = saver;
+        currentState = null;
+    }
 
-    public void log (LogMessage message){
-        if (message.checkFlush()){
-            flushBuffer(intCommand.intFlag, strCommand.strFlag, byteCommand.byteFlag)
-            saver.save(message.getDecoratedSelf());
+    public void log(LoggerCommand message) {
+        if (currentState == null) {
+            currentState = message;
         }
+        else if (currentState.checkFlush(message)) {
+            saver.save(currentState.getDecoratedSelf());
+            currentState = message;
+        }
+        else
+            currentState.accumulate(message);
+    }
 
+    public void flush() {
+        saver.save(currentState.getDecoratedSelf());
+        currentState = null;
     }
 }

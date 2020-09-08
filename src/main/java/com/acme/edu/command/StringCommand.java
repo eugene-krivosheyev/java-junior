@@ -1,9 +1,7 @@
-package com.acme.edu.message;
+package com.acme.edu.command;
 
-public class StringCommand extends LogMessage {
-    static String strBuffer = "";
-    private static int strCounter = 0;
-    public static boolean strFlag = false;
+public class StringCommand extends LoggerCommand {
+    private int strCounter;
     private String value;
     final static String
             PREFIX_PRIMITIVE = "string: ";
@@ -21,13 +19,14 @@ public class StringCommand extends LogMessage {
     }
 
     @Override
-    public void reset(){
-        strFlag = false;
-        strBuffer = "";
-        strCounter = 0;
+    public boolean checkFlush(LoggerCommand other) {
+        if (other instanceof StringCommand)
+            return !this.value.equals(((StringCommand) other).value);
+        return true;
     }
 
-    public boolean checkFlush() {
-        return !value.equals(strBuffer);
+    @Override
+    public void accumulate(LoggerCommand other) {
+        strCounter++;
     }
 }
