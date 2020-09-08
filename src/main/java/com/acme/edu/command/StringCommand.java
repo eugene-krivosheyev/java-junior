@@ -8,18 +8,23 @@ public class StringCommand implements Command {
 
     public String message;
 
+    public static int sameCommandCounter = 0;
+
     public StringCommand(String message) {
         this.message = message;
     }
 
     @Override
     public String toString() {
-        return message;
+        return STRING_PREFIX + message;
     }
 
     @Override
     public String decorate() {
-        return STRING_PREFIX + message;
+        if (sameCommandCounter > 0)
+            return STRING_PREFIX + message + " (x" + ++sameCommandCounter + ")";
+        else
+            return STRING_PREFIX + message;
     }
 
     @Override
@@ -29,7 +34,15 @@ public class StringCommand implements Command {
 
     @Override
     public Command reduce(Command cmd) {
-        return null;
+        StringCommand tmp = (StringCommand) cmd;
+        if (this.message.contains(tmp.message)) {
+            sameCommandCounter++;
+        }
+        else {
+            sameCommandCounter = 0;
+        }
+        this.message += System.lineSeparator() +  cmd.decorate();
+        return this;
     }
 
 }

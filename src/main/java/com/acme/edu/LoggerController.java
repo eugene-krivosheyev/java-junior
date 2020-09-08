@@ -1,9 +1,4 @@
 package com.acme.edu;
-/*
-public enum Type {
-    "Integer" ,"String", "Byte";
-}
-*/
 
 import com.acme.edu.command.*;
 import com.acme.edu.save.Saver;
@@ -36,7 +31,7 @@ public class LoggerController {
     public LoggerController(Saver saver) {
         this.saver = saver;
     }
-
+/*
     public static void log(IntCommand cmd) {
         if (Integer.MAX_VALUE - cmd.message < INT_BUFFER) {
             flushBuffers();
@@ -63,7 +58,7 @@ public class LoggerController {
         }
     }
 
-    public static void log(ByteCommand cmd) {
+    public  void log(ByteCommand cmd) {
         if (Byte.MAX_VALUE - cmd.message < BYTE_BUFFER) {
             flushBuffers();
         }
@@ -93,13 +88,9 @@ public class LoggerController {
     public static void log(MatrixCommand cmd) {
         printLogMessage(cmd.decorate());
     }
-
-    public static void printLogMessage(String message) {
-        System.out.println(message);
-    }
-
-    public static void flushBuffers() {
-        switch (PREVIOUS_TYPE) {
+*/
+    public void flushBuffers() {
+        /*switch (PREVIOUS_TYPE) {
             case "String":
                 if (STRING_BUFFER > 1) {
                     printLogMessage(StringCommand.STRING_PREFIX + PREVIOUS_STRING + " (x" + STRING_BUFFER + ")");
@@ -115,17 +106,8 @@ public class LoggerController {
                 printLogMessage(PrimitiveCommand.PRIMITIVE_PREFIX + BYTE_BUFFER);
                 BYTE_BUFFER = 0;
                 break;
-        }
-    }
-
-    public static void flushString() {
-        STRING_BUFFER = 0;
-        PREVIOUS_STRING = "";
-        PREVIOUS_MESSAGE = "";
-    }
-
-    public static String getClassName(Object object) {
-        return object.getClass().getSimpleName();
+        }*/
+        saver.save(currentCommand);
     }
 
     public void log(Command cmd) {

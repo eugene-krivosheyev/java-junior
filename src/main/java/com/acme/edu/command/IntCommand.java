@@ -11,7 +11,7 @@ public class IntCommand extends PrimitiveCommand {
 
     @Override
     public String toString() {
-        return "" + message;
+        return  PRIMITIVE_PREFIX + message;
     }
 
     @Override
@@ -26,7 +26,10 @@ public class IntCommand extends PrimitiveCommand {
 
     @Override
     public Command reduce(Command cmd) {
-        return null;
+        IntCommand tmp = (IntCommand) cmd;
+
+        message += tmp.message;
+        return this;
     }
 
 }
