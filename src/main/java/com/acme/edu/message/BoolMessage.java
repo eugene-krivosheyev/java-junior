@@ -3,6 +3,10 @@ package com.acme.edu.message;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Implementation of AbstractMessage for logging Booleans
+ * @see AbstractMessage
+ */
 public class BoolMessage extends AbstractMessage {
 
     public BoolMessage(boolean message) {

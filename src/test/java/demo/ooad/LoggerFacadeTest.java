@@ -3,7 +3,7 @@ package demo.ooad;
 import demo.ooad.Logger;
 import org.junit.Test;
 
-public class LoggerTest {
+public class LoggerFacadeTest {
     @Test
     public void shouldLog() {
         Logger logger = new Logger();

@@ -4,8 +4,13 @@ import java.util.ArrayList;
 
 import static java.lang.System.lineSeparator;
 
+/**
+ * Implementation of AbstractMessage for logging Integers.
+ * Supports flushing and type overflow
+ *
+ * @see AbstractMessage
+ */
 public class IntMessage extends AbstractMessage {
-
     public IntMessage(ArrayList<Object> listOfLog) {
         PREFIX = "primitive: ";
         messageController.setLength(0);
