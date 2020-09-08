@@ -23,6 +23,8 @@ public class IntMessage extends LoggerMessage implements  PrefixSupplier {
         message = message + finalNewMessage.message;
         return this;
     }
+}
+
 
 /*
     if (type.equals("")) {
@@ -38,4 +40,4 @@ public class IntMessage extends LoggerMessage implements  PrefixSupplier {
         }
     }
     */
-}
+

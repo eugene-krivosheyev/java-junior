@@ -10,8 +10,11 @@ public class ObjectMessage extends LoggerMessage {
     public boolean isSameType(LoggerMessage currentState) {
         return false;
     }
+}
+
+
 
     /*chooseMessageWriter();
     writeMessage(PREFIX_REFERENCE + message);
     type = "";*/
-}
+

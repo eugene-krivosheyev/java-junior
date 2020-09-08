@@ -10,6 +10,9 @@ public class MatrixMessage extends LoggerMessage {
     public boolean isSameType(LoggerMessage currentState) {
         return false;
     }
+}
+
+
 
     /*StringBuilder message = new StringBuilder("{"+ lineSeparator());
         for(int i = 0; i < matrix[0].length; i++){
@@ -19,4 +22,4 @@ public class MatrixMessage extends LoggerMessage {
     }
         message.append("}");
     writeMessage(PREFIX_MATRIX + message);*/
-}
+

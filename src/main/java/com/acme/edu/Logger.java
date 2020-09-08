@@ -12,7 +12,18 @@ public class Logger {
     public static void log(int message) {
         controller.log(new IntMessage(message));
     }
-/*
+
+    public static void log(String message) {
+        controller.log(new StringMessage(message));
+    }
+
+    public static void flush() {
+        controller.flush();
+    }
+}
+
+
+    /*
     public static void log(byte message) {
         controller.log(new ByteCommand(message));
     }
@@ -25,9 +36,6 @@ public class Logger {
         controller.log(new BooleanCommand(message));
     }
 */
-    public static void log(String message) {
-        controller.log(new StringMessage(message));
-    }
 /*
     public static void log(Object message) {
         controller.log(new ObjectCommand(message));
@@ -42,9 +50,6 @@ public class Logger {
     }
 /*
 */
-    public static void flush() {
-        controller.flush();
-    }
 /*
     private static void chooseMessageWriter(){
         switch (type){
@@ -74,4 +79,4 @@ public class Logger {
                 break;
         }
     }*/
-}
+

@@ -11,7 +11,7 @@ public class StringMessage extends LoggerMessage implements  PrefixSupplier {
 
     @Override
     public String getMessage() {
-        message += (counter > 1)?" (x" + counter + ")" + System.lineSeparator():"";
+        message += (counter > 1) ? " (x" + counter + ")" + System.lineSeparator() : "";
         return PREFIX_STRING + message;
     }
 
@@ -26,13 +26,15 @@ public class StringMessage extends LoggerMessage implements  PrefixSupplier {
         if (message.contains(finalNewMessage.message)) {
             counter++;
         } else {
-            message += (counter > 1)?" (x" + counter + ")" + System.lineSeparator():"";
+            message += (counter > 1) ? " (x" + counter + ")" + System.lineSeparator() : "";
             counter = 1;
             message = message + " " + finalNewMessage.message;
             //message = finalNewMessage.message;
         }
         return this;
     }
+}
+
 
 
     /*if (type.equals("")) {
@@ -53,4 +55,4 @@ public class StringMessage extends LoggerMessage implements  PrefixSupplier {
             string_buffer = message;
         }
     }*/
-}
+

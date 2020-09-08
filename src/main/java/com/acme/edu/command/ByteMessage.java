@@ -10,6 +10,9 @@ public class ByteMessage extends LoggerMessage {
     public boolean isSameType(LoggerMessage currentState) {
         return false;
     }
+}
+
+
 
     /*if (type.equals("")) {
         type = "byte";
@@ -23,4 +26,4 @@ public class ByteMessage extends LoggerMessage {
             byte_buffer = message;
         }
     }*/
-}
+

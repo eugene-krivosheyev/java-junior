@@ -10,8 +10,9 @@ public class BooleanMessage extends LoggerMessage {
     public boolean isSameType(LoggerMessage currentState) {
         return false;
     }
+}
 
-    /*chooseMessageWriter();
+
+/*chooseMessageWriter();
     writeMessage(PREFIX_PRIMITIVE + message);
     type = "";*/
-}
