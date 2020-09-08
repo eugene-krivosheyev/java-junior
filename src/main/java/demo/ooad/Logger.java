@@ -26,10 +26,12 @@ public class Logger {
 
     /**
      * @param message
-     * @param level
      */
     public void log(LoggerMessage message) {
         if (filter.filter(message)) {
+//            if (saver instanceof FileLoggerSaver) {
+                final FileLoggerSaver fileSaver = (FileLoggerSaver) saver;
+//            }
             saver.save(message);
         }
     }
