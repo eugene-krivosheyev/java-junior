@@ -2,23 +2,11 @@ package demo;
 
 public class PolymorphismDemo {
     public static void main(String[] args) {
-        Object o = new Insure(); // new -> creational components
-        System.out.println(o.toString());
-
-        Object[] array = {
-                new String("abc"),
-                new Double("4.0"),
-                new Insure()
-        };
-        for (Object current : array) {
-            System.out.println(current.toString());
-        }
+        doSmthWithParam("abc");
+        doSmthWithParam(4);
     }
-}
 
-class Insure {
-    @Override
-    public String toString() {
-        return "AAAAA!!!!! Осень!!!!!!";
+    private static void doSmthWithParam(Object param) {
+        System.out.println(param);
     }
 }
