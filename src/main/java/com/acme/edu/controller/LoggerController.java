@@ -2,12 +2,13 @@ package com.acme.edu.controller;
 
 import com.acme.edu.command.LoggerCommand;
 import com.acme.edu.saver.ConsoleSaver;
+import com.acme.edu.saver.LoggerSaver;
 
 public class LoggerController {
-    private ConsoleSaver loggerSaver;
+    private LoggerSaver loggerSaver;
     private LoggerCommand currentLoggerCommand;
 
-    public LoggerController(ConsoleSaver loggerSaver) {
+    public LoggerController(LoggerSaver loggerSaver) {
         this.loggerSaver = loggerSaver;
     }
 
