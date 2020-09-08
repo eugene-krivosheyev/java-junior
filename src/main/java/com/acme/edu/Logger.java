@@ -1,26 +1,18 @@
 package com.acme.edu;
 
-import java.util.Arrays;
+import com.acme.edu.message.BoolMessage;
+import com.acme.edu.message.Message;
 
 public class Logger {
+     static LoggerController loggerController = new LoggerController();
 
-    private static String primitiveType = "primitive: ";
 
-    private static String charType = "char: ";
-
-    private static String stringType = "string: ";
-
-    private static String referenceType = "reference: ";
-
-    private static  String arrayType = "primitives array: ";
-
-    private  static String matrixType = "primitives matrix: ";
-
-    private static void printMessage(String message) {
+    private static void printMessage(Message message) {
         System.out.println(message);
     }
 
     private static void printBuffer() {
+        /*
         switch (last) {
             case INTEGER:
                 printMessage(primitiveType + savedInt);
@@ -36,6 +28,7 @@ public class Logger {
                 break;
         }
         System.out.println();
+         */
     }
 
     private static void resetBuffer() {
@@ -77,74 +70,34 @@ public class Logger {
     }
 
     public static void log(int message) {
-        if (last != types.INTEGER && last != null) {
-            printBuffer();
-            resetBuffer();
-        }
-        long safe = savedInt;
-        safe += message;
-        if(safe > Integer.MAX_VALUE){
-            printBuffer();
-            resetBuffer();
-            savedInt = message;
-        }
-        else {
-            savedInt += message;
-        }
-        last = types.INTEGER;
+        loggerController.log(message);
     }
 
     public static void log(byte message) {
-        if (last != types.BYTE && last != null) {
-            printBuffer();
-            resetBuffer();
-        }
-        long safe = savedByte;
-        safe += message;
-        if(safe > Byte.MAX_VALUE){
-            printBuffer();
-            resetBuffer();
-            savedByte = message;
-        }
-        else {
-            savedByte += message;
-        }
-        last = types.BYTE;
+        loggerController.log(message);
     }
 
     public static void log(int[] message) {
-        String strForPrint = getStringFromArray(message);
-        printMessage(arrayType + strForPrint);
+        loggerController.log(message);
     }
 
     public static void log(int[][] message) {
-        System.out.println(matrixType + "{");
-        for (int[] arr : message) {
-            String strForPrint = getStringFromArray(arr);
-            printMessage(arrayType + strForPrint);
-        }
-        System.out.println("}");
+        loggerController.log(message);
     }
 
     public static void log(char message) {
-        printMessage(charType + message);
+        loggerController.log(message);
     }
 
     public static void log(String message) {
-        if ((last != types.STRING && last != null) || (savedString != message && last != null)) {
-            printBuffer();
-            resetBuffer();
-        }
-        savedString = message;
-        stringCounter++;
-        last = types.STRING;
+        loggerController.log(message);
     }
 
     public static void log(boolean message) {
-        printMessage(primitiveType + message);
+        loggerController.log( new BoolMessage(message) );
     }
 
     public static void log(Object message) {
-        printMessage(referenceType + message);
+        loggerController.log(message);
     }
 }
