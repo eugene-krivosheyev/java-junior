@@ -20,15 +20,17 @@ public class ByteMessage extends AbstractMessage {
     @Override
     public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
         byte resultByteSum = 0;
-        for (Object currentValue : listOfLog) {
-            if (Byte.MAX_VALUE - resultByteSum < ((ByteMessage)currentValue).byteValue) {
-                resultByteSum = (byte) (((ByteMessage)currentValue).byteValue - (Byte.MAX_VALUE - resultByteSum));
+        for (AbstractMessage currentMessage : listOfLog) {
+            Byte currentValue = ((ByteMessage)currentMessage).byteValue;
+
+            if (Byte.MAX_VALUE - resultByteSum < currentValue) {
+                resultByteSum = (byte) (currentValue - (Byte.MAX_VALUE - resultByteSum));
                 messageController
                         .append(PREFIX)
                         .append(Byte.MAX_VALUE)
                         .append(lineSeparator());
             } else {
-                resultByteSum += ((ByteMessage)currentValue).byteValue;
+                resultByteSum += currentValue;
             }
         }
         messageController.append(PREFIX).append(resultByteSum);

@@ -21,6 +21,7 @@ public class StringMessage extends AbstractMessage {
     public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
         String templateMultiple = PREFIX + "%s " + "(x%o)";
         String templateUnique = PREFIX + "%s";
+
         String prevValue = ((StringMessage) listOfLog.get(0)).stringValue;
         int counter = 0;
 

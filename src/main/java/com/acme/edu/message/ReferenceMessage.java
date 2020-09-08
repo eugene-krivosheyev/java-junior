@@ -12,14 +12,13 @@ public class ReferenceMessage extends AbstractMessage{
     private static final String PREFIX = "reference: ";
 
     public ReferenceMessage(Object message) {
-        referenceValue = message;
+        this.referenceValue = message;
     }
 
     @Override
     public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
-        messageController
-                .append(PREFIX)
-                .append(((ReferenceMessage)listOfLog.get(0)).referenceValue);
+        Object preparedReference = ((ReferenceMessage) listOfLog.get(0)).referenceValue;
+        messageController.append(PREFIX).append(preparedReference);
     }
 
     @Override

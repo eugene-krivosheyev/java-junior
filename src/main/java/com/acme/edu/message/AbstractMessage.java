@@ -8,10 +8,14 @@ import java.util.ArrayList;
  * for every message type.
  */
 public abstract class AbstractMessage {
-
     public static StringBuilder messageController = new StringBuilder();
 
     public abstract void prepareMessage(ArrayList<AbstractMessage> listOfLog);
     public abstract boolean isSameType(AbstractMessage message);
 
+    public String getPreparedMessage() {
+        String preparedMessage = messageController.toString();
+        messageController.setLength(0);
+        return preparedMessage;
+    };
 }
