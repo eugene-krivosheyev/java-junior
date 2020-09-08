@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import static java.lang.System.lineSeparator;
 
-public class ByteMessage implements AbstractMessage {
-    static public String PREFIX = "primitive: ";
+public class ByteMessage extends AbstractMessage {
 
     public ByteMessage(ArrayList<Object> listOfLog) {
+        PREFIX = "primitive: ";
         messageController.setLength(0);
         prepareMessage(listOfLog);
     }

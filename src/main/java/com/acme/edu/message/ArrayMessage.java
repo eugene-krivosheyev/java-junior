@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class ArrayMessage implements AbstractMessage {
-    static public String PREFIX = "primitives array: ";
+public class ArrayMessage extends AbstractMessage {
 
     public ArrayMessage(int[] message) {
+        PREFIX = "primitives array: ";
         messageController.setLength(0);
         prepareMessage(new ArrayList<>(Collections.singleton(message)));
     }
