@@ -10,9 +10,10 @@ public class Logger {
 
     private static LoggerController loggerController = new LoggerController(new ConsoleSaver());
 
-    public static void flush(){
+    public static void flush() {
         loggerController.flush();
     }
+
     public static void log(int message) {
         loggerController.log(new IntCommand(message));
     }

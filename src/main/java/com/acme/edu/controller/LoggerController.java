@@ -1,7 +1,6 @@
 package com.acme.edu.controller;
 
 import com.acme.edu.command.LoggerCommand;
-import com.acme.edu.saver.ConsoleSaver;
 import com.acme.edu.saver.LoggerSaver;
 
 public class LoggerController {
@@ -13,16 +12,17 @@ public class LoggerController {
     }
 
     public void log(LoggerCommand newLoggerCommand) {
-        if (currentLoggerCommand == null){
+        if (currentLoggerCommand == null) {
             this.currentLoggerCommand = newLoggerCommand;
-        }else if (newLoggerCommand != null && newLoggerCommand.isSameType(this.currentLoggerCommand)) {
+        } else if (newLoggerCommand != null && newLoggerCommand.isSameType(this.currentLoggerCommand)) {
             currentLoggerCommand = currentLoggerCommand.accumulate(newLoggerCommand);
         } else {
             loggerSaver.saveMessage(currentLoggerCommand);
             this.currentLoggerCommand = newLoggerCommand;
         }
     }
-    public void flush(){
+
+    public void flush() {
         loggerSaver.saveMessage(currentLoggerCommand);
         currentLoggerCommand = null;
     }

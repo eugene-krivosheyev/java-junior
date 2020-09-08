@@ -2,15 +2,15 @@ package com.acme.edu.command;
 
 import com.acme.edu.message.Prefix;
 
-public class StringCommand implements LoggerCommand{
+public class StringCommand implements LoggerCommand {
     private String stringAccumulator = "";
     private int stringDuplicates = 0;
 
-    public StringCommand(String message){
+    public StringCommand(String message) {
         stringAccumulator = message;
     }
 
-    private StringCommand(String stringAccumulator, int stringDuplicates){
+    private StringCommand(String stringAccumulator, int stringDuplicates) {
         this.stringAccumulator = stringAccumulator;
         this.stringDuplicates = stringDuplicates;
     }
@@ -27,10 +27,10 @@ public class StringCommand implements LoggerCommand{
 
     @Override
     public LoggerCommand accumulate(LoggerCommand newLoggerCommand) {
-        final StringCommand stringCommand = (StringCommand)newLoggerCommand;
-        if (stringCommand.stringAccumulator.equals(stringAccumulator)){
+        final StringCommand stringCommand = (StringCommand) newLoggerCommand;
+        if (stringCommand.stringAccumulator.equals(stringAccumulator)) {
             return new StringCommand(stringAccumulator, ++stringDuplicates);
-        }else{
+        } else {
             return new StringCommand(stringAccumulator + stringCommand.stringAccumulator);
         }
     }
