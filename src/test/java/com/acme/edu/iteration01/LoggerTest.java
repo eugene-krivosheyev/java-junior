@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
@@ -39,6 +39,23 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+    @Test
+    public void shouldLogString() throws IOException {
+        //region when
+        Logger.log("test string 1");
+        Logger.log("other str");
+        Logger.flush();
+        //endregion
+
+        //region then
+        assertSysoutContains("string: ");
+        assertSysoutContains("test string 1");
+        assertSysoutContains("other str");
+        //endregion
+    }
+
+//TODO: Uncomment when types will be implemented
+//
 //    @Test
 //    public void shouldLogByte() throws IOException {
 //        //region when
@@ -73,20 +90,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 //        //endregion
 //    }
 
-    @Test
-    public void shouldLogString() throws IOException {
-        //region when
-        Logger.log("test string 1");
-        Logger.log("other str");
-        Logger.flush();
-        //endregion
-
-        //region then
-        assertSysoutContains("string: ");
-        assertSysoutContains("test string 1");
-        assertSysoutContains("other str");
-        //endregion
-    }
 
 //    @Test
 //    public void shouldLogBoolean() throws IOException {
