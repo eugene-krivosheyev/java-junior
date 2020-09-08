@@ -8,16 +8,19 @@ import java.util.Collections;
  * @see AbstractMessage
  */
 public class CharMessage extends AbstractMessage{
+    protected char charValue;
+    private static final String PREFIX = "char: ";
+
     public CharMessage(char message) {
-        PREFIX = "char: ";
-        messageController.setLength(0);
-        messageController
-                .append(PREFIX)
-                .append(message);
+        charValue = message;
     }
 
     @Override
-    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {};
+    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
+        messageController
+                .append(PREFIX)
+                .append(((CharMessage)listOfLog.get(0)).charValue);
+    };
 
     @Override
     public boolean isSameType(AbstractMessage message) {

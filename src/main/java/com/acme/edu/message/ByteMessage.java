@@ -11,10 +11,9 @@ import static java.lang.System.lineSeparator;
  */
 public class ByteMessage extends AbstractMessage {
     protected Byte byteValue;
+    private static final String PREFIX = "primitive: ";
 
     public ByteMessage(Byte message) {
-        messageController.setLength(0);
-        PREFIX = "primitive: ";
         this.byteValue = message;
     }
 
@@ -22,14 +21,14 @@ public class ByteMessage extends AbstractMessage {
     public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
         byte resultByteSum = 0;
         for (Object currentValue : listOfLog) {
-            if (Byte.MAX_VALUE - resultByteSum < (byte) currentValue) {
-                resultByteSum = (byte) ((byte) currentValue - (Byte.MAX_VALUE - resultByteSum));
+            if (Byte.MAX_VALUE - resultByteSum < ((ByteMessage)currentValue).byteValue) {
+                resultByteSum = (byte) (((ByteMessage)currentValue).byteValue - (Byte.MAX_VALUE - resultByteSum));
                 messageController
                         .append(PREFIX)
                         .append(Byte.MAX_VALUE)
                         .append(lineSeparator());
             } else {
-                resultByteSum += (byte) currentValue;
+                resultByteSum += ((ByteMessage)currentValue).byteValue;
             }
         }
         messageController.append(PREFIX).append(resultByteSum);

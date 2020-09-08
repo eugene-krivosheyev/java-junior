@@ -64,6 +64,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogChar() throws IOException {
         //region when
         LoggerFacade.log('a');
+        LoggerFacade.flushStart();
         LoggerFacade.log('b');
         LoggerFacade.flushStart();
         //endregion
@@ -95,6 +96,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogBoolean() throws IOException {
         //region when
         LoggerFacade.log(true);
+        LoggerFacade.flushStart();
         LoggerFacade.log(false);
         LoggerFacade.flushStart();
         //endregion

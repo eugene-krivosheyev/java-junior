@@ -5,6 +5,12 @@ import com.acme.edu.saver.Saver;
 
 import java.util.ArrayList;
 
+/**
+ * Controller for logged messages. Collects messages of the
+ * same type to listOfLog and then process them in flush function
+ * for further output
+ *
+ */
 public class LoggerController {
     private final Saver saver;
     private AbstractMessage currentState = null;
@@ -14,28 +20,33 @@ public class LoggerController {
         this.saver = saver;
     }
 
+    /**
+     * Collects messages if they are of the same type or save them
+     *
+     * @param message
+     */
     public void log(AbstractMessage message) {
-        if (currentState == null) {
+        if (listOfLog.size() == 0) {
             currentState = message;
+            listOfLog.add(message);
             return;
         }
-
-        if (currentState.isSameType(message)) {
-            listOfLog.add(message);
-        } else {
+        if (!currentState.isSameType(message)) {
             flushStart();
-            listOfLog.clear();
         }
+        listOfLog.add(message);
         currentState = message;
+
     }
 
+    /**
+     * Prepares list of messages and saves them
+     */
     public void flushStart() {
         AbstractMessage firstToLog = listOfLog.get(0);
-
-        if (listOfLog.size() == 1) {
-            this.saver.save(firstToLog);
-        } else {
-            firstToLog.prepareMessage(listOfLog);
-        }
+        firstToLog.prepareMessage(listOfLog);
+        listOfLog.clear();
+        saver.save(AbstractMessage.messageController.toString());
+        AbstractMessage.messageController.setLength(0);
     }
 }
