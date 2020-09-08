@@ -1,7 +1,7 @@
 package com.acme.edu;
 
 import com.acme.edu.message.LoggerMessage;
-import com.acme.edu.utils.Saver;
+import com.acme.edu.saver.Saver;
 
 public class LoggerController {
     private LoggerMessage currentAccumulatedMessage = null; // type

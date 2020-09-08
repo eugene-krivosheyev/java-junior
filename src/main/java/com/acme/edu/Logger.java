@@ -1,7 +1,7 @@
 package com.acme.edu;
 
 import com.acme.edu.message.*;
-import com.acme.edu.utils.ConsoleSaver;
+import com.acme.edu.saver.ConsoleSaver;
 
 public class Logger {
 

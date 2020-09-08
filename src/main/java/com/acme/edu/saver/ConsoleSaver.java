@@ -1,4 +1,4 @@
-package com.acme.edu.utils;
+package com.acme.edu.saver;
 
 public class ConsoleSaver implements Saver {
     @Override

@@ -2,7 +2,7 @@ package com.acme.edu.message;
 
 import com.acme.edu.data.MessagePrefix;
 import com.acme.edu.data.MessageType;
-import com.acme.edu.utils.Saver;
+import com.acme.edu.saver.Saver;
 
 public class ByteMessage extends LoggerMessage{
     private byte message;

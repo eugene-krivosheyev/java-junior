@@ -3,7 +3,7 @@ package com.acme.edu.message;
 import com.acme.edu.data.MessagePrefix;
 import com.acme.edu.data.MessageType;
 
-import com.acme.edu.utils.Saver;
+import com.acme.edu.saver.Saver;
 
 /**
  * Class that represents input message of type Int
@@ -12,8 +12,8 @@ public class IntMessage extends LoggerMessage {
 
     private int message;
 
-    private int maxIntValueAmount = 0; // overflow
-    private int currentIntMessage; // sum int
+    private int maxIntValueAmount = 0;
+    private int currentIntMessage;
 
     public IntMessage(int message) {
         super(MessageType.INT, MessagePrefix.PRIMITIVE_PREFIX);
