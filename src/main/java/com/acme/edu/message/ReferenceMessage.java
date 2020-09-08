@@ -12,13 +12,16 @@ public class ReferenceMessage extends AbstractMessage{
     public ReferenceMessage(Object message) {
         PREFIX = "reference: ";
         messageController.setLength(0);
-        prepareMessage(new ArrayList<>(Collections.singleton(message)));
+        messageController
+                .append(PREFIX)
+                .append(message);
     }
 
     @Override
-    public void prepareMessage(ArrayList<Object> listOfLog) {
-        messageController
-                .append(PREFIX)
-                .append(listOfLog.get(0));
+    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {}
+
+    @Override
+    public boolean isSameType(AbstractMessage message) {
+        return message instanceof ReferenceMessage;
     }
 }

@@ -10,22 +10,22 @@ import static java.lang.System.lineSeparator;
  * @see AbstractMessage
  */
 public class StringMessage extends AbstractMessage {
-
-    public StringMessage(ArrayList<Object> listOfLog) {
-        PREFIX = "string: ";
+    public String stringValue;
+    public StringMessage(String message) {
         messageController.setLength(0);
-        prepareMessage(listOfLog);
+        PREFIX = "string: ";
+        this.stringValue = message;
     }
 
     @Override
-    public void prepareMessage(ArrayList<Object> listOfLog) {
+    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
         String templateMultiple = PREFIX + "%s " + "(x%o)";
         String templateUnique = PREFIX + "%s";
-        String prevValue = (String) listOfLog.get(0);
+        String prevValue = ((StringMessage) listOfLog.get(0)).stringValue;
         int counter = 0;
 
         for (int i = 0; i < listOfLog.size(); i++) {
-            String currentValue = (String) listOfLog.get(i);
+            String currentValue = ((StringMessage) listOfLog.get(i)).stringValue;
             if (i == listOfLog.size() - 1) {
                 messageController
                         .append(counter == 0 ?
@@ -46,5 +46,10 @@ public class StringMessage extends AbstractMessage {
             }
         }
         messageController.delete(messageController.length() - 2, messageController.length());
+    }
+
+    @Override
+    public boolean isSameType(AbstractMessage message) {
+        return message instanceof StringMessage;
     }
 }

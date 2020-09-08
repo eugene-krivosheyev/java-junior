@@ -10,14 +10,16 @@ import static java.lang.System.lineSeparator;
  * @see AbstractMessage
  */
 public class IntMessage extends AbstractMessage {
-    public IntMessage(ArrayList<Object> listOfLog) {
-        PREFIX = "primitive: ";
+    protected int intValue;
+
+    public IntMessage(int message) {
         messageController.setLength(0);
-        prepareMessage(listOfLog);
+        PREFIX = "primitive: ";
+        this.intValue = message;
     }
 
     @Override
-    public void prepareMessage(ArrayList<Object> listOfLog) {
+    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
         int resultIntSum = 0;
         for (Object currentValue : listOfLog) {
             if (Integer.MAX_VALUE - resultIntSum < (int) currentValue) {
@@ -31,5 +33,10 @@ public class IntMessage extends AbstractMessage {
             }
         }
         messageController.append(PREFIX).append(resultIntSum);
+    }
+
+    @Override
+    public boolean isSameType(AbstractMessage message) {
+        return message instanceof IntMessage;
     }
 }

@@ -10,15 +10,16 @@ import static java.lang.System.lineSeparator;
  * @see AbstractMessage
  */
 public class ByteMessage extends AbstractMessage {
+    protected Byte byteValue;
 
-    public ByteMessage(ArrayList<Object> listOfLog) {
-        PREFIX = "primitive: ";
+    public ByteMessage(Byte message) {
         messageController.setLength(0);
-        prepareMessage(listOfLog);
+        PREFIX = "primitive: ";
+        this.byteValue = message;
     }
 
     @Override
-    public void prepareMessage(ArrayList<Object> listOfLog) {
+    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
         byte resultByteSum = 0;
         for (Object currentValue : listOfLog) {
             if (Byte.MAX_VALUE - resultByteSum < (byte) currentValue) {
@@ -32,5 +33,10 @@ public class ByteMessage extends AbstractMessage {
             }
         }
         messageController.append(PREFIX).append(resultByteSum);
+    }
+
+    @Override
+    public boolean isSameType(AbstractMessage message) {
+        return message instanceof ByteMessage;
     }
 }

@@ -16,5 +16,7 @@ public abstract class AbstractMessage {
         return messageController.toString();
     }
 
-    protected abstract void prepareMessage(ArrayList<Object> listOfLog);
+    public abstract void prepareMessage(ArrayList<AbstractMessage> listOfLog);
+    public abstract boolean isSameType(AbstractMessage message);
+
 }

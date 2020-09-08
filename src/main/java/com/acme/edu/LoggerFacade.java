@@ -19,15 +19,15 @@ public class LoggerFacade {
      * @see AbstractMessage
      */
     public static void log(int message) {
-        controller.addToLogList(message);
+        controller.log(new IntMessage(message));
     }
 
     public static void log(byte message) {
-        controller.addToLogList(message);
+        controller.log(new ByteMessage(message));
     }
 
     public static void log(String message) {
-        controller.addToLogList(message);
+        controller.log(new StringMessage(message));
     }
 
     public static void log(char message) {

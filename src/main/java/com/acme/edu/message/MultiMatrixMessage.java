@@ -15,16 +15,20 @@ public class MultiMatrixMessage extends AbstractMessage {
     public MultiMatrixMessage(int[][][][] message) {
         PREFIX = "primitives multimatrix: ";
         messageController.setLength(0);
-        prepareMessage(new ArrayList<>(Collections.singleton(message)));
+        String preparedMessage =
+                Arrays.deepToString(message)
+                        .replace("]", lineSeparator() + "]")
+                        .replace("[", "[" + lineSeparator());
+        messageController.append(PREFIX).append(preparedMessage);
     }
 
     @Override
-    public void prepareMessage(ArrayList<Object> listOfLog) {
-        String preparedMessage =
-                Arrays.deepToString((Object[]) listOfLog.get(0))
-                .replace("]", lineSeparator() + "]")
-                .replace("[", "[" + lineSeparator());
+    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {}
 
-        messageController.append(PREFIX).append(preparedMessage);
+
+
+    @Override
+    public boolean isSameType(AbstractMessage message) {
+        return message instanceof MultiMatrixMessage;
     }
 }
