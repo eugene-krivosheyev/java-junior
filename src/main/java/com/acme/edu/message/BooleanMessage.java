@@ -2,14 +2,12 @@ package com.acme.edu.message;
 
 import com.acme.edu.data.MessagePrefix;
 import com.acme.edu.data.MessageType;
-import com.acme.edu.utils.ConsoleSaver;
+import com.acme.edu.utils.Saver;
 
 public class BooleanMessage extends LoggerMessage{
     private boolean message;
 
     private boolean currentBooleanMessage = false;
-
-    ConsoleSaver consoleSaver = new ConsoleSaver();
 
     public BooleanMessage(boolean message) {
         super(MessageType.BOOLEAN, MessagePrefix.PRIMITIVE_PREFIX);
@@ -32,8 +30,8 @@ public class BooleanMessage extends LoggerMessage{
     }
 
     @Override
-    public void printMessageBuffer() {
-        consoleSaver.print(this.createMessageWithPrefix());
+    public void printMessageBuffer(Saver saver) {
+        saver.print(this.createMessageWithPrefix());
         this.currentBooleanMessage = false;
     }
 

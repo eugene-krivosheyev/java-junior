@@ -2,14 +2,12 @@ package com.acme.edu.message;
 
 import com.acme.edu.data.MessagePrefix;
 import com.acme.edu.data.MessageType;
-import com.acme.edu.utils.ConsoleSaver;
+import com.acme.edu.utils.Saver;
 
 public class ObjectMessage extends LoggerMessage{
     private Object message;
 
     private Object currentObjectMessage = null;
-
-    ConsoleSaver consoleSaver = new ConsoleSaver();
 
     public ObjectMessage(Object message) {
         super(MessageType.OBJECT, MessagePrefix.REFERENCE_PREFIX);
@@ -32,8 +30,8 @@ public class ObjectMessage extends LoggerMessage{
     }
 
     @Override
-    public void printMessageBuffer() {
-        consoleSaver.print(this.createMessageWithPrefix());
+    public void printMessageBuffer(Saver saver) {
+        saver.print(this.createMessageWithPrefix());
         this.currentObjectMessage = null;
     }
 

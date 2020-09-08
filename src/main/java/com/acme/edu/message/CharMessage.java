@@ -2,14 +2,12 @@ package com.acme.edu.message;
 
 import com.acme.edu.data.MessagePrefix;
 import com.acme.edu.data.MessageType;
-import com.acme.edu.utils.ConsoleSaver;
+import com.acme.edu.utils.Saver;
 
 public class CharMessage extends LoggerMessage{
     private char message;
 
     private String currentCharMessage = ""; // sum int
-
-    ConsoleSaver consoleSaver = new ConsoleSaver();
 
     public CharMessage(char message) {
         super(MessageType.CHAR, MessagePrefix.CHAR_PREFIX);
@@ -32,9 +30,9 @@ public class CharMessage extends LoggerMessage{
     }
 
     @Override
-    public void printMessageBuffer() {
+    public void printMessageBuffer(Saver saver) {
         if ("".equals(this.currentCharMessage)) return;
-        consoleSaver.print(this.createMessageWithPrefix());
+        saver.print(this.createMessageWithPrefix());
         this.currentCharMessage = "";
     }
 

@@ -2,14 +2,12 @@ package com.acme.edu.message;
 
 import com.acme.edu.data.MessagePrefix;
 import com.acme.edu.data.MessageType;
-import com.acme.edu.utils.ConsoleSaver;
+import com.acme.edu.utils.Saver;
 
 public class ArrayMessage extends LoggerMessage{
     private int[] intArray;
 
     private int[] currentIntArray = null;
-
-    ConsoleSaver consoleSaver = new ConsoleSaver();
 
     public ArrayMessage(int[] message) {
         super(MessageType.ARRAY, MessagePrefix.ARRAY_PREFIX);
@@ -37,8 +35,8 @@ public class ArrayMessage extends LoggerMessage{
     }
 
     @Override
-    public void printMessageBuffer() {
-        consoleSaver.print(this.createMessageWithPrefix());
+    public void printMessageBuffer(Saver saver) {
+        saver.print(this.createMessageWithPrefix());
         this.currentIntArray = null;
     }
 

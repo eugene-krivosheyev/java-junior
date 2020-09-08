@@ -2,15 +2,13 @@ package com.acme.edu.message;
 
 import com.acme.edu.data.MessagePrefix;
 import com.acme.edu.data.MessageType;
-import com.acme.edu.utils.ConsoleSaver;
+import com.acme.edu.utils.Saver;
 
 public class ByteMessage extends LoggerMessage{
     private byte message;
 
     private byte maxByteValueAmount = 0; // overflow
     private byte currentByteMessage = 0; // sum int
-
-    ConsoleSaver consoleSaver = new ConsoleSaver();
 
     public ByteMessage(byte message) {
         super(MessageType.BYTE, MessagePrefix.PRIMITIVE_PREFIX);
@@ -43,10 +41,10 @@ public class ByteMessage extends LoggerMessage{
     }
 
     @Override
-    public void printMessageBuffer() {
-        consoleSaver.print(this.createMessageWithPrefix());
+    public void printMessageBuffer(Saver saver) {
+        saver.print(this.createMessageWithPrefix());
         for (int i = 0; i < maxByteValueAmount; i++) {
-            consoleSaver.print(this.createMessageWithOverflow());
+            saver.print(this.createMessageWithOverflow());
         }
         this.currentByteMessage = 0;
         this.maxByteValueAmount = 0;

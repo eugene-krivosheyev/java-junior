@@ -1,34 +1,51 @@
 package com.acme.edu;
 
-import com.acme.edu.data.MessagePrefix;
-import com.acme.edu.data.MessageType;
-import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.LoggerMessage;
-import com.acme.edu.utils.ConsoleSaver;
+import com.acme.edu.utils.Saver;
 
 public class LoggerController {
-    private LoggerMessage currentState = null; // type
+    private LoggerMessage currentAccumulatedMessage = null; // type
+    private Saver saver;
 
-    public void postProcessing() {
-        this.currentState.printMessageBuffer();
+    public LoggerController(Saver saver) {
+        this.saver = saver;
     }
 
+    /**
+     * Save decorated message, which is accumulated until this moment
+     *
+     * @see LoggerMessage
+     */
+    public void postProcessing() {
+        this.currentAccumulatedMessage.printMessageBuffer(saver);
+    }
+
+    /**
+     * Check the type of input message
+     * If the type is the same as the type of previous message -> accumulate massage
+     * Else save the decorated accumulated message
+     *
+     * @param message
+     */
     public void log(LoggerMessage message) {
-        if (currentState == null) {
-            this.currentState = message;
-            currentState.accumulateMessage(message);
+        if (currentAccumulatedMessage == null) {
+            this.currentAccumulatedMessage = message;
+            currentAccumulatedMessage.accumulateMessage(message);
             return;
         }
-        if (currentState.isSameType(message)) {
-            currentState.accumulateMessage(message);
+        if (currentAccumulatedMessage.isSameType(message)) {
+            currentAccumulatedMessage.accumulateMessage(message);
         } else {
-            currentState.printMessageBuffer();
-            this.currentState = message; // loggerm = intm
-            currentState.accumulateMessage(message);
+            currentAccumulatedMessage.printMessageBuffer(saver);
+            this.currentAccumulatedMessage = message; // loggerm = intm
+            currentAccumulatedMessage.accumulateMessage(message);
         }
     }
 
+    /**
+     * Flush the content of the currentState message
+     */
     public void clearLoggerMassageCash() {
-        this.currentState = null;
+        this.currentAccumulatedMessage = null;
     }
 }

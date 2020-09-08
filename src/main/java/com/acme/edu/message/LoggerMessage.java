@@ -2,6 +2,7 @@ package com.acme.edu.message;
 
 import com.acme.edu.data.MessagePrefix;
 import com.acme.edu.data.MessageType;
+import com.acme.edu.utils.Saver;
 
 /**
  * Class that represents input messages
@@ -17,29 +18,29 @@ public abstract class LoggerMessage {
     }
 
     /**
-     * Function for getting field {@link LoggerMessage#messageType}
+     * Get field {@link LoggerMessage#messageType} content
      */
     public MessageType getMessageType() {
         return messageType;
     }
 
     /**
-     * Function for accumulating current message with @param message
+     * Accumulate current message with @param message
      */
     public abstract void accumulateMessage(LoggerMessage message);
 
     /**
-     * Function for printing current message
+     * Save accumulated decorated message
      */
-    public abstract void printMessageBuffer();
+    public abstract void printMessageBuffer(Saver saver);
 
     /**
-     * Function for checking if current {@link LoggerMessage#messageType} is the same as in @param message
+     * Check if current {@link LoggerMessage#messageType} is the same as in @param message
      */
     public abstract boolean isSameType(LoggerMessage message);
 
     /**
-     * Function for creating message with prefix from {@link LoggerMessage#referencePrefix}
+     * Decorate message with prefix from {@link LoggerMessage#referencePrefix}
      */
     public abstract String createMessageWithPrefix();
 
