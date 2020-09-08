@@ -23,12 +23,13 @@ public class StringCommand extends LoggerMessage {
 
     @Override
     public void accumulate(LoggerMessage newMessage) {
-        if(message.equals(newMessage.message)){
+        if (message.equals(newMessage.message)) {
             counter++;
         } else {
-            message += " (x" + counter +")" + System.lineSeparator();
+            message += " (x" + counter + ")" + System.lineSeparator();
             counter = 0;
-            super.accumulate(newMessage);
+            final StringCommand finalNewMessage = (StringCommand) newMessage;
+            message = message + finalNewMessage.message;
             message = newMessage.message;
         }
     }

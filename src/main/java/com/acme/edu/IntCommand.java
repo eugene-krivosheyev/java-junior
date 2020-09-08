@@ -11,7 +11,7 @@ public class IntCommand extends LoggerMessage {
 
     @Override
     public String getMessage() {
-        return PREFIX_PRIMITIVE + message;
+        return PREFIX_PRIMITIVE + this.message;
     }
 
     @Override
@@ -21,9 +21,8 @@ public class IntCommand extends LoggerMessage {
 
     @Override
     public void accumulate(LoggerMessage newMessage) {
-        //if (filter.isNotOverflowed(newMessage)) {
-            super.accumulate(newMessage);
-        //}
+        final IntCommand finalNewMessage = (IntCommand) newMessage;
+        message = message + finalNewMessage.message;
     }
 
 /*
