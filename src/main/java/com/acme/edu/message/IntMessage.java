@@ -5,6 +5,9 @@ import com.acme.edu.data.MessageType;
 
 import com.acme.edu.utils.ConsoleSaver;
 
+/**
+ * Class that represents input message of type Int
+ */
 public class IntMessage extends LoggerMessage {
 
     private int message;

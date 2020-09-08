@@ -1,5 +1,8 @@
 package com.acme.edu.data;
 
+/**
+ * String prefixes that need to be concatenated with input messages
+ */
 public enum MessagePrefix {
 
     PRIMITIVE_PREFIX("primitive: "),
