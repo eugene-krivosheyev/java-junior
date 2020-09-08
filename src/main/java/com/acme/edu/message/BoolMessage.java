@@ -8,17 +8,19 @@ import java.util.Collections;
  * @see AbstractMessage
  */
 public class BoolMessage extends AbstractMessage {
+    protected boolean boolValue;
+    private static final String PREFIX = "primitive: ";
 
     public BoolMessage(boolean message) {
-        PREFIX = "primitive: ";
-        messageController.setLength(0);
-        messageController
-                .append(PREFIX)
-                .append(message);
+        boolValue = message;
     }
 
     @Override
-    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {}
+    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
+        messageController
+                .append(PREFIX)
+                .append(((BoolMessage)listOfLog.get(0)).boolValue);
+    }
 
     @Override
     public boolean isSameType(AbstractMessage message) {

@@ -11,9 +11,9 @@ import static java.lang.System.lineSeparator;
  */
 public class StringMessage extends AbstractMessage {
     public String stringValue;
+    private static final String PREFIX = "string: ";
+
     public StringMessage(String message) {
-        messageController.setLength(0);
-        PREFIX = "string: ";
         this.stringValue = message;
     }
 

@@ -11,21 +11,21 @@ import static java.lang.System.lineSeparator;
  * @see AbstractMessage
  */
 public class MultiMatrixMessage extends AbstractMessage {
+    protected int[][][][] multiMatrixValue;
+    private static final String PREFIX = "primitives multimatrix: ";
 
     public MultiMatrixMessage(int[][][][] message) {
-        PREFIX = "primitives multimatrix: ";
-        messageController.setLength(0);
+        multiMatrixValue = message;
+    }
+
+    @Override
+    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
         String preparedMessage =
-                Arrays.deepToString(message)
+                Arrays.deepToString(((MultiMatrixMessage)listOfLog.get(0)).multiMatrixValue)
                         .replace("]", lineSeparator() + "]")
                         .replace("[", "[" + lineSeparator());
         messageController.append(PREFIX).append(preparedMessage);
     }
-
-    @Override
-    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {}
-
-
 
     @Override
     public boolean isSameType(AbstractMessage message) {

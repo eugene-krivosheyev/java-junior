@@ -8,16 +8,18 @@ import java.util.Arrays;
  * @see AbstractMessage
  */
 public class ArrayMessage extends AbstractMessage {
+    protected int[] arrayValue;
+    private static final String PREFIX = "primitives array: ";
 
     public ArrayMessage(int[] message) {
-        PREFIX = "primitives array: ";
-        messageController.setLength(0);
-        String preparedMessage = Arrays.toString(message);
-        messageController.append(PREFIX).append(preparedMessage);
+        arrayValue = message;
     }
 
     @Override
-    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {}
+    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
+        String preparedMessage = Arrays.toString(((ArrayMessage)listOfLog.get(0)).arrayValue);
+        messageController.append(PREFIX).append(preparedMessage);
+    }
 
     @Override
     public boolean isSameType(AbstractMessage message) {

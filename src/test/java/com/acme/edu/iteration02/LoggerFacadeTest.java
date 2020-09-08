@@ -30,12 +30,12 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
         LoggerFacade.log("str 1");
-        LoggerFacade.flushStart();
+        //LoggerFacade.flushStart();
         LoggerFacade.log(1);
         LoggerFacade.log(2);
-        LoggerFacade.flushStart();
+        //LoggerFacade.flushStart();
         LoggerFacade.log("str 2");
-        LoggerFacade.flushStart();
+        //LoggerFacade.flushStart();
         LoggerFacade.log(0);
         LoggerFacade.flushStart();
         //endregion

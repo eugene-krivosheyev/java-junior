@@ -8,17 +8,19 @@ import java.util.Collections;
  * @see AbstractMessage
  */
 public class ReferenceMessage extends AbstractMessage{
+    protected Object referenceValue;
+    private static final String PREFIX = "reference: ";
 
     public ReferenceMessage(Object message) {
-        PREFIX = "reference: ";
-        messageController.setLength(0);
-        messageController
-                .append(PREFIX)
-                .append(message);
+        referenceValue = message;
     }
 
     @Override
-    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {}
+    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
+        messageController
+                .append(PREFIX)
+                .append(((ReferenceMessage)listOfLog.get(0)).referenceValue);
+    }
 
     @Override
     public boolean isSameType(AbstractMessage message) {

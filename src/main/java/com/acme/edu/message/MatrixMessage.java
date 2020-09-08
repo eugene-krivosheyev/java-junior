@@ -11,17 +11,19 @@ import static java.lang.System.lineSeparator;
  * @see AbstractMessage
  */
 public class MatrixMessage extends AbstractMessage {
+    protected int[][] matrixValue;
+    private static final String PREFIX = "primitives matrix: ";
 
     public MatrixMessage(int[][] message) {
-        PREFIX = "primitives matrix: ";
-        messageController.setLength(0);
-        String preparedMessage = Arrays.deepToString(message)
-                        .replace("], ", "]" + lineSeparator());
-        messageController.append(PREFIX).append(preparedMessage);
+        matrixValue = message;
     }
 
     @Override
-    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {};
+    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
+        String preparedMessage = Arrays.deepToString(((MatrixMessage)listOfLog.get(0)).matrixValue)
+                .replace("], ", "]" + lineSeparator());
+        messageController.append(PREFIX).append(preparedMessage);
+    };
 
     @Override
     public boolean isSameType(AbstractMessage message) {

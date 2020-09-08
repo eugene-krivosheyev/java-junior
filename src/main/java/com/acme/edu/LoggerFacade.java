@@ -6,10 +6,8 @@ import com.acme.edu.saver.LogSaver;
 /**
  * Facade for logger. Gets different types of message and
  * redirects to specific AbstractMessage implementation.
- * Integer, byte and string messages are being saved to
- * log list in controller for further flush.
  *
- * @version 1.0.3
+ * @version 2.0.0
  */
 public class LoggerFacade {
     static LoggerController controller = new LoggerController(new LogSaver());
@@ -56,7 +54,8 @@ public class LoggerFacade {
 
 
     /**
-     * Section for flush interface. Flush in necessary at the end of work!
+     * Section for flush interface.
+     * Flush in necessary at the end of work or in case of switching types.
      */
     public static void flushStart() {
         controller.flushStart();
