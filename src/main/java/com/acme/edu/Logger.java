@@ -1,19 +1,16 @@
 package com.acme.edu;
 
 
+import com.acme.edu.command.IntMessage;
+import com.acme.edu.command.StringMessage;
+import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class Logger {
     private static LoggerController controller = new LoggerController(new ConsoleLoggerSaver());
 
-    public static String type = "";
-    public static int int_buffer = 0;
-    public static byte byte_buffer = 0;
-    public static String string_buffer = "";
-    public static int counter = 0;*/
-
 
     public static void log(int message) {
-        controller.log(new IntCommand(message));
+        controller.log(new IntMessage(message));
     }
 /*
     public static void log(byte message) {
@@ -29,7 +26,7 @@ public class Logger {
     }
 */
     public static void log(String message) {
-        controller.log(new StringCommand(message));
+        controller.log(new StringMessage(message));
     }
 /*
     public static void log(Object message) {

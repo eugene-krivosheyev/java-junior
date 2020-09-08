@@ -1,6 +1,6 @@
-package com.acme.edu;
+package com.acme.edu.command;
 
-public class MatrixCommand implements LoggerMessage {
+public class MatrixMessage extends LoggerMessage {
     @Override
     public String getMessage() {
         return null;
@@ -11,10 +11,6 @@ public class MatrixCommand implements LoggerMessage {
         return false;
     }
 
-    @Override
-    public void accumulate(LoggerMessage newMessage) {
-
-    }
     /*StringBuilder message = new StringBuilder("{"+ lineSeparator());
         for(int i = 0; i < matrix[0].length; i++){
         message.append("{");

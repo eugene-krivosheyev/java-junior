@@ -1,6 +1,6 @@
-package com.acme.edu;
+package com.acme.edu.command;
 
-public class CharCommand implements LoggerMessage {
+public class CharMessage extends LoggerMessage {
     @Override
     public String getMessage() {
         return null;
@@ -11,10 +11,6 @@ public class CharCommand implements LoggerMessage {
         return false;
     }
 
-    @Override
-    public void accumulate(LoggerMessage newMessage) {
-
-    }
     /*chooseMessageWriter();
     writeMessage(PREFIX_CHAR + message);
     type = "";*/

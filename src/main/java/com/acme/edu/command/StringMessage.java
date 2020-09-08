@@ -1,13 +1,11 @@
-package com.acme.edu;
+package com.acme.edu.command;
 
-public class StringCommand implements LoggerMessage {
-    public static final String PREFIX_STRING = "string: ";
-
+public class StringMessage extends LoggerMessage implements  PrefixSupplier {
     private static int counter = 1;
 
     private String message;
 
-    public StringCommand(String message) {
+    public StringMessage(String message) {
         this.message = message;
     }
 
@@ -18,20 +16,21 @@ public class StringCommand implements LoggerMessage {
 
     @Override
     public boolean isSameType(LoggerMessage currentState) {
-        return currentState instanceof StringCommand;
+        return currentState instanceof StringMessage;
     }
 
     @Override
-    public void accumulate(LoggerMessage newMessage) {
-        if (message.equals(newMessage.message)) {
+    public LoggerMessage accumulate(LoggerMessage newMessage) {
+        final StringMessage finalNewMessage = (StringMessage) newMessage;
+        if (message.equals(finalNewMessage.message)) {
             counter++;
         } else {
             message += " (x" + counter + ")" + System.lineSeparator();
-            counter = 0;
-            final StringCommand finalNewMessage = (StringCommand) newMessage;
+            counter = 1;
             message = message + finalNewMessage.message;
-            message = newMessage.message;
+            message = finalNewMessage.message;
         }
+        return this;
     }
 
 

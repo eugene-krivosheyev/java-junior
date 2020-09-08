@@ -1,6 +1,6 @@
-package com.acme.edu;
+package com.acme.edu.command;
 
-public class ObjectCommand implements LoggerMessage {
+public class ObjectMessage extends LoggerMessage {
     @Override
     public String getMessage() {
         return null;
@@ -11,10 +11,6 @@ public class ObjectCommand implements LoggerMessage {
         return false;
     }
 
-    @Override
-    public void accumulate(LoggerMessage newMessage) {
-
-    }
     /*chooseMessageWriter();
     writeMessage(PREFIX_REFERENCE + message);
     type = "";*/

@@ -1,6 +1,6 @@
-package com.acme.edu;
+package com.acme.edu.command;
 
-public class ByteCommand implements LoggerMessage {
+public class ByteMessage extends LoggerMessage {
     @Override
     public String getMessage() {
         return null;
@@ -11,10 +11,6 @@ public class ByteCommand implements LoggerMessage {
         return false;
     }
 
-    @Override
-    public void accumulate(LoggerMessage newMessage) {
-
-    }
     /*if (type.equals("")) {
         type = "byte";
         byte_buffer = message;

@@ -1,11 +1,9 @@
-package com.acme.edu;
+package com.acme.edu.command;
 
-public class IntCommand implements LoggerMessage {
-    public static final String PREFIX_PRIMITIVE = "primitive: ";
-
+public class IntMessage extends LoggerMessage implements  PrefixSupplier {
     private int message;
 
-    public IntCommand(int message) {
+    public IntMessage(int message) {
         this.message = message;
     }
 
@@ -16,13 +14,14 @@ public class IntCommand implements LoggerMessage {
 
     @Override
     public boolean isSameType(LoggerMessage currentState) {
-        return currentState instanceof IntCommand;
+        return currentState instanceof IntMessage;
     }
 
     @Override
-    public void accumulate(LoggerMessage newMessage) {
-        final IntCommand finalNewMessage = (IntCommand) newMessage;
+    public LoggerMessage accumulate(LoggerMessage newMessage) {
+        final IntMessage finalNewMessage = (IntMessage) newMessage;
         message = message + finalNewMessage.message;
+        return this;
     }
 
 /*

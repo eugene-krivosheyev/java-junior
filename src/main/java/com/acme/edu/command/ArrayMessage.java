@@ -1,12 +1,10 @@
-package com.acme.edu;
+package com.acme.edu.command;
 
-public class ArrayCommand implements LoggerMessage {
-    public static final String PREFIX_ARRAY = "primitives array: ";
-
+public class ArrayMessage extends LoggerMessage implements PrefixSupplier{
     private int[] array;
     private StringBuilder message;
 
-    public ArrayCommand(int[] array) {
+    public ArrayMessage(int[] array) {
         this.array = array;
         message = new StringBuilder("{");
         fillStringWithArray();
@@ -28,9 +26,5 @@ public class ArrayCommand implements LoggerMessage {
     @Override
     public boolean isSameType(LoggerMessage currentState) {
         return false;
-    }
-
-    public void accumulate(LoggerMessage message) {
-
     }
 }
