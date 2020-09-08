@@ -1,15 +1,9 @@
 package com.acme.edu;
 
-import com.acme.edu.message.AbstractMessage;
-import com.acme.edu.message.ByteMessage;
-import com.acme.edu.message.IntMessage;
-import com.acme.edu.message.StringMessage;
+import com.acme.edu.message.*;
+import com.acme.edu.saver.LogSaver;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static java.lang.System.lineSeparator;
 
 /**
  * This is a simple logger for some standard Java types.
@@ -17,13 +11,6 @@ import static java.lang.System.lineSeparator;
  */
 public class Logger {
     static LogSaver saver = new LogSaver();
-
-   /* static final String CHAR_PREFIX = "char: ";
-    static final String REFERENCE_PREFIX = "reference: ";
-    static final String PRIMITIVE_ARRAY_PREFIX = "primitives array: ";
-    static final String PRIMITIVE_MATRIX_PREFIX = "primitives matrix: ";
-    static final String PRIMITIVE_MULTIMATRIX_PREFIX = "primitives multimatrix: ";
-*/
     static ArrayList<Object> listOfLog = new ArrayList<>();
 
     /**
@@ -41,6 +28,18 @@ public class Logger {
         listOfLog.add(message);
     }
 
+    public static void log(char message) {
+        saver.save(new CharMessage(message));
+    }
+
+    public static void log(Object message) {
+        saver.save(new ReferenceMessage(message));
+    }
+
+    public static void log(boolean message) {
+        saver.save(new BoolMessage(message));
+    }
+
 
     /**
      * Section for flush interface
@@ -49,30 +48,22 @@ public class Logger {
         Object firstToLog = listOfLog.get(0);
 
         if (firstToLog instanceof Integer) {
-            IntMessage messageProvider = new IntMessage(listOfLog);
-            saver.save("", messageProvider.messageController.toString());
+            saver.save(new IntMessage(listOfLog));
         } else if (firstToLog instanceof Byte) {
-            ByteMessage messageProvider = new ByteMessage(listOfLog);
-            saver.save("", messageProvider.messageController.toString());
+            saver.save(new ByteMessage(listOfLog));
         } else if (firstToLog instanceof String) {
-            StringMessage messageProvider = new StringMessage(listOfLog);
-            saver.save("", messageProvider.messageController.toString());
+            saver.save(new StringMessage(listOfLog));
         }
         listOfLog.clear();
     }
 
- /*   public static void log(boolean message) {
-        saver.save(PRIMITIVE_PREFIX, message);
-    }
 
-    public static void log(char message) {
-        saver.save(CHAR_PREFIX, message);
-    }
+     /*
+    static final String PRIMITIVE_ARRAY_PREFIX = "primitives array: ";
+    static final String PRIMITIVE_MATRIX_PREFIX = "primitives matrix: ";
+    static final String PRIMITIVE_MULTIMATRIX_PREFIX = "primitives multimatrix: ";
 */
-
- /*   public static void log(Object message) {
-        saver.save(REFERENCE_PREFIX, message);
-    }
+ /*
 
     public static void log(int[] message) {
         saver.save(

@@ -16,7 +16,6 @@ public class StringMessage implements AbstractMessage{
     public void prepareMessage(ArrayList<Object> listOfLog) {
         String templateMultiple = PREFIX + "%s " + "(x%o)";
         String templateUnique = PREFIX + "%s";
-        //System.out.println(PREFIX);
         String prevValue = (String) listOfLog.get(0);
         int counter = 0;
 
@@ -41,6 +40,6 @@ public class StringMessage implements AbstractMessage{
                 prevValue = currentValue;
             }
         }
-        messageController.delete(messageController.length()-2, messageController.length());
+        messageController.delete(messageController.length() - 2, messageController.length());
     }
 }

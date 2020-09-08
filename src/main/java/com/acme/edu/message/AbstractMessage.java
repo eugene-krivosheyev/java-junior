@@ -1,7 +1,5 @@
 package com.acme.edu.message;
 
-import com.acme.edu.LogSaver;
-
 import java.util.ArrayList;
 
 public interface AbstractMessage {
