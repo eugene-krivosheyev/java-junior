@@ -3,6 +3,10 @@ package com.acme.edu.message;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Implementation of AbstractMessage for logging Chars.
+ * @see AbstractMessage
+ */
 public class CharMessage extends AbstractMessage{
 
     public CharMessage(char message) {

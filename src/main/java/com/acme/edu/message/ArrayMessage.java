@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ * Implementation of AbstractMessage for logging Arrays.
+ * @see AbstractMessage
+ */
 public class ArrayMessage extends AbstractMessage {
 
     public ArrayMessage(int[] message) {

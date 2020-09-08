@@ -6,6 +6,10 @@ import java.util.Collections;
 
 import static java.lang.System.lineSeparator;
 
+/**
+ * Implementation of AbstractMessage for logging Matrix.
+ * @see AbstractMessage
+ */
 public class MatrixMessage extends AbstractMessage {
 
     public MatrixMessage(int[][] message) {

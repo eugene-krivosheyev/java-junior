@@ -1,6 +1,6 @@
 package com.acme.edu.iteration03;
 
-import com.acme.edu.Logger;
+import com.acme.edu.LoggerFacade;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import static java.lang.System.lineSeparator;
 
-public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
@@ -27,7 +27,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
-        Logger.log(new int[] {-1, 0, 1});
+        LoggerFacade.log(new int[] {-1, 0, 1});
+        LoggerFacade.flushStart();
         //endregion
 
         //region then
@@ -40,7 +41,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
-        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        LoggerFacade.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        LoggerFacade.flushStart();
         //endregion
 
         //region then
@@ -56,7 +58,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
-        Logger.log(new int[][][][] {{{{0}}}});
+        LoggerFacade.log(new int[][][][] {{{{0}}}});
+        LoggerFacade.flushStart();
         //endregion
 
         //region then

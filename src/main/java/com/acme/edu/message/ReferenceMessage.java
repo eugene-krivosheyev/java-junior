@@ -3,6 +3,10 @@ package com.acme.edu.message;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Implementation of AbstractMessage for logging References.
+ * @see AbstractMessage
+ */
 public class ReferenceMessage extends AbstractMessage{
 
     public ReferenceMessage(Object message) {

@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import static java.lang.System.lineSeparator;
 
+/**
+ * Implementation of AbstractMessage for logging Bytes.
+ * Supports flushing with type overflow.
+ * @see AbstractMessage
+ */
 public class ByteMessage extends AbstractMessage {
 
     public ByteMessage(ArrayList<Object> listOfLog) {
