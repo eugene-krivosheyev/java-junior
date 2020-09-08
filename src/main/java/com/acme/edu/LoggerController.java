@@ -20,17 +20,16 @@ public class LoggerController {
     /**
      * Main logger workflow: check flush, save message, accumulate state
      * @see LoggerCommand
-     * @param message - new incoming message
+     * @param command - new incoming message
      */
-    public void log(LoggerCommand message) {
+    public void log(LoggerCommand command) {
         if (currentState == null) {
-            currentState = message;
-            //TODO message => command
-        } else if (currentState.checkFlush(message)) {
+            currentState = command;
+        } else if (currentState.checkFlush(command)) {
             saver.save(currentState.getDecoratedSelf());
-            currentState = message;
+            currentState = command;
         } else {
-            currentState.accumulate(message);
+            currentState.accumulate(command);
         }
     }
 
