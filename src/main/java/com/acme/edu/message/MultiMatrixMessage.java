@@ -15,15 +15,17 @@ public class MultiMatrixMessage extends AbstractMessage {
     private static final String PREFIX = "primitives multimatrix: ";
 
     public MultiMatrixMessage(int[][][][] message) {
-        multiMatrixValue = message;
+        this.multiMatrixValue = message;
     }
 
     @Override
     public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
+        int[][][][] preparedMultiMatrix = ((MultiMatrixMessage) listOfLog.get(0)).multiMatrixValue;
         String preparedMessage =
-                Arrays.deepToString(((MultiMatrixMessage)listOfLog.get(0)).multiMatrixValue)
+                Arrays.deepToString(preparedMultiMatrix)
                         .replace("]", lineSeparator() + "]")
                         .replace("[", "[" + lineSeparator());
+
         messageController.append(PREFIX).append(preparedMessage);
     }
 

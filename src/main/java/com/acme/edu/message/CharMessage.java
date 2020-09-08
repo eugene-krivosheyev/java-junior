@@ -12,14 +12,13 @@ public class CharMessage extends AbstractMessage{
     private static final String PREFIX = "char: ";
 
     public CharMessage(char message) {
-        charValue = message;
+        this.charValue = message;
     }
 
     @Override
     public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
-        messageController
-                .append(PREFIX)
-                .append(((CharMessage)listOfLog.get(0)).charValue);
+        char preparedCharValue = ((CharMessage) listOfLog.get(0)).charValue;
+        messageController.append(PREFIX).append(preparedCharValue);
     };
 
     @Override

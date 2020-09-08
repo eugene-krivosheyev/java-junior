@@ -14,21 +14,23 @@ public class IntMessage extends AbstractMessage {
     private static final String PREFIX = "primitive: ";
 
     public IntMessage(int message) {
-        intValue = message;
+        this.intValue = message;
     }
 
     @Override
     public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
         int resultIntSum = 0;
-        for (AbstractMessage currentValue : listOfLog) {
-            if (Integer.MAX_VALUE - resultIntSum < ((IntMessage)currentValue).intValue) {
-                resultIntSum = ((IntMessage)currentValue).intValue - (Integer.MAX_VALUE - resultIntSum);
+        for (AbstractMessage currentMessage : listOfLog) {
+            int currentValue = ((IntMessage) currentMessage).intValue;
+
+            if (Integer.MAX_VALUE - resultIntSum < currentValue) {
+                resultIntSum = currentValue - (Integer.MAX_VALUE - resultIntSum);
                 messageController
                         .append(PREFIX)
                         .append(Integer.MAX_VALUE)
                         .append(lineSeparator());
             } else {
-                resultIntSum += ((IntMessage)currentValue).intValue;
+                resultIntSum += currentValue;
             }
         }
         messageController.append(PREFIX).append(resultIntSum);

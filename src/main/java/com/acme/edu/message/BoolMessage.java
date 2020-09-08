@@ -12,14 +12,13 @@ public class BoolMessage extends AbstractMessage {
     private static final String PREFIX = "primitive: ";
 
     public BoolMessage(boolean message) {
-        boolValue = message;
+        this.boolValue = message;
     }
 
     @Override
     public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
-        messageController
-                .append(PREFIX)
-                .append(((BoolMessage)listOfLog.get(0)).boolValue);
+        boolean preparedBool = ((BoolMessage) listOfLog.get(0)).boolValue;
+        messageController.append(PREFIX).append(preparedBool);
     }
 
     @Override

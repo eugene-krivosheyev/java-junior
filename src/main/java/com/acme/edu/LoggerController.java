@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * Controller for logged messages. Collects messages of the
  * same type to listOfLog and then process them in flush function
  * for further output
- *
  */
 public class LoggerController {
     private final Saver saver;
@@ -22,21 +21,14 @@ public class LoggerController {
 
     /**
      * Collects messages if they are of the same type or save them
-     *
-     * @param message
+     * @param message AbstractMessage to be logged
      */
     public void log(AbstractMessage message) {
-        if (listOfLog.size() == 0) {
-            currentState = message;
-            listOfLog.add(message);
-            return;
-        }
-        if (!currentState.isSameType(message)) {
+        if (listOfLog.size() != 0 && !currentState.isSameType(message)) {
             flushStart();
         }
         listOfLog.add(message);
         currentState = message;
-
     }
 
     /**
@@ -45,8 +37,7 @@ public class LoggerController {
     public void flushStart() {
         AbstractMessage firstToLog = listOfLog.get(0);
         firstToLog.prepareMessage(listOfLog);
+        saver.save(firstToLog);
         listOfLog.clear();
-        saver.save(AbstractMessage.messageController.toString());
-        AbstractMessage.messageController.setLength(0);
     }
 }

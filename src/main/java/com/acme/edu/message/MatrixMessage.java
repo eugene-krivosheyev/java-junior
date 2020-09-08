@@ -15,13 +15,15 @@ public class MatrixMessage extends AbstractMessage {
     private static final String PREFIX = "primitives matrix: ";
 
     public MatrixMessage(int[][] message) {
-        matrixValue = message;
+        this.matrixValue = message;
     }
 
     @Override
     public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
-        String preparedMessage = Arrays.deepToString(((MatrixMessage)listOfLog.get(0)).matrixValue)
+        int[][] preparedMatrix = ((MatrixMessage) listOfLog.get(0)).matrixValue;
+        String preparedMessage = Arrays.deepToString(preparedMatrix)
                 .replace("], ", "]" + lineSeparator());
+
         messageController.append(PREFIX).append(preparedMessage);
     };
 

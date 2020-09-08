@@ -12,12 +12,14 @@ public class ArrayMessage extends AbstractMessage {
     private static final String PREFIX = "primitives array: ";
 
     public ArrayMessage(int[] message) {
-        arrayValue = message;
+        this.arrayValue = message;
     }
 
     @Override
     public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
-        String preparedMessage = Arrays.toString(((ArrayMessage)listOfLog.get(0)).arrayValue);
+        int[] preparedArray = ((ArrayMessage) listOfLog.get(0)).arrayValue;
+        String preparedMessage = Arrays.toString(preparedArray);
+
         messageController.append(PREFIX).append(preparedMessage);
     }
 
