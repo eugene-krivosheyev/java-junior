@@ -115,5 +115,5 @@ public class Logger {
     /**
      * Clears all previous message states
      */
-    public static void clearLogger() { loggerController.clearLoggerMassageCash(); }
+    public static void clearLogger() { loggerController.clearLoggerMassageCache(); }
 }

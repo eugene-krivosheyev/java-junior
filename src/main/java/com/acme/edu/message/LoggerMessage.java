@@ -18,13 +18,6 @@ public abstract class LoggerMessage {
     }
 
     /**
-     * Get field {@link LoggerMessage#messageType} content
-     */
-    public MessageType getMessageType() {
-        return messageType;
-    }
-
-    /**
      * Accumulate current message with @param message
      */
     public abstract void accumulateMessage(LoggerMessage message);

@@ -5,6 +5,7 @@ import com.acme.edu.saver.Saver;
 
 public class LoggerController {
     private LoggerMessage currentAccumulatedMessage = null; // type
+
     private Saver saver;
 
     public LoggerController(Saver saver) {
@@ -45,7 +46,7 @@ public class LoggerController {
     /**
      * Flush the content of the currentState message
      */
-    public void clearLoggerMassageCash() {
+    public void clearLoggerMassageCache() {
         this.currentAccumulatedMessage = null;
     }
 }

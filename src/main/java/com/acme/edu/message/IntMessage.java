@@ -7,12 +7,14 @@ import com.acme.edu.saver.Saver;
 
 /**
  * Class that represents input message of type Int
+ *
  */
 public class IntMessage extends LoggerMessage {
 
     private int message;
-
+    /** Amount of times the IntOverflow occured */
     private int maxIntValueAmount = 0;
+    /** Sum of all previous IntMessage content */
     private int currentIntMessage;
 
     public IntMessage(int message) {
