@@ -2,9 +2,10 @@ package com.acme.edu;
 
 import com.acme.edu.message.BoolMessage;
 import com.acme.edu.message.Message;
+import com.acme.edu.saver.ConsoleSaver;
 
 public class Logger {
-    static LoggerController loggerController = new LoggerController();
+    static LoggerController loggerController = new LoggerController(new ConsoleSaver());
 
     public static void flush() {
         loggerController.flush();

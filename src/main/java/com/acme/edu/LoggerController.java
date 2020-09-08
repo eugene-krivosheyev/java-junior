@@ -2,6 +2,7 @@ package com.acme.edu;
 
 import com.acme.edu.message.BoolMessage;
 import com.acme.edu.message.Message;
+import com.acme.edu.saver.Saver;
 
 public class LoggerController {
 
@@ -16,6 +17,12 @@ public class LoggerController {
     private static  String arrayType = "primitives array: ";
 
     private  static String matrixType = "primitives matrix: ";
+
+    private Saver saver;
+
+    public LoggerController(Saver saver){
+        this.saver = saver;
+    }
 
     private static void printMessage(String message) {
         System.out.println(message);
@@ -61,6 +68,8 @@ public class LoggerController {
     static byte savedByte = 0;
     static types last = null;
     static int stringCounter = 0;
+
+    Message state;
 
     enum types {
         INTEGER ,
