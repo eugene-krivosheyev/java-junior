@@ -1,10 +1,12 @@
 package com.acme.edu;
 
+import com.acme.edu.saver.ConsoleLoggerSaver;
+
 public class LoggerController {
-    private LoggerSaver saver;
+    private ConsoleLoggerSaver saver;
     private LoggerMessage currentState = null;
 
-    public LoggerController(LoggerSaver saver) {
+    public LoggerController(ConsoleLoggerSaver saver) {
         this.saver = saver;
     }
 

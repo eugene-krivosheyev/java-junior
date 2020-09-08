@@ -1,6 +1,6 @@
 package com.acme.edu;
 
-public class BooleanCommand extends LoggerMessage {
+public class BooleanCommand extends LoggerMessage implements PrefixSupplier {
     /*chooseMessageWriter();
     writeMessage(PREFIX_PRIMITIVE + message);
     type = "";*/

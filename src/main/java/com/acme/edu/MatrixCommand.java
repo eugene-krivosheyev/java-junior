@@ -1,6 +1,6 @@
 package com.acme.edu;
 
-public class MatrixCommand extends LoggerMessage {
+public class MatrixCommand extends LoggerMessage implements PrefixSupplier {
     /*StringBuilder message = new StringBuilder("{"+ lineSeparator());
         for(int i = 0; i < matrix[0].length; i++){
         message.append("{");

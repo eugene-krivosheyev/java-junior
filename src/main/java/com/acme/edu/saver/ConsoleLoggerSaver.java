@@ -1,6 +1,6 @@
-package com.acme.edu;
+package com.acme.edu.saver;
 
-public class LoggerSaver {
+public class ConsoleLoggerSaver {
     public void save(String message) {
         System.out.println(message);
     }

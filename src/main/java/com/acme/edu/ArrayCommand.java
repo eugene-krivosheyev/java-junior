@@ -1,6 +1,6 @@
 package com.acme.edu;
 
-public class ArrayCommand extends LoggerMessage {
+public class ArrayCommand extends LoggerMessage implements PrefixSupplier {
     public static final String PREFIX_ARRAY = "primitives array: ";
 
     private int[] array;

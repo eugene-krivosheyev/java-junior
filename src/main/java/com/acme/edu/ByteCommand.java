@@ -1,6 +1,6 @@
 package com.acme.edu;
 
-public class ByteCommand extends LoggerMessage {
+public class ByteCommand extends LoggerMessage implements PrefixSupplier {
     /*if (type.equals("")) {
         type = "byte";
         byte_buffer = message;
