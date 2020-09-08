@@ -6,10 +6,10 @@ import java.util.Collections;
 
 import static java.lang.System.lineSeparator;
 
-public class MatrixMessage implements AbstractMessage {
-    static public String PREFIX = "primitives matrix: ";
+public class MatrixMessage extends AbstractMessage {
 
     public MatrixMessage(int[][] message) {
+        PREFIX = "primitives matrix: ";
         messageController.setLength(0);
         prepareMessage(new ArrayList<>(Collections.singleton(message)));
     }

@@ -3,10 +3,10 @@ package com.acme.edu.message;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ReferenceMessage implements AbstractMessage{
-    static public String PREFIX = "reference: ";
+public class ReferenceMessage extends AbstractMessage{
 
     public ReferenceMessage(Object message) {
+        PREFIX = "reference: ";
         messageController.setLength(0);
         prepareMessage(new ArrayList<>(Collections.singleton(message)));
     }

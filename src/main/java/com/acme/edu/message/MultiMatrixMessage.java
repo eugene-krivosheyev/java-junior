@@ -6,10 +6,10 @@ import java.util.Collections;
 
 import static java.lang.System.lineSeparator;
 
-public class MultiMatrixMessage implements AbstractMessage {
-    static public String PREFIX = "primitives multimatrix: ";
+public class MultiMatrixMessage extends AbstractMessage {
 
     public MultiMatrixMessage(int[][][][] message) {
+        PREFIX = "primitives multimatrix: ";
         messageController.setLength(0);
         prepareMessage(new ArrayList<>(Collections.singleton(message)));
     }
