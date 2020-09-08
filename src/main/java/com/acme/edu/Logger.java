@@ -40,6 +40,18 @@ public class Logger {
         saver.save(new BoolMessage(message));
     }
 
+    public static void log(int[] message) {
+        saver.save(new ArrayMessage(message));
+    }
+
+    public static void log(int[][] message) {
+        saver.save(new MatrixMessage(message));
+    }
+
+    public static void log(int[][][][] message) {
+        saver.save(new MultiMatrixMessage(message));
+    }
+
 
     /**
      * Section for flush interface
@@ -56,37 +68,4 @@ public class Logger {
         }
         listOfLog.clear();
     }
-
-
-     /*
-    static final String PRIMITIVE_ARRAY_PREFIX = "primitives array: ";
-    static final String PRIMITIVE_MATRIX_PREFIX = "primitives matrix: ";
-    static final String PRIMITIVE_MULTIMATRIX_PREFIX = "primitives multimatrix: ";
-*/
- /*
-
-    public static void log(int[] message) {
-        saver.save(
-                PRIMITIVE_ARRAY_PREFIX,
-                Arrays.toString(message)
-        );
-    }
-
-    public static void log(int[][] message) {
-        saver.save(
-                PRIMITIVE_MATRIX_PREFIX,
-                Arrays.deepToString(message).replace("], ", "]" + lineSeparator())
-        );
-    }
-
-    public static void log(int[][][][] message) {
-        saver.save(
-                PRIMITIVE_MULTIMATRIX_PREFIX,
-                Arrays.deepToString(message)
-                        .replace("]", lineSeparator() + "]")
-                        .replace("[", "[" + lineSeparator())
-        );
-    }
-*/
-
 }
