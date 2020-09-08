@@ -1,10 +1,20 @@
 package com.acme.edu.message;
 
-public class Prefix {
-    public static final String PRIMITIVE_PREFIX = "primitive: ";
-    public static final String CHAR_PREFIX = "char: ";
-    public static final String STRING_PREFIX = "string: ";
-    public static final String REFERENCE_PREFIX = "reference: ";
-    public static final String ARRAY_PREFIX  = "primitives array: ";
-    public static final String MATRIX_PREFIX = "primitives matrix: ";
+public enum Prefix {
+    PRIMITIVE("primitive: "),
+    CHAR("char: "),
+    STRING("string: "),
+    REFERENCE("reference: "),
+    ARRAY("primitives array: "),
+    MATRIX("primitives matrix: ");
+
+    private String value;
+
+    Prefix(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }
