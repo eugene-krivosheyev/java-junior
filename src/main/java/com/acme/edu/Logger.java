@@ -37,15 +37,6 @@ public class Logger {
 
     public static void log(String message) {
         loggerController.log(new StringCommand(message));
-//        if (message.equals(stringAccumulator)) {
-//            stringDuplicates++;
-//        } else {
-//            stringAccumulator += message;
-//        }
-//        if (previousType != null && !previousType.equals(Type.STRING)) {
-//            flush();
-//        }
-//        setPreviousPrefixAndType(Prefix.STRING_PREFIX, Type.STRING);
     }
 
 
