@@ -4,15 +4,15 @@ import com.acme.edu.message.AbstractMessage;
 import com.acme.edu.message.ByteMessage;
 import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.StringMessage;
-import com.acme.edu.saver.AbstractSaver;
+import com.acme.edu.saver.Saver;
 
 import java.util.ArrayList;
 
 public class LoggerController {
-    private final AbstractSaver saver;
+    private final Saver saver;
     static ArrayList<Object> listOfLog = new ArrayList<>();
 
-    public LoggerController(AbstractSaver saver) {
+    public LoggerController(Saver saver) {
         this.saver = saver;
     }
 
