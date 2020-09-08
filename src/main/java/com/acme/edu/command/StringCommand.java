@@ -8,7 +8,7 @@ public class StringCommand implements Command {
 
     public String message;
 
-    public static int sameCommandCounter = 0;
+    public static int sameCommandCounter = 1;
 
     public StringCommand(String message) {
         this.message = message;
@@ -21,10 +21,7 @@ public class StringCommand implements Command {
 
     @Override
     public String decorate() {
-        if (sameCommandCounter > 0)
-            return STRING_PREFIX + message + " (x" + ++sameCommandCounter + ")";
-        else
-            return STRING_PREFIX + message;
+       return " (x" + ++sameCommandCounter + ")";
     }
 
     @Override
@@ -39,9 +36,9 @@ public class StringCommand implements Command {
             sameCommandCounter++;
         }
         else {
-            sameCommandCounter = 0;
+            this.message += System.lineSeparator() + tmp.message + tmp.decorate();
+            sameCommandCounter = 1;
         }
-        this.message += System.lineSeparator() +  cmd.decorate();
         return this;
     }
 

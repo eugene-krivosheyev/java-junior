@@ -22,6 +22,7 @@ public class Logger {               //LoggerFacade
         controller.log(new StringCommand(message));
     }
 
+
     public static void log(byte message) {
         controller.log(new ByteCommand(message));
     }

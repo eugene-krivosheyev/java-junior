@@ -7,7 +7,7 @@ public class ArrayCommand implements Command {
     public int[] message;
 
     public ArrayCommand(int[] arrayMessage) {
-        this.message = arrayMessage; //System.out.println(PRIMITIVES_ARRAY_PREFIX +  displayArray(arrayMessage));
+        this.message = arrayMessage;
     }
 
     @Override

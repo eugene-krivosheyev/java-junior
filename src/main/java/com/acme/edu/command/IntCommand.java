@@ -27,7 +27,9 @@ public class IntCommand extends PrimitiveCommand {
     @Override
     public Command reduce(Command cmd) {
         IntCommand tmp = (IntCommand) cmd;
+        /*if (Integer.MAX_VALUE - tmp.message < this.message) {
 
+        }*/
         message += tmp.message;
         return this;
     }
