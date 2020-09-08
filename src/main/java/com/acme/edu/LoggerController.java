@@ -30,17 +30,20 @@ public class LoggerController {
      */
     public void log(LoggerMessage message) {
         if (currentAccumulatedMessage == null) {
-            this.currentAccumulatedMessage = message;
-            currentAccumulatedMessage.accumulateMessage(message);
+            updateCurrentAccumulatedMessage(message);
             return;
         }
         if (currentAccumulatedMessage.isSameType(message)) {
             currentAccumulatedMessage.accumulateMessage(message);
         } else {
             currentAccumulatedMessage.printMessageBuffer(saver);
-            this.currentAccumulatedMessage = message; // loggerm = intm
-            currentAccumulatedMessage.accumulateMessage(message);
+            updateCurrentAccumulatedMessage(message);
         }
+    }
+
+    private void updateCurrentAccumulatedMessage(LoggerMessage message) {
+        this.currentAccumulatedMessage = message;
+        currentAccumulatedMessage.accumulateMessage(message);
     }
 
     /**
