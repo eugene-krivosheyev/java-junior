@@ -1,4 +1,4 @@
-package com.acme.edu.test;
+package test;
 
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.saver.ConsoleLoggerSaver;
