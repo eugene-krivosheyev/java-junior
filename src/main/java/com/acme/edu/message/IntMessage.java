@@ -1,17 +1,14 @@
 package com.acme.edu.message;
 
-import com.acme.edu.data.MessagePrefix;
-import com.acme.edu.data.MessageType;
-
 import com.acme.edu.saver.Saver;
 
 /**
  * Class that represents input message of type Int
  *
  */
-public class IntMessage extends LoggerMessage {
-
+public class IntMessage implements LoggerMessage {
     private int message;
+    private final String REFERENCE_PREFIX = "primitive: ";
 
     /** Amount of times the IntOverflow occured */
     private int maxIntValueAmount = 0;
@@ -19,7 +16,6 @@ public class IntMessage extends LoggerMessage {
     private int currentIntMessage;
 
     public IntMessage(int message) {
-        super(MessageType.INT, MessagePrefix.PRIMITIVE_PREFIX);
         this.message = message;
         this.currentIntMessage = message;
     }
@@ -43,21 +39,19 @@ public class IntMessage extends LoggerMessage {
      * Create decorated message with prefixes
      *
      * @return String decoratedMessage
-     * @see MessagePrefix
      */
     @Override
     public String createMessageWithPrefix() {
-        return referencePrefix.getPrefixString() + currentIntMessage;
+        return REFERENCE_PREFIX + currentIntMessage;
     }
 
     /**
      * Create overflow decorated message (Integer.MAX_VALUE with prefix)
      *
      * @return String decoratedMessage
-     * @see MessagePrefix
      */
     private String createMessageWithOverflow() {
-        return referencePrefix.getPrefixString() + Integer.MAX_VALUE;
+        return REFERENCE_PREFIX + Integer.MAX_VALUE;
     }
 
     /**

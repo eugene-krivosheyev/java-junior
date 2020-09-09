@@ -17,7 +17,9 @@ public class LoggerController {
      *
      * @see LoggerMessage
      */
-    public void postProcessing() {
+    public void flush() {
+        if (currentAccumulatedMessage == null) return;
+
         this.currentAccumulatedMessage.printMessageBuffer(saver);
     }
 
@@ -49,7 +51,7 @@ public class LoggerController {
     /**
      * Flush the content of the currentState message
      */
-    public void clearLoggerMassageCache() {
+    public void clearLoggerMessageCache() {
         this.currentAccumulatedMessage = null;
     }
 }

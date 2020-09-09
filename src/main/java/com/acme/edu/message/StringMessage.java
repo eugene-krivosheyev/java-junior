@@ -1,21 +1,19 @@
 package com.acme.edu.message;
 
-import com.acme.edu.data.MessagePrefix;
-import com.acme.edu.data.MessageType;
 import com.acme.edu.saver.Saver;
 
 /**
  * Class that represents input message of type String
  */
-public class StringMessage extends LoggerMessage{
+public class StringMessage implements LoggerMessage{
     private String message;
+    private final String REFERENCE_PREFIX = "string: ";
 
     private static String currentStringMessage = "";
     private static String lastStringMessage = "";
     private static int sameStringAmount = 0;
 
     public StringMessage(String message) {
-        super(MessageType.STRING, MessagePrefix.STRING_PREFIX);
         this.message = message;
     }
 
@@ -62,14 +60,13 @@ public class StringMessage extends LoggerMessage{
      * Create decorated message with prefixes
      *
      * @return String decoratedMessage
-     * @see MessagePrefix
      */
     @Override
     public String createMessageWithPrefix() {
         if (sameStringAmount != 1) {
             currentStringMessage += " (x"+ sameStringAmount + ")";
         }
-        return referencePrefix.getPrefixString() + currentStringMessage;
+        return REFERENCE_PREFIX + currentStringMessage;
     }
 
     public String getMessage() {

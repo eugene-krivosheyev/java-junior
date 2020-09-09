@@ -44,44 +44,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Ignore
-    public void shouldLogByte() throws IOException {
-        //region when
-        Logger.log((byte)1);
-        Logger.postProcessing();
-        Logger.log((byte)0);
-        Logger.postProcessing();
-        Logger.log((byte)-1);
-        Logger.postProcessing();
-        //endregion
-
-        //region then
-        assertSysoutContains("primitive: ");
-        assertSysoutContains("1");
-        assertSysoutContains("0");
-        assertSysoutContains("-1");
-        //endregion
-    }
-
-    @Test
-    @Ignore
-    public void shouldLogChar() throws IOException {
-        //region when
-        Logger.log('a');
-        Logger.postProcessing();
-        Logger.log('b');
-        Logger.postProcessing();
-        //endregion
-
-        //region then
-        assertSysoutContains("char: ");
-        assertSysoutContains("a");
-        assertSysoutContains("b");
-        //endregion
-    }
-
-
-    @Test
-    @Ignore
     public void shouldLogString() throws IOException {
         //region when
         Logger.log("test string 1");
@@ -94,39 +56,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("string: ");
         assertSysoutContains("test string 1");
         assertSysoutContains("other str");
-        //endregion
-    }
-
-
-    @Test
-    @Ignore
-    public void shouldLogBoolean() throws IOException {
-        //region when
-        Logger.log(true);
-        Logger.postProcessing();
-        Logger.log(false);
-        Logger.postProcessing();
-        //endregion
-
-        //region then
-        assertSysoutContains("primitive: ");
-        assertSysoutContains("true");
-        assertSysoutContains("false");
-        //endregion
-    }
-
-
-    @Test
-    @Ignore
-    public void shouldLogReference() throws IOException {
-        //region when
-        Logger.log(new Object());
-        Logger.postProcessing();
-        //endregion
-
-        //region then
-        assertSysoutContains("reference: ");
-        assertSysoutContains("@");
         //endregion
     }
 
