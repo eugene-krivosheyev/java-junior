@@ -1,11 +1,13 @@
 package demo.test;
 
 import org.assertj.core.error.AssertionErrorMessagesAggregrator;
+import org.hamcrest.CoreMatchers;
 import org.jetbrains.annotations.NotNull;
 import org.junit.*;
 
 import java.util.ArrayList;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;
@@ -43,6 +45,12 @@ public class ArrayListTests {
         //region Assert | Then
         assertTrue(sut.contains(dummy));
         assertEquals("", 1, sut.size());
+
+        //assertThat(sut, allOf(hasItem(dummy))); //hasSize(1)));
+        assertThat(sut)
+                .hasSize(1)
+                .containsExactly(dummy)
+                .isNotEmpty();
         //endregion
     }
 
