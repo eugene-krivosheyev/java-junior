@@ -12,9 +12,3 @@ public class ObjectMessage extends LoggerMessage {
     }
 }
 
-
-
-    /*chooseMessageWriter();
-    writeMessage(PREFIX_REFERENCE + message);
-    type = "";*/
-

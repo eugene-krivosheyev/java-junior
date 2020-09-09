@@ -11,8 +11,3 @@ public class BooleanMessage extends LoggerMessage {
         return false;
     }
 }
-
-
-/*chooseMessageWriter();
-    writeMessage(PREFIX_PRIMITIVE + message);
-    type = "";*/

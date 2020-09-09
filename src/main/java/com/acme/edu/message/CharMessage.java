@@ -12,8 +12,3 @@ public class CharMessage extends LoggerMessage {
     }
 }
 
-
-    /*chooseMessageWriter();
-    writeMessage(PREFIX_CHAR + message);
-    type = "";*/
-

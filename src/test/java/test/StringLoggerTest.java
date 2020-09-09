@@ -3,12 +3,10 @@ package test;
 import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.LoggerMessage;
 import com.acme.edu.message.StringMessage;
-import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.SQLOutput;
 
 
 public class StringLoggerTest {
