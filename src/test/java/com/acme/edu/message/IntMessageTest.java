@@ -1,6 +1,7 @@
 package com.acme.edu.message;
 
 import com.acme.edu.saver.Saver;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -8,11 +9,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class IntMessageTest {
+    private static IntMessage message;
+    @Before
+    public void setUp() {
+        message = new IntMessage(1);
+    }
 
     @Test
     public void shouldAccumalateWithoutOverflow() {
-        IntMessage message = new IntMessage(1);
-
         message.accumulateMessage(new IntMessage(2));
 
         assertTrue(message.getMaxIntValueAmount() == 0);
@@ -21,8 +25,6 @@ public class IntMessageTest {
 
     @Test
     public void shouldAccumalateWithOverflow(){
-        IntMessage message = new IntMessage(1);
-
         message.accumulateMessage(new IntMessage(Integer.MAX_VALUE));
 
         assertTrue(message.getMaxIntValueAmount() == 1);
@@ -31,7 +33,6 @@ public class IntMessageTest {
 
     @Test
     public void shouldCreateMessageWithPrefix() {
-        IntMessage message = new IntMessage(1);
         String actual = message.createMessageWithPrefix();
 
         assertEquals(actual, "primitive: 1");
@@ -39,7 +40,7 @@ public class IntMessageTest {
 
     @Test
     public void shouldCreateMessageWithOverflowWithPrefix() {
-        IntMessage message = new IntMessage(Integer.MAX_VALUE);
+        message = new IntMessage(Integer.MAX_VALUE);
         String actual = message.createMessageWithPrefix();
 
         assertEquals(actual, "primitive: "+Integer.MAX_VALUE);
@@ -47,40 +48,34 @@ public class IntMessageTest {
 
     @Test
     public void shouldBeSameType() {
-        IntMessage message = new IntMessage(1);
-        LoggerMessage loggerMessage = new IntMessage(2);
+        LoggerMessage sameTypeMessage = new IntMessage(2);
 
-        boolean same = message.isSameType(loggerMessage);
-        assertTrue(same);
+        assertTrue(message.isSameType(sameTypeMessage));
     }
 
     @Test
     public void shouldNotBeSameType() {
-        IntMessage message = new IntMessage(1);
-        LoggerMessage loggerMessage = mock(StringMessage.class);
+        LoggerMessage notSameTypeMessage = mock(StringMessage.class);
 
-        boolean same = message.isSameType(loggerMessage);
-        assertFalse(same);
+        assertFalse(message.isSameType(notSameTypeMessage));
     }
 
     @Test
     public void shouldPrintWithoutOverflow() {
-        Saver saver = mock(Saver.class);
-        IntMessage message = new IntMessage(1);
+        Saver mock = mock(Saver.class);
 
-        message.printMessageBuffer(saver);
-        verify(saver).print("primitive: 1");
+        message.printMessageBuffer(mock);
+        verify(mock).print("primitive: 1");
     }
 
     @Test
     public void shouldPrintWithOverflow() {
-        Saver saver = mock(Saver.class);
-        IntMessage message = new IntMessage(1);
+        Saver mock = mock(Saver.class);
         message.accumulateMessage(new IntMessage(Integer.MAX_VALUE));
 
-        message.printMessageBuffer(saver);
-        verify(saver).print("primitive: 1");
-        verify(saver).print("primitive: "+Integer.MAX_VALUE);
+        message.printMessageBuffer(mock);
+        verify(mock).print("primitive: 1");
+        verify(mock).print("primitive: " + Integer.MAX_VALUE);
     }
 }
 
