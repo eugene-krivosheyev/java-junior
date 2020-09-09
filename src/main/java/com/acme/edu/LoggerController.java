@@ -6,20 +6,7 @@ import com.acme.edu.save.Saver;
 public class LoggerController {
 
     private final Saver saver;
-    private Command currentCommand; /* = new Command() {
-        @Override
-        public String decorate() {
-            return null;
-        }
-        @Override
-        public boolean isSameType(Command cmd) {
-            return false;
-        }
-        @Override
-        public Command reduce(Command cmd) {
-            return cmd;
-        }
-    };*/
+    private Command currentCommand;
 
     public LoggerController(Saver saver) {
         this.saver = saver;
