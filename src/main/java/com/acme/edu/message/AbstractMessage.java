@@ -17,6 +17,7 @@ public abstract class AbstractMessage {
         String preparedMessage = messageController.toString();
         messageController.setLength(0);
         return preparedMessage;
-        dkjghkjhdkfgh
+
+        ////fdfvfdgdfg
     };
 }
