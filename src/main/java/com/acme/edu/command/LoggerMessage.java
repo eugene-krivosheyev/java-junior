@@ -12,4 +12,6 @@ public class LoggerMessage {
     public LoggerMessage accumulate(LoggerMessage newMessage) {
         return newMessage;
     }
+
+    public boolean isNotOverflowed(LoggerMessage newMessage) { return true;}
 }
