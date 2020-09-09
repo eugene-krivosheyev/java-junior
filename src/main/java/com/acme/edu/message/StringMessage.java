@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-public class StringMessage extends LoggerMessage {
+public class StringMessage implements LoggerMessage {
     public static final String PREFIX_STRING = "string: ";
     private static int counter = 1;
 
@@ -33,6 +33,11 @@ public class StringMessage extends LoggerMessage {
             //message = finalNewMessage.message;
         }
         return this;
+    }
+
+    @Override
+    public boolean isNotOverflowed(LoggerMessage newMessage) {
+        return false;
     }
 }
 

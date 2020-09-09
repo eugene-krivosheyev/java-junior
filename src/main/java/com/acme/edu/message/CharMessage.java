@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-public class CharMessage extends LoggerMessage {
+public class CharMessage implements LoggerMessage {
     public static final String PREFIX_CHAR = "char: ";
 
     @Override
@@ -10,6 +10,16 @@ public class CharMessage extends LoggerMessage {
 
     @Override
     public boolean isSameType(LoggerMessage currentState) {
+        return false;
+    }
+
+    @Override
+    public LoggerMessage accumulate(LoggerMessage newMessage) {
+        return null;
+    }
+
+    @Override
+    public boolean isNotOverflowed(LoggerMessage newMessage) {
         return false;
     }
 }

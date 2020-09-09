@@ -1,11 +1,12 @@
 package com.acme.edu;
 
+import com.acme.edu.message.DefaultMessage;
 import com.acme.edu.message.LoggerMessage;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class LoggerController {
     private ConsoleLoggerSaver saver;
-    private LoggerMessage currentMessage = new LoggerMessage();
+    private LoggerMessage currentMessage = new DefaultMessage();
 
     public LoggerController(ConsoleLoggerSaver saver) {
         this.saver = saver;
@@ -26,6 +27,6 @@ public class LoggerController {
 
     public void flush() {
         saver.save(currentMessage.getMessage());
-        currentMessage = new LoggerMessage();
+        currentMessage = new DefaultMessage();
     }
 }

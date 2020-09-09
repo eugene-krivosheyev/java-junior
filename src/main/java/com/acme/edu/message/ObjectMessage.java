@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-public class ObjectMessage extends LoggerMessage {
+public class ObjectMessage implements LoggerMessage {
     public static final String PREFIX_REFERENCE = "reference: ";
 
     @Override
@@ -10,6 +10,16 @@ public class ObjectMessage extends LoggerMessage {
 
     @Override
     public boolean isSameType(LoggerMessage currentState) {
+        return false;
+    }
+
+    @Override
+    public LoggerMessage accumulate(LoggerMessage newMessage) {
+        return null;
+    }
+
+    @Override
+    public boolean isNotOverflowed(LoggerMessage newMessage) {
         return false;
     }
 }

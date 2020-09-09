@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-public class IntMessage extends LoggerMessage {
+public class IntMessage implements LoggerMessage {
     public static final String PREFIX_PRIMITIVE = "primitive: ";
     private int message;
 

@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-public class MatrixMessage extends LoggerMessage {
+public class MatrixMessage implements LoggerMessage {
     public static final String PREFIX_MATRIX = "primitives matrix: ";
 
     @Override
@@ -10,6 +10,16 @@ public class MatrixMessage extends LoggerMessage {
 
     @Override
     public boolean isSameType(LoggerMessage currentState) {
+        return false;
+    }
+
+    @Override
+    public LoggerMessage accumulate(LoggerMessage newMessage) {
+        return null;
+    }
+
+    @Override
+    public boolean isNotOverflowed(LoggerMessage newMessage) {
         return false;
     }
 }
