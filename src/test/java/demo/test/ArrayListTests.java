@@ -4,6 +4,7 @@ import org.assertj.core.error.AssertionErrorMessagesAggregrator;
 import org.hamcrest.CoreMatchers;
 import org.jetbrains.annotations.NotNull;
 import org.junit.*;
+import refactoring.save.Saver;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
 public class ArrayListTests {
     private static int CONNECTIONS_COUNT;
@@ -55,7 +58,36 @@ public class ArrayListTests {
     }
 
     @Test
-    public void dummyTest() {
+    public void shouldUseElementsStringRepresentationWhenToString() {
+        //region given
+        //Saver saverStub = mock(Saver.class);
+        Object stub = mock(Object.class);
+        when(stub.toString())
+                .thenReturn("element string representation");
+//                .thenReturn()
+//                .thenThrow();
+//        when(stub.toString(1)).thenReturn("element string representation");
+//        when(stub.toString(any())).thenReturn("element string representation");
+        sut.add(stub);
+        //endregion
 
+        //region when
+        final String sutToString = sut.toString();
+        //endregion
+
+        //region then
+        assertThat(sutToString).contains("element string representation");
+        //endregion
+    }
+
+    @Test @Ignore
+    public void shouldCallElementsToStringWhenToString() {
+        Object mock = mock(Object.class);
+        sut.add(mock);
+
+        sut.toString();
+
+        verify(mock).toString();
+//        verify(mock, times(1)).toString(any());
     }
 }
