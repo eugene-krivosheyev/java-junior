@@ -72,7 +72,16 @@ public class IntMessageTest {
         verify(saver).print("primitive: 1");
     }
 
+    @Test
+    public void shouldPrintWithOverflow() {
+        Saver saver = mock(Saver.class);
+        IntMessage message = new IntMessage(1);
+        message.accumulateMessage(new IntMessage(Integer.MAX_VALUE));
 
+        message.printMessageBuffer(saver);
+        verify(saver).print("primitive: 1");
+        verify(saver).print("primitive: "+Integer.MAX_VALUE);
+    }
 }
 
 
