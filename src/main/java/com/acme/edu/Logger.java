@@ -1,8 +1,8 @@
 package com.acme.edu;
 
 
-import com.acme.edu.command.IntMessage;
-import com.acme.edu.command.StringMessage;
+import com.acme.edu.message.IntMessage;
+import com.acme.edu.message.StringMessage;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class Logger {

@@ -1,6 +1,6 @@
 package com.acme.edu;
 
-import com.acme.edu.command.LoggerMessage;
+import com.acme.edu.message.LoggerMessage;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class LoggerController {
@@ -9,6 +9,10 @@ public class LoggerController {
 
     public LoggerController(ConsoleLoggerSaver saver) {
         this.saver = saver;
+    }
+
+    public void setCurrentMessage(LoggerMessage currentMessage) {
+        this.currentMessage = currentMessage;
     }
 
     public void log(LoggerMessage newMessage) {

@@ -1,4 +1,4 @@
-package com.acme.edu.command;
+package com.acme.edu.message;
 
 public interface PrefixSupplier {
      String PREFIX_PRIMITIVE = "primitive: ";
