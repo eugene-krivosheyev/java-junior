@@ -1,6 +1,5 @@
 package com.acme.edu.command;
 
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
