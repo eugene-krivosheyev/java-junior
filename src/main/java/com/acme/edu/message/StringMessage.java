@@ -1,6 +1,7 @@
 package com.acme.edu.message;
 
-public class StringMessage extends LoggerMessage implements  PrefixSupplier {
+public class StringMessage extends LoggerMessage {
+    public static final String PREFIX_STRING = "string: ";
     private static int counter = 1;
 
     private String message;

@@ -1,6 +1,7 @@
 package com.acme.edu.message;
 
-public class IntMessage extends LoggerMessage implements PrefixSupplier {
+public class IntMessage extends LoggerMessage {
+    public static final String PREFIX_PRIMITIVE = "primitive: ";
     private int message;
 
     public IntMessage(int message) {

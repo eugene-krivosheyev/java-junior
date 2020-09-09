@@ -1,6 +1,7 @@
 package com.acme.edu.message;
 
-public class ArrayMessage extends LoggerMessage implements PrefixSupplier{
+public class ArrayMessage extends LoggerMessage {
+    public static final String PREFIX_ARRAY = "primitives array: ";
     private int[] array;
     private StringBuilder message;
 
