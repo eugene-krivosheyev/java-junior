@@ -18,12 +18,12 @@ public class ArrayCommand implements Command {
         }
         arrayElementsToPrint.append(message[message.length - 1]);
 
-        return "{" + arrayElementsToPrint + "}";
+        return PRIMITIVES_ARRAY_PREFIX +  "{" + arrayElementsToPrint + "}";
     }
 
     @Override
     public String decorate() {
-        return PRIMITIVES_ARRAY_PREFIX + this.toString();
+        return  this.toString().replace( PRIMITIVES_ARRAY_PREFIX, "");    //replace("", PRIMITIVES_ARRAY_PREFIX);
     }
 
     @Override

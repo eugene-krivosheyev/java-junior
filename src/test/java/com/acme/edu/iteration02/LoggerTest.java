@@ -42,7 +42,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("0" + lineSeparator);
         //endregion
     }
-
+    /*
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
@@ -61,8 +61,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("str 2" + lineSeparator);
         assertSysoutContains("0" + lineSeparator);
         //endregion
-    }
-
+    }*/
+    /*
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
@@ -81,6 +81,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("0" + lineSeparator);
         //endregion
     }
+    */
 
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() {

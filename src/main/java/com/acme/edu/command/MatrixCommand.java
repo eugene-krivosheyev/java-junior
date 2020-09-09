@@ -34,9 +34,9 @@ public class MatrixCommand implements Command {
         StringBuilder arrayElementsToPrint = new StringBuilder();
         arrayElementsToPrint.append("{").append(LINE_SEPARATOR);
         for (int[] ints : message) {
-            arrayElementsToPrint.append((new ArrayCommand(ints)).toString()).append(LINE_SEPARATOR);
+            arrayElementsToPrint.append((new ArrayCommand(ints)).decorate()).append(LINE_SEPARATOR);
         }
         arrayElementsToPrint.append("}");
-        return arrayElementsToPrint.toString();
+        return  PRIMITIVES_MATRIX_PREFIX + arrayElementsToPrint.toString();
     }
 }

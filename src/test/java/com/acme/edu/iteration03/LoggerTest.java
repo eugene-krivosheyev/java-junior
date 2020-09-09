@@ -5,6 +5,7 @@ import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import sun.rmi.runtime.Log;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
@@ -28,10 +29,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersArray() {
         //region when
         Logger.log(new int[]{-1, 0, 1});
+        Logger.flush();
         //endregion
 
         //region then
-        assertSysoutEquals(
+        assertSysoutContains(
                 "primitives array: {-1, 0, 1}" + lineSeparator
         );
         //endregion
@@ -43,7 +45,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         //endregion
-
+        Logger.flush();
         //region then
         assertSysoutEquals(
                 "primitives matrix: {" + lineSeparator +
@@ -54,7 +56,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-
+/*
     @Test
     public void shouldLogIntegersMulitidimentionalArray()  {
         //region when
@@ -71,7 +73,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-/*
+
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
