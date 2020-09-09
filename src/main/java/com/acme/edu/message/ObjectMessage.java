@@ -1,6 +1,6 @@
-package com.acme.edu.command;
+package com.acme.edu.message;
 
-public class BooleanMessage extends LoggerMessage {
+public class ObjectMessage extends LoggerMessage {
     @Override
     public String getMessage() {
         return null;
@@ -13,6 +13,8 @@ public class BooleanMessage extends LoggerMessage {
 }
 
 
-/*chooseMessageWriter();
-    writeMessage(PREFIX_PRIMITIVE + message);
+
+    /*chooseMessageWriter();
+    writeMessage(PREFIX_REFERENCE + message);
     type = "";*/
+

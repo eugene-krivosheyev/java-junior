@@ -1,4 +1,4 @@
-package com.acme.edu.command;
+package com.acme.edu.message;
 
 public class LoggerMessage {
     public String getMessage() {

@@ -1,4 +1,4 @@
-package com.acme.edu.command;
+package com.acme.edu.message;
 
 public class MatrixMessage extends LoggerMessage {
     @Override

@@ -1,4 +1,4 @@
-package com.acme.edu.command;
+package com.acme.edu.message;
 
 public class ArrayMessage extends LoggerMessage implements PrefixSupplier{
     private int[] array;
