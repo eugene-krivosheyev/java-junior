@@ -14,39 +14,20 @@ import java.io.IOException;
 import static org.mockito.Mockito.*;
 
 public class ControllerTest implements SysoutCaptureAndAssertionAbility {
+    private LoggerController loggerController;
+    private LoggerSaver loggerSaver;
+
     @Before
-    public void setUpSystemOut() {
-        resetOut();
-        captureSysout();
-    }
-
-    @After
-    public void tearDown() {
-        resetOut();
-    }
-
-    @Test
-    public void shouldSetCurrentCommandWhenTheFirstCall() {
-        LoggerSaver loggerSaver = mock(LoggerSaver.class);
-        LoggerController loggerController = new LoggerController(loggerSaver);
-        IntCommand intCommand = new IntCommand(3);
-        doAnswer(invocation -> {
-            System.out.println("primitive: 3");
-            return null;
-        }).when(loggerSaver).saveMessage(intCommand);
-
-        loggerController.log(intCommand);
-        loggerController.flush();
-
-        assertSysoutContains("primitive: 3");
+    public void setUp() {
+        loggerSaver = mock(LoggerSaver.class);
+        loggerController = new LoggerController(loggerSaver);
     }
 
     @Test
     public void shouldCallAccumulateWhenLogIntSequence() {
-        LoggerSaver loggerSaver = mock(LoggerSaver.class);
-        LoggerController loggerController = new LoggerController(loggerSaver);
         IntCommand firstIntCommand = mock(IntCommand.class);
         IntCommand secondIntCommand = mock(IntCommand.class);
+
         when(secondIntCommand.isSameType(firstIntCommand)).thenReturn(true);
 
         loggerController.log(firstIntCommand);
@@ -58,8 +39,6 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldCallSaveWhenLogSequenceWithDifferentTypes() {
-        LoggerSaver loggerSaver = mock(LoggerSaver.class);
-        LoggerController loggerController = new LoggerController(loggerSaver);
         IntCommand intCommand = mock(IntCommand.class);
         StringCommand stringCommand = mock(StringCommand.class);
 
@@ -71,16 +50,21 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldCallSaveWhenFlush() {
-        LoggerSaver loggerSaver = mock(LoggerSaver.class);
-        LoggerController loggerController = new LoggerController(loggerSaver);
         IntCommand intCommand = mock(IntCommand.class);
-        StringCommand stringCommand = mock(StringCommand.class);
 
         loggerController.log(intCommand);
-        loggerController.log(stringCommand);
         loggerController.flush();
 
         verify(loggerSaver).saveMessage(intCommand);
-        verify(loggerSaver).saveMessage(stringCommand);
+    }
+
+    @Test
+    public void shouldCallSaveWhenNewCommandIsNull(){
+        IntCommand intCommand = mock(IntCommand.class);
+
+        loggerController.log(intCommand);
+        loggerController.log(null);
+
+        verify(loggerSaver).saveMessage(intCommand);
     }
 }
