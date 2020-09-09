@@ -1,6 +1,6 @@
 package com.acme.edu.command;
 
-public class IntMessage extends LoggerMessage implements  PrefixSupplier {
+public class IntMessage extends LoggerMessage implements PrefixSupplier {
     private int message;
 
     public IntMessage(int message) {
@@ -23,21 +23,10 @@ public class IntMessage extends LoggerMessage implements  PrefixSupplier {
         message = message + finalNewMessage.message;
         return this;
     }
-}
 
-
-/*
-    if (type.equals("")) {
-        type = "int";
-        int_buffer = message;
-    } else {
-        if ("int".equals(type) && (Integer.MAX_VALUE - int_buffer >= message)) {
-            int_buffer += message;
-        } else {
-            chooseMessageWriter();
-            type = "int";
-            int_buffer = message;
-        }
+    @Override
+    public boolean isNotOverflowed(LoggerMessage newMessage) {
+        final IntMessage finalNewMessage = (IntMessage) newMessage;
+        return Integer.MAX_VALUE - message >= finalNewMessage.message;
     }
-    */
-
+}

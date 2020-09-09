@@ -12,7 +12,7 @@ public class LoggerController {
     }
 
     public void log(LoggerMessage newMessage) {
-        if (currentMessage.isSameType(newMessage)) {
+        if (currentMessage.isSameType(newMessage) && currentMessage.isNotOverflowed(newMessage)) {
             currentMessage = currentMessage.accumulate(newMessage);
         } else {
             saver.save(currentMessage.getMessage());
