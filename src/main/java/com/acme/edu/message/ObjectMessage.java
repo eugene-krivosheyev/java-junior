@@ -20,7 +20,7 @@ public class ObjectMessage implements LoggerMessage {
 
     @Override
     public boolean isNotOverflowed(LoggerMessage newMessage) {
-        return false;
+        return true;
     }
 }
 

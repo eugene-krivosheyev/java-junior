@@ -12,7 +12,7 @@ public class StringMessage implements LoggerMessage {
 
     @Override
     public String getMessage() {
-        message += (counter > 1) ? " (x" + counter + ")" + System.lineSeparator() : "";
+        AddPartOfStringDependingOnCounterToMessage();
         return PREFIX_STRING + message;
     }
 
@@ -27,17 +27,20 @@ public class StringMessage implements LoggerMessage {
         if (message.contains(finalNewMessage.message)) {
             counter++;
         } else {
-            message += (counter > 1) ? " (x" + counter + ")" + System.lineSeparator() : "";
+            AddPartOfStringDependingOnCounterToMessage();
             counter = 1;
             message = message + " " + finalNewMessage.message;
-            //message = finalNewMessage.message;
         }
         return this;
     }
 
+    private void AddPartOfStringDependingOnCounterToMessage(){
+        message += (counter > 1) ? " (x" + counter + ")" + System.lineSeparator() : "";
+    }
+
     @Override
     public boolean isNotOverflowed(LoggerMessage newMessage) {
-        return false;
+        return true;
     }
 }
 
