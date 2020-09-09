@@ -1,4 +1,4 @@
-package test;
+package com.acme.edu.test;
 
 import com.acme.edu.LoggerController;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;

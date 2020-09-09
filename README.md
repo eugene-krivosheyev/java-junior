@@ -166,7 +166,7 @@ $ git push
 - String concatenation
 
 ## Course Project Iteration 01: The Rise of Logger Library
-- Read and analyse specification as tests for this iteration in *src/test*
+- Read and analyse specification as tests for this iteration in *src/com.acme.edu.test*
 - Uncomment specification cases
 - Implement features needed
 
@@ -189,7 +189,7 @@ $ git push
 - Procedure Metrics: CC
 
 ## Course Project Iteration 02: Logger Library
-- Read and analyse specification as tests for this iteration in *src/test*
+- Read and analyse specification as tests for this iteration in *src/com.acme.edu.test*
 - Uncomment specification cases
 - Implement features needed
 
@@ -209,7 +209,7 @@ $ git push
 - Constraints
 
 ## Course Project Iteration 03: Logger Library
-- Read and analyse specification as tests for this iteration in *src/test*
+- Read and analyse specification as tests for this iteration in *src/com.acme.edu.test*
 - Uncomment specification cases
 - Implement features needed
 
@@ -367,7 +367,7 @@ $ git push
 - Assertions in Java
 - Testing scopes
 - Unit tests
-- Structure of unit test
+- Structure of unit com.acme.edu.test
 - Tests and contract
 - JUnit
 - Hamcrest and FEST-assert
@@ -618,7 +618,7 @@ assertMessageEquals("3")
 - Code style
 - Documented public API
 - Unit tests coverage ≥ 70%
-- Load test for remote log server
+- Load com.acme.edu.test for remote log server
 
 ---
 
@@ -652,7 +652,7 @@ assertMessageEquals("3")
 - Code style
 - Documented public API
 - Unit tests coverage ≥ 70%
-- System test for DB
+- System com.acme.edu.test for DB
 
 ---
 
@@ -663,7 +663,7 @@ assertMessageEquals("3")
 - Profiling
 
 ## Course Project Iteration 19: Load testing and profiling
-- Load test
+- Load com.acme.edu.test
 - Profile with JVisualVM
 
 ### DoD

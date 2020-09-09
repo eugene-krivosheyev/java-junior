@@ -1,4 +1,4 @@
-package test;
+package com.acme.edu.test;
 
 import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.StringMessage;
