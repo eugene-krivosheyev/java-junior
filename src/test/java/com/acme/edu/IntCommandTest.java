@@ -2,16 +2,13 @@ package com.acme.edu;
 
 import com.acme.edu.command.IntCommand;
 import com.acme.edu.command.StringCommand;
-import com.acme.edu.controller.LoggerController;
-import com.acme.edu.saver.LoggerSaver;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 
 public class IntCommandTest {
     private IntCommand intCommand;

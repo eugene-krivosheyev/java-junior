@@ -10,7 +10,7 @@ public class StringCommand implements LoggerCommand {
         stringAccumulator = message;
     }
 
-    private StringCommand(String stringAccumulator, int stringDuplicates) {
+    public StringCommand(String stringAccumulator, int stringDuplicates) {
         this.stringAccumulator = stringAccumulator;
         this.stringDuplicates = stringDuplicates;
     }
@@ -27,16 +27,15 @@ public class StringCommand implements LoggerCommand {
 
     @Override
     public LoggerCommand accumulate(LoggerCommand newLoggerCommand) {
-        final StringCommand stringCommand = (StringCommand) newLoggerCommand;
-        if (stringCommand.stringAccumulator.equals(stringAccumulator)) {
-            return new StringCommand(stringAccumulator, ++stringDuplicates);
-        } else {
-            return new StringCommand(stringAccumulator + stringCommand.stringAccumulator);
-        }
+        return new StringCommand(stringAccumulator, ++stringDuplicates);
     }
 
     @Override
     public boolean isSameType(LoggerCommand loggerCommand) {
-        return loggerCommand instanceof StringCommand;
+        if (loggerCommand instanceof StringCommand) {
+            return ((StringCommand) loggerCommand).stringAccumulator.equals(stringAccumulator);
+        }
+
+        return false;
     }
 }

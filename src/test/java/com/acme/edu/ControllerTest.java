@@ -4,12 +4,8 @@ import com.acme.edu.command.IntCommand;
 import com.acme.edu.command.StringCommand;
 import com.acme.edu.controller.LoggerController;
 import com.acme.edu.saver.LoggerSaver;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
-
 
 import static org.mockito.Mockito.*;
 
