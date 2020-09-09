@@ -4,7 +4,7 @@ public class IntMessage implements ILogMessage {
     private int value;
     private String PREFIX = "primitive: ";
 
-    IntMessage(int value_) {
+    public IntMessage(int value_) {
         value = value_;
     }
 
