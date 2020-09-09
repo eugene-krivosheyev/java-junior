@@ -14,4 +14,23 @@ public class BoolMessage implements Message {
     public String toString() {
         return prefix + message;
     }
+
+    @Override
+    public boolean isSameType(Message message) {
+        return message instanceof BoolMessage;
+    }
+
+    @Override
+    public void updateAccumulator(Message message) {
+    }
+
+    @Override
+    public Object getValue() {
+        return null;
+    }
+
+    @Override
+    public boolean isOverFlow(Message message) {
+        return false;
+    }
 }

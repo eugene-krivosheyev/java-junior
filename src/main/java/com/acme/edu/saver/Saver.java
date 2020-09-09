@@ -1,5 +1,7 @@
 package com.acme.edu.saver;
 
+import com.acme.edu.message.Message;
+
 public interface Saver {
-    public void save(String toLog);
+    void save(Message toLog);
 }

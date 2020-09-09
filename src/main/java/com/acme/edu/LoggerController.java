@@ -1,22 +1,15 @@
 package com.acme.edu;
 
-import com.acme.edu.message.BoolMessage;
 import com.acme.edu.message.Message;
 import com.acme.edu.saver.Saver;
 
 public class LoggerController {
-
-    private static String primitiveType = "primitive: ";
-
-    private static String charType = "char: ";
-
-    private static String stringType = "string: ";
-
-    private static String referenceType = "reference: ";
-
-    private static  String arrayType = "primitives array: ";
-
-    private  static String matrixType = "primitives matrix: ";
+//    private static String primitiveType = "primitive: ";
+//    private static String charType = "char: ";
+//    private static String stringType = "string: ";
+//    private static String referenceType = "reference: ";
+//    private static  String arrayType = "primitives array: ";
+//    private  static String matrixType = "primitives matrix: ";
 
     private Saver saver;
 
@@ -24,34 +17,8 @@ public class LoggerController {
         this.saver = saver;
     }
 
-    private static void printMessage(String message) {
-        System.out.println(message);
-    }
-
-    private static void printBuffer() {
-        switch (last) {
-            case INTEGER:
-                printMessage(primitiveType + savedInt);
-                break;
-            case BYTE:
-                printMessage(primitiveType + savedByte);
-                break;
-            case STRING:
-                printMessage(stringType + savedString);
-                if(stringCounter != 1){
-                    System.out.print(" (x" + stringCounter + ")");
-                }
-                break;
-        }
-        System.out.println();
-    }
-
-    private static void resetBuffer() {
-        savedString = "";
-        savedInt = 0;
-        savedByte = 0;
-        stringCounter = 0;
-        last = null;
+    private void resetBuffer() {
+        state = null;
     }
 
     private static  String getStringFromArray(int [] arr) {
@@ -76,19 +43,35 @@ public class LoggerController {
         BYTE ,
         STRING
     }
-    public void log(Message message){
 
+    public void log(Message message){
+        if (state == null) {
+            state = message;
+            return;
+        }
+        if (!state.isSameType(message)) {
+            flush();
+            state = message;
+            return;
+        }
+        if (message.isOverFlow(state)) {
+            flush();
+            state = message;
+        }
+        else {
+            state.updateAccumulator(message);
+        }
     }
 
-    public static void log(int message) {
+    public void log(int message) {
         if (last != LoggerController.types.INTEGER && last != null) {
-            printBuffer();
+            //printBuffer();
             resetBuffer();
         }
         long safe = savedInt;
         safe += message;
         if(safe > Integer.MAX_VALUE){
-            printBuffer();
+            //printBuffer();
             resetBuffer();
             savedInt = message;
         }
@@ -98,15 +81,15 @@ public class LoggerController {
         last = LoggerController.types.INTEGER;
     }
 
-    public static void log(byte message) {
+    public void log(byte message) {
         if (last != LoggerController.types.BYTE && last != null) {
-            printBuffer();
+            //printBuffer();
             resetBuffer();
         }
         long safe = savedByte;
         safe += message;
         if(safe > Byte.MAX_VALUE){
-            printBuffer();
+            //printBuffer();
             resetBuffer();
             savedByte = message;
         }
@@ -118,25 +101,25 @@ public class LoggerController {
 
     public static void log(int[] message) {
         String strForPrint = getStringFromArray(message);
-        printMessage(arrayType + strForPrint);
+        //printMessage(arrayType + strForPrint);
     }
 
     public static void log(int[][] message) {
-        System.out.println(matrixType + "{");
+        //System.out.println(matrixType + "{");
         for (int[] arr : message) {
             String strForPrint = getStringFromArray(arr);
-            printMessage(arrayType + strForPrint);
+            //printMessage(arrayType + strForPrint);
         }
         System.out.println("}");
     }
 
     public static void log(char message) {
-        printMessage(charType + message);
+        ///printMessage(charType + message);
     }
 
-    public static void log(String message) {
+    public void log(String message) {
         if ((last != LoggerController.types.STRING && last != null) || (savedString != message && last != null)) {
-            printBuffer();
+            //printBuffer();
             resetBuffer();
         }
         savedString = message;
@@ -144,16 +127,12 @@ public class LoggerController {
         last = LoggerController.types.STRING;
     }
 
-    public static void log(BoolMessage message) {
-        printMessage(message.toString());
+    public void log(Object message) {
+        //printMessage(referenceType + message);
     }
 
-    public static void log(Object message) {
-        printMessage(referenceType + message);
-    }
-
-    public static void flush() {
-        printBuffer();
+    public void flush() {
+        saver.save(state);
         resetBuffer();
     }
 }
