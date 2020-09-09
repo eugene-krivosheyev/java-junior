@@ -4,6 +4,7 @@ import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.*;
@@ -24,7 +25,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    @Test
+    @Test @Ignore
     public void shouldLogInteger() throws IOException {
         //region when
         myTestLogger.log(1);
@@ -80,7 +81,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     */
 
-    @Test
+    @Test @Ignore
     public void shouldLogString() throws IOException {
         //region when
         myTestLogger.log("test string 1");
