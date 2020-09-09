@@ -12,6 +12,7 @@ import com.acme.edu.saver.Saver;
 public class IntMessage extends LoggerMessage {
 
     private int message;
+
     /** Amount of times the IntOverflow occured */
     private int maxIntValueAmount = 0;
     /** Sum of all previous IntMessage content */
@@ -20,6 +21,7 @@ public class IntMessage extends LoggerMessage {
     public IntMessage(int message) {
         super(MessageType.INT, MessagePrefix.PRIMITIVE_PREFIX);
         this.message = message;
+        this.currentIntMessage = message;
     }
 
     /**
@@ -89,4 +91,11 @@ public class IntMessage extends LoggerMessage {
         return message;
     }
 
+    public int getMaxIntValueAmount() {
+        return maxIntValueAmount;
+    }
+
+    public int getCurrentIntMessage() {
+        return currentIntMessage;
+    }
 }
