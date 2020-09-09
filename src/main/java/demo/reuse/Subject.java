@@ -9,7 +9,7 @@ public class Subject {
 
     public void log() {
         System.out.println("begin");
-        strategy.step();
+//        strategy.step();
         System.out.println("end");
     }
 }

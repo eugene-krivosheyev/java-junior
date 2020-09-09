@@ -1,8 +1,13 @@
 package demo.reuse;
 
 public class StrategyImpl2 implements Strategy {
-    @Override
+//    @Override
     public void step() {
         System.out.println("custom string 2");
+    }
+
+    @Override
+    public void setName() {
+
     }
 }
