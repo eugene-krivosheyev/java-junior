@@ -2,8 +2,10 @@ package com.acme.edu;
 
 import com.acme.edu.message.AbstractMessage;
 import com.acme.edu.message.IntMessage;
+import com.acme.edu.message.StringMessage;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -22,16 +24,9 @@ public class AbstractMessageTest implements SysoutCaptureAndAssertionAbility{
         resetOut();
     }
 
-    @Test //бред бредовый на самом деле
+    @Test
+    @Ignore//бред бредовый на самом деле
     public void shouldCallIsSameTypeForCorrectMessageType(){
-        IntMessage intMock = mock(IntMessage.class);
-        AbstractMessage messageMock = mock(AbstractMessage.class);
 
-        when(intMock.isSameType(any())).thenReturn(true);
-
-        if (intMock.isSameType(messageMock)) {
-            System.out.println("int");
-        }
-        assertSysoutContains("int");
     }
 }
