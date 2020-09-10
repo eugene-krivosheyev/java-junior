@@ -1,8 +1,6 @@
 package refactoring;
 
-import refactoring.message.IntMessage;
 import refactoring.message.Message;
-import refactoring.message.StringMessage;
 import refactoring.save.Saver;
 
 class LoggerController {
@@ -22,7 +20,6 @@ class LoggerController {
     public LoggerController(Saver saver) {
         this.saver = saver;
     }
-
 
     public void log(Message message) {
         if (currentMessage.isSameType(message)) {
