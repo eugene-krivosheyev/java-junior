@@ -13,7 +13,7 @@ public class IntMessage implements Message{
     }
 
     @Override
-    public boolean isOverFlow(Message message) {
+    public boolean needFlush(Message message) {
         long safe = value;
         safe += (int)message.getValue();
         return (safe > Integer.MAX_VALUE);

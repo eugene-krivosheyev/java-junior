@@ -1,8 +1,6 @@
 package com.acme.edu.message;
 
 public interface Message {
-    @Override
-    String toString();
 
     boolean isSameType(Message message);
 
@@ -10,5 +8,5 @@ public interface Message {
 
     Object getValue();
 
-    boolean isOverFlow(Message message);
+    boolean needFlush(Message message);
 }

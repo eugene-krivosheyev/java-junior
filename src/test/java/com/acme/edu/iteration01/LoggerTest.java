@@ -109,7 +109,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test @Ignore
     public void shouldLogReference() throws IOException {
         //region when
-        Logger.log(new Object());
+        //Logger.log(new Object());
         //endregion
 
         //region then

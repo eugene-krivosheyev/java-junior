@@ -2,16 +2,12 @@ package com.acme.edu.unittests;
 
 import com.acme.edu.LoggerController;
 import com.acme.edu.message.IntMessage;
-import com.acme.edu.message.Message;
 import com.acme.edu.message.StringMessage;
 import com.acme.edu.saver.Saver;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.*;
-
-import org.mockito.Mock;
 
 
 public class LoggerControllerTest {
@@ -44,7 +40,7 @@ public class LoggerControllerTest {
         loggerController.log(messageStr);
 
         verify(message).isSameType(messageStr);
-        verify(message, times(0)).isOverFlow(messageStr);
+        verify(message, times(0)).needFlush(messageStr);
         verify(message, times(0)).updateAccumulator(message);
     }
 }

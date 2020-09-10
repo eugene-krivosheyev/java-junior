@@ -26,7 +26,7 @@ public class StringMessage implements Message {
     }
 
     @Override
-    public boolean isOverFlow(Message message) {
+    public boolean needFlush(Message message) {
         return !message.getValue().equals(value);
     }
 

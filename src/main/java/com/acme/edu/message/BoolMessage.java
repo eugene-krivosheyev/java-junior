@@ -30,7 +30,7 @@ public class BoolMessage implements Message {
     }
 
     @Override
-    public boolean isOverFlow(Message message) {
+    public boolean needFlush(Message message) {
         return false;
     }
 }
