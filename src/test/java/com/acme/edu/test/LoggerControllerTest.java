@@ -23,17 +23,18 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
         sut = new LoggerController(mockSaver);
     }
 
-    @Ignore
+
     @Test
     public void messageIsPrintedWhenFlush() {
-        IntMessage mockInt = mock(IntMessage.class);
-        //sut.setCurrentMessage(mockInt);
+        LoggerMessage dummyMessage = mock(LoggerMessage.class);
+        LoggerMessage messageDoubler = mock(LoggerMessage.class);
+        when(messageDoubler.getMessage()).thenReturn("test");
+        when(messageDoubler.isSameType(dummyMessage)).thenReturn(false);
+        when(messageDoubler.isNotOverflowed(dummyMessage)).thenReturn(true);
 
-
+        sut.log(messageDoubler);
         sut.flush();
-
-        assertSysoutEquals("");
-        //assertThat();
+        verify(mockSaver).save(messageDoubler.getMessage());
     }
 
     @Test
