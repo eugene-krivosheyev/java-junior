@@ -4,7 +4,6 @@ import com.acme.edu.message.AbstractMessage;
 import com.acme.edu.message.IntMessage;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -23,8 +22,7 @@ public class AbstractMessageTest implements SysoutCaptureAndAssertionAbility{
         resetOut();
     }
 
-    @Test
-    @Ignore //бред бредовый на самом деле
+    @Test //бред бредовый на самом деле
     public void shouldCallIsSameTypeForCorrectMessageType(){
         IntMessage intMock = mock(IntMessage.class);
         AbstractMessage messageMock = mock(AbstractMessage.class);
