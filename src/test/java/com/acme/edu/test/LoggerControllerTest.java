@@ -1,14 +1,10 @@
 package com.acme.edu.test;
 
-import com.acme.edu.Logger;
 import com.acme.edu.LoggerController;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.LoggerMessage;
 import com.acme.edu.saver.ConsoleLoggerSaver;
-import com.acme.edu.saver.LoggerSaver;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;

@@ -3,11 +3,8 @@ package com.acme.edu.test;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 
 import com.acme.edu.message.IntMessage;
-import com.acme.edu.message.LoggerMessage;
 import com.acme.edu.message.StringMessage;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static java.lang.System.lineSeparator;
