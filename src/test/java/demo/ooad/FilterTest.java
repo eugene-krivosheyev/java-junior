@@ -5,6 +5,7 @@ import demo.ooad.filter.ContentLengthLoggerFilter;
 import demo.ooad.filter.NullCheckLoggerFilter;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class FilterTest implements SysoutCaptureAndAssertionAbility  {
@@ -20,6 +21,7 @@ public class FilterTest implements SysoutCaptureAndAssertionAbility  {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    @Ignore
     public void shouldCallChildMethodWhenOverriden() {
         NullCheckLoggerFilter filter = new ContentLengthLoggerFilter(4);
         filter.checkNull(new LoggerMessage("", 0));

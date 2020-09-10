@@ -1,5 +1,8 @@
 package demo.test;
 
+import demo.ooad.Logger;
+import demo.ooad.LoggerMessage;
+import demo.ooad.saver.LoggerSaver;
 import org.assertj.core.error.AssertionErrorMessagesAggregrator;
 import org.hamcrest.CoreMatchers;
 import org.jetbrains.annotations.NotNull;
@@ -88,6 +91,18 @@ public class ArrayListTests {
         sut.toString();
 
         verify(mock).toString();
-//        verify(mock, times(1)).toString(any());
+//        verify(mock, times(1)).toString(any())
+    }
+
+    @Test
+    public void shouldCallSaverWhenLog() {
+        LoggerSaver saverMock = mock(LoggerSaver.class);
+        final Logger sut = new Logger(saverMock);
+        LoggerMessage messageStub = mock(LoggerMessage.class);
+
+        sut.log(messageStub);
+
+        verify(saverMock, times(0)).save(any());
+        verify(messageStub).getMessage();
     }
 }
