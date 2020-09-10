@@ -26,7 +26,7 @@ public class AbstractMessageTest implements SysoutCaptureAndAssertionAbility{
 
     @Test
     @Ignore//бред бредовый на самом деле
-    public void shouldCallIsSameTypeForCorrectMessageType(){
+    public void shouldCallIsSameTypeForCorrectMessageType() {
 
     }
 }
