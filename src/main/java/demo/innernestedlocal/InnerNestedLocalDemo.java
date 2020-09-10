@@ -88,15 +88,11 @@ class DuplicationDetected {
 
     public static void main(String[] args) {
         //m1() | m2()
-        new DuplicationDetected().m(new Todo() {
-            @Override
-            public void todo() {
-                System.out.println("Implementation 1");
-            }
-        });
+        new DuplicationDetected().m(() -> System.out.println("Implementation 1"));
     }
 }
 
+@FunctionalInterface
 interface Todo {
     void todo();
 }
