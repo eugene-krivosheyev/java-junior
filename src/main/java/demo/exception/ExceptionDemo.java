@@ -1,5 +1,7 @@
 package demo.exception;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -45,6 +47,20 @@ class Controller {
             }
         }
         //endregion
+
+        try(
+                Connection connection1 = null;
+                FileInputStream file = new FileInputStream("file");
+        ) {
+
+            //???
+            //???
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            //connection1
+        }
     }
 }
 
