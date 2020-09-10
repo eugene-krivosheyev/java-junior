@@ -37,10 +37,5 @@ public class StringMessage implements LoggerMessage {
     private void AddPartOfStringDependingOnCounterToMessage(){
         message += (counter > 1) ? " (x" + counter + ")" + System.lineSeparator() : "";
     }
-
-    @Override
-    public boolean isNotOverflowed(LoggerMessage newMessage) {
-        return true;
-    }
 }
 

@@ -12,9 +12,9 @@ public class LoggerController {
         this.saver = saver;
     }
 
-    public void setCurrentMessage(LoggerMessage currentMessage) {
+   /* public void setCurrentMessage(LoggerMessage currentMessage) {
         this.currentMessage = currentMessage;
-    }
+    }*/
 
     public void log(LoggerMessage newMessage) {
         if (currentMessage.isSameType(newMessage) && currentMessage.isNotOverflowed(newMessage)) {

@@ -3,19 +3,22 @@ package com.acme.edu.test;
 import com.acme.edu.LoggerController;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.message.IntMessage;
+import com.acme.edu.message.LoggerMessage;
 import com.acme.edu.saver.ConsoleLoggerSaver;
+import com.acme.edu.saver.LoggerSaver;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
     private LoggerController sut;
+    private ConsoleLoggerSaver mockSaver;
 
     @Before
     public void setUp() {
-        ConsoleLoggerSaver mockSaver = mock(ConsoleLoggerSaver.class);
+        mockSaver = mock(ConsoleLoggerSaver.class);
         sut = new LoggerController(mockSaver);
     }
 
@@ -23,7 +26,7 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void messageIsPrintedWhenFlush() {
         IntMessage mockInt = mock(IntMessage.class);
-        sut.setCurrentMessage(mockInt);
+        //sut.setCurrentMessage(mockInt);
 
 
         sut.flush();
@@ -32,4 +35,17 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
         //assertThat();
     }
 
+    @Test
+    public void shouldAccumulateWhenCurrentMessageSameTypeWithLoggedMessage() {
+        LoggerMessage firstMessageDoubler = mock(LoggerMessage.class);
+        LoggerMessage secondMessageDoubler = mock(LoggerMessage.class);
+        when(firstMessageDoubler.isSameType(secondMessageDoubler)).thenReturn(true);
+        when(firstMessageDoubler.isNotOverflowed(secondMessageDoubler)).thenReturn(true);
+
+        sut.log(firstMessageDoubler);
+        sut.log(secondMessageDoubler);
+
+        verify(firstMessageDoubler).accumulate(secondMessageDoubler);
+        verify(mockSaver, never()).save(any());
+    }
 }

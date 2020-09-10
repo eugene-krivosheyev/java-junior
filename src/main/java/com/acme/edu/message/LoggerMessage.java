@@ -7,5 +7,7 @@ public interface LoggerMessage {
 
     public LoggerMessage accumulate(LoggerMessage newMessage);
 
-    public boolean isNotOverflowed(LoggerMessage newMessage);
+    public default boolean isNotOverflowed(LoggerMessage newMessage){
+        return true;
+    };
 }

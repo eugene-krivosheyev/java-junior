@@ -33,9 +33,4 @@ public class ArrayMessage implements LoggerMessage {
     public LoggerMessage accumulate(LoggerMessage newMessage) {
         return null;
     }
-
-    @Override
-    public boolean isNotOverflowed(LoggerMessage newMessage) {
-        return true;
-    }
 }
