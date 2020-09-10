@@ -7,7 +7,7 @@ import refactoring.save.ConsoleSaver;
 
 public class LoggerFacade {
     private static LoggerController controller =
-            new LoggerController(new ConsoleSaver());
+            new LoggerController(System.out::println);
 
     /**
      * Accumulation <- message type
