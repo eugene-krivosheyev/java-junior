@@ -1,5 +1,6 @@
 package com.acme.edu.test;
 
+import com.acme.edu.Logger;
 import com.acme.edu.LoggerController;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.message.IntMessage;
@@ -33,6 +34,20 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
 
         assertSysoutEquals("");
         //assertThat();
+    }
+
+    @Test
+    public void shouldSetUpStateWhenFirstMessage(){
+        LoggerMessage dummyMessage = mock(LoggerMessage.class);
+        LoggerMessage messageDoubler = mock(LoggerMessage.class);
+        when(messageDoubler.isSameType(dummyMessage)).thenReturn(false);
+        when(messageDoubler.isNotOverflowed(dummyMessage)).thenReturn(true);
+        when(messageDoubler.getMessage()).thenReturn("test");
+
+        sut.log(messageDoubler);
+        sut.log(dummyMessage);
+
+        verify(mockSaver).save(messageDoubler.getMessage());
     }
 
     @Test
