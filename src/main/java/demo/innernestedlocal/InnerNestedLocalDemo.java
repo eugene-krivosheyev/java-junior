@@ -1,5 +1,6 @@
 package demo.innernestedlocal;
 
+import refactoring.message.Message;
 import refactoring.save.Saver;
 
 public class InnerNestedLocalDemo {
@@ -15,6 +16,8 @@ public class InnerNestedLocalDemo {
 
         final Outer.Nested nested1 = new Outer().new Nested();
 
+
+        outer.getObjectImpl().m
     }
 }
 
@@ -37,5 +40,22 @@ class Outer {
             int outerObjectState = 0;
             return Outer.this.outerObjectState++;
         }
+    }
+
+    public Saver getObjectImpl() {
+        class Local implements Saver {
+            private int objectState;
+
+            @Override
+            public void save(Message message) {
+
+            }
+
+            public int m() {
+                return objectState++;
+            }
+        }
+
+        return new Local();
     }
 }
