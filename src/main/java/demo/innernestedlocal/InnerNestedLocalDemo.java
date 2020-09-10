@@ -16,14 +16,23 @@ public class InnerNestedLocalDemo {
 
         final Outer.Nested nested1 = new Outer().new Nested();
 
-
-        outer.getObjectImpl().m
+        String localVar = "1";
+        Object printable = new Object() {
+            @Override //Closure
+            public String toString() {
+                int localLolaVar = 0;
+                localLolaVar = 1;
+                return localVar;
+            }
+        };
+//        AnothrObject.setPrintable(printable);
     }
 }
 
 class Outer {
     private static int outerStaticState;
     private int outerObjectState;
+    int outerVar = 9;
 
     static class StaticInner {
         public int mutateAndGetOuterStaticState() {
@@ -43,19 +52,51 @@ class Outer {
     }
 
     public Saver getObjectImpl() {
-        class Local implements Saver {
-            private int objectState;
+        int localVar = 9;
 
+        return new Saver() {
             @Override
             public void save(Message message) {
-
+                int localVar = 0;
+                //...
+                System.out.println("SAVE!!!");
             }
-
-            public int m() {
-                return objectState++;
-            }
-        }
-
-        return new Local();
+        };
     }
+}
+
+class DuplicationDetected {
+    public void m1() {
+        //...
+//        ???
+        //...
+    }
+
+    public void m2() {
+        //...
+//        ???
+        //...
+    }
+
+    // ------------------
+
+    public void m(Todo todo) {
+        //...
+        todo.todo();
+        //...
+    }
+
+    public static void main(String[] args) {
+        //m1() | m2()
+        new DuplicationDetected().m(new Todo() {
+            @Override
+            public void todo() {
+                System.out.println("Implementation 1");
+            }
+        });
+    }
+}
+
+interface Todo {
+    void todo();
 }
