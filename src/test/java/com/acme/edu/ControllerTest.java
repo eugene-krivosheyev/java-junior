@@ -1,6 +1,7 @@
 package com.acme.edu;
 
 import com.acme.edu.command.IntCommand;
+import com.acme.edu.command.LoggerCommand;
 import com.acme.edu.command.StringCommand;
 import com.acme.edu.controller.LoggerController;
 import com.acme.edu.saver.LoggerSaver;
@@ -20,28 +21,39 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldCallAccumulateWhenLogIntSequence() {
-        IntCommand firstIntCommand = mock(IntCommand.class);
-        IntCommand secondIntCommand = mock(IntCommand.class);
+    public void shouldSetCommandWhenFirstTimeLog(){
+        LoggerCommand loggerCommand = mock(LoggerCommand.class);
 
-        when(secondIntCommand.isSameType(firstIntCommand)).thenReturn(true);
-
-        loggerController.log(firstIntCommand);
-        loggerController.log(secondIntCommand);
-
+        loggerController.log(loggerCommand);
         verify(loggerSaver, never()).saveMessage(any());
-        verify(firstIntCommand).accumulate(secondIntCommand);
     }
 
     @Test
-    public void shouldCallSaveWhenLogSequenceWithDifferentTypes() {
-        IntCommand intCommand = mock(IntCommand.class);
-        StringCommand stringCommand = mock(StringCommand.class);
+    public void shouldCallAccumulateWhenLogSameTypeSequence() {
+        LoggerCommand firstCommand = mock(LoggerCommand.class);
+        LoggerCommand secondCommand = mock(LoggerCommand.class);
 
-        loggerController.log(intCommand);
-        loggerController.log(stringCommand);
+        when(secondCommand.isSameType(firstCommand)).thenReturn(true);
 
-        verify(loggerSaver).saveMessage(intCommand);
+        loggerController.log(firstCommand);
+        loggerController.log(secondCommand);
+
+        verify(loggerSaver, never()).saveMessage(any());
+        verify(firstCommand).accumulate(secondCommand);
+    }
+
+    @Test
+    public void shouldCallSaveWhenLogDifferentTypesSequence() {
+        LoggerCommand firstCommand = mock(LoggerCommand.class);
+        LoggerCommand secondCommand = mock(LoggerCommand.class);
+
+        when(secondCommand.isSameType(firstCommand)).thenReturn(false);
+
+        loggerController.log(firstCommand);
+        loggerController.log(secondCommand);
+
+        verify(loggerSaver).saveMessage(firstCommand);
+        verify(loggerSaver, never()).saveMessage(secondCommand);
     }
 
     @Test
