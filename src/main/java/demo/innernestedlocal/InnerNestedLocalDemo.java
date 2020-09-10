@@ -4,6 +4,8 @@ import refactoring.message.Message;
 import refactoring.save.Saver;
 
 public class InnerNestedLocalDemo {
+    Saver saver = System.out::println;
+
     public static void main(String[] args) {
         Outer.StaticInner o1 = new Outer.StaticInner();
         System.out.println(o1.mutateAndGetOuterStaticState());
