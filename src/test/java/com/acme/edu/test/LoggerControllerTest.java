@@ -2,6 +2,7 @@ package com.acme.edu.test;
 
 import com.acme.edu.LoggerController;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.exceptions.SaverException;
 import com.acme.edu.message.LoggerMessage;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 import org.junit.Before;
@@ -21,7 +22,7 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void messageIsPrintedWhenFlush() {
+    public void messageIsPrintedWhenFlush() throws SaverException {
         LoggerMessage dummyMessage = mock(LoggerMessage.class);
         LoggerMessage messageDoubler = mock(LoggerMessage.class);
         when(messageDoubler.getMessage()).thenReturn("test");
@@ -34,7 +35,7 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldSetUpStateWhenFirstMessage(){
+    public void shouldSetUpStateWhenFirstMessage() throws SaverException {
         LoggerMessage dummyMessage = mock(LoggerMessage.class);
         LoggerMessage messageDoubler = mock(LoggerMessage.class);
         when(messageDoubler.isSameType(dummyMessage)).thenReturn(false);
@@ -48,7 +49,7 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldAccumulateWhenCurrentMessageSameTypeWithLoggedMessage() {
+    public void shouldAccumulateWhenCurrentMessageSameTypeWithLoggedMessage() throws SaverException {
         LoggerMessage firstMessageDoubler = mock(LoggerMessage.class);
         LoggerMessage secondMessageDoubler = mock(LoggerMessage.class);
         when(firstMessageDoubler.isSameType(secondMessageDoubler)).thenReturn(true);
