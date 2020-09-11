@@ -2,6 +2,7 @@ package com.acme.edu.iteration02;
 
 import com.acme.edu.LoggerFacade;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.exception.LoggerControllerException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -28,7 +29,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogSequentIntegersAsSum() throws IOException {
+    public void shouldLogSequentIntegersAsSum() throws LoggerControllerException {
         //region when
         LoggerFacade.log("str 1");
         //LoggerFacade.flushStart();
@@ -55,7 +56,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
+    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws LoggerControllerException {
         //region when
         LoggerFacade.log("str 1");
         LoggerFacade.flushStart();
@@ -84,7 +85,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
+    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() throws LoggerControllerException {
         //region when
         LoggerFacade.log("str 1");
         LoggerFacade.flushStart();
@@ -109,7 +110,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
+    public void shouldLogSameSubsequentStringsWithoutRepeat() throws LoggerControllerException {
         //region when
         LoggerFacade.log("str 1");
         LoggerFacade.log("str 2");

@@ -1,5 +1,6 @@
 package com.acme.edu;
 
+import com.acme.edu.exception.LoggerControllerException;
 import com.acme.edu.message.AbstractMessage;
 import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.StringMessage;
@@ -31,7 +32,7 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldCallSaveWhenFlushCalled() {
+    public void shouldCallSaveWhenFlushCalled() throws LoggerControllerException {
         AbstractMessage messageMock = mock(AbstractMessage.class);
 
         sut.log(messageMock);
@@ -41,7 +42,7 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldNotCallSaveWhenSameTypeLogged() {
+    public void shouldNotCallSaveWhenSameTypeLogged() throws LoggerControllerException {
         IntMessage intMock = spy(new IntMessage(0));
 
         sut.log(intMock);
@@ -52,7 +53,7 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldCallSaveWhenDifferentTypeLogged() {
+    public void shouldCallSaveWhenDifferentTypeLogged() throws LoggerControllerException {
         IntMessage intMock = mock(IntMessage.class);
         StringMessage strMock = spy(new StringMessage(" "));
 
@@ -63,6 +64,12 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
         verify(intMock).isSameType(strMock);
         verify(saverMock, times(2)).save(any());
     }
+
+    @Test(expected = LoggerControllerException.class)
+    public void shouldThrowExceptionWhenListOfLogIsEmpty() throws LoggerControllerException {
+        sut.flushStart();
+    }
+
 
 
 }

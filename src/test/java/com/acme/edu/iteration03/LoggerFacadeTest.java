@@ -2,6 +2,7 @@ package com.acme.edu.iteration03;
 
 import com.acme.edu.LoggerFacade;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.exception.LoggerControllerException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -27,7 +28,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Ignore
-    public void shouldLogIntegersArray() throws IOException {
+    public void shouldLogIntegersArray() throws LoggerControllerException {
         //region when
         LoggerFacade.log(new int[] {-1, 0, 1});
         LoggerFacade.flushStart();
@@ -42,7 +43,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Ignore
-    public void shouldLogIntegersMatrix() throws IOException {
+    public void shouldLogIntegersMatrix() throws LoggerControllerException {
         //region when
         LoggerFacade.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         LoggerFacade.flushStart();
@@ -60,7 +61,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Ignore
-    public void shouldLogIntegersMulitidimentionalArray() throws IOException {
+    public void shouldLogIntegersMulitidimentionalArray() throws LoggerControllerException {
         //region when
         LoggerFacade.log(new int[][][][] {{{{0}}}});
         LoggerFacade.flushStart();

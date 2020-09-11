@@ -2,6 +2,7 @@ package com.acme.edu.iteration01;
 
 import com.acme.edu.LoggerFacade;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.exception.LoggerControllerException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -24,7 +25,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test
-    public void shouldLogInteger() {
+    public void shouldLogInteger() throws LoggerControllerException {
         //region when
         LoggerFacade.log(1);
         LoggerFacade.flushStart();
@@ -43,7 +44,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogByte() {
+    public void shouldLogByte() throws LoggerControllerException {
         //region when
         LoggerFacade.log(1);
         LoggerFacade.flushStart();
@@ -62,7 +63,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogChar() throws IOException {
+    public void shouldLogChar() throws LoggerControllerException {
         //region when
         LoggerFacade.log('a');
         LoggerFacade.flushStart();
@@ -78,7 +79,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogString() throws IOException {
+    public void shouldLogString() throws LoggerControllerException {
         //region when
         LoggerFacade.log("test string 1");
         LoggerFacade.flushStart();
@@ -94,7 +95,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogBoolean() throws IOException {
+    public void shouldLogBoolean() throws LoggerControllerException {
         //region when
         LoggerFacade.log(true);
         LoggerFacade.flushStart();
@@ -112,7 +113,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogReference() throws IOException {
+    public void shouldLogReference() throws LoggerControllerException {
         //region when
         LoggerFacade.log(new Object());
         LoggerFacade.flushStart();

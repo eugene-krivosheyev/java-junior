@@ -1,5 +1,6 @@
 package com.acme.edu;
 
+import com.acme.edu.exception.LoggerControllerException;
 import com.acme.edu.message.AbstractMessage;
 import com.acme.edu.saver.Saver;
 
@@ -23,7 +24,7 @@ public class LoggerController {
      * Collects messages if they are of the same type or save them
      * @param message AbstractMessage to be logged
      */
-    public void log(AbstractMessage message) {
+    public void log(AbstractMessage message) throws LoggerControllerException {
         if (listOfLog.size() != 0 && !currentState.isSameType(message)) {
             flushStart();
         }
@@ -34,10 +35,14 @@ public class LoggerController {
     /**
      * Prepares list of messages and saves them
      */
-    public void flushStart() {
-        AbstractMessage firstToLog = listOfLog.get(0);
-        firstToLog.prepareMessage(listOfLog);
-        saver.save(firstToLog);
+    public void flushStart() throws LoggerControllerException {
+        try {
+            AbstractMessage firstToLog = listOfLog.get(0);
+            firstToLog.prepareMessage(listOfLog);
+            saver.save(firstToLog);
+        } catch (IndexOutOfBoundsException e){
+            throw new LoggerControllerException("ListOfLog is empty");
+        }
         listOfLog.clear();
     }
 }
