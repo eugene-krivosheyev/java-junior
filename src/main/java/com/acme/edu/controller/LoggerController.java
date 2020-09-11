@@ -24,10 +24,11 @@ public class LoggerController {
                     this.currentLoggerCommand = newLoggerCommand;
                 }
             } else {
-                throw new NullPointerException();
+                throw new NullPointerException("new command is null");
             }
         } catch (NullPointerException e) {
-            throw new ControllerException("new command is null");
+            e.printStackTrace();
+            throw new ControllerException("cannot log new command");
         }
     }
 

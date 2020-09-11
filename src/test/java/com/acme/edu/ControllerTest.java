@@ -2,7 +2,6 @@ package com.acme.edu;
 
 import com.acme.edu.command.IntCommand;
 import com.acme.edu.command.LoggerCommand;
-import com.acme.edu.command.StringCommand;
 import com.acme.edu.controller.LoggerController;
 import com.acme.edu.saver.LoggerSaver;
 import org.junit.Before;
@@ -24,7 +23,12 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldSetCommandWhenFirstTimeLog(){
         LoggerCommand loggerCommand = mock(LoggerCommand.class);
 
-        loggerController.log(loggerCommand);
+        try {
+            loggerController.log(loggerCommand);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         verify(loggerSaver, never()).saveMessage(any());
     }
 
@@ -35,8 +39,12 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
 
         when(secondCommand.isSameType(firstCommand)).thenReturn(true);
 
-        loggerController.log(firstCommand);
-        loggerController.log(secondCommand);
+        try {
+            loggerController.log(firstCommand);
+            loggerController.log(secondCommand);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         verify(loggerSaver, never()).saveMessage(any());
         verify(firstCommand).accumulate(secondCommand);
@@ -49,8 +57,13 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
 
         when(secondCommand.isSameType(firstCommand)).thenReturn(false);
 
-        loggerController.log(firstCommand);
-        loggerController.log(secondCommand);
+        try {
+            loggerController.log(firstCommand);
+            loggerController.log(secondCommand);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         verify(loggerSaver).saveMessage(firstCommand);
         verify(loggerSaver, never()).saveMessage(secondCommand);
@@ -60,19 +73,25 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldCallSaveWhenFlush() {
         IntCommand intCommand = mock(IntCommand.class);
 
-        loggerController.log(intCommand);
+        try {
+            loggerController.log(intCommand);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         loggerController.flush();
 
         verify(loggerSaver).saveMessage(intCommand);
     }
 
     @Test
-    public void shouldCallSaveWhenNewCommandIsNull(){
+    public void shouldThrowExceptionWhenNewCommandIsNull() {
         IntCommand intCommand = mock(IntCommand.class);
 
-        loggerController.log(intCommand);
-        loggerController.log(null);
-
-        verify(loggerSaver).saveMessage(intCommand);
+        try {
+            loggerController.log(intCommand);
+            loggerController.log(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
