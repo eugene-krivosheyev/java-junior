@@ -3,22 +3,134 @@ package com.acme.edu;
 import com.acme.edu.command.IntCommand;
 import com.acme.edu.command.StringCommand;
 import com.acme.edu.controller.LoggerController;
-import com.acme.edu.exceptions.ControllerException;
+import com.acme.edu.exception.LogException;
+import com.acme.edu.saver.ConsoleSaver;
 
 public class Logger {
+    //private static byte byteAccumulator = (byte) 0;
 
-    private static final LoggerController loggerController = new LoggerController(System.out::println);
+    private static LoggerController loggerController = new LoggerController(System.out::println);
 
     public static void flush() {
-        loggerController.flush();
+        try {
+            loggerController.flush(null);
+        } catch (LogException e) {
+            System.out.println("Can't save message. Exception was thrown caused by" + e.getCause() +
+                    " with message " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
-    public static void log(int message) throws ControllerException {
-        loggerController.log(new IntCommand(message));
+    public static void log(int message) {
+        try {
+            loggerController.log(new IntCommand(message));
+        }
+        catch (LogException e) {
+            System.out.println("Can't log message. Exception was thrown caused by" + e.getCause() +
+                    " with message " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
-    public static void log(String message) throws ControllerException {
-        loggerController.log(new StringCommand(message));
+    public static void log(String message) {
+        try {
+            loggerController.log(new StringCommand(message));
+        }
+        catch (LogException e) {
+            System.out.println("Can't log message. Exception was thrown caused by" + e.getCause() +
+                    " with message " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
+//TODO: Implement when customer will ask for these types
+//
+//    public static void log(byte message) {
+//        byte diff = (byte) checkNumberAccumulatorOverflow(Byte.MAX_VALUE, byteAccumulator, message);
+//        if (Byte.MAX_VALUE - byteAccumulator < message) {
+//            byteAccumulator += diff;
+//            message -= diff;
+//            flush();
+//        }
+//        byteAccumulator += message;
+//        if (previousType != null && !previousType.equals(Type.BYTE)) {
+//            flush();
+//        }
+//        setPreviousPrefixAndType(Prefix.PRIMITIVE_PREFIX, Type.BYTE);
+//    }
+
+//    public static void log(char message) {
+//        writeMessage(Prefix.CHAR_PREFIX + message);
+//    }
+
+//    public static void log(boolean message) {
+//        writeMessage(Prefix.PRIMITIVE_PREFIX + message);
+//    }
+//
+//    public static void log(Object message) {
+//        writeMessage(Prefix.REFERENCE_PREFIX + message);
+//    }
+//
+//    public static void log(int[] message) {
+//        writeArray(message);
+//    }
+//
+//    public static void log(int[][] message) {
+//        writeMatrix(message);
+//    }
+
+//    private static String clearStringBuffer() {
+//        String buffer = stringAccumulator;
+//        if (stringDuplicates != 0) {
+//            buffer += " (x" + ++stringDuplicates + ")";
+//        }
+//        stringAccumulator = "";
+//        stringDuplicates = 0;
+//        return buffer;
+//    }
+
+//    private static String clearByteBuffer() {
+//        String buffer = Byte.toString(byteAccumulator);
+//        byteAccumulator = (byte) 0;
+//        return buffer;
+//    }
+
+//    private static void writeMessage(String message) {
+//        System.out.println(message);
+//    }
+
+//    private static void writeArray(int[] array) {
+//        writeMessage(Prefix.ARRAY_PREFIX + buildArrayStr(array));
+//    }
+
+//    private static String buildArrayStr(int[] array) {
+//        StringBuilder stringBuilder = new StringBuilder("{");
+//        for (int i = 0; i < array.length - 1; i++) {
+//            stringBuilder.append(array[i] + ", ");
+//        }
+//        stringBuilder.append(array[array.length - 1]);
+//        stringBuilder.append("}");
+//        return stringBuilder.toString();
+//    }
+
+//    private static void writeMatrix(int[][] matrix) {
+//        writeMessage(Prefix.MATRIX_PREFIX + "{");
+//        for (int[] array : matrix) {
+//            writeMessage(buildArrayStr(array));
+//        }
+//        writeMessage("}");
+//    }
+//
+//    private static int checkNumberAccumulatorOverflow(int maxValue, int accumulator, int message) {
+//        int diff = 0;
+//        if (maxValue - accumulator < message) {
+//            diff = message - maxValue;
+//        }
+//        return diff;
+//    }
+
+//    private static void setPreviousPrefixAndType(String prefix, String type) {
+//        previousPrefix = prefix;
+//        previousType = type;
+//    }
 }
