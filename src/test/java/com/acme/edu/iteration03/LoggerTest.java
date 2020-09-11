@@ -41,7 +41,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test @Ignore
     public void shouldLogIntegersMatrix() {
         //region when
-        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        //Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         //endregion
 
         //region then

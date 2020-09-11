@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import com.acme.edu.exception.LogException;
+import com.acme.edu.exception.SaverException;
 import com.acme.edu.message.Message;
 import com.acme.edu.saver.Saver;
 
@@ -11,26 +13,31 @@ public class LoggerController {
         this.saver = saver;
     }
 
-    public void log(Message message){
+    public void log(Message message) throws LogException {
         if (state == null) {
             state = message;
             return;
         }
-        if (!state.isSameType(message)) {
-            flush();
-            state = message;
-            return;
+        try {
+            if (!state.isSameType(message)) {
+                flush();
+                state = message;
+                return;
+            }
+            if (message.needFlush(state)) {
+                flush();
+                state = message;
+            }
+            else {
+                state.updateAccumulator(message);
+            }
         }
-        if (message.needFlush(state)) {
-            flush();
-            state = message;
-        }
-        else {
-            state.updateAccumulator(message);
+        catch (SaverException e) {
+            throw new LogException("Ooops!");
         }
     }
 
-    public void flush() {
+    public void flush() throws SaverException {
         saver.save(state);
         resetBuffer();
     }

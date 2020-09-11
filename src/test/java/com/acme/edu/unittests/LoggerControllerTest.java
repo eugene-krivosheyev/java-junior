@@ -1,11 +1,17 @@
 package com.acme.edu.unittests;
 
 import com.acme.edu.LoggerController;
+import com.acme.edu.exception.LogException;
+import com.acme.edu.exception.SaverException;
 import com.acme.edu.message.IntMessage;
+import com.acme.edu.message.Message;
 import com.acme.edu.message.StringMessage;
 import com.acme.edu.saver.Saver;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.stubbing.OngoingStubbing;
+
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -14,14 +20,14 @@ public class LoggerControllerTest {
     static LoggerController loggerController;
     static Saver saver;
 
-    @BeforeClass
+    @Before
     public static void setUp() {
         saver = mock(Saver.class);
         loggerController = new LoggerController(saver);
     }
 
     @Test
-    public void shouldCorrectWorkWithIntMessage() {
+    public void shouldCorrectWorkWithIntMessage() throws LogException, SaverException {
         IntMessage message = mock(IntMessage.class);
         when(message.toString()).thenReturn("12");
         loggerController.log(message);
@@ -31,7 +37,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldChangeStateIfNotSameMessageType() {
+    public void shouldChangeStateIfNotSameMessageType() throws LogException {
         IntMessage message = mock(IntMessage.class);
         when(message.toString()).thenReturn("12");
         loggerController.log(message);
@@ -42,5 +48,11 @@ public class LoggerControllerTest {
         verify(message).isSameType(messageStr);
         verify(message, times(0)).needFlush(messageStr);
         verify(message, times(0)).updateAccumulator(message);
+    }
+
+    @Test(expected = LogException.class)
+    public void shouldThrowLogExceptionWhenGotSaverException() throws SaverException, LogException {
+        when(saver.save(any())).thenThrow(new SaverException());
+        loggerController.log(mock(Message.class));
     }
 }
