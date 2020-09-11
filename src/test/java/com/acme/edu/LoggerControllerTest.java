@@ -5,7 +5,7 @@ import com.acme.edu.exception.LoggerException;
 import com.acme.edu.message.AbstractMessage;
 import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.StringMessage;
-import com.acme.edu.saver.LogSaver;
+import com.acme.edu.saver.ConsoleSaver;
 import com.acme.edu.saver.Saver;
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +23,7 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
     public void setUp() {
         resetOut();
         captureSysout();
-        saverMock = mock(LogSaver.class);
+        saverMock = mock(ConsoleSaver.class);
         sut = new LoggerController(saverMock);
     }
 
