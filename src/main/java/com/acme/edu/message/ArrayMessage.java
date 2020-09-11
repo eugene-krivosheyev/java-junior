@@ -1,7 +1,7 @@
 package com.acme.edu.message;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Implementation of AbstractMessage for logging Arrays.
@@ -16,7 +16,7 @@ public class ArrayMessage extends AbstractMessage {
     }
 
     @Override
-    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
+    public void prepareMessage(List<AbstractMessage> listOfLog) {
         int[] preparedArray = ((ArrayMessage) listOfLog.get(0)).arrayValue;
         String preparedMessage = Arrays.toString(preparedArray);
 

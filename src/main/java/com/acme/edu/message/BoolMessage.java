@@ -1,7 +1,6 @@
 package com.acme.edu.message;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 /**
  * Implementation of AbstractMessage for logging Booleans.
@@ -16,7 +15,7 @@ public class BoolMessage extends AbstractMessage {
     }
 
     @Override
-    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
+    public void prepareMessage(List<AbstractMessage> listOfLog) {
         boolean preparedBool = ((BoolMessage) listOfLog.get(0)).boolValue;
         messageController.append(PREFIX).append(preparedBool);
     }

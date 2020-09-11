@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.System.lineSeparator;
 
@@ -20,7 +20,7 @@ public class StringMessage extends AbstractMessage {
     }
 
     @Override
-    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
+    public void prepareMessage(List<AbstractMessage> listOfLog) {
         String prevValue = ((StringMessage) listOfLog.get(0)).stringValue;
         int counter = 0;
 

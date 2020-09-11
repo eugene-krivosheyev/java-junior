@@ -1,7 +1,6 @@
 package com.acme.edu.message;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 /**
  * Implementation of AbstractMessage for logging Chars.
@@ -16,7 +15,7 @@ public class CharMessage extends AbstractMessage{
     }
 
     @Override
-    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
+    public void prepareMessage(List<AbstractMessage> listOfLog) {
         char preparedCharValue = ((CharMessage) listOfLog.get(0)).charValue;
         messageController.append(PREFIX).append(preparedCharValue);
     };

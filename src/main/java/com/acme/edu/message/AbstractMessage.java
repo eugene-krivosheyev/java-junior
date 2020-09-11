@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Abstract class for any message type that we want to log.
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public abstract class AbstractMessage {
     public static StringBuilder messageController = new StringBuilder();
 
-    public abstract void prepareMessage(ArrayList<AbstractMessage> listOfLog);
+    public abstract void prepareMessage(List<AbstractMessage> listOfLog);
     public abstract boolean isSameType(AbstractMessage message);
 
     public String getPreparedMessage() {

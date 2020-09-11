@@ -1,8 +1,7 @@
 package com.acme.edu.message;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.List;
 
 import static java.lang.System.lineSeparator;
 
@@ -19,7 +18,7 @@ public class MultiMatrixMessage extends AbstractMessage {
     }
 
     @Override
-    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
+    public void prepareMessage(List<AbstractMessage> listOfLog) {
         int[][][][] preparedMultiMatrix = ((MultiMatrixMessage) listOfLog.get(0)).multiMatrixValue;
         String preparedMessage =
                 Arrays.deepToString(preparedMultiMatrix)

@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.System.lineSeparator;
 
@@ -18,7 +18,7 @@ public class ByteMessage extends AbstractMessage {
     }
 
     @Override
-    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
+    public void prepareMessage(List<AbstractMessage> listOfLog) {
         byte resultByteSum = 0;
         for (AbstractMessage currentMessage : listOfLog) {
             Byte currentValue = ((ByteMessage)currentMessage).byteValue;

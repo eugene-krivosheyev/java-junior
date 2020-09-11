@@ -7,6 +7,7 @@ import com.acme.edu.message.AbstractMessage;
 import com.acme.edu.saver.Saver;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controller for logged messages. Collects messages of the
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 public class LoggerController {
     private final Saver saver;
     private AbstractMessage currentState = null;
-    ArrayList<AbstractMessage> messageQueue = new ArrayList<>();
+    private final List<AbstractMessage> messageQueue = new ArrayList<>();
 
     public LoggerController(Saver saver) {
         this.saver = saver;
