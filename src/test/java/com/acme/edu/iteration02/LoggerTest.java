@@ -2,6 +2,8 @@ package com.acme.edu.iteration02;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.exception.LogException;
+import com.acme.edu.exception.SaverException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -12,7 +14,7 @@ import java.io.IOException;
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
-    public void setUpSystemOut() throws IOException {
+    public void setUpSystemOut() {
         resetOut();
         captureSysout();
     }
@@ -28,7 +30,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //TODO: implement Logger solution to match specification as tests
 
     @Test @Ignore
-    public void shouldLogSequentIntegersAsSum() throws IOException {
+    public void shouldLogSequentIntegersAsSum() throws LogException, SaverException {
         //region when
         Logger.log("str 1");
         Logger.log(1);
@@ -53,7 +55,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test @Ignore
-    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
+    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws LogException, SaverException {
         //region when
         Logger.log("str 1");
         Logger.log(10);
@@ -80,11 +82,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test @Ignore
-    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
+    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() throws LogException, SaverException {
         //region when
         Logger.log("str 1");
         Logger.log((byte)10);
-        Logger.log((byte)Byte.MAX_VALUE);
+        Logger.log(Byte.MAX_VALUE);
         Logger.log("str 2");
         Logger.log(0);
         Logger.flush();
@@ -107,7 +109,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test @Ignore
-    public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
+    public void shouldLogSameSubsequentStringsWithoutRepeat() throws LogException, SaverException {
         //region when
         Logger.log("str 1");
         Logger.log("str 2");

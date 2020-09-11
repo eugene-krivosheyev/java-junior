@@ -8,11 +8,8 @@ import com.acme.edu.message.Message;
 import com.acme.edu.message.StringMessage;
 import com.acme.edu.saver.Saver;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mockito.stubbing.OngoingStubbing;
 
-import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 
@@ -21,7 +18,7 @@ public class LoggerControllerTest {
     static Saver saver;
 
     @Before
-    public static void setUp() {
+    public void setUp() {
         saver = mock(Saver.class);
         loggerController = new LoggerController(saver);
     }
@@ -52,7 +49,10 @@ public class LoggerControllerTest {
 
     @Test(expected = LogException.class)
     public void shouldThrowLogExceptionWhenGotSaverException() throws SaverException, LogException {
-        when(saver.save(any())).thenThrow(new SaverException());
+        doThrow(SaverException.class).when(saver).save(any());
+        Message message = mock(Message.class);
+        loggerController.log(message);
+        when(message.isSameType(any())).thenReturn(false);
         loggerController.log(mock(Message.class));
     }
 }
