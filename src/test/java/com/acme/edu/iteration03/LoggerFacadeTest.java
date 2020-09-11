@@ -2,20 +2,19 @@ package com.acme.edu.iteration03;
 
 import com.acme.edu.LoggerFacade;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import com.acme.edu.exception.LoggerControllerException;
+import com.acme.edu.exception.LoggerException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.IOException;
 
 import static java.lang.System.lineSeparator;
 
 public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
-    public void setUpSystemOut() throws IOException {
+    public void setUpSystemOut() {
         resetOut();
         captureSysout();
     }
@@ -28,10 +27,10 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Ignore
-    public void shouldLogIntegersArray() throws LoggerControllerException {
+    public void shouldLogIntegersArray() throws LoggerException {
         //region when
         LoggerFacade.log(new int[] {-1, 0, 1});
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         //endregion
 
         //region then
@@ -43,10 +42,10 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Ignore
-    public void shouldLogIntegersMatrix() throws LoggerControllerException {
+    public void shouldLogIntegersMatrix() throws LoggerException {
         //region when
         LoggerFacade.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         //endregion
 
         //region then
@@ -61,10 +60,10 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Ignore
-    public void shouldLogIntegersMulitidimentionalArray() throws LoggerControllerException {
+    public void shouldLogIntegersMulitidimentionalArray() throws LoggerException {
         //region when
         LoggerFacade.log(new int[][][][] {{{{0}}}});
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         //endregion
 
         //region then

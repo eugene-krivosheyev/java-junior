@@ -2,7 +2,7 @@ package com.acme.edu.iteration02;
 
 import com.acme.edu.LoggerFacade;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import com.acme.edu.exception.LoggerControllerException;
+import com.acme.edu.exception.LoggerException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,14 +26,14 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test
-    public void shouldLogSequentIntegersAsSum() throws LoggerControllerException {
+    public void shouldLogSequentIntegersAsSum() throws LoggerException {
         //region when
         LoggerFacade.log("str 1");
         LoggerFacade.log(1);
         LoggerFacade.log(2);
         LoggerFacade.log("str 2");
         LoggerFacade.log(0);
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         //endregion
 
         //region then
@@ -50,18 +50,18 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws LoggerControllerException {
+    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws LoggerException {
         //region when
         LoggerFacade.log("str 1");
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         LoggerFacade.log(10);
         LoggerFacade.log(Integer.MAX_VALUE-1);
         LoggerFacade.log(Integer.MAX_VALUE-2);
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         LoggerFacade.log("str 2");
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         LoggerFacade.log(0);
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         //endregion
 
         //region then
@@ -79,17 +79,17 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() throws LoggerControllerException {
+    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() throws LoggerException {
         //region when
         LoggerFacade.log("str 1");
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         LoggerFacade.log((byte)10);
         LoggerFacade.log(Byte.MAX_VALUE);
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         LoggerFacade.log("str 2");
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         LoggerFacade.log(0);
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         //endregion
 
         //region then
@@ -104,19 +104,19 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogSameSubsequentStringsWithoutRepeat() throws LoggerControllerException {
+    public void shouldLogSameSubsequentStringsWithoutRepeat() throws LoggerException {
         //region when
         LoggerFacade.log("str 1");
         LoggerFacade.log("str 2");
         LoggerFacade.log("str 2");
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         LoggerFacade.log(0);
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         LoggerFacade.log("str 2");
         LoggerFacade.log("str 3");
         LoggerFacade.log("str 3");
         LoggerFacade.log("str 3");
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         //endregion
 
         //region then
