@@ -2,11 +2,18 @@ package com.acme.edu;
 
 import com.acme.edu.command.IntCommand;
 import com.acme.edu.command.LoggerCommand;
+import com.acme.edu.command.StringCommand;
 import com.acme.edu.controller.LoggerController;
+import com.acme.edu.exception.IntLogException;
+import com.acme.edu.exception.LogException;
+import com.acme.edu.exception.SaveException;
+import com.acme.edu.exception.StringLogException;
 import com.acme.edu.saver.LoggerSaver;
+import com.sun.corba.se.spi.logging.LogWrapperBase;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class ControllerTest implements SysoutCaptureAndAssertionAbility {
@@ -20,78 +27,68 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldSetCommandWhenFirstTimeLog(){
+    public void shouldSetCommandWhenFirstTimeLog() throws LogException, SaveException {
         LoggerCommand loggerCommand = mock(LoggerCommand.class);
 
-        try {
-            loggerController.log(loggerCommand);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        loggerController.log(loggerCommand);
         verify(loggerSaver, never()).saveMessage(any());
     }
 
     @Test
-    public void shouldCallAccumulateWhenLogSameTypeSequence() {
+    public void shouldCallAccumulateWhenLogSameTypeSequence() throws LogException, StringLogException, IntLogException, SaveException {
         LoggerCommand firstCommand = mock(LoggerCommand.class);
         LoggerCommand secondCommand = mock(LoggerCommand.class);
 
         when(secondCommand.isSameType(firstCommand)).thenReturn(true);
 
-        try {
-            loggerController.log(firstCommand);
-            loggerController.log(secondCommand);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        loggerController.log(firstCommand);
+        loggerController.log(secondCommand);
 
         verify(loggerSaver, never()).saveMessage(any());
         verify(firstCommand).accumulate(secondCommand);
     }
 
     @Test
-    public void shouldCallSaveWhenLogDifferentTypesSequence() {
+    public void shouldCallSaveWhenLogDifferentTypesSequence() throws LogException, StringLogException, SaveException{
         LoggerCommand firstCommand = mock(LoggerCommand.class);
         LoggerCommand secondCommand = mock(LoggerCommand.class);
 
         when(secondCommand.isSameType(firstCommand)).thenReturn(false);
 
-        try {
-            loggerController.log(firstCommand);
-            loggerController.log(secondCommand);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        loggerController.log(firstCommand);
+        loggerController.log(secondCommand);
 
         verify(loggerSaver).saveMessage(firstCommand);
         verify(loggerSaver, never()).saveMessage(secondCommand);
     }
 
     @Test
-    public void shouldCallSaveWhenFlush() {
+    public void shouldCallSaveWhenFlush()throws LogException, SaveException {
         IntCommand intCommand = mock(IntCommand.class);
 
-        try {
-            loggerController.log(intCommand);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        loggerController.flush();
+        loggerController.log(intCommand);
+        loggerController.flush(null);
 
         verify(loggerSaver).saveMessage(intCommand);
     }
 
+    @Test(expected = LogException.class)
+    public void shouldThrowLogExceptionWhenNewCommandIsNull() throws LogException {
+        LoggerCommand firstCommand = mock(LoggerCommand.class);
+
+        loggerController.log(firstCommand);
+        loggerController.log(null);
+    }
+
     @Test
-    public void shouldThrowExceptionWhenNewCommandIsNull() {
-        IntCommand intCommand = mock(IntCommand.class);
+    public void shouldThrowExceptionWithRightMessageWhenNewCommandIsNull() throws LogException {
+        LoggerCommand firstCommand = mock(LoggerCommand.class);
 
         try {
-            loggerController.log(intCommand);
+            loggerController.log(firstCommand);
             loggerController.log(null);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (LogException e) {
+            assertEquals("Invalid parameter exception: new command is null", e.getMessage());
         }
     }
 }

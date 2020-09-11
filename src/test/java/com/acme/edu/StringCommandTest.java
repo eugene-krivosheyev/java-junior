@@ -2,6 +2,7 @@ package com.acme.edu;
 
 import com.acme.edu.command.IntCommand;
 import com.acme.edu.command.StringCommand;
+import com.acme.edu.exception.StringLogException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,17 +21,17 @@ public class StringCommandTest {
     }
 
     @Test
-    public void shouldReturnTrueWhenNewCommandTypeIsTheSame() {
+    public void shouldReturnTrueWhenNewCommandTypeIsTheSame() throws StringLogException{
         assertTrue(stringCommand.isSameType(new StringCommand("test string")));
     }
 
     @Test
-    public void shouldReturnFalseWhenNewCommandIsDifferentString() {
+    public void shouldReturnFalseWhenNewCommandIsDifferentString() throws StringLogException{
         assertFalse(stringCommand.isSameType(new StringCommand("different string")));
     }
 
     @Test
-    public void shouldReturnFalseWhenNewCommandTypeIsInt() {
+    public void shouldReturnFalseWhenNewCommandTypeIsInt() throws StringLogException {
         assertFalse(stringCommand.isSameType(new IntCommand(anyInt())));
     }
 
@@ -53,5 +54,23 @@ public class StringCommandTest {
         stringCommand.accumulate(duplicatedStringCommand);
 
         assertEquals("string: test string (x2)", stringCommand.toString());
+    }
+
+    @Test(expected = StringLogException.class)
+    public void shouldThrowStringLogExceptionWhenStringCommandIsNull() throws StringLogException{
+        StringCommand nullStringCommand = new StringCommand(null);
+
+        stringCommand.isSameType(nullStringCommand);
+    }
+
+    @Test
+    public void shouldThrowStringLogExceptionWithRightMessageWhenStringCommandIsNull(){
+        StringCommand nullStringCommand = new StringCommand(null);
+
+        try {
+            stringCommand.isSameType(nullStringCommand);
+        } catch(StringLogException e) {
+            assertEquals("new string is null", e.getMessage());
+        }
     }
 }
