@@ -38,8 +38,7 @@ public class StringCommand implements LoggerCommand {
                 return ((StringCommand) loggerCommand).stringAccumulator.equals(stringAccumulator);
             }
             catch (NullPointerException e){
-                e.printStackTrace();
-                throw new StringLogException("New string is null", e);
+                throw new StringLogException("new string is null", e);
             }
         }
 

@@ -70,7 +70,7 @@ public class StringCommandTest {
         try {
             stringCommand.isSameType(nullStringCommand);
         } catch(StringLogException e) {
-            assertEquals("New string is null", e.getMessage());
+            assertEquals("new string is null", e.getMessage());
         }
     }
 }

@@ -6,6 +6,7 @@ import com.acme.edu.command.StringCommand;
 import com.acme.edu.controller.LoggerController;
 import com.acme.edu.exception.IntLogException;
 import com.acme.edu.exception.LogException;
+import com.acme.edu.exception.SaveException;
 import com.acme.edu.exception.StringLogException;
 import com.acme.edu.saver.LoggerSaver;
 import com.sun.corba.se.spi.logging.LogWrapperBase;
@@ -26,7 +27,7 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldSetCommandWhenFirstTimeLog() throws LogException {
+    public void shouldSetCommandWhenFirstTimeLog() throws LogException, SaveException {
         LoggerCommand loggerCommand = mock(LoggerCommand.class);
 
         loggerController.log(loggerCommand);
@@ -34,7 +35,7 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldCallAccumulateWhenLogSameTypeSequence() throws LogException, StringLogException, IntLogException {
+    public void shouldCallAccumulateWhenLogSameTypeSequence() throws LogException, StringLogException, IntLogException, SaveException {
         LoggerCommand firstCommand = mock(LoggerCommand.class);
         LoggerCommand secondCommand = mock(LoggerCommand.class);
 
@@ -48,7 +49,7 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldCallSaveWhenLogDifferentTypesSequence() throws LogException, StringLogException{
+    public void shouldCallSaveWhenLogDifferentTypesSequence() throws LogException, StringLogException, SaveException{
         LoggerCommand firstCommand = mock(LoggerCommand.class);
         LoggerCommand secondCommand = mock(LoggerCommand.class);
 
@@ -62,21 +63,11 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldCallSaveWhenFlush()throws LogException {
+    public void shouldCallSaveWhenFlush()throws LogException, SaveException {
         IntCommand intCommand = mock(IntCommand.class);
 
         loggerController.log(intCommand);
-        loggerController.flush();
-
-        verify(loggerSaver).saveMessage(intCommand);
-    }
-
-    @Test
-    public void shouldCallSaveWhenNewCommandIsNull() throws LogException{
-        IntCommand intCommand = mock(IntCommand.class);
-
-        loggerController.log(intCommand);
-        loggerController.log(null);
+        loggerController.flush(null);
 
         verify(loggerSaver).saveMessage(intCommand);
     }
@@ -97,7 +88,7 @@ public class ControllerTest implements SysoutCaptureAndAssertionAbility {
             loggerController.log(firstCommand);
             loggerController.log(null);
         } catch (LogException e) {
-            assertEquals("Invalid parameter exception: null", e.getMessage());
+            assertEquals("Invalid parameter exception: new command is null", e.getMessage());
         }
     }
 }

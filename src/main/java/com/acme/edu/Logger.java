@@ -12,7 +12,13 @@ public class Logger {
     private static LoggerController loggerController = new LoggerController(System.out::println);
 
     public static void flush() {
-        loggerController.flush();
+        try {
+            loggerController.flush(null);
+        } catch (LogException e) {
+            System.out.println("Can't save message. Exception was thrown caused by" + e.getCause() +
+                    " with message " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public static void log(int message) {
@@ -20,8 +26,9 @@ public class Logger {
             loggerController.log(new IntCommand(message));
         }
         catch (LogException e) {
-            System.out.println("Exception was thrown cause " + e.getCause() +
+            System.out.println("Can't log message. Exception was thrown caused by" + e.getCause() +
                     " with message " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -30,8 +37,9 @@ public class Logger {
             loggerController.log(new StringCommand(message));
         }
         catch (LogException e) {
-            System.out.println("Exception was thrown cause " + e.getCause() +
+            System.out.println("Can't log message. Exception was thrown caused by" + e.getCause() +
                     " with message " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

@@ -23,7 +23,7 @@ public class IntCommand implements LoggerCommand {
     @Override
     public LoggerCommand accumulate(LoggerCommand loggerCommand) throws IntLogException {
         if (Integer.MAX_VALUE - intAccumulator < ((IntCommand) loggerCommand).intAccumulator) {
-            throw new IntLogException("Integer overflow");
+            throw new IntLogException("can't accumulate integer cause by overflow");
         }
         return new IntCommand(intAccumulator + ((IntCommand) loggerCommand).intAccumulator);
     }

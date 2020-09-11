@@ -55,7 +55,7 @@ public class IntCommandTest {
         try {
             intCommand.accumulate(maxValueIntCommand);
         } catch (IntLogException e) {
-            assertEquals("Integer overflow", e.getMessage());
+            assertEquals("can't accumulate integer cause by overflow", e.getMessage());
         }
     }
 }
