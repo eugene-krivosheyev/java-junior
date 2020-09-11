@@ -2,6 +2,7 @@ package com.acme.edu;
 
 import com.acme.edu.command.IntCommand;
 import com.acme.edu.command.StringCommand;
+import com.acme.edu.exception.IntLogException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,7 +30,7 @@ public class IntCommandTest {
     }
 
     @Test
-    public void shouldCreateNewIntCommandWhenAccumulate() {
+    public void shouldCreateNewIntCommandWhenAccumulate() throws IntLogException {
         IntCommand newCommand = new IntCommand(1);
         assertThat(intCommand.accumulate(newCommand)).usingRecursiveComparison()
                 .isEqualTo(new IntCommand(2));
@@ -38,5 +39,23 @@ public class IntCommandTest {
     @Test
     public void shouldReturnDecoratedCommand(){
         assertEquals("primitive: 1", intCommand.toString());
+    }
+
+    @Test(expected = IntLogException.class)
+    public void shouldThrowIntLogExceptionWhenOverflow() throws IntLogException{
+        IntCommand maxValueIntCommand = new IntCommand(Integer.MAX_VALUE);
+
+        intCommand.accumulate(maxValueIntCommand);
+    }
+
+    @Test
+    public void shouldThrowIntLogExceptionWithRightMessageWhenOverflow(){
+        IntCommand maxValueIntCommand = new IntCommand(Integer.MAX_VALUE);
+
+        try {
+            intCommand.accumulate(maxValueIntCommand);
+        } catch (IntLogException e) {
+            assertEquals("Integer overflow", e.getMessage());
+        }
     }
 }

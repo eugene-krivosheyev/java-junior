@@ -3,23 +3,36 @@ package com.acme.edu;
 import com.acme.edu.command.IntCommand;
 import com.acme.edu.command.StringCommand;
 import com.acme.edu.controller.LoggerController;
+import com.acme.edu.exception.LogException;
 import com.acme.edu.saver.ConsoleSaver;
 
 public class Logger {
     //private static byte byteAccumulator = (byte) 0;
 
-    private static LoggerController loggerController = new LoggerController(new ConsoleSaver());
+    private static LoggerController loggerController = new LoggerController(System.out::println);
 
     public static void flush() {
         loggerController.flush();
     }
 
     public static void log(int message) {
-        loggerController.log(new IntCommand(message));
+        try {
+            loggerController.log(new IntCommand(message));
+        }
+        catch (LogException e) {
+            System.out.println("Exception was thrown cause " + e.getCause() +
+                    " with message " + e.getMessage());
+        }
     }
 
     public static void log(String message) {
-        loggerController.log(new StringCommand(message));
+        try {
+            loggerController.log(new StringCommand(message));
+        }
+        catch (LogException e) {
+            System.out.println("Exception was thrown cause " + e.getCause() +
+                    " with message " + e.getMessage());
+        }
     }
 
 //TODO: Implement when customer will ask for these types

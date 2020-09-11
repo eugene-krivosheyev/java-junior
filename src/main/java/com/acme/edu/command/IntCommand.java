@@ -1,5 +1,6 @@
 package com.acme.edu.command;
 
+import com.acme.edu.exception.IntLogException;
 import com.acme.edu.message.Prefix;
 
 public class IntCommand implements LoggerCommand {
@@ -20,7 +21,10 @@ public class IntCommand implements LoggerCommand {
     }
 
     @Override
-    public LoggerCommand accumulate(LoggerCommand loggerCommand) {
+    public LoggerCommand accumulate(LoggerCommand loggerCommand) throws IntLogException {
+        if (Integer.MAX_VALUE - intAccumulator < ((IntCommand) loggerCommand).intAccumulator) {
+            throw new IntLogException("Integer overflow");
+        }
         return new IntCommand(intAccumulator + ((IntCommand) loggerCommand).intAccumulator);
     }
 }

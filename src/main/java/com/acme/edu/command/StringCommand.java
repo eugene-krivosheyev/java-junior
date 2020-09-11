@@ -1,5 +1,6 @@
 package com.acme.edu.command;
 
+import com.acme.edu.exception.StringLogException;
 import com.acme.edu.message.Prefix;
 
 public class StringCommand implements LoggerCommand {
@@ -31,9 +32,15 @@ public class StringCommand implements LoggerCommand {
     }
 
     @Override
-    public boolean isSameType(LoggerCommand loggerCommand) {
+    public boolean isSameType(LoggerCommand loggerCommand) throws StringLogException{
         if (loggerCommand instanceof StringCommand) {
-            return ((StringCommand) loggerCommand).stringAccumulator.equals(stringAccumulator);
+            try {
+                return ((StringCommand) loggerCommand).stringAccumulator.equals(stringAccumulator);
+            }
+            catch (NullPointerException e){
+                e.printStackTrace();
+                throw new StringLogException("New string is null", e);
+            }
         }
 
         return false;
