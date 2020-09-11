@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class LoggerController {
     private final Saver saver;
     private AbstractMessage currentState = null;
-    static ArrayList<AbstractMessage> messageLog = new ArrayList<>();
+    ArrayList<AbstractMessage> messageQueue = new ArrayList<>();
 
     public LoggerController(Saver saver) {
         this.saver = saver;
@@ -27,10 +27,10 @@ public class LoggerController {
      * @param message AbstractMessage to be logged
      */
     public void log(AbstractMessage message) throws LoggerException {
-        if (messageLog.size() != 0 && !currentState.isSameType(message)) {
+        if (!messageQueue.isEmpty() && !currentState.isSameType(message)) {
             flush();
         }
-        messageLog.add(message);
+        messageQueue.add(message);
         currentState = message;
     }
 
@@ -39,15 +39,15 @@ public class LoggerController {
      */
     public void flush() throws LoggerException {
         try {
-            AbstractMessage firstToLog = messageLog.get(0);
-            firstToLog.prepareMessage(messageLog);
+            AbstractMessage firstToLog = messageQueue.get(0);
+            firstToLog.prepareMessage(messageQueue);
             saver.save(firstToLog);
         } catch (IndexOutOfBoundsException e) {
             throw new FlushLogException("Message log is empty! See: ", e);
         } catch (Exception e) {
             throw new SaveException("Message cannot be saved correctly", e);
         } finally {
-            messageLog.clear();
+            messageQueue.clear();
         }
     }
 }

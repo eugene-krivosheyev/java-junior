@@ -6,11 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 public class MessagesTest implements SysoutCaptureAndAssertionAbility {
     private final IntMessage intMessage = new IntMessage(0);
     private final CharMessage charMessage = new CharMessage('a');
+    private final BoolMessage boolMessage = new BoolMessage(true);
     private final StringMessage strMessage = new StringMessage("");
     private final ByteMessage byteMessage = new ByteMessage((byte) 1);
     private final ArrayMessage arrayMessage = new ArrayMessage(new int[] {0});
@@ -67,6 +67,12 @@ public class MessagesTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
+    public void shouldSayNotSameTypeWhenBoolAndStringProvided() {
+        boolean result = boolMessage.isSameType(arrayMessage);
+        assertFalse(result);
+    }
+
+    @Test
     public void shouldSayNotSameTypeWhenMultiMatrixAndMatrixProvided() {
         boolean result = multiMatrixMessage.isSameType(matrixMessage);
         assertFalse(result);
@@ -77,6 +83,12 @@ public class MessagesTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldSayIsSameTypeWhenStrsProvided() {
         boolean result = strMessage.isSameType(strMessage);
+        assertTrue(result);
+    }
+
+    @Test
+    public void shouldSayIsSameTypeWhenBoolsProvided() {
+        boolean result = boolMessage.isSameType(boolMessage);
         assertTrue(result);
     }
 
