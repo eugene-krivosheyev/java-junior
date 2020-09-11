@@ -5,7 +5,6 @@ import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.exception.LoggerControllerException;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -26,18 +25,13 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-
-
     @Test
     public void shouldLogSequentIntegersAsSum() throws LoggerControllerException {
         //region when
         LoggerFacade.log("str 1");
-        //LoggerFacade.flushStart();
         LoggerFacade.log(1);
         LoggerFacade.log(2);
-        //LoggerFacade.flushStart();
         LoggerFacade.log("str 2");
-        //LoggerFacade.flushStart();
         LoggerFacade.log(0);
         LoggerFacade.flushStart();
         //endregion

@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import static org.mockito.Mockito.*;
 
 public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
-
     private LoggerController sut;
     private Saver saverMock;
 
@@ -83,7 +82,7 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldCallPrepareMessageWhenFlushStarted() throws LoggerControllerException {
-        AbstractMessage mock = mock(AbstractMessage.class);
+        IntMessage mock = spy(new IntMessage(1));
 
         sut.log(mock);
         sut.log(mock);
@@ -91,6 +90,6 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
         sut.log(mock);
         sut.flushStart();
 
-        verify(mock, times(4)).prepareMessage(any(ArrayList.class));
+        verify(mock).prepareMessage(any(ArrayList.class));
     }
 }
