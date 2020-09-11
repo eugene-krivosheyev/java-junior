@@ -31,19 +31,6 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    @Ignore
-    public void shouldSaveMessageWhenFlushCalled() {
-        AbstractMessage mock = mock(AbstractMessage.class);
-
-        //when(mock.prepareMessage(LoggerController.listOfLog)).thenReturn("sad");
-
-        sut.log(mock);
-        sut.flushStart();
-
-        assertSysoutContains("hahaaha");
-    }
-
-    @Test
     public void shouldCallSaveWhenFlushCalled() {
         AbstractMessage messageMock = mock(AbstractMessage.class);
 
