@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import static com.acme.edu.Logger.*;
+
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private static final String LINE_SEP = System.lineSeparator();
     Logger myTestLogger = new Logger();
@@ -25,7 +27,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test @Ignore
-    public void shouldLogSequentIntegersAsSum() {
+    public void shouldLogSequentIntegersAsSum() throws LogException, FlushException {
         //region when
         myTestLogger.log("str 1");
         myTestLogger.log(1);
@@ -46,7 +48,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test @Ignore
-    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
+    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws LogException, FlushException {
         //region when
         myTestLogger.log("str 1");
         myTestLogger.log(10);
@@ -92,7 +94,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     */
 
     @Test @Ignore
-    public void shouldLogSameSubsequentStringsWithoutRepeat() {
+    public void shouldLogSameSubsequentStringsWithoutRepeat() throws LogException, FlushException {
         //region when
         myTestLogger.log("str 1");
         myTestLogger.log("str 2");
@@ -114,5 +116,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
             "string: str 3 (x3)" + LINE_SEP
         );
         //endregion
+    }
+
+    @Test(expected = LogException.class)
+    public void shouldThrowExceptionWhenComeEmptyString() throws FlushException, LogException{
+        myTestLogger.log(Integer.MAX_VALUE);
+        myTestLogger.log(1);
+        myTestLogger.flush();
     }
 }

@@ -21,13 +21,16 @@ public class IntCommand implements LoggerCommand {
     public boolean checkFlush(LoggerCommand other) {
         if (other instanceof IntCommand) {
             long sumCheck = (long)((IntCommand) other).value + (long)this.value;
+            if (sumCheck >= Integer.MAX_VALUE) throw new BufferOverflowException();
             return sumCheck >= Integer.MAX_VALUE;
         }
         return true;
     }
 
     @Override
-    public void accumulate(LoggerCommand other) {
-        this.value += ((IntCommand)other).value;
+    public void accumulate(LoggerCommand other) throws BufferOverflowException{
+        if ((long)  this.value < Integer.MAX_VALUE)
+            this.value += ((IntCommand)other).value;
+        else throw new BufferOverflowException();
     }
 }

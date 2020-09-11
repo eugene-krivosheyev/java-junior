@@ -29,7 +29,9 @@ public class StringCommand implements LoggerCommand {
     }
 
     @Override
-    public void accumulate(LoggerCommand other) {
-        strCounter++;
+    public void accumulate(LoggerCommand other) throws BufferOverflowException{
+        if ((long) strCounter < Integer.MAX_VALUE) {
+            strCounter++;
+        } else throw new BufferOverflowException();
     }
 }

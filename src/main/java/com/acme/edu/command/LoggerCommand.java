@@ -1,5 +1,9 @@
 package com.acme.edu.command;
 
+import com.acme.edu.saver.LoggerSaver;
+
+import java.nio.BufferOverflowException;
+
 /**
  * Interface for work with different message types
  */
@@ -15,11 +19,13 @@ public interface LoggerCommand {
      * @param other - new incoming message
      * @return result of the check
      */
-    boolean checkFlush(LoggerCommand other);
+    boolean checkFlush(LoggerCommand other) throws BufferOverflowException;
 
     /**
      * Accumulate current message with new one
      * @param other - new incoming message
      */
-    void accumulate(LoggerCommand other);
+    void accumulate(LoggerCommand other)throws BufferOverflowException;
+
+    class BufferOverflowException extends IllegalArgumentException{}
 }

@@ -22,7 +22,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldNotLogWhenFirstMessage() {
+    public void shouldNotLogWhenFirstMessage() throws Logger.LogException, LoggerSaver.SaveException {
         //region given
         when(command.getDecoratedSelf()).thenReturn("str");
         //endregion
@@ -37,7 +37,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldLogDecoratedWhenAllowedFlush() {
+    public void shouldLogDecoratedWhenAllowedFlush() throws Logger.LogException, LoggerSaver.SaveException {
         //region given
         when(command.getDecoratedSelf()).thenReturn("str");
         when(command.checkFlush(any(LoggerCommand.class))).thenReturn(true);
@@ -56,7 +56,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldAccumulateButNotLogWhenDisallowedFlush() {
+    public void shouldAccumulateButNotLogWhenDisallowedFlush() throws Logger.LogException, LoggerSaver.SaveException {
         //region given
         when(command.getDecoratedSelf()).thenReturn("str");
         when(command.checkFlush(any(LoggerCommand.class))).thenReturn(false);

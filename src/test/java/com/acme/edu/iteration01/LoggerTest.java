@@ -26,7 +26,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test @Ignore
-    public void shouldLogInteger() throws IOException {
+    public void shouldLogInteger() throws IOException, Logger.LogException, Logger.FlushException {
         //region when
         myTestLogger.log(1);
         myTestLogger.flush();
@@ -82,7 +82,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     */
 
     @Test @Ignore
-    public void shouldLogString() throws IOException {
+    public void shouldLogString() throws IOException, Logger.LogException, Logger.FlushException {
         //region when
         myTestLogger.log("test string 1");
         myTestLogger.log("other str");
