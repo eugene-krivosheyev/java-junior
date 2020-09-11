@@ -1,12 +1,12 @@
 package com.acme.edu.message;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.System.lineSeparator;
 
 /**
- * Implementation of AbstractMessage for logging Bytes.
- * Supports flushing with type overflow.
+ * Extension of AbstractMessage for logging Byte message type.
+ * Supports processing consecutive Byte messages and type overflow.
  * @see AbstractMessage
  */
 public class ByteMessage extends AbstractMessage {
@@ -18,7 +18,7 @@ public class ByteMessage extends AbstractMessage {
     }
 
     @Override
-    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
+    public void prepareMessage(List<AbstractMessage> listOfLog) {
         byte resultByteSum = 0;
         for (AbstractMessage currentMessage : listOfLog) {
             Byte currentValue = ((ByteMessage)currentMessage).byteValue;

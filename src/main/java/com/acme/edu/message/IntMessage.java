@@ -1,12 +1,12 @@
 package com.acme.edu.message;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.System.lineSeparator;
 
 /**
- * Implementation of AbstractMessage for logging Integers.
- * Supports flushing with type overflow.
+ * Extension of AbstractMessage for logging Integer message type.
+ * Supports processing consecutive Integer messages and type overflow.
  * @see AbstractMessage
  */
 public class IntMessage extends AbstractMessage {
@@ -18,7 +18,7 @@ public class IntMessage extends AbstractMessage {
     }
 
     @Override
-    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
+    public void prepareMessage(List<AbstractMessage> listOfLog) {
         int resultIntSum = 0;
         for (AbstractMessage currentMessage : listOfLog) {
             int currentValue = ((IntMessage) currentMessage).intValue;

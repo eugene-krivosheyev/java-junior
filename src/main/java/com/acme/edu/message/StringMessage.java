@@ -1,12 +1,12 @@
 package com.acme.edu.message;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.System.lineSeparator;
 
 /**
- * Implementation of AbstractMessage for logging Strings.
- * Supports flushing with strings counter.
+ * Extension of AbstractMessage for logging String message type.
+ * Supports processing consecutive String messages and type overflow.
  * @see AbstractMessage
  */
 public class StringMessage extends AbstractMessage {
@@ -20,7 +20,7 @@ public class StringMessage extends AbstractMessage {
     }
 
     @Override
-    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
+    public void prepareMessage(List<AbstractMessage> listOfLog) {
         String prevValue = ((StringMessage) listOfLog.get(0)).stringValue;
         int counter = 0;
 

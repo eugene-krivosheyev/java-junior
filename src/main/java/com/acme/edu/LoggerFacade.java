@@ -4,18 +4,18 @@ import com.acme.edu.exception.LoggerException;
 import com.acme.edu.message.*;
 
 /**
- * Facade for logger. Gets different types of message and
- * redirects to specific AbstractMessage implementation.
+ * Facade for logger.
+ * Gets different types of message and redirects to specific
+ * AbstractMessage implementation for further logging in controller.
  *
- * @version 2.0.0
+ * @version 3.0.0
  */
 public class LoggerFacade {
-    static LoggerController controller = new LoggerController(
-            message -> System.out.println(message.getPreparedMessage())
-    );
+    private static final LoggerController controller =
+            new LoggerController(message -> System.out.println(message.getPreparedMessage()));
 
     /**
-     * @param  message  a value to be logged
+     * @param  message AbstractMessage value to be logged
      * @see AbstractMessage
      */
     public static void log(int message) throws LoggerException {
@@ -57,7 +57,10 @@ public class LoggerFacade {
 
     /**
      * Section for flush interface.
-     * Flush is necessary in the end of work or in case of switching types.
+     * Should be called when client doesn't want to concatenate some
+     * consecutive log messages of the same type.
+     *
+     * Warning: flush is necessary in the end of work!
      */
     public static void flush() throws LoggerException {
         controller.flush();

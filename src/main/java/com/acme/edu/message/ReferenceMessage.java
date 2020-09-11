@@ -1,10 +1,9 @@
 package com.acme.edu.message;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 /**
- * Implementation of AbstractMessage for logging References.
+ * Extension of AbstractMessage for logging Reference message type.
  * @see AbstractMessage
  */
 public class ReferenceMessage extends AbstractMessage{
@@ -16,7 +15,7 @@ public class ReferenceMessage extends AbstractMessage{
     }
 
     @Override
-    public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
+    public void prepareMessage(List<AbstractMessage> listOfLog) {
         Object preparedReference = ((ReferenceMessage) listOfLog.get(0)).referenceValue;
         messageController.append(PREFIX).append(preparedReference);
     }
