@@ -1,6 +1,5 @@
 package demo.exception;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,7 +8,7 @@ import java.sql.SQLException;
 public class ExceptionDemo {
     public static void main(String[] args) {
         try {
-            new Controller().log("some message");
+            new Controller(System.out::println).log("some message");
         } catch (LogException e) {
             e.printStackTrace();
         }
@@ -18,7 +17,11 @@ public class ExceptionDemo {
 }
 
 class Controller {
-    private Saver saver = new Saver();
+    private AbstractSaver saver;
+
+    Controller(AbstractSaver saver) {
+        this.saver = saver;
+    }
 
     public void log(String message) throws LogException {
         //region t-c
@@ -64,7 +67,7 @@ class Controller {
     }
 }
 
-class Saver implements AbstractSaver {
+class SaverImpl implements AbstractSaver {
     public void save(String message) throws SaveException {
         //...
         try {

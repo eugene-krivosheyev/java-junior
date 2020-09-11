@@ -94,7 +94,7 @@ public class ArrayListTests {
 //        verify(mock, times(1)).toString(any())
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void shouldCallSaverWhenLog() {
         LoggerSaver saverMock = mock(LoggerSaver.class);
         final Logger sut = new Logger(saverMock);
