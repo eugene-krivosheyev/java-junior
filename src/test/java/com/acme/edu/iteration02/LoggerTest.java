@@ -2,6 +2,8 @@ package com.acme.edu.iteration02;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.exception.FlushException;
+import com.acme.edu.exception.LogException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -26,7 +28,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    @Test @Ignore
+    @Test
     public void shouldLogSequentIntegersAsSum() throws LogException, FlushException {
         //region when
         myTestLogger.log("str 1");
@@ -93,7 +95,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     */
 
-    @Test @Ignore
+    @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws LogException, FlushException {
         //region when
         myTestLogger.log("str 1");
@@ -119,7 +121,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test(expected = LogException.class)
-    public void shouldThrowExceptionWhenComeEmptyString() throws FlushException, LogException{
+    public void shouldThrowExceptionWhenBufferOverflow() throws FlushException, LogException{
         myTestLogger.log(Integer.MAX_VALUE);
         myTestLogger.log(1);
         myTestLogger.flush();

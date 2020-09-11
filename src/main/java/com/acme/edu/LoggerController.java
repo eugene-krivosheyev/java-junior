@@ -1,11 +1,14 @@
 package com.acme.edu;
 
 import com.acme.edu.command.LoggerCommand;
+import com.acme.edu.exception.BufferOverflowException;
+import com.acme.edu.exception.FlushException;
+import com.acme.edu.exception.LogException;
+import com.acme.edu.exception.SaveException;
 import com.acme.edu.saver.LoggerSaver;
-import javafx.fxml.LoadException;
 
 public class LoggerController {
-    LoggerSaver saver;
+    private LoggerSaver saver;
     LoggerCommand currentState;
 
     /**
@@ -15,7 +18,6 @@ public class LoggerController {
      */
     public LoggerController(LoggerSaver saver) {
         this.saver = saver;
-        currentState = null;
     }
 
     /**
@@ -23,32 +25,31 @@ public class LoggerController {
      * @see LoggerCommand
      * @param command - new incoming message
      */
-    public void log(LoggerCommand command) throws Logger.LogException {
+    public void log(LoggerCommand command) throws LogException {
         try {
             if (currentState == null) {
                 currentState = command;
             } else if (currentState.checkFlush(command)) {
-                saver.save(currentState.getDecoratedSelf());
-                currentState = command;
+                flush(command);
             } else {
                 currentState.accumulate(command);
             }
-        } catch (LoggerSaver.SaveException | LoggerCommand.BufferOverflowException e) {
+        } catch (BufferOverflowException | FlushException e) {
             e.printStackTrace();
-            throw new Logger.LogException();
+            throw new LogException("log error", e);
         }
     }
 
     /**
      * Flush logger buffer and revert to default state
      */
-    public void flush() throws Logger.FlushException {
+    public void flush(LoggerCommand state) throws FlushException {
         try {
             saver.save(currentState.getDecoratedSelf());
-            currentState = null;
-        } catch(LoggerSaver.SaveException e){
+            currentState = state;
+        } catch(SaveException e){
             e.printStackTrace();
-            throw  new Logger.FlushException();
+            throw  new FlushException("flush error: unable to save", e);
         }
     }
 }

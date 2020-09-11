@@ -1,12 +1,9 @@
 package com.acme.edu.saver;
 
-import java.io.IOException;
+import com.acme.edu.exception.SaveException;
 
 public interface LoggerSaver {
     void save(String representation) throws SaveException;
-
-    class SaveException extends IOException {
-    }
 }
 
 

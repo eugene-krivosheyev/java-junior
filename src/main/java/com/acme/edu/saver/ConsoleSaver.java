@@ -1,8 +1,7 @@
 package com.acme.edu.saver;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import com.acme.edu.exception.SaveException;
 
-import java.io.IOException;
 import java.security.InvalidParameterException;
 
 public class ConsoleSaver implements LoggerSaver {
@@ -16,7 +15,7 @@ public class ConsoleSaver implements LoggerSaver {
             }
         } catch(InvalidParameterException e) {
             e.printStackTrace();
-            throw new SaveException();
+            throw new SaveException("received empty message", e);
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.acme.edu;
 
 import com.acme.edu.command.LoggerCommand;
+import com.acme.edu.exception.LogException;
+import com.acme.edu.exception.SaveException;
 import com.acme.edu.saver.ConsoleSaver;
 import com.acme.edu.saver.LoggerSaver;
 import org.junit.Before;
@@ -22,7 +24,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldNotLogWhenFirstMessage() throws Logger.LogException, LoggerSaver.SaveException {
+    public void shouldNotLogWhenFirstMessage() throws LogException, SaveException {
         //region given
         when(command.getDecoratedSelf()).thenReturn("str");
         //endregion
@@ -37,7 +39,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldLogDecoratedWhenAllowedFlush() throws Logger.LogException, LoggerSaver.SaveException {
+    public void shouldLogDecoratedWhenAllowedFlush() throws LogException, SaveException {
         //region given
         when(command.getDecoratedSelf()).thenReturn("str");
         when(command.checkFlush(any(LoggerCommand.class))).thenReturn(true);
@@ -56,7 +58,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldAccumulateButNotLogWhenDisallowedFlush() throws Logger.LogException, LoggerSaver.SaveException {
+    public void shouldAccumulateButNotLogWhenDisallowedFlush() throws SaveException, LogException {
         //region given
         when(command.getDecoratedSelf()).thenReturn("str");
         when(command.checkFlush(any(LoggerCommand.class))).thenReturn(false);

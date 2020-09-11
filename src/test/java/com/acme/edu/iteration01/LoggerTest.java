@@ -2,19 +2,20 @@ package com.acme.edu.iteration01;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.exception.FlushException;
+import com.acme.edu.exception.LogException;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     Logger myTestLogger = new Logger();
 
     //region given
     @Before
-    public void setUpSystemOut() throws IOException {
+    public void setUpSystemOut() {
         resetOut();
         captureSysout();
     }
@@ -25,8 +26,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    @Test @Ignore
-    public void shouldLogInteger() throws IOException, Logger.LogException, Logger.FlushException {
+    @Test
+    public void shouldLogInteger() throws LogException, FlushException {
         //region when
         myTestLogger.log(1);
         myTestLogger.flush();
@@ -81,8 +82,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     */
 
-    @Test @Ignore
-    public void shouldLogString() throws IOException, Logger.LogException, Logger.FlushException {
+    @Test
+    public void shouldLogString() throws LogException, FlushException {
         //region when
         myTestLogger.log("test string 1");
         myTestLogger.log("other str");

@@ -1,5 +1,7 @@
 package com.acme.edu.command;
 
+import com.acme.edu.exception.BufferOverflowException;
+
 /**
  * @see LoggerCommand
  */
