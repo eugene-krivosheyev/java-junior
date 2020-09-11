@@ -8,13 +8,13 @@ import com.acme.edu.saver.LogSaver;
 import com.acme.edu.saver.Saver;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static org.mockito.Mockito.*;
 
 public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
-
     private LoggerController sut;
     private Saver saverMock;
 
@@ -70,6 +70,26 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
         sut.flushStart();
     }
 
+    @Test
+    public void shouldSavePersiceMessageWhenSaverCalled() throws LoggerControllerException {
+        AbstractMessage mock = mock(AbstractMessage.class);
 
+        sut.log(mock);
+        sut.flushStart();
 
+        verify(saverMock).save(mock);
+    }
+
+    @Test
+    public void shouldCallPrepareMessageWhenFlushStarted() throws LoggerControllerException {
+        IntMessage mock = spy(new IntMessage(1));
+
+        sut.log(mock);
+        sut.log(mock);
+        sut.log(mock);
+        sut.log(mock);
+        sut.flushStart();
+
+        verify(mock).prepareMessage(any(ArrayList.class));
+    }
 }

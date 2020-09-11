@@ -56,7 +56,7 @@ public class LoggerFacade {
 
     /**
      * Section for flush interface.
-     * Flush in necessary at the end of work or in case of switching types.
+     * Flush is necessary in the end of work or in case of switching types.
      */
     public static void flushStart() throws LoggerControllerException {
         controller.flushStart();
