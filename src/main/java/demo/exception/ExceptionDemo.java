@@ -72,7 +72,7 @@ class SaverImpl implements AbstractSaver {
         //...
         try {
             throw new IOException("some error definition");
-        } catch (Exception e) {
+        } catch (IOException e) {
             //e.printStackTrace();
             throw new SaveException("file abc.txt", e);
         }
