@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Implementation of AbstractMessage for logging Arrays.
+ * Extension of AbstractMessage for logging 1D Array of Integers message type.
  * @see AbstractMessage
  */
 public class ArrayMessage extends AbstractMessage {

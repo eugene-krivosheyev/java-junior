@@ -3,7 +3,7 @@ package com.acme.edu.message;
 import java.util.List;
 
 /**
- * Implementation of AbstractMessage for logging References.
+ * Extension of AbstractMessage for logging Reference message type.
  * @see AbstractMessage
  */
 public class ReferenceMessage extends AbstractMessage{

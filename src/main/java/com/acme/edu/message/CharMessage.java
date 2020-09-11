@@ -3,7 +3,7 @@ package com.acme.edu.message;
 import java.util.List;
 
 /**
- * Implementation of AbstractMessage for logging Chars.
+ * Extension of AbstractMessage for logging Char message type.
  * @see AbstractMessage
  */
 public class CharMessage extends AbstractMessage{

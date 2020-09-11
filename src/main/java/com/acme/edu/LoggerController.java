@@ -10,9 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Controller for logged messages. Collects messages of the
- * same type to listOfLog and then process them in flush function
- * for further output
+ * Controller for log messages. Automatically decides whether to put
+ * messages into message queue or to call flush on message queue.
  */
 public class LoggerController {
     private final Saver saver;
@@ -24,7 +23,9 @@ public class LoggerController {
     }
 
     /**
-     * Collects messages if they are of the same type or save them
+     * Performs collecting messages of the same type to message queue
+     * and flushing message queue in case of new type arrival.
+     *
      * @param message AbstractMessage to be logged
      */
     public void log(AbstractMessage message) throws LoggerException {
@@ -36,7 +37,7 @@ public class LoggerController {
     }
 
     /**
-     * Prepares list of messages and saves them
+     * Saves collected messages from message queue and clears messages buffer.
      */
     public void flush() throws LoggerException {
         try {

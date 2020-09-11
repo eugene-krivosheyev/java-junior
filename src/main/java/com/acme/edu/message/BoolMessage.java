@@ -3,7 +3,7 @@ package com.acme.edu.message;
 import java.util.List;
 
 /**
- * Implementation of AbstractMessage for logging Booleans.
+ * Extension of AbstractMessage for logging Boolean message type.
  * @see AbstractMessage
  */
 public class BoolMessage extends AbstractMessage {

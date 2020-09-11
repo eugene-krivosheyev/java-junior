@@ -5,8 +5,8 @@ import java.util.List;
 import static java.lang.System.lineSeparator;
 
 /**
- * Implementation of AbstractMessage for logging Strings.
- * Supports flushing with strings counter.
+ * Extension of AbstractMessage for logging String message type.
+ * Supports processing consecutive String messages and type overflow.
  * @see AbstractMessage
  */
 public class StringMessage extends AbstractMessage {

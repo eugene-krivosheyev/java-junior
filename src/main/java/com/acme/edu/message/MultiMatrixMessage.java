@@ -6,7 +6,7 @@ import java.util.List;
 import static java.lang.System.lineSeparator;
 
 /**
- * Implementation of AbstractMessage for logging Multidimensional Matrix.
+ * Extension of AbstractMessage for logging 4D Array of Integers message type.
  * @see AbstractMessage
  */
 public class MultiMatrixMessage extends AbstractMessage {
