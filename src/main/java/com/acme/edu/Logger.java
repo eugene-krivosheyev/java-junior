@@ -6,8 +6,7 @@ import com.acme.edu.message.StringMessage;
 import com.acme.edu.saver.ConsoleLoggerSaver;
 
 public class Logger {
-    private static LoggerController controller = new LoggerController(new ConsoleLoggerSaver());
-
+    private static LoggerController controller = new LoggerController(System.out::println);
 
     public static void log(int message) {
         controller.log(new IntMessage(message));

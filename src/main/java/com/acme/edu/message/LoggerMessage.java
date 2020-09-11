@@ -1,13 +1,13 @@
 package com.acme.edu.message;
 
 public interface LoggerMessage {
-    public String getMessage();
+    String getMessage();
 
-    public boolean isSameType(LoggerMessage currentState);
+    boolean isSameType(LoggerMessage currentState);
 
-    public LoggerMessage accumulate(LoggerMessage newMessage);
+    LoggerMessage accumulate(LoggerMessage newMessage);
 
-    public default boolean isNotOverflowed(LoggerMessage newMessage){
+    default boolean isNotOverflowed(LoggerMessage newMessage){
         return true;
     };
 }
