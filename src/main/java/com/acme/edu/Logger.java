@@ -1,5 +1,6 @@
 package com.acme.edu;
 
+import com.acme.edu.exception.FlushException;
 import com.acme.edu.exception.LogException;
 import com.acme.edu.exception.SaverException;
 import com.acme.edu.message.*;
@@ -10,7 +11,7 @@ public class Logger {
         System.out.println(message);
     });
 
-    public static void flush() throws SaverException {
+    public static void flush() throws FlushException {
         loggerController.flush();
     }
 

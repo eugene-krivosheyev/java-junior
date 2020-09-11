@@ -1,6 +1,7 @@
 package com.acme.edu.unittests;
 
 import com.acme.edu.LoggerController;
+import com.acme.edu.exception.FlushException;
 import com.acme.edu.exception.LogException;
 import com.acme.edu.exception.SaverException;
 import com.acme.edu.message.IntMessage;
@@ -24,7 +25,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldCorrectWorkWithIntMessage() throws LogException, SaverException {
+    public void shouldCorrectWorkWithIntMessage() throws LogException, FlushException, SaverException {
         IntMessage message = mock(IntMessage.class);
         when(message.toString()).thenReturn("12");
         loggerController.log(message);
@@ -48,7 +49,7 @@ public class LoggerControllerTest {
     }
 
     @Test(expected = LogException.class)
-    public void shouldThrowLogExceptionWhenGotSaverException() throws SaverException, LogException {
+    public void shouldThrowLogExceptionWhenGotSaverException() throws LogException, SaverException {
         doThrow(SaverException.class).when(saver).save(any());
         Message message = mock(Message.class);
         loggerController.log(message);
