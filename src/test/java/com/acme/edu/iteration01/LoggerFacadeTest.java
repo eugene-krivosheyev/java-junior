@@ -2,7 +2,7 @@ package com.acme.edu.iteration01;
 
 import com.acme.edu.LoggerFacade;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import com.acme.edu.exception.LoggerControllerException;
+import com.acme.edu.exception.LoggerException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,14 +22,14 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test
-    public void shouldLogInteger() throws LoggerControllerException {
+    public void shouldLogInteger() throws LoggerException {
         //region when
         LoggerFacade.log(1);
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         LoggerFacade.log(0);
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         LoggerFacade.log(-1);
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         //endregion
 
         //region then
@@ -41,14 +41,14 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogByte() throws LoggerControllerException {
+    public void shouldLogByte() throws LoggerException {
         //region when
         LoggerFacade.log(1);
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         LoggerFacade.log(0);
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         LoggerFacade.log(-1);
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         //endregion
 
         //region then
@@ -60,12 +60,12 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogChar() throws LoggerControllerException {
+    public void shouldLogChar() throws LoggerException {
         //region when
         LoggerFacade.log('a');
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         LoggerFacade.log('b');
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         //endregion
 
         //region then
@@ -76,12 +76,12 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogString() throws LoggerControllerException {
+    public void shouldLogString() throws LoggerException {
         //region when
         LoggerFacade.log("test string 1");
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         LoggerFacade.log("other str");
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         //endregion
 
         //region then
@@ -92,12 +92,12 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogBoolean() throws LoggerControllerException {
+    public void shouldLogBoolean() throws LoggerException {
         //region when
         LoggerFacade.log(true);
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         LoggerFacade.log(false);
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         //endregion
 
         //region then
@@ -110,10 +110,10 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogReference() throws LoggerControllerException {
+    public void shouldLogReference() throws LoggerException {
         //region when
         LoggerFacade.log(new Object());
-        LoggerFacade.flushStart();
+        LoggerFacade.flush();
         //endregion
 
         //region then

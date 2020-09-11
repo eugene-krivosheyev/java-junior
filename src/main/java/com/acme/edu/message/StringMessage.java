@@ -12,6 +12,8 @@ import static java.lang.System.lineSeparator;
 public class StringMessage extends AbstractMessage {
     public String stringValue;
     private static final String PREFIX = "string: ";
+    private static final String templateMultiple = PREFIX + "%s " + "(x%o)";
+    private static final String templateUnique = PREFIX + "%s";
 
     public StringMessage(String message) {
         this.stringValue = message;
@@ -19,29 +21,18 @@ public class StringMessage extends AbstractMessage {
 
     @Override
     public void prepareMessage(ArrayList<AbstractMessage> listOfLog) {
-        String templateMultiple = PREFIX + "%s " + "(x%o)";
-        String templateUnique = PREFIX + "%s";
-
         String prevValue = ((StringMessage) listOfLog.get(0)).stringValue;
         int counter = 0;
 
         for (int i = 0; i < listOfLog.size(); i++) {
             String currentValue = ((StringMessage) listOfLog.get(i)).stringValue;
             if (i == listOfLog.size() - 1) {
-                messageController
-                        .append(counter == 0 ?
-                                String.format(templateUnique, currentValue) :
-                                String.format(templateMultiple, currentValue, counter + 1))
-                        .append(lineSeparator());
+                messageControllerUpdate(currentValue, counter);
             } else {
                 if (currentValue.equals(prevValue)) {
                     counter += 1;
                 } else {
-                    messageController
-                            .append(counter == 1 ?
-                                    String.format(templateUnique, prevValue) :
-                                    String.format(templateMultiple, prevValue, counter))
-                            .append(lineSeparator());
+                    messageControllerUpdate(prevValue, counter - 1);
                 }
                 prevValue = currentValue;
             }
@@ -52,5 +43,13 @@ public class StringMessage extends AbstractMessage {
     @Override
     public boolean isSameType(AbstractMessage message) {
         return message instanceof StringMessage;
+    }
+
+    private void messageControllerUpdate(String value, int counter) {
+        messageController
+                .append(counter == 0 ?
+                        String.format(templateUnique, value) :
+                        String.format(templateMultiple, value, counter + 1))
+                .append(lineSeparator());
     }
 }

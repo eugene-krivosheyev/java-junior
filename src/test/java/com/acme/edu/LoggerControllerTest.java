@@ -1,6 +1,7 @@
 package com.acme.edu;
 
-import com.acme.edu.exception.LoggerControllerException;
+import com.acme.edu.exception.FlushLogException;
+import com.acme.edu.exception.LoggerException;
 import com.acme.edu.message.AbstractMessage;
 import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.StringMessage;
@@ -32,64 +33,54 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldCallSaveWhenFlushCalled() throws LoggerControllerException {
+    public void shouldCallSaveWhenFlushCalled() throws LoggerException {
         AbstractMessage messageMock = mock(AbstractMessage.class);
 
         sut.log(messageMock);
-        sut.flushStart();
+        sut.flush();
 
         verify(saverMock).save(messageMock);
     }
 
     @Test
-    public void shouldNotCallSaveWhenSameTypeLogged() throws LoggerControllerException {
+    public void shouldNotCallSaveWhenSameTypeLogged() throws LoggerException {
         IntMessage intMock = spy(new IntMessage(0));
 
         sut.log(intMock);
         sut.log(intMock);
-        sut.flushStart();
+        sut.flush();
 
-        verify(saverMock, times(1)).save(any());
+        verify(saverMock).save(any(IntMessage.class));
     }
 
     @Test
-    public void shouldCallSaveWhenDifferentTypeLogged() throws LoggerControllerException {
+    public void shouldCallSaveWhenDifferentTypeLogged() throws LoggerException {
         IntMessage intMock = mock(IntMessage.class);
         StringMessage strMock = spy(new StringMessage(" "));
 
         sut.log(intMock);
         sut.log(strMock);
-        sut.flushStart();
+        sut.flush();
 
         verify(intMock).isSameType(strMock);
         verify(saverMock, times(2)).save(any());
     }
 
-    @Test(expected = LoggerControllerException.class)
-    public void shouldThrowExceptionWhenListOfLogIsEmpty() throws LoggerControllerException {
-        sut.flushStart();
-    }
-
     @Test
-    public void shouldSavePersiceMessageWhenSaverCalled() throws LoggerControllerException {
-        AbstractMessage mock = mock(AbstractMessage.class);
-
-        sut.log(mock);
-        sut.flushStart();
-
-        verify(saverMock).save(mock);
-    }
-
-    @Test
-    public void shouldCallPrepareMessageWhenFlushStarted() throws LoggerControllerException {
+    public void shouldCallPrepareMessageWhenFlushStarted() throws LoggerException {
         IntMessage mock = spy(new IntMessage(1));
 
         sut.log(mock);
         sut.log(mock);
         sut.log(mock);
         sut.log(mock);
-        sut.flushStart();
+        sut.flush();
 
         verify(mock).prepareMessage(any(ArrayList.class));
+    }
+
+    @Test(expected = FlushLogException.class)
+    public void shouldThrowExceptionWhenListOfLogIsEmpty() throws LoggerException {
+        sut.flush();
     }
 }

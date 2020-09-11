@@ -1,9 +1,6 @@
 package com.acme.edu;
 
-import com.acme.edu.message.CharMessage;
-import com.acme.edu.message.IntMessage;
-import com.acme.edu.message.ReferenceMessage;
-import com.acme.edu.message.StringMessage;
+import com.acme.edu.message.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +9,14 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class MessagesTest implements SysoutCaptureAndAssertionAbility {
+    private final IntMessage intMessage = new IntMessage(0);
+    private final CharMessage charMessage = new CharMessage('a');
+    private final StringMessage strMessage = new StringMessage("");
+    private final ByteMessage byteMessage = new ByteMessage((byte) 1);
+    private final ArrayMessage arrayMessage = new ArrayMessage(new int[] {0});
+    private final MatrixMessage matrixMessage = new MatrixMessage(new int[][] {{0}});
+    private final ReferenceMessage referenceMessage = new ReferenceMessage(new Object());
+    private final MultiMatrixMessage multiMatrixMessage = new MultiMatrixMessage(new int[][][][] {{{{0}}}});
 
     @Before
     public void setUp() {
@@ -24,39 +29,97 @@ public class MessagesTest implements SysoutCaptureAndAssertionAbility {
         resetOut();
     }
 
+    //region Different types tests
     @Test
     public void shouldSayNotSameTypeWhenIntAndStringMessagesProvided() {
-        IntMessage mockInt = spy(new IntMessage(1));
-        StringMessage mockString = spy(new StringMessage("2"));
+        boolean result = intMessage.isSameType(strMessage);
+        assertFalse(result);
+    }
 
-        boolean result = mockInt.isSameType(mockString);
+    @Test
+    public void shouldSayNotSameTypeWhenIntAndArrayMessagesProvided() {
+        boolean result = arrayMessage.isSameType(intMessage);
+        assertFalse(result);
+    }
+
+    @Test
+    public void shouldSayNotSameTypeWhenArrayAndMatrixMessagesProvided() {
+        boolean result = matrixMessage.isSameType(arrayMessage);
         assertFalse(result);
     }
 
     @Test
     public void shouldSayNotSameTypeWhenIntAndCharProvided() {
-        IntMessage mockInt = spy(new IntMessage(1));
-        CharMessage mockChar = spy(new CharMessage('a'));
-
-        boolean result = mockInt.isSameType(mockChar);
+        boolean result = charMessage.isSameType(intMessage);
         assertFalse(result);
     }
 
     @Test
-    public void shouldSayNotSameTypeWhenReferenceAndCharProvided() {
-        ReferenceMessage mockRef = spy(new ReferenceMessage(new Object()));
-        CharMessage mockChar = spy(new CharMessage('a'));
-
-        boolean result = mockRef.isSameType(mockChar);
+    public void shouldSayNotSameTypeWhenRefAndCharProvided() {
+        boolean result = referenceMessage.isSameType(charMessage);
         assertFalse(result);
     }
 
     @Test
-    public void shouldSayIsSameTypeWhenIntAndIntProvided() {
-        IntMessage mockIntA = spy(new IntMessage(1));
-        IntMessage mockIntB = spy(new IntMessage(2));
+    public void shouldSayNotSameTypeWhenByteAndCharProvided() {
+        boolean result = byteMessage.isSameType(charMessage);
+        assertFalse(result);
+    }
 
-        boolean result = mockIntA.isSameType(mockIntB);
+    @Test
+    public void shouldSayNotSameTypeWhenMultiMatrixAndMatrixProvided() {
+        boolean result = multiMatrixMessage.isSameType(matrixMessage);
+        assertFalse(result);
+    }
+    //endregion
+
+    //region Same type tests
+    @Test
+    public void shouldSayIsSameTypeWhenStrsProvided() {
+        boolean result = strMessage.isSameType(strMessage);
         assertTrue(result);
     }
+
+    @Test
+    public void shouldSayIsSameTypeWhenCharsProvided() {
+        boolean result = charMessage.isSameType(charMessage);
+        assertTrue(result);
+    }
+
+    @Test
+    public void shouldSayIsSameTypeWhenArraysProvided() {
+        boolean result = arrayMessage.isSameType(arrayMessage);
+        assertTrue(result);
+    }
+
+    @Test
+    public void shouldSayIsSameTypeWhenInsProvided() {
+        boolean result = intMessage.isSameType(intMessage);
+        assertTrue(result);
+    }
+
+    @Test
+    public void shouldSayIsSameTypeWhenMatrixesProvided() {
+        boolean result = matrixMessage.isSameType(matrixMessage);
+        assertTrue(result);
+    }
+
+    @Test
+    public void shouldSayIsSameTypeWhenRefsProvided() {
+        boolean result = referenceMessage.isSameType(referenceMessage);
+        assertTrue(result);
+    }
+
+    @Test
+    public void shouldSayIsSameTypeWhenBytesProvided() {
+        boolean result = byteMessage.isSameType(byteMessage);
+        assertTrue(result);
+    }
+
+    @Test
+    public void shouldSayIsSameTypeWhenMultiMatrixesProvided() {
+        boolean result = multiMatrixMessage.isSameType(multiMatrixMessage);
+        assertTrue(result);
+    }
+    //endregion
 }
