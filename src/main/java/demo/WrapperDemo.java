@@ -1,7 +1,5 @@
 package demo;
 
-import com.sun.xml.internal.xsom.XSUnionSimpleType;
-
 public class WrapperDemo {
     public static void main(String[] args) {
         String s = "abc"; //

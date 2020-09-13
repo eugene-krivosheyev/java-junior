@@ -1,7 +1,5 @@
 package demo.streamapi;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
-
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
