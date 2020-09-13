@@ -36,7 +36,7 @@ pipeline {
             agent { node { label 'ci' } }
 
             steps {
-                sh 'mvn sonar:sonar -Dsonar.host.url=http://81.163.25.104:9000/sonarqube -Dsonar.login=dbe3f1554ad7509551b5494a39dac40578b92fca'
+                sh 'mvn sonar:sonar -Dsonar.host.url=http://81.163.25.104:9000/sonarqube -Dsonar.login=3635e4977682ed4741fe2d28e4e5109653451d4c'
             }
         }
     }
