@@ -35,4 +35,9 @@ public class ArrayCommand implements Command {
     public Command reduce(Command cmd) {
         return null;
     }
+
+    @Override
+    public boolean isOverflow(Command cmd) {
+        return false;
+    }
 }

@@ -21,7 +21,9 @@ public class StringCommand implements Command {
 
     @Override
     public String decorate() {
-       return " (x" + ++sameCommandCounter + ")";
+        if (sameCommandCounter > 1)
+            return this.message + " (x" + sameCommandCounter + ")";
+        return message;
     }
 
     @Override
@@ -32,14 +34,21 @@ public class StringCommand implements Command {
     @Override
     public Command reduce(Command cmd) {
         StringCommand tmp = (StringCommand) cmd;
+        //System.err.println(tmp.message);
         if (this.message.contains(tmp.message)) {
             sameCommandCounter++;
         }
         else {
-            this.message += System.lineSeparator() + tmp.message + tmp.decorate();
+            this.message +=  System.lineSeparator() + tmp.decorate() ;// + tmp.message;
+            //System.err.println("mes: " + this.message);
             sameCommandCounter = 1;
         }
         return this;
+    }
+
+    @Override
+    public boolean isOverflow(Command cmd) {
+        return false;
     }
 
 }

@@ -2,6 +2,8 @@ package com.acme.edu.iteration02;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.exceptions.LogException;
+import com.acme.edu.exceptions.TypeCommandException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +27,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogSequentIntegersAsSum() {
+    public void shouldLogSequentIntegersAsSum() throws LogException {
         //region when
         Logger.log("str 1");
         Logger.log(1);
@@ -42,9 +44,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("0" + lineSeparator);
         //endregion
     }
-    /*
+
     @Test
-    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
+    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws LogException {
         //region when
         Logger.log("str 1");
         Logger.log(10);
@@ -61,30 +63,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("str 2" + lineSeparator);
         assertSysoutContains("0" + lineSeparator);
         //endregion
-    }*/
-    /*
-    @Test
-    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
-        //region when
-        Logger.log("str 1");
-        Logger.log((byte) 10);
-        Logger.log(Byte.MAX_VALUE);
-        Logger.log("str 2");
-        Logger.log(0);
-        //endregion
-
-        //region then
-        assertSysoutContains("str 1" + lineSeparator);
-        assertSysoutContains("10" + lineSeparator);
-        assertSysoutContains(Byte.MAX_VALUE + lineSeparator);
-        assertSysoutContains("str 2" + lineSeparator);
-        assertSysoutContains("0" + lineSeparator);
-        //endregion
     }
-    */
 
     @Test
-    public void shouldLogSameSubsequentStringsWithoutRepeat() {
+    public void shouldLogSameSubsequentStringsWithoutRepeat() throws LogException {
         //region when
         Logger.log("str 1");
         Logger.log("str 2");
@@ -104,6 +86,36 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("str 2" + lineSeparator);
         assertSysoutContains("str 3 (x3)" + lineSeparator);
         //endregion
+    }
+
+    @Test
+    public void shouldLogSameSubsequentStringsWithRepeat() throws LogException {
+        //region when
+        Logger.log("str 2");
+        Logger.log("str 2");
+        Logger.log("str 1");
+        Logger.flush();
+        //endregion
+
+        //region then
+
+        assertSysoutContains("str 2 (x2)" + lineSeparator);
+        assertSysoutContains("str 1" + lineSeparator);
+
+        //endregion
+    }
+
+    @Test
+    public void shouldLogByteType() throws LogException {
+        Logger sut = new Logger();
+        sut.log(1);
+        sut.log((byte)3);
+        sut.log("String message");
+
+        //assertSysoutContains("Message is not logged" + lineSeparator);
+        assertSysoutContains("1" + lineSeparator);
+        assertSysoutContains("Wrong type of command" + lineSeparator);
+        assertSysoutContains("String message" + lineSeparator);
     }
 
 }

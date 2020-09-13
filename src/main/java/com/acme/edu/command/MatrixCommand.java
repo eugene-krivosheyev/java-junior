@@ -30,6 +30,11 @@ public class MatrixCommand implements Command {
     }
 
     @Override
+    public boolean isOverflow(Command cmd) {
+        return false;
+    }
+
+    @Override
     public String toString() {
         StringBuilder arrayElementsToPrint = new StringBuilder();
         arrayElementsToPrint.append("{").append(LINE_SEPARATOR);

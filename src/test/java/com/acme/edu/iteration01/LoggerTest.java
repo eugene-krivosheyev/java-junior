@@ -2,6 +2,7 @@ package com.acme.edu.iteration01;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.exceptions.LogException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +22,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test
-    public void shouldLogInteger() {
+    public void shouldLogInteger() throws LogException {
         //region when
         Logger.log(1);
         Logger.flush();
@@ -38,7 +39,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogString() {
+    public void shouldLogString() throws LogException {
         //region when
         Logger.log("test string 1");
         Logger.flush();

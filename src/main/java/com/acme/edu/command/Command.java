@@ -9,4 +9,6 @@ public interface Command {
     boolean isSameType(Command cmd);
 
     Command reduce(Command cmd);
+
+    boolean isOverflow(Command cmd);
 }

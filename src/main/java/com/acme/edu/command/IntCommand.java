@@ -30,5 +30,10 @@ public class IntCommand extends PrimitiveCommand {
         message += tmp.message;
         return this;
     }
+    @Override
+    public boolean isOverflow(Command cmd) {
+        int tmp = ((IntCommand) cmd).message;
+        return Integer.MAX_VALUE - tmp < this.message;
+    }
 
 }
