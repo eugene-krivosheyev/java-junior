@@ -1,5 +1,8 @@
 package demo;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.*;
 
 public class CollectionsDemo {
@@ -67,11 +70,14 @@ public class CollectionsDemo {
         Collections.synchronizedCollection(list);
         Collections.unmodifiableSet(set);
 
-        new HashMap<>().entrySet();
+        final Map<Cat, Cat> catFriends = new TreeMap<>((o1, o2) -> 0);
+        catFriends.put(new Cat(1, "murik"), new Cat(1, "murik"));
+        catFriends.entrySet();
+
     }
 }
 
-class Cat {
+class Cat implements Comparable<Cat> {
     private int id;
     private String name;
 
@@ -96,12 +102,14 @@ class Cat {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "{" +
+    //@Override
+    @NotNull
+    public String toString(@Nullable String param) {
+        return param;
+        /*"{" +
             "'id'='" + id +
             "', 'name'='" + name + '\'' +
-        '}';
+        '}';*/
     }
 
     @Override
@@ -120,5 +128,10 @@ class Cat {
         int result = getId();
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public int compareTo(@NotNull Cat o) {
+        return 0;
     }
 }
