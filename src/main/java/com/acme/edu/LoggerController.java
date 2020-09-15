@@ -7,17 +7,19 @@ import com.acme.edu.exception.LogException;
 import com.acme.edu.exception.SaveException;
 import com.acme.edu.saver.LoggerSaver;
 
+import java.util.Arrays;
+
 public class LoggerController {
-    private LoggerSaver saver;
+    private Iterable<LoggerSaver> savers;
     LoggerCommand currentState;
 
     /**
      * Constructor with dependency injection
      * @see LoggerSaver
-     * @param saver - responsible for saving message
+     * @param savers - responsible for saving message
      */
-    public LoggerController(LoggerSaver saver) {
-        this.saver = saver;
+    public LoggerController(LoggerSaver... savers) {
+        this.savers = Arrays.asList(savers);
     }
 
     /**
@@ -30,7 +32,8 @@ public class LoggerController {
             if (currentState == null) {
                 currentState = command;
             } else if (currentState.checkFlush(command)) {
-                flush(command);
+                flush();
+                currentState = command;
             } else {
                 currentState.accumulate(command);
             }
@@ -43,13 +46,14 @@ public class LoggerController {
     /**
      * Flush logger buffer and revert to default state
      */
-    public void flush(LoggerCommand state) throws FlushException {
-        try {
-            saver.save(currentState.getDecoratedSelf());
-            currentState = state;
-        } catch(SaveException e){
-            e.printStackTrace();
-            throw  new FlushException("flush error: unable to save", e);
-        }
+    public void flush() throws FlushException {
+        savers.forEach(s -> {
+            try {
+                s.save(currentState.getDecoratedSelf());
+            } catch (SaveException e) {
+                e.printStackTrace();
+            }
+        });
+        currentState = null;
     }
 }
