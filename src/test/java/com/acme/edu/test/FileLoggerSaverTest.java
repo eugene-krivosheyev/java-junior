@@ -2,7 +2,6 @@ package com.acme.edu.test;
 
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.exceptions.FileLoggerSaverException;
-import com.acme.edu.saver.ConsoleLoggerSaver;
 import com.acme.edu.saver.FileLoggerSaver;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +17,8 @@ public class FileLoggerSaverTest implements SysoutCaptureAndAssertionAbility {
     @Before
     public void setUp() {
         saver = new FileLoggerSaver();
+        resetOut();
+        captureSysout();
     }
 
     @Test
@@ -27,7 +28,7 @@ public class FileLoggerSaverTest implements SysoutCaptureAndAssertionAbility {
         List<String> lines = Files.readAllLines(Paths.get("test.txt"));
         lines.forEach(System.out::println);
 
-        assertSysoutEquals("H1!!!");
+        assertSysoutEquals("H1!!!"+System.lineSeparator());
     }
 
     @Test(expected = FileLoggerSaverException.class)
