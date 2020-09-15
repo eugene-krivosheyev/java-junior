@@ -7,16 +7,21 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class FileSaver implements LoggerSaver {
-    private final String file = "targetFile.txt";
+    private final String fileName;
+
+    public FileSaver(String fileName) {
+        this.fileName = fileName;
+    }
 
     @Override
     public void saveMessage(LoggerCommand message) throws SaveException {
-        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(file)), StandardCharsets.UTF_8))) {
+        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(fileName, true))))) {
             bw.write(message.toString());
-        } catch (FileNotFoundException e) {
-            throw new SaveException("File " + file + " does not exist", e);
+            bw.newLine();
+        } catch (FileNotFoundException | NullPointerException e) {
+            throw new SaveException("file " + fileName + " does not exist", e);
         } catch (IOException e) {
-            throw new SaveException("Cannot save file", e);
+            throw new SaveException("cannot save file", e);
         }
     }
 }

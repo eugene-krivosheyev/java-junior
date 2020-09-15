@@ -8,7 +8,7 @@ import com.acme.edu.saver.FileSaver;
 
 public class Logger {
 
-    private static LoggerController loggerController = new LoggerController(System.out::println, new FileSaver());
+    private static LoggerController loggerController = new LoggerController(System.out::println, new FileSaver("logger.txt"));
 
     public static void flush() {
         loggerController.flush(null);
