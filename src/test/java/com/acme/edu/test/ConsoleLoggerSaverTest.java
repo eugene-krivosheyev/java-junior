@@ -14,7 +14,7 @@ public class ConsoleLoggerSaverTest implements SysoutCaptureAndAssertionAbility 
         saver = new ConsoleLoggerSaver();
     }
 
-    @Ignore
+    
     @Test
     public void messageIsPrintedToConsoleWhenSave() {
         saver.save("Hi!!!");

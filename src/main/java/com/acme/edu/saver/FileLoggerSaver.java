@@ -9,7 +9,7 @@ public class FileLoggerSaver implements LoggerSaver{
 
     @Override
     public void save(String message) throws FileLoggerSaverException {
-        if(message == null) {throw new FileLoggerSaverException("Empty message!")};
+        if(message == null) {throw new FileLoggerSaverException("Empty message!");};
 
         try (BufferedWriter bw =
                      new BufferedWriter(
