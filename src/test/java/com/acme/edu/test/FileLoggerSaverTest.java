@@ -22,7 +22,7 @@ public class FileLoggerSaverTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void messageIsPrintedToConsoleWhenSave() throws FileLoggerSaverException, IOException {
+    public void messageIsPrintedToFileWhenSave() throws FileLoggerSaverException, IOException {
         saver.save("H1!!!");
 
         List<String> lines = Files.readAllLines(Paths.get("test.txt"));
