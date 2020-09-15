@@ -3,27 +3,27 @@ package com.acme.edu.saver;
 import com.acme.edu.exception.SaverException;
 import com.acme.edu.message.Message;
 
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class FileSaver implements Saver{
 
-    String fileName;
+    File fileInfo;
 
     public FileSaver(String fileName){
-        this.fileName = fileName;
+        this.fileInfo = new File(fileName);
     }
 
     @Override
     public void save(Message toLog) throws SaverException {
-        try (FileWriter out = new FileWriter(fileName, true)) {
-            out.append(toLog.toString() + "\n");
-        } catch (FileNotFoundException e) {
-            throw new SaverException(e.getMessage());
+        try (BufferedWriter bw =
+                     new BufferedWriter(
+                             new OutputStreamWriter(
+                                     new BufferedOutputStream(
+                                             new FileOutputStream(fileInfo, true))))) {
+
+            bw.write(toLog.toString() + "\n");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new SaverException(e.getMessage());
         }
     }
 }
