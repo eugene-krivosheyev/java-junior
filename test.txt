@@ -1,1 +1,3 @@
-reference: java.lang.Object@32a1bec0
+string: test string 1
+primitive: 1
+primitive: 0
