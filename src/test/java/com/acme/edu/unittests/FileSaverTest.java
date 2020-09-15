@@ -12,6 +12,8 @@ import org.junit.Test;
 import java.io.File;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class FileSaverTest {
 
@@ -24,7 +26,8 @@ public class FileSaverTest {
     @Test
     public void shouldSaveToFile() throws SaverException {
         Saver mySaver = new FileSaver("log.txt");
-        StringMessage stringMessage= new StringMessage("ololo");
+        StringMessage stringMessage= mock(StringMessage.class); //new StringMessage("ololo");
+        when(stringMessage.toString()).thenReturn("string: ololo");
         mySaver.save(stringMessage);
         assertThat(linesOf(new File("log.txt"))).containsExactly(
                 "string: ololo"
