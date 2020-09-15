@@ -1,6 +1,6 @@
 package com.acme.edu.exceptions;
 
-public class FileLoggerSaverException extends Exception {
+public class FileLoggerSaverException extends SaverException {
 
     public FileLoggerSaverException() {
     }

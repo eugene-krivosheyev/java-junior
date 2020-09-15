@@ -4,10 +4,11 @@ package com.acme.edu;
 import com.acme.edu.exceptions.SaverException;
 import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.StringMessage;
+import com.acme.edu.saver.FileLoggerSaver;
 
 
 public class Logger {
-    private static LoggerController controller = new LoggerController(System.out::println);
+    private static LoggerController controller = new LoggerController(System.out::println, new FileLoggerSaver());
 
     public static void log(int message) throws SaverException {
         controller.log(new IntMessage(message));
