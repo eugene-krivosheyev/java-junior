@@ -4,7 +4,6 @@ import com.acme.edu.command.LoggerCommand;
 import com.acme.edu.exception.SaveException;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 
 public class FileSaver implements LoggerSaver {
     private final String fileName;
@@ -15,9 +14,8 @@ public class FileSaver implements LoggerSaver {
 
     @Override
     public void saveMessage(LoggerCommand message) throws SaveException {
-        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(fileName, true))))) {
-            bw.write(message.toString());
-            bw.newLine();
+        try (PrintWriter bw = new PrintWriter(new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(fileName, true))))) {
+            bw.println(message.toString());
         } catch (FileNotFoundException | NullPointerException e) {
             throw new SaveException("file " + fileName + " does not exist", e);
         } catch (IOException e) {

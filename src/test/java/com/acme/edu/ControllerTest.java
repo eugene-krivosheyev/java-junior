@@ -2,21 +2,19 @@ package com.acme.edu;
 
 import com.acme.edu.command.IntCommand;
 import com.acme.edu.command.LoggerCommand;
-import com.acme.edu.command.StringCommand;
 import com.acme.edu.controller.LoggerController;
 import com.acme.edu.exception.IntLogException;
 import com.acme.edu.exception.LogException;
 import com.acme.edu.exception.SaveException;
 import com.acme.edu.exception.StringLogException;
 import com.acme.edu.saver.LoggerSaver;
-import com.sun.corba.se.spi.logging.LogWrapperBase;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class ControllerTest implements SysoutCaptureAndAssertionAbility {
+public class ControllerTest {
     private LoggerController loggerController;
     private LoggerSaver loggerSaver;
 

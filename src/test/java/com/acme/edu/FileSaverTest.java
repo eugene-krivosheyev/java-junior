@@ -1,7 +1,6 @@
 package com.acme.edu;
 
 import com.acme.edu.command.IntCommand;
-import com.acme.edu.command.LoggerCommand;
 import com.acme.edu.exception.SaveException;
 import com.acme.edu.saver.FileSaver;
 import org.junit.After;
@@ -19,10 +18,12 @@ import static org.mockito.Mockito.when;
 public class FileSaverTest {
     private FileSaver fileSaver;
     private File testFile;
+
     @Before
     public void setUp() {
-        fileSaver = new FileSaver("test_log.txt");
         testFile = new File("test_log.txt");
+        fileSaver = new FileSaver(testFile.getName());
+
     }
 
     @After
@@ -49,12 +50,12 @@ public class FileSaverTest {
     }
 
     @Test
-    public void shouldThrowExceptionWithRightMtssageWhenFileNameIsNull() {
+    public void shouldThrowExceptionWithRightMessageWhenFileNameIsNull() {
         FileSaver fileSaver = new FileSaver(null);
         IntCommand command = mock(IntCommand.class);
 
         try {
-        fileSaver.saveMessage(command);
+            fileSaver.saveMessage(command);
         } catch (SaveException e) {
             assertEquals("file null does not exist", e.getMessage());
         }
