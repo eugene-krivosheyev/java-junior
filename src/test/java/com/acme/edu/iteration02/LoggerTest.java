@@ -94,28 +94,18 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 2");
         Logger.log("str 2");
         Logger.log("str 1");
+        Logger.log("str 1");
+        Logger.log("str 1");
+
         Logger.flush();
         //endregion
 
         //region then
 
         assertSysoutContains("str 2 (x2)" + lineSeparator);
-        assertSysoutContains("str 1" + lineSeparator);
+        assertSysoutContains("str 1 (x3)" + lineSeparator);
 
         //endregion
-    }
-
-    @Test
-    public void shouldLogByteType() throws LogException {
-        Logger sut = new Logger();
-        sut.log(1);
-        sut.log((byte)3);
-        sut.log("String message");
-
-        //assertSysoutContains("Message is not logged" + lineSeparator);
-        assertSysoutContains("1" + lineSeparator);
-        assertSysoutContains("Wrong type of command" + lineSeparator);
-        assertSysoutContains("String message" + lineSeparator);
     }
 
 }

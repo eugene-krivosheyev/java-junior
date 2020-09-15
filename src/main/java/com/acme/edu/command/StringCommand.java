@@ -16,14 +16,14 @@ public class StringCommand implements Command {
 
     @Override
     public String toString() {
-        return STRING_PREFIX + message;
+        return STRING_PREFIX + message + this.decorate();
     }
 
     @Override
     public String decorate() {
         if (sameCommandCounter > 1)
-            return this.message + " (x" + sameCommandCounter + ")";
-        return message;
+            return  " (x" + sameCommandCounter + ")" ;
+        return "";
     }
 
     @Override
@@ -34,13 +34,10 @@ public class StringCommand implements Command {
     @Override
     public Command reduce(Command cmd) {
         StringCommand tmp = (StringCommand) cmd;
-        //System.err.println(tmp.message);
         if (this.message.contains(tmp.message)) {
             sameCommandCounter++;
-        }
-        else {
-            this.message +=  System.lineSeparator() + tmp.decorate() ;// + tmp.message;
-            //System.err.println("mes: " + this.message);
+        } else {
+            this.message += this.decorate() + System.lineSeparator() + tmp.message;
             sameCommandCounter = 1;
         }
         return this;

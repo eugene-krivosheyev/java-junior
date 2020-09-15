@@ -9,3 +9,5 @@ buildNumber.properties
 javajunior.iml
 .idea
 .DS_Store
+/applog.txt
+/test.txt

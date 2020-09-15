@@ -2,8 +2,10 @@ package com.acme.edu;
 
 import com.acme.edu.command.*;
 import com.acme.edu.exceptions.LogException;
-import com.acme.edu.exceptions.TypeCommandException;
 import com.acme.edu.save.ConsoleSaver;
+import com.acme.edu.save.FileSaverStateless;
+
+import java.io.FileNotFoundException;
 
 /**
  * Accumulation <-- message type
@@ -13,7 +15,11 @@ import com.acme.edu.save.ConsoleSaver;
  */
 
 public class Logger {               //LoggerFacade
-    private static LoggerController controller = new LoggerController(new ConsoleSaver());
+    private static LoggerController controller;
+
+    static {
+        controller = new LoggerController(new ConsoleSaver(), new FileSaverStateless("applog.txt"));
+    }
 
     public static void log(int message) throws LogException {
         controller.log(new IntCommand(message));

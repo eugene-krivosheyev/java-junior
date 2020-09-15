@@ -1,9 +1,12 @@
 package com.acme.edu.demotests;
 
 import com.acme.edu.command.IntCommand;
+import com.acme.edu.exceptions.SaveException;
 import com.acme.edu.save.Saver;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -35,7 +38,7 @@ public class IntCommandUnitTest {
     }
 
     @Test
-    public void shouldDecorateIntCommandWithToString() {
+    public void shouldDecorateIntCommandWithToString() throws IOException, SaveException {
         Saver saver = System.out::println;
 
         saver.save(firstCmd);

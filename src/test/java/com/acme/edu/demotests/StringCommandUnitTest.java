@@ -1,10 +1,7 @@
 package com.acme.edu.demotests;
 
-import com.acme.edu.LoggerController;
 import com.acme.edu.command.Command;
 import com.acme.edu.command.StringCommand;
-import com.acme.edu.exceptions.LogException;
-import com.acme.edu.save.Saver;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,7 +30,7 @@ public class StringCommandUnitTest {
     }
 
     @Test
-    public void shouldAccumulateSameStringCommand() throws LogException {
+    public void shouldAccumulateSameStringCommand() {
         StringCommand duplicate = new StringCommand("first message");
         /*
         LoggerController loggerController = new LoggerController(new Saver() {
@@ -51,7 +48,6 @@ public class StringCommandUnitTest {
         duplicate = (StringCommand) duplicate.reduce(secondCommand);
         System.out.println(duplicate);
 
-        //assert((System.out.toString()).contains("(x2)"));
-        assertThat((duplicate.toString()).contains("(x2"));
+        assertThat((duplicate.toString()).contains("first message (x2") + System.lineSeparator() + secondCommand.toString());
     }
 }
