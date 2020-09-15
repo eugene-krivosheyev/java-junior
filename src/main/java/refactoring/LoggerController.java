@@ -3,8 +3,13 @@ package refactoring;
 import refactoring.message.Message;
 import refactoring.save.Saver;
 
+import java.util.Arrays;
+
+import static java.util.Arrays.asList;
+
 class LoggerController {
-    private final Saver saver;
+    private final Iterable<Saver> savers;
+
     private Message currentMessage = new Message() {
         @Override
         public boolean isSameType(Message message) {
@@ -17,15 +22,15 @@ class LoggerController {
         }
     };
 
-    public LoggerController(Saver saver) {
-        this.saver = saver;
+    public LoggerController(Saver... saver) {
+        this.savers = asList(saver);
     }
 
     public void log(Message message) {
         if (currentMessage.isSameType(message)) {
             currentMessage = currentMessage.reduce(message);
         } else {
-            saver.save(currentMessage);
+            savers.forEach(s -> s.save(currentMessage));
             currentMessage = message;
         }
     }
