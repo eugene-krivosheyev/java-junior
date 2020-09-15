@@ -7,12 +7,14 @@ import com.acme.edu.exception.SaveException;
 import com.acme.edu.exception.StringLogException;
 import com.acme.edu.saver.LoggerSaver;
 
+import java.util.Arrays;
+
 public class LoggerController {
-    private LoggerSaver loggerSaver;
+    private Iterable<LoggerSaver> loggerSaver;
     private LoggerCommand currentLoggerCommand;
 
-    public LoggerController(LoggerSaver loggerSaver) {
-        this.loggerSaver = loggerSaver;
+    public LoggerController(LoggerSaver... loggerSaver) {
+        this.loggerSaver = Arrays.asList(loggerSaver);
     }
 
     public void log(LoggerCommand newLoggerCommand) throws LogException {
@@ -33,12 +35,20 @@ public class LoggerController {
         }
     }
 
-    public void flush(LoggerCommand currentLoggerCommand) throws LogException {
-        try {
-            loggerSaver.saveMessage(this.currentLoggerCommand);
-            this.currentLoggerCommand = currentLoggerCommand;
-        } catch (SaveException e) {
-            throw new LogException("Can't save message: " + e.getMessage(), e);
-        }
+    public void flush(LoggerCommand currentLoggerCommand) {
+        loggerSaver.forEach(s -> {
+            try {
+                s.saveMessage(this.currentLoggerCommand);
+            } catch (SaveException e) {
+                try {
+                    throw new LogException("Cannot save message cased by " + e.getMessage(), e);
+                } catch (LogException logException) {
+                    System.out.println("Can't save message. Exception was thrown caused by" + e.getCause() +
+                            " with message " + e.getMessage());
+                    logException.printStackTrace();
+                }
+            }
+        });
+        this.currentLoggerCommand = currentLoggerCommand;
     }
 }
