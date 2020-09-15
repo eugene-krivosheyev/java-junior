@@ -17,6 +17,13 @@ public class LoggerController {
         this.loggerSaver = Arrays.asList(loggerSaver);
     }
 
+    /**
+     * Accumulating messages with same types in currentLoggerCommand
+     * Flushes currentLoggerCommand if new command has different type
+     *
+     * @param newLoggerCommand
+     * @throws LogException
+     */
     public void log(LoggerCommand newLoggerCommand) throws LogException {
         try {
             if (currentLoggerCommand == null) {
@@ -35,6 +42,11 @@ public class LoggerController {
         }
     }
 
+    /**
+     * Save currentLoggerCommand for each saver
+     *
+     * @param currentLoggerCommand
+     */
     public void flush(LoggerCommand currentLoggerCommand) {
         loggerSaver.forEach(s -> {
             try {
