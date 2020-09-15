@@ -74,12 +74,13 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
     @Test(expected = SaverException.class)
     public void shouldThrowSaverException() throws SaverException {
         IntMessage firstMessageDoubler = mock(IntMessage.class);
-        when(firstMessageDoubler.getMessage()).thenReturn("1");
-//        StringMessage secondMessageDoubler = mock(StringMessage.class);
-//        when(secondMessageDoubler.getMessage()).thenReturn("1");
+        when(firstMessageDoubler.getMessage()).thenReturn(null);
+        StringMessage secondMessageDoubler = mock(StringMessage.class);
+        when(secondMessageDoubler.getMessage()).thenReturn(null);
+        when(firstMessageDoubler.isSameType(secondMessageDoubler)).thenReturn(true);
 
         sut1.log(firstMessageDoubler);
-//        sut1.log(secondMessageDoubler);
+        sut1.log(secondMessageDoubler);
 
         sut1.flush();
     }

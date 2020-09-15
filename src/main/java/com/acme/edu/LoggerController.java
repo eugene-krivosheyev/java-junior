@@ -21,16 +21,8 @@ public class LoggerController {
         if (currentMessage.isSameType(newMessage) && currentMessage.isNotOverflowed(newMessage)) {
             currentMessage = currentMessage.accumulate(newMessage);
         } else {
-            try {
-                for(LoggerSaver s: savers) {
-                    s.save(currentMessage.getMessage());
-                }
-            } catch (SaverException e) {
-                SaverException saverException = new SaverException("Can not save file!", e);
-                throw saverException;
-            } finally {
-                currentMessage = newMessage;
-            }
+            flush();
+            currentMessage = newMessage;
         }
     }
 
@@ -40,8 +32,7 @@ public class LoggerController {
                 s.save(currentMessage.getMessage());
             }
         } catch (SaverException e) {
-            SaverException saverException = new SaverException("Can not save file!", e);
-            throw saverException;
+            throw new SaverException("Can not save file!", e);
         } finally {
             currentMessage = new DefaultMessage();
         }
