@@ -35,12 +35,23 @@ public class FileIODemo {
             e.printStackTrace();
         }
 
+        //writing?
+//        BufferedWriter bw; bw.write(""); bw.newLine();
+//        PrintWriter pw; pw.printf("");
 
+        //Object saving: serialization
+
+        //append? FileOutputStream
+
+        //when to close?
+
+        //flushing
+        //buffering trade-off
         InputStream in;
         try (BufferedReader br =
                  new BufferedReader(
                      new InputStreamReader(
-//                     new DataInputStream(
+//                     new DataInputStream( //ObjectInputStream
                            new BufferedInputStream(
                                     new FileInputStream("data.txt")), StandardCharsets.UTF_8))){
 
@@ -58,5 +69,6 @@ public class FileIODemo {
         new DataInputStream().readDouble();
         new DataInputStream().readUTF();
         */
+
     }
 }
