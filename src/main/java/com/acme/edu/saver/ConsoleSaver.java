@@ -11,4 +11,7 @@ public class ConsoleSaver implements Saver {
     public void save(AbstractMessage message) {
         System.out.println(message.getPreparedMessage());
     }
+
+    @Override
+    public void closeWriter() {};
 }

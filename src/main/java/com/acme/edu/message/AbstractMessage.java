@@ -25,8 +25,10 @@ public abstract class AbstractMessage {
      * Returns prepared string message from buffer and clears it afterwards.
      */
     public String getPreparedMessage() {
-        String preparedMessage = messageController.toString();
-        messageController.setLength(0);
-        return preparedMessage;
+        return messageController.toString();
     };
+
+    public void clearMessageBuffer() {
+        messageController.setLength(0);
+    }
 }

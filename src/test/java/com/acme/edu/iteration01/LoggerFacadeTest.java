@@ -29,7 +29,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
         LoggerFacade.log(0);
         LoggerFacade.flush();
         LoggerFacade.log(-1);
-        LoggerFacade.flush();
+        LoggerFacade.end();
         //endregion
 
         //region then
@@ -48,7 +48,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
         LoggerFacade.log(0);
         LoggerFacade.flush();
         LoggerFacade.log(-1);
-        LoggerFacade.flush();
+        LoggerFacade.end();
         //endregion
 
         //region then
@@ -65,7 +65,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
         LoggerFacade.log('a');
         LoggerFacade.flush();
         LoggerFacade.log('b');
-        LoggerFacade.flush();
+        LoggerFacade.end();
         //endregion
 
         //region then
@@ -81,7 +81,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
         LoggerFacade.log("test string 1");
         LoggerFacade.flush();
         LoggerFacade.log("other str");
-        LoggerFacade.flush();
+        LoggerFacade.end();
         //endregion
 
         //region then
@@ -97,7 +97,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
         LoggerFacade.log(true);
         LoggerFacade.flush();
         LoggerFacade.log(false);
-        LoggerFacade.flush();
+        LoggerFacade.end();
         //endregion
 
         //region then
@@ -113,7 +113,7 @@ public class LoggerFacadeTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogReference() throws LoggerException {
         //region when
         LoggerFacade.log(new Object());
-        LoggerFacade.flush();
+        LoggerFacade.end();
         //endregion
 
         //region then
