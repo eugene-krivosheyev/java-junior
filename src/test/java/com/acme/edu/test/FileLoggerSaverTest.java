@@ -7,7 +7,12 @@ import com.acme.edu.saver.FileLoggerSaver;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FileLoggerSaverTest  implements SysoutCaptureAndAssertionAbility {
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
+public class FileLoggerSaverTest implements SysoutCaptureAndAssertionAbility {
     private FileLoggerSaver saver;
 
     @Before
@@ -15,6 +20,15 @@ public class FileLoggerSaverTest  implements SysoutCaptureAndAssertionAbility {
         saver = new FileLoggerSaver();
     }
 
+    @Test
+    public void messageIsPrintedToConsoleWhenSave() throws FileLoggerSaverException, IOException {
+        saver.save("H1!!!");
+
+        List<String> lines = Files.readAllLines(Paths.get("test.txt"));
+        lines.forEach(System.out::println);
+
+        assertSysoutEquals("H1!!!");
+    }
 
     @Test(expected = FileLoggerSaverException.class)
     public void shouldThrowExceptionIfMessageIsNull() throws FileLoggerSaverException {
