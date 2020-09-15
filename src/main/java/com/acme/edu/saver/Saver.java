@@ -1,5 +1,6 @@
 package com.acme.edu.saver;
 
+import com.acme.edu.exception.SaveException;
 import com.acme.edu.message.AbstractMessage;
 
 /**
@@ -10,5 +11,6 @@ public interface Saver {
      * @param message AbstractMessage to be saved
      * @see AbstractMessage
      */
-    void save(AbstractMessage message);
+    void save(AbstractMessage message) throws SaveException;
+    void closeWriter() throws SaveException;
 }

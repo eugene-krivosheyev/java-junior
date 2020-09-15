@@ -37,7 +37,7 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
         AbstractMessage messageMock = mock(AbstractMessage.class);
 
         sut.log(messageMock);
-        sut.flush();
+        sut.end();
 
         verify(saverMock).save(messageMock);
     }
@@ -48,7 +48,7 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
 
         sut.log(intMock);
         sut.log(intMock);
-        sut.flush();
+        sut.end();
 
         verify(saverMock).save(any(IntMessage.class));
     }
@@ -60,7 +60,7 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
 
         sut.log(intMock);
         sut.log(strMock);
-        sut.flush();
+        sut.end();
 
         verify(intMock).isSameType(strMock);
         verify(saverMock, times(2)).save(any());
@@ -74,7 +74,7 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
         sut.log(mock);
         sut.log(mock);
         sut.log(mock);
-        sut.flush();
+        sut.end();
 
         verify(mock).prepareMessage(any(ArrayList.class));
     }

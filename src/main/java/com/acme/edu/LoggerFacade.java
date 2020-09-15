@@ -2,6 +2,8 @@ package com.acme.edu;
 
 import com.acme.edu.exception.LoggerException;
 import com.acme.edu.message.*;
+import com.acme.edu.saver.ConsoleSaver;
+import com.acme.edu.saver.FileSaver;
 
 /**
  * Facade for logger.
@@ -12,7 +14,7 @@ import com.acme.edu.message.*;
  */
 public class LoggerFacade {
     private static final LoggerController controller =
-            new LoggerController(message -> System.out.println(message.getPreparedMessage()));
+            new LoggerController(new ConsoleSaver(), new FileSaver("test.txt"));
 
     /**
      * @param  message AbstractMessage value to be logged
@@ -52,6 +54,10 @@ public class LoggerFacade {
 
     public static void log(int[][][][] message) throws LoggerException {
         controller.log(new MultiMatrixMessage(message));
+    }
+
+    public static void end() throws LoggerException {
+        controller.end();
     }
 
 
