@@ -43,7 +43,9 @@ class Counter {
 
         lock.lock();
         try {
+            //????
             result = state;
+            //????
         } finally {
             lock.unlock();
         }
