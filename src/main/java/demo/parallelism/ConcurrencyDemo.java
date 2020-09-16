@@ -22,6 +22,9 @@ public class ConcurrencyDemo {
     }
 }
 
+/**
+ * JMM: visibility + reordering
+ */
 class Counter {
     private Object monitor = new Object();
     private Lock lock = new ReentrantLock(false);
@@ -39,7 +42,7 @@ class Counter {
 
     public int getState() {
         int result;
-        lock.tryLock();
+        final boolean locked = lock.tryLock();
 
         lock.lock();
         try {
