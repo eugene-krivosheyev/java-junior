@@ -27,8 +27,9 @@ public class ConcurrencyDemo {
  */
 class Counter {
     private Object monitor = new Object();
-    private Lock lock = new ReentrantLock(false);
-    private int state;
+    private Lock lock = new ReentrantLock(false); // ReadWriteLock
+    private int state; // sharedList = Collections.syncList(new ArrayList())
+    //java.util.concurrent.CopyOnWriteArraySet
 
     public Counter(int state) {
         this.state = state;
@@ -36,7 +37,9 @@ class Counter {
 
     public void increment() {
         synchronized (monitor) {
-            state++;
+            //....
+            state++; // sharedList.add()
+            //....
         }
     }
 
