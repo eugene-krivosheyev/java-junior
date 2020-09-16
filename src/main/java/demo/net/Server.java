@@ -16,7 +16,7 @@ public class Server {
                             clientConnection.getOutputStream()))) {
 
                 final String readLine = input.readUTF();
-                out.writeUTF("!!! " + readLine);
+                out.writeUTF("!!! " + readLine); //INT 5
                 out.flush();
 
 

@@ -15,9 +15,15 @@ public class Client {
         ) {
 
             System.out.println(connection.getLocalPort());
-            out.writeUTF("HW!!!");
+            out.writeUTF("HW!!!"); //LOG INT 5
             out.flush();
             System.out.println(">> " + input.readUTF());
+
+            /*
+            zamestitel.log(5);
+            zamestitel.flush();
+            zamestitel.close();
+            */
 
         } catch (IOException e) {
             e.printStackTrace();
