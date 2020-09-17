@@ -35,8 +35,7 @@
 - Запуск сервера одним bat-/sh-скриптом.
 - Развертывание и запуск на prod-стенде осуществляется строго отчуждаемо:
 ```bash
-$ git pull
-$ mvn clean verify
+<Download jar(s) from Artifactory> 
 $ startServer.sh/bat
 $ startClients.sh/bat
 ```
