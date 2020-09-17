@@ -1,6 +1,5 @@
 package demo.parallelism;
 
-import com.sun.codemodel.internal.JWhileLoop;
 
 import java.util.List;
 import java.util.concurrent.Executor;

@@ -1,16 +1,17 @@
 package demo;
 
 
-import com.sun.tools.javac.util.List;
 
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
+
 
 public class StreamApiDemo {
     public static void main(String[] args) {
         //Arrays.asList(1,2,3,4,5)
         //range(0, 5)
         System.out.println(
-            List.of(1,2,3,4,5).stream()
+                Arrays.asList(1, 2, 3, 4, 5).stream()
                 .map(Dog::new)
                 .filter(dog -> dog.getId() > 2)
                 .sorted((d1,d2) -> d2.getId() - d1.getId())
