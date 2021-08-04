@@ -459,26 +459,6 @@ $ git push
 
 ---
 
-# Work Project. Session 1 (8/8)
-
-## Given
-- PM
-- Analyst
-- Product's FRs and NFRs
-- System's internal NFRs
-- CI server
-- Sonar server
-
-## When
-- Teams formed
-- Every team's git repo visible to PM and is identifiable
-- Teams deliver product with two iterations
-
-## Then
-- PM and Business Customers accept product with two demo sessions
-
----
-
 # System library (6/2)
 - System
 - Math
@@ -632,44 +612,6 @@ assertMessageEquals("3")
 
 ---
 
-# JDBC API (6/2)
-- SQL recap: DDL and DML
-- DB schema design
-- Overview of JDBC API
-- Driver types
-- Connection to Derby
-- Basic interfaces
-- Retrieving data
-- Transactions
-
-## Course Project Iteration 18: Logging to database
-- FR: As a developer I want log messages to DB
-
-### DoD
-- All given specifications runs are green
-- Code reuse and minimum code duplication
-- Code style
-- Documented public API
-- Unit tests coverage ≥ 70%
-- System test for DB
-
----
-
-# Performance tuning and optimization in Java (3/1)
-- JVM monitoring tool JVisualVM
-- Heap structure
-- GC types
-- Profiling
-
-## Course Project Iteration 19: Load testing and profiling
-- Load test
-- Profile with JVisualVM
-
-### DoD
-- Bottlenecks detected
-
----
-
 # Work Project. Session 2 (24/24)
 
 ## Given
@@ -683,6 +625,8 @@ assertMessageEquals("3")
 - Every team's git repo visible to PM and is identifiable
 
 ## When
+- Teams formed
+- Every team's git repo visible to PM and is identifiable
 - Teams deliver product with six iterations
 
 ## Then
