@@ -3,6 +3,10 @@
 
 ---
 
+Записи
+======
+- [16.08](https://us02web.zoom.us/rec/share/-ecIdA3pG3BZ9g5VzFpxoolxUXQ-AaG9LExlw6_6AQ0BaTrPUWx3j1M3Mp3IqBkw.fIAGyXc45YjAbGv2)
+
 # Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice)
 - Introduction to Java. Benefits.
 - JDK, JVM.
