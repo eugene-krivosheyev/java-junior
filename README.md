@@ -55,6 +55,11 @@ Hello, world!
 - Update README.md locally to your teammates names
 - Commit and push initial commit
 ```
+Sofya
+Ivan
+```
+
+```
 $ git add .
 $ git commit -m “…”
 $ git push
