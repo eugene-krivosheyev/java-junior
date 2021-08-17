@@ -47,6 +47,8 @@ Hello, world!
 - Commits
 - Shortly about branches, conflicts and merges
 
+#Nikitina & Rakov
+
 ## Lab: Setting Up Git
 - Install [Git](https://git-scm.com/download/win) and in case of Windows [TortoiseGit](https://tortoisegit.org)
 - Create account at [Github](http://github.com/): _teamXX_
