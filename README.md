@@ -6,6 +6,7 @@
 Записи
 ======
 - [16.08](https://us02web.zoom.us/rec/share/-ecIdA3pG3BZ9g5VzFpxoolxUXQ-AaG9LExlw6_6AQ0BaTrPUWx3j1M3Mp3IqBkw.fIAGyXc45YjAbGv2)
+- [17.08](https://us02web.zoom.us/rec/share/pYNHtwTAGuSQVS4PWLLVhHiCbFEb10Ua8APz-7xcTVjFtPsjxbhld1VHxUWoqd_I.ri626dL6BYXr84L8)
 
 # Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice)
 - Introduction to Java. Benefits.
