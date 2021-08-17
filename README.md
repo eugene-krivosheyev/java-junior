@@ -59,6 +59,8 @@ $ git add .
 $ git commit -m “…”
 $ git push
 ```
+16_08_21
+TEAM: Artem Vodovatov and Roman Lobakov
 
 ### DoD
 - Trainer see all the forks in github
