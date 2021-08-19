@@ -2,23 +2,19 @@ package com.acme.edu;
 
 public class Logger {
     public static void log(int message) {
-        Integer i = message;
-        log(i);
+        log(Integer.valueOf(message));
     }
 
     public static void log(byte message) {
-        Byte b = message;
-        log(b);
+        log(Byte.valueOf(message));
     }
 
     public static void log(char message) {
-        Character c = message;
-        log(c);
+        log(Character.valueOf(message));
     }
 
     public static void log(boolean message) {
-        Boolean b = message;
-        log(b);
+        log(Boolean.valueOf(message));
     }
 
     public static void log(Object message) {
