@@ -1,40 +1,62 @@
 package com.db.edu;
 
-import java.io.PrintStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 public class Logger {
 
-    private static PrintStream OUT = System.out;
+    private static OutputStream DEFAULT_OUT = System.out;
+    private static final String PRIMITIVE_PREFIX = "primitive: ";
+    private static final String CHAR_PREFIX = "char: ";
+    private static final String STRING_PREFIX = "string: ";
+    private static final String REFERENCE_PREFIX = "reference: ";
 
-    Logger() {
+    private Logger() {
     }
 
 
-    public static PrintStream getOut() {
-        return OUT;
+    public static OutputStream getDefaultOut() {
+        return DEFAULT_OUT;
     }
 
-    public static void setOut(PrintStream OUT) {
-        Logger.OUT = OUT;
+    public static void setDefaultOut(OutputStream defaultOut) {
+        DEFAULT_OUT = defaultOut;
     }
 
-    public static void log(int i) {
-        OUT.println("primitive: " + i);
+    public static void log(int message) {
+        writeMessage(decorate(PRIMITIVE_PREFIX, message));
     }
 
-    public static void log(char ch) {
-        OUT.println("char: " + ch);
+    public static void log(byte message) {
+        writeMessage(decorate(PRIMITIVE_PREFIX, message));
     }
 
-    public static void log(String s) {
-        OUT.println("string: " + s);
+    public static void log(char message) {
+        writeMessage(decorate(CHAR_PREFIX, message));
     }
 
-    public static void log(boolean b) {
-        OUT.println("primitive: " + b);
+    public static void log(String message)  {
+        writeMessage(decorate(STRING_PREFIX, message));
     }
 
-    public static void log(Object o) {
-        OUT.println("reference: " + o);
+    public static void log(boolean message) {
+        writeMessage(decorate(PRIMITIVE_PREFIX, message));
     }
+
+    public static void log(Object message) {
+        writeMessage(decorate(REFERENCE_PREFIX, message));
+    }
+
+    private static String decorate(String prefix, Object message) {
+        return prefix + message + System.lineSeparator();
+    }
+
+    private static void writeMessage(String message) {
+        try {
+            DEFAULT_OUT.write(message.getBytes());
+        } catch (IOException e) {
+            System.out.println("An error occurred during logging: " + e);
+        }
+    }
+
 }
