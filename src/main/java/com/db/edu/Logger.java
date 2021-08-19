@@ -7,14 +7,16 @@ public class Logger {
     }
 
     public static <T> void defineLog(T message)  {
+        String prefix = null;
         if (message instanceof Integer || message instanceof Byte || message instanceof Boolean) {
-            printLog("primitive: ", message);
+            prefix = "primitive: ";
         } else if (message instanceof Character) {
-            printLog("char: ", message);
+            prefix = "char: ";
         } else if (message instanceof String) {
-            printLog("string: ", message);
+            prefix = "string: ";
         } else if (message instanceof Object) {
-            printLog("reference: ", message);
+            prefix = "reference: ";
         }
+        printLog(prefix, message);
     }
 }
