@@ -9,6 +9,5 @@ buildNumber.properties
 javajunior.iml
 _config.yml
 README.md
-.gitignore
 .idea
 .DS_Store

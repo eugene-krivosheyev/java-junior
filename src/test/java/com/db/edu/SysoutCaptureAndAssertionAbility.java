@@ -2,7 +2,9 @@ package com.db.edu;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import static org.hamcrest.MatcherAssert.assertThat;
+
+import static org.fest.assertions.Assertions.assertThat;
+
 
 public interface SysoutCaptureAndAssertionAbility {
     ByteArrayOutputStream OUT = new ByteArrayOutputStream();
@@ -12,11 +14,11 @@ public interface SysoutCaptureAndAssertionAbility {
     }
 
     default void assertSysoutEquals(String expected) {
-        assertThat("Actual: " + OUT + " expected: " + expected, OUT.toString().equals(expected));
+        assertThat(OUT.toString()).isEqualTo(expected);
     }
 
     default void assertSysoutContains(String expected) {
-        assertThat("Actual: " + OUT + " does not contains: " + expected, OUT.toString().contains(expected));
+        assertThat(OUT.toString()).contains(expected);
     }
 
     default void resetOut() {
