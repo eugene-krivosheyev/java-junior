@@ -1,9 +1,9 @@
-package com.acme.edu;
+package com.db.edu;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.fest.assertions.Assertions.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public interface SysoutCaptureAndAssertionAbility {
     ByteArrayOutputStream OUT = new ByteArrayOutputStream();
@@ -13,11 +13,11 @@ public interface SysoutCaptureAndAssertionAbility {
     }
 
     default void assertSysoutEquals(String expected) {
-        assertThat(OUT.toString()).isEqualTo(expected);
+                assertThat("Sysout equal: ",OUT.toString().equals(expected));
     }
 
     default void assertSysoutContains(String expected) {
-        assertThat(OUT.toString()).contains(expected);
+        assertThat("Sysout contains: ",OUT.toString().contains(expected));
     }
 
     default void resetOut() {
