@@ -1,6 +1,7 @@
 package com.acme.edu.iteration01;
 
 import com.acme.edu.Logger;
+import static com.acme.edu.Logger.*;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.*;
 
@@ -31,8 +32,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("primitive: ");
-        assertSysoutEquals("primitive: 1" + sep + "primitive: 0" + sep + "primitive: -1" + sep);
+        assertSysoutContains(PRIMITIVE_TYPE);
+        assertSysoutEquals(PRIMITIVE_TYPE + "1" + sep + PRIMITIVE_TYPE + "0" + sep + PRIMITIVE_TYPE + "-1" + sep);
         //endregion
     }
 
@@ -45,7 +46,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("primitive: ");
+        assertSysoutContains(PRIMITIVE_TYPE);
         assertSysoutContains("1");
         assertSysoutContains("0");
         assertSysoutContains("-1");
@@ -63,7 +64,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("char: ");
+        assertSysoutContains(CHAR_TYPE);
         assertSysoutContains("a");
         assertSysoutContains("b");
         //endregion
@@ -77,7 +78,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("string: ");
+        assertSysoutContains(STRING_TYPE);
         assertSysoutContains("test string 1");
         assertSysoutContains("other str");
         //endregion
@@ -91,7 +92,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("primitive: ");
+        assertSysoutContains(PRIMITIVE_TYPE);
         assertSysoutContains("true");
         assertSysoutContains("false");
         //endregion
@@ -104,7 +105,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("reference: ");
+        assertSysoutContains(REFERENCE_TYPE);
         assertSysoutContains("@");
         //endregion
     }
