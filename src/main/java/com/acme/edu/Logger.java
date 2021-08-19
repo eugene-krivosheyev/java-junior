@@ -12,12 +12,18 @@ public class Logger {
     }
 
     private static String getMessagePrefix(Object message) {
-        return switch (message.getClass().getSimpleName()) {
-            case "Integer", "Byte", "Boolean" -> PRIMITIVE_PREFIX;
-            case "String" -> STRING_PREFIX;
-            case "Character" -> CHAR_PREFIX;
-            default -> OBJECT_PREFIX;
-        };
+        switch (message.getClass().getSimpleName()) {
+            case "Integer":
+            case "Byte":
+            case "Boolean":
+                return PRIMITIVE_PREFIX;
+            case "String":
+                return STRING_PREFIX;
+            case "Character":
+                return CHAR_PREFIX;
+            default:
+                return OBJECT_PREFIX;
+        }
     }
 
     public static void log(Object message) {
