@@ -23,9 +23,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogInteger() throws AssertionError {
         //region when
-        Logger.log(1);
-        Logger.log(0);
-        Logger.log(-1);
+        Logger.defineLog(1);
+        Logger.defineLog(0);
+        Logger.defineLog(-1);
         //endregion
 
         //region then
@@ -37,9 +37,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogByte() throws AssertionError {
         //region when
-        Logger.log((byte)1);
-        Logger.log((byte)0);
-        Logger.log((byte)-1);
+        Logger.defineLog((byte)1);
+        Logger.defineLog((byte)0);
+        Logger.defineLog((byte)-1);
         //endregion
 
         //region then
@@ -53,8 +53,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogChar() throws AssertionError {
         //region when
-        Logger.log('a');
-        Logger.log('b');
+        Logger.defineLog('a');
+        Logger.defineLog('b');
         //endregion
 
         //region then
@@ -67,8 +67,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogString() throws AssertionError {
         //region when
-        Logger.log("test string 1");
-        Logger.log("other str");
+        Logger.defineLog("test string 1");
+        Logger.defineLog("other str");
         //endregion
 
         //region then
@@ -81,8 +81,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogBoolean() throws AssertionError {
         //region when
-        Logger.log(true);
-        Logger.log(false);
+        Logger.defineLog(true);
+        Logger.defineLog(false);
         //endregion
 
         //region then
@@ -95,7 +95,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogReference() throws AssertionError {
         //region when
-        Logger.log(new Object());
+        Logger.defineLog(new Object());
         //endregion
 
         //region then
