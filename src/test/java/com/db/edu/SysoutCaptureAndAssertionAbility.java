@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public interface SysoutCaptureAndAssertionAbility {
     ByteArrayOutputStream OUT = new ByteArrayOutputStream();
