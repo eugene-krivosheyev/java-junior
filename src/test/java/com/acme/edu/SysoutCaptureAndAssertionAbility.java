@@ -3,7 +3,7 @@ package com.acme.edu;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.fest.assertions.Assertions.*;
 
 public interface SysoutCaptureAndAssertionAbility {
     ByteArrayOutputStream OUT = new ByteArrayOutputStream();
@@ -13,11 +13,11 @@ public interface SysoutCaptureAndAssertionAbility {
     }
 
     default void assertSysoutEquals(String expected) {
-        assertThat(OUT.toString(), OUT.toString().equals(expected));
+        assertThat(OUT.toString()).isEqualTo(expected);
     }
 
     default void assertSysoutContains(String expected) {
-        assertThat(OUT.toString(), OUT.toString().contains(expected));
+        assertThat(OUT.toString()).contains(expected);
     }
 
     default void resetOut() {

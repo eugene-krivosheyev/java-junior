@@ -32,11 +32,11 @@ public class Logger {
     }
 
     private static String formatMessage(String prefix, Object message) {
-        return prefix + message + "\n";
+        return prefix + message;
     }
 
     private static void save(String message) {
-        System.out.print(message);
+        System.out.println(message);
     }
 }
 
