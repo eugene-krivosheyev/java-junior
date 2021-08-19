@@ -7,21 +7,36 @@ public class Logger {
     private static final String STRING_PREFIX = "string: ";
     private static final String OBJECT_PREFIX = "reference: ";
 
-    private static String getMessage(Object message) {
-        return getMessagePrefix(message) + message + "\n";
+    public static void log(int message) {
+        save(formatMessage(PRIMITIVE_PREFIX, message));
     }
 
-    private static String getMessagePrefix(Object message) {
-        return switch (message.getClass().getSimpleName()) {
-            case "Integer", "Byte", "Boolean" -> PRIMITIVE_PREFIX;
-            case "String" -> STRING_PREFIX;
-            case "Character" -> CHAR_PREFIX;
-            default -> OBJECT_PREFIX;
-        };
+    public static void log(byte message) {
+        save(formatMessage(PRIMITIVE_PREFIX, message));
+    }
+
+    public static void log(char message) {
+        save(formatMessage(CHAR_PREFIX, message));
+    }
+
+    public static void log(boolean message) {
+        save(formatMessage(PRIMITIVE_PREFIX, message));
+    }
+
+    public static void log(String message) {
+        save(formatMessage(STRING_PREFIX, message));
     }
 
     public static void log(Object message) {
-        System.out.print(getMessage(message));
+        save(formatMessage(OBJECT_PREFIX, message));
+    }
+
+    private static String formatMessage(String prefix, Object message) {
+        return prefix + message + "\n";
+    }
+
+    private static void save(String message) {
+        System.out.print(message);
     }
 }
 
