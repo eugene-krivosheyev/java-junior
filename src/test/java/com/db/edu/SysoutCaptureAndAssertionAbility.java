@@ -1,9 +1,10 @@
-package com.acme.edu;
+package com.db.edu;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.fest.assertions.Assertions.*;
+import static org.fest.assertions.Assertions.assertThat;
+
 
 public interface SysoutCaptureAndAssertionAbility {
     ByteArrayOutputStream OUT = new ByteArrayOutputStream();

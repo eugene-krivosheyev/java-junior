@@ -1,22 +1,24 @@
-package com.acme.edu.iteration01;
+package com.db.edu.iteration1;
 
-import com.acme.edu.Logger;
-import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import com.db.edu.Logger;
+import com.db.edu.SysoutCaptureAndAssertionAbility;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.*;
 
+import static java.lang.System.lineSeparator;
+
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
-    @Before
+    @BeforeEach
     public void setUpSystemOut() throws IOException {
         resetOut();
         captureSysout();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         resetOut();
     }
@@ -31,8 +33,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
+        String ls = lineSeparator();
         assertSysoutContains("primitive: ");
-        assertSysoutEquals("primitive: 1\nprimitive: 0\nprimitive: -1\n");
+        assertSysoutEquals("primitive: 1" + ls + "primitive: 0" + ls + "primitive: -1" + ls);
         //endregion
     }
 
@@ -51,9 +54,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("-1");
         //endregion
     }
-
-    /*
-    TODO: implement Logger solution to match specification as tests
 
     @Test
     public void shouldLogChar() throws IOException {
@@ -109,5 +109,5 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    */
+
 }
