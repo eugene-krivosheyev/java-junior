@@ -3,26 +3,24 @@ package com.db.edu;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-
+import static org.fest.assertions.Assertions.*;
 
 public interface SysoutCaptureAndAssertionAbility {
     ByteArrayOutputStream OUT = new ByteArrayOutputStream();
 
-    static void captureSysout() {
+    default void captureSysout() {
         System.setOut(new PrintStream(OUT));
     }
 
     default void assertSysoutEquals(String expected) {
-        assertThat(OUT.toString(), is(expected));
+        assertThat(OUT.toString()).isEqualTo(expected);
     }
 
     default void assertSysoutContains(String expected) {
-        assertThat(OUT.toString(), containsString(expected));
+        assertThat(OUT.toString()).contains(expected);
     }
 
-    static void resetOut() {
+    default void resetOut() {
         OUT.reset();
     }
 }
