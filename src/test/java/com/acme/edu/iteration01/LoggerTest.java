@@ -7,6 +7,8 @@ import org.junit.jupiter.api.*;
 import java.io.*;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+    static private String sep = System.lineSeparator();
+
     //region given
     @BeforeEach
     public void setUpSystemOut() throws IOException {
@@ -30,7 +32,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutContains("primitive: ");
-        assertSysoutEquals("primitive: 1\r\nprimitive: 0\r\nprimitive: -1\r\n");
+        assertSysoutEquals("primitive: 1" + sep + "primitive: 0" + sep + "primitive: -1" + sep);
         //endregion
     }
 
