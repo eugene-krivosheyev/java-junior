@@ -6,6 +6,11 @@ import org.junit.jupiter.api.*;
 
 import java.io.*;
 
+import static com.db.edu.Logger.PRIMITIVE_PREFIX;
+import static com.db.edu.Logger.CHAR_PREFIX;
+import static com.db.edu.Logger.STRING_PREFIX;
+import static com.db.edu.Logger.REFERENCE_PREFIX;
+
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @BeforeEach
@@ -29,8 +34,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("primitive: ");
-        assertSysoutEquals("primitive: 1\r\nprimitive: 0\r\nprimitive: -1\r\n");
+        assertSysoutContains(PRIMITIVE_PREFIX);
+        assertSysoutContains("1");
+        assertSysoutContains("0");
+        assertSysoutContains("-1");
         //endregion
     }
 
@@ -43,7 +50,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("primitive: ");
+        assertSysoutContains(PRIMITIVE_PREFIX);
         assertSysoutContains("1");
         assertSysoutContains("0");
         assertSysoutContains("-1");
@@ -58,7 +65,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log('b');
         //endregion
         //region then
-        assertSysoutContains("char: ");
+        assertSysoutContains(CHAR_PREFIX);
         assertSysoutContains("a");
         assertSysoutContains("b");
         //endregion
@@ -71,7 +78,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("other str");
         //endregion
         //region then
-        assertSysoutContains("string: ");
+        assertSysoutContains(STRING_PREFIX);
         assertSysoutContains("test string 1");
         assertSysoutContains("other str");
         //endregion
@@ -84,7 +91,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(false);
         //endregion
         //region then
-        assertSysoutContains("primitive: ");
+        assertSysoutContains(PRIMITIVE_PREFIX);
         assertSysoutContains("true");
         assertSysoutContains("false");
         //endregion
@@ -96,7 +103,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(new Object());
         //endregion
         //region then
-        assertSysoutContains("reference: ");
+        assertSysoutContains(REFERENCE_PREFIX);
         assertSysoutContains("@");
         //endregion
     }
