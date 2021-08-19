@@ -7,21 +7,28 @@ public class Logger {
     public static final String STRING_PREFIX = "string: ";
     public static final String OBJECT_PREFIX = "reference: ";
 
+    public static void log(int message) {
+        writeMessage(PRIMITIVE_PREFIX + message);
+    }
+
+    public static void log(byte message) {
+        writeMessage(PRIMITIVE_PREFIX + message);
+    }
+
+    public static void log(boolean message) {
+        writeMessage(PRIMITIVE_PREFIX + message);
+    }
+
+    public static void log(char message) {
+        writeMessage(CHAR_PREFIX + message);
+    }
+
+    public static void log(String message) {
+        writeMessage(STRING_PREFIX + message);
+    }
+
     public static void log(Object message) {
-        String prefix;
-        if (message instanceof Integer || message instanceof Byte || message instanceof Boolean) {
-            prefix = PRIMITIVE_PREFIX;
-        }
-        else if (message instanceof Character) {
-            prefix = CHAR_PREFIX;
-        }
-        else if (message instanceof String) {
-            prefix = STRING_PREFIX;
-        }
-        else {
-            prefix = OBJECT_PREFIX;
-        }
-        writeMessage(prefix + message);
+        writeMessage(OBJECT_PREFIX + message);
     }
 
     private static void writeMessage(String s) {
