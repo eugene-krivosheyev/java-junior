@@ -1,39 +1,41 @@
 package com.acme.edu;
 
 public class Logger {
+    private static final String PRIMITIVE_PREFIX = "primitive";
+    private static final String CHAR_PREFIX = "char";
+    private static final String STRING_PREFIX = "string";
+    private static final String OBJECT_PREFIX = "reference";
+
     public static void log(int message) {
-        log(Integer.valueOf(message));
+        save(formatMessage(PRIMITIVE_PREFIX, message));
     }
 
     public static void log(byte message) {
-        log(Byte.valueOf(message));
+        save(formatMessage(PRIMITIVE_PREFIX, message));
     }
 
     public static void log(char message) {
-        log(Character.valueOf(message));
+        save(formatMessage(CHAR_PREFIX, message));
     }
 
     public static void log(boolean message) {
-        log(Boolean.valueOf(message));
+        save(formatMessage(PRIMITIVE_PREFIX, message));
+    }
+
+    public static void log(String message) {
+        save(formatMessage(STRING_PREFIX, message));
     }
 
     public static void log(Object message) {
+        save(formatMessage(OBJECT_PREFIX, message));
+    }
 
-        String prefix;
+    private static String formatMessage(String prefix, Object message) {
+        return prefix+": "+message+"\n";
+    }
 
-        if ( message instanceof Integer ||
-             message instanceof Byte    ||
-             message instanceof Boolean     ) {
-            prefix = "primitive: ";
-        } else if ( message instanceof String ) {
-            prefix = "string: ";
-        } else if ( message instanceof Character ) {
-            prefix = "char: ";
-        } else {
-            prefix = "reference: ";
-        }
-
-        System.out.print(prefix + message + "\n");
+    private static void save(String message) {
+        System.out.print(message);
     }
 }
 
