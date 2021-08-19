@@ -6,8 +6,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
-
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @BeforeEach
@@ -31,9 +29,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("primitive: 1");
-        assertSysoutContains("primitive: 0");
-        assertSysoutContains("primitive: -1");
+        assertSysoutContains(Logger.PRIMITIVE_PREFIX + "1");
+        assertSysoutContains(Logger.PRIMITIVE_PREFIX + "0");
+        assertSysoutContains(Logger.PRIMITIVE_PREFIX + "-1");
         //endregion
     }
 
@@ -46,7 +44,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("primitive: ");
+        assertSysoutContains(Logger.PRIMITIVE_PREFIX);
         assertSysoutContains("1");
         assertSysoutContains("0");
         assertSysoutContains("-1");
