@@ -5,7 +5,6 @@ import java.io.PrintStream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 public interface SysoutCaptureAndAssertionAbility {
     ByteArrayOutputStream OUT = new ByteArrayOutputStream();
@@ -15,11 +14,11 @@ public interface SysoutCaptureAndAssertionAbility {
     }
 
     default void assertSysoutEquals(String expected) {
-        assertTrue(OUT.toString().equals(expected));
+        assertThat(OUT.toString(), is(expected));
     }
 
     default void assertSysoutContains(String expected) {
-        assertThat(OUT.toString(), OUT.toString().contains(expected));
+        assertThat(OUT.toString(), containsString(expected));
     }
 
     default void resetOut() {
