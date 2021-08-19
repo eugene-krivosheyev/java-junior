@@ -36,6 +36,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("0");
         assertSysoutContains("-1");
         assertSysoutEquals("primitive: 1\r\nprimitive: 0\r\nprimitive: -1\r\n");
+        assertSysoutEquals("primitive: 1" + System.lineSeparator() +
+                                    "primitive: 0" + System.lineSeparator() +
+                                    "primitive: -1" + System.lineSeparator());
 
         //endregion
     }

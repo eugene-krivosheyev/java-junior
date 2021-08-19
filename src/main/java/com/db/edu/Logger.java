@@ -1,27 +1,28 @@
 package com.db.edu;
 
 public class Logger {
-    public static void log(int message) {
-        System.out.println("primitive: " + message);
-    }
-
-    public static void log(byte message) {
-        System.out.println("primitive: " + message);
-    }
-
-    public static void log(String message) {
-        System.out.println("string: " + message);
-    }
-
-    public static void log(char message) {
-        System.out.println("char: " + message);
-    }
-
-    public static void log(boolean message) {
-        System.out.println("primitive: " + message);
-    }
-
     public static void log(Object message) {
-        System.out.println("reference: " + message.toString());
+        String type = getTypeByClass(message);
+        log(type, message);
+    }
+
+    private static String getTypeByClass(Object message) {
+        String className = message.getClass().getSimpleName();
+        switch (className) {
+            case "Integer":
+            case "Byte":
+            case "Boolean":
+                return  "primitive: ";
+            case "String":
+                return  "string: ";
+            case "Character":
+                return  "char: " ;
+            default:
+                return "reference: ";
+        }
+    }
+
+    private static void log(String type, Object message) {
+        System.out.print(type + message + System.lineSeparator());
     }
 }
