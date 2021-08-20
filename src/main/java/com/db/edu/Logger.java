@@ -22,8 +22,23 @@ public class Logger {
             intCount++;
             intSum += message;
         }
-        else (isOverflows(message) == 1){
-            int temp =  message - Integer.MAX_VALUE
+        else if (isOverflows(message) == 1){
+            int temp =  message + intSum - Integer.MAX_VALUE;
+            intSum = Integer.MAX_VALUE;
+            printAccumulatedInt();
+            if (temp != 0) {
+                intSum = temp;
+                intCount = 1;
+            }
+        }
+        else if (isOverflows(message) == -1) {
+            int temp =  message + intSum - Integer.MIN_VALUE;
+            intSum = Integer.MIN_VALUE;
+            printAccumulatedInt();
+            if (temp != 0) {
+                intSum = temp;
+                intCount = 1;
+            }
         }
     }
 
