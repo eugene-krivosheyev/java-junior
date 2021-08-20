@@ -9,10 +9,10 @@ public class Logger {
     private static String prevString;
     private static int stringCounter = 0;
 
-    public static final String PRIMITIVE_PREFIX = "primitive: ";
-    public static final String STRING_PREFIX = "string: ";
-    public static final String CHAR_PREFIX = "char: ";
-    public static final String REFERENCE_PREFIX = "reference: ";
+    public static final String PRIMITIVE_PREFIX = "primitive:";
+    public static final String STRING_PREFIX = "string:";
+    public static final String CHAR_PREFIX = "char:";
+    public static final String REFERENCE_PREFIX = "reference:";
 
     public static void log(int message) {
         writeLog(PRIMITIVE_PREFIX, message);
@@ -98,16 +98,16 @@ public class Logger {
         }
 
         if (integerAccumulator != null) {
-            writeLogToConsole(STRING_PREFIX, integerAccumulator);
+            writeLogToConsole(PRIMITIVE_PREFIX, integerAccumulator);
             integerAccumulator = null;
         }
     }
 
     private static void writeLogToConsole(String prefix, Object message) {
-        System.out.println(prefix + message);
+        System.out.printf("%s %s%n", prefix, message);
     }
 
     private static void writeLogToConsole(String prefix, Object message, int counter) {
-        System.out.printf("%s%s (x%d)%n", prefix, message, counter);
+        System.out.printf("%s %s (x%d)%n", prefix, message, counter);
     }
 }

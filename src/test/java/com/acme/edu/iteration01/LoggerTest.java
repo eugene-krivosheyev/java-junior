@@ -24,15 +24,17 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogInteger() {
         //region when
         Logger.log(1);
+        Logger.closeLog();
         Logger.log(0);
+        Logger.closeLog();
         Logger.log(-1);
         Logger.closeLog();
         //endregion
 
         //region then
-        assertSysoutContains(Logger.PRIMITIVE_PREFIX + "1");
-        assertSysoutContains(Logger.PRIMITIVE_PREFIX + "0");
-        assertSysoutContains(Logger.PRIMITIVE_PREFIX + "-1");
+        assertSysoutContains(Logger.PRIMITIVE_PREFIX + " 1");
+        assertSysoutContains(Logger.PRIMITIVE_PREFIX + " 0");
+        assertSysoutContains(Logger.PRIMITIVE_PREFIX + " -1");
         //endregion
     }
 
