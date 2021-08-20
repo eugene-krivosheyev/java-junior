@@ -1,15 +1,21 @@
 package com.db.edu;
 
+import com.db.edu.commands.BooleanCommand;
+import com.db.edu.commands.ByteCommand;
+import com.db.edu.commands.CharCommand;
+import com.db.edu.commands.Command;
+import com.db.edu.commands.IntCommand;
+import com.db.edu.commands.ObjectCommand;
+import com.db.edu.commands.StartCommand;
+import com.db.edu.commands.StringCommand;
+
 import java.io.IOException;
 import java.io.OutputStream;
 
 public class Logger {
 
     private static OutputStream DEFAULT_OUT = System.out;
-    private static final String PRIMITIVE_PREFIX = "primitive: ";
-    private static final String CHAR_PREFIX = "char: ";
-    private static final String STRING_PREFIX = "string: ";
-    private static final String REFERENCE_PREFIX = "reference: ";
+    private static Command last = new StartCommand();
 
     private Logger() {
     }
@@ -24,31 +30,41 @@ public class Logger {
     }
 
     public static void log(int message) {
-        writeMessage(decorate(PRIMITIVE_PREFIX, message));
+        Logger.processCommand(new IntCommand(message));
     }
 
     public static void log(byte message) {
-        writeMessage(decorate(PRIMITIVE_PREFIX, message));
+        Logger.processCommand(new ByteCommand(message));
     }
 
     public static void log(char message) {
-        writeMessage(decorate(CHAR_PREFIX, message));
+        Logger.processCommand(new CharCommand(message));
     }
 
     public static void log(String message)  {
-        writeMessage(decorate(STRING_PREFIX, message));
+        Logger.processCommand(new StringCommand(message));
     }
 
     public static void log(boolean message) {
-        writeMessage(decorate(PRIMITIVE_PREFIX, message));
+        Logger.processCommand(new BooleanCommand(message));
     }
 
     public static void log(Object message) {
-        writeMessage(decorate(REFERENCE_PREFIX, message));
+        Logger.processCommand(new ObjectCommand(message));
     }
 
-    private static String decorate(String prefix, Object message) {
-        return prefix + message + System.lineSeparator();
+    public static void flush() {
+        last.finishCommand();
+        writeMessage(last.getLogMessage());
+        last = new StartCommand();
+    }
+
+    private static void processCommand(Command command) {
+        Command next = last.accumulate(command);
+        if (next != last) {
+            writeMessage(last.getLogMessage());
+            last = next;
+        }
     }
 
     private static void writeMessage(String message) {
