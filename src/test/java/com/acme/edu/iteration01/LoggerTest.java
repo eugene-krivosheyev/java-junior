@@ -7,7 +7,6 @@ import org.junit.jupiter.api.*;
 
 import java.io.*;
 
-import static com.acme.edu.Logger.*;
 
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
