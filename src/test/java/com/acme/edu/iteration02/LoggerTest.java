@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+    static private final String sep = System.lineSeparator();
     //region given
     @BeforeEach
     public void setUpSystemOut() throws IOException {
@@ -96,16 +97,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 3");
         Logger.log("str 3");
         Logger.log("str 3");
+        Logger.flush();
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "str 1\n" +
-            "str 2 (x2)\n" +
-            "0\n" +
-            "str 2\n" +
-            "str 3 (x3)\n"
-        );
+        assertSysoutContains("str 1");
+        assertSysoutContains("str 2 (x2)");
+        assertSysoutContains("0");
+        assertSysoutContains("str 2");
+        assertSysoutContains("str 3 (x3)");
         //endregion
     }
 }
