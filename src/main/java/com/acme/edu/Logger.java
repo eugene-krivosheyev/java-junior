@@ -5,13 +5,35 @@ public class Logger {
     public static String CHAR_TYPE = "char: ";
     public static String STRING_TYPE = "string: ";
     public static String REFERENCE_TYPE = "reference: ";
+    private static int iterationId = 1;
+
+
+    public static void start(int id){
+        Logger.iterationId = id;
+    }
 
     public static void log(int message) {
-        System.out.println(PRIMITIVE_TYPE + message);
+        switch (iterationId) {
+            case 1:
+                System.out.println(PRIMITIVE_TYPE + message);
+                break;
+            case 2:
+                break;
+            default:
+                break;
+        }
     }
 
     public static void log(byte message) {
-        System.out.println(PRIMITIVE_TYPE + message);
+        switch (iterationId) {
+            case 1:
+                System.out.println(PRIMITIVE_TYPE + message);
+                break;
+            case 2:
+                break;
+            default:
+                break;
+        }
     }
 
     public static void log(char message) {
@@ -19,7 +41,15 @@ public class Logger {
     }
 
     public static void log(String message) {
-        System.out.println(STRING_TYPE + message);
+        switch (iterationId) {
+            case 1:
+                System.out.println(STRING_TYPE + message);
+                break;
+            case 2:
+                break;
+            default:
+                break;
+        }
     }
 
     public static void log(boolean message) {

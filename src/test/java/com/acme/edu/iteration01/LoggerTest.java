@@ -7,9 +7,11 @@ import org.junit.jupiter.api.*;
 
 import java.io.*;
 
-public class LoggerTest implements SysoutCaptureAndAssertionAbility {
-    static private String sep = System.lineSeparator();
+import static com.acme.edu.Logger.*;
 
+
+public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+    static private final String sep = System.lineSeparator();
     //region given
     @BeforeEach
     public void setUpSystemOut() throws IOException {
