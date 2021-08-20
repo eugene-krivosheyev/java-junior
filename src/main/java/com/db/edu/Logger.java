@@ -10,8 +10,55 @@ public class Logger {
     private static final String STRING_PREFIX = "string: ";
     private static final String REFERENCE_PREFIX = "reference: ";
 
+    private static int sum = 0;
+    private static boolean hasNumberToPublish = false;
+    private static boolean hasPreviousString = false;
+    private static String savedString = "";
+    private static int equalStringAmount=0;
+
+    public static void flush() {
+        flushNumber();
+        flushString();
+    }
+
+    private static void flushNumber(){
+        if (hasNumberToPublish){
+            OUT.println(PRIMITIVE_PREFIX+sum);
+            hasNumberToPublish = false;
+        }
+        sum=0;
+    }
+    private static void flushString(){
+        if (hasPreviousString){
+            if (equalStringAmount==1){
+                OUT.println(STRING_PREFIX+savedString);
+            }
+            else{
+                OUT.println(STRING_PREFIX+savedString+" (x"+equalStringAmount+")");
+            }
+            hasPreviousString=false;
+        }
+        equalStringAmount = 0;
+    }
+
+    private static void addValueToSum(int value){
+        hasNumberToPublish = true;
+        long sumResultValue = (long)sum+(long)value;
+        if (sumResultValue>Integer.MAX_VALUE)
+        {
+            flush();
+            sum=value;
+            hasNumberToPublish = true;
+        }
+        else
+        {
+            sum+=value;
+        }
+    }
+
     public static void log(int message) {
-        OUT.println(PRIMITIVE_PREFIX+message);
+        flushString();
+        addValueToSum(message);
     }
 
     public static void log(byte message) {
@@ -27,7 +74,28 @@ public class Logger {
     }
 
     public static void log(String message) {
-        OUT.println(STRING_PREFIX + message);
+        flushNumber();
+        if (hasPreviousString){
+            if (savedString.equals(message)) {
+                equalStringAmount++;
+            }
+            else {
+                if (equalStringAmount==1){
+                    OUT.println(STRING_PREFIX+savedString);
+                }
+                else{
+                    OUT.println(STRING_PREFIX+savedString+" (x"+equalStringAmount+")");
+                }
+                savedString = message;
+                equalStringAmount=1;
+            }
+        }
+        else{
+            savedString = message;
+            equalStringAmount=1;
+            hasPreviousString=true;
+        }
+
     }
 
     public static void log(Object message) {
