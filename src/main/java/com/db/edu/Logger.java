@@ -7,31 +7,78 @@ public class Logger {
     public static final String STRING_PREFIX = "string: ";
     public static final String REFERENCE_PREFIX = "reference: ";
 
+    private static int intSum = 0;
+    private static int intCount = 0;
+    private static String stringAcc = "";
+    private static int stringCount = 0;
+
+    public static void printToConsole(String message) {
+        System.out.println(message);
+    }
+
     public static void log(int message) {
-        printToConsole(PRIMITIVE_PREFIX + message);
+        printAccumulatedString();
+        if (isOverflows(message) == 0) {
+            intCount++;
+            intSum += message;
+        }
+        else (isOverflows(message) == 1){
+            int temp =  message - Integer.MAX_VALUE
+        }
     }
 
     public static void log(byte message) {
+        printAccumulatedInt();
+        printAccumulatedString();
         printToConsole(PRIMITIVE_PREFIX + message);
     }
 
     public static void log(char message) {
+        printAccumulatedInt();
+        printAccumulatedString();
         printToConsole(CHAR_PREFIX + message);
     }
 
     public static void log(String message) {
-        printToConsole(STRING_PREFIX + message);
+        printAccumulatedInt();
     }
 
     public static void log(boolean message) {
+        printAccumulatedString();
+        printAccumulatedInt();
         printToConsole(PRIMITIVE_PREFIX + message);
     }
 
     public static void log(Object message) {
+        printAccumulatedInt();
+        printAccumulatedString();
         printToConsole(REFERENCE_PREFIX + message);
     }
 
-    public static void printToConsole(String message) {
-        System.out.println(message);
+    public static void close() {
+        printAccumulatedInt();
+        printAccumulatedString();
+    }
+
+    private static void printAccumulatedInt() {
+        if (intCount != 0) {
+            printToConsole(PRIMITIVE_PREFIX + intSum);
+            intCount = 0;
+            intSum = 0;
+        }
+    }
+
+    private static void printAccumulatedString() {
+        if (stringCount != 0) {
+            printToConsole(STRING_PREFIX + stringAcc + (stringCount > 1 ? "(x" + stringCount + ")" : ""));
+            stringCount = 0;
+            stringAcc = "";
+        }
+    }
+
+    private static int isOverflows(int message) {
+        if (message >= 0 && intSum >= 0 && message + intSum < 0) return 1;
+        else if (message <= 0 && intSum <= 0 && message + intSum > 0) return -1;
+        else return 0;
     }
 }
