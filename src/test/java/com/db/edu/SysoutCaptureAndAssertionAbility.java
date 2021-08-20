@@ -13,11 +13,11 @@ public interface SysoutCaptureAndAssertionAbility {
     }
 
     default void assertSysoutEquals(String expected) {
-                assertThat("Sysout equal: ",OUT.toString().equals(expected));
+        assertThat("Sysout equal: ", OUT.toString().equals(expected));
     }
 
     default void assertSysoutContains(String expected) {
-        assertThat("Sysout contains: ",OUT.toString().contains(expected));
+        assertThat("Sysout contains: ", OUT.toString().contains(expected));
     }
 
     default void resetOut() {

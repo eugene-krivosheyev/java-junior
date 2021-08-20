@@ -56,6 +56,11 @@ public class Logger {
 
     public static void log(String message) {
         printAccumulatedInt();
+        if (stringCount > 0 && !stringAcc.equals(message)) {
+            printAccumulatedString();
+            stringAcc = message;
+        }
+        stringCount++;
     }
 
     public static void log(boolean message) {
