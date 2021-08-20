@@ -23,4 +23,10 @@ public interface SysoutCaptureAndAssertionAbility {
     default void resetOut() {
         OUT.reset();
     }
+
+    default void logAssert(String ... args) {
+        for (String arg : args) {
+            assertSysoutContains(arg);
+        }
+    }
 }

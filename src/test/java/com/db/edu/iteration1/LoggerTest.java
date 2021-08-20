@@ -4,6 +4,8 @@ import com.db.edu.Logger;
 import com.db.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.*;
 
+import static com.db.edu.Logger.*;
+
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @BeforeEach
@@ -17,28 +19,28 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         resetOut();
     }
 
-    private void logAssert(String ... args) {
-        for (String arg : args) {
-            assertSysoutContains(arg);
-        }
-    }
-
     @Test
     public void shouldLogInteger() {
         Logger.log(1);
+        Logger.flush();
         Logger.log(0);
+        Logger.flush();
         Logger.log(-1);
+        Logger.flush();
 
-        logAssert("primitive: ", "1", "0", "-1");
+        logAssert(PRIMITIVE_PREFIX, "1", "0", "-1");
     }
 
     @Test
     public void shouldLogByte() {
         Logger.log((byte)1);
+        Logger.flush();
         Logger.log((byte)0);
+        Logger.flush();
         Logger.log((byte)-1);
+        Logger.flush();
 
-        logAssert("primitive: ", "1", "0", "-1");
+        logAssert(PRIMITIVE_PREFIX, "1", "0", "-1");
     }
 
     @Test
@@ -46,15 +48,16 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log('a');
         Logger.log('b');
 
-        logAssert("char: ", "a", "b");
+        logAssert(CHAR_PREFIX, "a", "b");
     }
 
     @Test
     public void shouldLogString() {
         Logger.log("test string 1");
         Logger.log("other str");
+        Logger.flush();
 
-        logAssert("string: ", "test string 1", "other str");
+        logAssert(STRING_PREFIX, "test string 1", "other str");
     }
 
     @Test
@@ -62,13 +65,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(true);
         Logger.log(false);
 
-        logAssert("primitive: ", "true", "false");
+        logAssert(PRIMITIVE_PREFIX, "true", "false");
     }
 
     @Test
     public void shouldLogReference() {
         Logger.log(new Object());
 
-        logAssert("reference: ", "@");
+        logAssert(OBJECT_PREFIX, "@");
     }
 }
