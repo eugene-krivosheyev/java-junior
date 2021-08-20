@@ -21,18 +21,16 @@ public class Logger {
         if (isOverflows(message) == 0) {
             intCount++;
             intSum += message;
-        }
-        else if (isOverflows(message) == 1){
-            int temp =  message + intSum - Integer.MAX_VALUE;
+        } else if (isOverflows(message) == 1) {
+            int temp = message + intSum - Integer.MAX_VALUE;
             intSum = Integer.MAX_VALUE;
             printAccumulatedInt();
             if (temp != 0) {
                 intSum = temp;
                 intCount = 1;
             }
-        }
-        else if (isOverflows(message) == -1) {
-            int temp =  message + intSum - Integer.MIN_VALUE;
+        } else if (isOverflows(message) == -1) {
+            int temp = message + intSum - Integer.MIN_VALUE;
             intSum = Integer.MIN_VALUE;
             printAccumulatedInt();
             if (temp != 0) {
@@ -58,8 +56,8 @@ public class Logger {
         printAccumulatedInt();
         if (stringCount > 0 && !stringAcc.equals(message)) {
             printAccumulatedString();
-            stringAcc = message;
         }
+        stringAcc = message;
         stringCount++;
     }
 
@@ -90,7 +88,7 @@ public class Logger {
 
     private static void printAccumulatedString() {
         if (stringCount != 0) {
-            printToConsole(STRING_PREFIX + stringAcc + (stringCount > 1 ? "(x" + stringCount + ")" : ""));
+            printToConsole(STRING_PREFIX + stringAcc + (stringCount > 1 ? " (x" + stringCount + ")" : ""));
             stringCount = 0;
             stringAcc = "";
         }
