@@ -26,8 +26,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogInteger() throws IOException {
         //region when
         Logger.log(1);
+        Logger.flush();
         Logger.log(0);
+        Logger.flush();
         Logger.log(-1);
+        Logger.flush();
         //endregion
 
         //region then
@@ -44,6 +47,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log((byte) 1);
         Logger.log((byte) 0);
         Logger.log((byte) -1);
+        Logger.flush();
         //endregion
 
         //region then
@@ -59,6 +63,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log('a');
         Logger.log('b');
+        Logger.flush();
         //endregion
 
         //region then
@@ -73,6 +78,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log("test string 1");
         Logger.log("other str");
+        Logger.flush();
         //endregion
 
         //region then
@@ -87,6 +93,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log(true);
         Logger.log(false);
+        Logger.flush();
         //endregion
 
         //region then
@@ -100,11 +107,95 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogReference() throws IOException {
         //region when
         Logger.log(new Object());
+        Logger.flush();
         //endregion
 
         //region then
         assertSysoutContains(OBJECT_PREFIX);
         assertSysoutContains("@");
+        //endregion
+    }
+
+    @Test
+    public void shouldLogSequentIntegersAsSum() throws IOException {
+        //region when
+        Logger.log("str 1");
+        Logger.log(1);
+        Logger.log(2);
+        Logger.log("str 2");
+        Logger.log(0);
+        Logger.flush();
+        //endregion
+
+        //region then
+        assertSysoutContains("str 1" + System.lineSeparator());
+        assertSysoutContains(3 + System.lineSeparator());
+        assertSysoutContains("str 2" + System.lineSeparator());
+        assertSysoutContains(0 + System.lineSeparator());
+        //endregion
+    }
+
+    @Test
+    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
+        //region when
+        Logger.log("str 1");
+        Logger.log(10);
+        Logger.log(Integer.MAX_VALUE);
+        Logger.log("str 2");
+        Logger.log(0);
+        Logger.flush();
+        //endregion
+        //
+        //region then
+        assertSysoutContains("str 1" + System.lineSeparator());
+        assertSysoutContains(10 + System.lineSeparator());
+        assertSysoutContains(Integer.MAX_VALUE + System.lineSeparator());
+        assertSysoutContains("str 2" + System.lineSeparator());
+        assertSysoutContains(0 + System.lineSeparator());
+        //endregion
+    }
+
+    @Test
+    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
+        //NO PREFIXES
+        //region when
+        Logger.log("str 1");
+        Logger.log((byte)10);
+        Logger.log((byte)Byte.MAX_VALUE);
+        Logger.log("str 2");
+        Logger.log(0);
+        Logger.flush();
+        //endregionprimitive: 127
+
+        //region then
+        assertSysoutContains("str 1" + System.lineSeparator());
+        assertSysoutContains(10 + System.lineSeparator());
+        assertSysoutContains(Byte.MAX_VALUE + System.lineSeparator());
+        assertSysoutContains("str 2" + System.lineSeparator());
+        assertSysoutContains(0 + System.lineSeparator());
+        //endregion
+    }
+
+    @Test
+    public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
+        //region when
+        Logger.log("str 1");
+        Logger.log("str 2");
+        Logger.log("str 2");
+        Logger.log(0);
+        Logger.log("str 2");
+        Logger.log("str 3");
+        Logger.log("str 3");
+        Logger.log("str 3");
+        Logger.flush();
+        //endregion
+        //dont show repeating strings
+        //region then
+        assertSysoutContains("str 1" + System.lineSeparator());
+        assertSysoutContains("str 2 (x2)" + System.lineSeparator());
+        assertSysoutContains(0 + System.lineSeparator());
+        assertSysoutContains("str 2" + System.lineSeparator());
+        assertSysoutContains("str 3 (x3)" + System.lineSeparator());
         //endregion
     }
 }
