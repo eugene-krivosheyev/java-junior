@@ -14,11 +14,46 @@ public class Logger {
     public static final String CHAR_PREFIX = "char: ";
     public static final String REFERENCE_PREFIX = "reference: ";
 
-    private Logger() {
+    public static void log(int message) {
+        writeLog(PRIMITIVE_PREFIX, message);
     }
 
-    private static void writeLogToConsole(String prefix, Object message) {
-        System.out.println(prefix + message);
+    public static void log(byte message) {
+        writeLog(PRIMITIVE_PREFIX, message);
+    }
+
+    public static void log(char message) {
+        writeLog(CHAR_PREFIX, message);
+    }
+
+    public static void log(String message) {
+        writeLog(STRING_PREFIX, message);
+    }
+
+    public static void log(boolean message) {
+        writeLog(PRIMITIVE_PREFIX, message);
+    }
+
+    public static void log(Object message) {
+        writeLog(REFERENCE_PREFIX, message);
+    }
+
+    private static void writeLog(String prefix, Object message) {
+        Class<?> currentClass = message.getClass();
+
+        if (prevClass != currentClass) {
+            closeLog();
+        }
+
+        if (currentClass.equals(String.class)) {
+            logString(message.toString());
+        } else if (currentClass.equals(Integer.class)) {
+            logInteger((int) message);
+        } else {
+            writeLogToConsole(prefix, message);
+        }
+
+        prevClass = currentClass;
     }
 
     private static void logString(String message) {
@@ -50,30 +85,12 @@ public class Logger {
         }
     }
 
-    private static void writeLog(String prefix, Object message) {
-        Class<?> currentClass = message.getClass();
-
-        if (prevClass != currentClass) {
-            closeLog();
-        }
-
-        if (currentClass.equals(String.class)) {
-            logString(message.toString());
-        } else if (currentClass.equals(Integer.class)) {
-            logInteger((int) message);
-        } else {
-            writeLogToConsole(prefix, message);
-        }
-
-        prevClass = currentClass;
-    }
-
     public static void closeLog() {
         if (prevString != null) {
             if (stringCounter == 1) {
                 writeLogToConsole(STRING_PREFIX, prevString);
             } else {
-                writeLogToConsole(STRING_PREFIX, String.format("%s (x%d)", prevString, stringCounter));
+                writeLogToConsole(STRING_PREFIX, prevString, stringCounter);
             }
 
             prevString = null;
@@ -86,27 +103,11 @@ public class Logger {
         }
     }
 
-    public static void log(int message) {
-        writeLog(PRIMITIVE_PREFIX, message);
+    private static void writeLogToConsole(String prefix, Object message) {
+        System.out.println(prefix + message);
     }
 
-    public static void log(byte message) {
-        writeLog(PRIMITIVE_PREFIX, message);
-    }
-
-    public static void log(char message) {
-        writeLog(CHAR_PREFIX, message);
-    }
-
-    public static void log(String message) {
-        writeLog(STRING_PREFIX, message);
-    }
-
-    public static void log(boolean message) {
-        writeLog(PRIMITIVE_PREFIX, message);
-    }
-
-    public static void log(Object message) {
-        writeLog(REFERENCE_PREFIX, message);
+    private static void writeLogToConsole(String prefix, Object message, int counter) {
+        System.out.printf("%s%s (x%d)%n", prefix, message, counter);
     }
 }
