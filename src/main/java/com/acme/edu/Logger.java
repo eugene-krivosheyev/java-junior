@@ -15,34 +15,34 @@ public class Logger {
     public static final String REFERENCE_PREFIX = "reference:";
 
     public static void log(int message) {
-        writeLog(PRIMITIVE_PREFIX, message);
+        initLogWriting(PRIMITIVE_PREFIX, message);
     }
 
     public static void log(byte message) {
-        writeLog(PRIMITIVE_PREFIX, message);
+        initLogWriting(PRIMITIVE_PREFIX, message);
     }
 
     public static void log(char message) {
-        writeLog(CHAR_PREFIX, message);
+        initLogWriting(CHAR_PREFIX, message);
     }
 
     public static void log(String message) {
-        writeLog(STRING_PREFIX, message);
+        initLogWriting(STRING_PREFIX, message);
     }
 
     public static void log(boolean message) {
-        writeLog(PRIMITIVE_PREFIX, message);
+        initLogWriting(PRIMITIVE_PREFIX, message);
     }
 
     public static void log(Object message) {
-        writeLog(REFERENCE_PREFIX, message);
+        initLogWriting(REFERENCE_PREFIX, message);
     }
 
-    private static void writeLog(String prefix, Object message) {
+    private static void initLogWriting(String prefix, Object message) {
         Class<?> currentClass = message.getClass();
 
         if (prevClass != currentClass) {
-            closeLog();
+            flush();
         }
 
         if (currentClass.equals(String.class)) {
@@ -50,20 +50,21 @@ public class Logger {
         } else if (currentClass.equals(Integer.class)) {
             logInteger((int) message);
         } else {
-            writeLogToConsole(prefix, message);
+            writeMessageToLog(prefix, message);
         }
 
         prevClass = currentClass;
     }
 
     private static void logString(String message) {
+
         if (Objects.equals(message, prevString)) {
             stringCounter++;
-        } else if (!Objects.equals(message, prevString) && stringCounter == 0) {
-            stringCounter = 1;
-            prevString = message;
         } else {
-            closeLog();
+            if(stringCounter != 0){
+                flush();
+            }
+
             stringCounter = 1;
             prevString = message;
         }
@@ -77,20 +78,23 @@ public class Logger {
         }
 
         if (integerAccumulator >= Integer.MAX_VALUE) {
-            writeLogToConsole(PRIMITIVE_PREFIX, Integer.MAX_VALUE);
-            integerAccumulator = integerAccumulator - Integer.MAX_VALUE == 0 ? null : integerAccumulator - Integer.MAX_VALUE;
+            removeIntegerOverflow(Integer.MAX_VALUE);
         } else if (integerAccumulator <= Integer.MIN_VALUE) {
-            writeLogToConsole(PRIMITIVE_PREFIX, Integer.MIN_VALUE);
-            integerAccumulator = integerAccumulator - Integer.MIN_VALUE == 0 ? null : integerAccumulator - Integer.MIN_VALUE;
+            removeIntegerOverflow(Integer.MIN_VALUE);
         }
     }
 
-    public static void closeLog() {
+    private static void removeIntegerOverflow(int value){
+        writeMessageToLog(PRIMITIVE_PREFIX, value);
+        integerAccumulator = integerAccumulator - value == 0 ? null : integerAccumulator - value;
+    }
+
+    public static void flush() {
         if (prevString != null) {
             if (stringCounter == 1) {
-                writeLogToConsole(STRING_PREFIX, prevString);
+                writeMessageToLog(STRING_PREFIX, prevString);
             } else {
-                writeLogToConsole(STRING_PREFIX, prevString, stringCounter);
+                writeMessageToLog(STRING_PREFIX, prevString, stringCounter);
             }
 
             prevString = null;
@@ -98,16 +102,20 @@ public class Logger {
         }
 
         if (integerAccumulator != null) {
-            writeLogToConsole(PRIMITIVE_PREFIX, integerAccumulator);
+            writeMessageToLog(PRIMITIVE_PREFIX, integerAccumulator);
             integerAccumulator = null;
         }
     }
 
-    private static void writeLogToConsole(String prefix, Object message) {
-        System.out.printf("%s %s%n", prefix, message);
+    private static void writeMessageToLog(String prefix, Object message) {
+        logToConsole(String.format("%s %s%n", prefix, message.toString()));
     }
 
-    private static void writeLogToConsole(String prefix, Object message, int counter) {
-        System.out.printf("%s %s (x%d)%n", prefix, message, counter);
+    private static void writeMessageToLog(String prefix, Object message, int counter) {
+        logToConsole(String.format("%s %s (x%d)%n", prefix, message.toString(), counter));
+    }
+
+    private static void logToConsole(String report) {
+        System.out.print(report);
     }
 }

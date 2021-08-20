@@ -5,7 +5,6 @@ import com.acme.edu.SysoutCaptureAndAssertionAbility;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
@@ -32,7 +31,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(2);
         Logger.log("str 2");
         Logger.log(0);
-        Logger.closeLog();
+        Logger.flush();
         //endregion
 
         //region then
@@ -51,7 +50,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(Integer.MAX_VALUE);
         Logger.log("str 2");
         Logger.log(0);
-        Logger.closeLog();
+        Logger.flush();
         //endregion
 
         //region then
@@ -71,7 +70,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log((byte)Byte.MAX_VALUE);
         Logger.log("str 2");
         Logger.log(0);
-        Logger.closeLog();
+        Logger.flush();
         //endregion
 
         //region then
@@ -94,7 +93,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 3");
         Logger.log("str 3");
         Logger.log("str 3");
-        Logger.closeLog();
+        Logger.flush();
         //endregion
 
         //region then
