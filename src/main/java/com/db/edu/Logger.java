@@ -9,62 +9,72 @@ public class Logger {
     public static final String STRING_PREFIX = "string: ";
     public static final String REFERENCE_PREFIX = "reference: ";
     private static int sum = 0;
-    private static String previousString;
+    private static String bufString = "";
     private static int quantityString = 0;
-    private static enum State {STRING, INT, BYTE};
-//    private static boolean isStateByte;
-//    private static boolean isStateString;
+    private enum State {STRING, INT, BYTE, CHAR, BOOLEAN, OBJECT}
 
-
-    private static <T> void printLog(String name, T message) {
-        System.out.println(name + message);
-    }
-
-    private static void processLog(String prefix, String message) {
-        if (Objects.equals(message, previousString)) {
-            ++quantityString;
-        } else {
-            previousString = message;
-            ++quantityString;
+    private static <T> void printLog(String prefix, T message) {
+        if (message instanceof String) {
+            if (quantityString == 1) {
+                System.out.println(prefix + message);
+            } else {
+                System.out.println(prefix + message + " (x" + quantityString + ")");
+            }
+            return;
         }
+        System.out.println(prefix + message);
     }
 
-    private static void processLog(String prefix, int message) {
-        if (Integer.MAX_VALUE - message >= sum) {
-            sum += message;
-        } else {
-            printLog(prefix, sum);
-            printLog(prefix, message);
+    private static void flushBuffer(State inputType) {
+        if (inputType != State.STRING) {
+            printLog(STRING_PREFIX, bufString);
+            quantityString = 0;
+            bufString = "";
+        } else if (inputType != State.INT){
+            printLog(PRIMITIVE_PREFIX, sum);
             sum = 0;
         }
-
-    }
-
-    private static void processLog(String prefix, byte message) {
-
     }
 
     public static void log(int message) {
-        printLog(PRIMITIVE_PREFIX, message);
+        flushBuffer(State.INT);
+        if (Integer.MAX_VALUE - message >= sum) {
+            sum += message;
+        } else {
+            printLog(PRIMITIVE_PREFIX, sum);
+            sum = message;
+        }
     }
 
     public static void log(byte message) {
+        flushBuffer(State.BYTE);
         printLog(PRIMITIVE_PREFIX, message);
     }
 
     public static void log(char message) {
+        flushBuffer(State.CHAR);
         printLog(CHAR_PREFIX, message);
     }
 
     public static void log(String message) {
-        printLog(STRING_PREFIX, message);
+        flushBuffer(State.STRING);
+        if (Objects.equals(bufString, "")) {
+            bufString = message;
+            quantityString = 1;
+        } else if (Objects.equals(message, bufString)) {
+            ++quantityString;
+        } else {
+            flushBuffer(State.INT);
+        }
     }
 
     public static void log(boolean message) {
+        flushBuffer(State.BOOLEAN);
         printLog(PRIMITIVE_PREFIX, message);
     }
 
     public static void log(Object message) {
+        flushBuffer(State.OBJECT);
         printLog(REFERENCE_PREFIX, message);
     }
 }
