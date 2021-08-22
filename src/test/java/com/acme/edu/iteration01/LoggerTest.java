@@ -42,7 +42,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogByte() {
         //region when
         Logger.log((byte)1);
+        Logger.flush();
         Logger.log((byte)0);
+        Logger.flush();
         Logger.log((byte)-1);
         Logger.flush();
         //endregion
