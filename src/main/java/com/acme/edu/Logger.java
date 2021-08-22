@@ -89,6 +89,7 @@ public class Logger {
         if (intAccumulateState) {
             System.out.println(PRIMITIVE_TYPE + intAccumulateSum);
             intAccumulateState = false;
+            intAccumulateSum = 0;
         }
 
         checkIfStringIsEqualToLast(null);
