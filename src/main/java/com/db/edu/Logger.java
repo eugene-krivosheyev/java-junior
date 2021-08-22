@@ -12,6 +12,7 @@ public class Logger {
     private static String bufString = "";
     private static int quantityString = 0;
     private enum State {STRING, INT, BYTE, CHAR, BOOLEAN, OBJECT}
+    private static State state;
 
     private static <T> void printLog(String prefix, T message) {
         if (message instanceof String) {
@@ -27,12 +28,16 @@ public class Logger {
 
     private static void flushBuffer(State inputType) {
         if (inputType != State.STRING) {
-            printLog(STRING_PREFIX, bufString);
-            quantityString = 0;
-            bufString = "";
+            if (state == State.STRING) {
+                printLog(STRING_PREFIX, bufString);
+                quantityString = 0;
+                bufString = "";
+            }
         } else if (inputType != State.INT){
-            printLog(PRIMITIVE_PREFIX, sum);
-            sum = 0;
+            if (state == State.INT) {
+                printLog(PRIMITIVE_PREFIX, sum);
+                sum = 0;
+            }
         }
     }
 
@@ -44,16 +49,19 @@ public class Logger {
             printLog(PRIMITIVE_PREFIX, sum);
             sum = message;
         }
+        state = State.INT;
     }
 
     public static void log(byte message) {
         flushBuffer(State.BYTE);
         printLog(PRIMITIVE_PREFIX, message);
+        state = State.BYTE;
     }
 
     public static void log(char message) {
         flushBuffer(State.CHAR);
         printLog(CHAR_PREFIX, message);
+        state = State.CHAR;
     }
 
     public static void log(String message) {
@@ -65,16 +73,21 @@ public class Logger {
             ++quantityString;
         } else {
             flushBuffer(State.INT);
+            bufString = message;
+            quantityString = 1;
         }
+        state = State.STRING;
     }
 
     public static void log(boolean message) {
         flushBuffer(State.BOOLEAN);
         printLog(PRIMITIVE_PREFIX, message);
+        state = State.BOOLEAN;
     }
 
     public static void log(Object message) {
         flushBuffer(State.OBJECT);
         printLog(REFERENCE_PREFIX, message);
+        state = State.OBJECT;
     }
 }
