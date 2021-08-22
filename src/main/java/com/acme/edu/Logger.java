@@ -84,11 +84,17 @@ public class Logger {
     }
 
     public static void checkIfIntegerComesAsSequence(Object message){
-        if (message instanceof Integer){
+        if (message instanceof Integer) {
             if (!intAccumulateState) {
                 intAccumulateState = true;
             }
-            intAccumulateSum += (int)message;
+            if ((long)intAccumulateSum + (long)((int)message) > (long)Integer.MAX_VALUE) {
+                System.out.println(intAccumulateSum);
+                System.out.println(message);
+            }
+            else {
+                intAccumulateSum += (int)message;
+            }
         }
         else{
             if (intAccumulateState) {
