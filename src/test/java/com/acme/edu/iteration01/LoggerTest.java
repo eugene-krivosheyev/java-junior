@@ -8,7 +8,7 @@ import org.junit.jupiter.api.*;
 import java.io.*;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
-    static private String sep = System.lineSeparator();
+    static private final String sep = System.lineSeparator();
 
     //region given
     @BeforeEach
