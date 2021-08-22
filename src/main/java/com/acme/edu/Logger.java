@@ -16,40 +16,38 @@ public class Logger {
     private static String lastStr = null;
 
     public static void log(int message) {
-        if (!intAccumulateState) {
-            intAccumulateState = true;
-        }
-        intAccumulateSum += message;
         checkIfStringIsEqualToLast(message);
+        checkIfIntegerComesAsSequence(message);
     }
 
     public static void log(byte message) {
         System.out.println(PRIMITIVE_TYPE + message);
         checkIfStringIsEqualToLast(message);
-        flush();
+        checkIfIntegerComesAsSequence(message);
     }
 
     public static void log(char message) {
         System.out.println(CHAR_TYPE + message);
         checkIfStringIsEqualToLast(message);
-        flush();
+        checkIfIntegerComesAsSequence(message);
     }
 
     public static void log(String message) {
         System.out.println(STRING_TYPE + message);
         checkIfStringIsEqualToLast(message);
+        checkIfIntegerComesAsSequence(message);
     }
 
     public static void log(boolean message) {
         System.out.println(PRIMITIVE_TYPE + message);
         checkIfStringIsEqualToLast(message);
-        flush();
+        checkIfIntegerComesAsSequence(message);
     }
 
     public static void log(Object message) {
         System.out.println(REFERENCE_TYPE + message);
         checkIfStringIsEqualToLast(message);
-        flush();
+        checkIfIntegerComesAsSequence(message);
     }
 
     private static void checkIfStringIsEqualToLast(Object message) {
@@ -72,7 +70,7 @@ public class Logger {
             }
         }
         else {
-            if (accumString == true) {
+            if (accumString) {
                 if (strCount > 1) {
                     System.out.println(lastStr + " (x" + strCount + ")");
                 }
@@ -85,13 +83,25 @@ public class Logger {
         }
     }
 
-    public static void flush(){
-        if (intAccumulateState) {
-            System.out.println(PRIMITIVE_TYPE + intAccumulateSum);
-            intAccumulateState = false;
-            intAccumulateSum = 0;
+    public static void checkIfIntegerComesAsSequence(Object message){
+        if (message instanceof Integer){
+            if (!intAccumulateState) {
+                intAccumulateState = true;
+            }
+            intAccumulateSum += (int)message;
         }
+        else{
+            if (intAccumulateState) {
+                System.out.println(PRIMITIVE_TYPE + intAccumulateSum);
+                intAccumulateState = false;
+                intAccumulateSum = 0;
+            }
+        }
+    }
 
+
+    public static void flush(){
         checkIfStringIsEqualToLast(null);
+        checkIfIntegerComesAsSequence(null);
     }
 }
