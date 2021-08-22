@@ -6,6 +6,7 @@ public class Logger {
     private static Class<?> prevClass;
 
     private static Long integerAccumulator = null;
+    private static Integer byteAccumulator = null;
     private static String prevString;
     private static int stringCounter = 0;
 
@@ -49,6 +50,8 @@ public class Logger {
             logString(message.toString());
         } else if (currentClass.equals(Integer.class)) {
             logInteger((int) message);
+        } else if (currentClass.equals(Byte.class)) {
+            logByte((byte) message);
         } else {
             writeMessageToLog(prefix, message);
         }
@@ -61,7 +64,7 @@ public class Logger {
         if (Objects.equals(message, prevString)) {
             stringCounter++;
         } else {
-            if(stringCounter != 0){
+            if (stringCounter != 0) {
                 flush();
             }
 
@@ -71,11 +74,8 @@ public class Logger {
     }
 
     private static void logInteger(int inputInteger) {
-        if (integerAccumulator != null) {
-            integerAccumulator += inputInteger;
-        } else {
-            integerAccumulator = (long) inputInteger;
-        }
+        integerAccumulator = integerAccumulator == null ?
+                (long) inputInteger : integerAccumulator + inputInteger;
 
         if (integerAccumulator >= Integer.MAX_VALUE) {
             removeIntegerOverflow(Integer.MAX_VALUE);
@@ -84,9 +84,28 @@ public class Logger {
         }
     }
 
-    private static void removeIntegerOverflow(int value){
+    private static void removeIntegerOverflow(int value) {
         writeMessageToLog(PRIMITIVE_PREFIX, value);
         integerAccumulator = integerAccumulator - value == 0 ? null : integerAccumulator - value;
+    }
+
+    private static void logByte(byte input) {
+        if (byteAccumulator != null) {
+            byteAccumulator += input;
+        } else {
+            byteAccumulator = (int) input;
+        }
+
+        if (byteAccumulator >= Byte.MAX_VALUE) {
+            removeByteOverflow(Byte.MAX_VALUE);
+        } else if (byteAccumulator <= Byte.MIN_VALUE) {
+            removeByteOverflow(Byte.MIN_VALUE);
+        }
+    }
+
+    private static void removeByteOverflow(int value) {
+        writeMessageToLog(PRIMITIVE_PREFIX, value);
+        byteAccumulator = byteAccumulator - value == 0 ? null : byteAccumulator - value;
     }
 
     public static void flush() {
@@ -104,6 +123,11 @@ public class Logger {
         if (integerAccumulator != null) {
             writeMessageToLog(PRIMITIVE_PREFIX, integerAccumulator);
             integerAccumulator = null;
+        }
+
+        if (byteAccumulator != null) {
+            writeMessageToLog(PRIMITIVE_PREFIX, byteAccumulator);
+            byteAccumulator = null;
         }
     }
 
