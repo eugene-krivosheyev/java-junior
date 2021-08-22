@@ -20,7 +20,7 @@ public class Logger {
 
     }
 
-    public static void accumulateLogs(int message) {
+    private static void accumulateLogs(int message) {
         sequenceLength++;
         sum += message;
 
@@ -30,31 +30,28 @@ public class Logger {
         }
     }
 
-    public static void stopAccumulate() {
-        if (previousLogIsAnotherType) {
-            if (isInteger) {
-                out.println(sum);
-            } else {
-                out.println(message);
-            }
-        }
-    }
-
     private static void printOverflow(int maxValueCounter) {
         for (int i = 0; i < maxValueCounter; i++) {
             out.println(Integer.MAX_VALUE);
         }
     }
 
+    private static void saveIntegersSum() {
+        if (sequenceLength > 0) {
+            printOverflow(maxValueCounter);
+            out.println(PREFIX_PRIMITIVE + ": " + sum);
+            sum = 0;
+            maxValueCounter = 0;
+            sequenceLength = 0;
+        }
+    }
+
+    public static void stopAccumulate() {
+        saveIntegersSum();
+    }
+
     public static void log(int message) {
-//        previousLogIsAnotherType = false;
         accumulateLogs(message);
-//        if (previousLogIsAnotherType) {
-//            printOverflow(maxValueCounter);
-//            out.println(PREFIX_PRIMITIVE + ": " + sum);
-//            sum = 0;
-//            maxValueCounter = 0;
-//        }
     }
 
     public static void log(byte message) {
@@ -66,14 +63,7 @@ public class Logger {
     }
 
     public static void log(String message) {
-//        previousLogIsAnotherType = true;
-        if (sequenceLength > 0) {
-            printOverflow(maxValueCounter);
-            out.println(PREFIX_PRIMITIVE + ": " + sum);
-            sum = 0;
-            maxValueCounter = 0;
-            sequenceLength = 0;
-        }
+        saveIntegersSum();
         out.println(PREFIX_STRING + ": " + message);
     }
 
