@@ -117,8 +117,13 @@ public class Logger {
                 intAccumulateState = true;
             }
             if ((long)intAccumulateSum + (long)((int)message) > (long)Integer.MAX_VALUE) {
-                System.out.println(intAccumulateSum);
-                System.out.println(message);
+                System.out.println(Integer.MAX_VALUE);
+                intAccumulateSum = (int)((long)intAccumulateSum + (long)((int)message) - (long)Integer.MAX_VALUE);
+
+            }
+            else if ((long)intAccumulateSum + (long)((int)message) < (long)Integer.MIN_VALUE) {
+                System.out.println(Integer.MIN_VALUE);
+                intAccumulateSum = (int)((long)intAccumulateSum + (long)((int)message) - (long)Integer.MIN_VALUE);
             }
             else {
                 intAccumulateSum += (int)message;
