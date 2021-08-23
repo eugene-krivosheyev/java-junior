@@ -4,9 +4,9 @@ import static com.db.edu.Prefixes.NEGATIVE_OVERFLOW_PREFIX;
 import static com.db.edu.Prefixes.POSITIVE_OVERFLOW_PREFIX;
 import static com.db.edu.Prefixes.PRIMITIVE_PREFIX;
 
-public abstract class OverflowingCommand extends Command {
+abstract class OverflowingCommand extends Command {
 
-    long accumulator;
+    protected long accumulator;
 
     OverflowingCommand(int message) {
         accumulator = message;
@@ -31,9 +31,4 @@ public abstract class OverflowingCommand extends Command {
         }
     }
 
-    public void finishCommand() {
-        builder.append(PRIMITIVE_PREFIX)
-                .append(accumulator)
-                .append(System.lineSeparator());
-    }
 }

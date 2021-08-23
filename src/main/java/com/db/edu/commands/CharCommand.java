@@ -15,7 +15,6 @@ public class CharCommand extends Command {
         return another;
     }
 
-    @Override
     public void finishCommand() {
         builder.append(CHAR_PREFIX)
                 .append(message)

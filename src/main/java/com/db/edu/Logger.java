@@ -1,5 +1,6 @@
 package com.db.edu;
 
+import com.db.edu.commands.ArrayCommand;
 import com.db.edu.commands.BooleanCommand;
 import com.db.edu.commands.ByteCommand;
 import com.db.edu.commands.CharCommand;
@@ -11,11 +12,13 @@ import com.db.edu.commands.StringCommand;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class Logger {
 
     private static OutputStream DEFAULT_OUT = System.out;
-    private static Command last = new StartCommand();
+    private static Command lastCommand = new StartCommand();
 
     private Logger() {
     }
@@ -33,6 +36,14 @@ public class Logger {
         Logger.processCommand(new IntCommand(message));
     }
 
+    public static void log(int message, int... messages) {
+        Logger.processCommand(new IntCommand(message, messages));
+    }
+
+    public static void log(int[] message) {
+        Logger.processCommand(new ArrayCommand(message));
+    }
+
     public static void log(byte message) {
         Logger.processCommand(new ByteCommand(message));
     }
@@ -41,7 +52,11 @@ public class Logger {
         Logger.processCommand(new CharCommand(message));
     }
 
-    public static void log(String message)  {
+    public static void log(String message) {
+        Logger.processCommand(new StringCommand(message));
+    }
+
+    public static void log(String... message)  {
         Logger.processCommand(new StringCommand(message));
     }
 
@@ -54,16 +69,16 @@ public class Logger {
     }
 
     public static void flush() {
-        last.finishCommand();
-        writeMessage(last.getLogMessage());
-        last = new StartCommand();
+        lastCommand.finishCommand();
+        writeMessage(lastCommand.getLogMessage());
+        lastCommand = new StartCommand();
     }
 
     private static void processCommand(Command command) {
-        Command next = last.accumulate(command);
-        if (next != last) {
-            writeMessage(last.getLogMessage());
-            last = next;
+        Command curCommand = lastCommand.accumulate(command);
+        if (curCommand != lastCommand) {
+            writeMessage(lastCommand.getLogMessage());
+            lastCommand = curCommand;
         }
     }
 

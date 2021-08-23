@@ -1,5 +1,7 @@
 package com.db.edu.commands;
 
+import static com.db.edu.Prefixes.PRIMITIVE_PREFIX;
+
 public class ByteCommand extends OverflowingCommand {
 
     public ByteCommand(int message) {
@@ -15,6 +17,12 @@ public class ByteCommand extends OverflowingCommand {
             finishCommand();
             return another;
         }
+    }
+
+    public void finishCommand() {
+        builder.append(PRIMITIVE_PREFIX)
+                .append(accumulator)
+                .append(System.lineSeparator());
     }
 
 }
