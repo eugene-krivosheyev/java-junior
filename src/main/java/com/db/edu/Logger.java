@@ -7,61 +7,11 @@ public class Logger {
     public static final String STRING_PREFIX = "string: ";
     public static final String OBJECT_PREFIX = "reference: ";
     private static long intResult;
-    private static long numResult;
     private static int byteResult;
     private static String stringResult;
     private static int stringCount;
     private static Object type;
 
-
-    private static void flushNum(int maxValue, int minValue) {
-        while (numResult > maxValue) {
-            numResult -= maxValue;
-            writeMessage(PRIMITIVE_PREFIX + maxValue);
-        }
-        while (numResult < minValue) {
-            numResult -= minValue;
-            writeMessage(PRIMITIVE_PREFIX + minValue);
-        }
-        writeMessage(PRIMITIVE_PREFIX + numResult);
-        numResult = 0;
-    }
-
-    /*private static void intFlush() {
-        while (intResult > Integer.MAX_VALUE) {
-            intResult -= Integer.MAX_VALUE;
-            writeMessage(PRIMITIVE_PREFIX + Integer.MAX_VALUE);
-        }
-        while (intResult < Integer.MIN_VALUE) {
-            intResult -= Integer.MIN_VALUE;
-            writeMessage(PRIMITIVE_PREFIX + Integer.MIN_VALUE);
-        }
-        writeMessage(PRIMITIVE_PREFIX + intResult);
-        intResult = 0;
-    }
-
-    private static void byteFlush() {
-        while (byteResult > Byte.MAX_VALUE) {
-            byteResult -= Byte.MAX_VALUE;
-            writeMessage(PRIMITIVE_PREFIX + Byte.MAX_VALUE);
-        }
-        while (byteResult < Byte.MIN_VALUE) {
-            byteResult -= Byte.MIN_VALUE;
-            writeMessage(PRIMITIVE_PREFIX + Byte.MIN_VALUE);
-        }
-        writeMessage(PRIMITIVE_PREFIX + byteResult);
-        byteResult = 0;
-    }*/
-
-    private static void flushString() {
-        String strRes = STRING_PREFIX + stringResult;
-        stringResult = "";
-        if (stringCount > 1) {
-            strRes += " (x" + stringCount + ")";
-        }
-        writeMessage(strRes);
-        stringCount = 0;
-    }
 
     public static void flush() {
         if (type == null) return;
@@ -111,6 +61,45 @@ public class Logger {
 
     public static void log(Object message) {
         writeMessage(OBJECT_PREFIX + message);
+    }
+
+    public static void log(int ... message) {
+        for (int value : message) {
+            log(value);
+        }
+        flush();
+    }
+
+    public static void log(String ... message) {
+        for (String value : message) {
+            log(value);
+        }
+        flush();
+    }
+
+    private static void flushNum(int maxValue, int minValue) {
+        long numResult = maxValue == Byte.MAX_VALUE ? byteResult : intResult;
+        while (numResult > maxValue) {
+            numResult -= maxValue;
+            writeMessage(PRIMITIVE_PREFIX + maxValue);
+        }
+        while (numResult < minValue) {
+            numResult -= minValue;
+            writeMessage(PRIMITIVE_PREFIX + minValue);
+        }
+        writeMessage(PRIMITIVE_PREFIX + numResult);
+        byteResult = 0;
+        intResult = 0;
+    }
+
+    private static void flushString() {
+        String strRes = STRING_PREFIX + stringResult;
+        stringResult = "";
+        if (stringCount > 1) {
+            strRes += " (x" + stringCount + ")";
+        }
+        writeMessage(strRes);
+        stringCount = 0;
     }
 
     private static void writeMessage(String s) {
