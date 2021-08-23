@@ -1,5 +1,6 @@
 package com.db.edu;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Logger {
@@ -26,103 +27,121 @@ public class Logger {
         BYTE,
         CHAR,
         BOOLEAN,
-        OBJECT
+        OBJECT,
+        ARRAY
     }
 
     //Current state
     private static State state;
 
-    //Prints the result with some additions for Strings: number of repetitive strings
-    private static <T> void printLog(String prefix, T message) {
-        if (message instanceof String) {
-            if (quantityString == 1) {
-                System.out.println(prefix + message);
-            } else {
-                System.out.println(prefix + message + " (x" + quantityString + ")");
-            }
-            return;
-        }
-        System.out.println(prefix + message);
+    //Prints the result
+    private static void printLog(String message) {
+        System.out.println(message);
     }
 
-    //Cleans the string buffer and int sum if the input type changes
-    private static void flushBuffer(State inputType) {
-        if (inputType != State.STRING) {
-            if (state == State.STRING) {
-                printLog(STRING_PREFIX, bufString);
-                quantityString = 0;
-                bufString = null;
+    private static void flushInt() {
+        if (state == State.INT) {
+            printLog(PRIMITIVE_PREFIX + sum);
+            flagThereIsInteger = 0;
+            sum = 0;
+        }
+    }
+
+    private static void flushString() {
+        if (state == State.STRING) {
+            if (quantityString == 1) {
+                printLog(STRING_PREFIX + bufString);
+            } else {
+                printLog(STRING_PREFIX + bufString + " (x" + quantityString + ")");
             }
-        } else if (inputType != State.INT){
-            if (state == State.INT) {
-                printLog(PRIMITIVE_PREFIX, sum);
-                flagThereIsInteger = 0;
-                sum = 0;
-            }
+            quantityString = 0;
+            bufString = null;
         }
     }
 
     //Cleans the string buffer and int sum in the end
-    public static void flusher() {
+    public static void flush() {
         if (!Objects.equals(bufString, null)) {
-            printLog(STRING_PREFIX, bufString);
-            bufString = null;
+            flushString();
         }
         if (flagThereIsInteger == 1) {
-            printLog(PRIMITIVE_PREFIX, sum);
-            sum = 0;
-            flagThereIsInteger = 0;
+            flushInt();
         }
     }
 
     public static void log(int message) {
+        flushString();
         flagThereIsInteger = 1;
-        flushBuffer(State.INT);
-        if (Integer.MAX_VALUE - message >= sum) {
-            sum += message;
+        if (message >= 0) {
+            if (Integer.MAX_VALUE - message >= sum) {
+                sum += message;
+            } else {
+                printLog(PRIMITIVE_PREFIX + Integer.MAX_VALUE);
+                sum = message - (Integer.MAX_VALUE - sum);
+            }
         } else {
-            printLog(PRIMITIVE_PREFIX, sum);
-            sum = message;
+            if (Integer.MIN_VALUE - message <= sum) {
+                sum += message;
+            } else {
+                printLog(PRIMITIVE_PREFIX + Integer.MIN_VALUE);
+                sum = message - (Integer.MIN_VALUE - sum);
+            }
         }
         state = State.INT;
     }
 
+    public static void log(Integer ... args) {
+        for (int x : args) {
+            log(x);
+        }
+    }
+
     public static void log(byte message) {
-        flushBuffer(State.BYTE);
-        printLog(PRIMITIVE_PREFIX, message);
+        flushString();
+        flushInt();
+        printLog(PRIMITIVE_PREFIX + message);
         state = State.BYTE;
     }
 
     public static void log(char message) {
-        flushBuffer(State.CHAR);
-        printLog(CHAR_PREFIX, message);
+        flushString();
+        flushInt();
+        printLog(CHAR_PREFIX + message);
         state = State.CHAR;
     }
 
     public static void log(String message) {
-        flushBuffer(State.STRING);
+        flushInt();
         if (Objects.equals(bufString, null)) {
             bufString = message;
             quantityString = 1;
         } else if (Objects.equals(message, bufString)) {
             ++quantityString;
         } else {
-            flushBuffer(State.INT);
+            flushString();
             bufString = message;
             quantityString = 1;
         }
         state = State.STRING;
     }
 
+    public static void log(String ... args) {
+        for (String x : args) {
+            log(x);
+        }
+    }
+
     public static void log(boolean message) {
-        flushBuffer(State.BOOLEAN);
-        printLog(PRIMITIVE_PREFIX, message);
+        flushString();
+        flushInt();
+        printLog(PRIMITIVE_PREFIX + message);
         state = State.BOOLEAN;
     }
 
     public static void log(Object message) {
-        flushBuffer(State.OBJECT);
-        printLog(REFERENCE_PREFIX, message);
+        flushString();
+        flushInt();
+        printLog(REFERENCE_PREFIX + message);
         state = State.OBJECT;
     }
 }
