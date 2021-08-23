@@ -11,7 +11,7 @@ import static com.db.edu.Logger.CHAR_PREFIX;
 import static com.db.edu.Logger.STRING_PREFIX;
 import static com.db.edu.Logger.REFERENCE_PREFIX;
 
-public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+public class LoggerTest1 implements SysoutCaptureAndAssertionAbility {
     //region given
     @BeforeEach
     public void setUpSystemOut() throws IOException {

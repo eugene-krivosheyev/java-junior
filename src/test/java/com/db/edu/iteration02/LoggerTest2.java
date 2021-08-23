@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+public class LoggerTest2 implements SysoutCaptureAndAssertionAbility {
     //region given
     @BeforeEach
     public void setUpSystemOut() throws IOException {

@@ -1,4 +1,4 @@
-package com.db.edu;
+package com.db.edu.iteration03;
 
 import com.db.edu.Logger;
 import com.db.edu.SysoutCaptureAndAssertionAbility;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-public class LoggerTest2 implements SysoutCaptureAndAssertionAbility {
+public class LoggerTest3 implements SysoutCaptureAndAssertionAbility {
     //region given
     @BeforeEach
     public void setUpSystemOut() throws IOException {
@@ -25,6 +25,7 @@ public class LoggerTest2 implements SysoutCaptureAndAssertionAbility {
 
     //TODO: implement Logger solution to match specification as tests
     @Test
+    @Disabled
     public void shouldLogIntegersArray() throws IOException {
         //region when
         Logger.log(new int[] {-1, 0, 1});
