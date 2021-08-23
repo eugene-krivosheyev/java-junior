@@ -1,18 +1,21 @@
 package com.db.education.app;
-
+    
 import java.util.Objects;
 
 public class Logger {
-    public static final String PRIMITIVE_PREFIX = "primitive: ";
     public static final String CHAR_PREFIX = "char: ";
-    public static final String STRING_PREFIX = "string: ";
     public static final String OBJECT_PREFIX = "reference: ";
+    public static final String PRIMITIVE_PREFIX = "primitive: ";
+    public static final String STRING_PREFIX = "string: ";
 
-    private static Object lastMessage;
-    private static long accumulatedInteger = 0;
     private static int accumulatedByte = 0;
-    private static String lastString = "";
+    private static long accumulatedInteger = 0;
     private static int countOfString = 0;
+    private static String lastString = "";
+    private static Object lastMessage;
+
+    private Logger() {
+    }
 
     public static void log(int message) {
         updateLastMessageType(message);
@@ -42,6 +45,16 @@ public class Logger {
     public static void log(Object message) {
         updateLastMessageType(message);
         writeToOutput(OBJECT_PREFIX, message);
+    }
+
+    public static void flush() {
+        if (lastMessage instanceof Integer) {
+            flushInteger();
+        } else if (lastMessage instanceof Byte) {
+            flushByte();
+        } else if (lastMessage instanceof String) {
+            flushString();
+        }
     }
 
     private static void accumulateString(String message) {
@@ -84,16 +97,6 @@ public class Logger {
             flush();
         }
         lastMessage = message;
-    }
-
-    public static void flush() {
-        if (lastMessage instanceof Integer) {
-            flushInteger();
-        } else if (lastMessage instanceof Byte) {
-            flushByte();
-        } else if (lastMessage instanceof String) {
-            flushString();
-        }
     }
 
     private static void flushInteger() {
