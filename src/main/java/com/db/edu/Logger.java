@@ -22,23 +22,26 @@ public class Logger {
             intCount++;
             intSum += message;
         } else if (isOverflows(message) == 1) {
-            int temp = message + intSum - Integer.MAX_VALUE;
-            intSum = Integer.MAX_VALUE;
-            printAccumulatedInt();
-            if (temp != 0) {
-                intSum = temp;
-                intCount = 1;
-            }
+            printOverflow(message, Integer.MAX_VALUE);
         } else if (isOverflows(message) == -1) {
-            int temp = message + intSum - Integer.MIN_VALUE;
-            intSum = Integer.MIN_VALUE;
-            printAccumulatedInt();
-            if (temp != 0) {
-                intSum = temp;
-                intCount = 1;
+            printOverflow(message, Integer.MIN_VALUE);
+        }
+    }
+
+    public static void log(int... message) {
+        printAccumulatedString();
+        for (int current : message) {
+            if (isOverflows(current) == 0) {
+                intCount++;
+                intSum += current;
+            } else if (isOverflows(current) == 1) {
+                printOverflow(current, Integer.MAX_VALUE);
+            } else if (isOverflows(current) == -1) {
+                printOverflow(current, Integer.MIN_VALUE);
             }
         }
     }
+
 
     public static void log(byte message) {
         printAccumulatedInt();
@@ -59,6 +62,17 @@ public class Logger {
         }
         stringAcc = message;
         stringCount++;
+    }
+
+    public static void log(String... message) {
+        printAccumulatedInt();
+        for (String current : message) {
+            if (stringCount > 0 && !stringAcc.equals(current)) {
+                printAccumulatedString();
+            }
+            stringAcc = current;
+            stringCount++;
+        }
     }
 
     public static void log(boolean message) {
@@ -98,5 +112,15 @@ public class Logger {
         if (message >= 0 && intSum >= 0 && message + intSum < 0) return 1;
         else if (message <= 0 && intSum <= 0 && message + intSum > 0) return -1;
         else return 0;
+    }
+
+    private static void printOverflow(int message, int constant) {
+        int temp = message + intSum - constant;
+        intSum = constant;
+        printAccumulatedInt();
+        if (temp != 0) {
+            intSum = temp;
+            intCount = 1;
+        }
     }
 }
