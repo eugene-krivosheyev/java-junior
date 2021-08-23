@@ -20,6 +20,24 @@ public class Logger {
         checkIfIntegerComesAsSequence(message);
     }
 
+    public static void log(int ... params) {
+        String nums = "primitives array: {";
+        for (int i = 0; i < params.length; i++) {
+            nums += params[i] + "";
+
+            if (i != params.length-1) {
+                nums += ", ";
+            }
+        }
+        nums += "}";
+        System.out.println(nums);
+
+        checkIfStringIsEqualToLast(params);
+        for (int temp : params) {
+            checkIfIntegerComesAsSequence(temp);
+        }
+    }
+
     public static void log(byte message) {
         System.out.println(PRIMITIVE_TYPE + message);
         checkIfStringIsEqualToLast(message);
@@ -36,6 +54,14 @@ public class Logger {
         System.out.println(STRING_TYPE + message);
         checkIfStringIsEqualToLast(message);
         checkIfIntegerComesAsSequence(message);
+    }
+
+    public static void log(String ... params){
+        checkIfIntegerComesAsSequence(params);
+        for (String temp : params){
+            checkIfStringIsEqualToLast(temp);
+        }
+
     }
 
     public static void log(boolean message) {
@@ -62,7 +88,9 @@ public class Logger {
                     System.out.println(lastStr + " (x" + strCount + ")");
                 }
                 else {
-                    System.out.println(lastStr);
+                    if (lastStr != null) {
+                        System.out.println(lastStr);
+                    }
                 }
 
                 lastStr = (String)message;
