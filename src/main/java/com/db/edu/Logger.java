@@ -12,6 +12,10 @@ enum MessageType {
 
 public class Logger {
     /**
+     * Primitive array prefix
+     */
+    public static final String PRIMITIVE_ARRAY_PREFIX = "primitives array: {";
+    /**
      * Primitive prefix
      */
     public static final String PRIMITIVE_PREFIX = "primitive: ";
@@ -41,6 +45,16 @@ public class Logger {
      */
     public static void log(int message) {
         accumulatedInt = (int) accumulateNumber(INTEGER, accumulatedInt, message, Integer.MAX_VALUE);
+    }
+
+    //public static void log(int... messages) {
+      //  for (int message : messages) {
+        //    log(message);
+        //}
+    //}
+
+    public static void log(int[] messages) {
+        saveOutput(simpleOutput(messages));
     }
 
     /**
@@ -74,6 +88,12 @@ public class Logger {
                 saveOutputAndCount(STRING_PREFIX, accumulatedString, stringCount);
                 accumulatedString = message;
             }
+        }
+    }
+
+    public static void log(String... messages) {
+        for (String message : messages) {
+            log(message);
         }
     }
 
@@ -164,6 +184,15 @@ public class Logger {
 
     private static String decorateOutput(String prefix, Object message, int stringCount) {
         return prefix + message + " (x" + stringCount + ")" + System.lineSeparator();
+    }
+
+    private static String simpleOutput(int[] messages) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(PRIMITIVE_ARRAY_PREFIX);
+        for (int i = 0; i < messages.length - 1; ++i) {
+            builder.append(messages[i]).append(", ");
+        }
+        return builder.append(messages[messages.length - 1]).append("}").toString();
     }
 
     private static void saveOutput(String decoratedMessage) {

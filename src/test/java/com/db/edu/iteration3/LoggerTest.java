@@ -32,9 +32,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "primitives array: {-1, 0, 1}\n"
-        );
+        assertSysoutEquals("primitives array: {-1, 0, 1}\n");
         //endregion
     }
     @Test
@@ -73,6 +71,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
         Logger.log("str1", "string 2", "str 3");
+        Logger.flush();
         //endregion
 
         //region then
@@ -83,6 +82,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
         Logger.log(-1, 0, 1, 3);
+        Logger.flush();
         //endregion
 
         //region then
