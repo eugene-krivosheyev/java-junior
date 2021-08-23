@@ -28,9 +28,8 @@ public class Logger {
     private static int repeatableStringCounter;
     private static String lastString;
 
-    //region loggers
     public static void log(int message) {
-        checkIntOverFlow(message);
+        checkOverFlow(message, LastLoggedType.INT);
 
         if (!lastLoggedType.equals(LastLoggedType.INT)) {
             processAllBuffers();
@@ -40,7 +39,7 @@ public class Logger {
     }
 
     public static void log(byte message) {
-        checkByteOverFlow(message);
+        checkOverFlow(message, LastLoggedType.BYTE);
 
         if (!lastLoggedType.equals(LastLoggedType.BYTE)) {
             processAllBuffers();
@@ -77,158 +76,216 @@ public class Logger {
         save(formatMessage(OBJECT_PREFIX, message));
         lastLoggedType = LastLoggedType.OBJ;
     }
-    //endregion
 
-    //region int methods
-    private static void checkIntOverFlow(int message) {
-        if (message == Integer.MAX_VALUE) {
-            increaseIntegerThresholdValueCounter();
-            return;
-        }
-
-        if (message == Integer.MIN_VALUE) {
-            decreaseIntegerThresholdValueCounter();
-            return;
-        }
-
-        if (message > 0) {
-            checkMaxIntOverFlow(message);
-        } else {
-            checkMinIntOverFlow(message);
-        }
-    }
-
-    private static void checkMaxIntOverFlow(int message) {
-        long diff = Integer.MAX_VALUE - (long) intBuffer;
-        if (diff > message) {
-            intBuffer += message;
-        } else {
-            intBuffer = (int) (message - diff);
-            increaseIntegerThresholdValueCounter();
-        }
-    }
-
-    private static void checkMinIntOverFlow(int message) {
-        long diff = (long) intBuffer - Integer.MIN_VALUE;
-        if (diff > Math.abs((long) message)) {
-            intBuffer += message;
-        } else {
-            intBuffer = (int) (message + diff);
-            decreaseIntegerThresholdValueCounter();
-        }
-    }
-
-    private static void increaseIntegerThresholdValueCounter() {
-        if (integerThresholdValueCounter < 0) {
-            --intBuffer;
-        }
-        ++integerThresholdValueCounter;
-    }
-
-    private static void decreaseIntegerThresholdValueCounter() {
-        if (integerThresholdValueCounter > 0) {
-            --intBuffer;
-            if (intBuffer == Integer.MIN_VALUE) {
-                intBuffer = 0;
-                --integerThresholdValueCounter;
+    private static int getOverflowValue(LastLoggedType type) {
+        switch ( type ) {
+            case INT: {
+                return integerThresholdValueCounter > 0 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+            case BYTE: {
+                return byteThresholdValueCounter > 0 ? Byte.MAX_VALUE : Byte.MIN_VALUE;
+            }
+            default: {
+                return 0;
             }
         }
-        --integerThresholdValueCounter;
     }
 
-    private static void processIntBuffer() {
-        int overflowValue = integerThresholdValueCounter > 0 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
-        for (int i = 0; i < Math.abs(integerThresholdValueCounter); i++) {
-            save(formatMessage(PRIMITIVE_PREFIX, overflowValue));
-        }
-        if (integerThresholdValueCounter == 0 || intBuffer != 0) {
-            save(formatMessage(PRIMITIVE_PREFIX, intBuffer));
-        }
-        cleanIntBuffer();
-    }
-
-    private static void cleanIntBuffer() {
-        intBuffer = 0;
-        integerThresholdValueCounter = 0;
-    }
-
-    //endregion
-
-    //region byte methods
-    private static void checkByteOverFlow(byte message) {
-        if (message == Byte.MAX_VALUE) {
-            increaseByteThresholdValueCounter();
-            return;
-        }
-
-        if (message == Byte.MIN_VALUE) {
-            decreaseByteThresholdValueCounter();
-            return;
-        }
-
-        if (message > 0) {
-            checkMaxByteOverFlow(message);
-        } else {
-            checkMinByteOverFlow(message);
-        }
-    }
-
-    private static void checkMaxByteOverFlow(byte message) {
-        long diff = Byte.MAX_VALUE - (long) byteBuffer;
-        if (diff > message) {
-            byteBuffer += message;
-        } else {
-            byteBuffer = (byte) (message - diff);
-            increaseByteThresholdValueCounter();
-        }
-    }
-
-    private static void checkMinByteOverFlow(byte message) {
-        long diff = (long) byteBuffer - Byte.MIN_VALUE;
-        if (diff > Math.abs((long) message)) {
-            byteBuffer += message;
-        } else {
-            byteBuffer = (byte) (message + diff);
-            decreaseByteThresholdValueCounter();
-        }
-    }
-
-    private static void increaseByteThresholdValueCounter() {
-        if (byteThresholdValueCounter < 0) {
-            --byteBuffer;
-        }
-        ++byteThresholdValueCounter;
-    }
-
-    private static void decreaseByteThresholdValueCounter() {
-        if (byteThresholdValueCounter > 0) {
-            --byteBuffer;
-            if (byteBuffer == Byte.MIN_VALUE) {
-                byteBuffer = 0;
-                --byteThresholdValueCounter;
+    private static int getThresholdValueCounter(LastLoggedType type) {
+        switch (type) {
+            case INT: {
+                return integerThresholdValueCounter;
+            }
+            case BYTE: {
+                return byteThresholdValueCounter;
+            }
+            default:{
+                return 0;
             }
         }
-        --byteThresholdValueCounter;
     }
 
-    private static void processByteBuffer() {
-        byte overflowValue = byteThresholdValueCounter > 0 ? Byte.MAX_VALUE : Byte.MIN_VALUE;
-        for (byte i = 0; i < Math.abs(byteThresholdValueCounter); i++) {
-            save(formatMessage(PRIMITIVE_PREFIX, overflowValue));
+    private static int getThresholdValue(int message, LastLoggedType type) {
+        switch (type) {
+            case INT: {
+                if ( message > 0 ) {
+                    return Integer.MAX_VALUE;
+                } else {
+                    return Integer.MIN_VALUE;
+                }
+            }
+            case BYTE: {
+                if ( message > 0 ) {
+                    return Byte.MAX_VALUE;
+                } else {
+                    return Byte.MIN_VALUE;
+                }
+            }
+            default: {
+                return 0;
+            }
         }
-        if (byteThresholdValueCounter == 0 || byteBuffer != 0) {
-            save(formatMessage(PRIMITIVE_PREFIX, byteBuffer));
+    }
+
+    private static boolean isMessageEqualThresholdValue(int message, LastLoggedType type, int thresholdValue) {
+        if (message == thresholdValue) {
+            if ( thresholdValue > 0 ) {
+                changeThresholdValueCounter(ChangeType.INCREASE, type);
+            } else {
+                changeThresholdValueCounter(ChangeType.DECREASE, type);
+            }
+            return true;
+        } else {
+            return false;
         }
-        cleanByteBuffer();
     }
 
-    private static void cleanByteBuffer() {
-        byteBuffer = 0;
-        byteThresholdValueCounter = 0;
+    private static int getBuffer(LastLoggedType type) {
+        switch (type) {
+            case INT: {
+                return intBuffer;
+            }
+            case BYTE: {
+                return byteBuffer;
+            }
+            default: {
+                return 0;
+            }
+        }
     }
-    //endregion
 
-    //region string methods
+    private static void checkOverFlow(int message, LastLoggedType type) {
+        int thresholdValue = getThresholdValue(message, type);
+        if ( isMessageEqualThresholdValue(message, type, thresholdValue) ) return;
+
+        int buffer = getBuffer(type);
+
+        long diff = Math.abs(thresholdValue - (long) buffer);
+        if (diff > Math.abs((long) message)) {
+            appendBuffer(type, message);
+        } else {
+            if ( thresholdValue > 0 ) {
+                assignBuffer(type, (message - diff) );
+                changeThresholdValueCounter(ChangeType.INCREASE, type);
+            } else {
+                assignBuffer(type, (message + diff));
+                changeThresholdValueCounter(ChangeType.DECREASE, type);
+            }
+        }
+    }
+
+    private static void assignBuffer( LastLoggedType type, long value ) {
+        switch (type) {
+            case INT: {
+                intBuffer = (int) value;
+                break;
+            }
+            case BYTE: {
+                byteBuffer = (byte) value;
+                break;
+            }
+        }
+    }
+
+    private static void appendBuffer( LastLoggedType type, long value ) {
+        switch (type) {
+            case INT: {
+                intBuffer += value;
+                break;
+            }
+            case BYTE: {
+                byteBuffer += value;
+                break;
+            }
+        }
+    }
+
+    private enum ChangeType {
+        INCREASE,
+        DECREASE
+    }
+
+    private static void decreaseBuffer(LastLoggedType type) {
+        int[] res;
+        switch (type) {
+            case INT: {
+                res = decreaseBuffer(Integer.MIN_VALUE, intBuffer, integerThresholdValueCounter);
+                intBuffer = res[0];
+                integerThresholdValueCounter = res[1];
+                break;
+            }
+            case BYTE: {
+                res = decreaseBuffer(Byte.MIN_VALUE, byteBuffer, byteThresholdValueCounter);
+                byteBuffer = res[0];
+                byteThresholdValueCounter = res[1];
+                break;
+            }
+        }
+    }
+
+    private static int[] decreaseBuffer(int thresholdValue, int buffer, int counter) {
+        --buffer;
+        if (buffer == thresholdValue) {
+            buffer = 0;
+            --counter;
+        }
+
+        return new int[] {buffer, counter};
+    }
+
+    private static void changeCounter(ChangeType changeType, LastLoggedType type) {
+        switch (type) {
+            case INT: {
+                switch (changeType) {
+                    case INCREASE: {
+                        ++integerThresholdValueCounter;
+                        break;
+                    }
+                    case DECREASE: {
+                        --integerThresholdValueCounter;
+                        break;
+                    }
+                }
+                break;
+            }
+            case BYTE: {
+                switch (changeType) {
+                    case INCREASE: {
+                        ++byteThresholdValueCounter;
+                        break;
+                    }
+                    case DECREASE: {
+                        --byteThresholdValueCounter;
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    private static void changeThresholdValueCounter(ChangeType changeType, LastLoggedType type) {
+        int thresholdValueCounter = getThresholdValueCounter(type);
+
+        switch (changeType) {
+            case INCREASE: {
+                if (thresholdValueCounter < 0) {
+                    decreaseBuffer(type);
+                }
+
+                break;
+            }
+            case DECREASE: {
+                if (thresholdValueCounter > 0) {
+                    decreaseBuffer(type);
+                }
+                break;
+            }
+        }
+
+        changeCounter(changeType, type);
+    }
+
     private static boolean checkStringBuffer() {
         return repeatableStringCounter > 0;
     }
@@ -241,14 +298,54 @@ public class Logger {
                 save(formatMessage(STRING_PREFIX, lastString));
             }
 
-            cleanStringBuffer();
+            cleanBuffer(LastLoggedType.STRING);
         }
+    }
+
+    private static void processNumericBuffer(LastLoggedType type, String prefix) {
+        int overflowValue = getOverflowValue(type);
+        int counter = getThresholdValueCounter(type);
+        int buffer = getBuffer(type);
+
+        for (int i = 0; i < Math.abs(counter); i++) {
+            save(formatMessage(prefix, overflowValue));
+        }
+        if (counter == 0 || buffer != 0) {
+            save(formatMessage(prefix, buffer));
+        }
+        cleanBuffer(type);
     }
 
     private static void cleanStringBuffer() {
         repeatableStringCounter = 0;
     }
-    //endregion
+
+    private static void cleanIntBuffer() {
+        intBuffer = 0;
+        integerThresholdValueCounter = 0;
+    }
+
+    private static void cleanByteBuffer() {
+        byteBuffer = 0;
+        byteThresholdValueCounter = 0;
+    }
+
+    private static void cleanBuffer(LastLoggedType type) {
+        switch (type) {
+            case INT: {
+                cleanIntBuffer();
+                break;
+            }
+            case BYTE: {
+                cleanByteBuffer();
+                break;
+            }
+            case STRING: {
+                cleanStringBuffer();
+                break;
+            }
+        }
+    }
 
     private static String formatMessage(String prefix, Object message) {
         return prefix + message;
@@ -264,13 +361,10 @@ public class Logger {
 
     public static void processAllBuffers() {
         switch (lastLoggedType) {
-            case BYTE: {
-                processByteBuffer();
-                break;
-            }
+            case BYTE:
             case INT: {
-                processIntBuffer();
-                break;
+                    processNumericBuffer(lastLoggedType, PRIMITIVE_PREFIX);
+                    break;
             }
             case STRING: {
                 processStringBuffer();
