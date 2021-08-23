@@ -8,78 +8,40 @@ public class Logger {
     public static final String STRING_PREFIX = "string: ";
     public static final String OBJECT_PREFIX = "reference: ";
 
-    public static void log(int message) {
-        updateLastObject(message);
-        accumulateInteger(message);
-    }
-
-    public static void log(byte message) {
-        updateLastObject(message);
-        accumulateByte(message);
-    }
-
-    public static void log(char message) {
-        updateLastObject(message);
-        writeToOutput(CHAR_PREFIX, message);
-    }
-
-    public static void log(String message) {
-        updateLastObject(message);
-        accumulateString(message);
-    }
-
-    public static void log(boolean message) {
-        updateLastObject(message);
-        writeToOutput(PRIMITIVE_PREFIX, message);
-    }
-
-    public static void log(Object message) {
-        updateLastObject(message);
-        writeToOutput(OBJECT_PREFIX, message);
-    }
-
-    public static void flush() {
-        if (lastObject instanceof Integer) {
-            flushInteger();
-        } else if (lastObject instanceof Byte) {
-            flushByte();
-        } else if (lastObject instanceof String) {
-            flushString();
-        }
-    }
-
-    private static Object lastObject;
+    private static Object lastMessage;
     private static long accumulatedInteger = 0;
     private static int accumulatedByte = 0;
     private static String lastString = "";
     private static int countOfString = 0;
 
-    private static void flushInteger() {
-        writeToOutput(PRIMITIVE_PREFIX, accumulatedInteger);
-        accumulatedInteger = 0;
+    public static void log(int message) {
+        updateLastMessageType(message);
+        accumulateInteger(message);
     }
 
-    private static void flushByte() {
-        writeToOutput(PRIMITIVE_PREFIX, accumulatedByte);
-        accumulatedByte = 0;
+    public static void log(byte message) {
+        updateLastMessageType(message);
+        accumulateByte(message);
     }
 
-    private static void flushString() {
-        writeStringToOutput();
-        countOfString = 0;
-        lastString = "";
+    public static void log(char message) {
+        updateLastMessageType(message);
+        writeToOutput(CHAR_PREFIX, message);
     }
 
-    private static void writeToOutput(String prefix, Object message) {
-        System.out.print(prefix + message + System.lineSeparator());
+    public static void log(String message) {
+        updateLastMessageType(message);
+        accumulateString(message);
     }
 
-    private static void writeStringToOutput() {
-        String countString = "";
-        if (countOfString > 1) {
-            countString = " (x" + countOfString + ")";
-        }
-        writeToOutput(STRING_PREFIX, lastString + countString);
+    public static void log(boolean message) {
+        updateLastMessageType(message);
+        writeToOutput(PRIMITIVE_PREFIX, message);
+    }
+
+    public static void log(Object message) {
+        updateLastMessageType(message);
+        writeToOutput(OBJECT_PREFIX, message);
     }
 
     private static void accumulateString(String message) {
@@ -89,7 +51,6 @@ public class Logger {
             if (!lastString.isEmpty()) {
                 writeStringToOutput();
             }
-
             lastString = message;
             countOfString = 1;
         }
@@ -117,11 +78,49 @@ public class Logger {
         }
     }
 
-    private static void updateLastObject(Object object) {
-        if (lastObject != null &&
-                !Objects.equals(lastObject.getClass().getName(), object.getClass().getName())) {
+    private static void updateLastMessageType(Object message) {
+        if (lastMessage != null &&
+                !Objects.equals(lastMessage.getClass().getName(), message.getClass().getName())) {
             flush();
         }
-        lastObject = object;
+        lastMessage = message;
+    }
+
+    public static void flush() {
+        if (lastMessage instanceof Integer) {
+            flushInteger();
+        } else if (lastMessage instanceof Byte) {
+            flushByte();
+        } else if (lastMessage instanceof String) {
+            flushString();
+        }
+    }
+
+    private static void flushInteger() {
+        writeToOutput(PRIMITIVE_PREFIX, accumulatedInteger);
+        accumulatedInteger = 0;
+    }
+
+    private static void flushByte() {
+        writeToOutput(PRIMITIVE_PREFIX, accumulatedByte);
+        accumulatedByte = 0;
+    }
+
+    private static void flushString() {
+        writeStringToOutput();
+        countOfString = 0;
+        lastString = "";
+    }
+
+    private static void writeToOutput(String prefix, Object message) {
+        System.out.print(prefix + message + System.lineSeparator());
+    }
+
+    private static void writeStringToOutput() {
+        String countString = "";
+        if (countOfString > 1) {
+            countString = " (x" + countOfString + ")";
+        }
+        writeToOutput(STRING_PREFIX, lastString + countString);
     }
 }
