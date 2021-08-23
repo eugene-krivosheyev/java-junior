@@ -15,10 +15,6 @@ enum MessageType {
 
 public class Logger {
     /**
-     * Primitive array prefix
-     */
-    public static final String PRIMITIVE_ARRAY_PREFIX = "primitives array: {";
-    /**
      * Primitive prefix
      */
     public static final String PRIMITIVE_PREFIX = "primitive: ";
@@ -44,7 +40,7 @@ public class Logger {
 
     /**
      * Logging Integer
-     * @param message
+     * @param message (int)
      */
     public static void log(int message) {
         accumulatedInt = (int) accumulateNumber(INTEGER, accumulatedInt, message, Integer.MAX_VALUE);
@@ -52,22 +48,17 @@ public class Logger {
 
     /**
      * Logging Integer array
-     * @param isArray (custom view for int[])
-     * @param messages
+     * @param messages (int...)
      */
-    public static void log(boolean isArray, int... messages) {
-        if (isArray) {
-            saveOutput(simpleOutput(messages));
-        } else {
-            for (int message : messages) {
-                log(message);
-            }
+    public static void log(int... messages) {
+        for (int message : messages) {
+            log(message);
         }
     }
 
     /**
      * Logging Byte
-     * @param message
+     * @param message (byte)
      */
     public static void log(byte message) {
         accumulatedByte = (byte) accumulateNumber(BYTE, accumulatedByte, message, Byte.MAX_VALUE);
@@ -75,7 +66,7 @@ public class Logger {
 
     /**
      * Logging Character
-     * @param message
+     * @param message (char)
      */
     public static void log(char message) {
         saveOutput(decorateOutput(CHAR_PREFIX, message));
@@ -83,7 +74,7 @@ public class Logger {
 
     /**
      * Logging String
-     * @param message
+     * @param message (String)
      */
     public static void log(String message) {
         if (currentType != STRING) {
@@ -101,7 +92,7 @@ public class Logger {
 
     /**
      * Logging String array
-     * @param messages
+     * @param messages (String...)
      */
     public static void log(String... messages) {
         for (String message : messages) {
@@ -111,7 +102,7 @@ public class Logger {
 
     /**
      * Logging Boolean
-     * @param message
+     * @param message (boolean)
      */
     public static void log(boolean message) {
         saveOutput(decorateOutput(PRIMITIVE_PREFIX, message));
@@ -119,7 +110,7 @@ public class Logger {
 
     /**
      * Logging object reference
-     * @param message
+     * @param message (Object)
      */
     public static void log(Object message) {
         System.out.println(REFERENCE_PREFIX + message.toString());
@@ -127,7 +118,7 @@ public class Logger {
 
     /**
      * Logging Object array
-     * @param messages
+     * @param messages (Object[])
      */
     public static void log(Object[] messages) {
         saveOutput(Arrays.deepToString(messages));
@@ -204,15 +195,6 @@ public class Logger {
 
     private static String decorateOutput(String prefix, Object message, int stringCount) {
         return prefix + message + " (x" + stringCount + ")" + lineSeparator();
-    }
-
-    private static String simpleOutput(int[] messages) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(PRIMITIVE_ARRAY_PREFIX);
-        for (int i = 0; i < messages.length - 1; ++i) {
-            builder.append(messages[i]).append(", ");
-        }
-        return builder.append(messages[messages.length - 1]).append("}").append(lineSeparator()).toString();
     }
 
     private static void saveOutput(String decoratedMessage) {
