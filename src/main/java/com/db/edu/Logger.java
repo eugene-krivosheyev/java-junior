@@ -7,12 +7,27 @@ public class Logger {
     public static final String STRING_PREFIX = "string: ";
     public static final String OBJECT_PREFIX = "reference: ";
     private static long intResult;
+    private static long numResult;
     private static int byteResult;
     private static String stringResult;
     private static int stringCount;
     private static Object type;
 
-    private static void intFlush() {
+
+    private static void flushNum(int maxValue, int minValue) {
+        while (numResult > maxValue) {
+            numResult -= maxValue;
+            writeMessage(PRIMITIVE_PREFIX + maxValue);
+        }
+        while (numResult < minValue) {
+            numResult -= minValue;
+            writeMessage(PRIMITIVE_PREFIX + minValue);
+        }
+        writeMessage(PRIMITIVE_PREFIX + numResult);
+        numResult = 0;
+    }
+
+    /*private static void intFlush() {
         while (intResult > Integer.MAX_VALUE) {
             intResult -= Integer.MAX_VALUE;
             writeMessage(PRIMITIVE_PREFIX + Integer.MAX_VALUE);
@@ -36,9 +51,9 @@ public class Logger {
         }
         writeMessage(PRIMITIVE_PREFIX + byteResult);
         byteResult = 0;
-    }
+    }*/
 
-    private static void stringFlush() {
+    private static void flushString() {
         String strRes = STRING_PREFIX + stringResult;
         stringResult = "";
         if (stringCount > 1) {
@@ -51,11 +66,11 @@ public class Logger {
     public static void flush() {
         if (type == null) return;
         if (type instanceof Integer) {
-            intFlush();
+            flushNum(Integer.MAX_VALUE, Integer.MIN_VALUE);
         } else if (type instanceof Byte) {
-            byteFlush();
+            flushNum(Byte.MAX_VALUE, Byte.MIN_VALUE);
         } else if (type instanceof String) {
-            stringFlush();
+            flushString();
         }
     }
 
