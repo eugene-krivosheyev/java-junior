@@ -47,14 +47,14 @@ public class Logger {
         accumulatedInt = (int) accumulateNumber(INTEGER, accumulatedInt, message, Integer.MAX_VALUE);
     }
 
-    //public static void log(int... messages) {
-      //  for (int message : messages) {
-        //    log(message);
-        //}
-    //}
-
-    public static void log(int[] messages) {
-        saveOutput(simpleOutput(messages));
+    public static void log(boolean isArray, int... messages) {
+        if (isArray) {
+            saveOutput(simpleOutput(messages));
+        } else {
+            for (int message : messages) {
+                log(message);
+            }
+        }
     }
 
     /**
@@ -192,7 +192,7 @@ public class Logger {
         for (int i = 0; i < messages.length - 1; ++i) {
             builder.append(messages[i]).append(", ");
         }
-        return builder.append(messages[messages.length - 1]).append("}").toString();
+        return builder.append(messages[messages.length - 1]).append("}").append(System.lineSeparator()).toString();
     }
 
     private static void saveOutput(String decoratedMessage) {
