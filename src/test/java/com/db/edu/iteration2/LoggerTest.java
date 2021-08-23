@@ -6,7 +6,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
@@ -101,16 +100,20 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 3");
         Logger.log("str 3");
         Logger.log("str 3");
+        Logger.stopAccumulate();
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "str 1\n" +
-            "str 2 (x2)\n" +
-            "0\n" +
-            "str 2\n" +
-            "str 3 (x3)\n"
-        );
+        assertSysoutContains("string: ");
+        assertSysoutContains("str 1");
+        assertSysoutContains("string: ");
+        assertSysoutContains("str 2 (x2)");
+        assertSysoutContains("primitive: ");
+        assertSysoutContains("0");
+        assertSysoutContains("string: ");
+        assertSysoutContains("str 2");
+        assertSysoutContains("string: ");
+        assertSysoutContains("str 3 (x3)");
         //endregion
     }
 

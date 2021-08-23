@@ -7,27 +7,41 @@ public class Logger {
     public static final String PREFIX_CHAR = "char";
     public static final String PREFIX_STRING = "string";
     public static final String PREFIX_REFERENCE = "reference";
-    private static int sum = 0;              //sum of integer sequence
-    private static boolean printIsNeeded;   //
-    private static boolean previousLogIsAnotherType;
-    private static int maxValueCounter = 0;
-    private static int sequenceLength = 0;   //
-    private static boolean isInteger;
-    private static boolean isString;
-    private static String message;
+    private static int sum = 0;                                  //sum of integer sequence
+    private static int maxValueCounter = 0;                      //number of overflows of the sum
+    private static int integerSequenceLength = 0;
+    private static int stringSequenceLength = 0;
+    private static StringBuffer previousMessage = new StringBuffer();
+    private static boolean messageIsSaved;
 
     private Logger() {
 
     }
 
     private static void accumulateLogs(int message) {
-        sequenceLength++;
+        integerSequenceLength++;
         sum += message;
 
         if (sum < 0) {
             maxValueCounter++;
             sum -= Integer.MAX_VALUE;
         }
+    }
+
+    private static void accumulateLogs(String message) {
+        if (!previousMessage.toString().equals(message) && stringSequenceLength > 0) {
+            out.println(PREFIX_STRING + ": " +  previousMessage + (stringSequenceLength > 1 ? " (x" + stringSequenceLength + ")" : ""));
+            previousMessage.setLength(0);
+            stringSequenceLength = 0;
+            messageIsSaved = false;
+        }
+
+        if (!messageIsSaved) {
+            previousMessage.append(message);
+            messageIsSaved = true;
+        }
+
+        stringSequenceLength++;
     }
 
     private static void printOverflow(int maxValueCounter) {
@@ -37,20 +51,31 @@ public class Logger {
     }
 
     private static void saveIntegersSum() {
-        if (sequenceLength > 0) {
+        if (integerSequenceLength > 0) {
             printOverflow(maxValueCounter);
             out.println(PREFIX_PRIMITIVE + ": " + sum);
             sum = 0;
             maxValueCounter = 0;
-            sequenceLength = 0;
+            integerSequenceLength = 0;
+        }
+    }
+
+    private static void saveStrings() {
+        if (stringSequenceLength > 0) {
+            out.println(PREFIX_STRING + ": " +  previousMessage + (stringSequenceLength > 1 ? " (x" + stringSequenceLength + ")" : ""));
+            previousMessage.setLength(0);
+            stringSequenceLength = 0;
+            messageIsSaved = false;
         }
     }
 
     public static void stopAccumulate() {
         saveIntegersSum();
+        saveStrings();
     }
 
     public static void log(int message) {
+        saveStrings();
         accumulateLogs(message);
     }
 
@@ -64,7 +89,7 @@ public class Logger {
 
     public static void log(String message) {
         saveIntegersSum();
-        out.println(PREFIX_STRING + ": " + message);
+        accumulateLogs(message);
     }
 
     public static void log(boolean message) {
