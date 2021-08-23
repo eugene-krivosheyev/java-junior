@@ -12,25 +12,10 @@ public class Logger {
     public static final String STRING_PREFIX = "string: ";
     public static final String REFERENCE_PREFIX = "reference: ";
 
-    /**
-     * The sum of sequent ints and flag means, that sum was changed (for zero case)
-     */
     private static int sum = 0;
     private static int flagThereIsInteger = 0;
-
-    /**
-     * The value of repetitive string
-     */
     private static String bufString = null;
-
-    /**
-     * The number of repetitive strings
-     */
     private static int quantityString = 0;
-
-    /**
-     * The list of states
-     */
     private enum State {
         STRING,
         INT,
@@ -39,27 +24,15 @@ public class Logger {
         BOOLEAN,
         OBJECT
     }
-
-    /**
-     * Current state
-     */
     private static State state;
 
     private Logger() {
     }
 
-    /**
-     * Prints the message
-     * @param message
-     */
     private static void printLog(String message) {
         System.out.println(message);
     }
 
-    /**
-     * Cleans & prints buffer of ints if input type changes
-     * @see #printLog(String)
-     */
     private static void flushInt() {
         if (state == State.INT) {
             printLog(PRIMITIVE_PREFIX + sum);
@@ -68,10 +41,6 @@ public class Logger {
         }
     }
 
-    /**
-     * Cleans & prints buffer of Strings if input type changes
-     * @see #printLog(String)
-     */
     private static void flushString() {
         if (state == State.STRING) {
             if (quantityString == 1) {
