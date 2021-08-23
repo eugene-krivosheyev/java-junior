@@ -4,17 +4,18 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Logger {
+
+    public static final String PRIMITIVE_PREFIX = "primitive:";
+    public static final String STRING_PREFIX = "string:";
+    public static final String CHAR_PREFIX = "char:";
+    public static final String REFERENCE_PREFIX = "reference:";
+
     private static Class<?> prevClass;
 
     private static Long integerAccumulator = null;
     private static Integer byteAccumulator = null;
     private static String prevString;
     private static int stringCounter = 0;
-
-    public static final String PRIMITIVE_PREFIX = "primitive:";
-    public static final String STRING_PREFIX = "string:";
-    public static final String CHAR_PREFIX = "char:";
-    public static final String REFERENCE_PREFIX = "reference:";
 
     public static void log(int message) {
         initLogWriting(PRIMITIVE_PREFIX, message);
