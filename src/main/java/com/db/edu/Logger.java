@@ -1,44 +1,62 @@
 package com.db.edu;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Logger {
 
+    /**
+     * The list of prefixes
+     */
     public static final String PRIMITIVE_PREFIX = "primitive: ";
     public static final String CHAR_PREFIX = "char: ";
     public static final String STRING_PREFIX = "string: ";
     public static final String REFERENCE_PREFIX = "reference: ";
 
-    //The sum of sequent ints and flag means, that sum was changed (for zero case)
+    /**
+     * The sum of sequent ints and flag means, that sum was changed (for zero case)
+     */
     private static int sum = 0;
     private static int flagThereIsInteger = 0;
 
-    //The value of repetitive string
+    /**
+     * The value of repetitive string
+     */
     private static String bufString = null;
 
-    //The number of repetitive strings
+    /**
+     * The number of repetitive strings
+     */
     private static int quantityString = 0;
 
-    //The list of states
+    /**
+     * The list of states
+     */
     private enum State {
         STRING,
         INT,
         BYTE,
         CHAR,
         BOOLEAN,
-        OBJECT,
-        ARRAY
+        OBJECT
     }
 
-    //Current state
+    /**
+     * Current state
+     */
     private static State state;
 
-    //Prints the result
+    /**
+     * Prints the message
+     * @param message
+     */
     private static void printLog(String message) {
         System.out.println(message);
     }
 
+    /**
+     * Cleans & prints buffer of ints if input type changes
+     * @see #printLog(String)
+     */
     private static void flushInt() {
         if (state == State.INT) {
             printLog(PRIMITIVE_PREFIX + sum);
@@ -47,6 +65,10 @@ public class Logger {
         }
     }
 
+    /**
+     * Cleans & prints buffer of Strings if input type changes
+     * @see #printLog(String)
+     */
     private static void flushString() {
         if (state == State.STRING) {
             if (quantityString == 1) {
@@ -59,7 +81,9 @@ public class Logger {
         }
     }
 
-    //Cleans the string buffer and int sum in the end
+    /**
+     * Cleans the string buffer and int sum in the end of logs
+     */
     public static void flush() {
         if (!Objects.equals(bufString, null)) {
             flushString();
