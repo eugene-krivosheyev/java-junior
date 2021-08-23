@@ -1,12 +1,12 @@
 package com.db.education.app;
-    
+
 import java.util.Objects;
 
 public class Logger {
-    public static final String CHAR_PREFIX = "char: ";
-    public static final String OBJECT_PREFIX = "reference: ";
-    public static final String PRIMITIVE_PREFIX = "primitive: ";
-    public static final String STRING_PREFIX = "string: ";
+    public static final String CHAR_PREFIX = "char";
+    public static final String OBJECT_PREFIX = "reference";
+    public static final String PRIMITIVE_PREFIX = "primitive";
+    public static final String STRING_PREFIX = "string";
 
     private static int accumulatedByte = 0;
     private static long accumulatedInteger = 0;
@@ -29,7 +29,12 @@ public class Logger {
 
     public static void log(char message) {
         updateLastMessageType(message);
-        writeToOutput(CHAR_PREFIX, message);
+        writeToOutput(createPrefix(CHAR_PREFIX), message);
+    }
+
+    public static void log(boolean message) {
+        updateLastMessageType(message);
+        writeToOutput(createPrefix(PRIMITIVE_PREFIX), message);
     }
 
     public static void log(String message) {
@@ -37,14 +42,31 @@ public class Logger {
         accumulateString(message);
     }
 
-    public static void log(boolean message) {
-        updateLastMessageType(message);
-        writeToOutput(PRIMITIVE_PREFIX, message);
-    }
-
     public static void log(Object message) {
         updateLastMessageType(message);
-        writeToOutput(OBJECT_PREFIX, message);
+        writeToOutput(createPrefix(OBJECT_PREFIX), message);
+    }
+
+    public static void log(int... message) {
+        updateLastMessageType(message);
+        accumulateVarArgInt(message);
+    }
+
+    public static void log(String... message) {
+        updateLastMessageType(message);
+        accumulateVarArgString(message);
+    }
+
+    public static void accumulateVarArgInt(int... varArgs) {
+        for (int number : varArgs) {
+            log(number);
+        }
+    }
+
+    public static void accumulateVarArgString(String... varArgs) {
+        for (String item : varArgs) {
+            log(item);
+        }
     }
 
     public static void flush() {
@@ -69,14 +91,13 @@ public class Logger {
         }
     }
 
-    private static long accumulateNumber(long accumulatedValue, long number, long minValue, long maxValue)
-    {
+    private static long accumulateNumber(long accumulatedValue, long number, long minValue, long maxValue) {
         accumulatedValue += number;
-        if(accumulatedValue > maxValue) {
-            writeToOutput(PRIMITIVE_PREFIX, maxValue);
+        if (accumulatedValue > maxValue) {
+            writeToOutput(createPrefix(PRIMITIVE_PREFIX), maxValue);
             accumulatedValue -= maxValue;
-        } else if(accumulatedInteger < minValue) {
-            writeToOutput(PRIMITIVE_PREFIX, minValue);
+        } else if (accumulatedInteger < minValue) {
+            writeToOutput(createPrefix(PRIMITIVE_PREFIX), minValue);
             accumulatedValue -= minValue;
         }
         return accumulatedValue;
@@ -89,7 +110,7 @@ public class Logger {
 
     private static void accumulateByte(byte number) {
         accumulatedByte =
-                (byte)accumulateNumber(accumulatedByte, number, Byte.MIN_VALUE, Byte.MAX_VALUE);
+                (byte) accumulateNumber(accumulatedByte, number, Byte.MIN_VALUE, Byte.MAX_VALUE);
     }
 
     private static void updateLastMessageType(Object message) {
@@ -101,12 +122,12 @@ public class Logger {
     }
 
     private static void flushInteger() {
-        writeToOutput(PRIMITIVE_PREFIX, accumulatedInteger);
+        writeToOutput(createPrefix(PRIMITIVE_PREFIX), accumulatedInteger);
         accumulatedInteger = 0;
     }
 
     private static void flushByte() {
-        writeToOutput(PRIMITIVE_PREFIX, accumulatedByte);
+        writeToOutput(createPrefix(PRIMITIVE_PREFIX), accumulatedByte);
         accumulatedByte = 0;
     }
 
@@ -125,6 +146,10 @@ public class Logger {
         if (countOfString > 1) {
             countString = " (x" + countOfString + ")";
         }
-        writeToOutput(STRING_PREFIX, lastString + countString);
+        writeToOutput(createPrefix(STRING_PREFIX), lastString + countString);
+    }
+
+    private static String createPrefix(String prefix) {
+        return prefix + ": ";
     }
 }
