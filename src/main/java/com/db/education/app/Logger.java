@@ -57,18 +57,6 @@ public class Logger {
         accumulateVarArgString(message);
     }
 
-    public static void accumulateVarArgInt(int... varArgs) {
-        for (int number : varArgs) {
-            log(number);
-        }
-    }
-
-    public static void accumulateVarArgString(String... varArgs) {
-        for (String item : varArgs) {
-            log(item);
-        }
-    }
-
     public static void flush() {
         if (lastMessage instanceof Integer) {
             flushInteger();
@@ -76,6 +64,18 @@ public class Logger {
             flushByte();
         } else if (lastMessage instanceof String) {
             flushString();
+        }
+    }
+
+    private static void accumulateVarArgInt(int... varArgs) {
+        for (int number : varArgs) {
+            log(number);
+        }
+    }
+
+    private static void accumulateVarArgString(String... varArgs) {
+        for (String item : varArgs) {
+            log(item);
         }
     }
 
