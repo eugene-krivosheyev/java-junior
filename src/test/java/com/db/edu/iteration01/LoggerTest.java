@@ -27,15 +27,18 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogInteger() throws AssertionError {
         //region when
         Logger.log(1);
+        Logger.log("a");
         Logger.log(0);
+        Logger.log("b");
         Logger.log(-1);
+        Logger.flusher();
         //endregion
 
         //region then
         assertSysoutContains(PRIMITIVE_PREFIX);
-        assertSysoutEquals(PRIMITIVE_PREFIX + "1" + lineSeparator() +
-                PRIMITIVE_PREFIX + "0" + lineSeparator() +
-                PRIMITIVE_PREFIX + "-1" + lineSeparator());
+        assertSysoutContains("1");
+        assertSysoutContains("0");
+        assertSysoutContains("-1");
         //endregion
     }
 
@@ -45,6 +48,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log((byte)1);
         Logger.log((byte)0);
         Logger.log((byte)-1);
+        Logger.flusher();
         //endregion
 
         //region then
@@ -60,6 +64,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log('a');
         Logger.log('b');
+        Logger.flusher();
         //endregion
 
         //region then
@@ -74,6 +79,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log("test string 1");
         Logger.log("other str");
+        Logger.flusher();
         //endregion
 
         //region then
@@ -88,6 +94,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log(true);
         Logger.log(false);
+        Logger.flusher();
         //endregion
 
         //region then
@@ -101,6 +108,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogReference() throws AssertionError {
         //region when
         Logger.log(new Object());
+        Logger.flusher();
         //endregion
 
         //region then

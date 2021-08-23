@@ -69,13 +69,14 @@ public class Logger {
             bufString = null;
         }
         if (flagThereIsInteger == 1) {
-            printLog(PRIMITIVE_PREFIX, sum );
+            printLog(PRIMITIVE_PREFIX, sum);
             sum = 0;
             flagThereIsInteger = 0;
         }
     }
 
     public static void log(int message) {
+        flagThereIsInteger = 1;
         flushBuffer(State.INT);
         if (Integer.MAX_VALUE - message >= sum) {
             sum += message;
@@ -83,7 +84,6 @@ public class Logger {
             printLog(PRIMITIVE_PREFIX, sum);
             sum = message;
         }
-        flagThereIsInteger = 1;
         state = State.INT;
     }
 
