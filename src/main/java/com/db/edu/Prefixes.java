@@ -7,5 +7,4 @@ public class Prefixes {
     public static final String REFERENCE_PREFIX = "reference: ";
     public static final String POSITIVE_OVERFLOW_PREFIX = "positive overflow: ";
     public static final String NEGATIVE_OVERFLOW_PREFIX = "negative overflow: ";
-    public static final String PRIMITIVE_ARRAY_PREFIX = "primitives array: ";
 }

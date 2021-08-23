@@ -1,6 +1,5 @@
 package com.db.edu;
 
-import com.db.edu.commands.ArrayCommand;
 import com.db.edu.commands.BooleanCommand;
 import com.db.edu.commands.ByteCommand;
 import com.db.edu.commands.CharCommand;
@@ -36,14 +35,6 @@ public class Logger {
         Logger.processCommand(new IntCommand(message));
     }
 
-    public static void log(int message, int... messages) {
-        Logger.processCommand(new IntCommand(message, messages));
-    }
-
-    public static void log(int[] message) {
-        Logger.processCommand(new ArrayCommand(message));
-    }
-
     public static void log(byte message) {
         Logger.processCommand(new ByteCommand(message));
     }
@@ -56,12 +47,16 @@ public class Logger {
         Logger.processCommand(new StringCommand(message));
     }
 
-    public static void log(String... message)  {
-        Logger.processCommand(new StringCommand(message));
-    }
-
     public static void log(boolean message) {
         Logger.processCommand(new BooleanCommand(message));
+    }
+
+    public static void log(int... message) {
+        Arrays.stream(message).forEach(msg -> Logger.processCommand(new IntCommand(msg)));
+    }
+
+    public static void log(String... message) {
+        Arrays.stream(message).forEach(msg -> Logger.processCommand(new StringCommand(msg)));
     }
 
     public static void log(Object message) {

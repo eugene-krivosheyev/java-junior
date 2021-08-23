@@ -22,6 +22,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
+    /* deprecated - use varargs call instead
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
@@ -34,6 +35,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
+    */
     /*
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
@@ -50,21 +52,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-    @Test
-    public void shouldLogIntegersMulitidimentionalArray() throws IOException {
-        //region when
-        Logger.log(new int[][][][] {{{{0}}}});
-        //endregion
-        //region then
-        assertSysoutEquals(
-            "primitives multimatrix: {\n" +
-                "{\n" + "{\n" + "{\n" +
-                    "0\n" +
-                "}\n" + "}\n" + "}\n" +
-            "}\n"
-        );
-        //endregion
-    }
     */
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
@@ -74,7 +61,19 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
         //region then
         String ls = System.lineSeparator();
-        assertSysoutContains("str1" + ls + "string 2" + ls + "str 3");
+        assertSysoutEquals("string: str1" + ls + "string: string 2" + ls + "string: str 3" + ls);
+        //endregion
+    }
+    @Test
+    public void shouldLogSameStringWithOneMethodCall() throws IOException {
+        //region when
+        Logger.log("str1", "string 2", "string 2", "str 3", "string 2");
+        Logger.flush();
+        //endregion
+        //region then
+        String ls = System.lineSeparator();
+        assertSysoutEquals("string: str1" + ls + "string: string 2 (x2)"
+                + ls + "string: str 3" + ls + "string: string 2" + ls);
         //endregion
     }
     @Test
@@ -84,24 +83,18 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.flush();
         //endregion
         //region then
-        assertSysoutContains("3");
+        assertSysoutEquals("primitive: 3" + System.lineSeparator());
         //endregion
     }
-    /*
     @Test
-    public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException {
+    public void shouldLogIntegerOverflowWithOneMethodCall() throws IOException {
         //region when
-        Logger.log(1);
-        Logger.log("str");
-        Logger.log(Integer.MAX_VALUE - 10);
-        Logger.log(11);
+        Logger.log(-1, 0, Integer.MAX_VALUE, 3, 1, 3);
+        Logger.flush();
         //endregion
         //region then
-        assertSysoutContains(1);
-        assertSysoutContains("str");
-        assertSysoutContains(Integer.MAX_VALUE - 10);
-        assertSysoutContains(11);
+        String ls = System.lineSeparator();
+        assertSysoutEquals("positive overflow: " + Integer.MAX_VALUE + ls + "primitive: 6" + ls);
         //endregion
     }
-    */
 }
