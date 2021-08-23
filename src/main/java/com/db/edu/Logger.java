@@ -8,12 +8,31 @@ public class Logger {
     public static final String CHAR_PREFIX = "char: ";
     public static final String STRING_PREFIX = "string: ";
     public static final String REFERENCE_PREFIX = "reference: ";
+
+    //The sum of sequent ints and flag means, that sum was changed (for zero case)
     private static int sum = 0;
-    private static String bufString = "";
+    private static int flagThereIsInteger = 0;
+
+    //The value of repetitive string
+    private static String bufString = null;
+
+    //The number of repetitive strings
     private static int quantityString = 0;
-    private enum State {STRING, INT, BYTE, CHAR, BOOLEAN, OBJECT}
+
+    //The list of states
+    private enum State {
+        STRING,
+        INT,
+        BYTE,
+        CHAR,
+        BOOLEAN,
+        OBJECT
+    }
+
+    //Current state
     private static State state;
 
+    //Prints the result with some additions for Strings: number of repetitive strings
     private static <T> void printLog(String prefix, T message) {
         if (message instanceof String) {
             if (quantityString == 1) {
@@ -26,18 +45,33 @@ public class Logger {
         System.out.println(prefix + message);
     }
 
+    //Cleans the string buffer and int sum if the input type changes
     private static void flushBuffer(State inputType) {
         if (inputType != State.STRING) {
             if (state == State.STRING) {
                 printLog(STRING_PREFIX, bufString);
                 quantityString = 0;
-                bufString = "";
+                bufString = null;
             }
         } else if (inputType != State.INT){
             if (state == State.INT) {
                 printLog(PRIMITIVE_PREFIX, sum);
+                flagThereIsInteger = 0;
                 sum = 0;
             }
+        }
+    }
+
+    //Cleans the string buffer and int sum in the end
+    public static void flusher() {
+        if (!Objects.equals(bufString, null)) {
+            printLog(STRING_PREFIX, bufString);
+            bufString = null;
+        }
+        if (flagThereIsInteger == 1) {
+            printLog(PRIMITIVE_PREFIX, sum );
+            sum = 0;
+            flagThereIsInteger = 0;
         }
     }
 
@@ -49,6 +83,7 @@ public class Logger {
             printLog(PRIMITIVE_PREFIX, sum);
             sum = message;
         }
+        flagThereIsInteger = 1;
         state = State.INT;
     }
 
@@ -66,7 +101,7 @@ public class Logger {
 
     public static void log(String message) {
         flushBuffer(State.STRING);
-        if (Objects.equals(bufString, "")) {
+        if (Objects.equals(bufString, null)) {
             bufString = message;
             quantityString = 1;
         } else if (Objects.equals(message, bufString)) {
