@@ -45,6 +45,9 @@ public class Logger {
      */
     private static State state;
 
+    private Logger() {
+    }
+
     /**
      * Prints the message
      * @param message
