@@ -69,26 +69,27 @@ public class Logger {
         }
     }
 
-    private static void accumulateInteger(int number) {
-        accumulatedInteger += number;
-        if (accumulatedInteger > Integer.MAX_VALUE) {
-            writeToOutput(PRIMITIVE_PREFIX, Integer.MAX_VALUE);
-            accumulatedInteger -= Integer.MAX_VALUE;
-        } else if (accumulatedInteger < Integer.MIN_VALUE) {
-            writeToOutput(PRIMITIVE_PREFIX, Integer.MIN_VALUE);
-            accumulatedInteger -= Integer.MIN_VALUE;
+    private static long accumulateNumber(long accumulatedValue, long number, long minValue, long maxValue)
+    {
+        accumulatedValue += number;
+        if(accumulatedValue > maxValue) {
+            writeToOutput(PRIMITIVE_PREFIX, maxValue);
+            accumulatedValue -= maxValue;
+        } else if(accumulatedInteger < minValue) {
+            writeToOutput(PRIMITIVE_PREFIX, minValue);
+            accumulatedValue -= minValue;
         }
+        return accumulatedValue;
+    }
+
+    private static void accumulateInteger(int number) {
+        accumulatedInteger =
+                accumulateNumber(accumulatedInteger, number, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
     private static void accumulateByte(byte number) {
-        accumulatedByte += number;
-        if (accumulatedByte > Byte.MAX_VALUE) {
-            writeToOutput(PRIMITIVE_PREFIX, Byte.MAX_VALUE);
-            accumulatedByte -= Byte.MAX_VALUE;
-        } else if (accumulatedByte < Byte.MIN_VALUE) {
-            writeToOutput(PRIMITIVE_PREFIX, Byte.MIN_VALUE);
-            accumulatedByte -= Byte.MIN_VALUE;
-        }
+        accumulatedByte =
+                (byte)accumulateNumber(accumulatedByte, number, Byte.MIN_VALUE, Byte.MAX_VALUE);
     }
 
     private static void updateLastMessageType(Object message) {
