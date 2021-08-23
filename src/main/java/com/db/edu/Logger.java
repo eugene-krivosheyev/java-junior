@@ -1,7 +1,10 @@
 package com.db.edu;
 
+import java.util.Arrays;
+
 import static com.db.edu.MessageType.*;
 import static java.lang.Math.*;
+import static java.lang.System.lineSeparator;
 
 enum MessageType {
     INTEGER,
@@ -47,6 +50,11 @@ public class Logger {
         accumulatedInt = (int) accumulateNumber(INTEGER, accumulatedInt, message, Integer.MAX_VALUE);
     }
 
+    /**
+     * Logging Integer array
+     * @param isArray (custom view for int[])
+     * @param messages
+     */
     public static void log(boolean isArray, int... messages) {
         if (isArray) {
             saveOutput(simpleOutput(messages));
@@ -91,6 +99,10 @@ public class Logger {
         }
     }
 
+    /**
+     * Logging String array
+     * @param messages
+     */
     public static void log(String... messages) {
         for (String message : messages) {
             log(message);
@@ -111,6 +123,14 @@ public class Logger {
      */
     public static void log(Object message) {
         System.out.println(REFERENCE_PREFIX + message.toString());
+    }
+
+    /**
+     * Logging Object array
+     * @param messages
+     */
+    public static void log(Object[] messages) {
+        saveOutput(Arrays.deepToString(messages));
     }
 
     /**
@@ -179,11 +199,11 @@ public class Logger {
     }
 
     private static String decorateOutput(String prefix, Object message) {
-        return prefix + message + System.lineSeparator();
+        return prefix + message + lineSeparator();
     }
 
     private static String decorateOutput(String prefix, Object message, int stringCount) {
-        return prefix + message + " (x" + stringCount + ")" + System.lineSeparator();
+        return prefix + message + " (x" + stringCount + ")" + lineSeparator();
     }
 
     private static String simpleOutput(int[] messages) {
@@ -192,7 +212,7 @@ public class Logger {
         for (int i = 0; i < messages.length - 1; ++i) {
             builder.append(messages[i]).append(", ");
         }
-        return builder.append(messages[messages.length - 1]).append("}").append(System.lineSeparator()).toString();
+        return builder.append(messages[messages.length - 1]).append("}").append(lineSeparator()).toString();
     }
 
     private static void saveOutput(String decoratedMessage) {

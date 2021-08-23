@@ -26,48 +26,26 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogIntegersArray() throws IOException {
-        //region when
-        Logger.log(true, new int[] {-1, 0, 1});
-        //endregion
-
-        //region then
-        assertSysoutEquals("primitives array: {-1, 0, 1}\n");
-        //endregion
-    }
-    /*@Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
         Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "primitives matrix: {\n" +
-                "{-1, 0, 1}\n" +
-                "{1, 2, 3}\n" +
-                "{-1, -2, -3}\n" +
-            "}\n"
-        );
+        assertLogContains("[[-1, 0, 1], [1, 2, 3], [-1, -2, -3]]");
         //endregion
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
         Logger.log(new int[][][][] {{{{0}}}});
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "primitives multimatrix: {\n" +
-                "{\n" + "{\n" + "{\n" +
-                    "0\n" +
-                "}\n" + "}\n" + "}\n" +
-            "}\n"
-        );
+        assertLogContains("[[[[0]]]]");
         //endregion
-    }*/
+    }
 
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
@@ -80,6 +58,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertLogContains("str1", "string 2", "str 3");
         //endregion
     }
+
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
@@ -91,8 +70,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertLogContains("3");
         //endregion
     }
+
     @Test
-    /*public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException {
+    public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException {
         //region when
         Logger.log(1);
         Logger.log("str");
@@ -101,21 +81,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertLogContains("1", "str", Integer.toString(Integer.MAX_VALUE - 10), "11");
+        assertLogContains("1", "str", Integer.toString(Integer.MAX_VALUE), "1");
         //endregion
-    }*/
+    }
 
     private void assertLogContains(String... asserts) {
         for (String current : asserts) {
             assertSysoutContains(current);
         }
-    }
-
-    private void assertLogEquals(String prefix, String... asserts) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String current : asserts) {
-            stringBuilder.append(prefix).append(current).append(lineSeparator());
-        }
-        assertSysoutEquals(stringBuilder.toString());
     }
 }
