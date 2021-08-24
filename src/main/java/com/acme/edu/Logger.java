@@ -38,6 +38,10 @@ public class Logger {
         lastLoggedType = LastLoggedType.INT;
     }
 
+    public static void log(int... integers) {
+        processArray(integers);
+    }
+
     public static void log(byte message) {
         checkOverFlow(message, LastLoggedType.BYTE);
 
@@ -69,6 +73,10 @@ public class Logger {
         ++repeatableStringCounter;
 
         lastLoggedType = LastLoggedType.STRING;
+    }
+
+    public static void log(String... strings) {
+        processArray(strings);
     }
 
     public static void log(Object message) {
@@ -344,6 +352,18 @@ public class Logger {
                 cleanStringBuffer();
                 break;
             }
+        }
+    }
+
+    private static void processArray(int... integers){
+        for (int integer: integers) {
+            log(integer);
+        }
+    }
+
+    private static void processArray(String... strings){
+        for (String string: strings) {
+            log(string);
         }
     }
 
