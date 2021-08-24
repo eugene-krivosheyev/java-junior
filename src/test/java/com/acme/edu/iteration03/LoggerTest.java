@@ -1,6 +1,8 @@
 package com.acme.edu.iteration03;
 
-import com.acme.edu.Logger;
+//import com.acme.edu.Logger;
+import com.acme.edu.ooad.controller.LoggerController;
+import com.acme.edu.ooad.factory.LoggerControllerFactory;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.*;
 import java.io.IOException;
@@ -26,9 +28,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
+
+        LoggerController logger = LoggerControllerFactory.create();
+
         //region when
-        Logger.log("str1", "string 2", "str 3");
-        Logger.flush();
+        logger.log("str1", "string 2", "str 3");
+        logger.flush();
         //endregion
 
         //region then
@@ -41,9 +46,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
+
+        LoggerController logger = LoggerControllerFactory.create();
+
         //region when
-        Logger.log(-1, 0, 1, 3);
-        Logger.flush();
+        logger.log(-1, 0, 1, 3);
+        logger.flush();
         //endregion
 
         //region then
