@@ -1,18 +1,20 @@
-package demo.ooad;
+package demo.ooad.domain;
 
 /**
  * Stateful
  * Immutable
- * POJO
+ * POJO ≠ JavaBeans
  */
 public class Message {
     private final String body; //state
+    private final SeverityLevel severity;
 
     /**
      * Public API
      */
-    public Message(String body) {
+    public Message(String body, SeverityLevel severity) {
         this.body = body;
+        this.severity = severity;
     }
 
     /**
