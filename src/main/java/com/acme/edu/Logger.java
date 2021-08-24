@@ -3,10 +3,11 @@ package com.acme.edu;
 import java.util.Objects;
 
 public class Logger {
-    public static String PRIMITIVE_TYPE = "primitive: ";
-    public static String CHAR_TYPE = "char: ";
-    public static String STRING_TYPE = "string: ";
-    public static String REFERENCE_TYPE = "reference: ";
+    public static Type primitiveType = Type.PRIMITIVE;
+    public static Type charType = Type.CHAR;
+    public static Type stringType = Type.STRING;
+    public static Type referenceType = Type.REFERENCE;
+
     private static boolean intAccumulateState = false;
     private static int intAccumulateSum = 0;
 
@@ -39,19 +40,18 @@ public class Logger {
     }
 
     public static void log(byte message) {
-        System.out.println(PRIMITIVE_TYPE + message);
+        System.out.println(primitiveType.value + message);
         checkIfStringIsEqualToLast(message);
         checkIfIntegerComesAsSequence(message);
     }
 
     public static void log(char message) {
-        System.out.println(CHAR_TYPE + message);
+        System.out.println(charType.value + message);
         checkIfStringIsEqualToLast(message);
         checkIfIntegerComesAsSequence(message);
     }
 
     public static void log(String message) {
-        System.out.println(STRING_TYPE + message);
         checkIfStringIsEqualToLast(message);
         checkIfIntegerComesAsSequence(message);
     }
@@ -65,13 +65,13 @@ public class Logger {
     }
 
     public static void log(boolean message) {
-        System.out.println(PRIMITIVE_TYPE + message);
+        System.out.println(primitiveType.value + message);
         checkIfStringIsEqualToLast(message);
         checkIfIntegerComesAsSequence(message);
     }
 
     public static void log(Object message) {
-        System.out.println(REFERENCE_TYPE + message);
+        System.out.println(referenceType.value + message);
         checkIfStringIsEqualToLast(message);
         checkIfIntegerComesAsSequence(message);
     }
@@ -85,11 +85,11 @@ public class Logger {
             }
             else {
                 if (strCount > 1) {
-                    System.out.println(lastStr + " (x" + strCount + ")");
+                    System.out.println(stringType.value + lastStr + " (x" + strCount + ")");
                 }
                 else {
                     if (lastStr != null) {
-                        System.out.println(lastStr);
+                        System.out.println(stringType.value + lastStr);
                     }
                 }
 
@@ -100,10 +100,10 @@ public class Logger {
         else {
             if (accumString) {
                 if (strCount > 1) {
-                    System.out.println(lastStr + " (x" + strCount + ")");
+                    System.out.println(stringType.value + lastStr + " (x" + strCount + ")");
                 }
                 else {
-                    System.out.println(lastStr);
+                    System.out.println(stringType.value + lastStr);
                 }
                 strCount = 1;
                 accumString = false;
@@ -131,7 +131,7 @@ public class Logger {
         }
         else{
             if (intAccumulateState) {
-                System.out.println(PRIMITIVE_TYPE + intAccumulateSum);
+                System.out.println(primitiveType.value + intAccumulateSum);
                 intAccumulateState = false;
                 intAccumulateSum = 0;
             }

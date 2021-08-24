@@ -35,8 +35,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(PRIMITIVE_TYPE);
-        assertSysoutEquals(PRIMITIVE_TYPE + "1" + sep + PRIMITIVE_TYPE + "0" + sep + PRIMITIVE_TYPE + "-1" + sep);
+        assertSysoutContains(primitiveType.value);
+        assertSysoutEquals(primitiveType.value + "1" + sep + primitiveType.value + "0" + sep + primitiveType.value + "-1" + sep);
         //endregion
     }
 
@@ -49,7 +49,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(PRIMITIVE_TYPE);
+        assertSysoutContains(primitiveType.value);
         assertSysoutContains("1");
         assertSysoutContains("0");
         assertSysoutContains("-1");
@@ -67,7 +67,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(CHAR_TYPE);
+        assertSysoutContains(charType.value);
         assertSysoutContains("a");
         assertSysoutContains("b");
         //endregion
@@ -78,10 +78,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log("test string 1");
         Logger.log("other str");
+        Logger.flush();
         //endregion
 
         //region then
-        assertSysoutContains(STRING_TYPE);
+        assertSysoutContains(stringType.value);
         assertSysoutContains("test string 1");
         assertSysoutContains("other str");
         //endregion
@@ -95,7 +96,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(PRIMITIVE_TYPE);
+        assertSysoutContains(primitiveType.value);
         assertSysoutContains("true");
         assertSysoutContains("false");
         //endregion
@@ -108,7 +109,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(REFERENCE_TYPE);
+        assertSysoutContains(referenceType.value);
         assertSysoutContains("@");
         //endregion
     }
