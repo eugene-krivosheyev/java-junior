@@ -1,6 +1,7 @@
 package com.acme.edu.iteration01;
 
 import com.acme.edu.Logger;
+import com.acme.edu.Prefix;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,9 +33,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(Logger.PRIMITIVE_PREFIX + " 1");
-        assertSysoutContains(Logger.PRIMITIVE_PREFIX + " 0");
-        assertSysoutContains(Logger.PRIMITIVE_PREFIX + " -1");
+        assertSysoutContains(Prefix.PRIMITIVE.value + " 1");
+        assertSysoutContains(Prefix.PRIMITIVE.value + " 0");
+        assertSysoutContains(Prefix.PRIMITIVE.value + " -1");
         //endregion
     }
 
@@ -50,7 +51,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(Logger.PRIMITIVE_PREFIX);
+        assertSysoutContains(Prefix.PRIMITIVE.value);
         assertSysoutContains("0");
         //endregion
     }

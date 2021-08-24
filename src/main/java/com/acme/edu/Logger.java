@@ -1,74 +1,79 @@
 package com.acme.edu;
 
+import com.acme.edu.accumulator.IntAccumulator;
+import com.acme.edu.message.BooleanMessage;
+import com.acme.edu.message.CharMessage;
+import com.acme.edu.message.Message;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Logger {
+    private static final IntAccumulator intAccumulator = new IntAccumulator();
 
-    public static final String PRIMITIVE_PREFIX = "primitive:";
-    public static final String STRING_PREFIX = "string:";
-    public static final String CHAR_PREFIX = "char:";
-    public static final String REFERENCE_PREFIX = "reference:";
+    private static final ClassValidator classValidator = new ClassValidator();
 
-    private static Class<?> prevClass;
-
-    private static Long integerAccumulator = null;
     private static Integer byteAccumulator = null;
     private static String prevString;
     private static int stringCounter = 0;
 
     public static void log(int message) {
-        initLogWriting(PRIMITIVE_PREFIX, message);
+        if(classValidator.setCurrentClass(message)){
+            Logger.flush();
+        }
+
+        Message message1 = intAccumulator.addValueToAccumulator(message);
+        if(message1 != null){
+            message1.writeMessageToLog();
+        }
     }
 
     public static void log(int ... messages) {
-        Arrays.stream(messages)
-                .forEach(message -> initLogWriting(PRIMITIVE_PREFIX, message));
+        Arrays.stream(messages).forEach(Logger::log);
     }
 
     public static void log(byte message) {
-        initLogWriting(PRIMITIVE_PREFIX, message);
+        initLogWriting(Prefix.PRIMITIVE, message);
     }
 
     public static void log(char message) {
-        initLogWriting(CHAR_PREFIX, message);
+        Message message1 = new CharMessage(message);
+        message1.writeMessageToLog();
     }
 
     public static void log(String message) {
-        initLogWriting(STRING_PREFIX, message);
+        initLogWriting(Prefix.STRING, message);
     }
 
     public static void log(String ... messages) {
         Arrays.stream(messages)
-                .forEach(message -> initLogWriting(STRING_PREFIX, message));
+                .forEach(message -> initLogWriting(Prefix.STRING, message));
     }
 
     public static void log(boolean message) {
-        initLogWriting(PRIMITIVE_PREFIX, message);
+        Message message1 = new BooleanMessage(message);
+        message1.writeMessageToLog();
     }
 
     public static void log(Object message) {
-        initLogWriting(REFERENCE_PREFIX, message);
+        Message message1 = new Message(message);
+        message1.writeMessageToLog();
     }
 
-    private static void initLogWriting(String prefix, Object message) {
+    private static void initLogWriting(Prefix prefix, Object message) {
         Class<?> currentClass = message.getClass();
 
-        if (prevClass != currentClass) {
+        if (classValidator.setCurrentClass(message)) {
             flush();
         }
 
         if (currentClass.equals(String.class)) {
             logString(message.toString());
-        } else if (currentClass.equals(Integer.class)) {
-            logInteger((int) message);
         } else if (currentClass.equals(Byte.class)) {
             logByte((byte) message);
         } else {
             writeMessageToLog(prefix, message);
         }
-
-        prevClass = currentClass;
     }
 
     private static void logString(String message) {
@@ -83,22 +88,6 @@ public class Logger {
             stringCounter = 1;
             prevString = message;
         }
-    }
-
-    private static void logInteger(int inputInteger) {
-        integerAccumulator = integerAccumulator == null ?
-                (long) inputInteger : integerAccumulator + inputInteger;
-
-        if (integerAccumulator >= Integer.MAX_VALUE) {
-            removeIntegerOverflow(Integer.MAX_VALUE);
-        } else if (integerAccumulator <= Integer.MIN_VALUE) {
-            removeIntegerOverflow(Integer.MIN_VALUE);
-        }
-    }
-
-    private static void removeIntegerOverflow(int value) {
-        writeMessageToLog(PRIMITIVE_PREFIX, value);
-        integerAccumulator = integerAccumulator - value == 0 ? null : integerAccumulator - value;
     }
 
     private static void logByte(byte input) {
@@ -116,39 +105,39 @@ public class Logger {
     }
 
     private static void removeByteOverflow(int value) {
-        writeMessageToLog(PRIMITIVE_PREFIX, value);
+        writeMessageToLog(Prefix.PRIMITIVE, value);
         byteAccumulator = byteAccumulator - value == 0 ? null : byteAccumulator - value;
     }
 
     public static void flush() {
         if (prevString != null) {
             if (stringCounter == 1) {
-                writeMessageToLog(STRING_PREFIX, prevString);
+                writeMessageToLog(Prefix.STRING, prevString);
             } else {
-                writeMessageToLog(STRING_PREFIX, prevString, stringCounter);
+                writeMessageToLog(Prefix.STRING, prevString, stringCounter);
             }
 
             prevString = null;
             stringCounter = 0;
         }
 
-        if (integerAccumulator != null) {
-            writeMessageToLog(PRIMITIVE_PREFIX, integerAccumulator);
-            integerAccumulator = null;
-        }
-
         if (byteAccumulator != null) {
-            writeMessageToLog(PRIMITIVE_PREFIX, byteAccumulator);
+            writeMessageToLog(Prefix.PRIMITIVE, byteAccumulator);
             byteAccumulator = null;
         }
+
+        Message message1 = intAccumulator.flush();
+        if(message1 != null){
+            message1.writeMessageToLog();
+        }
     }
 
-    private static void writeMessageToLog(String prefix, Object message) {
-        logToConsole(String.format("%s %s%n", prefix, message.toString()));
+    private static void writeMessageToLog(Prefix prefix, Object message) {
+        logToConsole(String.format("%s %s%n", prefix.value, message.toString()));
     }
 
-    private static void writeMessageToLog(String prefix, Object message, int counter) {
-        logToConsole(String.format("%s %s (x%d)%n", prefix, message.toString(), counter));
+    private static void writeMessageToLog(Prefix prefix, Object message, int counter) {
+        logToConsole(String.format("%s %s (x%d)%n", prefix.value, message.toString(), counter));
     }
 
     private static void logToConsole(String report) {
