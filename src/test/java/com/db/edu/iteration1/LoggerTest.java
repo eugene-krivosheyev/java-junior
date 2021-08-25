@@ -5,6 +5,7 @@ import com.db.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.*;
 
 import static com.db.edu.Logger.*;
+import static com.db.edu.Prefix.*;
 
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
@@ -28,7 +29,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(-1);
         Logger.flush();
 
-        logAssert(PRIMITIVE_PREFIX, "1", "0", "-1");
+        logAssert(PRIMITIVE_PREFIX.getMessage(), "1", "0", "-1");
     }
 
     @Test
@@ -40,7 +41,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log((byte)-1);
         Logger.flush();
 
-        logAssert(PRIMITIVE_PREFIX, "1", "0", "-1");
+        logAssert(PRIMITIVE_PREFIX.getMessage(), "1", "0", "-1");
     }
 
     @Test
@@ -48,7 +49,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log('a');
         Logger.log('b');
 
-        logAssert(CHAR_PREFIX, "a", "b");
+        logAssert(CHAR_PREFIX.getMessage(), "a", "b");
     }
 
     @Test
@@ -57,7 +58,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("other str");
         Logger.flush();
 
-        logAssert(STRING_PREFIX, "test string 1", "other str");
+        logAssert(STRING_PREFIX.getMessage(), "test string 1", "other str");
     }
 
     @Test
@@ -65,13 +66,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(true);
         Logger.log(false);
 
-        logAssert(PRIMITIVE_PREFIX, "true", "false");
+        logAssert(PRIMITIVE_PREFIX.getMessage(), "true", "false");
     }
 
     @Test
     public void shouldLogReference() {
         Logger.log(new Object());
 
-        logAssert(OBJECT_PREFIX, "@");
+        logAssert(OBJECT_PREFIX.getMessage(), "@");
     }
 }

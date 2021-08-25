@@ -6,7 +6,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.db.edu.Logger.*;
+import static com.db.edu.Prefix.PRIMITIVE_PREFIX;
+import static com.db.edu.Prefix.STRING_PREFIX;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @BeforeEach
@@ -21,23 +22,16 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogIntegersArray() {
-        Logger.log(new int[] {-1, 0, 1});
-
-        logAssert(PRIMITIVE_PREFIX, "0");
-    }
-
-    @Test
     public void shouldLogStringsWithOneMethodCall() {
         Logger.log("str1", "string 2", "str 3");
 
-        logAssert(STRING_PREFIX, "str1", "string 2", "str 3");
+        logAssert(STRING_PREFIX.getMessage(), "str1", "string 2", "str 3");
     }
 
     @Test
     public void shouldLogIntegersWithOneMethodCall() {
         Logger.log(-1, 0, 1, 3);
 
-        logAssert(PRIMITIVE_PREFIX, "3");
+        logAssert(PRIMITIVE_PREFIX.getMessage(), "3");
     }
 }
