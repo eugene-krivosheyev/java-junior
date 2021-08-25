@@ -36,7 +36,7 @@ public class Logger {
     }
 
     public static void log(Object message) {
-        controller.log(new Message(message));
+        controller.log(new ReferenceMessage(message));
     }
 
     public static void flush() {

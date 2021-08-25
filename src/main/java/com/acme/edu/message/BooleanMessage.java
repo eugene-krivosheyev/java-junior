@@ -12,6 +12,11 @@ public class BooleanMessage extends Message{
     }
 
     @Override
+    public boolean sameTypeOf(Message message) {
+        return false;
+    }
+
+    @Override
     public String getDecoratedMessage(){
         return String.format("%s %s%n", Prefix.PRIMITIVE.value, body);
     }

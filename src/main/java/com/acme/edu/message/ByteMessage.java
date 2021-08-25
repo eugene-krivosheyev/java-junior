@@ -11,6 +11,12 @@ public class ByteMessage extends Message{
         this.body = body;
     }
 
+
+    @Override
+    public boolean sameTypeOf(Message message) {
+        return message instanceof ByteMessage;
+    }
+
     @Override
     public Message accumulate(Message message){
         this.body += (byte) message.getBody();
