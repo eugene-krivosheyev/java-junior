@@ -14,12 +14,11 @@ public class Logger {
     private static IntSequenceChecker intCheker= new IntSequenceChecker();
     private static StringSequenceChecker stringChecker = new StringSequenceChecker();
 
-    private static boolean intAccumulateState = false;
-    private static int intAccumulateSum = 0;
+
 
     public static void log(int message) {
         stringChecker.check(message);
-        checkIfIntegerComesAsSequence(message);
+        intCheker.check(message);
     }
 
     public static void log(int ... params) {
@@ -36,29 +35,29 @@ public class Logger {
 
         stringChecker.check(params);
         for (int temp : params) {
-            checkIfIntegerComesAsSequence(temp);
+            intCheker.check(temp);
         }
     }
 
     public static void log(byte message) {
         System.out.println(primitiveType.value + message);
         stringChecker.check(message);
-        checkIfIntegerComesAsSequence(message);
+        intCheker.check(message);
     }
 
     public static void log(char message) {
         System.out.println(charType.value + message);
         stringChecker.check(message);
-        checkIfIntegerComesAsSequence(message);
+        intCheker.check(message);
     }
 
     public static void log(String message) {
         stringChecker.check(message);
-        checkIfIntegerComesAsSequence(message);
+        intCheker.check(message);
     }
 
     public static void log(String ... params){
-        checkIfIntegerComesAsSequence(params);
+        intCheker.check(params);
         for (String temp : params){
             stringChecker.check(temp);
         }
@@ -68,46 +67,20 @@ public class Logger {
     public static void log(boolean message) {
         System.out.println(primitiveType.value + message);
         stringChecker.check(message);
-        checkIfIntegerComesAsSequence(message);
+        intCheker.check(message);
     }
 
     public static void log(Object message) {
         System.out.println(referenceType.value + message);
         stringChecker.check(message);
-        checkIfIntegerComesAsSequence(message);
+        intCheker.check(message);
     }
 
-    public static void checkIfIntegerComesAsSequence(Object message){
-        if (message instanceof Integer) {
-            if (!intAccumulateState) {
-                intAccumulateState = true;
-            }
-            if ((long)intAccumulateSum + (long)((int)message) > (long)Integer.MAX_VALUE) {
-                System.out.println(Integer.MAX_VALUE);
-                intAccumulateSum = (int)((long)intAccumulateSum + (long)((int)message) - (long)Integer.MAX_VALUE);
-
-            }
-            else if ((long)intAccumulateSum + (long)((int)message) < (long)Integer.MIN_VALUE) {
-                System.out.println(Integer.MIN_VALUE);
-                intAccumulateSum = (int)((long)intAccumulateSum + (long)((int)message) - (long)Integer.MIN_VALUE);
-            }
-            else {
-                intAccumulateSum += (int)message;
-            }
-        }
-        else{
-            if (intAccumulateState) {
-                System.out.println(primitiveType.value + intAccumulateSum);
-                intAccumulateState = false;
-                intAccumulateSum = 0;
-            }
-        }
-    }
 
 
     public static void flush(){
 //        checkIfStringIsEqualToLast(null);
         stringChecker.check(null);
-        checkIfIntegerComesAsSequence(null);
+        intCheker.check(null);
     }
 }
