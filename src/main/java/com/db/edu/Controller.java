@@ -1,21 +1,22 @@
 package com.db.edu;
 
+import static com.db.edu.ByteMessage.flushByte;
+import static com.db.edu.IntMessage.flushInt;
 import static com.db.edu.Prefix.*;
 
 public class Controller {
 
-    private static long intResult;
-    private static int byteResult;
+
     private static String stringResult;
     private static int stringCount;
     private static Object type;
 
-    public void flush() {
+    public static void flush() {
         if (type == null) return;
         if (type instanceof Integer) {
-            flushNum(Integer.MAX_VALUE, Integer.MIN_VALUE);
+            flushInt();
         } else if (type instanceof Byte) {
-            flushNum(Byte.MAX_VALUE, Byte.MIN_VALUE);
+            flushByte();
         } else if (type instanceof String) {
             flushString();
         }
@@ -29,13 +30,6 @@ public class Controller {
         intResult += message;
     }
 
-    public void log(byte message) {
-        if (!(type instanceof Byte)) {
-            flush();
-            type = message;
-        }
-        byteResult += message;
-    }
 
     public void log(boolean message) {
         ConsoleSaver.writeMessage(PRIMITIVE_PREFIX.getMessage() + message);
@@ -74,21 +68,6 @@ public class Controller {
         flush();
     }
 
-    private void flushNum(int maxValue, int minValue) {
-        long numResult = maxValue == Byte.MAX_VALUE ? byteResult : intResult;
-        while (numResult > maxValue) {
-            numResult -= maxValue;
-            ConsoleSaver.writeMessage(PRIMITIVE_PREFIX.getMessage() + maxValue);
-        }
-        while (numResult < minValue) {
-            numResult -= minValue;
-            ConsoleSaver.writeMessage(PRIMITIVE_PREFIX.getMessage() + minValue);
-        }
-        ConsoleSaver.writeMessage(PRIMITIVE_PREFIX.getMessage() + numResult);
-        byteResult = 0;
-        intResult = 0;
-    }
-
     private void flushString() {
         String strRes = STRING_PREFIX.getMessage() + stringResult;
         stringResult = "";
@@ -98,4 +77,5 @@ public class Controller {
         ConsoleSaver.writeMessage(strRes);
         stringCount = 0;
     }
+
 }
