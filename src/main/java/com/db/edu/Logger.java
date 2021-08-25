@@ -57,12 +57,7 @@ public class Logger {
      * Cleans the string buffer and int sum in the end of logs
      */
     public static void flush() {
-        if (!Objects.equals(bufString, null)) {
-            flushString();
-        }
-        if (flagThereIsInteger == 1) {
-            flushInt();
-        }
+        controller.flush();
     }
 
     public static void log(int message) {
