@@ -1,9 +1,9 @@
-package com.db.edu;
+package com.db.edu.message;
 
 import static com.db.edu.Controller.flush;
 import static com.db.edu.Prefix.PRIMITIVE_PREFIX;
 
-public class IntMessage {
+public class IntMessage implements Message {
     private int message;
     private static long intResult;
 
@@ -15,20 +15,20 @@ public class IntMessage {
 
     }
 
-    static void flushInt() {
+    public static void flushInt() {
         while (intResult > Integer.MAX_VALUE) {
             intResult -= Integer.MAX_VALUE;
-            ConsoleSaver.writeMessage(PRIMITIVE_PREFIX.getMessage() + Integer.MAX_VALUE);
+            saver.save(PRIMITIVE_PREFIX.getMessage() + Integer.MAX_VALUE);
         }
         while (intResult < Integer.MIN_VALUE) {
             intResult -= Integer.MIN_VALUE;
-            ConsoleSaver.writeMessage(PRIMITIVE_PREFIX.getMessage() + Integer.MIN_VALUE);
+            saver.save(PRIMITIVE_PREFIX.getMessage() + Integer.MIN_VALUE);
         }
-        ConsoleSaver.writeMessage(PRIMITIVE_PREFIX.getMessage() + intResult);
+        saver.save(PRIMITIVE_PREFIX.getMessage() + intResult);
         intResult = 0;
     }
 
-    Object accumulate(Object type) {
+    public Object accumulate(Object type) {
         if (!(type instanceof Integer)) {
             flush();
             type = message;

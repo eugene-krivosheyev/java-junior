@@ -1,13 +1,18 @@
 package com.db.edu;
 
-import static com.db.edu.ByteMessage.flushByte;
-import static com.db.edu.IntMessage.flushInt;
+import com.db.edu.message.*;
+import com.db.edu.saver.ConsoleSaver;
+import com.db.edu.saver.Saver;
+
+import static com.db.edu.message.ByteMessage.flushByte;
+import static com.db.edu.message.IntMessage.flushInt;
 import static com.db.edu.Prefix.*;
-import static com.db.edu.StringMessage.flushString;
+import static com.db.edu.message.StringMessage.flushString;
 
 public class Controller {
-
+    private static Object accumulateMessage;
     private static Object type;
+    private static final Saver saver = new ConsoleSaver();
 
     public static void flush() {
         if (type == null) return;
@@ -20,28 +25,21 @@ public class Controller {
         }
     }
 
-    public void log(IntMessage message) {
+    public void log(Message message) {
        type = message.accumulate(type);
+       if (type instanceof )
     }
 
-    public void log(ByteMessage message) {
-        type = message.accumulate(type);
-    }
-
-    public void log(StringMessage message) {
-        type = message.accumulate(type);
-    }
-
-    public void log(boolean message) {
-        ConsoleSaver.writeMessage(PRIMITIVE_PREFIX.getMessage() + message);
+    public void log(BooleanMessage message) {
+        saver.save(PRIMITIVE_PREFIX.getMessage() + message);
     }
 
     public void log(char message) {
-        ConsoleSaver.writeMessage(CHAR_PREFIX.getMessage() + message);
+        saver.save(CHAR_PREFIX.getMessage() + message);
     }
 
     public void log(Object message) {
-        ConsoleSaver.writeMessage(OBJECT_PREFIX.getMessage() + message);
+        saver.save(OBJECT_PREFIX.getMessage() + message);
     }
 
     public void log(int ... message) {

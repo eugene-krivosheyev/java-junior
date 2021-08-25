@@ -1,9 +1,9 @@
-package com.db.edu;
+package com.db.edu.message;
 
 import static com.db.edu.Controller.flush;
 import static com.db.edu.Prefix.PRIMITIVE_PREFIX;
 
-public class ByteMessage {
+public class ByteMessage implements Message{
     private byte message;
     private static int byteResult;
 
@@ -11,7 +11,7 @@ public class ByteMessage {
         this.message = message;
     }
 
-    Object accumulate(Object type) {
+    public Object accumulate(Object type) {
         if (!(type instanceof Byte)) {
             flush();
             type = message;
@@ -20,16 +20,16 @@ public class ByteMessage {
         return type;
     }
 
-    static void flushByte() {
+    public static void flushByte() {
         while (byteResult > Byte.MAX_VALUE) {
             byteResult -= Byte.MAX_VALUE;
-            ConsoleSaver.writeMessage(PRIMITIVE_PREFIX.getMessage() + Byte.MAX_VALUE);
+            saver.save(PRIMITIVE_PREFIX.getMessage() + Byte.MAX_VALUE);
         }
         while (byteResult < Byte.MIN_VALUE) {
             byteResult -= Byte.MIN_VALUE;
-            ConsoleSaver.writeMessage(PRIMITIVE_PREFIX.getMessage() + Byte.MIN_VALUE);
+            saver.save(PRIMITIVE_PREFIX.getMessage() + Byte.MIN_VALUE);
         }
-        ConsoleSaver.writeMessage(PRIMITIVE_PREFIX.getMessage() + byteResult);
+        saver.save(PRIMITIVE_PREFIX.getMessage() + byteResult);
         byteResult = 0;
     }
 }
