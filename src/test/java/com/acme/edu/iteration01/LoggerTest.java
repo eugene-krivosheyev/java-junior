@@ -4,6 +4,7 @@ import com.acme.edu.Logger;
 import static com.acme.edu.LoggerController.*;
 
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.Type;
 import org.junit.jupiter.api.*;
 
 import java.io.*;
@@ -37,8 +38,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(primitiveType.value);
-        assertSysoutEquals(primitiveType.value + "1" + sep + primitiveType.value + "0" + sep + primitiveType.value + "-1" + sep);
+        assertSysoutContains(Type.PRIMITIVE.value);
+        assertSysoutEquals(Type.PRIMITIVE.value + "1" + sep + Type.PRIMITIVE.value + "0" + sep + Type.PRIMITIVE.value + "-1" + sep);
         //endregion
     }
 
@@ -51,7 +52,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(primitiveType.value);
+        assertSysoutContains(Type.PRIMITIVE.value);
         assertSysoutContains("1");
         assertSysoutContains("0");
         assertSysoutContains("-1");
@@ -69,7 +70,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(charType.value);
+        assertSysoutContains(Type.CHAR.value);
         assertSysoutContains("a");
         assertSysoutContains("b");
         //endregion
@@ -84,7 +85,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(stringType.value);
+        assertSysoutContains(Type.STRING.value);
         assertSysoutContains("test string 1");
         assertSysoutContains("other str");
         //endregion
@@ -98,7 +99,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(primitiveType.value);
+        assertSysoutContains(Type.PRIMITIVE.value);
         assertSysoutContains("true");
         assertSysoutContains("false");
         //endregion
@@ -111,7 +112,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains(referenceType.value);
+        assertSysoutContains(Type.REFERENCE.value);
         assertSysoutContains("@");
         //endregion
     }

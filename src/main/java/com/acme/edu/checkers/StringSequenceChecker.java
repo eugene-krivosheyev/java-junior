@@ -1,14 +1,11 @@
 package com.acme.edu.checkers;
 
+
 import com.acme.edu.Type;
 
 import java.util.Objects;
 
 public class StringSequenceChecker extends Checker{
-    public static Type primitiveType = Type.PRIMITIVE;
-    public static Type charType = Type.CHAR;
-    public static Type stringType = Type.STRING;
-    public static Type referenceType = Type.REFERENCE;
 
     private static boolean accumString = false;
     private static int strCount = 1;
@@ -18,16 +15,16 @@ public class StringSequenceChecker extends Checker{
         if (message instanceof String) {
             accumString = true;
 
-            if (Objects.equals(lastStr, (String)message)) {
+            if (Objects.equals(lastStr, message)) {
                 strCount++;
             }
             else {
                 if (strCount > 1) {
-                    System.out.println(stringType.value + lastStr + " (x" + strCount + ")");
+                    System.out.println(Type.STRING.value + lastStr + " (x" + strCount + ")");
                 }
                 else {
                     if (lastStr != null) {
-                        System.out.println(stringType.value + lastStr);
+                        System.out.println(Type.STRING.value + lastStr);
                     }
                 }
 
@@ -38,10 +35,10 @@ public class StringSequenceChecker extends Checker{
         else {
             if (accumString) {
                 if (strCount > 1) {
-                    System.out.println(stringType.value + lastStr + " (x" + strCount + ")");
+                    System.out.println(Type.STRING.value + lastStr + " (x" + strCount + ")");
                 }
                 else {
-                    System.out.println(stringType.value + lastStr);
+                    System.out.println(Type.STRING.value + lastStr);
                 }
                 strCount = 1;
                 accumString = false;
