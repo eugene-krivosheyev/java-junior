@@ -7,10 +7,6 @@ public class Logger {
     private static String stringAcc = "";
     private static int stringCount = 0;
 
-    public static void printToConsole(String message) {
-        System.out.println(message);
-    }
-
     public static void log(int message) {
         printAccumulatedString();
         if (isOverflows(message) == 0) {
@@ -41,13 +37,13 @@ public class Logger {
     public static void log(byte message) {
         printAccumulatedInt();
         printAccumulatedString();
-        printToConsole(Prefix.PRIMITIVE.value + message);
+        ConsoleSaver.printToConsole(Prefix.PRIMITIVE.value + message);
     }
 
     public static void log(char message) {
         printAccumulatedInt();
         printAccumulatedString();
-        printToConsole(Prefix.CHAR.value + message);
+        ConsoleSaver.printToConsole(Prefix.CHAR.value + message);
     }
 
     public static void log(String message) {
@@ -73,13 +69,13 @@ public class Logger {
     public static void log(boolean message) {
         printAccumulatedString();
         printAccumulatedInt();
-        printToConsole(Prefix.PRIMITIVE.value + message);
+        ConsoleSaver.printToConsole(Prefix.PRIMITIVE.value + message);
     }
 
     public static void log(Object message) {
         printAccumulatedInt();
         printAccumulatedString();
-        printToConsole(Prefix.PRIMITIVE.value + message);
+        ConsoleSaver.printToConsole(Prefix.PRIMITIVE.value + message);
     }
 
     public static void close() {
@@ -89,7 +85,7 @@ public class Logger {
 
     private static void printAccumulatedInt() {
         if (intCount != 0) {
-            printToConsole(Prefix.PRIMITIVE.value + intSum);
+            ConsoleSaver.printToConsole(Prefix.PRIMITIVE.value + intSum);
             intCount = 0;
             intSum = 0;
         }
@@ -97,7 +93,7 @@ public class Logger {
 
     private static void printAccumulatedString() {
         if (stringCount != 0) {
-            printToConsole(Prefix.STRING + stringAcc + (stringCount > 1 ? " (x" + stringCount + ")" : ""));
+            ConsoleSaver.printToConsole(Prefix.STRING + stringAcc + (stringCount > 1 ? " (x" + stringCount + ")" : ""));
             stringCount = 0;
             stringAcc = "";
         }
