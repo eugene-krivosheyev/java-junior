@@ -16,6 +16,8 @@ public class Logger {
     private static int flagThereIsInteger = 0;
     private static String bufString = null;
     private static int quantityString = 0;
+    private static Controller controller;
+
     private enum State {
         STRING,
         INT,
@@ -61,9 +63,9 @@ public class Logger {
     }
 
     public static void log(int message) {
-        flushString();
-        flagThereIsInteger = 1;
-        if (message >= 0) {
+        controller.log(new IntMessage(message));
+
+        /*if (message >= 0) {
             if (Integer.MAX_VALUE - message >= sum) {
                 sum += message;
             } else {
@@ -77,8 +79,7 @@ public class Logger {
                 printLog(PRIMITIVE_PREFIX + Integer.MIN_VALUE);
                 sum = message - (Integer.MIN_VALUE - sum);
             }
-        }
-        state = State.INT;
+        }*/
     }
 
     public static void log(Integer ... args) {
@@ -102,18 +103,7 @@ public class Logger {
     }
 
     public static void log(String message) {
-        flushInt();
-        if (Objects.equals(bufString, null)) {
-            bufString = message;
-            quantityString = 1;
-        } else if (Objects.equals(message, bufString)) {
-            ++quantityString;
-        } else {
-            flushString();
-            bufString = message;
-            quantityString = 1;
-        }
-        state = State.STRING;
+        controller.log(new StringMessage(message));
     }
 
     public static void log(String ... args) {
