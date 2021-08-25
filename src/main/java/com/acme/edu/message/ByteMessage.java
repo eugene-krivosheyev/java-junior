@@ -11,8 +11,10 @@ public class ByteMessage extends Message{
         this.body = body;
     }
 
-    public Message accumulate(ByteMessage message){
-        return new ByteMessage((byte) (message.body + this.body));
+    @Override
+    public Message accumulate(Message message){
+        this.body += (byte) message.getBody();
+        return this;
     }
 
     @Override

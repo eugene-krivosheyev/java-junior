@@ -14,6 +14,10 @@ public class ClassValidator {
         return true;
     }
 
+    public boolean checkValidatorIsNull(){
+        return currentClass == null;
+    }
+
     public void clearClass(){
         this.currentClass = null;
     }

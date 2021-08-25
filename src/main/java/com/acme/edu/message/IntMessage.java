@@ -10,8 +10,14 @@ public class IntMessage extends Message{
         this.body = body;
     }
 
-    public Message accumulate(IntMessage message){
-        this.body += message.body;
+    @Override
+    public boolean sameTypeOf(Message message) {
+        return message instanceof IntMessage;
+    }
+
+    @Override
+    public IntMessage accumulate(Message message){
+        this.body += (int)message.getBody();
         return this;
     }
 

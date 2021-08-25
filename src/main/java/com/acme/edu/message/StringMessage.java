@@ -20,7 +20,8 @@ public class StringMessage extends Message{
         this.stringCounter = stringCounter;
     }
 
-    public StringMessage accumulate(StringMessage message){
+    @Override
+    public StringMessage accumulate(Message message){
         this.stringCounter++;
         return this;
     }
