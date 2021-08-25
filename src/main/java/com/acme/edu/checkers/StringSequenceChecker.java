@@ -14,7 +14,7 @@ public class StringSequenceChecker extends Checker{
     private static int strCount = 1;
     private static String lastStr = null;
 
-    public static void check(Object message) {
+    public void check(Object message) {
         if (message instanceof String) {
             accumString = true;
 

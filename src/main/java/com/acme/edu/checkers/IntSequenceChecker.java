@@ -11,7 +11,7 @@ public class IntSequenceChecker extends Checker {
         intAccumulateState = false;
     }
 
-    public static void check(Object message){
+    public void check(Object message){
         if (message instanceof Integer) {
             if (!intAccumulateState) {
                 intAccumulateState = true;

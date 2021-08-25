@@ -7,6 +7,9 @@ public class BoolMessage extends Message {
         super(message);
         this.value = message;
     }
+    public boolean getValue(){
+        return value;
+    }
 
     @Override
     public String wrapMessage() {

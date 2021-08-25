@@ -8,6 +8,10 @@ public class CharMessage extends Message {
         this.value = message;
     }
 
+    public char getValue(){
+        return value;
+    }
+
     @Override
     public String wrapMessage() {
         return this.message_type + ": " + this.value;

@@ -8,6 +8,9 @@ public class ByteMessage extends Message {
         this.value = message;
     }
 
+    public byte getValue(){
+        return value;
+    }
     @Override
     public String wrapMessage() {
         return this.message_type + ": " + this.value;

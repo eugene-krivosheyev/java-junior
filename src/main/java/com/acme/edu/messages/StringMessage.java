@@ -8,6 +8,10 @@ public class StringMessage extends Message {
         this.value = message;
     }
 
+    public String getValue(){
+        return value;
+    }
+
     @Override
     public String wrapMessage() {
         return this.message_type + ": " + this.value;

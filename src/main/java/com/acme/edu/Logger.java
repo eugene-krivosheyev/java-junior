@@ -1,86 +1,51 @@
 package com.acme.edu;
 
-import java.util.Objects;
-
-import com.acme.edu.checkers.IntSequenceChecker;
-import com.acme.edu.checkers.StringSequenceChecker;
+import com.acme.edu.messages.*;
 
 public class Logger {
-    public static Type primitiveType = Type.PRIMITIVE;
-    public static Type charType = Type.CHAR;
-    public static Type stringType = Type.STRING;
-    public static Type referenceType = Type.REFERENCE;
-
-    private static IntSequenceChecker intCheker= new IntSequenceChecker();
-    private static StringSequenceChecker stringChecker = new StringSequenceChecker();
+    private LoggerController controller  = new LoggerController();
 
 
 
-    public static void log(int message) {
-        stringChecker.check(message);
-        intCheker.check(message);
+    public void log(int message) {
+        controller.log(new IntMessage(message));
     }
 
-    public static void log(int ... params) {
-        String nums = "primitives array: {";
-        for (int i = 0; i < params.length; i++) {
-            nums += params[i] + "";
-
-            if (i != params.length-1) {
-                nums += ", ";
-            }
-        }
-        nums += "}";
-        System.out.println(nums);
-
-        stringChecker.check(params);
+    public void log(int ... params) {
         for (int temp : params) {
-            intCheker.check(temp);
+            controller.log(new IntMessage(temp));
         }
     }
 
-    public static void log(byte message) {
-        System.out.println(primitiveType.value + message);
-        stringChecker.check(message);
-        intCheker.check(message);
+    public void log(byte message) {
+        controller.log(new ByteMessage(message));
     }
 
-    public static void log(char message) {
-        System.out.println(charType.value + message);
-        stringChecker.check(message);
-        intCheker.check(message);
+    public void log(char message) {
+        controller.log(new CharMessage(message));
     }
 
-    public static void log(String message) {
-        stringChecker.check(message);
-        intCheker.check(message);
+    public void log(String message) {
+        controller.log(new StringMessage(message));
     }
 
-    public static void log(String ... params){
-        intCheker.check(params);
+    public void log(String ... params){
+
         for (String temp : params){
-            stringChecker.check(temp);
+            controller.log(new StringMessage(temp));
         }
 
     }
 
-    public static void log(boolean message) {
-        System.out.println(primitiveType.value + message);
-        stringChecker.check(message);
-        intCheker.check(message);
+    public void log(boolean message) {
+        controller.log(new BoolMessage(message));
     }
 
-    public static void log(Object message) {
-        System.out.println(referenceType.value + message);
-        stringChecker.check(message);
-        intCheker.check(message);
+    public void log(Object message) {
+        controller.log(new ObjectMessage(message));
     }
 
-
-
-    public static void flush(){
-//        checkIfStringIsEqualToLast(null);
-        stringChecker.check(null);
-        intCheker.check(null);
+    public void flush(){
+        controller.flush();
     }
 }
