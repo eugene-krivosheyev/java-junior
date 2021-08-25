@@ -1,7 +1,10 @@
 package com.acme.edu;
 
 public enum Type {
-    PRIMITIVE("primitive: "), CHAR("char: "), STRING("string: "), REFERENCE("reference: ");
+    PRIMITIVE("primitive: "),
+    CHAR("char: "),
+    STRING("string: "),
+    REFERENCE("reference: ");
 
     public String value;
 
