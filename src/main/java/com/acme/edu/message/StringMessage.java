@@ -2,6 +2,8 @@ package com.acme.edu.message;
 
 import com.acme.edu.Prefix;
 
+import java.util.Objects;
+
 public class StringMessage extends Message{
     private String body;
     private int stringCounter;
@@ -13,13 +15,6 @@ public class StringMessage extends Message{
         this.stringCounter = 1;
     }
 
-    public StringMessage(String body, int stringCounter) {
-        super(body);
-
-        this.body = body;
-        this.stringCounter = stringCounter;
-    }
-
     @Override
     public StringMessage accumulate(Message message){
         this.stringCounter++;
@@ -28,6 +23,11 @@ public class StringMessage extends Message{
 
     public String getBody(){
         return this.body;
+    }
+
+    @Override
+    public boolean sameTypeOf(Message message) {
+        return message instanceof StringMessage && Objects.equals(message.getBody(), this.getBody());
     }
 
     @Override

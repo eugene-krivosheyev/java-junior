@@ -18,6 +18,11 @@ public class ByteMessage extends Message{
     }
 
     @Override
+    public boolean sameTypeOf(Message message) {
+        return message instanceof ByteMessage;
+    }
+
+    @Override
     public String getDecoratedMessage(){
         return String.format("%s %s%n", Prefix.PRIMITIVE.value, body);
     }

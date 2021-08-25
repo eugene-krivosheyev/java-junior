@@ -1,9 +1,8 @@
 package com.acme.edu.message;
 
-import com.acme.edu.ConsoleSaver;
 import com.acme.edu.Prefix;
 
-public abstract class Message {
+public class Message {
     private Object body;
 
     public Message(Object body) {

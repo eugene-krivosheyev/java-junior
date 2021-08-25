@@ -1,6 +1,5 @@
 package com.acme.edu.message;
 
-import com.acme.edu.ConsoleSaver;
 import com.acme.edu.Prefix;
 
 public class CharMessage extends Message{
