@@ -1,19 +1,22 @@
 package com.acme.edu.message;
 
-import com.acme.edu.ConsoleSaver;
 import com.acme.edu.Prefix;
 
 public class IntMessage extends Message{
-    private final int body;
+    private int body;
 
     public IntMessage(int body) {
         super(body);
         this.body = body;
     }
 
+    public Message accumulate(IntMessage message){
+        this.body += message.body;
+        return this;
+    }
+
     @Override
-    public void writeMessageToLog(){
-        String result = String.format("%s %s%n", Prefix.PRIMITIVE.value, body);
-        ConsoleSaver.writeToConsole(result);
+    public String getDecoratedMessage(){
+        return String.format("%s %s%n", Prefix.PRIMITIVE.value, body);
     }
 }

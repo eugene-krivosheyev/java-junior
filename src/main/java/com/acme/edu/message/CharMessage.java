@@ -4,7 +4,7 @@ import com.acme.edu.ConsoleSaver;
 import com.acme.edu.Prefix;
 
 public class CharMessage extends Message{
-    private final char body;
+    private char body;
 
     public CharMessage(char body) {
         super(body);
@@ -12,8 +12,7 @@ public class CharMessage extends Message{
     }
 
     @Override
-    public void writeMessageToLog(){
-        String result = String.format("%s %s%n", Prefix.CHAR.value, body);
-        ConsoleSaver.writeToConsole(result);
+    public String getDecoratedMessage(){
+        return String.format("%s %s%n", Prefix.CHAR.value, body);
     }
 }

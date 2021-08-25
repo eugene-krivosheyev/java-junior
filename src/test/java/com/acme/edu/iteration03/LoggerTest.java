@@ -63,6 +63,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
+    @Disabled
     public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() {
         //region when
         Logger.log(1);

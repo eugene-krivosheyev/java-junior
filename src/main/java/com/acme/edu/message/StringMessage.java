@@ -1,11 +1,10 @@
 package com.acme.edu.message;
 
-import com.acme.edu.ConsoleSaver;
 import com.acme.edu.Prefix;
 
 public class StringMessage extends Message{
-    private final String body;
-    private final int stringCounter;
+    private String body;
+    private int stringCounter;
 
     public StringMessage(String body) {
         super(body);
@@ -21,8 +20,17 @@ public class StringMessage extends Message{
         this.stringCounter = stringCounter;
     }
 
+    public StringMessage accumulate(StringMessage message){
+        this.stringCounter++;
+        return this;
+    }
+
+    public String getBody(){
+        return this.body;
+    }
+
     @Override
-    public void writeMessageToLog(){
+    public String getDecoratedMessage(){
         String result;
         if(stringCounter == 1){
             result = String.format("%s %s%n", Prefix.STRING.value, body);
@@ -30,6 +38,6 @@ public class StringMessage extends Message{
             result = String.format("%s %s (x%d)%n", Prefix.STRING.value, body, stringCounter);
         }
 
-        ConsoleSaver.writeToConsole(result);
+        return result;
     }
 }

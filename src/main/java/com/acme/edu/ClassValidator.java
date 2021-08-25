@@ -8,9 +8,13 @@ public class ClassValidator {
     public boolean setCurrentClass(Object object) {
         if(this.currentClass != object.getClass()){
             this.currentClass = object.getClass();
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
+    }
+
+    public void clearClass(){
+        this.currentClass = null;
     }
 }
