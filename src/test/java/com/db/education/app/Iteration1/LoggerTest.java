@@ -8,9 +8,12 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static com.db.education.app.Logger.*;
-
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+    public static final String CHAR_PREFIX = "char";
+    public static final String OBJECT_PREFIX = "reference";
+    public static final String PRIMITIVE_PREFIX = "primitive";
+    public static final String STRING_PREFIX = "string";
+
     //region given
     @BeforeEach
     public void setUpSystemOut() throws IOException {
@@ -105,18 +108,18 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("false");
         //endregion
     }
-/*
+
     @Test
     public void shouldLogReference() throws IOException {
         //region when
         Logger.log(new Object());
         Logger.flush();
-        //endregion
+        //endsregion
 
         //region then
         assertSysoutContains(OBJECT_PREFIX);
         assertSysoutContains("@");
         //endregion
     }
-*/
+
 }
