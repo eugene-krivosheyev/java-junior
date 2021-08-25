@@ -1,6 +1,6 @@
 package com.db.edu.message;
 
-public class BooleanMessage implements Message{
+public class BooleanMessage extends Message<Boolean> {
     private boolean message;
 
     BooleanMessage(boolean message) {
@@ -10,7 +10,7 @@ public class BooleanMessage implements Message{
     public void save(boolean)
 
     @Override
-    public Object accumulate(Object type) {
+    public Message accumulate(Message message) {
         return null;
     }
 }

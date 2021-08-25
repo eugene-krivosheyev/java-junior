@@ -10,8 +10,8 @@ import static com.db.edu.Prefix.*;
 import static com.db.edu.message.StringMessage.flushString;
 
 public class Controller {
-    private static Object accumulateMessage;
-    private static Object type;
+    private Message accumulateMessage;
+//    private static Object type;
     private static final Saver saver = new ConsoleSaver();
 
     public static void flush() {
@@ -26,8 +26,9 @@ public class Controller {
     }
 
     public void log(Message message) {
-       type = message.accumulate(type);
-       if (type instanceof )
+       if (message.getClass() == accumulateMessage.getClass()) {
+           accumulateMessage.accumulate(message);
+       }
     }
 
     public void log(BooleanMessage message) {

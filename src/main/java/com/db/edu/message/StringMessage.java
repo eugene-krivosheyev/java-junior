@@ -3,25 +3,13 @@ package com.db.edu.message;
 import static com.db.edu.Controller.flush;
 import static com.db.edu.Prefix.STRING_PREFIX;
 
-public class StringMessage implements Message {
+public class StringMessage extends Message<String> {
     private static String stringResult;
     private static int stringCount;
     private String message;
 
     public StringMessage(String message) {
         this.message = message;
-    }
-
-    public Object accumulate(Object type) {
-        if (!(type instanceof String)) {
-            flush();
-            type = message;
-        } else if (!message.equals(stringResult)) {
-            flush();
-        }
-        stringResult = message;
-        stringCount++;
-        return type;
     }
 
     public static void flushString() {
@@ -32,5 +20,15 @@ public class StringMessage implements Message {
         }
         saver.save(strRes);
         stringCount = 0;
+    }
+
+    @Override
+    public StringMessage accumulate(Message message) {
+        if (!(message instanceof StringMessage) || !message.getMessage().equals(stringResult)) {
+            flush();
+        }
+        stringResult = (String) message.getMessage();
+        stringCount++;
+        return this;
     }
 }

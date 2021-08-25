@@ -3,8 +3,13 @@ package com.db.edu.message;
 import com.db.edu.saver.ConsoleSaver;
 import com.db.edu.saver.Saver;
 
-public interface Message {
-    Saver saver = new ConsoleSaver();
+public abstract class Message<T> {
+    static Saver saver = new ConsoleSaver();
+    private T message;
 
-    Object accumulate(Object type);
+    public T getMessage() {
+        return message;
+    }
+
+    abstract public Message accumulate(Message message);
 }
