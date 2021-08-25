@@ -1,6 +1,7 @@
 package demo;
 
 import java.sql.Connection;
+import java.util.Arrays;
 
 public class InheritanceDemo {
     public static void main(String[] args) {
@@ -9,6 +10,18 @@ public class InheritanceDemo {
 
         State.staticDefenderM();
         new T1().instanceDefenderM();
+
+        m(new T1());
+        m(new T2());
+
+        State[] array = { new T1(), new T2() };
+        for (State current : array) {
+            current.step();
+        }
+    }
+
+    private static void m(State state) {
+        state.step();
     }
 }
 
