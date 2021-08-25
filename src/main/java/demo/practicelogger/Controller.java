@@ -7,16 +7,16 @@ import java.util.Queue;
 
 public class Controller {
     private Queue<Message> currentState;
-    private Saver saver;
-
-    public void log(Message message) {
-        if (currentState.sameTypeOf(message)) {
-            currentState.add(message);
-        } else {
-            for (Message curent : currentState) {
+//    private Saver saver;
+//
+//    public void log(Message message) {
+//        if (currentState.sameTypeOf(message)) {
+//            currentState.add(message);
+//        } else {
+//            for (Message curent : currentState) {
 //            currentSum = message.accumulate(currentState);
-            }
-            saver.save(currentSum.getDecoratedMesssage());
-        }
-    }
+//            }
+//            saver.save(currentSum.getDecoratedMesssage());
+//        }
+//    }
 }
