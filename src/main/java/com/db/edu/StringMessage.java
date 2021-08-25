@@ -2,32 +2,30 @@ package com.db.edu;
 
 public class StringMessage {
     private String messageBody;
-
-    static String stringAcc = "";
-    static int stringCount = 0;
+    int stringCount = 0;
 
     public StringMessage(String messageBody) {
         this.messageBody = messageBody;
     }
 
-    static void printAccumulatedString() {
+    void printAccumulatedString() {
         if (stringCount != 0) {
-            ConsoleSaver.printToConsole(Prefix.STRING.value + stringAcc + (stringCount > 1 ? " (x" + stringCount + ")" : ""));
+            ConsoleSaver.printToConsole(this.toString());
             stringCount = 0;
-            stringAcc = "";
+            messageBody = "";
         }
     }
 
-    public static void accumulate(StringMessage message) {
-        if (stringCount > 0 && !stringAcc.equals(message.messageBody)) {
-            StringMessage.printAccumulatedString();
+    public void accumulate(StringMessage message) {
+        if (stringCount > 0 && !messageBody.equals(message.messageBody)) {
+            this.printAccumulatedString();
         }
-        stringAcc = message.messageBody;
+        messageBody = message.messageBody;
         stringCount++;
     }
 
     @Override
     public String toString() {
-        return Prefix.STRING.value + messageBody;
+        return Prefix.STRING.value + messageBody + (stringCount > 1 ? " (x" + stringCount + ")" : "");
     }
 }

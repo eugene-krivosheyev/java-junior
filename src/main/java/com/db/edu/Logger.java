@@ -9,46 +9,35 @@ public class Logger {
     }
 
     public static void log(int... message) {
-        StringMessage.printAccumulatedString();
         for (int current : message) {
             loggerController.log(new IntMessage(current));
         }
     }
 
     public static void log(byte message) {
-        IntMessage.printAccumulatedInt();
-        StringMessage.printAccumulatedString();
-        ConsoleSaver.printToConsole(Prefix.PRIMITIVE.value + message);
+        loggerController.log(new ByteMessage(message));
     }
 
     public static void log(char message) {
-        IntMessage.printAccumulatedInt();
-        StringMessage.printAccumulatedString();
-        ConsoleSaver.printToConsole(Prefix.CHAR.value + message);
+        loggerController.log(new CharMessage(message));
     }
 
     public static void log(String message) {
-        IntMessage.printAccumulatedInt();
         loggerController.log(new StringMessage(message));
     }
 
     public static void log(String... message) {
-        IntMessage.printAccumulatedInt();
         for (String current : message) {
             loggerController.log(new StringMessage(current));
         }
     }
 
     public static void log(boolean message) {
-        StringMessage.printAccumulatedString();
-        IntMessage.printAccumulatedInt();
-        ConsoleSaver.printToConsole(Prefix.PRIMITIVE.value + message);
+        loggerController.log(new BoolMessage(message));
     }
 
     public static void log(Object message) {
-        IntMessage.printAccumulatedInt();
-        StringMessage.printAccumulatedString();
-        ConsoleSaver.printToConsole(Prefix.REFERENCE.value + message);
+        loggerController.log(new ObjectMessage(message));
     }
 
     /*

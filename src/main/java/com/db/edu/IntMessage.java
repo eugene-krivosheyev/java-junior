@@ -2,15 +2,13 @@ package com.db.edu;
 
 public class IntMessage {
     private int messageBody;
+    int intCount = 0;
 
-    static int intSum = 0;
-    static int intCount = 0;
-
-    static void printAccumulatedInt() {
+    void printAccumulatedInt() {
         if (intCount != 0) {
-            ConsoleSaver.printToConsole(Prefix.PRIMITIVE.value + intSum);
+            ConsoleSaver.printToConsole(this.toString());
             intCount = 0;
-            intSum = 0;
+            messageBody = 0;
         }
     }
 
@@ -18,9 +16,9 @@ public class IntMessage {
         this.messageBody = messageBody;
     }
 
-    static public void accumulate(IntMessage message) {
+    public void accumulate(IntMessage message) {
         intCount++;
-        intSum += message.messageBody;
+        messageBody += message.messageBody;
     }
 
     @Override
