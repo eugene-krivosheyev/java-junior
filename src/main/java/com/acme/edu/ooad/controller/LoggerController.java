@@ -1,96 +1,71 @@
 package com.acme.edu.ooad.controller;
 
-import com.acme.edu.ooad.message.ObjectMessage;
-import com.acme.edu.ooad.processor.*;
-import com.acme.edu.ooad.saver.ConsoleSaver;
+import com.acme.edu.ooad.message.*;
+import com.acme.edu.ooad.saver.ValidatingSaver;
 
 public class LoggerController {
-    private final NumericProcessor integerProcessor;
-    private final NumericProcessor byteProcessor;
-    private final StringProcessor stringProcessor;
-    private final CharacterProcessor characterProcessor;
-    private final BooleanProcessor booleanProcessor;
-    private final ObjectProcessor objectProcessor;
-    private final ConsoleSaver consoleSaver;
 
-    private Processor lastProcessor;
+    private ObjectMessage lastLogMessage;
+    private ValidatingSaver saver;
 
-    public LoggerController(NumericProcessor integerProcessor,
-                            NumericProcessor byteProcessor,
-                            StringProcessor stringProcessor,
-                            CharacterProcessor characterProcessor,
-                            BooleanProcessor booleanProcessor,
-                            ObjectProcessor objectProcessor, ConsoleSaver consoleSaver) {
-        this.integerProcessor = integerProcessor;
-        this.byteProcessor = byteProcessor;
-        this.stringProcessor = stringProcessor;
-        this.characterProcessor = characterProcessor;
-        this.booleanProcessor = booleanProcessor;
-        this.objectProcessor = objectProcessor;
-        this.consoleSaver = consoleSaver;
+    public LoggerController(ValidatingSaver saver) {
+        this.saver = saver;
     }
 
-    public void log(int message) {
-        checkLastProcessor(integerProcessor);
-        integerProcessor.process(message);
+    public void log(BooleanMessage boolMessage) {
+        flush();
+        saver.save(boolMessage);
     }
 
-    public void log(int... messages) {
-        checkLastProcessor(integerProcessor);
-        integerProcessor.process(messages);
+    public void log(CharMessage charMessage) {
+        flush();
+        saver.save(charMessage);
     }
 
-    public void log(byte message) {
-        checkLastProcessor(byteProcessor);
-        byteProcessor.process(message);
-    }
-
-    public void log(String message) {
-        checkLastProcessor(stringProcessor);
-        saveLogs(stringProcessor.process(message));
-    }
-
-    public void log(String... messages) {
-        checkLastProcessor(stringProcessor);
-        saveLogs(stringProcessor.process(messages));
-    }
-
-    public void log(char message) {
-        checkLastProcessor(characterProcessor);
-        saveLogs(characterProcessor.process(message));
-    }
-
-    public void log(boolean message) {
-        checkLastProcessor(booleanProcessor);
-        saveLogs(booleanProcessor.process(message));
-    }
-
-    public void log(Object message) {
-        checkLastProcessor(objectProcessor);
-        saveLogs(objectProcessor.process(message));
-    }
-
-    private void checkLastProcessor(Processor processor) {
-        if ( lastProcessor != processor ) {
-            flush();
-            lastProcessor = processor;
+    public void log(ByteMessage byteMessage) {
+        if (lastLogMessage != null && !(lastLogMessage instanceof ByteMessage)) {
+            saver.save(lastLogMessage);
         }
+
+        byteMessage.process();
+        updateLastLoggedMessage(byteMessage);
+    }
+
+    public void log(IntegerMessage intMessage) {
+        if (lastLogMessage != null && !(lastLogMessage instanceof IntegerMessage)) {
+            saver.save(lastLogMessage);
+        }
+
+        intMessage.process();
+        updateLastLoggedMessage(intMessage);
+    }
+
+    public void log(StringMessage strMessage) {
+        if (lastLogMessage != null &&
+            (!(lastLogMessage instanceof StringMessage) || strMessage.isNewString())) {
+            saver.save(lastLogMessage);
+        }
+
+        strMessage.process();
+        updateLastLoggedMessage(strMessage);
+    }
+
+    public void log(ObjectMessage objMessage) {
+        flush();
+        saver.save(objMessage);
     }
 
     public void flush() {
-        if ( lastProcessor == null ) return;
-        flushAndSaveLogs(lastProcessor);
-        lastProcessor = null;
-    }
-
-    void flushAndSaveLogs(Processor processor) {
-        saveLogs(processor.flush());
-    }
-
-    void saveLogs(ObjectMessage[] logs) {
-        if ( logs == null || logs.length < 1 ) return;
-        for (var log : logs ) {
-            consoleSaver.save(log);
+        if (lastLogMessage != null) {
+            saver.save(lastLogMessage);
+            updateLastLoggedMessage(null);
         }
+    }
+
+    private void updateLastLoggedMessage(ObjectMessage newMessage) {
+        if (lastLogMessage != null) {
+            lastLogMessage.clean();
+        }
+        lastLogMessage = newMessage;
     }
 }

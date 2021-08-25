@@ -1,6 +1,6 @@
 package com.acme.edu.ooad.processor;
 
-import com.acme.edu.ooad.message.NumericMessage;
+import com.acme.edu.ooad.message.IntegerMessage;
 import com.acme.edu.ooad.message.ObjectMessage;
 
 public class NumericProcessor extends Processor {
@@ -123,15 +123,15 @@ public class NumericProcessor extends Processor {
         int optionalMessageCounter = (buffer != 0 || thresholdOverflowCounter == 0) ? 1 : 0;
         int counter = Math.abs(thresholdOverflowCounter);
 
-        NumericMessage[] res = new NumericMessage[counter + optionalMessageCounter];
+        IntegerMessage[] res = new IntegerMessage[counter + optionalMessageCounter];
 
         int overflowValue = getThresholdValue(thresholdOverflowCounter);
         for (int i = 0; i < counter; ++i) {
-            res[i] = new NumericMessage(overflowValue);
+            res[i] = new IntegerMessage(overflowValue);
         }
 
         if (optionalMessageCounter == 1) {
-            res[counter] = new NumericMessage(buffer);
+            res[counter] = new IntegerMessage(buffer);
         }
 
         cleanBuffer();

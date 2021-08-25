@@ -1,6 +1,6 @@
 package com.acme.edu;
 
-public class Logger {
+public class OldLogger {
 
     private enum LastLoggedType {
         NONE,

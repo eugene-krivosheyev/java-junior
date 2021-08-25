@@ -1,8 +1,7 @@
 package com.acme.edu.iteration02;
 
-import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import com.acme.edu.ooad.controller.LoggerController;
+import com.acme.edu.ooad.controller.OldLoggerController;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 
 import com.acme.edu.ooad.factory.LoggerControllerFactory;
-import static com.acme.edu.Logger.*;
+import static com.acme.edu.OldLogger.*;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
@@ -29,7 +28,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
 
-        LoggerController logger = LoggerControllerFactory.create();
+        OldLoggerController logger = LoggerControllerFactory.create();
 
         //region when
         logger.log("str 1");
@@ -51,7 +50,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
 
-        LoggerController logger = LoggerControllerFactory.create();
+        OldLoggerController logger = LoggerControllerFactory.create();
 
         //region when
         logger.log("Test 1");
@@ -113,7 +112,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
 
-        LoggerController logger = LoggerControllerFactory.create();
+        OldLoggerController logger = LoggerControllerFactory.create();
 
         //region when
         logger.log("Test 1");
@@ -175,7 +174,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
 
-        LoggerController logger = LoggerControllerFactory.create();
+        OldLoggerController logger = LoggerControllerFactory.create();
 
         //region when
         logger.log("str 1");

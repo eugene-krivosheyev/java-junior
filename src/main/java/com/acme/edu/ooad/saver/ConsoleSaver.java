@@ -14,5 +14,6 @@ public class ConsoleSaver extends ValidatingSaver {
         }
 
         System.out.println(message);
+
     }
 }

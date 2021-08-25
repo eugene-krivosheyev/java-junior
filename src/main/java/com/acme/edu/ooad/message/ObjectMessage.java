@@ -1,7 +1,7 @@
 package com.acme.edu.ooad.message;
 
 public class ObjectMessage {
-    private final String prefix;
+    /*private*/protected final String prefix;
     private final Object value;
 
     protected String getPrefix() {
@@ -21,4 +21,15 @@ public class ObjectMessage {
     public String toString() {
         return prefix + value;
     }
+    //-------------
+//    public ObjectMessage flush() {
+//        return this;
+//    }
+
+    public void clean(){};
+
+//    public ObjectMessage[] process(Object message) {
+//        this.lastObject = message;
+//        return flush();
+//    }
 }

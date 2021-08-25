@@ -1,7 +1,7 @@
 package com.acme.edu.iteration01;
 
-//import com.acme.edu.Logger;
-import com.acme.edu.ooad.controller.LoggerController;
+//import com.acme.edu.ooad.Logger;
+import com.acme.edu.ooad.controller.OldLoggerController;
 import com.acme.edu.ooad.factory.LoggerControllerFactory;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.AfterEach;
@@ -27,7 +27,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogInteger() throws IOException {
 
-        LoggerController logger = LoggerControllerFactory.create();
+        OldLoggerController logger = LoggerControllerFactory.create();
 
         //region when
         logger.log(1);
@@ -49,7 +49,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogByte() throws IOException {
 
-        LoggerController logger = LoggerControllerFactory.create();
+        OldLoggerController logger = LoggerControllerFactory.create();
 
         //region when
         logger.log((byte) 1);
@@ -71,7 +71,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogChar() throws IOException {
 
-        LoggerController logger = LoggerControllerFactory.create();
+        OldLoggerController logger = LoggerControllerFactory.create();
 
         //region when
         logger.log('a');
@@ -88,7 +88,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogString() throws IOException {
 
-        LoggerController logger = LoggerControllerFactory.create();
+        OldLoggerController logger = LoggerControllerFactory.create();
 
         //region when
         logger.log("test string 1");
@@ -106,7 +106,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogBoolean() throws IOException {
 
-        LoggerController logger = LoggerControllerFactory.create();
+        OldLoggerController logger = LoggerControllerFactory.create();
 
         //region when
         logger.log(true);
@@ -123,7 +123,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogReference() throws IOException {
 
-        LoggerController logger = LoggerControllerFactory.create();
+        OldLoggerController logger = LoggerControllerFactory.create();
 
         //region when
         logger.log(new Object());

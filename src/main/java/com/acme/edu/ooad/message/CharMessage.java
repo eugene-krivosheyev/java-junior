@@ -11,6 +11,12 @@ public class CharMessage extends ObjectMessage {
 
     @Override
     public String toString() {
-        return getPrefix() + value;
+        return prefix + value;
     }
+
+//    @Override
+//    public CharMessage flush() {
+//        return this;
+//    }
+
 }
