@@ -2,11 +2,6 @@ package com.db.edu;
 
 public class Logger {
 
-    public static final String PRIMITIVE_PREFIX = "primitive: ";
-    public static final String CHAR_PREFIX = "char: ";
-    public static final String STRING_PREFIX = "string: ";
-    public static final String REFERENCE_PREFIX = "reference: ";
-
     private static int intSum = 0;
     private static int intCount = 0;
     private static String stringAcc = "";
@@ -46,13 +41,13 @@ public class Logger {
     public static void log(byte message) {
         printAccumulatedInt();
         printAccumulatedString();
-        printToConsole(PRIMITIVE_PREFIX + message);
+        printToConsole(Prefix.PRIMITIVE.value + message);
     }
 
     public static void log(char message) {
         printAccumulatedInt();
         printAccumulatedString();
-        printToConsole(CHAR_PREFIX + message);
+        printToConsole(Prefix.CHAR.value + message);
     }
 
     public static void log(String message) {
@@ -78,13 +73,13 @@ public class Logger {
     public static void log(boolean message) {
         printAccumulatedString();
         printAccumulatedInt();
-        printToConsole(PRIMITIVE_PREFIX + message);
+        printToConsole(Prefix.PRIMITIVE.value + message);
     }
 
     public static void log(Object message) {
         printAccumulatedInt();
         printAccumulatedString();
-        printToConsole(REFERENCE_PREFIX + message);
+        printToConsole(Prefix.PRIMITIVE.value + message);
     }
 
     public static void close() {
@@ -94,7 +89,7 @@ public class Logger {
 
     private static void printAccumulatedInt() {
         if (intCount != 0) {
-            printToConsole(PRIMITIVE_PREFIX + intSum);
+            printToConsole(Prefix.PRIMITIVE.value + intSum);
             intCount = 0;
             intSum = 0;
         }
@@ -102,7 +97,7 @@ public class Logger {
 
     private static void printAccumulatedString() {
         if (stringCount != 0) {
-            printToConsole(STRING_PREFIX + stringAcc + (stringCount > 1 ? " (x" + stringCount + ")" : ""));
+            printToConsole(Prefix.STRING + stringAcc + (stringCount > 1 ? " (x" + stringCount + ")" : ""));
             stringCount = 0;
             stringAcc = "";
         }
