@@ -1,9 +1,14 @@
 package demo;
 
+import java.sql.Connection;
+
 public class InheritanceDemo {
     public static void main(String[] args) {
         T object = new T(new T1());
         object.m();
+
+        State.staticDefenderM();
+        new T1().instanceDefenderM();
     }
 }
 
@@ -25,7 +30,16 @@ class T {
 }
 
 interface State {
-    public void step();
+    int MY_CONST = 0;
+    void step();
+
+    public static void staticDefenderM() {
+
+    }
+
+    public default void instanceDefenderM() {
+        this.step();
+    }
 }
 
 class T1 implements State {
