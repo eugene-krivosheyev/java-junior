@@ -18,6 +18,7 @@ public class ObjectMessage {
         this.value = value;
     }
 
+    public void clean() {}
     public String toString() {
         return prefix + value;
     }
