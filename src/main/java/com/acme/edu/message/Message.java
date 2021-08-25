@@ -1,28 +1,26 @@
 package com.acme.edu.message;
 
-import com.acme.edu.ConsoleSaver;
 import com.acme.edu.Prefix;
 
 public abstract class Message {
-    private Object body;
+    private final Object body;
 
     public Message(Object body) {
         this.body = body;
     }
 
-    public Object getBody(){
+    public Object getBody() {
         return this.body;
     }
 
-    public boolean sameTypeOf(Message message){
+    public boolean sameTypeOf(Message message) {
         return false;
     }
 
-    public Message accumulate(Message message) {
-        return this;
+    public void accumulate(Message message) {
     }
 
-    public String getDecoratedMessage(){
+    public String getDecoratedMessage() {
         return String.format("%s %s%n", Prefix.REFERENCE.value, body.toString());
     }
 }

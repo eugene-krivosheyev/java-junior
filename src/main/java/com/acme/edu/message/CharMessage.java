@@ -1,10 +1,9 @@
 package com.acme.edu.message;
 
-import com.acme.edu.ConsoleSaver;
 import com.acme.edu.Prefix;
 
-public class CharMessage extends Message{
-    private char body;
+public class CharMessage extends Message {
+    private final char body;
 
     public CharMessage(char body) {
         super(body);
@@ -17,7 +16,7 @@ public class CharMessage extends Message{
     }
 
     @Override
-    public String getDecoratedMessage(){
+    public String getDecoratedMessage() {
         return String.format("%s %s%n", Prefix.CHAR.value, body);
     }
 }

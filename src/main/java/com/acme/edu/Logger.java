@@ -11,7 +11,7 @@ public class Logger {
         controller.log(new IntMessage(message));
     }
 
-    public static void log(int ... messages) {
+    public static void log(int... messages) {
         Arrays.stream(messages).forEach(Logger::log);
     }
 
@@ -27,7 +27,7 @@ public class Logger {
         controller.log(new StringMessage(message));
     }
 
-    public static void log(String ... messages) {
+    public static void log(String... messages) {
         Arrays.stream(messages).forEach(Logger::log);
     }
 

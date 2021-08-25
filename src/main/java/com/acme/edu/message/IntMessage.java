@@ -2,7 +2,7 @@ package com.acme.edu.message;
 
 import com.acme.edu.Prefix;
 
-public class IntMessage extends Message{
+public class IntMessage extends Message {
     private int body;
 
     public IntMessage(int body) {
@@ -16,13 +16,12 @@ public class IntMessage extends Message{
     }
 
     @Override
-    public IntMessage accumulate(Message message){
-        this.body += (int)message.getBody();
-        return this;
+    public void accumulate(Message message) {
+        this.body += (int) message.getBody();
     }
 
     @Override
-    public String getDecoratedMessage(){
+    public String getDecoratedMessage() {
         return String.format("%s %s%n", Prefix.PRIMITIVE.value, body);
     }
 }

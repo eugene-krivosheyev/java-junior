@@ -2,7 +2,7 @@ package com.acme.edu.message;
 
 import com.acme.edu.Prefix;
 
-public class ByteMessage extends Message{
+public class ByteMessage extends Message {
     private byte body;
 
     public ByteMessage(byte body) {
@@ -11,20 +11,18 @@ public class ByteMessage extends Message{
         this.body = body;
     }
 
-
     @Override
     public boolean sameTypeOf(Message message) {
         return message instanceof ByteMessage;
     }
 
     @Override
-    public Message accumulate(Message message){
+    public void accumulate(Message message) {
         this.body += (byte) message.getBody();
-        return this;
     }
 
     @Override
-    public String getDecoratedMessage(){
+    public String getDecoratedMessage() {
         return String.format("%s %s%n", Prefix.PRIMITIVE.value, body);
     }
 }

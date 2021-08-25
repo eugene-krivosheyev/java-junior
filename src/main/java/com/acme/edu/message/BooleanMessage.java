@@ -1,10 +1,9 @@
 package com.acme.edu.message;
 
-import com.acme.edu.ConsoleSaver;
 import com.acme.edu.Prefix;
 
 public class BooleanMessage extends Message{
-    private boolean body;
+    private final boolean body;
 
     public BooleanMessage(boolean body) {
         super(body);
