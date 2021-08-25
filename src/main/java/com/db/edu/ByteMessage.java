@@ -11,12 +11,13 @@ public class ByteMessage {
         this.message = message;
     }
 
-    public static void accumulate(Object type, byte message) {
+    Object accumulate(Object type) {
         if (!(type instanceof Byte)) {
             flush();
             type = message;
         }
         byteResult += message;
+        return type;
     }
 
     static void flushByte() {

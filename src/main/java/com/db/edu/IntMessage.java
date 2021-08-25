@@ -11,6 +11,10 @@ public class IntMessage {
         this.message = message;
     }
 
+    public void createMessage() {
+
+    }
+
     static void flushInt() {
         while (intResult > Integer.MAX_VALUE) {
             intResult -= Integer.MAX_VALUE;
@@ -24,11 +28,12 @@ public class IntMessage {
         intResult = 0;
     }
 
-    private static void accumulate(Object type, int message) {
+    Object accumulate(Object type) {
         if (!(type instanceof Integer)) {
             flush();
             type = message;
         }
         intResult += message;
+        return type;
     }
 }

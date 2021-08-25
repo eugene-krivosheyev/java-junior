@@ -1,21 +1,43 @@
 package com.db.edu;
 
 
-import static com.db.edu.Prefix.*;
-
 public class Logger {
-    private static Controller controller;
+    private static final Controller controller = new Controller();
 
-    public void log(int message) {
+    public static void log(int message) {
         controller.log(new IntMessage(message));
     }
 
-    public void log(byte message) {
+    public static void log(byte message) {
         controller.log(new ByteMessage(message));
     }
 
-    public void log(String message) {
+    public static void log(String message) {
         controller.log(new StringMessage(message));
+    }
+
+    public static void log(char message) {
+        controller.log(message);
+    }
+
+    public static void log(boolean message) {
+        controller.log(message);
+    }
+
+    public static void log(Object message) {
+        controller.log(message);
+    }
+
+    public static void log(int ... message) {
+        controller.log(message);
+    }
+
+    public static void log(String  ... message) {
+        controller.log(message);
+    }
+
+    public static void flush() {
+        Controller.flush();
     }
 
 }
