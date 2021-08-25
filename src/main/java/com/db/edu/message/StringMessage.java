@@ -6,7 +6,6 @@ import static com.db.edu.Prefix.STRING_PREFIX;
 public class StringMessage extends Message<String> {
     private static String stringResult;
     private static int stringCount;
-    private String message;
 
     public StringMessage(String message) {
         this.message = message;

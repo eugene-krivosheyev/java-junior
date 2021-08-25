@@ -4,7 +4,6 @@ import static com.db.edu.Controller.flush;
 import static com.db.edu.Prefix.PRIMITIVE_PREFIX;
 
 public class IntMessage extends Message<Integer> {
-    private int message;
 
     private static long intResult;
 

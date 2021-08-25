@@ -5,7 +5,7 @@ import com.db.edu.saver.Saver;
 
 public abstract class Message<T> {
     static Saver saver = new ConsoleSaver();
-    private T message;
+    protected T message;
 
     public T getMessage() {
         return message;

@@ -4,7 +4,6 @@ import static com.db.edu.Controller.flush;
 import static com.db.edu.Prefix.PRIMITIVE_PREFIX;
 
 public class ByteMessage extends Message<Byte> {
-    private byte message;
     private static int byteResult;
 
     public ByteMessage(byte message) {
