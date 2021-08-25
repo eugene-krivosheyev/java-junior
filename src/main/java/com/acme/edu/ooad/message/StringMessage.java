@@ -1,8 +1,10 @@
 package com.acme.edu.ooad.message;
 
+import java.util.Objects;
+
 public class StringMessage extends ObjectMessage{
     private final String value;
-    private static int stringCounter;
+    private static int stringCounter = 0;
     private static String lastString;
 
     public StringMessage(String value) {
@@ -30,11 +32,14 @@ public class StringMessage extends ObjectMessage{
     }
 
     /*private*/public boolean isNewString() {
-        return stringCounter != 0 && !lastString.equals(value);
+        if (lastString == null) {
+            return true;
+        }
+        return stringCounter != 0 && !Objects.equals(lastString,value);
     }
 
     private boolean isEmptyBuffer() {
-        return stringCounter == 0 || lastString.equals("");
+        return stringCounter == 0 || Objects.equals(lastString,"");
     }
 
 //    public StringMessage process(/*String message*/) {
@@ -49,11 +54,10 @@ public class StringMessage extends ObjectMessage{
 //        return result;
 //    }
     public void process() {
-        if (!isNewString()) {
-            ++stringCounter;
-        } else {
-            // do nothing
-        }
+  //      if (isNewString()) {
+             lastString = value;
+  //      }
+        ++stringCounter;
     }
 
 
