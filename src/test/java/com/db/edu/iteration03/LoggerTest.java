@@ -24,7 +24,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-
+/*
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
@@ -36,7 +36,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
             "primitives array: {-1, 0, 1}"+ lineSeparator()
         );
         //endregion
-    }
+    }*/
 /*
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
@@ -73,7 +73,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 */
 
-
+/*
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
@@ -96,7 +96,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region then
         assertSysoutContains("3");
         //endregion
-    }
+    }*/
 /*
     @Test
     public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException {
