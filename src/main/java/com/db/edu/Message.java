@@ -18,6 +18,10 @@ public class Message {
             return body;
         }
 
+        public void log() {
+
+        }
+
         @Override
         public String toString() {
             return "{ " + body  + " }";

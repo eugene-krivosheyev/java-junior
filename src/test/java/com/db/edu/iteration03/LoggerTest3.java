@@ -1,6 +1,7 @@
 package com.db.edu.iteration03;
 
 import com.db.edu.Logger;
+import com.db.edu.LoggerController;
 import com.db.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -72,7 +73,7 @@ public class LoggerTest3 implements SysoutCaptureAndAssertionAbility {
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
         Logger.log("str1", "string 2", "str 3");
-        Logger.close();
+        LoggerController.close();
         //endregion
         //region then
         assertSysoutContains("str1");
@@ -84,7 +85,7 @@ public class LoggerTest3 implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
         Logger.log(-1, 0, 1, 3);
-        Logger.close();
+        LoggerController.close();
         //endregion
         //region then
         assertSysoutContains("3");
