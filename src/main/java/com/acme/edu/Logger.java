@@ -2,22 +2,23 @@ package com.acme.edu;
 
 import java.util.Objects;
 
+import com.acme.edu.checkers.IntSequenceChecker;
+import com.acme.edu.checkers.StringSequenceChecker;
+
 public class Logger {
     public static Type primitiveType = Type.PRIMITIVE;
     public static Type charType = Type.CHAR;
     public static Type stringType = Type.STRING;
     public static Type referenceType = Type.REFERENCE;
 
+    private static IntSequenceChecker intCheker= new IntSequenceChecker();
+    private static StringSequenceChecker stringChecker = new StringSequenceChecker();
+
     private static boolean intAccumulateState = false;
     private static int intAccumulateSum = 0;
 
-    private static boolean accumString = false;
-
-    private static int strCount = 1;
-    private static String lastStr = null;
-
     public static void log(int message) {
-        checkIfStringIsEqualToLast(message);
+        stringChecker.check(message);
         checkIfIntegerComesAsSequence(message);
     }
 
@@ -33,7 +34,7 @@ public class Logger {
         nums += "}";
         System.out.println(nums);
 
-        checkIfStringIsEqualToLast(params);
+        stringChecker.check(params);
         for (int temp : params) {
             checkIfIntegerComesAsSequence(temp);
         }
@@ -41,74 +42,39 @@ public class Logger {
 
     public static void log(byte message) {
         System.out.println(primitiveType.value + message);
-        checkIfStringIsEqualToLast(message);
+        stringChecker.check(message);
         checkIfIntegerComesAsSequence(message);
     }
 
     public static void log(char message) {
         System.out.println(charType.value + message);
-        checkIfStringIsEqualToLast(message);
+        stringChecker.check(message);
         checkIfIntegerComesAsSequence(message);
     }
 
     public static void log(String message) {
-        checkIfStringIsEqualToLast(message);
+        stringChecker.check(message);
         checkIfIntegerComesAsSequence(message);
     }
 
     public static void log(String ... params){
         checkIfIntegerComesAsSequence(params);
         for (String temp : params){
-            checkIfStringIsEqualToLast(temp);
+            stringChecker.check(temp);
         }
 
     }
 
     public static void log(boolean message) {
         System.out.println(primitiveType.value + message);
-        checkIfStringIsEqualToLast(message);
+        stringChecker.check(message);
         checkIfIntegerComesAsSequence(message);
     }
 
     public static void log(Object message) {
         System.out.println(referenceType.value + message);
-        checkIfStringIsEqualToLast(message);
+        stringChecker.check(message);
         checkIfIntegerComesAsSequence(message);
-    }
-
-    private static void checkIfStringIsEqualToLast(Object message) {
-        if (message instanceof String) {
-            accumString = true;
-
-            if (Objects.equals(lastStr, (String)message)) {
-                strCount++;
-            }
-            else {
-                if (strCount > 1) {
-                    System.out.println(stringType.value + lastStr + " (x" + strCount + ")");
-                }
-                else {
-                    if (lastStr != null) {
-                        System.out.println(stringType.value + lastStr);
-                    }
-                }
-
-                lastStr = (String)message;
-                strCount = 1;
-            }
-        }
-        else {
-            if (accumString) {
-                if (strCount > 1) {
-                    System.out.println(stringType.value + lastStr + " (x" + strCount + ")");
-                }
-                else {
-                    System.out.println(stringType.value + lastStr);
-                }
-                strCount = 1;
-                accumString = false;
-            }
-        }
     }
 
     public static void checkIfIntegerComesAsSequence(Object message){
@@ -140,7 +106,8 @@ public class Logger {
 
 
     public static void flush(){
-        checkIfStringIsEqualToLast(null);
+//        checkIfStringIsEqualToLast(null);
+        stringChecker.check(null);
         checkIfIntegerComesAsSequence(null);
     }
 }
