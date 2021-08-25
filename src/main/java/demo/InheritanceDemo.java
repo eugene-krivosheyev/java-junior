@@ -2,34 +2,69 @@ package demo;
 
 public class InheritanceDemo {
     public static void main(String[] args) {
-        T object = new T2();
+        T object = new T(new T1());
         object.m();
     }
 }
 
 /**
- * Template Method
+ * Template Method <-> Strategy/State
  */
-abstract class T {
-    public void m() {
-        System.out.println("step 1"); // 1
-        this.step(); // 2
-        System.out.println("step 3"); // 3
+class T {
+    private State state;
+
+    T(State state) {
+        this.state = state;
     }
 
-    protected abstract void step();
+    public void m() {
+        System.out.println("step 1"); // 1
+        state.step(); // 2
+        System.out.println("step 3"); // 3
+    }
 }
 
-class T1 extends T {
+interface State {
+    public void step();
+}
+
+class T1 implements State {
     @Override
-    protected void step() {
+    public void step() {
         System.out.println("step 2 variant 1");
     }
 }
 
-class T2 extends T {
+class T2 implements State {
     @Override
-    protected void step() {
+    public void step() {
         System.out.println("step 2 var 2");
     }
 }
+
+class Santehnik {
+    public void fix() {
+        this.sayHello();
+        //.....
+        //.....
+    }
+
+    protected void sayHello() {
+        System.out.println("Hi");
+    }
+}
+
+// Special Case
+class NotSoTrezv extends Santehnik {
+    @Override
+    public void sayHello() {
+        System.out.println("!!!!!!!!$%^$&^*&^*&^*");
+    }
+}
+
+
+
+
+
+
+
