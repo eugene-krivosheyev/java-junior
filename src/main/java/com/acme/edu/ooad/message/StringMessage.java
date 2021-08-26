@@ -1,6 +1,6 @@
 package com.acme.edu.ooad.message;
 
-public class StringMessage extends AccumulatedMessage {
+public class StringMessage extends AccumulativeMessage {
 
     private static String lastString;
     private static int repeatableStringCounter;

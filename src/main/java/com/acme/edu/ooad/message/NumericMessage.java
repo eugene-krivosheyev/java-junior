@@ -1,6 +1,6 @@
 package com.acme.edu.ooad.message;
 
-public class NumericMessage extends AccumulatedMessage {
+public class NumericMessage extends AccumulativeMessage {
 
     private final int value;
 

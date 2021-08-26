@@ -19,24 +19,26 @@ public class LoggerController {
         if (isFlushNeeded(message)) {
             flush();
         }
-        if (AccumulatedMessage.isAncestor(message)) {
+        if (AccumulativeMessage.isAncestor(message)) {
             message.process();
             lastLoggedMessage = message;
         } else {
             consoleSaver.save(message);
             lastLoggedMessage = null;
         }
-
     }
+
     private static boolean isLastLogTypeSame(ObjectMessage message) {
         return Objects.equals(message.getClass(),lastLoggedMessage.getClass());
     }
 
     private static boolean isFlushNeeded(ObjectMessage message){
         if (lastLoggedMessage == null) return false;
-        if (AccumulatedMessage.isAncestor(message)) {
-            return !isLastLogTypeSame(message) || message.isNeedToFlush();
+        boolean flushFlag = false;
+        if (AccumulativeMessage.isAncestor(message)) {
+            flushFlag = !isLastLogTypeSame(message);
         }
-        return false;
+        flushFlag |= message.isNeedToFlush();
+        return flushFlag;
     }
 }
