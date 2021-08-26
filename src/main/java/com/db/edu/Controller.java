@@ -1,51 +1,44 @@
 package com.db.edu;
 
-import java.util.Objects;
+import com.db.edu.message.IntMessage;
+import com.db.edu.message.StringMessage;
 
 public class Controller {
-    private IntBuffer intBuffer = new IntBuffer();
-    private StringBuffer stringBuffer = new StringBuffer();
+    private final StringMessage bufferS = new StringMessage(null);
+    private final IntMessage bufferI = new IntMessage(0);
     State state = null;
-    private ConsoleSaver consoleSaver = new ConsoleSaver();
+    private final ConsoleSaver consoleSaver = new ConsoleSaver();
 
     public void log(IntMessage message) {
-        intBuffer.accumulate(message.getValue());
-        if(!stringBuffer.isEmpty()){
-            consoleSaver.save(flushString());
+        bufferI.accumulate(message);
+        if(!bufferS.isEmpty()){
+            consoleSaver.save(bufferS.decoratedString());
+            bufferS.flush();
         }
         state = State.INT;
     }
 
     public void log(StringMessage message) {
-        if(!stringBuffer.isStringEquals(message.getValue())) {
-            consoleSaver.save(flushString());
+        if(!bufferS.isMessageEquals(message)) {
+            consoleSaver.save(bufferS.decoratedString());
+            bufferS.flush();
         }
-        stringBuffer.accumulate(message.getValue());
-        if(!intBuffer.isEmpty()){
-            consoleSaver.save(flushInt());
+        bufferS.accumulate(message);
+        if(!bufferI.isEmpty()){
+            consoleSaver.save(bufferI.decoratedInt());
+            bufferI.flush();
         }
         state = State.STRING;
     }
 
-    private String flushInt() {
-            IntMessage m = new IntMessage(intBuffer.getSum());
-            intBuffer.bufferFlush();
-            return m.decoratedInt();
-    }
-
-    private String flushString() {
-            StringMessage m = new StringMessage(stringBuffer.getBufString());
-            String result = m.decoratedString(stringBuffer.getQuantityString());
-            stringBuffer.bufferFlush();
-            return result;
-    }
-
     void flush() {
-        if (!stringBuffer.isEmpty()) {
-            consoleSaver.save(flushString());
+        if (!bufferS.isEmpty()) {
+            consoleSaver.save(bufferS.decoratedString());
+            bufferS.flush();
         }
-        if (!intBuffer.isEmpty()) {
-            consoleSaver.save(flushInt());
+        if (!bufferI.isEmpty()) {
+            consoleSaver.save(bufferI.decoratedInt());
+            bufferI.flush();
         }
     }
 }
