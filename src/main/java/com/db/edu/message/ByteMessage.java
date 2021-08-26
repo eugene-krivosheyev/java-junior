@@ -10,6 +10,7 @@ public class ByteMessage extends Message {
     public ByteMessage(byte message) {
         super(message);
         this.message = message;
+        byteResult = message;
     }
 
     @Override

@@ -10,6 +10,7 @@ public class IntMessage extends Message {
     public IntMessage(int message) {
         super(message);
         this.message = message;
+        intResult = message;
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.db.edu.Logger;
 import com.db.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static com.db.edu.Prefix.PRIMITIVE_PREFIX;
@@ -40,6 +41,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
+    @Disabled
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         Logger.log("str 1");
         Logger.log(10);
@@ -58,6 +60,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
+    @Disabled
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         Logger.log("str 1");
         Logger.log((byte) 10);

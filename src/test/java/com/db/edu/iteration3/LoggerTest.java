@@ -21,17 +21,17 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         resetOut();
     }
 
-//    @Test
-//    public void shouldLogStringsWithOneMethodCall() {
-//        Logger.log("str1", "string 2", "str 3");
-//
-//        logAssert(STRING_PREFIX.body, "str1", "string 2", "str 3");
-//    }
-//
-//    @Test
-//    public void shouldLogIntegersWithOneMethodCall() {
-//        Logger.log(-1, 0, 1, 3);
-//
-//        logAssert(PRIMITIVE_PREFIX.body, "3");
-//    }
+    @Test
+    public void shouldLogStringsWithOneMethodCall() {
+        Logger.log("str1", "string 2", "str 3");
+
+        logAssert(STRING_PREFIX.body, "str1", "string 2", "str 3");
+    }
+
+    @Test
+    public void shouldLogIntegersWithOneMethodCall() {
+        Logger.log(-1, 0, 1, 3);
+
+        logAssert(PRIMITIVE_PREFIX.body, "3");
+    }
 }

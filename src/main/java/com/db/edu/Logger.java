@@ -1,10 +1,7 @@
 package com.db.edu;
 
 
-import com.db.edu.message.BooleanMessage;
-import com.db.edu.message.ByteMessage;
-import com.db.edu.message.IntMessage;
-import com.db.edu.message.StringMessage;
+import com.db.edu.message.*;
 
 public class Logger {
     private static final Controller controller = new Controller();
@@ -25,21 +22,27 @@ public class Logger {
         controller.log(new BooleanMessage(message));
     }
 
-//    public static void log(char message) {
-//        controller.log(message);
-//    }
-//
-//    public static void log(Object message) {
-//        controller.log(message);
-//    }
-//
-//    public static void log(int ... message) {
-//        controller.log(message);
-//    }
-//
-//    public static void log(String  ... message) {
-//        controller.log(message);
-//    }
+    public static void log(char message) {
+        controller.log(new CharMessage(message));
+    }
+
+    public static void log(Object message) {
+        controller.log(new ObjectMessage(message));
+    }
+
+    public static void log(int ... message) {
+        for (int value : message) {
+            log(value);
+            flush();
+        }
+    }
+
+    public static void log(String  ... message) {
+        for (String value : message) {
+            log(value);
+            flush();
+        }
+    }
 
     public static void flush() {
         controller.flush();

@@ -4,7 +4,6 @@ import com.db.edu.Logger;
 import com.db.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.*;
 
-import static com.db.edu.Logger.*;
 import static com.db.edu.Prefix.*;
 
 
@@ -47,7 +46,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogChar() {
         Logger.log('a');
+        Logger.flush();
         Logger.log('b');
+        Logger.flush();
 
         logAssert(CHAR_PREFIX.body, "a", "b");
     }
@@ -71,10 +72,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         logAssert(PRIMITIVE_PREFIX.body, "true", "false");
     }
 
-//    @Test
-//    public void shouldLogReference() {
-//        Logger.log(new Object());
-//
-//        logAssert(OBJECT_PREFIX.body, "@");
-//    }
+    @Test
+    public void shouldLogReference() {
+        Logger.log(new Object());
+        Logger.flush();
+
+        logAssert(OBJECT_PREFIX.body, "@");
+    }
 }
