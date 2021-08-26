@@ -8,37 +8,38 @@ import java.util.Objects;
 public class LoggerController {
     private static final ConsoleSaver consoleSaver = new ConsoleSaver();
 
-    private static ObjectMessage lastLoggedMessage = null;
+    private static Message lastLoggedMessage = null;
 
     public static void flush() {
         consoleSaver.save(lastLoggedMessage);
         lastLoggedMessage.clean();
     }
 
-    public static void log(ObjectMessage message) {
+    public static void log(Message message) {
         if (isFlushNeeded(message)) {
             flush();
         }
-        if (AccumulativeMessage.isAncestor(message)) {
-            message.process();
+        if (lastLoggedMessage == null) {
             lastLoggedMessage = message;
         } else {
+            lastLoggedMessage = lastLoggedMessage.process(message);
+        }
+        if (!AccumulativeMessage.isAccumulative(message)) {
             consoleSaver.save(message);
-            lastLoggedMessage = null;
         }
     }
 
-    private static boolean isLastLogTypeSame(ObjectMessage message) {
+    private static boolean isLastLogTypeSame(Message message) {
         return Objects.equals(message.getClass(),lastLoggedMessage.getClass());
     }
 
-    private static boolean isFlushNeeded(ObjectMessage message){
+    private static boolean isFlushNeeded(Message message){
         if (lastLoggedMessage == null) return false;
         boolean flushFlag = false;
-        if (AccumulativeMessage.isAncestor(message)) {
+        if (AccumulativeMessage.isAccumulative(message)) {
             flushFlag = !isLastLogTypeSame(message);
         }
-        flushFlag |= message.isNeedToFlush();
+        flushFlag |= lastLoggedMessage.isNeedToFlush(message);
         return flushFlag;
     }
 }
