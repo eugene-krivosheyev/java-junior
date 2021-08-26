@@ -17,6 +17,7 @@ public class StringMessage implements Message{
      * */
     @Override
     public boolean accumulate(Message message) {
+        if (!typeEquals(message)) return false;
         if(Objects.equals(value, ((StringMessage)message).value)) {
             ++count;
         } else {

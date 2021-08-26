@@ -13,6 +13,8 @@ public class ByteMessage implements Message {
      * */
     @Override
     public boolean accumulate(Message message) {
+        if (!typeEquals(message)) return false;
+
         byte msgValue = (byte) ((ByteMessage) message).value;
         this.value += msgValue;
         if (this.value > Byte.MAX_VALUE) {

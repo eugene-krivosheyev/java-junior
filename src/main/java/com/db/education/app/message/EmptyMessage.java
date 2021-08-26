@@ -1,6 +1,6 @@
 package com.db.education.app.message;
 
-public class EmptyMessage implements Message{
+public class EmptyMessage implements Message {
     private final MessageType type = MessageType.EMPTY;
 
     @Override

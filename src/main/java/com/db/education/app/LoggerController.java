@@ -19,7 +19,7 @@ public class LoggerController {
             return;
         }
 
-        if (!lastMessage.typeEquals(message) || !lastMessage.accumulate(message)) {
+        if (!lastMessage.accumulate(message)) {
             flush();
             lastMessage = message;
         }

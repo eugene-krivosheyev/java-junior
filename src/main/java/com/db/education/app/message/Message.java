@@ -10,5 +10,4 @@ public interface Message {
     boolean typeEquals(Message otherMessage);
 
     MessageType getType();
-
 }
