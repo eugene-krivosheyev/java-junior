@@ -80,9 +80,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("str1");
-        assertSysoutContains("string 2");
-        assertSysoutContains("str 3");
+        assertSysoutContains("string: str1");
+        assertSysoutContains("string: string 2");
+        assertSysoutContains("string: str 3");
         //endregion
     }
 
@@ -94,7 +94,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("3");
+        assertSysoutContains("primitive: 3");
         //endregion
     }
 
