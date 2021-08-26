@@ -6,13 +6,9 @@ public enum Prefix {
     STRING_PREFIX("string: "),
     OBJECT_PREFIX("reference: ");
 
-    private final String message;
+    public final String body;
 
     Prefix(String message) {
-        this.message = message;
-    }
-
-    public String getMessage() {
-        return message;
+        this.body = message;
     }
 }

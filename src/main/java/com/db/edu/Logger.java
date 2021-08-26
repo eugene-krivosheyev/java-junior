@@ -1,6 +1,7 @@
 package com.db.edu;
 
 
+import com.db.edu.message.BooleanMessage;
 import com.db.edu.message.ByteMessage;
 import com.db.edu.message.IntMessage;
 import com.db.edu.message.StringMessage;
@@ -20,28 +21,28 @@ public class Logger {
         controller.log(new StringMessage(message));
     }
 
-    public static void log(char message) {
-        controller.log(message);
-    }
-
     public static void log(boolean message) {
-        controller.log(message);
+        controller.log(new BooleanMessage(message));
     }
 
-    public static void log(Object message) {
-        controller.log(message);
-    }
-
-    public static void log(int ... message) {
-        controller.log(message);
-    }
-
-    public static void log(String  ... message) {
-        controller.log(message);
-    }
+//    public static void log(char message) {
+//        controller.log(message);
+//    }
+//
+//    public static void log(Object message) {
+//        controller.log(message);
+//    }
+//
+//    public static void log(int ... message) {
+//        controller.log(message);
+//    }
+//
+//    public static void log(String  ... message) {
+//        controller.log(message);
+//    }
 
     public static void flush() {
-        Controller.flush();
+        controller.flush();
     }
 
 }

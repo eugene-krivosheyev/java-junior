@@ -33,10 +33,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(0);
         Logger.flush();
 
-        logAssert(STRING_PREFIX.getMessage() + "str 1",
-                PRIMITIVE_PREFIX.getMessage() + "3",
-                STRING_PREFIX.getMessage() + "str 2",
-                PRIMITIVE_PREFIX.getMessage() + "0");
+        logAssert(STRING_PREFIX.body + "str 1",
+                PRIMITIVE_PREFIX.body + "3",
+                STRING_PREFIX.body + "str 2",
+                PRIMITIVE_PREFIX.body + "0");
     }
 
     @Test
@@ -49,12 +49,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(-10);
         Logger.flush();
 
-        logAssert(STRING_PREFIX.getMessage() + "str 1",
-                PRIMITIVE_PREFIX.getMessage() + "9",
-                PRIMITIVE_PREFIX.getMessage() + Integer.MAX_VALUE,
-                STRING_PREFIX.getMessage() + "str 2",
-                PRIMITIVE_PREFIX.getMessage() + Integer.MIN_VALUE,
-                PRIMITIVE_PREFIX.getMessage() + "-9");
+        logAssert(STRING_PREFIX.body + "str 1",
+                PRIMITIVE_PREFIX.body + "9",
+                PRIMITIVE_PREFIX.body + Integer.MAX_VALUE,
+                STRING_PREFIX.body + "str 2",
+                PRIMITIVE_PREFIX.body + Integer.MIN_VALUE,
+                PRIMITIVE_PREFIX.body + "-9");
     }
 
     @Test
@@ -66,11 +66,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(0);
         Logger.flush();
 
-        logAssert(STRING_PREFIX.getMessage() + "str 1",
-                PRIMITIVE_PREFIX.getMessage() + "9",
-                PRIMITIVE_PREFIX.getMessage() + Byte.MAX_VALUE,
-                STRING_PREFIX.getMessage() + "str 2",
-                PRIMITIVE_PREFIX.getMessage() + "0");
+        logAssert(STRING_PREFIX.body + "str 1",
+                PRIMITIVE_PREFIX.body + "9",
+                PRIMITIVE_PREFIX.body + Byte.MAX_VALUE,
+                STRING_PREFIX.body + "str 2",
+                PRIMITIVE_PREFIX.body + "0");
     }
 
     @Test
@@ -85,10 +85,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 3");
         Logger.flush();
 
-        logAssert(STRING_PREFIX.getMessage() + "str 1",
-                STRING_PREFIX.getMessage() + "str 2 (x2)",
-                PRIMITIVE_PREFIX.getMessage() + "0",
-                STRING_PREFIX.getMessage() + "str 2",
-                STRING_PREFIX.getMessage() + "str 3 (x3)");
+        logAssert(STRING_PREFIX.body + "str 1",
+                STRING_PREFIX.body + "str 2 (x2)",
+                PRIMITIVE_PREFIX.body + "0",
+                STRING_PREFIX.body + "str 2",
+                STRING_PREFIX.body + "str 3 (x3)");
     }
 }

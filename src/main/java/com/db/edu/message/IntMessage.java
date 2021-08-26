@@ -1,26 +1,28 @@
 package com.db.edu.message;
 
-import static com.db.edu.Controller.flush;
 import static com.db.edu.Prefix.PRIMITIVE_PREFIX;
 
-public class IntMessage extends Message<Integer> {
+public class IntMessage extends Message {
 
-    private static long intResult;
+    private final int message;
+    private int intResult;
 
     public IntMessage(int message) {
+        super(message);
         this.message = message;
     }
 
-    public static void flushInt() {
+    @Override
+    public void flush() {
         while (intResult > Integer.MAX_VALUE) {
             intResult -= Integer.MAX_VALUE;
-            saver.save(PRIMITIVE_PREFIX.getMessage() + Integer.MAX_VALUE);
+            saver.save(PRIMITIVE_PREFIX.body + Integer.MAX_VALUE);
         }
         while (intResult < Integer.MIN_VALUE) {
             intResult -= Integer.MIN_VALUE;
-            saver.save(PRIMITIVE_PREFIX.getMessage() + Integer.MIN_VALUE);
+            saver.save(PRIMITIVE_PREFIX.body + Integer.MIN_VALUE);
         }
-        saver.save(PRIMITIVE_PREFIX.getMessage() + intResult);
+        saver.save(PRIMITIVE_PREFIX.body + intResult);
         intResult = 0;
     }
 
@@ -29,7 +31,12 @@ public class IntMessage extends Message<Integer> {
         if (!(message instanceof IntMessage)) {
             flush();
         }
-        intResult += (long)message.getMessage();
+        intResult += (int)message.getMessage();
         return this;
+    }
+
+    @Override
+    public boolean sameTypeOf(Message accumulateMessage) {
+        return accumulateMessage instanceof IntMessage;
     }
 }
