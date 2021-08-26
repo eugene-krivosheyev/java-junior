@@ -5,8 +5,9 @@ import com.db.education.app.message.Message;
 import com.db.education.app.saver.Saver;
 
 public class LoggerController {
+    private static final Message EMPTY_MESSAGE = new EmptyMessage();
     private final Saver saver;
-    private Message lastMessage = new EmptyMessage();
+    private Message lastMessage = EMPTY_MESSAGE;
 
     public LoggerController(Saver saver) {
         this.saver = saver;
@@ -26,6 +27,6 @@ public class LoggerController {
 
     public void flush() {
         saver.save(lastMessage);
-        lastMessage = new EmptyMessage();
+        lastMessage = EMPTY_MESSAGE;
     }
 }
