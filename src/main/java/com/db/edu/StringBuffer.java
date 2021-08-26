@@ -9,16 +9,24 @@ public class StringBuffer {
         bufString = message;
     }
 
-    public String getBufString() {
+    String getBufString() {
         return bufString;
     }
 
-    public int getQuantityString() {
+    int getQuantityString() {
         return quantityString;
     }
 
-    public void bufferFlush() {
+    void bufferFlush() {
         quantityString = 0;
         bufString = null;
+    }
+
+    boolean isEmpty() {
+        return quantityString == 0;
+    }
+
+    boolean isStringEquals(String string) {
+        return string.equals(bufString);
     }
 }

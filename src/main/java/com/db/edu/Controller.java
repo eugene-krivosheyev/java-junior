@@ -5,24 +5,23 @@ import java.util.Objects;
 public class Controller {
     private IntBuffer intBuffer = new IntBuffer();
     private StringBuffer stringBuffer = new StringBuffer();
-    private int sum;
     State state = null;
-    private int flagThereIsInteger;
-    private int quantityString = 1;
-    private String bufString;
-    private ConsoleSaver consoleSaver;
+    private ConsoleSaver consoleSaver = new ConsoleSaver();
 
     public void log(IntMessage message) {
         intBuffer.accumulate(message.getValue());
-        if(state.equals(State.STRING)){
+        if(!stringBuffer.isEmpty()){
             consoleSaver.save(flushString());
         }
         state = State.INT;
     }
 
     public void log(StringMessage message) {
+        if(!stringBuffer.isStringEquals(message.getValue())) {
+            consoleSaver.save(flushString());
+        }
         stringBuffer.accumulate(message.getValue());
-        if(state.equals(State.INT)){
+        if(!intBuffer.isEmpty()){
             consoleSaver.save(flushInt());
         }
         state = State.STRING;
@@ -35,18 +34,17 @@ public class Controller {
     }
 
     private String flushString() {
-            StringMessage m = new StringMessage(bufString);
-            String result = m.decoratedString(quantityString);
-            quantityString = 0;
-            bufString = null;
+            StringMessage m = new StringMessage(stringBuffer.getBufString());
+            String result = m.decoratedString(stringBuffer.getQuantityString());
+            stringBuffer.bufferFlush();
             return result;
     }
 
     void flush() {
-        if (!Objects.equals(bufString, null)) {
+        if (!stringBuffer.isEmpty()) {
             consoleSaver.save(flushString());
         }
-        if (flagThereIsInteger == 1) {
+        if (!intBuffer.isEmpty()) {
             consoleSaver.save(flushInt());
         }
     }

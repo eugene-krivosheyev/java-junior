@@ -17,4 +17,8 @@ public class IntBuffer {
         sum = 0;
         flagThereIsInteger = 0;
     }
+
+    boolean isEmpty() {
+        return flagThereIsInteger == 0;
+    }
 }

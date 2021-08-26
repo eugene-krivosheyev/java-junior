@@ -16,7 +16,7 @@ public class Logger {
     private static int flagThereIsInteger = 0;
     private static String bufString = null;
     private static int quantityString = 0;
-    private static Controller controller;
+    private static Controller controller = new Controller();
 
     private enum State {
         STRING,

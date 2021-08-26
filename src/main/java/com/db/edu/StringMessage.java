@@ -16,14 +16,6 @@ public class StringMessage {
         }
     }
 
-    boolean isStateEquals(State currentState) {
-        return State.STRING.equals(currentState);
-    }
-
-    int accumulate(int accumulateBuffer) {
-        return ++accumulateBuffer;
-    }
-
     String getValue() {
         return value;
     }

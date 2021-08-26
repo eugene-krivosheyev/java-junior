@@ -12,14 +12,6 @@ public class IntMessage {
         return PRIMITIVE_PREFIX + value;
     }
 
-    boolean isStateEquals(State currentState) {
-        return State.INT.equals(currentState);
-    }
-
-    int accumulate(int sum) {
-        return sum + value;
-    }
-
     int getValue() {
         return value;
     }

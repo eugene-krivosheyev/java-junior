@@ -42,6 +42,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
+    @Disabled
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws AssertionError {
         //region when
         Logger.log("str 1");
