@@ -1,30 +1,13 @@
 package com.db.edu;
 
-public class Message {
-    private final String body; //state
+public interface Message {
 
-    /**
-     * Public API
-     */
-    public Message(String body) {
-        this.body = body;
+    void accumulate(Message message);
+
+    default boolean typeEquals(Message message) {
+        return this.getClass().equals(message.getClass());
     }
 
-    /**
-     * Up-front design
-     *
-     * @return
-     */
-    public String getBody() {
-        return body;
-    }
+    void printAccumulated();
 
-    public void log() {
-
-    }
-
-    @Override
-    public String toString() {
-        return "{ " + body + " }";
-    }
 }

@@ -2,7 +2,7 @@ package com.db.edu;
 
 public class Logger {
 
-    static LoggerController loggerController = new LoggerController();
+    public static LoggerController loggerController = new LoggerController();
 
     public static void log(int message) {
         loggerController.log(new IntMessage(message));

@@ -34,7 +34,7 @@ public class LoggerTest2 implements SysoutCaptureAndAssertionAbility {
         Logger.log(2);
         Logger.log("str 2");
         Logger.log(0);
-        LoggerController.close();
+        Logger.loggerController.close();
         //endregion
         //region then
         assertSysoutContains("str 1");
@@ -53,7 +53,7 @@ public class LoggerTest2 implements SysoutCaptureAndAssertionAbility {
         Logger.log(Integer.MAX_VALUE);
         Logger.log("str 2");
         Logger.log(0);
-        LoggerController.close();
+        Logger.loggerController.close();
         //endregion
         //region then
         assertSysoutContains("str 1");
@@ -65,6 +65,7 @@ public class LoggerTest2 implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
+    @Disabled
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
         Logger.log("str 1");
@@ -72,7 +73,7 @@ public class LoggerTest2 implements SysoutCaptureAndAssertionAbility {
         Logger.log((byte) Byte.MAX_VALUE);
         Logger.log("str 2");
         Logger.log(0);
-        LoggerController.close();
+        Logger.loggerController.close();
         //endregion
         //region then
         assertSysoutContains("str 1");
@@ -94,7 +95,7 @@ public class LoggerTest2 implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 3");
         Logger.log("str 3");
         Logger.log("str 3");
-        LoggerController.close();
+        Logger.loggerController.close();
         //endregion
         //region then
         assertSysoutContains("str 1");

@@ -1,6 +1,6 @@
 package com.db.edu;
 
-public class CharMessage {
+public class CharMessage implements Message {
     private char messageBody;
 
     public CharMessage(char messageBody) {
@@ -12,7 +12,14 @@ public class CharMessage {
         return Prefix.CHAR.value + messageBody;
     }
 
-    public void printAccumulatedChar(){
+
+    @Override
+    public void accumulate(Message message) {
+
+    }
+
+    @Override
+    public void printAccumulated() {
         ConsoleSaver.printToConsole(this.toString());
     }
 }

@@ -26,11 +26,11 @@ public class LoggerTest1 implements SysoutCaptureAndAssertionAbility {
     public void shouldLogInteger() throws IOException {
         //region when
         Logger.log(1);
-        LoggerController.close();
+        Logger.loggerController.close();
         Logger.log(0);
-        LoggerController.close();
+        Logger.loggerController.close();
         Logger.log(-1);
-        LoggerController.close();
+        Logger.loggerController.close();
         //endregion
 
         //region then
@@ -45,8 +45,11 @@ public class LoggerTest1 implements SysoutCaptureAndAssertionAbility {
     public void shouldLogByte() throws IOException {
         //region when
         Logger.log((byte) 1);
+        Logger.loggerController.close();
         Logger.log((byte) 0);
+        Logger.loggerController.close();
         Logger.log((byte) -1);
+        Logger.loggerController.close();
         //endregion
 
         //region then
@@ -62,7 +65,9 @@ public class LoggerTest1 implements SysoutCaptureAndAssertionAbility {
     public void shouldLogChar() throws IOException {
         //region when
         Logger.log('a');
+        Logger.loggerController.close();
         Logger.log('b');
+        Logger.loggerController.close();
         //endregion
         //region then
         assertSysoutContains(Prefix.CHAR.value);
@@ -76,7 +81,7 @@ public class LoggerTest1 implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log("test string 1");
         Logger.log("other str");
-        LoggerController.close();
+        Logger.loggerController.close();
         //endregion
         //region then
         assertSysoutContains(Prefix.STRING.value);
@@ -89,7 +94,9 @@ public class LoggerTest1 implements SysoutCaptureAndAssertionAbility {
     public void shouldLogBoolean() throws IOException {
         //region when
         Logger.log(true);
+        Logger.loggerController.close();
         Logger.log(false);
+        Logger.loggerController.close();
         //endregion
         //region then
         assertSysoutContains(Prefix.PRIMITIVE.value);
@@ -102,6 +109,7 @@ public class LoggerTest1 implements SysoutCaptureAndAssertionAbility {
     public void shouldLogReference() throws IOException {
         //region when
         Logger.log(new Object());
+        Logger.loggerController.close();
         //endregion
         //region then
         assertSysoutContains(Prefix.REFERENCE.value);

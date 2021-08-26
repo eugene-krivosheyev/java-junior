@@ -1,6 +1,6 @@
 package com.db.edu;
 
-public class ObjectMessage {
+public class ObjectMessage implements Message {
     private Object messageBody;
 
     public ObjectMessage(Object messageBody) {
@@ -12,7 +12,12 @@ public class ObjectMessage {
         return Prefix.REFERENCE.value + messageBody;
     }
 
-    public void printAccumulatedObject(){
+    @Override
+    public void accumulate(Message message) {
+    }
+
+    @Override
+    public void printAccumulated() {
         ConsoleSaver.printToConsole(this.toString());
     }
 }

@@ -1,6 +1,6 @@
 package com.db.edu;
 
-public class ByteMessage {
+public class ByteMessage implements Message {
     private byte messageBody;
 
     public ByteMessage(byte messageBody) {
@@ -12,7 +12,13 @@ public class ByteMessage {
         return Prefix.PRIMITIVE.value + messageBody;
     }
 
-    public void printAccumulatedBytes(){
+    @Override
+    public void accumulate(Message message) {
+
+    }
+
+    @Override
+    public void printAccumulated() {
         ConsoleSaver.printToConsole(this.toString());
     }
 }

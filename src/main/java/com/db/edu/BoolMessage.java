@@ -1,6 +1,6 @@
 package com.db.edu;
 
-public class BoolMessage {
+public class BoolMessage implements Message {
     private boolean messageBody;
 
     public BoolMessage(boolean messageBody) {
@@ -12,7 +12,12 @@ public class BoolMessage {
         return Prefix.PRIMITIVE.value + messageBody;
     }
 
-    public void printAccumulatedBool(){
+    @Override
+    public void accumulate(Message message) {
+    }
+
+    @Override
+    public void printAccumulated() {
         ConsoleSaver.printToConsole(this.toString());
     }
 }

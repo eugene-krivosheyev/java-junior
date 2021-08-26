@@ -1,24 +1,19 @@
 package com.db.edu;
 
-public class IntMessage {
+public class IntMessage implements Message {
     private int messageBody;
-    int intCount = 0;
 
-    void printAccumulatedInt() {
-        if (intCount != 0) {
+    public void printAccumulated() {
             ConsoleSaver.printToConsole(this.toString());
-            intCount = 0;
             messageBody = 0;
-        }
     }
 
     public IntMessage(int messageBody) {
         this.messageBody = messageBody;
     }
 
-    public void accumulate(IntMessage message) {
-        intCount++;
-        messageBody += message.messageBody;
+    public void accumulate(Message message) {
+        messageBody += ((IntMessage)message).messageBody;
     }
 
     @Override
