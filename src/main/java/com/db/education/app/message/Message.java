@@ -6,4 +6,9 @@ public interface Message {
      * @return false for messages that shouldn't be accumulated, true otherwise
      */
     boolean accumulate(Message message);
+
+    boolean typeEquals(Message otherMessage);
+
+    MessageType getType();
+
 }

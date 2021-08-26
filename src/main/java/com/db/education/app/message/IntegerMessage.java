@@ -1,6 +1,7 @@
 package com.db.education.app.message;
 
 public class IntegerMessage implements Message {
+    private final MessageType type = MessageType.INT;
     private long value;
 
     public IntegerMessage(int value) {
@@ -31,4 +32,13 @@ public class IntegerMessage implements Message {
         return "primitive: " + value + System.lineSeparator();
     }
 
+    @Override
+    public MessageType getType() {
+        return type;
+    }
+
+    @Override
+    public boolean typeEquals(Message otherMessage) {
+        return this.type.equals(otherMessage.getType());
+    }
 }

@@ -1,7 +1,8 @@
 package com.db.education.app.message;
 
-public class ObjectMessage implements Message{
+public class ObjectMessage implements Message {
     private Object value;
+    private final MessageType type = MessageType.OBJECT;
 
     public ObjectMessage(Object value) {
         this.value = value;
@@ -15,5 +16,15 @@ public class ObjectMessage implements Message{
     @Override
     public String toString() {
         return "reference: " + value + System.lineSeparator();
+    }
+
+    @Override
+    public MessageType getType() {
+        return type;
+    }
+
+    @Override
+    public boolean typeEquals(Message otherMessage) {
+        return this.type.equals(otherMessage.getType());
     }
 }

@@ -2,21 +2,24 @@ package com.db.education.app;
 
 import com.db.education.app.message.EmptyMessage;
 import com.db.education.app.message.Message;
-import com.db.education.app.saver.ConsoleSaver;
-
-import java.util.Objects;
+import com.db.education.app.saver.Saver;
 
 public class LoggerController {
-    private final ConsoleSaver saver = new ConsoleSaver();
-    private Message lastMessage = new EmptyMessage();
+    private static final Message EMPTY_MESSAGE = new EmptyMessage();
+    private final Saver saver;
+    private Message lastMessage = EMPTY_MESSAGE;
+
+    public LoggerController(Saver saver) {
+        this.saver = saver;
+    }
 
     public void processMessage(Message message) {
-        if(Objects.equals(lastMessage.getClass(), EmptyMessage.class)) {
+        if(lastMessage.typeEquals(EMPTY_MESSAGE)) {
             lastMessage = message;
             return;
         }
 
-        if (lastMessage.getClass() != message.getClass() || !lastMessage.accumulate(message)) {
+        if (!lastMessage.typeEquals(message) || !lastMessage.accumulate(message)) {
             flush();
             lastMessage = message;
         }

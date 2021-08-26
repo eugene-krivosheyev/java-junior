@@ -1,6 +1,7 @@
 package com.db.education.app.message;
 
 public class ByteMessage implements Message {
+    private final MessageType type = MessageType.BYTE;
     private int value;
 
     public ByteMessage(byte value) {
@@ -29,5 +30,15 @@ public class ByteMessage implements Message {
     @Override
     public String toString() {
         return "primitive: " + value + System.lineSeparator();
+    }
+
+    @Override
+    public MessageType getType() {
+        return type;
+    }
+
+    @Override
+    public boolean typeEquals(Message otherMessage) {
+        return this.type.equals(otherMessage.getType());
     }
 }

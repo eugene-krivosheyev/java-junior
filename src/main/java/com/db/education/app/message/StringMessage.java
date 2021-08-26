@@ -3,6 +3,7 @@ package com.db.education.app.message;
 import java.util.Objects;
 
 public class StringMessage implements Message{
+    private final MessageType type = MessageType.STRING;
     private String value;
     private int count;
 
@@ -28,5 +29,15 @@ public class StringMessage implements Message{
     public String toString() {
         String countString = (count > 1) ? " (x" + count + ")" : "";
         return "string: " + value + countString + System.lineSeparator();
+    }
+
+    @Override
+    public MessageType getType() {
+        return type;
+    }
+
+    @Override
+    public boolean typeEquals(Message otherMessage) {
+        return this.type.equals(otherMessage.getType());
     }
 }
