@@ -15,7 +15,7 @@ public class IntegerMessage implements Message {
     public boolean accumulate(Message message) {
         if (!typeEquals(message)) return false;
 
-        int msgValue = (int)((IntegerMessage)message).value;
+        int msgValue = (int) ((IntegerMessage) message).value;
         this.value += msgValue;
         if (this.value > Integer.MAX_VALUE) {
             ((IntegerMessage)message).value = this.value - Integer.MAX_VALUE;

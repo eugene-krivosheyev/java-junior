@@ -10,4 +10,8 @@ public interface Message {
     boolean typeEquals(Message otherMessage);
 
     MessageType getType();
+
+    default boolean isEmpty() {
+        return false;
+    };
 }

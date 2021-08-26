@@ -15,4 +15,9 @@ public class EmptyMessage implements Message {
     public boolean typeEquals(Message otherMessage) {
         return this.type.equals(otherMessage.getType());
     }
+
+    @Override
+    public boolean isEmpty() {
+        return true;
+    }
 }
