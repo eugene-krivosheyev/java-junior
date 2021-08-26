@@ -10,9 +10,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static com.acme.edu.Logger.*;
-
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+    private static final String STRING_PREFIX = "string: ";
+    private static final String PRIMITIVE_PREFIX = "primitive: ";
+
     ConsoleSaver saver = new ConsoleSaver();
     Logger logger = new Logger(saver);
     //region given

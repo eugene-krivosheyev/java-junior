@@ -5,9 +5,10 @@ import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.ooad.saver.ConsoleSaver;
 import org.junit.jupiter.api.*;
 import java.io.IOException;
-import static com.acme.edu.Logger.STRING_PREFIX;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+    private static final String STRING_PREFIX = "string: ";
+
     ConsoleSaver saver = new ConsoleSaver();
     Logger logger = new Logger(saver);
     //region given

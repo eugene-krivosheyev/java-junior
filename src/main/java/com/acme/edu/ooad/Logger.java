@@ -5,9 +5,8 @@ import com.acme.edu.ooad.message.*;
 import com.acme.edu.ooad.saver.Saver;
 
 public class Logger {
-    private LoggerController controller;
-
-    public Logger(Saver saver){
+    private final LoggerController controller;
+    public Logger(Saver saver) {
         controller = new LoggerController(saver);
     }
     public void flush() {
@@ -49,5 +48,4 @@ public class Logger {
     public void log(Object message) {
         controller.log(new ObjectMessage(message));
     }
-
 }
