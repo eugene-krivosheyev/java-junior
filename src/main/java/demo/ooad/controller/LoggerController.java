@@ -29,6 +29,13 @@ public class LoggerController {
      *
      */
     public void log(Message message) {
+        if (message == null ||
+            message.getBody() == null ||
+            message.getBody().isEmpty()) {
+                throw new IllegalArgumentException("not valid message to log!");
+        }
+
+
         if (!filter.filter(message)) {
             saver.save(message);
         }
