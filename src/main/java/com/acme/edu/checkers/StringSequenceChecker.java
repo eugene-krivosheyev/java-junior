@@ -2,14 +2,24 @@ package com.acme.edu.checkers;
 
 
 import com.acme.edu.Type;
+import com.acme.edu.savers.Saver;
 
 import java.util.Objects;
 
-public class StringSequenceChecker extends Checker{
+public class StringSequenceChecker extends Checker {
+    private Saver saver;
 
-    private static boolean accumString = false;
-    private static int strCount = 1;
-    private static String lastStr = null;
+    private boolean accumString;
+    private int strCount;
+    private String lastStr;
+
+    public StringSequenceChecker(Saver saver) {
+        this.saver = saver;
+        this.accumString = false;
+        this.strCount = 1;
+        this.lastStr = null;
+    }
+
 
     public void check(Object message) {
         if (message instanceof String) {
@@ -20,11 +30,12 @@ public class StringSequenceChecker extends Checker{
             }
             else {
                 if (strCount > 1) {
-                    System.out.println(Type.STRING.value + lastStr + " (x" + strCount + ")");
+                    saver.save(Type.STRING.value + lastStr + " (x" + strCount + ")");
                 }
                 else {
                     if (lastStr != null) {
-                        System.out.println(Type.STRING.value + lastStr);
+                        saver.save(Type.STRING.value + lastStr);
+
                     }
                 }
 
@@ -35,10 +46,10 @@ public class StringSequenceChecker extends Checker{
         else {
             if (accumString) {
                 if (strCount > 1) {
-                    System.out.println(Type.STRING.value + lastStr + " (x" + strCount + ")");
+                    saver.save(Type.STRING.value + lastStr + " (x" + strCount + ")");
                 }
                 else {
-                    System.out.println(Type.STRING.value + lastStr);
+                    saver.save(Type.STRING.value + lastStr);
                 }
                 strCount = 1;
                 accumString = false;

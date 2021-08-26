@@ -1,11 +1,10 @@
 package com.acme.edu;
 
 import com.acme.edu.messages.*;
+import com.acme.edu.savers.ConsoleSaver;
 
 public class Logger {
-    private LoggerController controller  = new LoggerController();
-
-
+    private LoggerController controller  = new LoggerController(new ConsoleSaver());
 
     public void log(int message) {
         controller.log(new IntMessage(message));
@@ -30,8 +29,7 @@ public class Logger {
     }
 
     public void log(String ... params){
-
-        for (String temp : params){
+        for (String temp : params) {
             controller.log(new StringMessage(temp));
         }
 
@@ -45,7 +43,7 @@ public class Logger {
         controller.log(new ObjectMessage(message));
     }
 
-    public void flush(){
+    public void flush() {
         controller.flush();
     }
 }

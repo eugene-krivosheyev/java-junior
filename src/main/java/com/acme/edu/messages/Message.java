@@ -1,7 +1,8 @@
 package com.acme.edu.messages;
 
-public abstract class Message {
+public class Message {
     protected String message_type;
+    protected Object value;
 
     public Message(Object message) {
         if (message instanceof Character) {
@@ -19,5 +20,7 @@ public abstract class Message {
         }
     }
 
-    public abstract String wrapMessage();
+    public Object getValue() {
+        return value;
+    };
 }
