@@ -1,71 +1,66 @@
 package com.acme.edu.ooad.controller;
 
 import com.acme.edu.ooad.message.*;
-import com.acme.edu.ooad.saver.ValidatingSaver;
+import com.acme.edu.ooad.saver.ConsoleSaver;
+
+import java.util.Objects;
 
 public class LoggerController {
+    private static final ConsoleSaver consoleSaver = new ConsoleSaver();
 
-    private ObjectMessage lastLogMessage;
-    private ValidatingSaver saver;
+    private static ObjectMessage lastLoggedMessage = null;
 
-    public LoggerController(ValidatingSaver saver) {
-        this.saver = saver;
+    public static void flush() {
+        consoleSaver.save(lastLoggedMessage);
+        lastLoggedMessage.clean();
     }
 
-    public void log(BooleanMessage boolMessage) {
-        flush();
-        saver.save(boolMessage);
-    }
-
-    public void log(CharMessage charMessage) {
-        flush();
-        saver.save(charMessage);
-    }
-
-    public void log(ByteMessage byteMessage) {
-        if (lastLogMessage != null && !(lastLogMessage instanceof ByteMessage)) {
-            saver.save(lastLogMessage);
+    public static void log(StringMessage message) {
+        boolean isLastLoggedAnotherType = isFlushNeeded(message);
+        if ( isLastLoggedAnotherType || message.isNeedToFlush() ) {
+            flush();
         }
 
-        byteMessage.process();
-        updateLastLoggedMessage(byteMessage);
+        message.process();
+        lastLoggedMessage = message;
     }
 
-    public void log(IntegerMessage intMessage) {
-        if (lastLogMessage != null && !(lastLogMessage instanceof IntegerMessage)) {
-            saver.save(lastLogMessage);
+    public static void log(IntegerMessage message) {
+        if (isFlushNeeded(message)) {
+            flush();
         }
 
-        intMessage.process();
-        updateLastLoggedMessage(intMessage);
+        message.process();
+        lastLoggedMessage = message;
     }
 
-    public void log(StringMessage strMessage) {
-        if (lastLogMessage != null &&
-            (!(lastLogMessage instanceof StringMessage) || strMessage.isNewString())) {
-            saver.save(lastLogMessage);
+    public static void log(ByteMessage message) {
+        if (isFlushNeeded(message)) {
+            flush();
         }
 
-        strMessage.process();
-        updateLastLoggedMessage(strMessage);
+        message.process();
+        lastLoggedMessage = message;
     }
 
-    public void log(ObjectMessage objMessage) {
-        flush();
-        saver.save(objMessage);
-    }
-
-    public void flush() {
-        if (lastLogMessage != null) {
-            saver.save(lastLogMessage);
-            updateLastLoggedMessage(null);
+    public static void log(ObjectMessage message) {
+        if (isFlushNeeded(message)) {
+            flush();
         }
+
+        consoleSaver.save(message);
+        lastLoggedMessage = null;
     }
 
-    private void updateLastLoggedMessage(ObjectMessage newMessage) {
-        if (lastLogMessage != null) {
-            lastLogMessage.clean();
+    private static boolean isLastLogTypeSame(ObjectMessage message) {
+        return Objects.equals(message.getClass(),lastLoggedMessage.getClass());
+    }
+
+    private static boolean isFlushNeeded(ObjectMessage message){
+        if (lastLoggedMessage == null) return true;
+        if (AccumulatedMessage.class.isAssignableFrom(message.getClass())) {
+            return !isLastLogTypeSame(message);
         }
-        lastLogMessage = newMessage;
+        return false;
     }
 }

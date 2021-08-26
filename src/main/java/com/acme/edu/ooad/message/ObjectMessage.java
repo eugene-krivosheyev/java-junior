@@ -1,10 +1,10 @@
 package com.acme.edu.ooad.message;
 
 public class ObjectMessage {
-    /*private*/protected final String prefix;
+    protected final String prefix;
     private final Object value;
 
-    protected String getPrefix() {
+    public String getPrefix() {
         return prefix;
     }
 
@@ -18,18 +18,8 @@ public class ObjectMessage {
         this.value = value;
     }
 
+    public void clean() {};
     public String toString() {
         return prefix + value;
     }
-    //-------------
-//    public ObjectMessage flush() {
-//        return this;
-//    }
-
-    public void clean(){};
-
-//    public ObjectMessage[] process(Object message) {
-//        this.lastObject = message;
-//        return flush();
-//    }
 }
