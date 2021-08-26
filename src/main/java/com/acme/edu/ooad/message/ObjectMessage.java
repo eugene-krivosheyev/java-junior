@@ -19,7 +19,12 @@ public class ObjectMessage {
     }
 
     public void clean() {};
+    public void process() {};
     public String toString() {
         return prefix + value;
+    }
+
+    public boolean isNeedToFlush() {
+        return false;
     }
 }

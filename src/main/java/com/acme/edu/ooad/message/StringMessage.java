@@ -12,6 +12,7 @@ public class StringMessage extends AccumulatedMessage {
         this.currentString = value;
     }
 
+    @Override
     public boolean isNeedToFlush(){
         return repeatableStringCounter != 0 && !currentString.equals(lastString);
     }

@@ -15,51 +15,27 @@ public class LoggerController {
         lastLoggedMessage.clean();
     }
 
-    public static void log(StringMessage message) {
-        boolean isLastLoggedAnotherType = isFlushNeeded(message);
-        if ( isLastLoggedAnotherType || message.isNeedToFlush() ) {
-            flush();
-        }
-
-        message.process();
-        lastLoggedMessage = message;
-    }
-
-    public static void log(IntegerMessage message) {
-        if (isFlushNeeded(message)) {
-            flush();
-        }
-
-        message.process();
-        lastLoggedMessage = message;
-    }
-
-    public static void log(ByteMessage message) {
-        if (isFlushNeeded(message)) {
-            flush();
-        }
-
-        message.process();
-        lastLoggedMessage = message;
-    }
-
     public static void log(ObjectMessage message) {
         if (isFlushNeeded(message)) {
             flush();
         }
+        if (AccumulatedMessage.isAncestor(message)) {
+            message.process();
+            lastLoggedMessage = message;
+        } else {
+            consoleSaver.save(message);
+            lastLoggedMessage = null;
+        }
 
-        consoleSaver.save(message);
-        lastLoggedMessage = null;
     }
-
     private static boolean isLastLogTypeSame(ObjectMessage message) {
         return Objects.equals(message.getClass(),lastLoggedMessage.getClass());
     }
 
     private static boolean isFlushNeeded(ObjectMessage message){
-        if (lastLoggedMessage == null) return true;
-        if (AccumulatedMessage.class.isAssignableFrom(message.getClass())) {
-            return !isLastLogTypeSame(message);
+        if (lastLoggedMessage == null) return false;
+        if (AccumulatedMessage.isAncestor(message)) {
+            return !isLastLogTypeSame(message) || message.isNeedToFlush();
         }
         return false;
     }
