@@ -2,45 +2,52 @@ package com.acme.edu.ooad;
 
 import com.acme.edu.ooad.controller.LoggerController;
 import com.acme.edu.ooad.message.*;
+import com.acme.edu.ooad.saver.Saver;
 
 public class Logger {
-    public static void flush() {
-        LoggerController.flush();
+    private LoggerController controller;
+
+    public Logger(Saver saver){
+        controller = new LoggerController(saver);
+    }
+    public void flush() {
+        controller.flush();
     }
 
-    public static void log(int message) {
-        LoggerController.log(new IntegerMessage(message));
+    public void log(int message) {
+        controller.log(new IntegerMessage(message));
     }
 
-    public static void log(int... integers) {
+    public void log(int... integers) {
         for ( var integer: integers ) {
-            LoggerController.log(new IntegerMessage(integer));
+            controller.log(new IntegerMessage(integer));
         }
     }
 
-    public static void log(byte message) {
-        LoggerController.log(new ByteMessage(message));
+    public void log(byte message) {
+        controller.log(new ByteMessage(message));
     }
 
-    public static void log(char message) {
-        LoggerController.log(new CharMessage(message));
+    public void log(char message) {
+        controller.log(new CharMessage(message));
     }
 
-    public static void log(boolean message) {
-        LoggerController.log(new BooleanMessage(message));
+    public void log(boolean message) {
+        controller.log(new BooleanMessage(message));
     }
 
-    public static void log(String message) {
-        LoggerController.log(new StringMessage(message));
+    public void log(String message) {
+        controller.log(new StringMessage(message));
     }
 
-    public static void log(String... strings) {
+    public void log(String... strings) {
         for ( var string : strings ) {
-            LoggerController.log(new StringMessage(string));
+            controller.log(new StringMessage(string));
         }
     }
 
-    public static void log(Object message) {
-        LoggerController.log(new ObjectMessage(message));
+    public void log(Object message) {
+        controller.log(new ObjectMessage(message));
     }
+
 }

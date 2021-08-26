@@ -2,6 +2,7 @@ package com.acme.edu.iteration01;
 
 import com.acme.edu.ooad.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.ooad.saver.ConsoleSaver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import java.io.*;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+    ConsoleSaver saver = new ConsoleSaver();
+    Logger logger = new Logger(saver);
     //region given
     @BeforeEach
     public void setUpSystemOut() throws IOException {
@@ -25,12 +28,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogInteger() throws IOException {
         //region when
-        Logger.log(1);
-        Logger.flush();
-        Logger.log(0);
-        Logger.flush();
-        Logger.log(-1);
-        Logger.flush();
+        logger.log(1);
+        logger.flush();
+        logger.log(0);
+        logger.flush();
+        logger.log(-1);
+        logger.flush();
         //endregion
 
         //region then
@@ -44,12 +47,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogByte() throws IOException {
         //region when
-        Logger.log((byte) 1);
-        Logger.flush();
-        Logger.log((byte) 0);
-        Logger.flush();
-        Logger.log((byte) -1);
-        Logger.flush();
+        logger.log((byte) 1);
+        logger.flush();
+        logger.log((byte) 0);
+        logger.flush();
+        logger.log((byte) -1);
+        logger.flush();
         //endregion
 
         //region then
@@ -63,8 +66,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogChar() throws IOException {
         //region when
-        Logger.log('a');
-        Logger.log('b');
+        logger.log('a');
+        logger.log('b');
         //endregion
 
         //region then
@@ -77,9 +80,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogString() throws IOException {
         //region when
-        Logger.log("test string 1");
-        Logger.log("other str");
-        Logger.flush();
+        logger.log("test string 1");
+        logger.log("other str");
+        logger.flush();
         //endregion
 
         //region then
@@ -92,8 +95,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogBoolean() throws IOException {
         //region when
-        Logger.log(true);
-        Logger.log(false);
+        logger.log(true);
+        logger.log(false);
         //endregion
 
         //region then
@@ -106,7 +109,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogReference() throws IOException {
         //region when
-        Logger.log(new Object());
+        logger.log(new Object());
         //endregion
 
         //region then

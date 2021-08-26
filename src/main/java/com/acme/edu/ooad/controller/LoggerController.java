@@ -2,44 +2,55 @@ package com.acme.edu.ooad.controller;
 
 import com.acme.edu.ooad.message.*;
 import com.acme.edu.ooad.saver.ConsoleSaver;
-
-import java.util.Objects;
+import com.acme.edu.ooad.saver.Saver;
 
 public class LoggerController {
-    private static final ConsoleSaver consoleSaver = new ConsoleSaver();
+    private final Saver saver;
+    private ObjectMessage lastLoggedMessage = null;
 
-    private static Message lastLoggedMessage = null;
+    public LoggerController(Saver saver) {
+        this.saver = saver;
+    }
 
-    public static void flush() {
-        consoleSaver.save(lastLoggedMessage);
+    public void flush() {
+        saver.save(lastLoggedMessage);
         lastLoggedMessage.clean();
     }
 
-    public static void log(Message message) {
-        if (isFlushNeeded(message)) {
+    public void log(StringMessage message) {
+        boolean isLastLoggedAnotherType = lastLoggedMessage != null && !(lastLoggedMessage instanceof StringMessage);
+        if ( isLastLoggedAnotherType || message.isNeedToFlush() ) {
             flush();
         }
-        if (lastLoggedMessage == null) {
-            lastLoggedMessage = message;
-        } else {
-            lastLoggedMessage = lastLoggedMessage.process(message);
-        }
-        if (!AccumulativeMessage.isAccumulative(message)) {
-            consoleSaver.save(message);
-        }
+
+        message.process();
+        lastLoggedMessage = message;
     }
 
-    private static boolean isLastLogTypeSame(Message message) {
-        return Objects.equals(message.getClass(),lastLoggedMessage.getClass());
+    public void log(IntegerMessage message) {
+        if ( lastLoggedMessage != null && !(lastLoggedMessage instanceof IntegerMessage) ) {
+            flush();
+        }
+
+        message.process();
+        lastLoggedMessage = message;
     }
 
-    private static boolean isFlushNeeded(Message message){
-        if (lastLoggedMessage == null) return false;
-        boolean flushFlag = false;
-        if (AccumulativeMessage.isAccumulative(message)) {
-            flushFlag = !isLastLogTypeSame(message);
+    public void log(ByteMessage message) {
+        if ( lastLoggedMessage != null && !(lastLoggedMessage instanceof ByteMessage) ) {
+            flush();
         }
-        flushFlag |= lastLoggedMessage.isNeedToFlush(message);
-        return flushFlag;
+
+        message.process();
+        lastLoggedMessage = message;
+    }
+
+    public void log(ObjectMessage message) {
+        if ( lastLoggedMessage != null ) {
+            flush();
+        }
+
+        saver.save(message);
+        lastLoggedMessage = null;
     }
 }
