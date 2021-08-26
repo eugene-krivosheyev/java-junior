@@ -1,34 +1,49 @@
 package com.db.edu.message;
 
-public class IntMessage {
+import com.db.edu.State;
+
+public class IntMessage implements Message {
     private static final String PRIMITIVE_PREFIX = "primitive: ";
-    private int flag = 0;
-    private int value;
+    private Integer value;
 
     public IntMessage(int value) {
         this.value = value;
     }
 
-    public void accumulate(IntMessage message) {
-        value += message.getValue();
-        flag = 1;
+    @Override
+    public boolean accumulate(Message message) {
+        value += Integer.parseInt(message.getValue());
+        return true;
     }
 
-    public String decoratedInt() {
+    @Override
+    public boolean isStateEquals(State state) {
+        return state.equals(State.INT);
+    }
+
+    @Override
+    public State getState() {
+        return State.INT;
+    }
+
+    @Override
+    public String decorated() {
         return PRIMITIVE_PREFIX + value;
     }
 
-    public int getValue() {
-        return value;
+    @Override
+    public String getValue() {
+        return String.valueOf(value);
     }
 
-    public boolean isEmpty() {
-        return flag == 0;
+    @Override
+    public boolean isNotEmpty() {
+        return value != null;
     }
 
+    @Override
     public void flush() {
         value = 0;
-        flag = 0;
     }
 }
 

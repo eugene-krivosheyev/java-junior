@@ -1,44 +1,37 @@
 package com.db.edu;
 
-import com.db.edu.message.IntMessage;
-import com.db.edu.message.StringMessage;
+import com.db.edu.message.EmptyMessage;
+import com.db.edu.message.Message;
+import com.db.edu.save.Saver;
 
 public class Controller {
-    private final StringMessage bufferS = new StringMessage(null);
-    private final IntMessage bufferI = new IntMessage(0);
-    State state = null;
-    private final ConsoleSaver consoleSaver = new ConsoleSaver();
+    private Message buffer = new EmptyMessage();
+    private final Saver saver;
 
-    public void log(IntMessage message) {
-        bufferI.accumulate(message);
-        if(!bufferS.isEmpty()){
-            consoleSaver.save(bufferS.decoratedString());
-            bufferS.flush();
-        }
-        state = State.INT;
+    public Controller(Saver saver) {
+        this.saver = saver;
     }
 
-    public void log(StringMessage message) {
-        if(!bufferS.isMessageEquals(message)) {
-            consoleSaver.save(bufferS.decoratedString());
-            bufferS.flush();
+    public void log(Message message) {
+        if(!message.isStateEquals(buffer.getState())) {
+            if(buffer.isNotEmpty()){
+                saver.save(buffer.decorated());
+                buffer.flush();
+            }
+            buffer = message;
+        } else {
+            if(!buffer.accumulate(message)) {
+                saver.save(buffer.decorated());
+                buffer = message;
+                buffer.accumulate(message);
+            }
         }
-        bufferS.accumulate(message);
-        if(!bufferI.isEmpty()){
-            consoleSaver.save(bufferI.decoratedInt());
-            bufferI.flush();
-        }
-        state = State.STRING;
     }
 
     void flush() {
-        if (!bufferS.isEmpty()) {
-            consoleSaver.save(bufferS.decoratedString());
-            bufferS.flush();
-        }
-        if (!bufferI.isEmpty()) {
-            consoleSaver.save(bufferI.decoratedInt());
-            bufferI.flush();
+        if (buffer.isNotEmpty()) {
+            saver.save(buffer.decorated());
+            buffer.flush();
         }
     }
 }

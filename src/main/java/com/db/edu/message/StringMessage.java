@@ -1,41 +1,63 @@
 package com.db.edu.message;
 
-public class StringMessage {
+import com.db.edu.State;
+
+public class StringMessage implements Message {
 
     private static final String STRING_PREFIX = "string: ";
-    private int quantityString = 0;
+    private int quantityOfRepetitiveString = 0;
     private String value;
 
     public StringMessage(String value) {
         this.value = value;
     }
 
-    public void accumulate(StringMessage message) {
-        this.value = message.getValue();
-        ++quantityString;
-    }
-
-    public String decoratedString() {
-        if (quantityString == 1) {
-            return STRING_PREFIX + value;
+    @Override
+    public boolean accumulate(Message message) {
+        if (isMessageEquals(message)) {
+            this.value = message.getValue();
+            ++quantityOfRepetitiveString;
+            return true;
         } else {
-            return STRING_PREFIX + value + " (x" + quantityString + ")";
+            return false;
         }
     }
 
-    public boolean isMessageEquals(StringMessage message) {
+    @Override
+    public boolean isStateEquals(State state) {
+        return state.equals(State.STRING);
+    }
+
+    @Override
+    public State getState() {
+        return State.STRING;
+    }
+
+    @Override
+    public String decorated() {
+        if (quantityOfRepetitiveString < 2) {
+            return STRING_PREFIX + value;
+        } else {
+            return STRING_PREFIX + value + " (x" + quantityOfRepetitiveString + ")";
+        }
+    }
+
+    public boolean isMessageEquals(Message message) {
         return message.getValue().equals(value);
     }
 
-    public boolean isEmpty() {
-        return quantityString == 0;
+    @Override
+    public boolean isNotEmpty() {
+        return value != null;
     }
 
+    @Override
     public void flush() {
         value = null;
-        quantityString = 0;
+        quantityOfRepetitiveString = 0;
     }
 
+    @Override
     public String getValue() {
         return value;
     }

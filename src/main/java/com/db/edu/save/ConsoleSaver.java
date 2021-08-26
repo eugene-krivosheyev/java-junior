@@ -1,6 +1,6 @@
-package com.db.edu;
+package com.db.edu.save;
 
-public class ConsoleSaver {
+public class ConsoleSaver implements Saver {
 
     public void save(String message) {
         System.out.println(message);
