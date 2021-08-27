@@ -1,5 +1,9 @@
 package com.db.edu;
 
+import com.db.edu.Message.IntMessage;
+import com.db.edu.Message.Message;
+import com.db.edu.Message.StringMessage;
+
 public class LoggerController {
 
     State state = State.NULL;

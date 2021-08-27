@@ -1,4 +1,4 @@
-package com.db.edu;
+package com.db.edu.Message;
 
 public interface Message {
 

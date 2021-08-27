@@ -1,4 +1,7 @@
-package com.db.edu;
+package com.db.edu.Message;
+
+import com.db.edu.ConsoleSaver;
+import com.db.edu.Prefix;
 
 public class ByteMessage implements Message {
     private byte messageBody;

@@ -1,5 +1,10 @@
 package com.db.edu;
 
+import com.db.edu.Message.CharMessage;
+import com.db.edu.Message.IntMessage;
+import com.db.edu.Message.ObjectMessage;
+import com.db.edu.Message.StringMessage;
+
 public class Logger {
 
     public static LoggerController loggerController = new LoggerController();
