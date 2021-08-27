@@ -1,12 +1,14 @@
 package com.acme.edu;
 
 import com.acme.edu.message.Message;
+import com.acme.edu.saver.Saver;
 
 public class LoggerController {
     private Message accumulator;
+    private Saver saver;
 
-    public LoggerController() {
-        accumulator = null;
+    public LoggerController(Saver saver) {
+        this.saver = saver;
     }
 
     public void log(Message message) {
@@ -20,7 +22,7 @@ public class LoggerController {
 
     public void flush() {
         if (accumulator != null) {
-            ConsoleSaver.writeToConsole(accumulator.getDecoratedMessage());
+            saver.save(accumulator.getDecoratedMessage());
             accumulator = null;
         }
     }

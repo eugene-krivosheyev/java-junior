@@ -1,11 +1,15 @@
 package com.acme.edu;
 
 import com.acme.edu.message.*;
+import com.acme.edu.saver.ConsoleSaver;
+import com.acme.edu.saver.Saver;
 
 import java.util.Arrays;
 
+
 public class Logger {
-    private static final LoggerController controller = new LoggerController();
+    private static final Saver consoleSaver = new ConsoleSaver();
+    private static final LoggerController controller = new LoggerController(consoleSaver);
 
     public static void log(int message) {
         controller.log(new IntMessage(message));
