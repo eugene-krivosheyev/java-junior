@@ -25,6 +25,8 @@ public class ControllerTest {
      * - pre-conditions: system state + input values
      * - post-conditions: system state + output values
      */
+
+
     @Test
     public void shouldGetErrorWhenMessageBodyNotExists() {
         //region Fixture | Arrange | Given
@@ -72,6 +74,21 @@ public class ControllerTest {
         sutController.log(messageStub);
 
         //Then
-        verify(saverMock, times(1)).save(messageStub);
+        verify(saverMock, times(1)).save(any());
+    }
+
+    @Test
+    public void stubShouldHoldState() {
+        Object stubObject = mock(Object.class);
+        when(stubObject.toString())
+                .thenReturn("1")
+                .thenReturn("2")
+                .thenReturn("3");
+
+        assertEquals("1", stubObject.toString());
+        assertEquals("2", stubObject.toString());
+        assertEquals("3", stubObject.toString());
+
+//        verify(mock, times(1)).write(anyString());
     }
 }
