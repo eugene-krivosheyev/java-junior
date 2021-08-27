@@ -44,48 +44,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    @Disabled
-    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
-        //region when
-        Logger.log("str 1");
-        Logger.log(10);
-        Logger.log(Integer.MAX_VALUE);
-        Logger.log("str 2");
-        Logger.log(0);
-        Logger.flush();
-        //endregion
-
-        //region then
-        assertSysoutContains("str 1" + SEPARATOR);
-        assertSysoutContains("10" + SEPARATOR);
-        assertSysoutContains(Integer.MAX_VALUE + SEPARATOR);
-        assertSysoutContains("str 2" + SEPARATOR);
-        assertSysoutContains("0" + SEPARATOR);
-        //endregion
-    }
-
-    @Test
-    @Disabled
-    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
-        //region when
-        Logger.log("str 1");
-        Logger.log((byte)10);
-        Logger.log(Byte.MAX_VALUE);
-        Logger.log("str 2");
-        Logger.log(0);
-        Logger.flush();
-        //endregion
-
-        //region then
-        assertSysoutContains("str 1" + SEPARATOR);
-        assertSysoutContains("10" + SEPARATOR);
-        assertSysoutContains(Byte.MAX_VALUE + SEPARATOR);
-        assertSysoutContains("str 2" + SEPARATOR);
-        assertSysoutContains("0" + SEPARATOR);
-        //endregion
-    }
-
-    @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() {
         //region when
         Logger.log("str 1");

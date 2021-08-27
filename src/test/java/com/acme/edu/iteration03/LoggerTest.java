@@ -22,21 +22,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test
-    @Disabled
-    public void shouldLogIntegersArray() {
-        //region when
-        Logger.log(new int[]{-1, 0, 1});
-        Logger.flush();
-        //endregion
-
-        //region then
-        assertSysoutEquals(
-                "primitives array: {-1, 0, 1}\n"
-        );
-        //endregion
-    }
-
-    @Test
     public void shouldLogStringsWithOneMethodCall() {
         //region when
         Logger.log("str1", "string 2", "str 3");
@@ -59,26 +44,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutContains("3");
-        //endregion
-    }
-
-    @Test
-    @Disabled
-    public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() {
-        //region when
-        Logger.log(1);
-        Logger.log("str");
-        Logger.log(Integer.MAX_VALUE - 10);
-        Logger.log(11);
-        Logger.flush();
-
-        //endregion
-
-        //region then
-        assertSysoutContains(1);
-        assertSysoutContains("str");
-        assertSysoutContains(Integer.MAX_VALUE);
-        assertSysoutContains(1);
         //endregion
     }
 }
