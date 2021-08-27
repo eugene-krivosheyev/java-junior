@@ -10,22 +10,16 @@ public class IntegerMessage implements Message {
         this.value = value;
     }
     @Override
-    public void clean() { value = 0; };
+    public void clean() { value = 0; }
     @Override
     public String toString() { return prefix + value; }
-    @Override
-    public Object getValue() {
+    private int getValue() {
         return value;
-    }
-    @Override
-    public boolean equalValues(Message message) {
-        return Objects.equals(this.value, message.getValue());
     }
     @Override
     public Message getNewInstance(Message message) {
         if (Message.sameType(this,message)) {
-            IntegerMessage updatedMessage = new IntegerMessage(this.value+(int)message.getValue());
-            return updatedMessage;
+            return new IntegerMessage(this.value+((IntegerMessage)message).getValue());
         } else {
             return message;
         }

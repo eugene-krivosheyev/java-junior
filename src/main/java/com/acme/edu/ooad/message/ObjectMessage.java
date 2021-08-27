@@ -11,17 +11,9 @@ public class ObjectMessage implements Message{
         this.value = value;
     }
     @Override
-    public void clean() {};
+    public void clean() {}
     @Override
     public String toString() { return prefix + value; }
-    @Override
-    public Object getValue() {
-        return value;
-    }
-    @Override
-    public boolean equalValues(Message message) {
-        return Objects.equals(this.value, message.getValue());
-    }
     @Override
     public Message getNewInstance(Message message) {
         return message;

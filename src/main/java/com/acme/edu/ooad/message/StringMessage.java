@@ -25,13 +25,11 @@ public class StringMessage implements Message {
     public void clean() {
         repeatableStringCounter = 0;
     }
-    @Override
-    public Object getValue() {
+    private String getValue() {
         return value;
     }
-    @Override
-    public boolean equalValues(Message message) {
-        return Objects.equals(this.value, message.getValue());
+    private boolean equalValues(Message message) {
+        return Objects.equals(this.value, ((StringMessage)message).getValue());
     }
     @Override
     public Message getNewInstance(Message message) {
