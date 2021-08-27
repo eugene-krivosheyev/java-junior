@@ -7,8 +7,6 @@ import com.db.edu.save.ConsoleSaver;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Objects;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -27,7 +25,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void testLogStringWithSavingMock() {
+    public void weCanLogStringWithSavingMock() {
         ConsoleSaver consoleSaverMock = mock(ConsoleSaver.class);
         StringMessage stringMessage = new StringMessage("value");
         IntMessage intMessage = new IntMessage(1);
@@ -40,4 +38,13 @@ public class ControllerTest {
         assertEquals(controller.getBuffer(), stringMessage);
     }
 
+    @Test
+    public void weCanUseFlushToCleanBuffer() {
+        ConsoleSaver consoleSaverMock = mock(ConsoleSaver.class);
+
+        Controller controller = new Controller(consoleSaverMock);
+        controller.flush();
+
+        Assertions.assertFalse(controller.getBuffer().isNotEmpty());
+    }
 }

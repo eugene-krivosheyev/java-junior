@@ -8,10 +8,6 @@ public class Controller {
     private Message buffer = new EmptyMessage();
     private final Saver saver;
 
-    public Message getBuffer() {
-        return buffer;
-    }
-
     public Controller(Saver saver) {
         this.saver = saver;
     }
@@ -35,5 +31,9 @@ public class Controller {
             saver.save(buffer.decorated());
             buffer.flush();
         }
+    }
+
+    public Message getBuffer() {
+        return buffer;
     }
 }
