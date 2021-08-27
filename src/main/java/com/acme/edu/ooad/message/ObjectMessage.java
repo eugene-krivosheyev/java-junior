@@ -13,11 +13,7 @@ public class ObjectMessage implements Message{
     @Override
     public void clean() {};
     @Override
-    public Message process(Message newMessage) {return newMessage;};
-    @Override
     public String toString() { return prefix + value; }
-    @Override
-    public boolean isNeedToFlush(Message message) { return false; }
     @Override
     public Object getValue() {
         return value;
@@ -27,7 +23,11 @@ public class ObjectMessage implements Message{
         return Objects.equals(this.value, message.getValue());
     }
     @Override
-    public boolean sameTypeOf(Message message) {
-        return message instanceof ObjectMessage;
+    public Message getNewInstance(Message message) {
+        return message;
+    }
+    @Override
+    public Message getInstanceToPrint(Message message) {
+        return this;
     }
 }

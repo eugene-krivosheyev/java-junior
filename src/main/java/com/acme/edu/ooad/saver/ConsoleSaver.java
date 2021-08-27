@@ -10,7 +10,7 @@ public class ConsoleSaver extends ValidatingSaver {
         try {
             super.save(message);
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+           // e.printStackTrace();
             return;
         }
 

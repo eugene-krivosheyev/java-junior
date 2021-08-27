@@ -2,7 +2,7 @@ package com.acme.edu.ooad.message;
 
 import java.util.Objects;
 
-public class ByteMessage implements AccumulativeMessage {
+public class ByteMessage implements Message {
     private final String prefix;
     private byte value;
     public ByteMessage(byte value) {
@@ -12,18 +12,7 @@ public class ByteMessage implements AccumulativeMessage {
     @Override
     public void clean() { value = 0; };
     @Override
-    public Message process(Message message) {
-        if (this.sameTypeOf(message)) {
-            ByteMessage updatedMessage = new ByteMessage((byte)(this.value+(byte)message.getValue()));
-            return updatedMessage;
-        } else {
-            return message;
-        }
-    };
-    @Override
     public String toString() { return prefix + value; }
-    @Override
-    public boolean isNeedToFlush(Message message) { return false; }
     @Override
     public Object getValue() {
         return value;
@@ -33,7 +22,17 @@ public class ByteMessage implements AccumulativeMessage {
         return Objects.equals(this.value, message.getValue());
     }
     @Override
-    public boolean sameTypeOf(Message message) {
-        return message instanceof ByteMessage;
+    public Message getNewInstance(Message message) {
+        if (Message.sameType(this,message)) {
+            ByteMessage updatedMessage = new ByteMessage((byte)(this.value+(byte)message.getValue()));
+            return updatedMessage;
+        } else {
+            return message;
+        }
+    }
+    @Override
+    public Message getInstanceToPrint(Message message) {
+        if (Message.sameType(this,message)) return null;
+        return this;
     }
 }

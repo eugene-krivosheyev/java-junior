@@ -13,9 +13,6 @@ import java.io.IOException;
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private static final String STRING_PREFIX = "string: ";
     private static final String PRIMITIVE_PREFIX = "primitive: ";
-
-    ConsoleSaver saver = new ConsoleSaver();
-    Logger logger = new Logger(saver);
     //region given
     @BeforeEach
     public void setUpSystemOut() throws IOException {
@@ -32,12 +29,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
-        logger.log("str 1");
-        logger.log(1);
-        logger.log(2);
-        logger.log("str 2");
-        logger.log(0);
-        logger.flush();
+        Logger.log("str 1");
+        Logger.log(1);
+        Logger.log(2);
+        Logger.log("str 2");
+        Logger.log(0);
+        Logger.flush();
         //endregion
 
         //region then
@@ -51,42 +48,42 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
-        logger.log("Test 1");
-        logger.log(Integer.MIN_VALUE + 1);
-        logger.log(Integer.MAX_VALUE);
-        logger.log(Integer.MIN_VALUE);
+        Logger.log("Test 1");
+        Logger.log(Integer.MIN_VALUE + 1);
+        Logger.log(Integer.MAX_VALUE);
+        Logger.log(Integer.MIN_VALUE);
 
-        logger.log("Test 2");
-        logger.log(Integer.MIN_VALUE);
-        logger.log(Integer.MIN_VALUE);
-        logger.log(-42);
-        logger.log(Integer.MAX_VALUE);
+        Logger.log("Test 2");
+        Logger.log(Integer.MIN_VALUE);
+        Logger.log(Integer.MIN_VALUE);
+        Logger.log(-42);
+        Logger.log(Integer.MAX_VALUE);
 
-        logger.log("Test 3");
-        logger.log(42);
+        Logger.log("Test 3");
+        Logger.log(42);
         for (int i = 0; i < 100; ++i) {
-            logger.log(Integer.MAX_VALUE);
+            Logger.log(Integer.MAX_VALUE);
         }
         for (int i = 0; i < 99; ++i) {
-            logger.log(Integer.MIN_VALUE);
+            Logger.log(Integer.MIN_VALUE);
         }
-        logger.log(57);
+        Logger.log(57);
 
-        logger.log("Test 4");
-        logger.log(Integer.MIN_VALUE / 2);
-        logger.log(Integer.MIN_VALUE / 2);
+        Logger.log("Test 4");
+        Logger.log(Integer.MIN_VALUE / 2);
+        Logger.log(Integer.MIN_VALUE / 2);
 
-        logger.log("Test 5");
-        logger.log(Integer.MAX_VALUE / 2);
-        logger.log(Integer.MAX_VALUE / 2);
-        logger.log(1);
+        Logger.log("Test 5");
+        Logger.log(Integer.MAX_VALUE / 2);
+        Logger.log(Integer.MAX_VALUE / 2);
+        Logger.log(1);
 
-        logger.log("Test 6");
+        Logger.log("Test 6");
         for (int i = 0; i < Integer.MAX_VALUE; ++i) {
-            logger.log(Integer.MIN_VALUE);
-            logger.log(Integer.MAX_VALUE);
+            Logger.log(Integer.MIN_VALUE);
+            Logger.log(Integer.MAX_VALUE);
         }
-        logger.flush();
+        Logger.flush();
         //endregion
 
         //region then
@@ -110,42 +107,42 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
-        logger.log("Test 1");
-        logger.log((byte) (Byte.MIN_VALUE + 1));
-        logger.log(Byte.MAX_VALUE);
-        logger.log(Byte.MIN_VALUE);
+        Logger.log("Test 1");
+        Logger.log((byte) (Byte.MIN_VALUE + 1));
+        Logger.log(Byte.MAX_VALUE);
+        Logger.log(Byte.MIN_VALUE);
 
-        logger.log("Test 2");
-        logger.log(Byte.MIN_VALUE);
-        logger.log(Byte.MIN_VALUE);
-        logger.log((byte) -42);
-        logger.log(Byte.MAX_VALUE);
+        Logger.log("Test 2");
+        Logger.log(Byte.MIN_VALUE);
+        Logger.log(Byte.MIN_VALUE);
+        Logger.log((byte) -42);
+        Logger.log(Byte.MAX_VALUE);
 
-        logger.log("Test 3");
-        logger.log((byte) 42);
+        Logger.log("Test 3");
+        Logger.log((byte) 42);
         for (int i = 0; i < 100; ++i) {
-            logger.log(Byte.MAX_VALUE);
+            Logger.log(Byte.MAX_VALUE);
         }
         for (int i = 0; i < 99; ++i) {
-            logger.log(Byte.MIN_VALUE);
+            Logger.log(Byte.MIN_VALUE);
         }
-        logger.log((byte) 57);
+        Logger.log((byte) 57);
 
-        logger.log("Test 4");
-        logger.log(Byte.MIN_VALUE / 2);
-        logger.log(Byte.MIN_VALUE / 2);
+        Logger.log("Test 4");
+        Logger.log(Byte.MIN_VALUE / 2);
+        Logger.log(Byte.MIN_VALUE / 2);
 
-        logger.log("Test 5");
-        logger.log(Byte.MAX_VALUE / 2);
-        logger.log(Byte.MAX_VALUE / 2);
-        logger.log(1);
+        Logger.log("Test 5");
+        Logger.log(Byte.MAX_VALUE / 2);
+        Logger.log(Byte.MAX_VALUE / 2);
+        Logger.log(1);
 
-        logger.log("Test 6");
+        Logger.log("Test 6");
         for (int i = 0; i < Byte.MAX_VALUE; ++i) {
-            logger.log(Byte.MIN_VALUE);
-            logger.log(Byte.MAX_VALUE);
+            Logger.log(Byte.MIN_VALUE);
+            Logger.log(Byte.MAX_VALUE);
         }
-        logger.flush();
+        Logger.flush();
         //endregion
 
         //region then
@@ -169,15 +166,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
         //region when
-        logger.log("str 1");
-        logger.log("str 2");
-        logger.log("str 2");
-        logger.log(0);
-        logger.log("str 2");
-        logger.log("str 3");
-        logger.log("str 3");
-        logger.log("str 3");
-        logger.flush();
+        Logger.log("str 1");
+        Logger.log("str 2");
+        Logger.log("str 2");
+        Logger.log(0);
+        Logger.log("str 2");
+        Logger.log("str 3");
+        Logger.log("str 3");
+        Logger.log("str 3");
+        Logger.flush();
         //endregion
 
         //region then

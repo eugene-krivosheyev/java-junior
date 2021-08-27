@@ -2,7 +2,7 @@ package com.acme.edu.ooad.message;
 
 import java.util.Objects;
 
-public class StringMessage implements AccumulativeMessage {
+public class StringMessage implements Message {
     private final String prefix;
     private final String value;
     private int repeatableStringCounter;
@@ -18,21 +18,8 @@ public class StringMessage implements AccumulativeMessage {
         this.repeatableStringCounter = counter;
     }
     @Override
-    public boolean isNeedToFlush(Message message){
-        return repeatableStringCounter != 0 && !equalValues(message);
-    }
-    @Override
     public String toString() {
         return prefix + value + (repeatableStringCounter > 1 ? " (x" + repeatableStringCounter + ")" : "");
-    }
-    @Override
-    public Message process(Message message) {
-        if (this.sameTypeOf(message) && this.equalValues(message)) {
-            int newCounter = this.repeatableStringCounter+1;
-            return new StringMessage(this.value,newCounter);
-        } else {
-            return message;
-        }
     }
     @Override
     public void clean() {
@@ -47,7 +34,17 @@ public class StringMessage implements AccumulativeMessage {
         return Objects.equals(this.value, message.getValue());
     }
     @Override
-    public boolean sameTypeOf(Message message) {
-        return message instanceof StringMessage;
+    public Message getNewInstance(Message message) {
+        if (Message.sameType(this, message) && this.equalValues(message)) {
+            int newCounter = this.repeatableStringCounter+1;
+            return new StringMessage(this.value,newCounter);
+        } else {
+            return message;
+        }
+    }
+    @Override
+    public Message getInstanceToPrint(Message message) {
+        if (Message.sameType(this, message) && this.equalValues(message)) return null;
+        return this;
     }
 }

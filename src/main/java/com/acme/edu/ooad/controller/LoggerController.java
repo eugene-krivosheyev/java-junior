@@ -14,35 +14,15 @@ public class LoggerController {
     }
 
     public void flush() {
+        if (lastLoggedMessage == null) return;
         saver.save(lastLoggedMessage);
         lastLoggedMessage.clean();
     }
 
     public void log(Message message) {
-        if (isFlushNeeded(message)) {
-            flush();
+        if (lastLoggedMessage != null) {
+            saver.save(lastLoggedMessage.getInstanceToPrint(message));
         }
-        if (lastLoggedMessage == null) {
-            lastLoggedMessage = message;
-        } else {
-            lastLoggedMessage = lastLoggedMessage.process(message);
-        }
-        if (!AccumulativeMessage.isAccumulative(message)) {
-            saver.save(message);
-        }
-    }
-
-    private boolean isLastLogTypeSame(Message message) {
-        return Objects.equals(message.getClass(),lastLoggedMessage.getClass());
-    }
-
-    private boolean isFlushNeeded(Message message){
-        if (lastLoggedMessage == null) return false;
-        boolean flushFlag = false;
-        if (AccumulativeMessage.isAccumulative(message)) {
-            flushFlag = !isLastLogTypeSame(message);
-        }
-        flushFlag |= lastLoggedMessage.isNeedToFlush(message);
-        return flushFlag;
+        lastLoggedMessage = lastLoggedMessage == null ? message : lastLoggedMessage.getNewInstance(message);
     }
 }

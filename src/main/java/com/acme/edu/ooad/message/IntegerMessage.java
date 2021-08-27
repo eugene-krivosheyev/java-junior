@@ -2,7 +2,7 @@ package com.acme.edu.ooad.message;
 
 import java.util.Objects;
 
-public class IntegerMessage implements AccumulativeMessage {
+public class IntegerMessage implements Message {
     private final String prefix;
     private int value;
     public IntegerMessage(int value) {
@@ -12,18 +12,7 @@ public class IntegerMessage implements AccumulativeMessage {
     @Override
     public void clean() { value = 0; };
     @Override
-    public Message process(Message message) {
-        if (this.sameTypeOf(message)) {
-            IntegerMessage updatedMessage = new IntegerMessage(this.value+(int)message.getValue());
-            return updatedMessage;
-        } else {
-            return message;
-        }
-    }
-    @Override
     public String toString() { return prefix + value; }
-    @Override
-    public boolean isNeedToFlush(Message message) {return false;}
     @Override
     public Object getValue() {
         return value;
@@ -33,7 +22,17 @@ public class IntegerMessage implements AccumulativeMessage {
         return Objects.equals(this.value, message.getValue());
     }
     @Override
-    public boolean sameTypeOf(Message message) {
-        return message instanceof IntegerMessage;
+    public Message getNewInstance(Message message) {
+        if (Message.sameType(this,message)) {
+            IntegerMessage updatedMessage = new IntegerMessage(this.value+(int)message.getValue());
+            return updatedMessage;
+        } else {
+            return message;
+        }
+    }
+    @Override
+    public Message getInstanceToPrint(Message message) {
+        if (Message.sameType(this,message)) return null;
+        return this;
     }
 }

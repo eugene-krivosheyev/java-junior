@@ -8,9 +8,6 @@ import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private static final String STRING_PREFIX = "string: ";
-
-    ConsoleSaver saver = new ConsoleSaver();
-    Logger logger = new Logger(saver);
     //region given
     @BeforeEach
     public void setUpSystemOut() throws IOException {
@@ -31,8 +28,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
-        logger.log("str1", "string 2", "str 3");
-        logger.flush();
+        Logger.log("str1", "string 2", "str 3");
+        Logger.flush();
         //endregion
 
         //region then
@@ -46,8 +43,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
-        logger.log(-1, 0, 1, 3);
-        logger.flush();
+        Logger.log(-1, 0, 1, 3);
+        Logger.flush();
         //endregion
 
         //region then
