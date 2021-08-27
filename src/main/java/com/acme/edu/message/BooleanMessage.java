@@ -16,6 +16,11 @@ public class BooleanMessage extends Message{
     }
 
     @Override
+    public void accumulate(Message message) {
+
+    }
+
+    @Override
     public String getDecoratedMessage(){
         return String.format("%s %s%n", Prefix.PRIMITIVE.value, body);
     }
