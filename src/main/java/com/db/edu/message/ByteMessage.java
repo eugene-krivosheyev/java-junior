@@ -1,9 +1,9 @@
 package com.db.edu.message;
 
 import com.db.edu.State;
+import static com.db.edu.Logger.PRIMITIVE_PREFIX;
 
 public class ByteMessage implements Message {
-    private static final String PRIMITIVE_PREFIX = "primitive: ";
     private Byte value = null;
 
     public ByteMessage(Byte value) {
@@ -27,6 +27,11 @@ public class ByteMessage implements Message {
 
     @Override
     public void flush() {
+    }
+
+    @Override
+    public void accumulate() {
+
     }
 
     @Override

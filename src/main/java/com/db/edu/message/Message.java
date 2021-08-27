@@ -12,6 +12,8 @@ public interface Message {
 
     void flush();
 
+    void accumulate();
+
     boolean accumulate(Message message);
 
     boolean isStateEquals(State state);

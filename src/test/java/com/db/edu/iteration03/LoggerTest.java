@@ -4,6 +4,7 @@ import com.db.edu.Logger;
 import com.db.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test
+    @Disabled
     public void shouldLogStringsWithOneMethodCall() throws AssertionError {
         //region when
         Logger.log("str1", "string 2", "str 3");
@@ -37,6 +39,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
+    @Disabled
     public void shouldLogIntegersWithOneMethodCall() throws AssertionError {
         //region when
         Logger.log(-1, 0, 1, 3);

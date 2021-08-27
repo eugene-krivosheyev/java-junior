@@ -1,10 +1,9 @@
 package com.db.edu.message;
 
 import com.db.edu.State;
+import static com.db.edu.Logger.STRING_PREFIX;
 
 public class StringMessage implements Message {
-
-    private static final String STRING_PREFIX = "string: ";
     private int quantityOfRepetitiveString = 0;
     private String value;
 
@@ -35,7 +34,7 @@ public class StringMessage implements Message {
 
     @Override
     public String decorated() {
-        if (quantityOfRepetitiveString < 2) {
+        if (quantityOfRepetitiveString == 1) {
             return STRING_PREFIX + value;
         } else {
             return STRING_PREFIX + value + " (x" + quantityOfRepetitiveString + ")";
@@ -55,6 +54,11 @@ public class StringMessage implements Message {
     public void flush() {
         value = null;
         quantityOfRepetitiveString = 0;
+    }
+
+    @Override
+    public void accumulate() {
+        quantityOfRepetitiveString++;
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.db.edu.message;
 
 import com.db.edu.State;
+import static com.db.edu.Logger.REFERENCE_PREFIX;
 
 public class ObjectMessage implements Message {
-    public static final String REFERENCE_PREFIX = "reference: ";
     private Object value = null;
 
     public ObjectMessage(Object value) {
@@ -27,6 +27,11 @@ public class ObjectMessage implements Message {
 
     @Override
     public void flush() {
+
+    }
+
+    @Override
+    public void accumulate() {
 
     }
 

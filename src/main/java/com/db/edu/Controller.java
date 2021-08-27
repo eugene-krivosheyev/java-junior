@@ -14,11 +14,9 @@ public class Controller {
 
     public void log(Message message) {
         if(!message.isStateEquals(buffer.getState())) {
-            if(buffer.isNotEmpty()){
-                saver.save(buffer.decorated());
-                buffer.flush();
-            }
+            flush();
             buffer = message;
+            buffer.accumulate();
         } else {
             if(!buffer.accumulate(message)) {
                 saver.save(buffer.decorated());
@@ -28,7 +26,7 @@ public class Controller {
         }
     }
 
-    void flush() {
+    public void flush() {
         if (buffer.isNotEmpty()) {
             saver.save(buffer.decorated());
             buffer.flush();

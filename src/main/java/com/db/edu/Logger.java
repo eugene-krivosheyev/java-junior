@@ -2,7 +2,6 @@ package com.db.edu;
 
 import com.db.edu.message.*;
 import com.db.edu.save.ConsoleSaver;
-import com.db.edu.save.Saver;
 
 public class Logger {
 
@@ -14,6 +13,7 @@ public class Logger {
     public static final String STRING_PREFIX = "string: ";
     public static final String REFERENCE_PREFIX = "reference: ";
 
+    //переделать передачу сейвера
     private static final Controller controller = new Controller(new ConsoleSaver());
 
     private Logger() {

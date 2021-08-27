@@ -23,6 +23,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
+    @Disabled
     public void shouldLogSequentIntegersAsSum() throws AssertionError {
         //region when
         Logger.log("str 1");
@@ -84,6 +85,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
+    @Disabled
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws AssertionError {
         //region when
         Logger.log("str 1");

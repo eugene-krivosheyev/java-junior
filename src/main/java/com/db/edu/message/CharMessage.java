@@ -2,8 +2,9 @@ package com.db.edu.message;
 
 import com.db.edu.State;
 
+import static com.db.edu.Logger.CHAR_PREFIX;
+
 public class CharMessage implements Message {
-    private static final String CHAR_PREFIX = "char: ";
     private Character value = null;
 
     public CharMessage(Character value) {
@@ -27,6 +28,11 @@ public class CharMessage implements Message {
 
     @Override
     public void flush() {
+    }
+
+    @Override
+    public void accumulate() {
+
     }
 
     @Override

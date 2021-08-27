@@ -23,6 +23,11 @@ public class EmptyMessage implements Message {
     }
 
     @Override
+    public void accumulate() {
+
+    }
+
+    @Override
     public boolean accumulate(Message message) {
         return false;
     }

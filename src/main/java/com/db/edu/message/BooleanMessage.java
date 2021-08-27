@@ -1,10 +1,10 @@
 package com.db.edu.message;
 
 import com.db.edu.State;
+import static com.db.edu.Logger.PRIMITIVE_PREFIX;
 
 public class BooleanMessage implements Message {
-    private static final String PRIMITIVE_PREFIX = "primitive: ";
-    private Boolean value = null;
+    private final Boolean value;
 
     public BooleanMessage(Boolean value) {
         this.value = value;
@@ -27,6 +27,10 @@ public class BooleanMessage implements Message {
 
     @Override
     public void flush() {
+    }
+
+    @Override
+    public void accumulate() {
     }
 
     @Override
