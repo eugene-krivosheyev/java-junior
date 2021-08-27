@@ -43,4 +43,9 @@ public class ByteMessage implements Message {
     public boolean typeEquals(Message otherMessage) {
         return this.type.equals(otherMessage.getType());
     }
+
+    @Override
+    public Object getValue() {
+        return value;
+    }
 }

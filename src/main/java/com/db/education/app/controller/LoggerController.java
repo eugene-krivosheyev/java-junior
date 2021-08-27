@@ -1,4 +1,4 @@
-package com.db.education.app;
+package com.db.education.app.controller;
 
 import com.db.education.app.message.EmptyMessage;
 import com.db.education.app.message.Message;
@@ -14,6 +14,10 @@ public class LoggerController {
     }
 
     public void processMessage(Message message) {
+        if (message == null || message.isEmpty()) {
+            throw new IllegalArgumentException("Empty or null message received");
+        }
+
         if (lastMessage.isEmpty()) {
             lastMessage = message;
             return;

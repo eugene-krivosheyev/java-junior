@@ -20,4 +20,9 @@ public class EmptyMessage implements Message {
     public boolean isEmpty() {
         return true;
     }
+
+    @Override
+    public Object getValue() {
+        return null;
+    }
 }

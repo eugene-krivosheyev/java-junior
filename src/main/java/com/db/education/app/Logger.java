@@ -1,5 +1,6 @@
 package com.db.education.app;
 
+import com.db.education.app.controller.LoggerController;
 import com.db.education.app.message.*;
 import com.db.education.app.saver.ConsoleSaver;
 
