@@ -8,6 +8,10 @@ public class Controller {
     private Message buffer = new EmptyMessage();
     private final Saver saver;
 
+    public Message getBuffer() {
+        return buffer;
+    }
+
     public Controller(Saver saver) {
         this.saver = saver;
     }
