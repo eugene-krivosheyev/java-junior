@@ -1,7 +1,7 @@
 package com.db.education.app.message;
 
 public class BooleanMessage implements Message {
-    private final MessageType type = MessageType.BOOL;
+    private final String type = "BOOL";
     private boolean value;
 
     public BooleanMessage(boolean value) {
@@ -19,7 +19,7 @@ public class BooleanMessage implements Message {
     }
 
     @Override
-    public MessageType getType() {
+    public String getType() {
         return type;
     }
 

@@ -1,7 +1,7 @@
 package com.db.education.app.message;
 
 public class ByteMessage implements Message {
-    private final MessageType type = MessageType.BYTE;
+    private final String type = "BYTE";
     private int value;
 
     public ByteMessage(byte value) {
@@ -35,7 +35,7 @@ public class ByteMessage implements Message {
     }
 
     @Override
-    public MessageType getType() {
+    public String getType() {
         return type;
     }
 

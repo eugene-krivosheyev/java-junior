@@ -1,7 +1,7 @@
 package com.db.education.app.message;
 
 public class IntegerMessage implements Message {
-    private final MessageType type = MessageType.INT;
+    private final String type = "INT";
     private long value;
 
     public IntegerMessage(int value) {
@@ -35,7 +35,7 @@ public class IntegerMessage implements Message {
     }
 
     @Override
-    public MessageType getType() {
+    public String getType() {
         return type;
     }
 

@@ -3,7 +3,7 @@ package com.db.education.app.message;
 import java.util.Objects;
 
 public class StringMessage implements Message{
-    private final MessageType type = MessageType.STRING;
+    private final String type = "STRING";
     private String value;
     private int count;
 
@@ -33,7 +33,7 @@ public class StringMessage implements Message{
     }
 
     @Override
-    public MessageType getType() {
+    public String getType() {
         return type;
     }
 

@@ -11,7 +11,7 @@ public interface Message {
 
     Object getValue();
 
-    MessageType getType();
+    String getType();
 
     default boolean isEmpty() {
         return false;

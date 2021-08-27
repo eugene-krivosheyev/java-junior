@@ -1,7 +1,7 @@
 package com.db.education.app.message;
 
 public class CharacterMessage implements Message {
-    private final MessageType type = MessageType.CHAR;
+    private final String type = "CHAR";
     private char value;
 
     public CharacterMessage(char value) {
@@ -19,7 +19,7 @@ public class CharacterMessage implements Message {
     }
 
     @Override
-    public MessageType getType() {
+    public String getType() {
         return type;
     }
 

@@ -1,13 +1,13 @@
 package com.db.education.app.message;
 
 public class EmptyMessage implements Message {
-    private final MessageType type = MessageType.EMPTY;
+    private final String type = "EMPTY";
 
     @Override
     public boolean accumulate(Message message) { return true; }
 
     @Override
-    public MessageType getType() {
+    public String getType() {
         return type;
     }
 

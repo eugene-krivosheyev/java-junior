@@ -2,7 +2,7 @@ package com.db.education.app.message;
 
 public class ObjectMessage implements Message {
     private Object value;
-    private final MessageType type = MessageType.OBJECT;
+    private final String type = "OBJECT";
 
     public ObjectMessage(Object value) {
         this.value = value;
@@ -19,7 +19,7 @@ public class ObjectMessage implements Message {
     }
 
     @Override
-    public MessageType getType() {
+    public String getType() {
         return type;
     }
 
