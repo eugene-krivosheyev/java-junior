@@ -17,13 +17,13 @@ public class IntMessage extends Message {
     public void flush() {
         while (intResult > Integer.MAX_VALUE) {
             intResult -= Integer.MAX_VALUE;
-            saver.save(PRIMITIVE_PREFIX.body + Integer.MAX_VALUE);
+            saver.save(decorate(Integer.MAX_VALUE));
         }
         while (intResult < Integer.MIN_VALUE) {
             intResult -= Integer.MIN_VALUE;
-            saver.save(PRIMITIVE_PREFIX.body + Integer.MIN_VALUE);
+            saver.save(decorate(Integer.MIN_VALUE));
         }
-        saver.save(PRIMITIVE_PREFIX.body + intResult);
+        saver.save(decorate(intResult));
         intResult = 0;
     }
 
@@ -34,6 +34,11 @@ public class IntMessage extends Message {
         }
         intResult += (int)message.getMessage();
         return this;
+    }
+
+    @Override
+    public String decorate(Object message) {
+        return PRIMITIVE_PREFIX.body + message;
     }
 
     @Override

@@ -16,9 +16,11 @@ public abstract class Message {
         return message;
     }
 
-    abstract public void flush();
+    public abstract void flush();
 
-    abstract public Message accumulate(Message message);
+    public abstract Message accumulate(Message message);
+
+    public abstract String decorate(Object message);
 
     public abstract boolean sameTypeOf(Message accumulateMessage);
 }

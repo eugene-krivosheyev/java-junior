@@ -13,12 +13,17 @@ public class ObjectMessage extends Message{
 
     @Override
     public void flush() {
-        saver.save(OBJECT_PREFIX.body + message);
+        saver.save(decorate(message));
     }
 
     @Override
     public Message accumulate(Message message) {
         return message;
+    }
+
+    @Override
+    public String decorate(Object message) {
+        return OBJECT_PREFIX.body + message;
     }
 
     @Override

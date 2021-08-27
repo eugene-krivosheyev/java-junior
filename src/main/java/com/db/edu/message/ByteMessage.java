@@ -17,13 +17,13 @@ public class ByteMessage extends Message {
     public void flush() {
         while (byteResult > Byte.MAX_VALUE) {
             byteResult -= Byte.MAX_VALUE;
-            saver.save(PRIMITIVE_PREFIX.body + Byte.MAX_VALUE);
+            saver.save(decorate(String.valueOf(Byte.MAX_VALUE)));
         }
         while (byteResult < Byte.MIN_VALUE) {
             byteResult -= Byte.MIN_VALUE;
-            saver.save(PRIMITIVE_PREFIX.body + Byte.MIN_VALUE);
+            saver.save(decorate(String.valueOf(Byte.MIN_VALUE)));
         }
-        saver.save(PRIMITIVE_PREFIX.body + byteResult);
+        saver.save(decorate(String.valueOf(byteResult)));
         byteResult = 0;
     }
 
@@ -34,6 +34,11 @@ public class ByteMessage extends Message {
         }
         byteResult += (byte)message.getMessage();
         return this;
+    }
+
+    @Override
+    public String decorate(Object message) {
+        return PRIMITIVE_PREFIX.body + message;
     }
 
     @Override

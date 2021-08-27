@@ -16,12 +16,8 @@ public class StringMessage extends Message {
 
     @Override
     public void flush() {
-        String strRes = STRING_PREFIX.body + stringResult;
+        saver.save(decorate(stringResult));
         stringResult = "";
-        if (stringCount > 1) {
-            strRes += " (x" + stringCount + ")";
-        }
-        saver.save(strRes);
         stringCount = 0;
     }
 
@@ -33,6 +29,15 @@ public class StringMessage extends Message {
         stringResult = (String)message.getMessage();
         stringCount++;
         return this;
+    }
+
+    @Override
+    public String decorate(Object message) {
+        String strRes = STRING_PREFIX.body + message;
+        if (stringCount > 1) {
+            strRes += " (x" + stringCount + ")";
+        }
+        return strRes;
     }
 
     @Override
