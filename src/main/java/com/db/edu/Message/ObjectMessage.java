@@ -1,7 +1,6 @@
 package com.db.edu.Message;
 
 import com.db.edu.ConsoleSaver;
-import com.db.edu.Message.Message;
 import com.db.edu.Prefix;
 
 public class ObjectMessage implements Message {
