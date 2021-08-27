@@ -15,7 +15,7 @@ import static org.mockito.Mockito.*;
 public class ControllerTest {
 
     @Test
-    public void testLogStringWithoutSaving() {
+    public void testLogStringWithoutSavingMock() {
         ConsoleSaver consoleSaver = mock(ConsoleSaver.class);
         Controller controller = new Controller(consoleSaver);
         StringMessage stringMessage = new StringMessage("value");
@@ -25,7 +25,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void testLogStringWithSaving() {
+    public void testLogStringWithSavingMock() {
         ConsoleSaver consoleSaver = mock(ConsoleSaver.class);
         Controller controller = new Controller(consoleSaver);
         StringMessage stringMessage = new StringMessage("value");
@@ -35,5 +35,28 @@ public class ControllerTest {
         verify(consoleSaver, times(1)).save(anyString());
         assertEquals(controller.getBuffer(), stringMessage);
     }
+    @Test
+    public void testLogTwoSameStringsWithoutSavingMock() {
+        ConsoleSaver consoleSaver = mock(ConsoleSaver.class);
+        Controller controller = new Controller(consoleSaver);
+        StringMessage stringMessage = new StringMessage("value");
+        StringMessage sameStringMessage = new StringMessage("value");
+        controller.log(stringMessage);
+        controller.log(sameStringMessage);
+        verify(consoleSaver, times(0)).save(anyString());
+        assertEquals(controller.getBuffer(), stringMessage);
+    }
+    @Test
+    public void testLogTwoDifferentStringsWithSavingMock() {
+        ConsoleSaver consoleSaver = mock(ConsoleSaver.class);
+        Controller controller = new Controller(consoleSaver);
+        StringMessage stringMessage = new StringMessage("value");
+        StringMessage anotherStringMessage = new StringMessage("not value");
+        controller.log(stringMessage);
+        controller.log(anotherStringMessage);
+        verify(consoleSaver, times(1)).save(anyString());
+        assertEquals(controller.getBuffer(), anotherStringMessage);
+    }
+
 
 }
