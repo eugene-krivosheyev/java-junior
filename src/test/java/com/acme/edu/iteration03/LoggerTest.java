@@ -2,11 +2,12 @@ package com.acme.edu.iteration03;
 
 import com.acme.edu.ooad.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.ooad.saver.ConsoleSaver;
 import org.junit.jupiter.api.*;
 import java.io.IOException;
-import static com.acme.edu.Logger.STRING_PREFIX;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+    private static final String STRING_PREFIX = "string: ";
     //region given
     @BeforeEach
     public void setUpSystemOut() throws IOException {
@@ -33,8 +34,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutContains(STRING_PREFIX + "str1" + System.lineSeparator() +
-                            STRING_PREFIX +  "string 2"  + System.lineSeparator() +
-                            STRING_PREFIX +   "str 3"  + System.lineSeparator()
+                STRING_PREFIX +  "string 2"  + System.lineSeparator() +
+                STRING_PREFIX +   "str 3"  + System.lineSeparator()
         );
         //endregion
     }

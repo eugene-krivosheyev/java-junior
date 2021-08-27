@@ -2,15 +2,17 @@ package com.acme.edu.iteration02;
 
 import com.acme.edu.ooad.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.ooad.saver.ConsoleSaver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static com.acme.edu.Logger.*;
-
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+    private static final String STRING_PREFIX = "string: ";
+    private static final String PRIMITIVE_PREFIX = "primitive: ";
     //region given
     @BeforeEach
     public void setUpSystemOut() throws IOException {
@@ -42,7 +44,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("0");
         //endregion
     }
-
+    @Disabled
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
@@ -101,7 +103,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-
+    @Disabled
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when

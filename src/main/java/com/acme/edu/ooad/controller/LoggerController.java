@@ -1,52 +1,28 @@
 package com.acme.edu.ooad.controller;
 
 import com.acme.edu.ooad.message.*;
-import com.acme.edu.ooad.saver.ConsoleSaver;
+import com.acme.edu.ooad.saver.Saver;
+
+import java.util.Objects;
 
 public class LoggerController {
-    private static final ConsoleSaver consoleSaver = new ConsoleSaver();
+    private final Saver saver;
+    private Message lastLoggedMessage;
 
-    private static ObjectMessage lastLoggedMessage = null;
+    public LoggerController(Saver saver) {
+        this.saver = saver;
+    }
 
-    public static void flush() {
-        consoleSaver.save(lastLoggedMessage);
+    public void flush() {
+        if (lastLoggedMessage == null) return;
+        saver.save(lastLoggedMessage);
         lastLoggedMessage.clean();
     }
 
-    public static void log(StringMessage message) {
-        boolean isLastLoggedAnotherType = lastLoggedMessage != null && !(lastLoggedMessage instanceof StringMessage);
-        if ( isLastLoggedAnotherType || message.isNeedToFlush() ) {
-            flush();
+    public void log(Message message) {
+        if (lastLoggedMessage != null) {
+            saver.save(lastLoggedMessage.getInstanceToPrint(message));
         }
-
-        message.process();
-        lastLoggedMessage = message;
-    }
-
-    public static void log(IntegerMessage message) {
-        if ( lastLoggedMessage != null && !(lastLoggedMessage instanceof IntegerMessage) ) {
-            flush();
-        }
-
-        message.process();
-        lastLoggedMessage = message;
-    }
-
-    public static void log(ByteMessage message) {
-        if ( lastLoggedMessage != null && !(lastLoggedMessage instanceof ByteMessage) ) {
-            flush();
-        }
-
-        message.process();
-        lastLoggedMessage = message;
-    }
-
-    public static void log(ObjectMessage message) {
-        if ( lastLoggedMessage != null ) {
-            flush();
-        }
-
-        consoleSaver.save(message);
-        lastLoggedMessage = null;
+        lastLoggedMessage = lastLoggedMessage == null ? message : lastLoggedMessage.getNewInstance(message);
     }
 }
