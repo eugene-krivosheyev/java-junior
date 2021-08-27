@@ -4,8 +4,6 @@ import com.acme.edu.Type;
 import com.acme.edu.savers.Saver;
 
 public class IntSequenceChecker extends Checker {
-    private Saver saver;
-
     private boolean intAccumulateState;
     private int intAccumulateSum;
 

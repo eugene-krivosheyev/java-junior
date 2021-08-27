@@ -1,57 +1,37 @@
 package com.acme.edu;
+import com.acme.edu.filters.Filter;
 import com.acme.edu.messages.*;
 import com.acme.edu.checkers.*;
 import com.acme.edu.savers.Saver;
 
 
 public class LoggerController {
-    Saver saver;
-    private IntSequenceChecker intCheker;
-    private StringSequenceChecker stringChecker;
+    private final Saver saver;
+    private final Filter filter;
+    private final IntSequenceChecker intChecker;
+    private final StringSequenceChecker stringChecker;
 
-    public LoggerController(Saver saver) {
+    public LoggerController(Saver saver, Filter filter) {
         this.saver = saver;
-        this.intCheker = new IntSequenceChecker(this.saver);
+        this.filter = filter;
+        this.intChecker = new IntSequenceChecker(this.saver);
         this.stringChecker = new StringSequenceChecker(this.saver);
+        this.saver.setCheckers(intChecker, stringChecker);
     }
 
-
-    public void log(IntMessage message){
-        stringChecker.check(message.getValue());
-        intCheker.check(message.getValue());
-    }
-
-    public  void log(BoolMessage message){
-        saver.save(Type.PRIMITIVE.value + message.getValue());
-        stringChecker.check(message.getValue());
-        intCheker.check(message.getValue());
-    }
-
-    public  void log(ByteMessage message){
-        saver.save(Type.PRIMITIVE.value + message.getValue());
-        stringChecker.check(message.getValue());
-        intCheker.check(message.getValue());
-    }
-
-    public  void log(CharMessage message){
-        saver.save(Type.CHAR.value + message.getValue());
-        stringChecker.check(message.getValue());
-        intCheker.check(message.getValue());
-    }
-
-    public  void log(StringMessage message){
-        stringChecker.check(message.getValue());
-        intCheker.check(message.getValue());
-    }
-
-    public  void log(ObjectMessage message){
-        saver.save(Type.REFERENCE.value + message.getValue());
-        stringChecker.check(message.getValue());
-        intCheker.check(message.getValue());
+    public void log(Message message) {
+        try {
+            if (!filter.filter(message)) {
+                saver.save(message);
+            }
+        }
+        catch (IllegalAccessException err) {
+            System.out.println(err.getMessage());
+        }
     }
 
     public void flush(){
         stringChecker.check(null);
-        intCheker.check(null);
+        intChecker.check(null);
     }
 }

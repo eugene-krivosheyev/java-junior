@@ -1,10 +1,14 @@
 package com.acme.edu;
 
+import com.acme.edu.filters.LengthFilter;
 import com.acme.edu.messages.*;
 import com.acme.edu.savers.ConsoleSaver;
 
 public class Logger {
-    private LoggerController controller  = new LoggerController(new ConsoleSaver());
+    private final LoggerController controller  = new LoggerController(
+            new ConsoleSaver(),
+            new LengthFilter(25)
+    );
 
     public void log(int message) {
         controller.log(new IntMessage(message));

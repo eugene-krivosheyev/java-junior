@@ -21,6 +21,11 @@ public class Message {
     }
 
     public Object getValue() {
+        if (value == null) throw new IllegalArgumentException("not valid message to log!");
         return value;
     };
+
+    public String getType() {
+        return message_type;
+    }
 }
