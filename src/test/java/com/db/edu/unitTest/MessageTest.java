@@ -1,7 +1,7 @@
 package com.db.edu.unitTest;
 
+import com.db.edu.State;
 import com.db.edu.message.*;
-//import org.fest.assertions.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -45,5 +45,28 @@ public class MessageTest {
         Assertions.assertTrue(message1.getValue().equals("10") &&
                 (message2.getValue().equals("Hi")));
     }
+
+    @Test
+    public void weCanCheckStateIfMessageIsNotEmpty() {
+        Message message = new IntMessage(5);
+
+        Assertions.assertTrue(message.isNotEmpty() && message.getState() == State.INT);
+    }
+
+    @Test
+    public void weCanCompareByteAndBooleanStates() {
+        Message message1 = new BooleanMessage(true);
+        Message message2 = new ByteMessage((byte)0);
+
+        Assertions.assertFalse(message1.isStateEquals(message2.getState()));
+    }
+
+    @Test
+    public void weCanCreateAndCanNotAccumulateEmptyMessage() {
+        Message message = new EmptyMessage();
+
+        Assertions.assertFalse(message.accumulate(message));
+    }
 }
+
 
