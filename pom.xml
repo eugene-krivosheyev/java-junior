@@ -59,5 +59,33 @@
             </execution>
         </executions>
     </plugin>
+        <plugin>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-maven</artifactId>
+            <version>1.6.9</version>
+            <dependencies>
+                <dependency>
+                    <groupId>org.pitest</groupId>
+                    <artifactId>pitest-junit5-plugin</artifactId>
+                    <version>0.14</version>
+                </dependency>
+            </dependencies>
+            <configuration>
+                <targetClasses>
+                    <param>com.db.education*</param>
+                </targetClasses>
+                <targetTests>
+                    <param>com.db.education*</param>
+                </targetTests>
+            </configuration>
+            <executions>
+                <execution>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>mutationCoverage</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
     </plugins></build>
 </project>
