@@ -1,11 +1,7 @@
 package com.acme.edu.ooad.message;
 
-public class AccumulativeMessage extends ObjectMessage {
-    public AccumulativeMessage(String prefix) {
-        super(prefix);
-    };
-    //public void process(){};
-    public static boolean isAncestor(ObjectMessage message) {
+public interface AccumulativeMessage extends Message {
+    public static boolean isAccumulative(Message message) {
         return AccumulativeMessage.class.isAssignableFrom(message.getClass());
     }
 }

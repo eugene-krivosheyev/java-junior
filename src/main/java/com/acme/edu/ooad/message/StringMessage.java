@@ -1,33 +1,50 @@
 package com.acme.edu.ooad.message;
 
-public class StringMessage extends AccumulativeMessage {
+import java.util.Objects;
 
-    private static String lastString;
-    private static int repeatableStringCounter;
-
-    private final String currentString;
+public class StringMessage implements Message {
+    private final String prefix;
+    private final String value;
+    private int repeatableStringCounter;
 
     public StringMessage(String value) {
-        super("string: ");
-        this.currentString = value;
+        this.prefix = "string: ";
+        this.value = value;
+        this.repeatableStringCounter = 1;
     }
-
-    @Override
-    public boolean isNeedToFlush(){
-        return repeatableStringCounter != 0 && !currentString.equals(lastString);
+    private StringMessage(String value, int counter) {
+        this.prefix = "string: ";
+        this.value = value;
+        this.repeatableStringCounter = counter;
     }
-
     @Override
     public String toString() {
-        return getPrefix() + lastString + (repeatableStringCounter > 1 ? " (x" + repeatableStringCounter + ")" : "");
+        return prefix + value + (repeatableStringCounter > 1 ? " (x" + repeatableStringCounter + ")" : "");
     }
-
-    public void process() {
-        lastString = currentString;
-        ++repeatableStringCounter;
-    }
-
+    @Override
     public void clean() {
         repeatableStringCounter = 0;
+    }
+    @Override
+    public Object getValue() {
+        return value;
+    }
+    @Override
+    public boolean equalValues(Message message) {
+        return Objects.equals(this.value, message.getValue());
+    }
+    @Override
+    public Message getNewInstance(Message message) {
+        if (Message.sameType(this, message) && this.equalValues(message)) {
+            int newCounter = this.repeatableStringCounter+1;
+            return new StringMessage(this.value,newCounter);
+        } else {
+            return message;
+        }
+    }
+    @Override
+    public Message getInstanceToPrint(Message message) {
+        if (Message.sameType(this, message) && this.equalValues(message)) return null;
+        return this;
     }
 }

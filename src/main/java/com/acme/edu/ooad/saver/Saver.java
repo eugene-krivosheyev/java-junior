@@ -1,7 +1,7 @@
 package com.acme.edu.ooad.saver;
 
-import com.acme.edu.ooad.message.ObjectMessage;
+import com.acme.edu.ooad.message.Message;
 
 public interface Saver {
-    void save(ObjectMessage message);
+    void save(Message message);
 }
