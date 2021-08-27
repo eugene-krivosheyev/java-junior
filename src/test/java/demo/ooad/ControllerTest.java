@@ -41,6 +41,19 @@ public class ControllerTest {
             IllegalArgumentException.class,
             () -> controllerSut.log(bodilessMessage)
         );
+
+        /*
+        assertThat(sut, //hamcrest
+                allOf(
+                        isNotNull(),
+                        hasProperty("p", 4),
+                        containsOnly(2,3,4,5)
+                        hasElement("ffff", hasValue())
+                )
+        );
+
+        assertThat(sut).hasElemnt().notEmpty().notNull(); //assert-j
+         */
         //endregion
     }
 
