@@ -1,16 +1,14 @@
 package com.db.edu.message;
 
-import static com.db.edu.Prefix.STRING_PREFIX;
+import static com.db.edu.message.Prefix.STRING_PREFIX;
 
 public class StringMessage extends Message {
 
-    private final String message;
     private String stringResult;
     private int stringCount;
 
     public StringMessage(String message) {
         super(message);
-        this.message = message;
         stringResult = message;
     }
 
@@ -23,8 +21,9 @@ public class StringMessage extends Message {
 
     @Override
     public StringMessage accumulate(Message message) {
-        if (!(message instanceof StringMessage) || !message.getMessage().equals(stringResult)) {
+        if (!sameTypeOf(message) || !message.getMessage().equals(stringResult)) {
             flush();
+            return this;
         }
         stringResult = (String)message.getMessage();
         stringCount++;

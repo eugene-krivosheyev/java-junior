@@ -1,6 +1,6 @@
 package com.db.edu.message;
 
-import static com.db.edu.Prefix.CHAR_PREFIX;
+import static com.db.edu.message.Prefix.CHAR_PREFIX;
 
 public class CharMessage extends Message{
     private final char message;

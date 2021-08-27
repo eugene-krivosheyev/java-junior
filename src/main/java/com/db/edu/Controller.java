@@ -19,31 +19,4 @@ public class Controller {
             accumulateMessage = accumulateMessage.accumulate(message);
         }
     }
-
-//    public void log(BooleanMessage message) {
-//        saver.save(PRIMITIVE_PREFIX.getMessage() + message);
-//    }
-//
-//    public void log(char message) {
-//        saver.save(CHAR_PREFIX.getMessage() + message);
-//    }
-//
-//    public void log(Object message) {
-//        saver.save(OBJECT_PREFIX.getMessage() + message);
-//    }
-//
-//    public void log(int ... message) {
-//        for (int value : message) {
-//            log(new IntMessage(value));
-//        }
-//        flush();
-//    }
-//
-//    public void log(String ... message) {
-//        for (String value : message) {
-//            log(new StringMessage(value));
-//        }
-//        flush();
-//    }
-
 }

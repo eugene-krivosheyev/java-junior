@@ -1,4 +1,4 @@
-package com.db.edu;
+package com.db.edu.message;
 
 public enum Prefix {
     PRIMITIVE_PREFIX("primitive: "),

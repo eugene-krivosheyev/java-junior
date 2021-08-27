@@ -6,8 +6,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.db.edu.Prefix.PRIMITIVE_PREFIX;
-import static com.db.edu.Prefix.STRING_PREFIX;
+import static com.db.edu.message.Prefix.PRIMITIVE_PREFIX;
+import static com.db.edu.message.Prefix.STRING_PREFIX;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @BeforeEach

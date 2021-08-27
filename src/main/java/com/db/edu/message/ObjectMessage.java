@@ -1,7 +1,6 @@
 package com.db.edu.message;
 
-import static com.db.edu.Prefix.CHAR_PREFIX;
-import static com.db.edu.Prefix.OBJECT_PREFIX;
+import static com.db.edu.message.Prefix.OBJECT_PREFIX;
 
 public class ObjectMessage extends Message{
     private final Object message;

@@ -1,6 +1,5 @@
 package com.db.edu;
 
-
 import com.db.edu.message.*;
 
 public class Logger {
@@ -47,5 +46,4 @@ public class Logger {
     public static void flush() {
         controller.flush();
     }
-
 }

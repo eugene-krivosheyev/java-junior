@@ -1,7 +1,6 @@
 package com.db.edu.saver;
 
-public class Saver {
+public abstract class Saver {
 
-    public void save(String s) {
-    }
+    public abstract void save(String s);
 }

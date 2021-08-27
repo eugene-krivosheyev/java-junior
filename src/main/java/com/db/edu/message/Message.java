@@ -6,11 +6,12 @@ import com.db.edu.saver.Saver;
 public abstract class Message {
     private final Object message;
 
-    public Message(Object message) {
-        this.message = message;
-    }
+    private final Saver saver;
 
-    static Saver saver = new ConsoleSaver();
+    public Message(Object message, Saver saver) {
+        this.message = message;
+        this.saver = saver;
+    }
 
     public Object getMessage() {
         return message;

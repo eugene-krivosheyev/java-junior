@@ -4,7 +4,7 @@ import com.db.edu.Logger;
 import com.db.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.*;
 
-import static com.db.edu.Prefix.*;
+import static com.db.edu.message.Prefix.*;
 
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {

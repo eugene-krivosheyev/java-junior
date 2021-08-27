@@ -1,10 +1,10 @@
 package com.db.edu.message;
 
-import static com.db.edu.Prefix.PRIMITIVE_PREFIX;
+import static com.db.edu.message.Prefix.PRIMITIVE_PREFIX;
 
 public class BooleanMessage extends Message {
 
-    private boolean message;
+    private final boolean message;
 
     public BooleanMessage(boolean message) {
         super(message);
