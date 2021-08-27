@@ -16,8 +16,9 @@ public class CharMessage extends Message {
     }
 
     @Override
-    public void accumulate(Message message) {
+    public Message accumulate(Message message) {
 
+        return this;
     }
 
     @Override

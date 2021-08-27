@@ -13,7 +13,7 @@ public abstract class Message {
 
     public abstract boolean sameTypeOf(Message message);
 
-    public abstract void accumulate(Message message);
+    public abstract Message accumulate(Message message);
 
     public abstract String getDecoratedMessage();
 }

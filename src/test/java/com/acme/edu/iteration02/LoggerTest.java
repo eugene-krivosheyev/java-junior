@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+//@Disabled("Disabled to count unit tests coverage.")
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
   private final String SEPARATOR = System.lineSeparator();
 

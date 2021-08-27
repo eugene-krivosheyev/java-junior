@@ -12,7 +12,8 @@ public class ReferenceMessage extends Message {
         return false;
     }
 
-    public void accumulate(Message message) {
+    public Message accumulate(Message message) {
+        return this;
     }
 
     public String getDecoratedMessage() {

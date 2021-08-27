@@ -16,8 +16,9 @@ public class IntMessage extends Message {
     }
 
     @Override
-    public void accumulate(Message message) {
+    public Message accumulate(Message message) {
         this.body += (int) message.getBody();
+        return this;
     }
 
     @Override

@@ -23,10 +23,11 @@ public class StringMessage extends Message {
     }
 
     @Override
-    public void accumulate(Message message) {
+    public Message accumulate(Message message) {
         if (body.equals(prevBody)) {
             this.stringCounter++;
         }
+        return this;
     }
 
     public String getBody() {

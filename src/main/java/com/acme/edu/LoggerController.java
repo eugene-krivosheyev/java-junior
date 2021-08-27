@@ -7,15 +7,15 @@ import com.acme.edu.saver.Saver;
 public class LoggerController {
     private Message accumulator = new EmptyMessage();
     private final Message EMPTY_MESSAGE = new EmptyMessage();
-    private Saver consoleSaver;
+    private Saver saver;
 
-    public LoggerController(Saver consoleSaver) {
-        this.consoleSaver = consoleSaver;
+    public LoggerController(Saver saver) {
+        this.saver = saver;
     }
 
     public void log(Message message) {
         if (accumulator.sameTypeOf(message)) {
-            accumulator.accumulate(message);
+            accumulator = accumulator.accumulate(message);
         } else {
             flush();
             accumulator = message;
@@ -23,7 +23,7 @@ public class LoggerController {
     }
 
     public void flush() {
-            consoleSaver.save(accumulator.getDecoratedMessage());
+            saver.save(accumulator.getDecoratedMessage());
             accumulator = EMPTY_MESSAGE;
     }
 }

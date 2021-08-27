@@ -2,11 +2,17 @@ package com.acme.edu.iteration03;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.message.EmptyMessage;
+import com.acme.edu.message.IntMessage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+//@Disabled("Disabled to count unit tests coverage.")
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @BeforeEach
@@ -20,6 +26,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         resetOut();
     }
     //endregion
+
+    @Test
+    public void shouldReturnFalseWhenComparingEmptyMessage() {
+        EmptyMessage emptyMessage = mock(EmptyMessage.class);
+        IntMessage intMessage = mock(IntMessage.class);
+
+        assertFalse(emptyMessage.sameTypeOf(intMessage), "Should return false when comparing empty message");
+
+    }
 
     @Test
     public void shouldLogStringsWithOneMethodCall() {
