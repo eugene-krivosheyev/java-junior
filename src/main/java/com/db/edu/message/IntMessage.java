@@ -1,17 +1,13 @@
 package com.db.edu.message;
 
 import com.db.edu.Message;
-import com.db.edu.Types;
 
 public class IntMessage extends Message {
+    private static final String PREFIX_PRIMITIVE = "primitive";
     private int body;
 
     public IntMessage(int message) {
         this.body = message;
-    }
-
-    public String getDecoratedMessage() {
-        return Types.PREFIX_PRIMITIVE + ": " + body;
     }
 
     public int getBody() {
@@ -19,14 +15,23 @@ public class IntMessage extends Message {
     }
 
     @Override
+    public String getDecoratedMessage() {
+        return PREFIX_PRIMITIVE + ": " + body;
+    }
+
+    @Override
     public boolean isSameType(Message message) {
-        return this.getState() == message.getState();
+        return message instanceof IntMessage;
     }
 
     @Override
     public IntMessage accumulate(Message message) {
-        IntMessage newMessage = (IntMessage)message;
-        this.body += newMessage.getBody();
+        body += ((IntMessage)message).getBody();
         return this;
+    }
+
+    @Override
+    public void resetFields() {
+        body = 0;
     }
 }

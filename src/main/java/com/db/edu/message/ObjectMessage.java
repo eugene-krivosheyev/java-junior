@@ -1,15 +1,17 @@
 package com.db.edu.message;
 
-import com.db.edu.Types;
+import com.db.edu.Message;
 
-public class ObjectMessage {
+public class ObjectMessage extends Message {
+    private static final String PREFIX_REFERENCE = "reference";
     private final Object body;
 
     public ObjectMessage(Object message) {
         this.body = message;
     }
 
+    @Override
     public String getDecoratedMessage() {
-        return Types.PREFIX_REFERENCE + ": " + body;
+        return PREFIX_REFERENCE + ": " + body;
     }
 }

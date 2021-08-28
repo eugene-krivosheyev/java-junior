@@ -1,37 +1,43 @@
 package com.db.edu.message;
 
 import com.db.edu.Message;
-import com.db.edu.Types;
 
 public class StringMessage extends Message {
+    private static final String PREFIX_STRING = "string";
     private String body;
-    private int stringCounter;
+    private int stringCounter = 1;
 
     public StringMessage(String message) {
         this.body = message;
     }
 
+    @Override
     public String getDecoratedMessage() {
-        String resString = Types.PREFIX_STRING + ": " + body;
+        String resString = PREFIX_STRING + ": " + body;
         if(stringCounter == 1) {
             return resString;
         }
-        return resString + "(x" + stringCounter + ")";
+        return resString + " (x" + stringCounter + ")";
     }
 
+    @Override
     public StringMessage accumulate(Message message) {
-        StringMessage newMessage = (StringMessage)message;
-        if (newMessage.equals(body)) {
-            stringCounter++;
-        } else {
-            this.body = newMessage.body;
-        }
+        stringCounter++;
         return this;
     }
 
     @Override
     public boolean isSameType(Message message) {
+        if (!(message instanceof StringMessage)) {
+            return false;
+        }
+
         StringMessage newMessage = (StringMessage)message;
-        return (this.getState() == newMessage.getState() && newMessage.equals(body));
+        return body.equals(newMessage.body);
+    }
+
+    @Override
+    public void resetFields() {
+        stringCounter = 1;
     }
 }

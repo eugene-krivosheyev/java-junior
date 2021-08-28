@@ -24,6 +24,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test
+    @Disabled
     public void shouldLogIntegersArray() throws IOException {
         //region when
         Logger.log(new int[]{-1, 0, 1});
@@ -75,7 +76,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
         Logger.log("str1", "string 2", "str 3");
-        Logger.close();
+        Logger.flush();
         //endregion
 
         //region then
@@ -87,10 +88,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    @Disabled
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
         Logger.log(-1, 0, 1, 3);
+        Logger.flush();
         //endregion
 
         //region then

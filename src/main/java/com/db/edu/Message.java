@@ -1,14 +1,14 @@
 package com.db.edu;
 
 abstract public class Message {
-    protected States state;
     public abstract String getDecoratedMessage();
+    public void resetFields() {};
 
-    public abstract Message accumulate(Message message);
+    public Message accumulate(Message message){
+        return message;
+    };
 
-    public States getState() {
-        return state;
-    }
-
-    public abstract boolean isSameType(Message message);
+    public boolean isSameType(Message message) {
+        return false;
+    };
 }

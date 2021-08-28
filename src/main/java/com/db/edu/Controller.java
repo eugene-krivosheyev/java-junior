@@ -1,19 +1,26 @@
 package com.db.edu;
 
+import com.db.edu.message.EmptyMessage;
+
 public class Controller {
-    private ConsoleSaver consoleSaver = new ConsoleSaver();
-    private Message previousMessage;
+    private Message previousMessage = new EmptyMessage();
+    private ConsoleSaver saver;
+
+    public Controller(ConsoleSaver saver) {
+        this.saver = saver;
+    }
 
     public void log(Message message) {
         if (previousMessage.isSameType(message)) {
-            this.previousMessage = previousMessage.accumulate(message);
+            previousMessage = previousMessage.accumulate(message);
         } else {
-            flush(message);
+            flush();
+            previousMessage = message;
         }
-        previousMessage = message;
     }
 
-    public void flush(Message message) {
-        consoleSaver.save(message);
+    public void flush() {
+        saver.save(previousMessage);
+        previousMessage.resetFields();
     }
 }
