@@ -3,11 +3,9 @@ package com.acme.edu.ooad.controller;
 import com.acme.edu.ooad.message.*;
 import com.acme.edu.ooad.saver.Saver;
 
-import java.util.Objects;
-
 public class LoggerController {
-    private final Saver saver;
-    private Message lastLoggedMessage;
+    final Saver saver;
+    Message lastLoggedMessage;
 
     public LoggerController(Saver saver) {
         this.saver = saver;
@@ -20,9 +18,11 @@ public class LoggerController {
     }
 
     public void log(Message message) {
-        if (lastLoggedMessage != null) {
+        if (lastLoggedMessage == null) {
+            lastLoggedMessage = message;
+        } else {
             saver.save(lastLoggedMessage.getInstanceToPrint(message));
+            lastLoggedMessage = lastLoggedMessage.getNewInstance(message);
         }
-        lastLoggedMessage = lastLoggedMessage == null ? message : lastLoggedMessage.getNewInstance(message);
     }
 }

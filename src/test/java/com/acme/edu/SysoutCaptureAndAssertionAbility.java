@@ -3,7 +3,9 @@ package com.acme.edu;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.fest.assertions.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public interface SysoutCaptureAndAssertionAbility {
     ByteArrayOutputStream OUT = new ByteArrayOutputStream();
@@ -13,11 +15,11 @@ public interface SysoutCaptureAndAssertionAbility {
     }
 
     default void assertSysoutEquals(String expected) {
-        assertThat(OUT.toString()).isEqualTo(expected);
+        assertEquals(OUT.toString(), expected);
     }
 
     default void assertSysoutContains(String expected) {
-        assertThat(OUT.toString()).contains(expected);
+        assertTrue(OUT.toString().contains(expected));
     }
 
     default void resetOut() {

@@ -5,44 +5,62 @@ import java.util.Objects;
 public class StringMessage implements Message {
     private final String prefix;
     private final String value;
-    private int repeatableStringCounter;
+    int counter;
 
     public StringMessage(String value) {
         this.prefix = "string: ";
         this.value = value;
-        this.repeatableStringCounter = 1;
+        this.counter = 1;
     }
-    private StringMessage(String value, int counter) {
+
+    StringMessage(String value, int counter) {
         this.prefix = "string: ";
         this.value = value;
-        this.repeatableStringCounter = counter;
+        this.counter = counter;
     }
+
     @Override
     public String toString() {
-        return prefix + value + (repeatableStringCounter > 1 ? " (x" + repeatableStringCounter + ")" : "");
+        return prefix + value + (counter > 1 ? " (x" + counter + ")" : "");
     }
+
     @Override
     public void clean() {
-        repeatableStringCounter = 0;
+        counter = 0;
     }
-    private String getValue() {
-        return value;
+
+    boolean equalValues(Message message) {
+        return Objects.equals(this.value, ((StringMessage)message).value);
     }
-    private boolean equalValues(Message message) {
-        return Objects.equals(this.value, ((StringMessage)message).getValue());
-    }
+
     @Override
     public Message getNewInstance(Message message) {
         if (Message.sameType(this, message) && this.equalValues(message)) {
-            int newCounter = this.repeatableStringCounter+1;
+            int newCounter = this.counter +1;
             return new StringMessage(this.value,newCounter);
         } else {
             return message;
         }
     }
+
     @Override
     public Message getInstanceToPrint(Message message) {
         if (Message.sameType(this, message) && this.equalValues(message)) return null;
         return this;
     }
+
+    @Override
+    public boolean equals(Object anObject) {
+        if (this == anObject) {
+            return true;
+        }
+        if (anObject instanceof StringMessage) {
+            if ((this.value == ((StringMessage) anObject).value) &&
+                (this.counter == ((StringMessage) anObject).counter)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
