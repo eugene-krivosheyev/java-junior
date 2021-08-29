@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import com.acme.edu.Prefix;
+
 public abstract class Message {
     private final Object body;
 
@@ -11,9 +13,17 @@ public abstract class Message {
         return this.body;
     }
 
-    public abstract boolean sameTypeOf(Message message);
+    public boolean sameTypeOf(Message message) {
+        return false;
+    }
 
-    public abstract Message accumulate(Message message);
+    public Message accumulate(Message message){
+        return this;
+    }
 
     public abstract String getDecoratedMessage();
+
+    protected String getDefaultDecoratedMessage(Prefix prefix){
+        return String.format("%s %s%n", prefix.value, body);
+    }
 }

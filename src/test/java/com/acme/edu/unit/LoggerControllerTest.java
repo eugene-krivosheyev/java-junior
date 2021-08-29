@@ -35,10 +35,9 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test
-    public void shouldReturnFalseWhenComparingEmptyMessage() {
+    public void shouldReturnFalseWhenComparingDifferentMessages() {
         EmptyMessage emptyMessage = mock(EmptyMessage.class);
         IntMessage intMessage = mock(IntMessage.class);
-
 
         assertFalse(emptyMessage.sameTypeOf(intMessage), "Should return false when comparing empty message");
     }

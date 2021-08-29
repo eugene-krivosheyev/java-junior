@@ -7,7 +7,7 @@ import com.acme.edu.saver.Saver;
 public class LoggerController {
     private Message accumulator = new EmptyMessage();
     private final Message EMPTY_MESSAGE = new EmptyMessage();
-    private Saver saver;
+    private final Saver saver;
 
     public LoggerController(Saver saver) {
         this.saver = saver;
@@ -23,7 +23,7 @@ public class LoggerController {
     }
 
     public void flush() {
-            saver.save(accumulator.getDecoratedMessage());
-            accumulator = EMPTY_MESSAGE;
+        saver.save(accumulator.getDecoratedMessage());
+        accumulator = EMPTY_MESSAGE;
     }
 }

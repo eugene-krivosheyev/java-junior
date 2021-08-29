@@ -8,15 +8,7 @@ public class ReferenceMessage extends Message {
         super(body);
     }
 
-    public boolean sameTypeOf(Message message) {
-        return false;
-    }
-
-    public Message accumulate(Message message) {
-        return this;
-    }
-
     public String getDecoratedMessage() {
-        return String.format("%s %s%n", Prefix.REFERENCE.value, super.getBody().toString());
+        return getDefaultDecoratedMessage(Prefix.REFERENCE);
     }
 }

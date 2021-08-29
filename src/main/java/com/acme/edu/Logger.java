@@ -8,8 +8,7 @@ import java.util.Arrays;
 
 
 public class Logger {
-    private static final Saver consoleSaver = new ConsoleSaver();
-    private static final LoggerController controller = new LoggerController(consoleSaver);
+    private static final LoggerController controller = new LoggerController(new ConsoleSaver());
 
     public static void log(int message) {
         controller.log(new IntMessage(message));

@@ -3,11 +3,9 @@ package com.acme.edu.message;
 import com.acme.edu.Prefix;
 
 public class IntMessage extends Message {
-    private int body;
 
     public IntMessage(int body) {
         super(body);
-        this.body = body;
     }
 
     @Override
@@ -17,12 +15,11 @@ public class IntMessage extends Message {
 
     @Override
     public Message accumulate(Message message) {
-        this.body += (int) message.getBody();
-        return this;
+        return new IntMessage((int)getBody() + (int) message.getBody());
     }
 
     @Override
     public String getDecoratedMessage() {
-        return String.format("%s %s%n", Prefix.PRIMITIVE.value, body);
+        return getDefaultDecoratedMessage(Prefix.PRIMITIVE);
     }
 }

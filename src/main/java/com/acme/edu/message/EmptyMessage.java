@@ -7,17 +7,6 @@ public class EmptyMessage extends Message {
     }
 
     @Override
-    public boolean sameTypeOf(Message message) {
-        return false;
-    }
-
-    @Override
-    public Message accumulate(Message message) {
-
-        return this;
-    }
-
-    @Override
     public String getDecoratedMessage() {
         return null;
     }

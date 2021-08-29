@@ -3,12 +3,9 @@ package com.acme.edu.message;
 import com.acme.edu.Prefix;
 
 public class ByteMessage extends Message {
-    private byte body;
 
     public ByteMessage(byte body) {
         super(body);
-
-        this.body = body;
     }
 
     @Override
@@ -18,12 +15,11 @@ public class ByteMessage extends Message {
 
     @Override
     public Message accumulate(Message message) {
-        this.body += (byte) message.getBody();
-        return this;
+        return new ByteMessage((byte) ((byte)getBody() + (byte) message.getBody()));
     }
 
     @Override
     public String getDecoratedMessage() {
-        return String.format("%s %s%n", Prefix.PRIMITIVE.value, body);
+        return getDefaultDecoratedMessage(Prefix.PRIMITIVE);
     }
 }
