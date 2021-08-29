@@ -26,7 +26,7 @@ class IntMessageTest {
     void shouldFlushWhenMessageNotSameTypeOfInt() {
         Saver saverMock = mock(Saver.class);
         IntMessage message1 = new IntMessage(1);
-        message1.flush();
+        //message1.flush();
 //        when(saveDummy)
         verify(saverMock, times(1)).save(any());
     }

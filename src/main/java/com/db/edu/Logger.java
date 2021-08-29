@@ -1,9 +1,10 @@
 package com.db.edu;
 
 import com.db.edu.message.*;
+import com.db.edu.saver.ConsoleSaver;
 
 public class Logger {
-    private static final Controller controller = new Controller();
+    private static final Controller controller = new Controller(new ConsoleSaver());
 
     public static void log(int message) {
         controller.log(new IntMessage(message));

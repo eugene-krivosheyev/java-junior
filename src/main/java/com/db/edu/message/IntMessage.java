@@ -12,36 +12,26 @@ public class IntMessage extends Message {
     }
 
     @Override
-    public void flush() {
-//        while (intResult > Integer.MAX_VALUE) {
-//            intResult -= Integer.MAX_VALUE;
-//            saver.save(decorate(Integer.MAX_VALUE));
-//        }
-//        while (intResult < Integer.MIN_VALUE) {
-//            intResult -= Integer.MIN_VALUE;
-//            saver.save(decorate(Integer.MIN_VALUE));
-//        }
-        saver.save(decorate(intResult));
-        intResult = 0;
-    }
-
-    @Override
     public IntMessage accumulate(Message message) {
         if (!sameTypeOf(message)) {
             flush();
             return this;
         }
-        intResult += (int)message.getMessage();
+        intResult += (int) message.getMessage();
         return this;
     }
 
     @Override
-    public String decorate(Object message) {
-        return PRIMITIVE_PREFIX.body + message;
+    public String decorate() {
+        return PRIMITIVE_PREFIX.body + intResult;
     }
 
     @Override
     public boolean sameTypeOf(Message accumulateMessage) {
         return accumulateMessage instanceof IntMessage;
+    }
+
+    private void flush() {
+        intResult = 0;
     }
 }

@@ -12,17 +12,12 @@ public class BooleanMessage extends Message {
     }
 
     @Override
-    public void flush() {
-        saver.save(decorate(message));
-    }
-
-    @Override
     public Message accumulate(Message message) {
         return message;
     }
 
     @Override
-    public String decorate(Object message) {
+    public String decorate() {
         return PRIMITIVE_PREFIX.body + message;
     }
 

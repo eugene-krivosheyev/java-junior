@@ -8,21 +8,7 @@ public class ByteMessage extends Message {
 
     public ByteMessage(byte message) {
         super(message);
-        byteResult = message;
-    }
-
-    @Override
-    public void flush() {
-//        while (byteResult > Byte.MAX_VALUE) {
-//            byteResult -= Byte.MAX_VALUE;
-//            saver.save(decorate(String.valueOf(Byte.MAX_VALUE)));
-//        }
-//        while (byteResult < Byte.MIN_VALUE) {
-//            byteResult -= Byte.MIN_VALUE;
-//            saver.save(decorate(String.valueOf(Byte.MIN_VALUE)));
-//        }
-        saver.save(decorate(String.valueOf(byteResult)));
-        byteResult = 0;
+        this.byteResult = message;
     }
 
     @Override
@@ -31,17 +17,21 @@ public class ByteMessage extends Message {
             flush();
             return this;
         }
-        byteResult += (byte)message.getMessage();
+        byteResult += (byte) message.getMessage();
         return this;
     }
 
     @Override
-    public String decorate(Object message) {
-        return PRIMITIVE_PREFIX.body + message;
+    public String decorate() {
+        return PRIMITIVE_PREFIX.body + byteResult;
     }
 
     @Override
     public boolean sameTypeOf(Message accumulateMessage) {
         return accumulateMessage instanceof ByteMessage;
+    }
+
+    private void flush() {
+        byteResult = 0;
     }
 }

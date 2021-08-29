@@ -1,22 +1,17 @@
 package com.db.edu.message;
 
+import java.util.Objects;
+
 import static com.db.edu.message.Prefix.STRING_PREFIX;
 
 public class StringMessage extends Message {
-
     private String stringResult;
     private int stringCount;
 
     public StringMessage(String message) {
         super(message);
-        stringResult = message;
-    }
-
-    @Override
-    public void flush() {
-        saver.save(decorate(stringResult));
-        stringResult = "";
-        stringCount = 0;
+        this.stringResult = message;
+        this.stringCount = 1;
     }
 
     @Override
@@ -25,14 +20,16 @@ public class StringMessage extends Message {
             flush();
             return this;
         }
-        stringResult = (String)message.getMessage();
-        stringCount++;
+        if (message.getMessage().equals(stringResult)) {
+            stringResult = (String) message.getMessage();
+            stringCount++;
+        }
         return this;
     }
 
     @Override
-    public String decorate(Object message) {
-        String strRes = STRING_PREFIX.body + message;
+    public String decorate() {
+        String strRes = STRING_PREFIX.body + stringResult;
         if (stringCount > 1) {
             strRes += " (x" + stringCount + ")";
         }
@@ -41,6 +38,16 @@ public class StringMessage extends Message {
 
     @Override
     public boolean sameTypeOf(Message accumulateMessage) {
-        return accumulateMessage instanceof StringMessage;
+        return accumulateMessage instanceof StringMessage && Objects.equals(this.getMessage(), accumulateMessage.getMessage());
+    }
+
+    @Override
+    public Object getMessage() {
+        return this.stringResult;
+    }
+
+    private void flush() {
+        stringResult = "";
+        stringCount = 1;
     }
 }
