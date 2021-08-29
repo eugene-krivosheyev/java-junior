@@ -5,7 +5,9 @@ import com.db.education.app.message.Message;
 import com.db.education.app.saver.Saver;
 
 public class LoggerController {
+
     private static final Message EMPTY_MESSAGE = new EmptyMessage();
+
     private final Saver saver;
     private Message lastMessage = EMPTY_MESSAGE;
 
@@ -14,22 +16,24 @@ public class LoggerController {
     }
 
     public void processMessage(Message message) {
-        if (message == null || message.isEmpty()) {
+        if (message == null || message.isEmptyMessage()) {
             throw new IllegalArgumentException("Empty or null message received");
         }
 
-        if (lastMessage.isEmpty()) {
-            lastMessage = message;
-            return;
-        }
+        lastMessage = lastMessage.accumulate(message);
 
-        if (!lastMessage.accumulate(message)) {
+        if (lastMessage.needsFlush()) {
+            Message last = lastMessage;
             flush();
-            lastMessage = message;
+            if (!(message == last)) {
+                lastMessage = lastMessage.accumulate(message);
+            }
         }
     }
 
     public void flush() {
+        if (lastMessage.isEmptyMessage()) return;
+
         saver.save(lastMessage);
         lastMessage = EMPTY_MESSAGE;
     }

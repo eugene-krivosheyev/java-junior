@@ -1,35 +1,26 @@
 package com.db.education.app.message;
 
 public class BooleanMessage implements Message {
-    private final String type = "BOOL";
-    private boolean value;
 
-    public BooleanMessage(boolean value) {
-        this.value = value;
+    private final String TYPE = "BOOL";
+    private boolean body;
+
+    public BooleanMessage(boolean body) {
+        this.body = body;
     }
 
     @Override
-    public boolean accumulate(Message message) {
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "primitive: " + value + System.lineSeparator();
+    public BooleanMessage accumulate(Message message) {
+        return this;
     }
 
     @Override
     public String getType() {
-        return type;
+        return this.TYPE;
     }
 
     @Override
-    public boolean typeEquals(Message otherMessage) {
-        return this.type.equals(otherMessage.getType());
-    }
-
-    @Override
-    public Object getValue() {
-        return value;
+    public String toString() {
+        return "primitive: " + body + System.lineSeparator();
     }
 }

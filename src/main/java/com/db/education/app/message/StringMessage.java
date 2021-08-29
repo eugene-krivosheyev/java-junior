@@ -3,12 +3,15 @@ package com.db.education.app.message;
 import java.util.Objects;
 
 public class StringMessage implements Message{
-    private final String type = "STRING";
-    private String value;
-    private int count;
 
-    public StringMessage(String value) {
-        this.value = value;
+    private final String TYPE = "STRING";
+
+    private String body;
+    private int count;
+    private boolean needsFlush = false;
+
+    public StringMessage(String body) {
+        this.body = body;
         count = 1;
     }
 
@@ -16,34 +19,34 @@ public class StringMessage implements Message{
      * Counts equal strings
      * */
     @Override
-    public boolean accumulate(Message message) {
-        if (!typeEquals(message)) return false;
-        if(Objects.equals(value, ((StringMessage)message).value)) {
-            ++count;
-        } else {
-            return false;
+    public StringMessage accumulate(Message message) {
+        if (!typeEquals(message)) {
+            this.needsFlush = true;
+            return this;
         }
-        return true;
+
+        if (Objects.equals(body, ((StringMessage) message).body)) {
+            ++count;
+            this.needsFlush = false;
+        } else {
+            this.needsFlush = true;
+        }
+        return this;
+    }
+
+    @Override
+    public String getType() {
+        return this.TYPE;
+    }
+
+    @Override
+    public boolean needsFlush() {
+        return needsFlush;
     }
 
     @Override
     public String toString() {
         String countString = (count > 1) ? " (x" + count + ")" : "";
-        return "string: " + value + countString + System.lineSeparator();
-    }
-
-    @Override
-    public String getType() {
-        return type;
-    }
-
-    @Override
-    public boolean typeEquals(Message otherMessage) {
-        return this.type.equals(otherMessage.getType());
-    }
-
-    @Override
-    public Object getValue() {
-        return value;
+        return "string: " + body + countString + System.lineSeparator();
     }
 }

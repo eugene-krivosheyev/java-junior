@@ -4,7 +4,21 @@ import com.db.education.app.controller.LoggerController;
 import com.db.education.app.message.*;
 import com.db.education.app.saver.ConsoleSaver;
 
+/**
+ * Logger logs provided messages into console with accumulation and decoration based on message type.
+ *
+ * Logger's way of storing messages (such as file, database, etc.) can be extended
+ * by the provision of a class, implementing the Saver interface, to the LoggerController.
+ *
+ * Logger is a pure static class and shouldn't be instantiated.
+ *
+ * Logger consist of two methods:
+ * - overloaded log() method for automatic processing and storing of different types of parameters
+ * for a proper accumulation and decoration.
+ * - flush() method, that should be called whenever accumulated log should actually be saved.
+ */
 public class Logger {
+
     private static LoggerController loggerController = new LoggerController(new ConsoleSaver());
 
     private Logger() {

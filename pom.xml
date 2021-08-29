@@ -63,7 +63,7 @@
                         <param>com.db.education.app*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>com.db.education.app.oooadtest*</param>
+                        <param>com.db.education.app.ooadtest*</param>
                     </targetTests>
                 </configuration>
                 <executions>

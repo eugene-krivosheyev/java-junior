@@ -1,28 +1,31 @@
 package com.db.education.app.message;
 
 public class EmptyMessage implements Message {
-    private final String type = "EMPTY";
+
+    private static final String TYPE = "EMPTY MESSAGE";
 
     @Override
-    public boolean accumulate(Message message) { return true; }
-
-    @Override
-    public String getType() {
-        return type;
+    public Message accumulate(Message message) {
+        return message;
     }
 
     @Override
-    public boolean typeEquals(Message otherMessage) {
-        return this.type.equals(otherMessage.getType());
-    }
-
-    @Override
-    public boolean isEmpty() {
+    public boolean isEmptyMessage() {
         return true;
     }
 
     @Override
-    public Object getValue() {
-        return null;
+    public boolean needsFlush() {
+        return false;
+    }
+
+    @Override
+    public String getType() {
+        return this.TYPE;
+    }
+
+    @Override
+    public String toString() {
+        return this.TYPE;
     }
 }

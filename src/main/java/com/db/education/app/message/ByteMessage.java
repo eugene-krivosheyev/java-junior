@@ -1,51 +1,59 @@
 package com.db.education.app.message;
 
-public class ByteMessage implements Message {
-    private final String type = "BYTE";
-    private int value;
+public class ByteMessage extends AbstractSmallNumericOverflowableMessage<ByteMessage> implements Message {
 
-    public ByteMessage(byte value) {
-        this.value = value;
+    private static final Byte MAX = Byte.MAX_VALUE;
+    private static final Byte MIN = Byte.MIN_VALUE;
+    private final String TYPE = "BYTE";
+
+    private long body;
+    private boolean needsFlush = false;
+
+    public ByteMessage(byte body) {
+        this.body = body;
     }
 
     /**
      * Accumulates Bytes and prevents overflow
      * */
     @Override
-    public boolean accumulate(Message message) {
-        if (!typeEquals(message)) return false;
-
-        byte msgValue = (byte) ((ByteMessage) message).value;
-        this.value += msgValue;
-        if (this.value > Byte.MAX_VALUE) {
-            ((ByteMessage) message).value = this.value - Byte.MAX_VALUE;
-            this.value = Byte.MAX_VALUE;
-            return false;
-        } else if (this.value < Byte.MIN_VALUE) {
-            ((ByteMessage) message).value = this.value - Byte.MIN_VALUE;
-            this.value = Byte.MIN_VALUE;
-            return false;
+    public ByteMessage accumulate(Message message) {
+        if (!typeEquals(message)) {
+            this.needsFlush = true;
+            return this;
         }
-        return true;
+
+        ByteMessage received = (ByteMessage) message;
+        this.body += received.body;
+
+        if (super.overflow(this, MIN, MAX, received)) {
+            this.needsFlush = true;
+        }
+        return this;
     }
 
     @Override
-    public String toString() {
-        return "primitive: " + value + System.lineSeparator();
+    public boolean needsFlush() {
+        return this.needsFlush;
     }
 
     @Override
     public String getType() {
-        return type;
+        return this.TYPE;
     }
 
     @Override
-    public boolean typeEquals(Message otherMessage) {
-        return this.type.equals(otherMessage.getType());
+    public String toString() {
+        return "primitive: " + body + System.lineSeparator();
     }
 
     @Override
-    public Object getValue() {
-        return value;
+    void setBody(long body) {
+        this.body = body;
+    }
+
+    @Override
+    long getBody() {
+        return this.body;
     }
 }
