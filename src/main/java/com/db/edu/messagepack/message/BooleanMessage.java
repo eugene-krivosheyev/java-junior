@@ -1,6 +1,4 @@
-package com.db.edu.message;
-
-import com.db.edu.Message;
+package com.db.edu.messagepack.message;
 
 public class BooleanMessage extends Message {
     private static final String PREFIX_PRIMITIVE = "primitive";

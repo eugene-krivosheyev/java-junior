@@ -1,12 +1,14 @@
 package com.db.edu;
 
-import com.db.edu.message.EmptyMessage;
+import com.db.edu.saver.Saver;
+import com.db.edu.messagepack.message.EmptyMessage;
+import com.db.edu.messagepack.message.Message;
 
 public class Controller {
     private Message previousMessage = new EmptyMessage();
-    private ConsoleSaver saver;
+    private Saver saver;
 
-    public Controller(ConsoleSaver saver) {
+    public Controller(Saver saver) {
         this.saver = saver;
     }
 

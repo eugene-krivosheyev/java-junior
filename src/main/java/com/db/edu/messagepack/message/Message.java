@@ -1,4 +1,4 @@
-package com.db.edu;
+package com.db.edu.messagepack.message;
 
 abstract public class Message {
     public abstract String getDecoratedMessage();

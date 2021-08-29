@@ -1,6 +1,7 @@
 package com.db.edu;
 
-import com.db.edu.message.*;
+import com.db.edu.saver.ConsoleSaver;
+import com.db.edu.messagepack.message.*;
 
 public class Logger {
     private static ConsoleSaver consoleSaver = new ConsoleSaver();

@@ -1,6 +1,4 @@
-package com.db.edu.message;
-
-import com.db.edu.Message;
+package com.db.edu.messagepack.message;
 
 public class EmptyMessage extends Message {
     @Override
