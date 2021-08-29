@@ -3,6 +3,7 @@ package com.acme.edu;
 import com.acme.edu.filters.LengthFilter;
 import com.acme.edu.messages.*;
 import com.acme.edu.savers.ConsoleSaver;
+import com.acme.edu.savers.FileSaver;
 
 public class Logger {
     private final LoggerController controller  = new LoggerController(

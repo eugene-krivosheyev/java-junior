@@ -7,7 +7,7 @@ public class IntSequenceChecker extends Checker {
     private boolean intAccumulateState;
     private int intAccumulateSum;
 
-    public IntSequenceChecker(Saver saver){
+    public IntSequenceChecker(Saver saver) {
         this.intAccumulateSum = 0;
         this.intAccumulateState = false;
         this.saver = saver;
@@ -31,7 +31,7 @@ public class IntSequenceChecker extends Checker {
                 intAccumulateSum += (int)message;
             }
         }
-        else{
+        else {
             if (intAccumulateState) {
                 saver.save(Type.PRIMITIVE.value + intAccumulateSum);
                 intAccumulateState = false;

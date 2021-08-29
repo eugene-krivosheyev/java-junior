@@ -20,14 +20,16 @@ public class LoggerController {
     }
 
     public void log(Message message) {
-        try {
+        if (message == null || message.getValue() == null)
+            throw new IllegalArgumentException("null message");
+
+        if (message.getValue().toString().length() == 0) {
+            throw new IllegalArgumentException("empty message"); // this works
+        }
+
             if (!filter.filter(message)) {
                 saver.save(message);
             }
-        }
-        catch (IllegalAccessException err) {
-            System.out.println(err.getMessage());
-        }
     }
 
     public void flush(){

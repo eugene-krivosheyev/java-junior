@@ -7,8 +7,6 @@ import com.acme.edu.savers.Saver;
 import java.util.Objects;
 
 public class StringSequenceChecker extends Checker {
-    private Saver saver;
-
     private boolean accumString;
     private int strCount;
     private String lastStr;
@@ -53,6 +51,7 @@ public class StringSequenceChecker extends Checker {
                 }
                 strCount = 1;
                 accumString = false;
+                lastStr = null;
             }
         }
     }
