@@ -14,25 +14,35 @@ public class LoggerController {
         this.saver = saver;
     }
 
-    public void close() throws SaveException {
-        if (state != State.NULL) {
-            lastMessage.close();
-            saver.save(lastMessage.decorate());
-            state = State.NULL;
-            lastMessage = null;
+    public void close() throws SaveException, NullPointerException {
+        try {
+            if (state != State.NULL) {
+                lastMessage.close();
+                saver.save(lastMessage.decorate());
+                state = State.NULL;
+                lastMessage = null;
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            throw e;
         }
     }
 
-    public void log(Message message) throws SaveException {
-        if (state == State.NULL) {
-            lastMessage = message;
-            state = State.NOT_NULL;
-        } else if (message.typeEquals(lastMessage)) {
-            lastMessage.accumulate(message);
-        } else {
-            lastMessage.close();
-            saver.save(lastMessage.decorate());
-            lastMessage = message;
+    public void log(Message message) throws SaveException, NullPointerException {
+        try {
+            if (state == State.NULL) {
+                lastMessage = message;
+                state = State.NOT_NULL;
+            } else if (message.typeEquals(lastMessage)) {
+                lastMessage.accumulate(message);
+            } else {
+                lastMessage.close();
+                saver.save(lastMessage.decorate());
+                lastMessage = message;
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            throw e;
         }
     }
 
