@@ -1,5 +1,8 @@
 package demo;
 
+import java.io.Closeable;
+import java.io.IOException;
+
 public class ExceptionsDemo {
     public static void main(String[] args) {
         //RQ + domain: main flow VS alternate flow
@@ -38,15 +41,10 @@ class Controller {
  */
 class Service {
     public void log(String message) {
-        LogOperationException lopex = null;
-        Repo repo = null; //Constructor || Factory Method e.g. _open_
-        try {
-            repo = new Repo();
+        try (Repo repo = new Repo()) { //Constructor || Factory Method e.g. _open_
             repo.save(message); // -> RuntExc
             return;
             //....
-
-
         } catch (ArithmeticException | NullPointerException e) {
                 //....
                 //....
@@ -54,30 +52,18 @@ class Service {
         } catch (Exception e) { // -> RuntExc!!!!
 //            1. Full handing: Retrying, Redundency -> NRFs (fail-over)
 //            2. Fail: log + raw case exception VS wrapper/business exception
-            lopex = new LogOperationException("business operation exception", e);
-            throw lopex;
-        } finally {
-            if (repo != null) {
-                try {
-                    repo.close(); // -> NPE
-                } catch (RuntimeException e) { // -> Suppression!!!!
-                    if (lopex != null) {
-                        e.addSuppressed(lopex);
-                    }
-                    throw e;
-                }
-            }
-        }
-        //.....
+            throw new LogOperationException("business operation exception", e);
+        } // finally with close()
     }
 }
 
-class Repo {
+class Repo implements AutoCloseable {
     public void save(String message) {
         throw new RuntimeException("low-level exception");
     }
 
-    public void close() {
+    @Override
+    public void close() throws Exception {
         throw new RuntimeException("close exception");
     }
 }
