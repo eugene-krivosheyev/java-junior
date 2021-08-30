@@ -1,10 +1,11 @@
 package com.db.edu;
 
 import com.db.edu.Message.*;
+import com.db.edu.Save.ConsoleSaver;
 
 public class Logger {
 
-    public static LoggerController loggerController = new LoggerController();
+    public static LoggerController loggerController = new LoggerController(new ConsoleSaver());
 
     public static void log(int message) {
         loggerController.log(new IntMessage(message));

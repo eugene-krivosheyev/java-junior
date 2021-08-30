@@ -1,13 +1,12 @@
 package com.db.edu.Message;
 
-import com.db.edu.ConsoleSaver;
+import com.db.edu.Save.ConsoleSaver;
 import com.db.edu.Prefix;
 
 public class IntMessage implements Message {
     private int messageBody;
 
-    public void printAccumulated() {
-            ConsoleSaver.printToConsole(this.toString());
+    public void close() {
             messageBody = 0;
     }
 
@@ -20,7 +19,7 @@ public class IntMessage implements Message {
     }
 
     @Override
-    public String toString() {
+    public String decorate() {
         return Prefix.PRIMITIVE.value + messageBody;
     }
 }

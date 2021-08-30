@@ -8,6 +8,8 @@ public interface Message {
         return this.getClass().equals(message.getClass());
     }
 
-    void printAccumulated();
+    void close();
+
+    String decorate();
 
 }

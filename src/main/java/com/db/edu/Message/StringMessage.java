@@ -1,6 +1,5 @@
 package com.db.edu.Message;
 
-import com.db.edu.ConsoleSaver;
 import com.db.edu.Prefix;
 
 public class StringMessage implements Message {
@@ -12,22 +11,21 @@ public class StringMessage implements Message {
     }
 
     @Override
-    public String toString() {
+    public String decorate() {
         return Prefix.STRING.value + messageBody + (stringCount > 1 ? " (x" + stringCount + ")" : "");
     }
 
     @Override
     public void accumulate(Message message) {
         if (stringCount > 0 && !messageBody.equals(((StringMessage)message).messageBody)) {
-            this.printAccumulated();
+            this.close();
         }
         messageBody = ((StringMessage)message).messageBody;
         stringCount++;
     }
 
     @Override
-    public void printAccumulated() {
-        ConsoleSaver.printToConsole(this.toString());
+    public void close() {
         stringCount = 0;
         messageBody = "";
     }

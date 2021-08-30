@@ -1,7 +1,6 @@
 package com.db.edu.Message;
 
-import com.db.edu.ConsoleSaver;
-import com.db.edu.Message.Message;
+import com.db.edu.Save.ConsoleSaver;
 import com.db.edu.Prefix;
 
 public class CharMessage implements Message {
@@ -12,7 +11,7 @@ public class CharMessage implements Message {
     }
 
     @Override
-    public String toString() {
+    public String decorate() {
         return Prefix.CHAR.value + messageBody;
     }
 
@@ -23,7 +22,6 @@ public class CharMessage implements Message {
     }
 
     @Override
-    public void printAccumulated() {
-        ConsoleSaver.printToConsole(this.toString());
+    public void close() {
     }
 }
