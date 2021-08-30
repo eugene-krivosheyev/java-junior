@@ -11,7 +11,7 @@ public class ConsoleSaver implements Saver {
                 throw new NullPointerException("FATAL ERROR: received null instead of message");
             }
         } catch (NullPointerException npe) {
-            throw new SaveException(npe);
+            throw new SaveException("Message was not saved! " + npe.getMessage(), npe);
         }
 
         System.out.print(message);

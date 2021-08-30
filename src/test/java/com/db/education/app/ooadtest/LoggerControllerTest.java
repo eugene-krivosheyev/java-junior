@@ -1,6 +1,7 @@
 package com.db.education.app.ooadtest;
 
 import com.db.education.app.controller.LoggerController;
+import com.db.education.app.exception.LogException;
 import com.db.education.app.exception.SaveException;
 import com.db.education.app.message.*;
 import com.db.education.app.saver.Saver;
@@ -26,7 +27,7 @@ public class LoggerControllerTest {
         Message noMessage = null;
 
         assertThrows(
-                IllegalArgumentException.class,
+                LogException.class,
                 () -> controllerSut.accept(noMessage)
         );
     }
@@ -37,13 +38,13 @@ public class LoggerControllerTest {
         when(emptyMessage.isEmptyMessage()).thenReturn(true);
 
         assertThrows(
-                IllegalArgumentException.class,
+                LogException.class,
                 () -> controllerSut.accept(emptyMessage)
         );
     }
 
     @Test
-    public void shouldUpdateWhenFirstMessageProvided() throws SaveException {
+    public void shouldUpdateWhenFirstMessageProvided() throws SaveException, LogException {
         Message byteMessageDummy = mock(ByteMessage.class);
 
         controllerSut.accept(byteMessageDummy);
@@ -53,7 +54,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldAccumulateAndNotFlushWhenAccumulatableMessagesProvided() throws SaveException {
+    public void shouldAccumulateAndNotFlushWhenAccumulatableMessagesProvided() throws SaveException, LogException {
         Message intMessageDummyFirst = mock(IntegerMessage.class);
         Message intMessageDummySecond = mock(IntegerMessage.class);
         Message intMessageDummyThird = mock(IntegerMessage.class);
@@ -69,7 +70,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldFlushOnceWhenNonAccumulatableMessageNeedsFlushing() throws SaveException {
+    public void shouldFlushOnceWhenNonAccumulatableMessageNeedsFlushing() throws SaveException, LogException {
         Message charMessageDummy = mock(CharacterMessage.class);
         when(charMessageDummy.needsFlush()).thenReturn(true);
 
@@ -79,7 +80,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldFlushProperMessageWhenAccumulatableMessageNeedsFlushing() throws SaveException {
+    public void shouldFlushProperMessageWhenAccumulatableMessageNeedsFlushing() throws SaveException, LogException {
         Message intMessageDummyFirst = mock(IntegerMessage.class);
         Message intMessageDummySecond = mock(IntegerMessage.class);
         when(intMessageDummyFirst.accumulate(intMessageDummySecond)).thenReturn(intMessageDummyFirst);
@@ -100,7 +101,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldFlushWhenInvokedOnNonEmptyMessage() throws SaveException {
+    public void shouldFlushWhenInvokedOnNonEmptyMessage() throws SaveException, LogException {
         Message objectMessageDummy = mock(ObjectMessage.class);
         when(objectMessageDummy.needsFlush()).thenReturn(false);
 
@@ -111,7 +112,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldNotFlushWhenInvokedOnEmptyMessage() throws SaveException {
+    public void shouldNotFlushWhenInvokedOnEmptyMessage() throws SaveException, LogException {
         Message booleanMessageDummy = mock(BooleanMessage.class);
         when(booleanMessageDummy.needsFlush()).thenReturn(false);
 

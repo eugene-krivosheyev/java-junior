@@ -1,6 +1,8 @@
 package com.db.education.app;
 
 import com.db.education.app.controller.LoggerController;
+import com.db.education.app.exception.LogException;
+import com.db.education.app.exception.SaveException;
 import com.db.education.app.message.*;
 import com.db.education.app.saver.ConsoleSaver;
 
@@ -25,27 +27,75 @@ public class Logger {
     }
 
     public static void log(int message) {
-        loggerController.accept(new IntegerMessage(message));
+        try {
+            loggerController.accept(new IntegerMessage(message));
+        } catch (LogException e) {
+            System.out.println("Log failed: " + e.getMessage());
+            e.printStackTrace();
+        } catch (SaveException e) {
+            System.out.println("Saving failed: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public static void log(byte message) {
-        loggerController.accept(new ByteMessage(message));
+        try {
+            loggerController.accept(new ByteMessage(message));
+        } catch (LogException e) {
+            System.out.println("Log failed: " + e.getMessage());
+            e.printStackTrace();
+        } catch (SaveException e) {
+            System.out.println("Saving failed: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public static void log(char message) {
-        loggerController.accept(new CharacterMessage(message));
+        try {
+            loggerController.accept(new CharacterMessage(message));
+        } catch (LogException e) {
+            System.out.println("Log failed: " + e.getMessage());
+            e.printStackTrace();
+        } catch (SaveException e) {
+            System.out.println("Saving failed: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public static void log(boolean message) {
-        loggerController.accept(new BooleanMessage(message));
+        try {
+            loggerController.accept(new BooleanMessage(message));
+        } catch (LogException e) {
+            System.out.println("Log failed: " + e.getMessage());
+            e.printStackTrace();
+        } catch (SaveException e) {
+            System.out.println("Saving failed: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public static void log(String message) {
-        loggerController.accept(new StringMessage(message));
+        try {
+            loggerController.accept(new StringMessage(message));
+        } catch (LogException e) {
+            System.out.println("Log failed: " + e.getMessage());
+            e.printStackTrace();
+        } catch (SaveException e) {
+            System.out.println("Saving failed: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public static void log(Object message) {
-        loggerController.accept(new ObjectMessage(message));
+        try {
+            loggerController.accept(new ObjectMessage(message));
+        } catch (LogException e) {
+            System.out.println("Log failed: " + e.getMessage());
+            e.printStackTrace();
+        } catch (SaveException e) {
+            System.out.println("Saving failed: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public static void log(int... messages) {
@@ -61,6 +111,11 @@ public class Logger {
     }
 
     public static void flush() {
-        loggerController.flush();
+        try {
+            loggerController.flush();
+        } catch (SaveException e) {
+            System.out.println("Saving failed: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
