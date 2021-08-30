@@ -5,8 +5,6 @@ import java.util.Objects;
 public interface Message {
     void clean();
     String toString();
-    boolean equalValues(Message message);
-    Object getValue();
     static boolean sameType(Message message1, Message message2) {
         if (message1 == null || message2 == null) return false;
         return Objects.equals(message1.getClass(),message2.getClass());
