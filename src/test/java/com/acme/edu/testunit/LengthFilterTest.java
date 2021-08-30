@@ -41,6 +41,7 @@ public class LengthFilterTest implements SysoutCaptureAndAssertionAbility {
         String forbiddenString = "LONGMESSAGE";
         Message longMessage = mock(Message.class);
         when(longMessage.getValue()).thenReturn(forbiddenString);
+        controllerSut.log(new StringMessage(forbiddenString));
 
         assertSysoutNotContains(forbiddenString);
     }
