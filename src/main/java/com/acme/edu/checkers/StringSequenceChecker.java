@@ -28,11 +28,11 @@ public class StringSequenceChecker extends Checker {
             }
             else {
                 if (strCount > 1) {
-                    saver.save(Type.STRING.value + lastStr + " (x" + strCount + ")");
+                    saver.sendToSave(Type.STRING.value + lastStr + " (x" + strCount + ")");
                 }
                 else {
                     if (lastStr != null) {
-                        saver.save(Type.STRING.value + lastStr);
+                        saver.sendToSave(Type.STRING.value + lastStr);
 
                     }
                 }
@@ -44,10 +44,10 @@ public class StringSequenceChecker extends Checker {
         else {
             if (accumString) {
                 if (strCount > 1) {
-                    saver.save(Type.STRING.value + lastStr + " (x" + strCount + ")");
+                    saver.sendToSave(Type.STRING.value + lastStr + " (x" + strCount + ")");
                 }
                 else {
-                    saver.save(Type.STRING.value + lastStr);
+                    saver.sendToSave(Type.STRING.value + lastStr);
                 }
                 strCount = 1;
                 accumString = false;
