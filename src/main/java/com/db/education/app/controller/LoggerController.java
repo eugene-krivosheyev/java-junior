@@ -1,5 +1,6 @@
 package com.db.education.app.controller;
 
+import com.db.education.app.exception.SaveException;
 import com.db.education.app.message.EmptyMessage;
 import com.db.education.app.message.Message;
 import com.db.education.app.saver.Saver;
@@ -23,16 +24,28 @@ public class LoggerController {
     }
 
     public void accept(Message message) {
-        processMessage(message);
+        try {
+            processMessage(message);
+        } catch (NullPointerException npe) {
+            System.out.println("FATAL ERROR: message was not saved" + npe.getMessage());
+        } catch (IllegalArgumentException iae) {
+            System.out.println("FATAL ERROR: " + iae.getMessage());
+        }
     }
 
     public void flush() {
-        flushMessage();
+        try {
+            flushMessage();
+        } catch (SaveException e) {
+            System.out.println("Unable to save message: " + e.getCause());
+        }
     }
 
     private void processMessage(Message message) {
-        if (message == null || message.isEmptyMessage()) {
-            throw new IllegalArgumentException("Empty or null message received");
+        if (message == null) {
+            throw new NullPointerException("No message received");
+        } else if (message.isEmptyMessage()) {
+            throw new IllegalArgumentException("Empty message received");
         }
 
         lastMessage = lastMessage.accumulate(message);
@@ -46,7 +59,7 @@ public class LoggerController {
         }
     }
 
-    private void flushMessage() {
+    private void flushMessage() throws SaveException {
         if (lastMessage.isEmptyMessage()) return;
 
         saver.save(lastMessage);

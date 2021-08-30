@@ -7,6 +7,10 @@ public class ObjectMessage implements Message {
     private Object body;
 
     public ObjectMessage(Object body) {
+        if (body == null) {
+            throw new NullPointerException("Unable to create message with empty object!");
+        }
+
         this.body = body;
     }
 

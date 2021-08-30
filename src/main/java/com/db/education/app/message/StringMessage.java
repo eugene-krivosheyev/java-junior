@@ -11,6 +11,12 @@ public class StringMessage implements Message{
     private boolean needsFlush = false;
 
     public StringMessage(String body) {
+        if (body == null) {
+            throw new NullPointerException("Unable to create message with no string!");
+        } else if (body.isEmpty()) {
+            throw new IllegalArgumentException("Empty string received!");
+        }
+
         this.body = body;
         count = 1;
     }

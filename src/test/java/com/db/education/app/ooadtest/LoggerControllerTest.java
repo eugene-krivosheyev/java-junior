@@ -1,6 +1,7 @@
 package com.db.education.app.ooadtest;
 
 import com.db.education.app.controller.LoggerController;
+import com.db.education.app.exception.SaveException;
 import com.db.education.app.message.*;
 import com.db.education.app.saver.Saver;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,7 +43,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldUpdateWhenFirstMessageProvided() {
+    public void shouldUpdateWhenFirstMessageProvided() throws SaveException {
         Message byteMessageDummy = mock(ByteMessage.class);
 
         controllerSut.accept(byteMessageDummy);
@@ -52,7 +53,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldAccumulateAndNotFlushWhenAccumulatableMessagesProvided() {
+    public void shouldAccumulateAndNotFlushWhenAccumulatableMessagesProvided() throws SaveException {
         Message intMessageDummyFirst = mock(IntegerMessage.class);
         Message intMessageDummySecond = mock(IntegerMessage.class);
         Message intMessageDummyThird = mock(IntegerMessage.class);
@@ -68,7 +69,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldFlushOnceWhenNonAccumulatableMessageNeedsFlushing() {
+    public void shouldFlushOnceWhenNonAccumulatableMessageNeedsFlushing() throws SaveException {
         Message charMessageDummy = mock(CharacterMessage.class);
         when(charMessageDummy.needsFlush()).thenReturn(true);
 
@@ -78,7 +79,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldFlushProperMessageWhenAccumulatableMessageNeedsFlushing() {
+    public void shouldFlushProperMessageWhenAccumulatableMessageNeedsFlushing() throws SaveException {
         Message intMessageDummyFirst = mock(IntegerMessage.class);
         Message intMessageDummySecond = mock(IntegerMessage.class);
         when(intMessageDummyFirst.accumulate(intMessageDummySecond)).thenReturn(intMessageDummyFirst);
@@ -92,14 +93,14 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldNotFlushWhenInvokedOnInitialState() {
+    public void shouldNotFlushWhenInvokedOnInitialState() throws SaveException {
         controllerSut.flush();
 
         verify(saverDummy, never()).save(any());
     }
 
     @Test
-    public void shouldFlushWhenInvokedOnNonEmptyMessage() {
+    public void shouldFlushWhenInvokedOnNonEmptyMessage() throws SaveException {
         Message objectMessageDummy = mock(ObjectMessage.class);
         when(objectMessageDummy.needsFlush()).thenReturn(false);
 
@@ -110,7 +111,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldNotFlushWhenInvokedOnEmptyMessage() {
+    public void shouldNotFlushWhenInvokedOnEmptyMessage() throws SaveException {
         Message booleanMessageDummy = mock(BooleanMessage.class);
         when(booleanMessageDummy.needsFlush()).thenReturn(false);
 

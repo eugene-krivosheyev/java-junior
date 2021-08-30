@@ -1,6 +1,7 @@
 package com.db.education.app.ooadtest;
 
 import com.db.education.app.SysoutCaptureAndAssertionAbility;
+import com.db.education.app.exception.SaveException;
 import com.db.education.app.message.Message;
 import com.db.education.app.saver.ConsoleSaver;
 import com.db.education.app.saver.Saver;
@@ -33,13 +34,13 @@ public class ConsoleSaverTest implements SysoutCaptureAndAssertionAbility {
         Message noMessage = null;
 
         assertThrows(
-                IllegalArgumentException.class,
+                SaveException.class,
                 () -> saverSut.save(noMessage)
         );
     }
 
     @Test
-    public void shouldPrintToConsoleWhenMessageProvided() {
+    public void shouldPrintToConsoleWhenMessageProvided() throws SaveException {
         String expected = "primitive: 1";
         Message messageDummy = mock(Message.class);
         when(messageDummy.toString()).thenReturn(expected);
