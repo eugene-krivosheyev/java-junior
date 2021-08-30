@@ -25,18 +25,6 @@ public class LoggerController {
     }
 
     public void accept(Message message) throws LogException, SaveException {
-            processMessage(message);
-    }
-
-    public void flush() throws SaveException {
-        try {
-            flushMessage();
-        } catch (SaveException e) {
-            throw new SaveException("Unable to save message: ", e);
-        }
-    }
-
-    private void processMessage(Message message) throws LogException, SaveException {
         try {
             if (message == null) {
                 throw new NullPointerException("No message received");
@@ -58,10 +46,15 @@ public class LoggerController {
         }
     }
 
-    private void flushMessage() throws SaveException {
+    public void flush() throws SaveException {
         if (lastMessage.isEmptyMessage()) return;
 
-        saver.save(lastMessage);
+        try {
+            saver.save(lastMessage);
+        } catch (SaveException e) {
+            throw new SaveException("Unable to save message: ", e);
+        }
+
         lastMessage = EMPTY_MESSAGE;
     }
 }
