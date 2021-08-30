@@ -15,6 +15,11 @@ public class CharMessage implements Message {
         return Prefix.CHAR.value + messageBody;
     }
 
+    @Override
+    public String getValue() {
+        return String.valueOf(messageBody);
+    }
+
 
     @Override
     public void accumulate(Message message) {

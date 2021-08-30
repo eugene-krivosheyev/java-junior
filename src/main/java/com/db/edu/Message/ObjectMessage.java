@@ -16,6 +16,11 @@ public class ObjectMessage implements Message {
     }
 
     @Override
+    public String getValue() {
+        return messageBody.toString();
+    }
+
+    @Override
     public void accumulate(Message message) {
     }
 

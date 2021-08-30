@@ -4,15 +4,24 @@ import com.db.edu.Prefix;
 
 public class StringMessage implements Message {
     private String messageBody;
-    int stringCount = 1;
+    private int stringCount = 1;
 
     public StringMessage(String messageBody) {
         this.messageBody = messageBody;
     }
 
+    public int getStringCount(){
+        return stringCount;
+    }
+
     @Override
     public String decorate() {
         return Prefix.STRING.value + messageBody + (stringCount > 1 ? " (x" + stringCount + ")" : "");
+    }
+
+    @Override
+    public String getValue() {
+        return messageBody;
     }
 
     @Override

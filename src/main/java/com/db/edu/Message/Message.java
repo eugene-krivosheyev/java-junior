@@ -12,4 +12,6 @@ public interface Message {
 
     String decorate();
 
+    String getValue();
+
 }

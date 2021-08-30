@@ -28,4 +28,9 @@ public class IntMessage implements Message {
     public String decorate() {
         return Prefix.PRIMITIVE.value + messageBody;
     }
+
+    @Override
+    public String getValue() {
+        return String.valueOf(messageBody);
+    }
 }

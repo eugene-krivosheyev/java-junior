@@ -16,6 +16,11 @@ public class ByteMessage implements Message {
     }
 
     @Override
+    public String getValue() {
+        return String.valueOf(messageBody);
+    }
+
+    @Override
     public void accumulate(Message message) {
 
     }
