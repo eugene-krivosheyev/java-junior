@@ -29,6 +29,8 @@ public class LoggerController {
 
             if (!filter.filter(message)) {
                 saver.save(message);
+            } else{
+                throw new IllegalArgumentException("unfiltered message");
             }
     }
 
