@@ -38,8 +38,10 @@ class Controller {
  */
 class Service {
     public void log(String message) {
-        Repo repo = new Repo(); //Constructor || Factory Method e.g. _open_
+        LogOperationException lopex = null;
+        Repo repo = null; //Constructor || Factory Method e.g. _open_
         try {
+            repo = new Repo();
             repo.save(message); // -> RuntExc
             return;
             //....
@@ -52,9 +54,19 @@ class Service {
         } catch (Exception e) { // -> RuntExc!!!!
 //            1. Full handing: Retrying, Redundency -> NRFs (fail-over)
 //            2. Fail: log + raw case exception VS wrapper/business exception
-            throw new LogOperationException("business message", e);
+            lopex = new LogOperationException("business operation exception", e);
+            throw lopex;
         } finally {
-            repo.close();
+            if (repo != null) {
+                try {
+                    repo.close(); // -> NPE
+                } catch (RuntimeException e) { // -> Suppression!!!!
+                    if (lopex != null) {
+                        e.addSuppressed(lopex);
+                    }
+                    throw e;
+                }
+            }
         }
         //.....
     }
@@ -62,7 +74,11 @@ class Service {
 
 class Repo {
     public void save(String message) {
-        throw new RuntimeException("low-level message");
+        throw new RuntimeException("low-level exception");
+    }
+
+    public void close() {
+        throw new RuntimeException("close exception");
     }
 }
 
