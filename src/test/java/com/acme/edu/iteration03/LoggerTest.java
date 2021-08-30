@@ -5,9 +5,10 @@ import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.saver.SaveException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-//@Disabled("Disabled to count unit tests coverage.")
+@Disabled("Disabled to count unit tests coverage.")
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @BeforeEach

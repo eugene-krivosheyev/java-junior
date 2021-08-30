@@ -5,70 +5,56 @@ import com.acme.edu.message.EmptyMessage;
 import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.Message;
 import com.acme.edu.message.StringMessage;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
 
 public class MessageTest implements SysoutCaptureAndAssertionAbility {
+    private final String DEFAULT_STRING = "default";
+    private final int DEFAULT_INT = 1;
+
+    private EmptyMessage emptyMessage;
+    private IntMessage intMessage;
+    private StringMessage stringMessage;
+
     //region given
     @BeforeEach
     public void setUpSystemOut() {
-        resetOut();
-        captureSysout();
+        emptyMessage = new EmptyMessage();
+        intMessage = new IntMessage(DEFAULT_INT);
+        stringMessage = new StringMessage(DEFAULT_STRING);
     }
-
-    @AfterEach
-    public void tearDown() {
-        resetOut();
-    }
-    //endregion
 
     @Test
     public void shouldReturnFalseWhenComparingDifferentMessages() {
-        EmptyMessage emptyMessage = new EmptyMessage();
-        IntMessage intMessage = new IntMessage(anyInt());
-
         assertFalse(emptyMessage.sameTypeOf(intMessage));
-
     }
 
     @Test
     public void shouldReturnTrueWhenComparingIntMessages() {
-        IntMessage accumulator = new IntMessage(anyInt());
-        IntMessage intMessage = new IntMessage(anyInt());
+        IntMessage accumulator = new IntMessage(DEFAULT_INT);
 
         assertTrue(accumulator.sameTypeOf(intMessage));
     }
 
     @Test
     public void shouldReturnTrueWhenComparingStringMessagesWithEqualBodies() {
-        String messageBody = anyString();
-
-        StringMessage accumulator = new StringMessage(messageBody);
-        StringMessage stringMessage = new StringMessage(messageBody);
+        StringMessage accumulator = new StringMessage(DEFAULT_STRING);
 
         assertTrue(accumulator.sameTypeOf(stringMessage));
     }
 
     @Test
     public void shouldReturnTrueWhenComparingStringMessagesWithNonEqualBodies() {
-        String messageBody = anyString();
-        String accumulatorBody = anyString() + ".";
-
-        StringMessage accumulator = new StringMessage(accumulatorBody);
-        StringMessage stringMessage = new StringMessage(messageBody);
+        StringMessage accumulator = new StringMessage(DEFAULT_STRING + ".");
 
         assertFalse(accumulator.sameTypeOf(stringMessage));
     }
 
     @Test
     public void shouldThrowExceptionWhenDifferentMessagesAccumulated() {
-        Message accumulator = new IntMessage(anyInt());
-        Message stringMessage = new StringMessage(anyString());
+        Message accumulator = new IntMessage(DEFAULT_INT);
 
         assertThrows(ClassCastException.class, () -> accumulator.accumulate(stringMessage));
 
@@ -76,7 +62,7 @@ public class MessageTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldThrowExceptionWhenNullMessageAccumulated() {
-        Message accumulator = new IntMessage(anyInt());
+        Message accumulator = new IntMessage(DEFAULT_INT);
 
         assertThrows(NullPointerException.class, () -> accumulator.accumulate(null));
 
