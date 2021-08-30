@@ -11,14 +11,17 @@ public class IntMessage implements Message {
     }
 
     @Override
-    public boolean accumulate(Message message) {
-        value += Integer.parseInt(message.getValue());
-        return true;
+    public Message accumulate(Message message) {
+        if (message.getValue() == null) {
+            return new IntMessage(value);
+        } else {
+            return new IntMessage(value += Integer.parseInt(message.getValue()));
+        }
     }
 
     @Override
-    public boolean isStateEquals(State state) {
-        return state.equals(State.INT);
+    public boolean isStateEquals(Message message) {
+        return message.getState().equals(State.INT);
     }
 
     @Override
@@ -47,8 +50,8 @@ public class IntMessage implements Message {
     }
 
     @Override
-    public void accumulate() {
-
+    public boolean isStateNotEquals(Message message) {
+        return !isStateEquals(message);
     }
 }
 

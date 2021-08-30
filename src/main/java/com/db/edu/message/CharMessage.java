@@ -31,22 +31,22 @@ public class CharMessage implements Message {
     }
 
     @Override
-    public void accumulate() {
-
+    public Message accumulate(Message message) {
+        return new CharMessage(value);
     }
 
     @Override
-    public boolean accumulate(Message message) {
+    public boolean isStateEquals(Message message) {
         return false;
-    }
-
-    @Override
-    public boolean isStateEquals(State state) {
-        return state.equals(State.CHAR);
     }
 
     @Override
     public State getState() {
         return State.CHAR;
+    }
+
+    @Override
+    public boolean isStateNotEquals(Message message) {
+        return !isStateEquals(message);
     }
 }

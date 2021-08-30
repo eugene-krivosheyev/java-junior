@@ -12,19 +12,19 @@ public class StringMessage implements Message {
     }
 
     @Override
-    public boolean accumulate(Message message) {
-        if (isMessageEquals(message)) {
-            this.value = message.getValue();
-            ++quantityOfRepetitiveString;
-            return true;
+    public Message accumulate(Message message) {
+        StringMessage newMessage = new StringMessage(value);
+        if (message instanceof StringMessage) {
+            newMessage.setQuantityOfRepetitiveString(((StringMessage) message).getQuantityOfRepetitiveString() + 1);
         } else {
-            return false;
+            newMessage.setQuantityOfRepetitiveString(1);
         }
+        return newMessage;
     }
 
     @Override
-    public boolean isStateEquals(State state) {
-        return state.equals(State.STRING);
+    public boolean isStateEquals(Message message) {
+        return message.getState().equals(State.STRING) && isMessageEquals(message);
     }
 
     @Override
@@ -41,10 +41,6 @@ public class StringMessage implements Message {
         }
     }
 
-    public boolean isMessageEquals(Message message) {
-        return message.getValue().equals(value);
-    }
-
     @Override
     public boolean isNotEmpty() {
         return value != null;
@@ -57,13 +53,24 @@ public class StringMessage implements Message {
     }
 
     @Override
-    public void accumulate() {
-        quantityOfRepetitiveString++;
-    }
-
-    @Override
     public String getValue() {
         return value;
     }
 
+    @Override
+    public boolean isStateNotEquals(Message message) {
+        return !isStateEquals(message);
+    }
+
+    public int getQuantityOfRepetitiveString() {
+        return quantityOfRepetitiveString;
+    }
+
+    private void setQuantityOfRepetitiveString(int quantityOfRepetitiveString) {
+        this.quantityOfRepetitiveString = quantityOfRepetitiveString;
+    }
+
+    public boolean isMessageEquals(Message message) {
+        return message.getValue().equals(value);
+    }
 }

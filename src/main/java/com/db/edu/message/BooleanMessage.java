@@ -30,21 +30,22 @@ public class BooleanMessage implements Message {
     }
 
     @Override
-    public void accumulate() {
-    }
-
-    @Override
-    public boolean accumulate(Message message) {
-        return false;
-    }
-
-    @Override
-    public boolean isStateEquals(State state) {
-        return state.equals(State.BOOLEAN);
+    public Message accumulate(Message message) {
+        return new BooleanMessage(value);
     }
 
     @Override
     public State getState() {
         return State.BOOLEAN;
+    }
+
+    @Override
+    public boolean isStateEquals(Message message) {
+        return false;
+    }
+
+    @Override
+    public boolean isStateNotEquals(Message message) {
+        return !isStateEquals(message);
     }
 }

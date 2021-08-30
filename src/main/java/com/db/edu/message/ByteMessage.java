@@ -30,22 +30,22 @@ public class ByteMessage implements Message {
     }
 
     @Override
-    public void accumulate() {
-
+    public Message accumulate(Message message) {
+        return new ByteMessage(value);
     }
 
     @Override
-    public boolean accumulate(Message message) {
+    public boolean isStateEquals(Message message) {
         return false;
-    }
-
-    @Override
-    public boolean isStateEquals(State state) {
-        return state.equals(State.BYTE);
     }
 
     @Override
     public State getState() {
         return State.BYTE;
+    }
+
+    @Override
+    public boolean isStateNotEquals(Message message) {
+        return !isStateEquals(message);
     }
 }

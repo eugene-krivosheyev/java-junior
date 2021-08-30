@@ -13,17 +13,10 @@ public class Controller {
     }
 
     public void log(Message message) {
-        if(!message.isStateEquals(buffer.getState())) {
+        if(message.isStateNotEquals(buffer)) {
             flush();
-            buffer = message;
-            buffer.accumulate();
-        } else {
-            if(!buffer.accumulate(message)) {
-                saver.save(buffer.decorated());
-                buffer = message;
-                buffer.accumulate(message);
-            }
         }
+        buffer = message.accumulate(buffer);
     }
 
     public void flush() {

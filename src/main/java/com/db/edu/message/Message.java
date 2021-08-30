@@ -12,11 +12,11 @@ public interface Message {
 
     void flush();
 
-    void accumulate();
+    Message accumulate(Message message);
 
-    boolean accumulate(Message message);
+    boolean isStateEquals(Message message);
 
-    boolean isStateEquals(State state);
+    boolean isStateNotEquals(Message message);
 
     State getState();
 }

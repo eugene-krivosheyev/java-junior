@@ -23,22 +23,22 @@ public class EmptyMessage implements Message {
     }
 
     @Override
-    public void accumulate() {
-
+    public Message accumulate(Message message) {
+        return new EmptyMessage();
     }
 
     @Override
-    public boolean accumulate(Message message) {
-        return false;
-    }
-
-    @Override
-    public boolean isStateEquals(State state) {
-        return false;
+    public boolean isStateEquals(Message message) {
+        return message.getState().equals(State.EMPTY);
     }
 
     @Override
     public State getState() {
         return State.EMPTY;
+    }
+
+    @Override
+    public boolean isStateNotEquals(Message message) {
+        return !isStateEquals(message);
     }
 }

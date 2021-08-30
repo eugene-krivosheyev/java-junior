@@ -27,26 +27,25 @@ public class ObjectMessage implements Message {
 
     @Override
     public void flush() {
-
     }
 
     @Override
-    public void accumulate() {
-
+    public Message accumulate(Message message) {
+        return new ObjectMessage(value);
     }
 
     @Override
-    public boolean accumulate(Message message) {
+    public boolean isStateEquals(Message message) {
         return false;
-    }
-
-    @Override
-    public boolean isStateEquals(State state) {
-        return state.equals(State.OBJECT);
     }
 
     @Override
     public State getState() {
         return State.OBJECT;
+    }
+
+    @Override
+    public boolean isStateNotEquals(Message message) {
+        return !isStateEquals(message);
     }
 }
