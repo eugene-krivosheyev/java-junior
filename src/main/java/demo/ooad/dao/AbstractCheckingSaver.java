@@ -11,7 +11,7 @@ public abstract class AbstractCheckingSaver implements Saver {
     }
 
     @Override
-    public void save(Message message) {
+    public void save(Message message) throws SaveException {
         validator.validate(message);
     }
 }

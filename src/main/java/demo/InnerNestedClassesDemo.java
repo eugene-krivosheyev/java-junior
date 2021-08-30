@@ -1,6 +1,7 @@
 package demo;
 
 import demo.ooad.controller.LoggerController;
+import demo.ooad.dao.SaveException;
 import demo.ooad.dao.Saver;
 import demo.ooad.domain.Message;
 import demo.ooad.domain.SeverityLevel;
@@ -39,7 +40,11 @@ public class InnerNestedClassesDemo {
                 }
         );
 
-        controller.log(new Message("123", SeverityLevel.ERROR));
+        try {
+            controller.log(new Message("123", SeverityLevel.ERROR));
+        } catch (SaveException e) {
+            e.printStackTrace();
+        }
 
 
         int localVar = 0;

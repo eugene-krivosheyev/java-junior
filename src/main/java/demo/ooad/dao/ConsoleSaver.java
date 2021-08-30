@@ -9,7 +9,7 @@ public class ConsoleSaver extends AbstractCheckingSaver {
     }
 
     @Override
-    public void save(Message message) {
+    public void save(Message message) throws SaveException {
         super.save(message);
         System.out.println(message.toString());
     }

@@ -2,6 +2,7 @@ package demo;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ExceptionsDemo {
     public static void main(String[] args) {
@@ -12,6 +13,8 @@ public class ExceptionsDemo {
         } catch (RuntimeException e) { //LogOperationException IS-A RuntExc
             //User communication
             e.printStackTrace();
+        } catch (LogOperationException e) {
+            e.printStackTrace();
         }
     }
 }
@@ -21,7 +24,7 @@ public class ExceptionsDemo {
  * API
  */
 class Controller {
-    public void log(String message) {
+    public void log(String message) throws LogOperationException {
         if (message == null || message.isEmpty()) {
             throw new IllegalArgumentException("message not valid");
         }
@@ -40,7 +43,7 @@ class Controller {
  * "Service": business logic
  */
 class Service {
-    public void log(String message) {
+    public void log(String message) throws LogOperationException {
         try (Repo repo = new Repo()) { //Constructor || Factory Method e.g. _open_
             repo.save(message); // -> RuntExc
             return;
@@ -58,17 +61,17 @@ class Service {
 }
 
 class Repo implements AutoCloseable {
-    public void save(String message) {
-        throw new RuntimeException("low-level exception");
+    public void save(String message) throws IOException {
+        throw new IOException("low-level exception");
     }
 
     @Override
     public void close() throws Exception {
-        throw new RuntimeException("close exception");
+        throw new Exception("close exception");
     }
 }
 
-class LogOperationException extends RuntimeException {
+class LogOperationException extends Exception {
     public LogOperationException() {
         super();
     }

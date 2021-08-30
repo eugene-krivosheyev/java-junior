@@ -1,5 +1,6 @@
 package demo.ooad.controller;
 
+import demo.ooad.dao.SaveException;
 import demo.ooad.domain.Message;
 import demo.ooad.filter.Filter;
 import demo.ooad.dao.Saver;
@@ -28,7 +29,7 @@ public class LoggerController {
      * a.m();
      *
      */
-    public void log(Message message) {
+    public void log(Message message) throws SaveException {
         if (message == null ||
             message.getBody() == null ||
             message.getBody().isEmpty()) {
@@ -37,7 +38,12 @@ public class LoggerController {
 
 
         if (!filter.filter(message)) {
-            saver.save(message);
+            try {
+                saver.save(message);
+            } catch (SaveException e) {
+                e.printStackTrace();
+                throw e;
+            }
         }
     }
 }
