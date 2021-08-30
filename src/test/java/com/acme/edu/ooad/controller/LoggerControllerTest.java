@@ -13,16 +13,16 @@ public class LoggerControllerTest {
     @Test
     public void shouldNotSaveLastLoggedMessageWhenFlushAndLastLoggedIsNull() {
         controllerSut.lastLoggedMessage = null;
-
         controllerSut.flush();
+
         verify(saverMock, times(0)).save(controllerSut.lastLoggedMessage);
     }
 
     @Test
     public void shouldSaveLastLoggedMessageWhenFlushAndLastLoggedMessageIsNotNull() {
         controllerSut.lastLoggedMessage = mock(Message.class);
-
         controllerSut.flush();
+
         verify(saverMock, times(1)).save(controllerSut.lastLoggedMessage);
     }
 
