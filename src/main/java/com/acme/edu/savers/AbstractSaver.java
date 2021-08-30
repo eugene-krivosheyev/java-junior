@@ -14,6 +14,7 @@ public abstract class AbstractSaver implements Saver  {
     @Override
     public void save(String message) throws SaveException {}
 
+    @Override
     public void sendToSave(String message) {
         try {
             save(message);

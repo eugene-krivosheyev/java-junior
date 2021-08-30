@@ -19,9 +19,6 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
 
     @BeforeEach
     public void setBasicArguments() {
-        resetOut();
-        captureSysout();
-
         Filter filterDummy = mock(Filter.class);
         Saver saveDummy = mock(Saver.class);
         controllerSut = new LoggerController(saveDummy, filterDummy);
@@ -33,22 +30,36 @@ public class LoggerControllerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldGiveErrorWhenMessageIsEmptyOrNull() {
+    public void shouldGiveErrorWhenMessageBodyIsNull() {
+        Message nullBodyMessage = mock(Message.class);
+        when(nullBodyMessage.getValue()).thenReturn(null);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> controllerSut.log(nullBodyMessage)
+        );
+    }
+
+    @Test
+    public void shouldGiveErrorWhenMessageBodyIsEmpty() {
         Message emptyMessage = mock(Message.class);
         when(emptyMessage.getValue()).thenReturn("");
-
-        Message nullMessage = mock(Message.class);
-        when(nullMessage.getValue()).thenReturn(null);
-
 
         assertThrows(
                 IllegalArgumentException.class,
                 () -> controllerSut.log(emptyMessage)
         );
+    }
+
+    @Test
+    public void shouldGiveErrorWhenMessageIsNullReference() {
+        Message nullMessage = mock(Message.class);
+        when(nullMessage.getValue()).thenReturn(null);
 
         assertThrows(
                 IllegalArgumentException.class,
                 () -> controllerSut.log(nullMessage)
         );
     }
+
 }
