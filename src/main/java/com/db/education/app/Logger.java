@@ -25,27 +25,27 @@ public class Logger {
     }
 
     public static void log(int message) {
-        loggerController.processMessage(new IntegerMessage(message));
+        loggerController.accept(new IntegerMessage(message));
     }
 
     public static void log(byte message) {
-        loggerController.processMessage(new ByteMessage(message));
+        loggerController.accept(new ByteMessage(message));
     }
 
     public static void log(char message) {
-        loggerController.processMessage(new CharacterMessage(message));
+        loggerController.accept(new CharacterMessage(message));
     }
 
     public static void log(boolean message) {
-        loggerController.processMessage(new BooleanMessage(message));
+        loggerController.accept(new BooleanMessage(message));
     }
 
     public static void log(String message) {
-        loggerController.processMessage(new StringMessage(message));
+        loggerController.accept(new StringMessage(message));
     }
 
     public static void log(Object message) {
-        loggerController.processMessage(new ObjectMessage(message));
+        loggerController.accept(new ObjectMessage(message));
     }
 
     public static void log(int... messages) {

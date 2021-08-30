@@ -26,7 +26,7 @@ public class LoggerControllerTest {
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> controllerSut.processMessage(noMessage)
+                () -> controllerSut.accept(noMessage)
         );
     }
 
@@ -37,7 +37,7 @@ public class LoggerControllerTest {
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> controllerSut.processMessage(emptyMessage)
+                () -> controllerSut.accept(emptyMessage)
         );
     }
 
@@ -45,7 +45,7 @@ public class LoggerControllerTest {
     public void shouldUpdateWhenFirstMessageProvided() {
         Message byteMessageDummy = mock(ByteMessage.class);
 
-        controllerSut.processMessage(byteMessageDummy);
+        controllerSut.accept(byteMessageDummy);
         controllerSut.flush();
 
         verify(saverDummy).save(byteMessageDummy);
@@ -60,9 +60,9 @@ public class LoggerControllerTest {
         when(intMessageDummyFirst.accumulate(intMessageDummyThird)).thenReturn(intMessageDummyFirst);
         when(intMessageDummyFirst.needsFlush()).thenReturn(false).thenReturn(false).thenReturn(false);
 
-        controllerSut.processMessage(intMessageDummyFirst);
-        controllerSut.processMessage(intMessageDummySecond);
-        controllerSut.processMessage(intMessageDummyThird);
+        controllerSut.accept(intMessageDummyFirst);
+        controllerSut.accept(intMessageDummySecond);
+        controllerSut.accept(intMessageDummyThird);
 
         verify(saverDummy, never()).save(any());
     }
@@ -72,7 +72,7 @@ public class LoggerControllerTest {
         Message charMessageDummy = mock(CharacterMessage.class);
         when(charMessageDummy.needsFlush()).thenReturn(true);
 
-        controllerSut.processMessage(charMessageDummy);
+        controllerSut.accept(charMessageDummy);
 
         verify(saverDummy, times(1)).save(charMessageDummy);
     }
@@ -84,8 +84,8 @@ public class LoggerControllerTest {
         when(intMessageDummyFirst.accumulate(intMessageDummySecond)).thenReturn(intMessageDummyFirst);
         when(intMessageDummyFirst.needsFlush()).thenReturn(false).thenReturn(true);
 
-        controllerSut.processMessage(intMessageDummyFirst);
-        controllerSut.processMessage(intMessageDummySecond);
+        controllerSut.accept(intMessageDummyFirst);
+        controllerSut.accept(intMessageDummySecond);
 
         verify(saverDummy, times(1)).save(intMessageDummyFirst);
         verify(saverDummy, never()).save(intMessageDummySecond);
@@ -103,7 +103,7 @@ public class LoggerControllerTest {
         Message objectMessageDummy = mock(ObjectMessage.class);
         when(objectMessageDummy.needsFlush()).thenReturn(false);
 
-        controllerSut.processMessage(objectMessageDummy);
+        controllerSut.accept(objectMessageDummy);
         controllerSut.flush();
 
         verify(saverDummy, times(1)).save(objectMessageDummy);
@@ -114,7 +114,7 @@ public class LoggerControllerTest {
         Message booleanMessageDummy = mock(BooleanMessage.class);
         when(booleanMessageDummy.needsFlush()).thenReturn(false);
 
-        controllerSut.processMessage(booleanMessageDummy);
+        controllerSut.accept(booleanMessageDummy);
         controllerSut.flush();
         controllerSut.flush();
 

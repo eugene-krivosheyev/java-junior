@@ -15,7 +15,15 @@ public class LoggerController {
         this.saver = saver;
     }
 
-    public void processMessage(Message message) {
+    public void accept(Message message) {
+        processMessage(message);
+    }
+
+    public void flush() {
+        flushMessage();
+    }
+
+    private void processMessage(Message message) {
         if (message == null || message.isEmptyMessage()) {
             throw new IllegalArgumentException("Empty or null message received");
         }
@@ -31,7 +39,7 @@ public class LoggerController {
         }
     }
 
-    public void flush() {
+    private void flushMessage() {
         if (lastMessage.isEmptyMessage()) return;
 
         saver.save(lastMessage);
