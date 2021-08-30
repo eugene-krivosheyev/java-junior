@@ -1,6 +1,7 @@
 package com.db.edu;
 
 import com.db.edu.Message.Message;
+import com.db.edu.Save.SaveException;
 import com.db.edu.Save.Saver;
 
 public class LoggerController {
@@ -13,7 +14,7 @@ public class LoggerController {
         this.saver = saver;
     }
 
-    public void close() {
+    public void close() throws SaveException {
         if (state != State.NULL) {
             lastMessage.close();
             saver.save(lastMessage.decorate());
@@ -22,7 +23,7 @@ public class LoggerController {
         }
     }
 
-    public void log(Message message) {
+    public void log(Message message) throws SaveException {
         if (state == State.NULL) {
             lastMessage = message;
             state = State.NOT_NULL;

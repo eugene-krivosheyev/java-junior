@@ -2,44 +2,45 @@ package com.db.edu;
 
 import com.db.edu.Message.*;
 import com.db.edu.Save.ConsoleSaver;
+import com.db.edu.Save.SaveException;
 
 public class Logger {
 
     public static LoggerController loggerController = new LoggerController(new ConsoleSaver());
 
-    public static void log(int message) {
+    public static void log(int message) throws SaveException {
         loggerController.log(new IntMessage(message));
     }
 
-    public static void log(int... message) {
+    public static void log(int... message) throws SaveException {
         for (int current : message) {
             loggerController.log(new IntMessage(current));
         }
     }
 
-    public static void log(byte message) {
+    public static void log(byte message) throws SaveException {
         loggerController.log(new ByteMessage(message));
     }
 
-    public static void log(char message) {
+    public static void log(char message) throws SaveException {
         loggerController.log(new CharMessage(message));
     }
 
-    public static void log(String message) {
+    public static void log(String message) throws SaveException {
         loggerController.log(new StringMessage(message));
     }
 
-    public static void log(String... message) {
+    public static void log(String... message) throws SaveException {
         for (String current : message) {
             loggerController.log(new StringMessage(current));
         }
     }
 
-    public static void log(boolean message) {
+    public static void log(boolean message) throws SaveException {
         loggerController.log(new BoolMessage(message));
     }
 
-    public static void log(Object message) {
+    public static void log(Object message) throws SaveException {
         loggerController.log(new ObjectMessage(message));
     }
 

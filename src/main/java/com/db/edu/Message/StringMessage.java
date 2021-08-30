@@ -16,12 +16,17 @@ public class StringMessage implements Message {
     }
 
     @Override
-    public void accumulate(Message message) {
-        if (stringCount > 0 && !messageBody.equals(((StringMessage)message).messageBody)) {
-            this.close();
+    public void accumulate(Message message) throws ClassCastException {
+        try {
+            if (stringCount > 0 && !messageBody.equals(((StringMessage) message).messageBody)) {
+                this.close();
+            }
+            messageBody = ((StringMessage) message).messageBody;
+            stringCount++;
+        } catch (ClassCastException e) {
+            e.printStackTrace();
+            throw e;
         }
-        messageBody = ((StringMessage)message).messageBody;
-        stringCount++;
     }
 
     @Override

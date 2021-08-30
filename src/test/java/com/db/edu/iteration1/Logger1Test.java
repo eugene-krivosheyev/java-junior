@@ -3,6 +3,7 @@ package com.db.edu.iteration1;
 import com.db.edu.Logger;
 import com.db.edu.LoggerController;
 import com.db.edu.Prefix;
+import com.db.edu.Save.SaveException;
 import com.db.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.*;
 
@@ -24,7 +25,7 @@ public class Logger1Test implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Disabled
-    public void shouldLogInteger() throws IOException {
+    public void shouldLogInteger() throws IOException, SaveException {
         //region when
         Logger.log(1);
         Logger.loggerController.close();
@@ -44,7 +45,7 @@ public class Logger1Test implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Disabled
-    public void shouldLogByte() throws IOException {
+    public void shouldLogByte() throws IOException, SaveException {
         //region when
         Logger.log((byte) 1);
         Logger.loggerController.close();
@@ -65,7 +66,7 @@ public class Logger1Test implements SysoutCaptureAndAssertionAbility {
     //TODO: implement Logger solution to match specification as tests
     @Test
     @Disabled
-    public void shouldLogChar() throws IOException {
+    public void shouldLogChar() throws IOException, SaveException {
         //region when
         Logger.log('a');
         Logger.loggerController.close();
@@ -81,7 +82,7 @@ public class Logger1Test implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Disabled
-    public void shouldLogString() throws IOException {
+    public void shouldLogString() throws IOException, SaveException {
         //region when
         Logger.log("test string 1");
         Logger.log("other str");
@@ -96,7 +97,7 @@ public class Logger1Test implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Disabled
-    public void shouldLogBoolean() throws IOException {
+    public void shouldLogBoolean() throws IOException, SaveException {
         //region when
         Logger.log(true);
         Logger.loggerController.close();
@@ -112,7 +113,7 @@ public class Logger1Test implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Disabled
-    public void shouldLogReference() throws IOException {
+    public void shouldLogReference() throws IOException, SaveException {
         //region when
         Logger.log(new Object());
         Logger.loggerController.close();

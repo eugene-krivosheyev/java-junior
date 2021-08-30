@@ -2,6 +2,7 @@ package com.db.edu.iteration02;
 
 import com.db.edu.Logger;
 import com.db.edu.LoggerController;
+import com.db.edu.Save.SaveException;
 import com.db.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +29,7 @@ public class Logger2Test implements SysoutCaptureAndAssertionAbility {
     //TODO: implement Logger solution to match specification as tests
     @Test
     @Disabled
-    public void shouldLogSequentIntegersAsSum() throws IOException {
+    public void shouldLogSequentIntegersAsSum() throws IOException, SaveException {
         //region when
         Logger.log("str 1");
         Logger.log(1);
@@ -47,7 +48,7 @@ public class Logger2Test implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Disabled
-    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
+    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws SaveException {
         //region when
         Logger.log("str 1");
         Logger.log(10);
@@ -67,7 +68,7 @@ public class Logger2Test implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Disabled
-    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
+    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() throws SaveException {
         //region when
         Logger.log("str 1");
         Logger.log((byte) 10);
@@ -87,7 +88,7 @@ public class Logger2Test implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Disabled
-    public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
+    public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException, SaveException {
         //region when
         Logger.log("str 1");
         Logger.log("str 2");

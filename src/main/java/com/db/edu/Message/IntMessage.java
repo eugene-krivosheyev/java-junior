@@ -14,8 +14,14 @@ public class IntMessage implements Message {
         this.messageBody = messageBody;
     }
 
-    public void accumulate(Message message) {
-        messageBody += ((IntMessage)message).messageBody;
+    public void accumulate(Message message) throws ClassCastException {
+        try {
+            messageBody += ((IntMessage)message).messageBody;
+        } catch (ClassCastException e) {
+            e.printStackTrace();
+            throw e;
+        }
+
     }
 
     @Override

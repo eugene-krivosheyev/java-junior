@@ -2,6 +2,7 @@ package com.db.edu.iteration03;
 
 import com.db.edu.Logger;
 import com.db.edu.LoggerController;
+import com.db.edu.Save.SaveException;
 import com.db.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +28,7 @@ public class Logger3Text implements SysoutCaptureAndAssertionAbility {
     //TODO: implement Logger solution to match specification as tests
     @Test
     @Disabled
-    public void shouldLogIntegersArray() throws IOException {
+    public void shouldLogIntegersArray() throws IOException, SaveException {
         //region when
         Logger.log(new int[] {-1, 0, 1});
         //endregion
@@ -39,7 +40,7 @@ public class Logger3Text implements SysoutCaptureAndAssertionAbility {
     }
     @Test
     @Disabled
-    public void shouldLogIntegersMatrix() throws IOException {
+    public void shouldLogIntegersMatrix() throws IOException, SaveException {
         //region when
         Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         //endregion
@@ -55,7 +56,7 @@ public class Logger3Text implements SysoutCaptureAndAssertionAbility {
     }
     @Test
     @Disabled
-    public void shouldLogIntegersMulitidimentionalArray() throws IOException {
+    public void shouldLogIntegersMulitidimentionalArray() throws IOException, SaveException {
         //region when
         Logger.log(new int[][][][] {{{{0}}}});
         //endregion
@@ -71,7 +72,7 @@ public class Logger3Text implements SysoutCaptureAndAssertionAbility {
     }
     @Test
     @Disabled
-    public void shouldLogStringsWithOneMethodCall() throws IOException {
+    public void shouldLogStringsWithOneMethodCall() throws IOException, SaveException {
         //region when
         Logger.log("str1", "string 2", "str 3");
         Logger.loggerController.close();
@@ -84,7 +85,7 @@ public class Logger3Text implements SysoutCaptureAndAssertionAbility {
     }
     @Test
     @Disabled
-    public void shouldLogIntegersWithOneMethodCall() throws IOException {
+    public void shouldLogIntegersWithOneMethodCall() throws IOException, SaveException {
         //region when
         Logger.log(-1, 0, 1, 3);
         Logger.loggerController.close();

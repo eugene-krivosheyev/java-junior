@@ -4,6 +4,7 @@ import com.db.edu.Save.ConsoleSaver;
 import com.db.edu.LoggerController;
 import com.db.edu.Message.Message;
 import com.db.edu.Message.StringMessage;
+import com.db.edu.Save.SaveException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,7 +12,7 @@ import static org.mockito.Mockito.*;
 
 public class ControllerTest {
     @Test
-    public void notSaveBeforeFlushOrAnotherMessageType(){
+    public void notSaveBeforeFlushOrAnotherMessageType() throws SaveException {
         Message message = mock(StringMessage.class);
         ConsoleSaver consoleSaver = mock(ConsoleSaver.class);
         LoggerController loggerController = new LoggerController(consoleSaver);
@@ -22,7 +23,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void saveMessageAfterCloseMethod(){
+    public void saveMessageAfterCloseMethod() throws SaveException {
         Message message = mock(StringMessage.class);
         ConsoleSaver consoleSaver = mock(ConsoleSaver.class);
         LoggerController loggerController = new LoggerController(consoleSaver);
@@ -34,7 +35,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void notSaveAfterSameTypeMessage(){
+    public void notSaveAfterSameTypeMessage() throws SaveException {
         Message message1 = mock(Message.class);
         Message message2 = mock(Message.class);
         ConsoleSaver consoleSaver = mock(ConsoleSaver.class);
@@ -48,7 +49,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void saveAfterAnotherTypeMessage(){
+    public void saveAfterAnotherTypeMessage() throws SaveException {
         Message message1 = mock(Message.class);
         Message message2 = mock(Message.class);
         ConsoleSaver consoleSaver = mock(ConsoleSaver.class);
