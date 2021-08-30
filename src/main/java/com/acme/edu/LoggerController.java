@@ -24,13 +24,11 @@ public class LoggerController {
             throw new IllegalArgumentException("null message");
 
         if (message.getValue().toString().length() == 0) {
-            throw new IllegalArgumentException("empty message"); // this works
+            throw new IllegalArgumentException("empty message");
         }
 
             if (!filter.filter(message)) {
                 saver.save(message);
-            } else{
-                throw new IllegalArgumentException("unfiltered message");
             }
     }
 

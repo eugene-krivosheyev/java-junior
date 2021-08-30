@@ -22,6 +22,11 @@ public interface SysoutCaptureAndAssertionAbility {
         assertThat(OUT.toString(), containsString(expected));
     }
 
+    default void assertSysoutNotContains(String forbidden) {
+        boolean exists = OUT.toString().contains(forbidden);
+        assert (exists == false);
+    }
+
     default void resetOut() {
         OUT.reset();
     }
