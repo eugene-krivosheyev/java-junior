@@ -2,10 +2,9 @@ package com.acme.edu.iteration02;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-
+import com.acme.edu.saver.SaveException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 //@Disabled("Disabled to count unit tests coverage.")
@@ -14,7 +13,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
   //region given
   @BeforeEach
-  public void setUpSystemOut() {
+  public void setUpSystemOut(){
     resetOut();
     captureSysout();
   }
@@ -26,7 +25,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
   //endregion
 
     @Test
-    public void shouldLogSequentIntegersAsSum() {
+    public void shouldLogSequentIntegersAsSum() throws SaveException {
         //region when
         Logger.log("str 1");
         Logger.log(1);
@@ -45,7 +44,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogSameSubsequentStringsWithoutRepeat() {
+    public void shouldLogSameSubsequentStringsWithoutRepeat() throws SaveException {
         //region when
         Logger.log("str 1");
         Logger.log("str 2");

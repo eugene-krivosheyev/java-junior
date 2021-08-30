@@ -2,47 +2,49 @@ package com.acme.edu;
 
 import com.acme.edu.message.*;
 import com.acme.edu.saver.ConsoleSaver;
-import com.acme.edu.saver.Saver;
-
-import java.util.Arrays;
+import com.acme.edu.saver.SaveException;
 
 
 public class Logger {
     private static final LoggerController controller = new LoggerController(new ConsoleSaver());
 
-    public static void log(int message) {
+    public static void log(int message) throws SaveException {
         controller.log(new IntMessage(message));
     }
 
-    public static void log(int... messages) {
-        Arrays.stream(messages).forEach(Logger::log);
+    public static void log(int... messages) throws SaveException {
+        for (int message : messages) {
+            log(message);
+        }
     }
 
-    public static void log(byte message) {
+    public static void log(byte message) throws SaveException {
         controller.log(new ByteMessage(message));
     }
 
-    public static void log(char message) {
+    public static void log(char message) throws SaveException {
         controller.log(new CharMessage(message));
     }
 
-    public static void log(String message) {
+    public static void log(String message) throws SaveException {
         controller.log(new StringMessage(message));
     }
 
-    public static void log(String... messages) {
-        Arrays.stream(messages).forEach(Logger::log);
+    public static void log(String... messages) throws SaveException {
+        for (String message : messages) {
+            log(message);
+        }
     }
 
-    public static void log(boolean message) {
+    public static void log(boolean message) throws SaveException {
         controller.log(new BooleanMessage(message));
     }
 
-    public static void log(Object message) {
+    public static void log(Object message) throws SaveException {
         controller.log(new ReferenceMessage(message));
     }
 
-    public static void flush() {
+    public static void flush() throws SaveException {
         controller.flush();
     }
 }

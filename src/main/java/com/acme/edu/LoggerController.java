@@ -2,6 +2,7 @@ package com.acme.edu;
 
 import com.acme.edu.message.EmptyMessage;
 import com.acme.edu.message.Message;
+import com.acme.edu.saver.SaveException;
 import com.acme.edu.saver.Saver;
 
 public class LoggerController {
@@ -13,7 +14,7 @@ public class LoggerController {
         this.saver = saver;
     }
 
-    public void log(Message message) {
+    public void log(Message message) throws SaveException {
         if (accumulator.sameTypeOf(message)) {
             accumulator = accumulator.accumulate(message);
         } else {
@@ -22,8 +23,13 @@ public class LoggerController {
         }
     }
 
-    public void flush() {
-        saver.save(accumulator.getDecoratedMessage());
+    public void flush() throws SaveException {
+        String decoratedMessage = accumulator.getDecoratedMessage();
+        
+        if(decoratedMessage != null){
+            saver.save(decoratedMessage);
+        }
+        
         accumulator = EMPTY_MESSAGE;
     }
 }

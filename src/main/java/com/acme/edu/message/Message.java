@@ -13,11 +13,11 @@ public abstract class Message {
         return this.body;
     }
 
-    public boolean sameTypeOf(Message message) {
+    public boolean sameTypeOf(Message message){
         return false;
     }
 
-    public Message accumulate(Message message){
+    public Message accumulate(Message message) throws ClassCastException, NullPointerException{
         return this;
     }
 

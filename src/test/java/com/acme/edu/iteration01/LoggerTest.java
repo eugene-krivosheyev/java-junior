@@ -3,9 +3,9 @@ package com.acme.edu.iteration01;
 import com.acme.edu.Logger;
 import com.acme.edu.Prefix;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.saver.SaveException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 //@Disabled("Disabled to count unit tests coverage.")
@@ -24,7 +24,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test
-    public void shouldLogInteger() {
+    public void shouldLogInteger() throws SaveException {
         //region when
         Logger.log(1);
         Logger.flush();
@@ -42,7 +42,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogByte() {
+    public void shouldLogByte() throws SaveException {
         //region when
         Logger.log((byte)1);
         Logger.flush();
@@ -59,7 +59,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogChar() {
+    public void shouldLogChar() throws SaveException {
         //region when
         Logger.log('a');
         Logger.log('b');
@@ -74,7 +74,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogString() {
+    public void shouldLogString() throws SaveException {
         //region when
         Logger.log("test string 1");
         Logger.log("other str");
@@ -89,7 +89,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogBoolean() {
+    public void shouldLogBoolean() throws SaveException {
         //region when
         Logger.log(true);
         Logger.log(false);
@@ -104,7 +104,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogReference() {
+    public void shouldLogReference() throws SaveException {
         //region when
         Logger.log(new Object());
         Logger.flush();

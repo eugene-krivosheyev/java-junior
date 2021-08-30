@@ -2,15 +2,10 @@ package com.acme.edu.iteration03;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import com.acme.edu.message.EmptyMessage;
-import com.acme.edu.message.IntMessage;
+import com.acme.edu.saver.SaveException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 //@Disabled("Disabled to count unit tests coverage.")
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
@@ -28,16 +23,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test
-    public void shouldReturnFalseWhenComparingEmptyMessage() {
-        EmptyMessage emptyMessage = mock(EmptyMessage.class);
-        IntMessage intMessage = mock(IntMessage.class);
-
-        assertFalse(emptyMessage.sameTypeOf(intMessage), "Should return false when comparing empty message");
-
-    }
-
-    @Test
-    public void shouldLogStringsWithOneMethodCall() {
+    public void shouldLogStringsWithOneMethodCall() throws SaveException {
         //region when
         Logger.log("str1", "string 2", "str 3");
         Logger.flush();
@@ -51,7 +37,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogIntegersWithOneMethodCall() {
+    public void shouldLogIntegersWithOneMethodCall() throws SaveException {
         //region when
         Logger.log(-1, 0, 1, 3);
         Logger.flush();

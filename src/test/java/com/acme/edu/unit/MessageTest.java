@@ -1,20 +1,17 @@
 package com.acme.edu.unit;
 
-import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.message.EmptyMessage;
 import com.acme.edu.message.IntMessage;
+import com.acme.edu.message.Message;
 import com.acme.edu.message.StringMessage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 
 public class MessageTest implements SysoutCaptureAndAssertionAbility {
     //region given
@@ -66,5 +63,22 @@ public class MessageTest implements SysoutCaptureAndAssertionAbility {
         StringMessage stringMessage = new StringMessage(messageBody);
 
         assertFalse(accumulator.sameTypeOf(stringMessage));
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenDifferentMessagesAccumulated() {
+        Message accumulator = new IntMessage(anyInt());
+        Message stringMessage = new StringMessage(anyString());
+
+        assertThrows(ClassCastException.class, () -> accumulator.accumulate(stringMessage));
+
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenNullMessageAccumulated() {
+        Message accumulator = new IntMessage(anyInt());
+
+        assertThrows(NullPointerException.class, () -> accumulator.accumulate(null));
+
     }
 }
