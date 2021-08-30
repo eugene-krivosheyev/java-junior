@@ -91,7 +91,7 @@
             <param>com.acme.edu*</param>
           </targetClasses>
           <targetTests>
-            <param>com.acme.edu.testunit.*</param>
+            <param>com.acme.edu.*</param>
           </targetTests>
         </configuration>
         <executions>
