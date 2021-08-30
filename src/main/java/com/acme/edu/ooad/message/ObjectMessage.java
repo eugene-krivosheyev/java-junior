@@ -16,7 +16,7 @@ public class ObjectMessage implements Message{
     public void clean() {}
 
     @Override
-    public String toString() { return prefix + value; }
+    public String toString() { return prefix + getBody(); }
 
     @Override
     public Message getNewInstance(Message message) {
@@ -26,6 +26,12 @@ public class ObjectMessage implements Message{
     @Override
     public Message getInstanceToPrint(Message message) {
         return this;
+    }
+
+    @Override
+    public String getBody() {
+        if (value == null) return "";
+        return String.valueOf(value);
     }
 
     @Override

@@ -31,6 +31,11 @@ public class CharMessage implements Message {
     }
 
     @Override
+    public String getBody() {
+        return String.valueOf(value);
+    }
+
+    @Override
     public boolean equals(Object anObject) {
         if (this == anObject) {
             return true;

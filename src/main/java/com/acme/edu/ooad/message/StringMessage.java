@@ -21,7 +21,7 @@ public class StringMessage implements Message {
 
     @Override
     public String toString() {
-        return prefix + value + (counter > 1 ? " (x" + counter + ")" : "");
+        return prefix + getBody();
     }
 
     @Override
@@ -47,6 +47,12 @@ public class StringMessage implements Message {
     public Message getInstanceToPrint(Message message) {
         if (Message.sameType(this, message) && this.equalValues(message)) return null;
         return this;
+    }
+
+    @Override
+    public String getBody() {
+        if ( counter == 0 || value == null ) return "";
+        return value + (counter > 1 ? " (x" + counter + ")" : "");
     }
 
     @Override

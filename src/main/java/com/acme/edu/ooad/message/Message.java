@@ -11,4 +11,5 @@ public interface Message {
     }
     Message getNewInstance(Message message);
     Message getInstanceToPrint(Message message);
+    String getBody();
 }

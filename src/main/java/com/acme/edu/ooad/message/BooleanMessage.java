@@ -16,7 +16,7 @@ public class BooleanMessage implements Message {
 
     @Override
     public String toString() {
-        return prefix + value;
+        return prefix + getBody();
     }
 
     @Override
@@ -27,6 +27,11 @@ public class BooleanMessage implements Message {
     @Override
     public Message getInstanceToPrint(Message message) {
         return this;
+    }
+
+    @Override
+    public String getBody() {
+        return String.valueOf(value);
     }
 
     @Override
