@@ -10,7 +10,7 @@ public interface Message {
 
     String getValue();
 
-    void flush();
+    Message flush();
 
     Message accumulate(Message message);
 

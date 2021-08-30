@@ -19,7 +19,8 @@ public class EmptyMessage implements Message {
     }
 
     @Override
-    public void flush() {
+    public Message flush() {
+        return new EmptyMessage();
     }
 
     @Override
@@ -29,7 +30,7 @@ public class EmptyMessage implements Message {
 
     @Override
     public boolean isStateEquals(Message message) {
-        return message.getState().equals(State.EMPTY);
+        return false;
     }
 
     @Override

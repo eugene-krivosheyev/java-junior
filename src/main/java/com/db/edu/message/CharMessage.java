@@ -23,11 +23,16 @@ public class CharMessage implements Message {
 
     @Override
     public String getValue() {
-        return String.valueOf(value);
+        if (value == null) {
+            return null;
+        } else {
+            return String.valueOf(value);
+        }
     }
 
     @Override
-    public void flush() {
+    public Message flush() {
+        return new CharMessage(null);
     }
 
     @Override

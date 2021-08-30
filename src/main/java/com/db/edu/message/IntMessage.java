@@ -6,7 +6,7 @@ import static com.db.edu.Logger.PRIMITIVE_PREFIX;
 public class IntMessage implements Message {
     private Integer value;
 
-    public IntMessage(int value) {
+    public IntMessage(Integer value) {
         this.value = value;
     }
 
@@ -36,7 +36,11 @@ public class IntMessage implements Message {
 
     @Override
     public String getValue() {
-        return String.valueOf(value);
+        if (value == null) {
+            return null;
+        } else {
+            return String.valueOf(value);
+        }
     }
 
     @Override
@@ -44,9 +48,8 @@ public class IntMessage implements Message {
         return value != null;
     }
 
-    @Override
-    public void flush() {
-        value = 0;
+    public Message flush() {
+        return new IntMessage(null);
     }
 
     @Override

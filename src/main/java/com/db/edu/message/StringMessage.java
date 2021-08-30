@@ -5,7 +5,7 @@ import static com.db.edu.Logger.STRING_PREFIX;
 
 public class StringMessage implements Message {
     private int quantityOfRepetitiveString = 0;
-    private String value;
+    private final String value;
 
     public StringMessage(String value) {
         this.value = value;
@@ -34,7 +34,7 @@ public class StringMessage implements Message {
 
     @Override
     public String decorated() {
-        if (quantityOfRepetitiveString == 1) {
+        if (quantityOfRepetitiveString <= 1) {
             return STRING_PREFIX + value;
         } else {
             return STRING_PREFIX + value + " (x" + quantityOfRepetitiveString + ")";
@@ -47,14 +47,17 @@ public class StringMessage implements Message {
     }
 
     @Override
-    public void flush() {
-        value = null;
-        quantityOfRepetitiveString = 0;
+    public Message flush() {
+        return new StringMessage(null);
     }
 
     @Override
     public String getValue() {
-        return value;
+        if (value == null) {
+            return null;
+        } else {
+            return value;
+        }
     }
 
     @Override
@@ -62,7 +65,7 @@ public class StringMessage implements Message {
         return !isStateEquals(message);
     }
 
-    public int getQuantityOfRepetitiveString() {
+    private int getQuantityOfRepetitiveString() {
         return quantityOfRepetitiveString;
     }
 
@@ -70,7 +73,7 @@ public class StringMessage implements Message {
         this.quantityOfRepetitiveString = quantityOfRepetitiveString;
     }
 
-    public boolean isMessageEquals(Message message) {
+    private boolean isMessageEquals(Message message) {
         return message.getValue().equals(value);
     }
 }

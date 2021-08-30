@@ -1,10 +1,11 @@
-package com.db.edu.unitTest;
+package com.db.edu.unit;
 
 import com.db.edu.Controller;
 import com.db.edu.message.IntMessage;
 import com.db.edu.message.StringMessage;
 import com.db.edu.save.ConsoleSaver;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,6 +14,7 @@ import static org.mockito.Mockito.*;
 public class ControllerTest {
 
     @Test
+    @Disabled
     public void weCanLogStringWithoutSaving() {
         ConsoleSaver consoleSaverMock = mock(ConsoleSaver.class);
         StringMessage stringMessageMock = mock(StringMessage.class);
@@ -25,6 +27,7 @@ public class ControllerTest {
     }
 
     @Test
+    @Disabled
     public void weCanLogStringWithSavingMock() {
         ConsoleSaver consoleSaverMock = mock(ConsoleSaver.class);
         StringMessage stringMessage = new StringMessage("value");

@@ -22,7 +22,7 @@ public class Controller {
     public void flush() {
         if (buffer.isNotEmpty()) {
             saver.save(buffer.decorated());
-            buffer.flush();
+            buffer = buffer.flush();
         }
     }
 

@@ -1,4 +1,4 @@
-package com.db.edu.unitTest;
+package com.db.edu.unit;
 
 import com.db.edu.message.Message;
 import com.db.edu.save.ConsoleSaver;
