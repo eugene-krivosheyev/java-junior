@@ -1,6 +1,8 @@
 package com.db.edu.saver;
 
-public abstract class Saver {
+import java.io.IOException;
 
-    public abstract void save(String s);
+public interface Saver {
+
+    void save(String s) throws IOException;
 }
