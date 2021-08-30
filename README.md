@@ -14,6 +14,7 @@
 - [25.08](https://us02web.zoom.us/rec/share/KZoxYSs17_aFJpFhGvpR1YMw2DHokb-jvfXPIpt1EXl8lk9-b7S_EAnSCe8onz2w.Y7fJx97wqHc2PznN)
 - [26.08](https://us02web.zoom.us/rec/share/5hPVCFZITDfZOiVstd7ooEU4qsVbuWy4pKXPzbib1NzwdCSGeQBz94bp91FW-zH9.MHw5uznhqMfKlP-g)
 - [27.08](https://us02web.zoom.us/rec/share/zbkeDNFl2ekZFaAHVsoONwSDSX6eGs5N4-IeJD4qa8-4gsezVBJRYLQt3XND6A0k.1uBxSq0DOAc2MuN9)
+- [30.08](https://us02web.zoom.us/rec/share/Z2aTm9ZbQiIh_I1oVV2RHeWqZPeoZrZhe2p3MqVt1DZTL2TmalwoBLA6q74DMaW_.eut6nbWbnD5RDpld)
 
 # Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice)
 - Introduction to Java. Benefits.
