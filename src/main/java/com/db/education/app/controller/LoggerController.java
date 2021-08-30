@@ -4,6 +4,13 @@ import com.db.education.app.message.EmptyMessage;
 import com.db.education.app.message.Message;
 import com.db.education.app.saver.Saver;
 
+/**
+ * LoggerController accumulates logging logic for the application by delegating accumulation
+ * and saving to external objects.
+ *
+ * Logger controller stores state of the application and controls proper flushing of accumulated
+ * data.
+ */
 public class LoggerController {
 
     private static final Message EMPTY_MESSAGE = new EmptyMessage();
