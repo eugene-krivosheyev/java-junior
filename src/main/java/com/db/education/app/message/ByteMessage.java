@@ -1,6 +1,6 @@
 package com.db.education.app.message;
 
-public class ByteMessage extends AbstractSmallNumericOverflowableMessage<ByteMessage> implements Message {
+public class ByteMessage extends AbstractSmallNumericOverflowableMessage implements Message {
 
     private static final Byte MAX = Byte.MAX_VALUE;
     private static final Byte MIN = Byte.MIN_VALUE;

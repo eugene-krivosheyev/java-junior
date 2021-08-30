@@ -1,6 +1,6 @@
 package com.db.education.app.message;
 
-public class IntegerMessage extends AbstractSmallNumericOverflowableMessage<IntegerMessage> implements Message {
+public class IntegerMessage extends AbstractSmallNumericOverflowableMessage implements Message {
 
     private static final Integer MAX = Integer.MAX_VALUE;
     private static final Integer MIN = Integer.MIN_VALUE;
