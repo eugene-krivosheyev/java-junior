@@ -38,14 +38,23 @@ class Controller {
  */
 class Service {
     public void log(String message) {
+        Repo repo = new Repo(); //Constructor || Factory Method e.g. _open_
         try {
-            new Repo().save(message);
+            repo.save(message); // -> RuntExc
+            return;
             //....
-            //....
-        } catch (RuntimeException e) {
+
+
+        } catch (ArithmeticException | NullPointerException e) {
+                //....
+                //....
+                //....
+        } catch (Exception e) { // -> RuntExc!!!!
 //            1. Full handing: Retrying, Redundency -> NRFs (fail-over)
-//            2. Fail: raw case exception VS wrapper/business exception
+//            2. Fail: log + raw case exception VS wrapper/business exception
             throw new LogOperationException("business message", e);
+        } finally {
+            repo.close();
         }
         //.....
     }
