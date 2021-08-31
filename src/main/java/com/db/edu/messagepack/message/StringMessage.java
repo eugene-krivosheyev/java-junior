@@ -38,4 +38,12 @@ public class StringMessage extends Message {
     public void resetFields() {
         stringCounter = 1;
     }
+
+    String getBody() {
+        return body;
+    }
+
+    int getStringCounter() {
+        return stringCounter;
+    }
 }

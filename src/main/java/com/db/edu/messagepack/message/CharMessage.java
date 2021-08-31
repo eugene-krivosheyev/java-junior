@@ -13,5 +13,7 @@ public class CharMessage extends Message {
         return PREFIX_CHAR + ": " + body;
     }
 
-
+    char getBody() {
+        return body;
+    }
 }

@@ -8,7 +8,7 @@ public class IntMessage extends Message {
         this.body = message;
     }
 
-    public int getBody() {
+    int getBody() {
         return body;
     }
 

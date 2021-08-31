@@ -4,6 +4,7 @@ import com.db.edu.Logger;
 import com.db.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         resetOut();
     }
     //endregion
-
+    @Disabled
     @Test
     public void shouldLogInteger() throws IOException {
         //region when
@@ -40,7 +41,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("-1");
         //endregion
     }
-
+    @Disabled
     @Test
     public void shouldLogByte() throws IOException {
         //region when
@@ -58,6 +59,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+    @Disabled
     @Test
     public void shouldLogChar() throws IOException {
         //region when
@@ -73,6 +75,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+    @Disabled
     @Test
     public void shouldLogString() throws IOException {
         //region when
@@ -89,6 +92,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+    @Disabled
     @Test
     public void shouldLogBoolean() throws IOException {
         //region when
@@ -104,6 +108,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+    @Disabled
     @Test
     public void shouldLogReference() throws IOException {
         //region when

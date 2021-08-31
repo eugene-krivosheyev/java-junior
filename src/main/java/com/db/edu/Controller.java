@@ -1,5 +1,6 @@
 package com.db.edu;
 
+import com.db.edu.saver.SaveException;
 import com.db.edu.saver.Saver;
 import com.db.edu.messagepack.message.EmptyMessage;
 import com.db.edu.messagepack.message.Message;
@@ -13,6 +14,9 @@ public class Controller {
     }
 
     public void log(Message message) {
+        if(message == null) {
+            throw new IllegalArgumentException("Controller: message is empty");
+        }
         if (previousMessage.isSameType(message)) {
             previousMessage = previousMessage.accumulate(message);
         } else {
@@ -22,7 +26,12 @@ public class Controller {
     }
 
     public void flush() {
-        saver.save(previousMessage);
-        previousMessage.resetFields();
+        try {
+            saver.save(previousMessage);
+            previousMessage.resetFields();
+        } catch (SaveException e) {
+            e.printStackTrace();
+            System.out.println("Controller: empty message is received");
+        }
     }
 }
