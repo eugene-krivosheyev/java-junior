@@ -111,5 +111,16 @@ public class StringMessageTest{
 
         assertFalse(messageSut.equals(messageStub));
     }
+    @Test
+    public void shouldConvertNullToEmptyStringWhenGetBody() {
+        Message message = new StringMessage(null);
 
+        assertEquals("", message.getBody());
+    }
+    @Test
+    public void shouldReturnStringFromStringMessageWhenGetBody() {
+        Message message = new StringMessage("string to return");
+
+        assertEquals("string to return", message.getBody());
+    }
 }

@@ -78,5 +78,10 @@ public class IntegerMessageTest {
 
         assertFalse(messageSut.equals(messageStub));
     }
+    @Test
+    public void shouldConvertValueToStringWhenGetBody() {
+        Message message = new IntegerMessage(3);
 
+        assertEquals("3", message.getBody());
+    }
 }

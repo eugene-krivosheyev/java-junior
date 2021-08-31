@@ -2,8 +2,7 @@ package com.acme.edu.ooad.message;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 public class ObjectMessageTest{
@@ -46,6 +45,33 @@ public class ObjectMessageTest{
         Message messageStub = mock(Message.class);
 
         assertFalse(messageSut.equals(messageStub));
+    }
+    @Test
+    public void shouldConvertNullToEmptyStringWhenGetBody() {
+        Message message = new ObjectMessage(null);
+
+        assertEquals("", message.getBody());
+    }
+    @Test
+    public void shouldConvertValueToStringWhenGetBody() {
+        Object obj = new Object();
+        Message message = new ObjectMessage(obj);
+
+        assertEquals(obj.toString(), message.getBody());
+    }
+    @Test
+    public void shouldGetMessageWhenGetNewInstance() {
+        Message messageSut = new ObjectMessage(new Object());
+        Message messageStub = mock(Message.class);
+
+        assertEquals(messageStub, messageSut.getNewInstance(messageStub));
+    }
+    @Test
+    public void shouldGetThisMessageWhenGetInstanceToPrint() {
+        Message messageSut = new ObjectMessage(new Object());
+        Message messageStub = mock(Message.class);
+
+        assertEquals(messageSut, messageSut.getInstanceToPrint(messageStub));
     }
 
 }

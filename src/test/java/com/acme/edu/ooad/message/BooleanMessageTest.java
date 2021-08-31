@@ -2,8 +2,8 @@ package com.acme.edu.ooad.message;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 public class BooleanMessageTest{
     boolean contains(Message message, String toContain) {
@@ -45,4 +45,25 @@ public class BooleanMessageTest{
 
         assertFalse(message1.equals(messageStub));
     }
+    @Test
+    public void shouldConvertValueToStringWhenGetBody() {
+        Message message = new BooleanMessage(true);
+
+        assertEquals("true", message.getBody());
+    }
+    @Test
+    public void shouldGetMessageWhenGetNewInstance() {
+        Message messageSut = new BooleanMessage(true);
+        Message messageStub = mock(Message.class);
+
+        assertEquals(messageStub, messageSut.getNewInstance(messageStub));
+    }
+    @Test
+    public void shouldGetThisMessageWhenGetInstanceToPrint() {
+        Message messageSut = new BooleanMessage(true);
+        Message messageStub = mock(Message.class);
+
+        assertEquals(messageSut, messageSut.getInstanceToPrint(messageStub));
+    }
+
 }

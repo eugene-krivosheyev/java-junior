@@ -50,4 +50,5 @@ public class MessageTest {
 
         assertFalse(areByteAndStrSame);
     }
+
 }

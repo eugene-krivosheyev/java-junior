@@ -79,5 +79,11 @@ public class ByteMessageTest{
 
         assertFalse(messageSut.equals(messageStub));
     }
+    @Test
+    public void shouldConvertValueToStringWhenGetBody() {
+        Message message = new ByteMessage((byte)2);
+
+        assertEquals("2", message.getBody());
+    }
 
 }
