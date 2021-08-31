@@ -24,6 +24,9 @@ public class GenericsDemo {
 
         m("");
         GenericsDemo.<String>m();
+
+        new Structure<String>().m(String.class);
+
     }
 
     private static <U> U m(U param) {
@@ -41,8 +44,14 @@ public class GenericsDemo {
  */
 class Structure<T> {
     private T value;
-    public T getValue() {
+    public T getValue(T param) {
         return value;
+    }
+
+    public void m(Class<T> param) {
+        Object o = new Object();
+//        Refl API: instanceof
+//        Refl API: new
     }
 }
 
