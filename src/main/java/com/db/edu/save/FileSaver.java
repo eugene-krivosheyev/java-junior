@@ -12,7 +12,7 @@ public class FileSaver implements Saver {
         try (BufferedWriter out = new BufferedWriter(
                 new OutputStreamWriter(
                         new BufferedOutputStream(
-                                new FileOutputStream(source))))) {
+                                new FileOutputStream(source)), "windows-1250"))) {
             out.write(message + System.lineSeparator());
 
         } catch (IOException e) {

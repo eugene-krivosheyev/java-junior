@@ -23,7 +23,7 @@ public class FileSaverTest {
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(
                         new BufferedInputStream(
-                                new FileInputStream(source))));
+                                new FileInputStream(source)), "windows-1250"));
 
         when(messageMock.decorated()).thenReturn("Hello");
 
