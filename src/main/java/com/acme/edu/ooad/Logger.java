@@ -5,9 +5,15 @@ import com.acme.edu.ooad.exception.FlushException;
 import com.acme.edu.ooad.exception.LogException;
 import com.acme.edu.ooad.message.*;
 import com.acme.edu.ooad.saver.ConsoleSaver;
+import com.acme.edu.ooad.saver.FileSaver;
+import com.acme.edu.ooad.saver.ValidatingSaver;
 
 public class Logger {
     private static final LoggerController controller = new LoggerController(new ConsoleSaver());
+
+    public static void setSaver(ValidatingSaver saver) {
+        controller.setSaver(saver);
+    }
 
     /**
      * Flushes last logged message.

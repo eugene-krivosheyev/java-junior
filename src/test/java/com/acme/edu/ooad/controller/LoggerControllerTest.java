@@ -58,25 +58,6 @@ public class LoggerControllerTest {
         );
     }
 
-//    @Test
-//    public void shouldCleanLastLoggedMessageWhenFlush() throws LogException, FlushException {
-//        Message messageStub = mock(Message.class);
-//        when(messageStub.getBody()).thenReturn("body");
-//        controllerSut.log(messageStub);
-//
-//        controllerSut.flush();
-//        verify(controllerSut.lastLoggedMessage, times(1)).clean();
-//    }
-//
-//    @Test
-//    public void shouldBecomeLastLoggedWhenLogMessageAndLastLoggedMessageIsNull() throws LogException {
-//        Message messageStub = mock(Message.class);
-//        when(messageStub.getBody()).thenReturn("body");
-//
-//        controllerSut.log(messageStub);
-//        assertEquals(messageStub, controllerSut.lastLoggedMessage);
-//    }
-
     @Test
     public void shouldSaveInstanceToPrintWhenLogAndLastLoggedMessageIsNotNull(){
         Message logMessageStub = mock(Message.class);

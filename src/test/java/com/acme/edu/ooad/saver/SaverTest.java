@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SaverTest implements SysoutCaptureAndAssertionAbility{
+public class SaverTest {
     Saver saver = new ConsoleSaver();
     @Test
     public void shouldGetErrorWhenMessageIsNull() {
@@ -30,21 +30,5 @@ public class SaverTest implements SysoutCaptureAndAssertionAbility{
                 SaveException.class,
                 () -> saver.save(emptyMessageStub)
         );
-    }
-
-    @Test
-    public void shouldPrintWhenSaveMessage() {
-        resetOut();
-        captureSysout();
-
-        Message messageStub = mock(Message.class);
-        when(messageStub.getBody()).thenReturn("message to print");
-        when(messageStub.toString()).thenReturn("message to print");
-        try {
-            saver.save(messageStub);
-        } catch (SaveException e) {
-            e.printStackTrace();
-        }
-        assertSysoutEquals("message to print"+System.lineSeparator());
     }
 }

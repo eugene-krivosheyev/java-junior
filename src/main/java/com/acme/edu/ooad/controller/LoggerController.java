@@ -5,10 +5,14 @@ import com.acme.edu.ooad.message.*;
 import com.acme.edu.ooad.saver.ValidatingSaver;
 
 public class LoggerController {
-    final ValidatingSaver saver;
+    ValidatingSaver saver;
     Message lastLoggedMessage = new EmptyMessage();
 
     public LoggerController(ValidatingSaver saver) {
+        this.saver = saver;
+    }
+
+    public void setSaver(ValidatingSaver saver) {
         this.saver = saver;
     }
 

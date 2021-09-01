@@ -8,11 +8,7 @@ public class ConsoleSaver extends ValidatingSaver {
 
     @Override
     public void save(Message message) throws SaveException {
-        try {
             super.save(message);
             System.out.println(message);
-        } catch (SaveException e) {
-            throw e;
-        }
     }
 }
