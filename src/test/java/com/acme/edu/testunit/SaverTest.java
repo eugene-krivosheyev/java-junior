@@ -19,19 +19,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class SaverTest implements SysoutCaptureAndAssertionAbility {
     static final FileSaver fileSut = new FileSaver();
 
-    //region given
-    @BeforeEach
-    public void setUpSystemOut() throws IOException {
-        resetOut();
-        captureSysout();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        resetOut();
-    }
-    //endregion
-
     @Test
     public void shouldLogInFile() throws IOException {
         fileSut.save("Message add");
