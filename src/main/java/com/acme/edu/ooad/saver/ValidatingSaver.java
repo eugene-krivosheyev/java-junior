@@ -8,6 +8,7 @@ public abstract class ValidatingSaver implements Saver {
     @Override
     public void save(Message message) throws SaveException {
         if (message == null) throw new SaveException(new IllegalArgumentException("Message to save is null"));
-        if (message.getBody().isEmpty()) throw new SaveException(new IllegalArgumentException("Message to save is empty"));
+        if (message.getBody().isEmpty())
+            throw new SaveException(new IllegalArgumentException("Message to save is empty"));
     }
 }

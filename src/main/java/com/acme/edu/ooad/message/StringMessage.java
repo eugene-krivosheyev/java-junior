@@ -30,14 +30,14 @@ public class StringMessage implements Message {
     }
 
     boolean equalValues(Message message) {
-        return Objects.equals(this.value, ((StringMessage)message).value);
+        return Objects.equals(this.value, ((StringMessage) message).value);
     }
 
     @Override
     public Message getNewInstance(Message message) {
         if (Message.sameType(this, message) && this.equalValues(message)) {
-            int newCounter = this.counter +1;
-            return new StringMessage(this.value,newCounter);
+            int newCounter = this.counter + 1;
+            return new StringMessage(this.value, newCounter);
         } else {
             return message;
         }
@@ -51,7 +51,7 @@ public class StringMessage implements Message {
 
     @Override
     public String getBody() {
-        if ( counter == 0 || value == null ) return "";
+        if (counter == 0 || value == null) return "";
         return value + (counter > 1 ? " (x" + counter + ")" : "");
     }
 
@@ -61,10 +61,8 @@ public class StringMessage implements Message {
             return true;
         }
         if (anObject instanceof StringMessage) {
-            if ((this.value == ((StringMessage) anObject).value) &&
-                (this.counter == ((StringMessage) anObject).counter)) {
-                return true;
-            }
+            return (this.value == ((StringMessage) anObject).value) &&
+                    (this.counter == ((StringMessage) anObject).counter);
         }
         return false;
     }

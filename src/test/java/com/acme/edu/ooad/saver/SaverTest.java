@@ -9,9 +9,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class SaverTest {
+    private Saver saver = new ConsoleSaver();
+
     @Test
     public void shouldGetErrorWhenMessageIsNull() {
-        Saver saver = new ConsoleSaver();
         Message nullMessage = null;
 
         assertThrows(
@@ -22,12 +23,12 @@ public class SaverTest {
 
     @Test
     public void shouldGetErrorWhenMessageIsEmpty() {
-        Saver saver = new ConsoleSaver();
-        Message emptyMessage = mock(Message.class);
-        when(emptyMessage.getBody()).thenReturn("");
+        Message emptyMessageStub = mock(Message.class);
+        when(emptyMessageStub.getBody()).thenReturn("");
+
         assertThrows(
                 SaveException.class,
-                () -> saver.save(emptyMessage)
+                () -> saver.save(emptyMessageStub)
         );
     }
 }

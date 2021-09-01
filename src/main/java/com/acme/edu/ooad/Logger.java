@@ -5,9 +5,14 @@ import com.acme.edu.ooad.exception.FlushException;
 import com.acme.edu.ooad.exception.LogException;
 import com.acme.edu.ooad.message.*;
 import com.acme.edu.ooad.saver.ConsoleSaver;
+import com.acme.edu.ooad.saver.ValidatingSaver;
 
 public class Logger {
     private static final LoggerController controller = new LoggerController(new ConsoleSaver());
+
+    public static void setSaver(ValidatingSaver saver) {
+        controller.setSaver(saver);
+    }
 
     /**
      * Flushes last logged message.
@@ -23,7 +28,7 @@ public class Logger {
      * Accumulates serial int <code>messages</code> to log sum of them.
      * Overflowing does not handle.
      *
-     * @param message  value to accumulate before saving
+     * @param message value to accumulate before saving
      * @see #flush()
      * @see #log(byte)
      * @see #log(String)
@@ -33,7 +38,7 @@ public class Logger {
     }
 
     public static void log(int... integers) throws LogException {
-        for ( int integer: integers ) {
+        for (int integer : integers) {
             controller.log(new IntegerMessage(integer));
         }
     }
@@ -55,9 +60,9 @@ public class Logger {
     }
 
     public static void log(String... strings) throws LogException {
-        for ( String string : strings ) {
-                controller.log(new StringMessage(string));
-            }
+        for (String string : strings) {
+            controller.log(new StringMessage(string));
+        }
     }
 
     public static void log(Object message) throws LogException {

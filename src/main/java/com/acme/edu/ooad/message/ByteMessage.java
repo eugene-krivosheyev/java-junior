@@ -9,16 +9,21 @@ public class ByteMessage implements Message {
         this.prefix = "primitive: ";
         this.value = value;
     }
-    @Override
-    public void clean() { value = 0; }
 
     @Override
-    public String toString() { return prefix + value; }
+    public void clean() {
+        value = 0;
+    }
+
+    @Override
+    public String toString() {
+        return prefix + value;
+    }
 
     @Override
     public Message getNewInstance(Message message) {
-        if (Message.sameType(this,message)) {
-            return new ByteMessage((byte)(this.value+((ByteMessage)message).value));
+        if (Message.sameType(this, message)) {
+            return new ByteMessage((byte) (this.value + ((ByteMessage) message).value));
         } else {
             return message;
         }
@@ -26,7 +31,7 @@ public class ByteMessage implements Message {
 
     @Override
     public Message getInstanceToPrint(Message message) {
-        if (Message.sameType(this,message)) return null;
+        if (Message.sameType(this, message)) return null;
         return this;
     }
 
@@ -41,9 +46,7 @@ public class ByteMessage implements Message {
             return true;
         }
         if (anObject instanceof ByteMessage) {
-            if (this.value == ((ByteMessage) anObject).value) {
-                return true;
-            }
+            return this.value == ((ByteMessage) anObject).value;
         }
         return false;
     }

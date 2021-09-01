@@ -1,14 +1,21 @@
 package com.acme.edu.ooad.controller;
 
-import com.acme.edu.ooad.exception.*;
-import com.acme.edu.ooad.message.*;
+import com.acme.edu.ooad.exception.FlushException;
+import com.acme.edu.ooad.exception.LogException;
+import com.acme.edu.ooad.exception.SaveException;
+import com.acme.edu.ooad.message.EmptyMessage;
+import com.acme.edu.ooad.message.Message;
 import com.acme.edu.ooad.saver.ValidatingSaver;
 
 public class LoggerController {
-    final ValidatingSaver saver;
+    ValidatingSaver saver;
     Message lastLoggedMessage = new EmptyMessage();
 
     public LoggerController(ValidatingSaver saver) {
+        this.saver = saver;
+    }
+
+    public void setSaver(ValidatingSaver saver) {
         this.saver = saver;
     }
 
