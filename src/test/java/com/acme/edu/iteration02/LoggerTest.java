@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
+
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     static final Logger logger = new Logger();
     //region given
@@ -66,29 +67,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    /*
-    @Test
-    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
-        //region when
-        logger.log("str 1");
-        logger.log((byte)10);
-        logger.log((byte)Byte.MAX_VALUE);
-        logger.log("str 2");
-        logger.log(0);
-        //endregion
-
-        //region then
-        assertSysoutEquals(
-            "str 1\n" +
-            "10\n" +
-            Byte.MAX_VALUE + "\n" +
-            "str 2\n" +
-            "0\n"
-        );
-        //endregion
-    }
-
-     */
 
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
