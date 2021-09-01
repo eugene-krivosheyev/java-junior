@@ -4,7 +4,15 @@ import com.db.edu.SaverException;
 import java.io.*;
 
 public class FileSaver implements Saver {
-    private final String fileName = "data.txt";
+    private final String fileName;
+    private final int buffSize;
+    private final String charsetName;
+
+    public FileSaver(String fileName, int buffSize, String charsetName) {
+        this.fileName = fileName;
+        this.buffSize = buffSize;
+        this.charsetName = charsetName;
+    }
 
     @Override
     public void save(String message) throws SaverException {
@@ -12,7 +20,7 @@ public class FileSaver implements Saver {
         try (BufferedWriter out = new BufferedWriter(
                 new OutputStreamWriter(
                         new BufferedOutputStream(
-                                new FileOutputStream(source)), "windows-1250"))) {
+                                new FileOutputStream(source), buffSize), charsetName))) {
             out.write(message + System.lineSeparator());
 
         } catch (IOException e) {

@@ -14,7 +14,7 @@ public class Logger {
     public static final String STRING_PREFIX = "string: ";
     public static final String REFERENCE_PREFIX = "reference: ";
 
-    private static final Controller controller = new Controller(new FileSaver());
+    private static final Controller controller = new Controller(new FileSaver("data.txt", 256, "windows-1250"));
 
     private Logger() {
     }

@@ -16,14 +16,14 @@ public class FileSaverTest {
     private final String fileName = "data.txt";
     File source = new File(fileName);
     Message messageMock = mock(Message.class);
-    Saver saver = new FileSaver();
+    Saver saver = new FileSaver(fileName, 256, "windows-1250");
 
     @Test
     public void weCanSaveMessageToFileCorrectly() throws IOException {
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(
                         new BufferedInputStream(
-                                new FileInputStream(source)), "windows-1250"));
+                                new FileInputStream(source), 256), "windows-1250"));
 
         when(messageMock.decorated()).thenReturn("Hello");
 
