@@ -5,12 +5,12 @@ import java.io.*;
 public class FileSaver implements Saver {
     private BufferedWriter writer;
 
-    public FileSaver(String filePath) {
+    public FileSaver(String filePath, String charset) {
         try{
             writer = new BufferedWriter(
                     new OutputStreamWriter(
                             new BufferedOutputStream(
-                                    new FileOutputStream(filePath)), "windows-1251"));
+                                    new FileOutputStream(filePath)), charset));
         } catch (IOException e){
             e.printStackTrace();
         }
