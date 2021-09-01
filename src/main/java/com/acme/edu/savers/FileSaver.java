@@ -23,10 +23,14 @@ public class FileSaver extends AbstractSaver {
             Files.createFile(path);
         }
         catch (Exception e) {
-            if (!path.toFile().exists()) {
+            if (!fileExists(path)) {
                 System.out.println("Can't create file");
             }
         }
+    }
+
+    private boolean fileExists(Path path) {
+        return path.toFile().exists();
     }
 
     @Override
