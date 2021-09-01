@@ -36,7 +36,7 @@ public class FileSaver extends AbstractSaver {
     @Override
     public void save(String message) throws FileSaverException {
         try {
-            Path f = Paths.get("results.txt");
+            Path f = Paths.get(fileName);
             Files.writeString(f, message + System.lineSeparator(), Charset.forName(charsetCode), APPEND);
         }
         catch (FileNotFoundException e) {
