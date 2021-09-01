@@ -16,6 +16,15 @@ public class FileSaver extends AbstractSaver {
     public FileSaver(String fileName, String charsetCode) {
         this.fileName = fileName;
         this.charsetCode = charsetCode;
+
+        // file creation
+        Path path = Paths.get(fileName);
+        try {
+            Files.createFile(path);
+        }
+        catch (Exception e) {
+            System.out.println("Can't create file");
+        }
     }
 
     @Override
