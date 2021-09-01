@@ -2,6 +2,12 @@ package com.acme.edu.savers;
 import com.acme.edu.exceptions.FileSaverException;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static java.nio.file.StandardOpenOption.*;
 
 public class FileSaver extends AbstractSaver {
     private String charsetCode = "Windows-1251";
@@ -9,11 +15,8 @@ public class FileSaver extends AbstractSaver {
     @Override
     public void save(String message) throws FileSaverException {
         try {
-            File fileOutput = new File("results.txt");
-            FileOutputStream outStream = new FileOutputStream(fileOutput, true);
-
-            outStream.write(message.getBytes(charsetCode));
-            outStream.write(System.lineSeparator().getBytes(charsetCode));
+            Path f = Paths.get("results.txt");
+            Files.writeString(f, message + System.lineSeparator(), Charset.forName(charsetCode), APPEND);
         }
         catch (FileNotFoundException e) {
             throw new FileSaverException("File not found", e);

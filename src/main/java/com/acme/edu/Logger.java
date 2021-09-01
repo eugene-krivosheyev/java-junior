@@ -7,7 +7,7 @@ import com.acme.edu.savers.FileSaver;
 
 public class Logger {
     private final LoggerController controller  = new LoggerController(
-            new ConsoleSaver(),
+            new FileSaver(),
             new LengthFilter(25)
     );
 
