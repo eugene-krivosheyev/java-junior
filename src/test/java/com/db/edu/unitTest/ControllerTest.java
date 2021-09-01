@@ -11,11 +11,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class ControllerTest {
+    String messageBody = "Message body";
+
     @Test
     public void notSaveBeforeFlushOrAnotherMessageType() throws SaveException {
         Message message = mock(StringMessage.class);
         ConsoleSaver consoleSaver = mock(ConsoleSaver.class);
         LoggerController loggerController = new LoggerController(consoleSaver);
+        when(message.getValue()).thenReturn(messageBody);
 
         loggerController.log(message);
         verify(consoleSaver, times(0)).save(message.decorate());
@@ -27,6 +30,7 @@ public class ControllerTest {
         Message message = mock(StringMessage.class);
         ConsoleSaver consoleSaver = mock(ConsoleSaver.class);
         LoggerController loggerController = new LoggerController(consoleSaver);
+        when(message.getValue()).thenReturn(messageBody);
 
         loggerController.log(message);
         loggerController.close();
@@ -41,6 +45,8 @@ public class ControllerTest {
         ConsoleSaver consoleSaver = mock(ConsoleSaver.class);
         LoggerController loggerController = new LoggerController(consoleSaver);
         when(message2.typeEquals(message1)).thenReturn(true);
+        when(message1.getValue()).thenReturn(messageBody);
+        when(message2.getValue()).thenReturn(messageBody);
 
         loggerController.log(message1);
         loggerController.log(message2);
@@ -55,6 +61,8 @@ public class ControllerTest {
         ConsoleSaver consoleSaver = mock(ConsoleSaver.class);
         LoggerController loggerController = new LoggerController(consoleSaver);
         when(message2.typeEquals(message1)).thenReturn(false);
+        when(message1.getValue()).thenReturn(messageBody);
+        when(message2.getValue()).thenReturn(messageBody);
 
         loggerController.log(message1);
         loggerController.log(message2);
