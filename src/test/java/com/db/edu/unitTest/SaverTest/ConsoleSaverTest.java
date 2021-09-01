@@ -1,4 +1,4 @@
-package com.db.edu.unitTest;
+package com.db.edu.unitTest.SaverTest;
 
 import com.db.edu.Message.Message;
 import com.db.edu.Save.ConsoleSaver;
@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
 
-public class SaverTest {
+public class ConsoleSaverTest {
     @Test
-    public void weCanSaveMessageUsingConsoleMessage() throws SaveException {
+    public void saveMessageWhenRegularMessageGiven() throws SaveException {
         Message messageMock = mock(Message.class);
         when(messageMock.decorate()).thenReturn("Message string with prefix");
 

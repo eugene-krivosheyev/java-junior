@@ -4,11 +4,24 @@ import java.io.*;
 import java.nio.charset.Charset;
 
 public class FileSaver implements Saver {
+    int size;
+    Charset charSet;
+    File outputFile;
+
+    public FileSaver() {
+        this.size = 8192;
+        this.charSet = Charset.defaultCharset();
+        this.outputFile = new File("log.txt");
+    }
+
+    public FileSaver(int size, Charset charSet, File outputFile) {
+        this.size = size;
+        this.charSet = charSet;
+        this.outputFile = outputFile;
+    }
+
     @Override
     public void save(String message) throws SaveException {
-        File outputFile = new File("log.txt");
-        int size = 8192;
-        Charset charSet = Charset.defaultCharset();
         try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(outputFile), size), charSet))) {
             out.write(message);
             System.out.println("log save to file");
