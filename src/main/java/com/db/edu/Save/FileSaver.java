@@ -20,6 +20,10 @@ public class FileSaver implements Saver {
         this.outputFile = outputFile;
     }
 
+    public FileSaver(File outputFile) {
+        this.outputFile = outputFile;
+    }
+
     @Override
     public void save(String message) throws SaveException {
         try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(outputFile), size), charSet))) {

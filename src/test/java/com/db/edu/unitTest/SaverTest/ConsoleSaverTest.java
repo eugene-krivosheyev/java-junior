@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 
 public class ConsoleSaverTest {
+
     @Test
     public void saveMessageWhenRegularMessageGiven() throws SaveException {
         Message messageMock = mock(Message.class);
@@ -18,5 +19,6 @@ public class ConsoleSaverTest {
         saver.save(messageMock.decorate());
 
         verify(messageMock, times(1)).decorate();
+
     }
 }
