@@ -4,12 +4,15 @@ import com.db.edu.message.EmptyMessage;
 import com.db.edu.message.Message;
 import com.db.edu.save.Saver;
 
+import java.io.FileNotFoundException;
+
 public class Controller {
-    private Message buffer = new EmptyMessage();
+    private Message buffer;
     private final Saver saver;
 
     public Controller(Saver saver) {
         this.saver = saver;
+        this.buffer = new EmptyMessage();
     }
 
     public void log(Message message) {
@@ -21,7 +24,11 @@ public class Controller {
 
     public void flush() {
         if (buffer.isNotEmpty()) {
-            saver.save(buffer.decorated());
+            try {
+                saver.save(buffer.decorated());
+            } catch (SaverException e) {
+                e.printStackTrace();
+            }
             buffer = buffer.flush();
         }
     }

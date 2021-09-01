@@ -12,7 +12,7 @@ import static org.mockito.Mockito.when;
 
 public class ByteMessageTest {
 
-    public ByteMessage message = new ByteMessage((byte)1);
+    ByteMessage message = new ByteMessage((byte)1);
 
     @Test
     public void weCanGetValueFromNotEmptyByteMessage() {

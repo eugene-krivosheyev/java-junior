@@ -12,10 +12,10 @@ public class IntMessage implements Message {
 
     @Override
     public Message accumulate(Message message) {
-        if (message.getValue() == null) {
-            return new IntMessage(value);
-        } else {
+        try {
             return new IntMessage(value += Integer.parseInt(message.getValue()));
+        } catch (NullPointerException e) {
+            return new IntMessage(value);
         }
     }
 

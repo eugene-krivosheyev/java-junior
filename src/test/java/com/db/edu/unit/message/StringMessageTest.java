@@ -11,7 +11,7 @@ import static org.mockito.Mockito.when;
 
 public class StringMessageTest {
 
-    public Message message = new StringMessage("Hello");
+    Message message = new StringMessage("Hello");
 
     @Test
     public void weCanGetValueFromNotEmptyStringMessage() {

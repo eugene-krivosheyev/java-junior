@@ -1,7 +1,6 @@
 package com.db.edu.unit.message;
 
 import com.db.edu.State;
-import com.db.edu.message.BooleanMessage;
 import com.db.edu.message.CharMessage;
 import com.db.edu.message.Message;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,7 @@ import static org.mockito.Mockito.when;
 
 public class CharMessageTest {
 
-    public CharMessage message = new CharMessage('a');
+    CharMessage message = new CharMessage('a');
 
     @Test
     public void weCanGetValueFromNotEmptyCharMessage() {
@@ -24,6 +23,11 @@ public class CharMessageTest {
         CharMessage nullMessage = new CharMessage(null);
 
         assertNull(nullMessage.getValue());
+    }
+
+    @Test
+    public void weCanNotChangeAnythingUsingAccumulate() {
+        assertEquals(message.getValue(), message.accumulate(mock(CharMessage.class)).getValue());
     }
 
     @Test

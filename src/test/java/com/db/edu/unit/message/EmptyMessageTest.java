@@ -6,13 +6,11 @@ import com.db.edu.message.Message;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class EmptyMessageTest {
 
-    public EmptyMessage message = new EmptyMessage();
+    EmptyMessage message = new EmptyMessage();
 
     @Test
     public void weCanGetNullWhenTryToGetValueFromEmptyMessage() {
@@ -32,6 +30,11 @@ public class EmptyMessageTest {
     @Test
     public void weCanGetStateFromEmptyMessage() {
         assertEquals(State.EMPTY, message.getState());
+    }
+
+    @Test
+    public void weCanNotChangeAnythingUsingAccumulate() {
+        assertEquals(message.getValue(), message.accumulate(mock(EmptyMessage.class)).getValue());
     }
 
     @Test

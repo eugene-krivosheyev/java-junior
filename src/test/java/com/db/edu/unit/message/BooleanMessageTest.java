@@ -11,7 +11,7 @@ import static org.mockito.Mockito.when;
 
 public class BooleanMessageTest {
 
-    public BooleanMessage message = new BooleanMessage(false);
+    BooleanMessage message = new BooleanMessage(false);
 
     @Test
     public void weCanGetValueFromNotEmptyBooleanMessage() {

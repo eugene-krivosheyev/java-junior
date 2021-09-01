@@ -12,7 +12,7 @@ import static org.mockito.Mockito.when;
 
 public class ObjectMessageTest {
 
-    public ObjectMessage message = new ObjectMessage("Hi");
+    ObjectMessage message = new ObjectMessage("Hi");
 
     @Test
     public void weCanGetValueFromNotEmptyObjectMessage() {
