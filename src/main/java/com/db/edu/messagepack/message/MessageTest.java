@@ -1,11 +1,8 @@
 package com.db.edu.messagepack.message;
 
-import com.db.edu.messagepack.message.ByteMessage;
-import com.db.edu.messagepack.message.CharMessage;
-import com.db.edu.messagepack.message.Message;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class MessageTest {
@@ -14,7 +11,7 @@ public class MessageTest {
         Message sutPreviousIntMessage = new ByteMessage((byte) 5);
         Message stubCharMessage = mock(CharMessage.class);
 
-        Assertions.assertEquals(false, sutPreviousIntMessage.isSameType(stubCharMessage));
+        assertEquals(false, sutPreviousIntMessage.isSameType(stubCharMessage));
 
     }
     @Test
@@ -22,7 +19,7 @@ public class MessageTest {
         Message sutPreviousCharMessage = new CharMessage('b');
         Message sutCharMessage = new CharMessage('a');
 
-        Assertions.assertEquals(false, sutPreviousCharMessage.isSameType(sutCharMessage));
+        assertEquals(false, sutPreviousCharMessage.isSameType(sutCharMessage));
     }
 
     @Test
@@ -31,7 +28,7 @@ public class MessageTest {
         CharMessage sutCharMessage = new CharMessage('a');
 
         CharMessage accumulation = (CharMessage)sutPreviousCharMessage.accumulate(sutCharMessage);
-        Assertions.assertEquals('a', accumulation.getBody());
+        assertEquals('a', accumulation.getBody());
     }
 
 }

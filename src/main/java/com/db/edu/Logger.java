@@ -1,11 +1,11 @@
 package com.db.edu;
 
-import com.db.edu.saver.ConsoleSaver;
 import com.db.edu.messagepack.message.*;
+import com.db.edu.saver.FileSaver;
 
 public class Logger {
-    private static ConsoleSaver consoleSaver = new ConsoleSaver();
-    private static Controller controller = new Controller(consoleSaver);
+    private static FileSaver fileSaver = new FileSaver();
+    private static Controller controller = new Controller(fileSaver);
 
     private Logger() {
     }

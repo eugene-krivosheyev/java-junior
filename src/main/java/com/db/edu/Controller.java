@@ -31,7 +31,6 @@ public class Controller {
             previousMessage.resetFields();
         } catch (SaveException e) {
             e.printStackTrace();
-            System.out.println("Controller: empty message is received");
         }
     }
 }
