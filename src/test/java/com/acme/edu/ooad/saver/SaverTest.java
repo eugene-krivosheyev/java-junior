@@ -1,5 +1,6 @@
 package com.acme.edu.ooad.saver;
 
+import com.acme.edu.ooad.exception.SaveException;
 import com.acme.edu.ooad.message.Message;
 import org.junit.jupiter.api.Test;
 
@@ -8,25 +9,26 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class SaverTest {
+    private Saver saver = new ConsoleSaver();
+
     @Test
     public void shouldGetErrorWhenMessageIsNull() {
-        Saver saver = new ValidatingSaver();
         Message nullMessage = null;
 
         assertThrows(
-                IllegalArgumentException.class,
+                SaveException.class,
                 () -> saver.save(nullMessage)
         );
     }
 
     @Test
     public void shouldGetErrorWhenMessageIsEmpty() {
-        Saver saver = new ValidatingSaver();
-        Message emptyMessage = mock(Message.class);
-        when(emptyMessage.toString()).thenReturn("");
+        Message emptyMessageStub = mock(Message.class);
+        when(emptyMessageStub.getBody()).thenReturn("");
+
         assertThrows(
-                IllegalArgumentException.class,
-                () -> saver.save(emptyMessage)
+                SaveException.class,
+                () -> saver.save(emptyMessageStub)
         );
     }
 }

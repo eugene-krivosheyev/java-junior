@@ -1,8 +1,9 @@
 package com.acme.edu.iteration02;
 
-import com.acme.edu.ooad.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import com.acme.edu.ooad.saver.ConsoleSaver;
+import com.acme.edu.ooad.Logger;
+import com.acme.edu.ooad.exception.FlushException;
+import com.acme.edu.ooad.exception.LogException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -13,6 +14,7 @@ import java.io.IOException;
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private static final String STRING_PREFIX = "string: ";
     private static final String PRIMITIVE_PREFIX = "primitive: ";
+
     //region given
     @BeforeEach
     public void setUpSystemOut() throws IOException {
@@ -27,7 +29,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
     @Test
-    public void shouldLogSequentIntegersAsSum() throws IOException {
+    public void shouldLogSequentIntegersAsSum() throws LogException, FlushException {
         //region when
         Logger.log("str 1");
         Logger.log(1);
@@ -44,9 +46,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("0");
         //endregion
     }
+
     @Disabled
     @Test
-    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
+    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws LogException, FlushException {
         //region when
         Logger.log("Test 1");
         Logger.log(Integer.MIN_VALUE + 1);
@@ -103,9 +106,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
+
     @Disabled
     @Test
-    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
+    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() throws LogException, FlushException {
         //region when
         Logger.log("Test 1");
         Logger.log((byte) (Byte.MIN_VALUE + 1));
@@ -164,7 +168,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
+    public void shouldLogSameSubsequentStringsWithoutRepeat() throws LogException, FlushException {
         //region when
         Logger.log("str 1");
         Logger.log("str 2");

@@ -1,7 +1,5 @@
 package com.acme.edu.ooad.message;
 
-import java.util.Objects;
-
 public class IntegerMessage implements Message {
     final String prefix;
     int value;
@@ -13,23 +11,33 @@ public class IntegerMessage implements Message {
     }
 
     @Override
-    public void clean() { value = 0; }
+    public void clean() {
+        value = 0;
+    }
 
     @Override
-    public String toString() { return prefix + value; }
+    public String toString() {
+        return prefix + value;
+    }
 
     @Override
     public Message getNewInstance(Message message) {
-        if (Message.sameType(this,message)) {
-            return new IntegerMessage(this.value+((IntegerMessage)message).value);
+        if (Message.sameType(this, message)) {
+            return new IntegerMessage(this.value + ((IntegerMessage) message).value);
         } else {
             return message;
         }
     }
+
     @Override
     public Message getInstanceToPrint(Message message) {
-        if (Message.sameType(this,message)) return null;
+        if (Message.sameType(this, message)) return null;
         return this;
+    }
+
+    @Override
+    public String getBody() {
+        return String.valueOf(value);
     }
 
     @Override
@@ -38,9 +46,7 @@ public class IntegerMessage implements Message {
             return true;
         }
         if (anObject instanceof IntegerMessage) {
-            if (this.value == ((IntegerMessage) anObject).value) {
-                return true;
-            }
+            return this.value == ((IntegerMessage) anObject).value;
         }
         return false;
     }

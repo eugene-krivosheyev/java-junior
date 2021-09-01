@@ -16,7 +16,7 @@ public class BooleanMessage implements Message {
 
     @Override
     public String toString() {
-        return prefix + value;
+        return prefix + getBody();
     }
 
     @Override
@@ -30,14 +30,17 @@ public class BooleanMessage implements Message {
     }
 
     @Override
+    public String getBody() {
+        return String.valueOf(value);
+    }
+
+    @Override
     public boolean equals(Object anObject) {
         if (this == anObject) {
             return true;
         }
         if (anObject instanceof BooleanMessage) {
-           if (this.value == ((BooleanMessage) anObject).value) {
-               return true;
-            }
+            return this.value == ((BooleanMessage) anObject).value;
         }
         return false;
     }

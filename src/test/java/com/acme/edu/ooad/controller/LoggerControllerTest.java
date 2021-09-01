@@ -1,46 +1,63 @@
 package com.acme.edu.ooad.controller;
 
+import com.acme.edu.ooad.exception.FlushException;
+import com.acme.edu.ooad.exception.LogException;
+import com.acme.edu.ooad.exception.SaveException;
 import com.acme.edu.ooad.message.Message;
-import com.acme.edu.ooad.saver.Saver;
+import com.acme.edu.ooad.saver.ValidatingSaver;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 public class LoggerControllerTest {
-    Saver saverMock = mock(Saver.class);
-    LoggerController controllerSut = new LoggerController(saverMock);
-
-    @Test
-    public void shouldNotSaveLastLoggedMessageWhenFlushAndLastLoggedIsNull() {
-        controllerSut.lastLoggedMessage = null;
-        controllerSut.flush();
-
-        verify(saverMock, times(0)).save(controllerSut.lastLoggedMessage);
-    }
+    private ValidatingSaver saverMock = mock(ValidatingSaver.class);
+    private LoggerController controllerSut = new LoggerController(saverMock);
 
     @Test
     public void shouldSaveLastLoggedMessageWhenFlushAndLastLoggedMessageIsNotNull() {
-        controllerSut.lastLoggedMessage = mock(Message.class);
-        controllerSut.flush();
+        Message messageStub = mock(Message.class);
+        controllerSut.lastLoggedMessage = messageStub;
+        try {
+            controllerSut.flush();
+        } catch (FlushException e) {
+            e.printStackTrace();
+        }
 
-        verify(saverMock, times(1)).save(controllerSut.lastLoggedMessage);
+        try {
+            verify(saverMock, times(1)).save(messageStub);
+        } catch (SaveException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void shouldCleanLastLoggedMessageWhenFlush() {
-        Message messageStub = mock(Message.class);
-        controllerSut.log(messageStub);
+    public void shouldGetFlushErrorWhenSaverGetError() throws SaveException {
+        Message emptyMessageStub = mock(Message.class);
+        controllerSut.lastLoggedMessage = emptyMessageStub;
+        doThrow(SaveException.class).when(saverMock).save(emptyMessageStub);
 
-        controllerSut.flush();
-        verify(controllerSut.lastLoggedMessage, times(1)).clean();
+        assertThrows(
+                FlushException.class,
+                () -> controllerSut.flush()
+        );
     }
 
     @Test
-    public void shouldBecomeLastLoggedWhenLogMessageAndLastLoggedMessageIsNull() {
+    public void shouldGetLogErrorWhenSaverGetError() throws SaveException {
         Message messageStub = mock(Message.class);
 
-        controllerSut.log(messageStub);
-        assertEquals(messageStub, controllerSut.lastLoggedMessage);
+        Message lastLoggedMessageStub = mock(Message.class);
+        when(lastLoggedMessageStub.getInstanceToPrint(any())).thenReturn(messageStub);
+        controllerSut.lastLoggedMessage = lastLoggedMessageStub;
+
+        doThrow(SaveException.class).when(saverMock).save(messageStub);
+
+        assertThrows(
+                LogException.class,
+                () -> controllerSut.log(messageStub)
+        );
     }
 
     @Test
@@ -51,9 +68,16 @@ public class LoggerControllerTest {
         when(controllerSut.lastLoggedMessage.getInstanceToPrint(logMessageStub))
                 .thenReturn(saveMessageStub);
 
-        controllerSut.log(logMessageStub);
-        verify(saverMock, times(1))
-                .save(saveMessageStub);
+        try {
+            controllerSut.log(logMessageStub);
+        } catch (LogException e) {
+            e.printStackTrace();
+        }
+        try {
+            verify(saverMock, times(1)).save(saveMessageStub);
+        } catch (SaveException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -64,7 +88,11 @@ public class LoggerControllerTest {
         when(controllerSut.lastLoggedMessage.getNewInstance(logMessageStub))
                 .thenReturn(newInstanceMessageStub);
 
-        controllerSut.log(logMessageStub);
+        try {
+            controllerSut.log(logMessageStub);
+        } catch (LogException e) {
+            e.printStackTrace();
+        }
         assertEquals(newInstanceMessageStub, controllerSut.lastLoggedMessage);
     }
 }

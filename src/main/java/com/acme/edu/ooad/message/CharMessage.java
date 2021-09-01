@@ -1,7 +1,5 @@
 package com.acme.edu.ooad.message;
 
-import java.util.Objects;
-
 public class CharMessage implements Message {
     final String prefix;
     final char value;
@@ -13,7 +11,8 @@ public class CharMessage implements Message {
     }
 
     @Override
-    public void clean() {}
+    public void clean() {
+    }
 
     @Override
     public String toString() {
@@ -31,14 +30,17 @@ public class CharMessage implements Message {
     }
 
     @Override
+    public String getBody() {
+        return String.valueOf(value);
+    }
+
+    @Override
     public boolean equals(Object anObject) {
         if (this == anObject) {
             return true;
         }
         if (anObject instanceof CharMessage) {
-            if (this.value == ((CharMessage) anObject).value) {
-                return true;
-            }
+            return this.value == ((CharMessage) anObject).value;
         }
         return false;
     }

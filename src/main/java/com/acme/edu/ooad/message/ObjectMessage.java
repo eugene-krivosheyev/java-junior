@@ -1,8 +1,6 @@
 package com.acme.edu.ooad.message;
 
-import java.util.Objects;
-
-public class ObjectMessage implements Message{
+public class ObjectMessage implements Message {
     private final String prefix;
     private final Object value;
     int counter;
@@ -13,10 +11,13 @@ public class ObjectMessage implements Message{
     }
 
     @Override
-    public void clean() {}
+    public void clean() {
+    }
 
     @Override
-    public String toString() { return prefix + value; }
+    public String toString() {
+        return prefix + getBody();
+    }
 
     @Override
     public Message getNewInstance(Message message) {
@@ -29,14 +30,18 @@ public class ObjectMessage implements Message{
     }
 
     @Override
+    public String getBody() {
+        if (value == null) return "";
+        return String.valueOf(value);
+    }
+
+    @Override
     public boolean equals(Object anObject) {
         if (this == anObject) {
             return true;
         }
         if (anObject instanceof ObjectMessage) {
-            if (this.value == ((ObjectMessage) anObject).value) {
-                return true;
-            }
+            return this.value == ((ObjectMessage) anObject).value;
         }
         return false;
     }
