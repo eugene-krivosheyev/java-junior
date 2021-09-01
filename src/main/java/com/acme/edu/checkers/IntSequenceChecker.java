@@ -3,7 +3,7 @@ package com.acme.edu.checkers;
 import com.acme.edu.Type;
 import com.acme.edu.savers.Saver;
 
-public class IntSequenceChecker extends Checker {
+public class IntSequenceChecker extends Checker<Integer> {
     private boolean intAccumulateState;
     private int intAccumulateSum;
 
@@ -13,30 +13,38 @@ public class IntSequenceChecker extends Checker {
         this.saver = saver;
     }
 
-    public void check(Object message){
+    public Integer check(Object message) {
+        int resultInt = 0;
+
         if (message instanceof Integer) {
             if (!intAccumulateState) {
                 intAccumulateState = true;
             }
             if ((long)intAccumulateSum + (long)((int)message) > (long)Integer.MAX_VALUE) {
-                saver.sendToSave(Integer.MAX_VALUE + "");
+                resultInt = Integer.MAX_VALUE;
                 intAccumulateSum = (int)((long)intAccumulateSum + (long)((int)message) - (long)Integer.MAX_VALUE);
 
             }
             else if ((long)intAccumulateSum + (long)((int)message) < (long)Integer.MIN_VALUE) {
-                saver.sendToSave(Integer.MIN_VALUE + "");
+                resultInt = Integer.MIN_VALUE;
                 intAccumulateSum = (int)((long)intAccumulateSum + (long)((int)message) - (long)Integer.MIN_VALUE);
             }
             else {
                 intAccumulateSum += (int)message;
+                return null;
             }
         }
         else {
             if (intAccumulateState) {
-                saver.sendToSave(Type.PRIMITIVE.value + intAccumulateSum);
+                resultInt = intAccumulateSum;
                 intAccumulateState = false;
                 intAccumulateSum = 0;
             }
+            else {
+                return null;
+            }
         }
+
+        return resultInt;
     }
 }

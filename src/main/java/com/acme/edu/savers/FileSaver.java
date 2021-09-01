@@ -23,24 +23,23 @@ public class FileSaver extends AbstractSaver {
         }
     }
 
-    private void createFileIfItDoesntExist(String fileName) throws FileSaverException {
-        Path path = Paths.get(fileName);
-        if (!path.toFile().exists()) {
-            try {
-                Files.createFile(path);
-            }
-            catch (IOException e) {
-                throw new FileSaverException("can't create file", e);
-            }
-        }
-    }
-
     @Override
     public void close() throws FileSaverException {
         try {
             out.close();
         } catch (IOException e) {
             throw new FileSaverException("can't close file", e);
+        }
+    }
+
+    private void createFileIfItDoesntExist(String fileName) throws FileSaverException {
+        Path path = Paths.get(fileName);
+        if (!path.toFile().exists()) {
+            try {
+                Files.createFile(path);
+            } catch (IOException e) {
+                throw new FileSaverException("can't create file", e);
+            }
         }
     }
 

@@ -6,7 +6,7 @@ import com.acme.edu.savers.Saver;
 
 import java.util.Objects;
 
-public class StringSequenceChecker extends Checker {
+public class StringSequenceChecker extends Checker<String> {
     private boolean accumString;
     private int strCount;
     private String lastStr;
@@ -19,21 +19,23 @@ public class StringSequenceChecker extends Checker {
     }
 
 
-    public void check(Object message) {
+    public String check(Object message) {
+        String resultStr = "";
+
         if (message instanceof String) {
             accumString = true;
 
             if (Objects.equals(lastStr, message)) {
                 strCount++;
+                return null;
             }
             else {
                 if (strCount > 1) {
-                    saver.sendToSave(Type.STRING.value + lastStr + " (x" + strCount + ")");
+                    resultStr = lastStr + " (x" + strCount + ")";
                 }
                 else {
                     if (lastStr != null) {
-                        saver.sendToSave(Type.STRING.value + lastStr);
-
+                        resultStr = lastStr;
                     }
                 }
 
@@ -44,15 +46,17 @@ public class StringSequenceChecker extends Checker {
         else {
             if (accumString) {
                 if (strCount > 1) {
-                    saver.sendToSave(Type.STRING.value + lastStr + " (x" + strCount + ")");
+                    resultStr = lastStr + " (x" + strCount + ")";
                 }
                 else {
-                    saver.sendToSave(Type.STRING.value + lastStr);
+                    resultStr = lastStr;
                 }
                 strCount = 1;
                 accumString = false;
                 lastStr = null;
             }
         }
+
+        return resultStr;
     }
 }

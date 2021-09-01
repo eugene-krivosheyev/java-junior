@@ -23,6 +23,11 @@ public class App
         logger.log(2);
         logger.log(3);
         logger.log("end");
+        logger.log(4);
+        logger.log(3);
+        logger.log((byte)99);
+        logger.log('c');
+        logger.log(new Object());
         logger.flush();
         logger.close();
     }

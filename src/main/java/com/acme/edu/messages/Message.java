@@ -20,6 +20,12 @@ public class Message {
         }
     }
 
+    public String decorate() {
+        if (getValue() == "") return "";
+
+        return getType() + ": " + getValue();
+    }
+
     public Object getValue() {
         if (value == null) throw new IllegalArgumentException("not valid message to log!");
         return value;
