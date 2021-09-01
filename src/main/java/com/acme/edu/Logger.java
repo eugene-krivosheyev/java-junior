@@ -1,15 +1,25 @@
 package com.acme.edu;
 
+import com.acme.edu.exceptions.FileSaverException;
 import com.acme.edu.filters.LengthFilter;
 import com.acme.edu.messages.*;
 import com.acme.edu.savers.ConsoleSaver;
 import com.acme.edu.savers.FileSaver;
 
 public class Logger {
-    private final LoggerController controller  = new LoggerController(
-            new FileSaver("results.txt", "Windows-1251"),
-            new LengthFilter(25)
-    );
+    private LoggerController controller;
+
+    public Logger() {
+        try {
+            controller  = new LoggerController(
+                    new FileSaver("results.txt", "Windows-1251", 4096),
+                    new LengthFilter(25)
+            );
+        } catch (FileSaverException e) {
+            System.out.println("exception: " + e.getMessage());
+            System.exit(-1);
+        }
+    }
 
     public void log(int message) {
         controller.log(new IntMessage(message));
@@ -50,5 +60,9 @@ public class Logger {
 
     public void flush() {
         controller.flush();
+    }
+
+    public void close() {
+        controller.close();
     }
 }

@@ -1,4 +1,5 @@
 package com.acme.edu;
+import com.acme.edu.exceptions.FileSaverException;
 import com.acme.edu.filters.Filter;
 import com.acme.edu.messages.*;
 import com.acme.edu.checkers.*;
@@ -35,5 +36,13 @@ public class LoggerController {
     public void flush(){
         stringChecker.check(null);
         intChecker.check(null);
+    }
+
+    public void close() {
+        try {
+            saver.close();
+        } catch (FileSaverException e) {
+            System.out.println("exception: " + e.getMessage());
+        }
     }
 }

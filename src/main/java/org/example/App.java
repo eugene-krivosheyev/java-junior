@@ -24,5 +24,6 @@ public class App
         logger.log(3);
         logger.log("end");
         logger.flush();
+        logger.close();
     }
 }
