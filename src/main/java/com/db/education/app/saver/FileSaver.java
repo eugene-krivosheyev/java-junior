@@ -1,11 +1,9 @@
 package com.db.education.app.saver;
 
 import com.db.education.app.exception.SaveException;
-import com.db.education.app.message.EmptyMessage;
 import com.db.education.app.message.Message;
 
 import java.io.*;
-import java.nio.charset.Charset;
 
 public class FileSaver implements Saver{
     private final String fileName;
