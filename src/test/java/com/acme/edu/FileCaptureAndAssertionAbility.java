@@ -2,13 +2,22 @@ package com.acme.edu;
 
 import java.io.*;
 
-import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public interface FileCaptureAndAssertionAbility {
 
-    default void assertFileContains(String expected) {
-        File source = new File("demo.txt");
+    default void resetFile(String fileName){
+        try {
+            PrintWriter writer = new PrintWriter(fileName);
+            writer.print("");
+            writer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    default void assertFileContains(String expected, String fileName) {
+        File source = new File(fileName);
         try (BufferedReader in = new BufferedReader(
                 new InputStreamReader(
                         new BufferedInputStream(

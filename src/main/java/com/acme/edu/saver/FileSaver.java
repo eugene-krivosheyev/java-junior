@@ -10,7 +10,7 @@ public class FileSaver implements Saver {
             writer = new BufferedWriter(
                     new OutputStreamWriter(
                             new BufferedOutputStream(
-                                    new FileOutputStream(filePath)), charset));
+                                    new FileOutputStream(filePath, true), bufferSize), charset));
         } catch (IOException e){
             e.printStackTrace();
         }
