@@ -4,8 +4,7 @@ import com.db.education.app.controller.LoggerController;
 import com.db.education.app.exception.LogException;
 import com.db.education.app.exception.SaveException;
 import com.db.education.app.message.*;
-import com.db.education.app.saver.ConsoleSaver;
-import com.db.education.app.saver.FIleSaver;
+import com.db.education.app.saver.FileSaver;
 
 /**
  * Logger logs provided messages into console with accumulation and decoration based on message type.
@@ -22,7 +21,7 @@ import com.db.education.app.saver.FIleSaver;
  */
 public class Logger {
 
-    private static LoggerController loggerController = new LoggerController(new FIleSaver("log.log", 128, "utf-8"));
+    private static LoggerController loggerController = new LoggerController(new FileSaver("log.log", 128, "utf-8"));
 
     private Logger() {
     }

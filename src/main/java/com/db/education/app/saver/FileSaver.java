@@ -8,11 +8,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-public class FIleSaver implements Saver{
+public class FileSaver implements Saver{
     private final String fileName;
     private final int bufferSize;
     private final String charSet;
-    public FIleSaver(String fileName, int bufferSize, String charSet) {
+
+    public FileSaver(String fileName, int bufferSize, String charSet) {
         this.fileName = fileName;
         this.bufferSize = bufferSize;
         this.charSet = charSet;
@@ -27,7 +28,7 @@ public class FIleSaver implements Saver{
         } catch (NullPointerException npe) {
             throw new SaveException("Empty message: " + npe.getMessage(), npe);
         }catch (IOException e) {
-           throw new SaveException("Log to file " + this.fileName + " failed", e);
+            throw new SaveException("Log to file " + this.fileName + " failed", e);
         }
     }
 }
