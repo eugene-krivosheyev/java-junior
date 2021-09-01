@@ -2,11 +2,12 @@ package com.db.edu;
 
 import com.db.edu.Message.*;
 import com.db.edu.Save.ConsoleSaver;
+import com.db.edu.Save.FileSaver;
 import com.db.edu.Save.SaveException;
 
 public class Logger {
 
-    public static LoggerController loggerController = new LoggerController(new ConsoleSaver());
+    public static LoggerController loggerController = new LoggerController(new FileSaver());
 
     public static void log(int message) throws SaveException {
         loggerController.log(new IntMessage(message));
