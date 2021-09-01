@@ -10,7 +10,13 @@ import java.nio.file.Paths;
 import static java.nio.file.StandardOpenOption.*;
 
 public class FileSaver extends AbstractSaver {
-    private String charsetCode = "Windows-1251";
+    private String charsetCode;
+    private String fileName;
+
+    public FileSaver(String fileName, String charsetCode) {
+        this.fileName = fileName;
+        this.charsetCode = charsetCode;
+    }
 
     @Override
     public void save(String message) throws FileSaverException {

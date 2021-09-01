@@ -17,7 +17,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SaverTest implements SysoutCaptureAndAssertionAbility {
-    static final FileSaver fileSut = new FileSaver();
+    static final FileSaver fileSut = new FileSaver("results.txt", "Windows-1251");
 
     @Test
     public void shouldLogInFile() throws IOException {

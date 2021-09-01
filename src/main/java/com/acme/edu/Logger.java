@@ -7,7 +7,7 @@ import com.acme.edu.savers.FileSaver;
 
 public class Logger {
     private final LoggerController controller  = new LoggerController(
-            new FileSaver(),
+            new FileSaver("results.txt", "Windows-1251"),
             new LengthFilter(25)
     );
 
