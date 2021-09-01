@@ -30,6 +30,16 @@ public class LoggerController {
 
     public void log(Message message) throws SaveException, NullPointerException {
         try {
+            if (message == null) {
+                throw new NullPointerException("There is no message");
+            } else if (message.getValue() == null) {
+                throw new NullPointerException("Message is empty");
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            throw e;
+        }
+        try {
             if (state == State.NULL) {
                 lastMessage = message;
                 state = State.NOT_NULL;
@@ -40,7 +50,8 @@ public class LoggerController {
                 saver.save(lastMessage.decorate());
                 lastMessage = message;
             }
-        } catch (NullPointerException e) {
+        }
+        catch (SaveException e){
             e.printStackTrace();
             throw e;
         }

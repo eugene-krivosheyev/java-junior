@@ -61,4 +61,23 @@ public class ControllerTest {
         verify(consoleSaver, times(1)).save(message1.decorate());
         assertNotNull(loggerController.getLastMessage());
     }
+
+    @Test
+    public void nullMessageThrowsNullPointerException() {
+        Message message = null;
+        ConsoleSaver consoleSaver = mock(ConsoleSaver.class);
+        LoggerController loggerController = new LoggerController(consoleSaver);
+
+        assertThrows(NullPointerException.class, () -> loggerController.log(message));
+    }
+
+    @Test
+    public void nullMessageBodyThrowsNullPointerException(){
+        Message message = mock(Message.class);
+        ConsoleSaver consoleSaver = mock(ConsoleSaver.class);
+        LoggerController loggerController = new LoggerController(consoleSaver);
+        when(message.getValue()).thenReturn(null);
+
+        assertThrows(NullPointerException.class, () -> loggerController.log(message));
+    }
 }

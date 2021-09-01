@@ -1,7 +1,5 @@
 package com.db.edu.Save;
 
-import java.io.IOException;
-
 public class ConsoleSaver implements Saver {
 
     @Override
@@ -11,8 +9,7 @@ public class ConsoleSaver implements Saver {
         }
         catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            throw new SaveException(e);
         }
-
     }
 }
