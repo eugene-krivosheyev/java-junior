@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import static org.mockito.Mockito.*;
@@ -24,7 +25,7 @@ public class FileSaverTest {
 
         verify(messageMock, times(1)).decorate();
 
-        String s = readFile("log.txt");
+        String s = readFile("log.txt", Charset.defaultCharset());
         Assertions.assertEquals(expectedString, s);
     }
 
@@ -39,13 +40,13 @@ public class FileSaverTest {
         saver.save(messageMock.decorate());
 
         verify(messageMock, times(1)).decorate();
-        String s = readFile("log.txt");
+        String s = readFile("logTest.txt", StandardCharsets.UTF_16BE);
         Assertions.assertEquals(expectedString, s);
     }
 
-    private String readFile(String filePath) throws SaveException {
+    private String readFile(String filePath, Charset charset) throws SaveException {
         StringBuilder s = new StringBuilder();
-        try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(new BufferedInputStream(new FileInputStream(filePath)), charset))){
             while (br.ready()){
                 s.append(br.readLine());
             }
