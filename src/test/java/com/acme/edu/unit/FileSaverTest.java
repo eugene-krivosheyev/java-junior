@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FileSaverTest implements FileCaptureAndAssertionAbility{
-    private String FILE_NAME = "demo.txt";
+
     private Saver saver;
 
     //region given
@@ -37,7 +37,7 @@ public class FileSaverTest implements FileCaptureAndAssertionAbility{
     }
 
     @Test
-    public void loggerShouldWriteStringToFile() throws SaveException {
+    public void shouldWriteStringToFile() throws SaveException {
         Logger.log(1);
         Logger.flush();
         Logger.log(0);
@@ -47,8 +47,8 @@ public class FileSaverTest implements FileCaptureAndAssertionAbility{
         //endregion
 
         //region then
-        assertFileContains(Prefix.PRIMITIVE.value + " 1", FILE_NAME);
-        assertFileContains(Prefix.PRIMITIVE.value + " 0", FILE_NAME);
-        assertFileContains(Prefix.PRIMITIVE.value + " -1", FILE_NAME);
+        assertFileContains(Prefix.PRIMITIVE.value + " 1");
+        assertFileContains(Prefix.PRIMITIVE.value + " 0");
+        assertFileContains(Prefix.PRIMITIVE.value + " -1");
     }
 }
