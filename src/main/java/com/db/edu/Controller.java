@@ -14,20 +14,21 @@ public class Controller {
     public Controller(Saver saver) {
         this.saver = saver;
         this.emptyMessage = new EmptyMessage();
+        this.accumulateMessage = emptyMessage;
     }
 
     public void flush() {
-        if (accumulateMessage != null) {
+        if (accumulateMessage != emptyMessage) {
             try {
                 saver.save(accumulateMessage.decorate());
-            } catch (IOException e) {
+            } catch (LoggerException e) {
                 System.out.println("Can't save log");
             }
             accumulateMessage = emptyMessage;
         }
     }
 
-    public void log(Message message) {
+    public void log(Message message) throws LoggerException {
         try {
             if (!message.sameTypeOf(accumulateMessage)) {
                 flush();
@@ -36,7 +37,7 @@ public class Controller {
                 accumulateMessage = accumulateMessage.accumulate(message);
             }
         } catch (NullPointerException ex) {
-            throw new NullPointerException("Message shouldn't be null");
+            throw new LoggerException("Message shouldn't be null", ex);
         }
     }
 }

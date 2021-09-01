@@ -1,13 +1,15 @@
 package com.db.edu.iteration1;
 
+import com.db.edu.FileCaptureAndAssertionAbility;
 import com.db.edu.Logger;
+import com.db.edu.LoggerException;
 import com.db.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.*;
 
 import static com.db.edu.message.Prefix.*;
 
 
-public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+public class LoggerTest implements FileCaptureAndAssertionAbility {
     @BeforeEach
     public void setUpSystemOut() {
         resetOut();
@@ -20,7 +22,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogInteger() {
+    public void shouldLogInteger() throws LoggerException {
         Logger.log(1);
         Logger.flush();
         Logger.log(0);
@@ -32,7 +34,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogByte() {
+    public void shouldLogByte() throws LoggerException {
         Logger.log((byte)1);
         Logger.flush();
         Logger.log((byte)0);
@@ -44,7 +46,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogChar() {
+    public void shouldLogChar() throws LoggerException {
         Logger.log('a');
         Logger.flush();
         Logger.log('b');
@@ -54,7 +56,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogString() {
+    public void shouldLogString() throws LoggerException {
         Logger.log("test string 1");
         Logger.log("other str");
         Logger.flush();
@@ -63,7 +65,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogBoolean() {
+    public void shouldLogBoolean() throws LoggerException {
         Logger.log(true);
         Logger.flush();
         Logger.log(false);
@@ -73,7 +75,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogReference() {
+    public void shouldLogReference() throws LoggerException {
         Logger.log(new Object());
         Logger.flush();
 

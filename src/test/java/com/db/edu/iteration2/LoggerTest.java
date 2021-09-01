@@ -1,7 +1,9 @@
 package com.db.edu.iteration2;
 
 
+import com.db.edu.FileCaptureAndAssertionAbility;
 import com.db.edu.Logger;
+import com.db.edu.LoggerException;
 import com.db.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +14,7 @@ import static com.db.edu.message.Prefix.PRIMITIVE_PREFIX;
 import static com.db.edu.message.Prefix.STRING_PREFIX;
 
 
-public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+public class LoggerTest implements FileCaptureAndAssertionAbility {
     @BeforeEach
     public void setUpSystemOut() {
         resetOut();
@@ -26,7 +28,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogSequentIntegersAsSum() {
+    public void shouldLogSequentIntegersAsSum() throws LoggerException {
         Logger.log("str 1");
         Logger.log(1);
         Logger.log(2);
@@ -42,7 +44,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Disabled
-    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
+    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws LoggerException {
         Logger.log("str 1");
         Logger.log(10);
         Logger.log(Integer.MAX_VALUE - 1);
@@ -61,7 +63,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     @Disabled
-    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
+    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() throws LoggerException {
         Logger.log("str 1");
         Logger.log((byte) 10);
         Logger.log((byte) (Byte.MAX_VALUE - 1));
@@ -77,7 +79,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogSameSubsequentStringsWithoutRepeat() {
+    public void shouldLogSameSubsequentStringsWithoutRepeat() throws LoggerException {
         Logger.log("str 1");
         Logger.log("str 2");
         Logger.log("str 2");
