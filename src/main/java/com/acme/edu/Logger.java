@@ -6,7 +6,7 @@ import com.acme.edu.saver.SaveException;
 
 
 public class Logger {
-    private static final LoggerController controller = new LoggerController(new FileSaver("demo.txt", "windows-1251"));
+    private static final LoggerController controller = new LoggerController(new FileSaver("demo.txt", "windows-1251", 512));
 //    private static final LoggerController controller = new LoggerController(new ConsoleSaver());
 
 

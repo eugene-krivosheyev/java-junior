@@ -21,7 +21,7 @@ public class FileSaverTest implements FileCaptureAndAssertionAbility{
     //region given
     @BeforeEach
     void setup() {
-        saver = new FileSaver("demo.txt", "windows-1251");
+        saver = new FileSaver(FILE_NAME, "windows-1251", 512);
     }
 
     @Test
@@ -32,7 +32,7 @@ public class FileSaverTest implements FileCaptureAndAssertionAbility{
     }
 
     @Test
-    public void shouldWriteStringToFile() throws SaveException {
+    public void loggerShouldWriteStringToFile() throws SaveException {
         Logger.log(1);
         Logger.flush();
         Logger.log(0);

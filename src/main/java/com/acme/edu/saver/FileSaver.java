@@ -5,7 +5,7 @@ import java.io.*;
 public class FileSaver implements Saver {
     private BufferedWriter writer;
 
-    public FileSaver(String filePath, String charset) {
+    public FileSaver(String filePath, String charset, int bufferSize) {
         try{
             writer = new BufferedWriter(
                     new OutputStreamWriter(
