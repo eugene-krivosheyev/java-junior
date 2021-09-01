@@ -5,15 +5,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
-public class CharMessageTest{
-    boolean contains(Message message, String toContain) {
+public class CharMessageTest {
+    private boolean contains(Message message, String toContain) {
         return message.toString().contains(toContain);
     }
+
     @Test
     public void shouldContainPrimitivePrefixWhenCharMessageToString() {
         Message messageSut = new CharMessage('a');
-        assertTrue(contains(messageSut,"char: "));
+        assertTrue(contains(messageSut, "char: "));
     }
+
     @Test
     void shouldSameObjectsOfCharMessageBeEqual() {
         CharMessage messageSut = new CharMessage('a');
@@ -45,12 +47,14 @@ public class CharMessageTest{
 
         assertFalse(messageSut.equals(messageStub));
     }
+
     @Test
     public void shouldConvertValueToStringWhenGetBody() {
         Message message = new CharMessage('a');
 
         assertEquals("a", message.getBody());
     }
+
     @Test
     public void shouldGetMessageWhenGetNewInstance() {
         Message messageSut = new CharMessage('a');
@@ -58,6 +62,7 @@ public class CharMessageTest{
 
         assertEquals(messageStub, messageSut.getNewInstance(messageStub));
     }
+
     @Test
     public void shouldGetThisMessageWhenGetInstanceToPrint() {
         Message messageSut = new CharMessage('a');

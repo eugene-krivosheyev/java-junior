@@ -6,15 +6,17 @@ import com.acme.edu.ooad.exception.SaveException;
 import com.acme.edu.ooad.message.Message;
 import com.acme.edu.ooad.saver.ValidatingSaver;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 public class LoggerControllerTest {
-    ValidatingSaver saverMock = mock(ValidatingSaver.class);
-    LoggerController controllerSut = new LoggerController(saverMock);
+    private ValidatingSaver saverMock = mock(ValidatingSaver.class);
+    private LoggerController controllerSut = new LoggerController(saverMock);
 
     @Test
-    public void shouldSaveLastLoggedMessageWhenFlushAndLastLoggedMessageIsNotNull(){
+    public void shouldSaveLastLoggedMessageWhenFlushAndLastLoggedMessageIsNotNull() {
         Message messageStub = mock(Message.class);
         controllerSut.lastLoggedMessage = messageStub;
         try {
@@ -31,7 +33,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldGetFlushErrorWhenSaverGetError() throws SaveException{
+    public void shouldGetFlushErrorWhenSaverGetError() throws SaveException {
         Message emptyMessageStub = mock(Message.class);
         controllerSut.lastLoggedMessage = emptyMessageStub;
         doThrow(SaveException.class).when(saverMock).save(emptyMessageStub);
@@ -43,7 +45,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldGetLogErrorWhenSaverGetError() throws SaveException{
+    public void shouldGetLogErrorWhenSaverGetError() throws SaveException {
         Message messageStub = mock(Message.class);
 
         Message lastLoggedMessageStub = mock(Message.class);
@@ -59,7 +61,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldSaveInstanceToPrintWhenLogAndLastLoggedMessageIsNotNull(){
+    public void shouldSaveInstanceToPrintWhenLogAndLastLoggedMessageIsNotNull() {
         Message logMessageStub = mock(Message.class);
         controllerSut.lastLoggedMessage = mock(Message.class);
         Message saveMessageStub = mock(Message.class);
@@ -79,7 +81,7 @@ public class LoggerControllerTest {
     }
 
     @Test
-    public void shouldUpdateLastLoggedMessageWhenLogAndLastLoggedMessageIsNotNull(){
+    public void shouldUpdateLastLoggedMessageWhenLogAndLastLoggedMessageIsNotNull() {
         Message logMessageStub = mock(Message.class);
         Message newInstanceMessageStub = mock(Message.class);
         controllerSut.lastLoggedMessage = mock(Message.class);

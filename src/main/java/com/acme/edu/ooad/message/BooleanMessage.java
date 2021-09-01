@@ -40,9 +40,7 @@ public class BooleanMessage implements Message {
             return true;
         }
         if (anObject instanceof BooleanMessage) {
-           if (this.value == ((BooleanMessage) anObject).value) {
-               return true;
-            }
+            return this.value == ((BooleanMessage) anObject).value;
         }
         return false;
     }

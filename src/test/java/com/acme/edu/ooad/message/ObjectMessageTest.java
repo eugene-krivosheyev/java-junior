@@ -5,15 +5,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
-public class ObjectMessageTest{
-    boolean contains(Message message, String toContain) {
+public class ObjectMessageTest {
+    private boolean contains(Message message, String toContain) {
         return message.toString().contains(toContain);
     }
+
     @Test
     public void shouldContainReferencePrefixWhenObjectMessageToString() {
         Message messageSut = new ObjectMessage(new Object());
-        assertTrue(contains(messageSut,"reference: "));
+        assertTrue(contains(messageSut, "reference: "));
     }
+
     @Test
     void shouldSameObjectsOfObjectMessageBeEqual() {
         ObjectMessage messageSut = new ObjectMessage(new Object());
@@ -46,12 +48,14 @@ public class ObjectMessageTest{
 
         assertFalse(messageSut.equals(messageStub));
     }
+
     @Test
     public void shouldConvertNullToEmptyStringWhenGetBody() {
         Message message = new ObjectMessage(null);
 
         assertEquals("", message.getBody());
     }
+
     @Test
     public void shouldConvertValueToStringWhenGetBody() {
         Object obj = new Object();
@@ -59,6 +63,7 @@ public class ObjectMessageTest{
 
         assertEquals(obj.toString(), message.getBody());
     }
+
     @Test
     public void shouldGetMessageWhenGetNewInstance() {
         Message messageSut = new ObjectMessage(new Object());
@@ -66,6 +71,7 @@ public class ObjectMessageTest{
 
         assertEquals(messageStub, messageSut.getNewInstance(messageStub));
     }
+
     @Test
     public void shouldGetThisMessageWhenGetInstanceToPrint() {
         Message messageSut = new ObjectMessage(new Object());

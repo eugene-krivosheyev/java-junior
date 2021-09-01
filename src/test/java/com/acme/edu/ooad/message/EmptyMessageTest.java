@@ -2,7 +2,8 @@ package com.acme.edu.ooad.message;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.mock;
 
 public class EmptyMessageTest {
@@ -13,6 +14,7 @@ public class EmptyMessageTest {
 
         assertEquals(messageStub, messageSut.getNewInstance(messageStub));
     }
+
     @Test
     public void shouldGetNullWhenGetInstanceToPrint() {
         Message messageSut = new EmptyMessage();
@@ -20,6 +22,7 @@ public class EmptyMessageTest {
 
         assertNull(messageSut.getInstanceToPrint(messageStub));
     }
+
     @Test
     public void shouldGetNullWhenGetBody() {
         Message message = new EmptyMessage();

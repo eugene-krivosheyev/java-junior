@@ -1,15 +1,14 @@
 package com.acme.edu.iteration01;
 
-import com.acme.edu.ooad.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.ooad.Logger;
 import com.acme.edu.ooad.exception.FlushException;
 import com.acme.edu.ooad.exception.LogException;
-import com.acme.edu.ooad.saver.ConsoleSaver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
+import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given

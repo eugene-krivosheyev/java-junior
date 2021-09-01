@@ -5,15 +5,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
-public class BooleanMessageTest{
-    boolean contains(Message message, String toContain) {
+public class BooleanMessageTest {
+    private boolean contains(Message message, String toContain) {
         return message.toString().contains(toContain);
     }
+
     @Test
     public void shouldContainPrimitivePrefixWhenBooleanMessageToString() {
         Message messageSut = new BooleanMessage(true);
-        assertTrue(contains(messageSut,"primitive: "));
+        assertTrue(contains(messageSut, "primitive: "));
     }
+
     @Test
     void shouldSameObjectsOfBooleanMessageBeEqual() {
         Message message1 = new BooleanMessage(true);
@@ -45,12 +47,14 @@ public class BooleanMessageTest{
 
         assertFalse(message1.equals(messageStub));
     }
+
     @Test
     public void shouldConvertValueToStringWhenGetBody() {
         Message message = new BooleanMessage(true);
 
         assertEquals("true", message.getBody());
     }
+
     @Test
     public void shouldGetMessageWhenGetNewInstance() {
         Message messageSut = new BooleanMessage(true);
@@ -58,6 +62,7 @@ public class BooleanMessageTest{
 
         assertEquals(messageStub, messageSut.getNewInstance(messageStub));
     }
+
     @Test
     public void shouldGetThisMessageWhenGetInstanceToPrint() {
         Message messageSut = new BooleanMessage(true);

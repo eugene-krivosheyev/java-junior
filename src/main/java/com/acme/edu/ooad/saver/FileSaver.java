@@ -6,10 +6,10 @@ import com.acme.edu.ooad.message.Message;
 import java.io.*;
 
 public class FileSaver extends ValidatingSaver {
-    private String encoding;
-    private int bufferSize;
-    private String filePath;
-    private boolean isAppended;
+    private final String encoding;
+    private final int bufferSize;
+    private final String filePath;
+    private final boolean isAppended;
 
     public FileSaver(String encoding, int bufferSize, String filePath, boolean isAppended) {
         this.encoding = encoding;
@@ -23,7 +23,7 @@ public class FileSaver extends ValidatingSaver {
         try (BufferedWriter out = new BufferedWriter(
                 new OutputStreamWriter(
                         new BufferedOutputStream(
-                                new FileOutputStream(filePath,isAppended),bufferSize),encoding))) {
+                                new FileOutputStream(filePath, isAppended), bufferSize), encoding))) {
             super.save(message);
             out.write(message.toString() + System.lineSeparator());
         } catch (IOException e) {

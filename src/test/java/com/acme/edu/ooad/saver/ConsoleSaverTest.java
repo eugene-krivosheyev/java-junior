@@ -9,7 +9,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ConsoleSaverTest implements SysoutCaptureAndAssertionAbility {
-    Saver saver = new ConsoleSaver();
+    private Saver saver = new ConsoleSaver();
+
     @Test
     public void shouldPrintWhenSaveMessage() {
         resetOut();
@@ -23,6 +24,6 @@ public class ConsoleSaverTest implements SysoutCaptureAndAssertionAbility {
         } catch (SaveException e) {
             e.printStackTrace();
         }
-        assertSysoutEquals("message to print"+System.lineSeparator());
+        assertSysoutEquals("message to print" + System.lineSeparator());
     }
 }
