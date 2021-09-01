@@ -4,8 +4,7 @@ import com.db.education.app.exception.SaveException;
 import com.db.education.app.message.EmptyMessage;
 import com.db.education.app.message.Message;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
 
 public class FileSaver implements Saver{
@@ -21,14 +20,20 @@ public class FileSaver implements Saver{
 
     @Override
     public void save(Message message) throws SaveException {
-        try (FileWriter fileWriter = new FileWriter(fileName, Charset.forName(charSet), true)){
-            if(message == null) throw new NullPointerException();
-
-            fileWriter.write(message.toString());
+        try {
+            if (message == null) throw new NullPointerException();
         } catch (NullPointerException npe) {
             throw new SaveException("Empty message: " + npe.getMessage(), npe);
-        }catch (IOException e) {
-            throw new SaveException("Log to file " + this.fileName + " failed", e);
+        }
+
+        try (BufferedWriter fileWriter = new BufferedWriter(
+                new OutputStreamWriter(
+                        new FileOutputStream(fileName, true), charSet), bufferSize)) {
+            fileWriter.write(message.toString());
+        } catch (FileNotFoundException fnfe) {
+            throw new SaveException("Log to file " + this.fileName + " failed", fnfe);
+        } catch (IOException ioe) {
+            throw new SaveException("Log to file " + this.fileName + " failed", ioe);
         }
     }
 }
