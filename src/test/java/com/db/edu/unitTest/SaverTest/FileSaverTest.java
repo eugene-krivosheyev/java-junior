@@ -4,7 +4,9 @@ import com.db.edu.Message.Message;
 import com.db.edu.Save.FileSaver;
 import com.db.edu.Save.SaveException;
 import com.db.edu.Save.Saver;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
@@ -16,11 +18,26 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
 public class FileSaverTest {
+    private final String filename = "logTest.txt";
+    private final String expectedString = "Message string with prefix";
+    private File file;
+    private Saver fileSaver;
+    Message messageMock = mock(Message.class);
+
+    @BeforeEach
+    void setUp(){
+        file = new File(filename);
+        fileSaver = new FileSaver(1024, StandardCharsets.UTF_16BE, file);
+        when(messageMock.decorate()).thenReturn(expectedString);
+    }
+
+    @AfterEach
+    void reset(){
+        file.delete();
+    }
+
     @Test
     public void saveMessageWhenRegularMessageGivenAndDefaultParams() throws SaveException {
-        String expectedString = "Message string with prefix";
-        Message messageMock = mock(Message.class);
-        when(messageMock.decorate()).thenReturn(expectedString);
         Saver saver = new FileSaver();
         saver.save(messageMock.decorate());
 
@@ -32,28 +49,17 @@ public class FileSaverTest {
 
     @Test
     public void saveMessageWhenRegularMessageGivenAndFileSaverTakesUserParams() throws SaveException {
-        String expectedString = "Message string with prefix";
-        Message messageMock = mock(Message.class);
-        File fileMock = new File("logTest.txt");
-        when(messageMock.decorate()).thenReturn(expectedString);
-
-        Saver saver = new FileSaver(1024, StandardCharsets.UTF_16BE, fileMock);
-        saver.save(messageMock.decorate());
+        fileSaver.save(messageMock.decorate());
 
         verify(messageMock, times(1)).decorate();
-        String s = readFile("logTest.txt", StandardCharsets.UTF_16BE);
+        String s = readFile(filename, StandardCharsets.UTF_16BE);
         Assertions.assertEquals(expectedString, s);
     }
     @Test
     public void readOnlyFileThrowsSaveException () {
-        String expectedString = "Message string with prefix";
-        Message messageMock = mock(Message.class);
-        File fileMock = new File("logTest.txt");
-        fileMock.setReadOnly();
-        when(messageMock.decorate()).thenReturn(expectedString);
+        file.setReadOnly();
 
-        Saver saver = new FileSaver(1024, StandardCharsets.UTF_16BE, fileMock);
-        assertThrows(SaveException.class, () -> saver.save(messageMock.decorate()));
+        assertThrows(SaveException.class, () -> fileSaver.save(messageMock.decorate()));
     }
 
     private String readFile(String filePath, Charset charset) throws SaveException {
