@@ -9,6 +9,7 @@ public class Server {
         try (final ServerSocket listener = new ServerSocket(10_000)) {
 
             try (
+//                listener.setSoTimeout();
                 final Socket connection = listener.accept();
                 final DataInputStream input = new DataInputStream(new BufferedInputStream(connection.getInputStream()));
                 final DataOutputStream output = new DataOutputStream(new BufferedOutputStream(connection.getOutputStream()))
