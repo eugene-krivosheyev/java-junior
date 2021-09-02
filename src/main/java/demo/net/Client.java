@@ -12,6 +12,11 @@ public class Client {
         ) {
 
             output.writeUTF("hello!"); // protocol
+            output.writeUTF("hello!"); // protocol
+            output.writeUTF("hello!"); // protocol
+            output.writeUTF("hello!"); // protocol
+            output.writeUTF("hello!"); // protocol
+            output.writeUTF("hello!"); // protocol
             output.flush();
             //.....
             System.out.println(input.readUTF());
