@@ -43,9 +43,9 @@ public class ParallelismDemo {
         */
 
         //====================================//
-
+        //Executors.newSingleThreadExecutor()
         final ExecutorService pool = Executors.newFixedThreadPool(10);
-        pool.execute(() -> { try { System.out.println("1"); } catch(Exception e) {} });
+//        pool.execute(() -> { try { controller.log() } catch(Exception e) {} });
         pool.execute(() -> System.out.println("2"));
         pool.execute(() -> System.out.println("3"));
         pool.execute(() -> System.out.println("4"));

@@ -7,7 +7,6 @@ import java.net.Socket;
 public class Server {
     public static void main(String[] args) {
         try (final ServerSocket listener = new ServerSocket(10_000)) {
-
             try (
 //                listener.setSoTimeout();
                 final Socket connection = listener.accept();
