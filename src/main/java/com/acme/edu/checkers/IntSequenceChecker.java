@@ -24,23 +24,19 @@ public class IntSequenceChecker extends Checker<Integer> {
                 resultInt = Integer.MAX_VALUE;
                 intAccumulateSum = (int)((long)intAccumulateSum + (long)((int)message) - (long)Integer.MAX_VALUE);
 
-            }
-            else if ((long)intAccumulateSum + (long)((int)message) < (long)Integer.MIN_VALUE) {
+            } else if ((long)intAccumulateSum + (long)((int)message) < (long)Integer.MIN_VALUE) {
                 resultInt = Integer.MIN_VALUE;
                 intAccumulateSum = (int)((long)intAccumulateSum + (long)((int)message) - (long)Integer.MIN_VALUE);
-            }
-            else {
+            } else {
                 intAccumulateSum += (int)message;
                 return null;
             }
-        }
-        else {
+        } else {
             if (intAccumulateState) {
                 resultInt = intAccumulateSum;
                 intAccumulateState = false;
                 intAccumulateSum = 0;
-            }
-            else {
+            } else {
                 return null;
             }
         }
