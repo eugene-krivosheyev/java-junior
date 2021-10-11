@@ -1,6 +1,9 @@
 # Java Junior Developer Training Course.
 88 hours training + 32 hours work project = 120 hr.
 
+# Recordings
+- [11.10](https://us02web.zoom.us/rec/share/4K_bvC_0q8nvkzo26fSbcMVPM2uWzlQ9kqT2BbdbcQe-qeAdinWuF-rPfFBA0Pyp.R2IQ39ujDDEZjv1C)
+
 ---
 
 # Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice)
