@@ -633,3 +633,8 @@ assertMessageEquals("3")
 - PM and Business Customers accept product with six demo sessions
 
 ---
+
+# Парковка
+- Spring: Core, MVC, Boot
+- DB: JDBC, Templates, JPA
+- CI: Jenkins, Sonar
