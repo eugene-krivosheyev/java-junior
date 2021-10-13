@@ -1,4 +1,5 @@
-##Marshinin Arsenii
+#Marshinin Arsenii
+
 # Java Junior Developer Training Course.
 88 hours training + 32 hours work project = 120 hr.
 
