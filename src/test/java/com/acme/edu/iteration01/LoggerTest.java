@@ -13,6 +13,8 @@ import static java.lang.System.lineSeparator;
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
+    private static final String sep = lineSeparator();
+
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
@@ -35,7 +37,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
         //region then
         assertSysoutContains("primitive: ");
-        String sep = lineSeparator();
         assertSysoutEquals("primitive: 1" + sep + "primitive: 0" + sep +
                 "primitive: -1" + sep);
         //endregion
