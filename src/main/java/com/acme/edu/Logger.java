@@ -1,31 +1,33 @@
 package com.acme.edu;
 
-import static com.acme.edu.utils.Types.*;
-
 public class Logger {
+    private static final String primitivePrefix = "primitive: ";
+    private static final String charPrefix = "char: ";
+    private static final String stringPrefix = "string: ";
+    private static final String referencePrefix = "reference: ";
 
-    public static void log(int message) {
-        print(INTEGER.getPrefix() + message);
+    public static void log(Integer message) {
+        print(primitivePrefix + message);
     }
 
     public static void log(byte message) {
-        print(BYTE.getPrefix() + message);
+        print(primitivePrefix + message);
     }
 
     public static void log(char message) {
-        print(CHAR.getPrefix() + message);
+        print(charPrefix + message);
     }
 
     public static void log(String message) {
-        print(STRING.getPrefix() + message);
+        print(stringPrefix + message);
     }
 
     public static void log(boolean message) {
-        print(BOOLEAN.getPrefix() + message);
+        print(primitivePrefix + message);
     }
 
     public static void log(Object message){
-        print(OBJECT.getPrefix() + message);
+        print(referencePrefix + message);
     }
 
     private static void print(String message) {

@@ -12,7 +12,6 @@ import static java.lang.System.lineSeparator;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
-
     private static final String sep = lineSeparator();
 
     //region given
