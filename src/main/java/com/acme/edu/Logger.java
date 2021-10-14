@@ -30,6 +30,10 @@ public class Logger {
     }
 
     public static void log(Object message) {
+        if (message == null) {
+            printToOutput("null");
+            return;
+        }
         printToOutput("reference: " + message.toString());
     }
 
