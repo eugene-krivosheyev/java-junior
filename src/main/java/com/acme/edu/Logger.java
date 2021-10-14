@@ -1,31 +1,39 @@
 package com.acme.edu;
 
+import java.io.PrintStream;
+
 public class Logger {
+    private static PrintStream out = System.out;
+
+    public static void setPrintStream(PrintStream newPrintStream) {
+        out = newPrintStream;
+    }
+
     public static void log(int message) {
-        printToConsole("primitive: " + message);
+        printToOutput("primitive: " + message);
     }
 
     public static void log(byte message) {
-        printToConsole("primitive: " + message);
+        printToOutput("primitive: " + message);
     }
 
     public static void log(char message) {
-        printToConsole("char: " + message);
+        printToOutput("char: " + message);
     }
 
     public static void log(String message) {
-        printToConsole("string: " + message);
+        printToOutput("string: " + message);
     }
 
     public static void log(boolean message) {
-        printToConsole("boolean: " + message);
+        printToOutput("boolean: " + message);
     }
 
     public static void log(Object message) {
-        printToConsole("reference: " + message.toString());
+        printToOutput("reference: " + message.toString());
     }
 
-    private static void printToConsole(String message) {
-        System.out.println(message);
+    private static void printToOutput(String message) {
+        out.println(message);
     }
 }
