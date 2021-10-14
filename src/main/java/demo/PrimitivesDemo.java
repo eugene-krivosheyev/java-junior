@@ -6,6 +6,7 @@ import java.math.BigInteger;
 public strictfp class PrimitivesDemo {
     int iii;
     static int iiii;
+    static Integer iiiiiii = new Integer(0);
 
     public static strictfp void main(String[] args) {
         //region целочисленные
@@ -54,6 +55,11 @@ public strictfp class PrimitivesDemo {
         System.out.println( .1 + .3 );
 
         BigDecimal bd;
+        //endregion
+
+        //region Reference Types
+        Object iiiii = new Object(); //32 bit
+        System.out.println(iiiii.toString());
         //endregion
     }
 }
