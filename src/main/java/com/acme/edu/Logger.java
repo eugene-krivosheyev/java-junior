@@ -6,7 +6,6 @@ public class Logger {
     private static final String stringPrefix = "string: ";
     private static final String referencePrefix = "reference: ";
 
-
     public static void log(int message) {
         print(primitivePrefix + message);
     }
