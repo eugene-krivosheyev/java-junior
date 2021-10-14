@@ -13,7 +13,7 @@ public class Logger {
 
     public static void log(String message) { System.out.println("string: " + message);}
 
-    public static void log(Boolean message) { System.out.println("primitive: " + message);}
+    public static void log(boolean message) { System.out.println("primitive: " + message);}
 
     public static void log(Object message) { System.out.println("reference: " + message);}
 }
