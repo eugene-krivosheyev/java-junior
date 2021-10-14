@@ -14,6 +14,7 @@ import static java.lang.System.lineSeparator;
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     public static final String sep = lineSeparator();
+    private static String type;
 
     //region given
     @Before
@@ -30,87 +31,86 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogInteger() throws IOException {
+        type = typePrimitive;
         //region when
-        Logger.log(1, typePrimitive);
-        Logger.log(0, typePrimitive);
-        Logger.log(-1, typePrimitive);
+        log(1, 0, -1);
         //endregion
 
         //region then
-        assertSysoutContains(typePrimitive);
-        assertSysoutEquals(typePrimitive + "1" + sep + typePrimitive + "0" + sep + typePrimitive + "-1" + sep);
+        checkLog("1", "0", "-1");
         //endregion
     }
 
     @Test
     public void shouldLogByte() throws IOException {
+        type = typePrimitive;
         //region when
-        Logger.log((byte)1, typePrimitive);
-        Logger.log((byte)0, typePrimitive);
-        Logger.log((byte)-1, typePrimitive);
+        log((byte)1, (byte)0, (byte)-1);
         //endregion
 
         //region then
-        assertSysoutContains(typePrimitive);
-        assertSysoutContains("1");
-        assertSysoutContains("0");
-        assertSysoutContains("-1");
+        checkLog("1", "0", "-1");
         //endregion
     }
 
     @Test
     public void shouldLogChar() throws IOException {
+        type = typePrimitive;
         //region when
-        Logger.log('a', typeChar);
-        Logger.log('b', typeChar);
+        log('a', 'b');
         //endregion
 
         //region then
-        assertSysoutContains(typeChar);
-        assertSysoutContains("a");
-        assertSysoutContains("b");
+        checkLog("a", "b");
         //endregion
     }
 
     @Test
     public void shouldLogString() throws IOException {
+        type = typeString;
         //region when
-        Logger.log("test string 1", typeString);
-        Logger.log("other str", typeString);
+        log("test string 1", "other str");
         //endregion
 
         //region then
-        assertSysoutContains(typeString);
-        assertSysoutContains("test string 1");
-        assertSysoutContains("other str");
+        checkLog("test string 1", "other str");
         //endregion
     }
 
     @Test
     public void shouldLogBoolean() throws IOException {
+        type = typePrimitive;
         //region when
-        Logger.log(true, typePrimitive);
-        Logger.log(false, typePrimitive);
+        log(true, false);
         //endregion
 
         //region then
-        assertSysoutContains(typePrimitive);
-        assertSysoutContains("true");
-        assertSysoutContains("false");
+        checkLog("true", "false");
         //endregion
     }
 
     @Test
     public void shouldLogReference() throws IOException {
+        type = typeReference;
         //region when
-        Logger.log(new Object(), typeReference);
+        log(new Object());
         //endregion
 
         //region then
-        assertSysoutContains(typeReference);
+        assertSysoutContains(type);
         assertSysoutContains("@");
         //endregion
     }
 
+    private void log(Object... valuesToLog) throws IOException {
+        for (Object valueToLog : valuesToLog) {
+            Logger.log(valueToLog, type);
+        }
+    }
 
+    private void checkLog(String... valuesToCheck) throws IOException {
+        for (String valueToCheck : valuesToCheck) {
+            assertSysoutContains(type + valueToCheck);
+        }
+    }
 }
