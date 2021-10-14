@@ -37,7 +37,11 @@ public class Logger {
         }
     }
 
-    private static void print(String type, String message) {
-        System.out.println(prefix(type) + message);
+    private static String formatMsg(String type, String message) {
+        return prefix(type) + message;
+    }
+
+    private static void print(String classType, String message) {
+        System.out.println(formatMsg(classType, message));
     }
 }
