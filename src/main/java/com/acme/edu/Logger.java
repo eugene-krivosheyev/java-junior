@@ -9,7 +9,7 @@ public class Logger {
         System.out.println("primitive: " + message);
     }
 
-    public static void log(char ch) {
-        System.out.println("char: " + ch);
+    public static void log(String str) {
+        System.out.println("string: " + str);
     }
 }
