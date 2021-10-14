@@ -11,4 +11,7 @@ public class Logger {
     public static void log(byte message) {
         System.out.println("primitive: " + message);
     }
+    public static void log(String message) {
+        System.out.println("string: " + message);
+    }
 }
