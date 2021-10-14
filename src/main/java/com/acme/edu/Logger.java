@@ -1,26 +1,38 @@
 package com.acme.edu;
 
 public class Logger {
+
+    private static final String primitivePrefix = "primitive: ";
+    private static final String charPrefix = "char: ";
+    private static final String stringPrefix = "string: ";
+    private static final String referencePrefix = "reference: ";
+
+    private static void print(String prefix, String message) {
+        System.out.println(prefix + message);
+    }
+
     public static void log(int message) {
-        System.out.println("primitive: " + message);
+        print(primitivePrefix, String.valueOf(message));
     }
 
     public static void log(byte message) {
-        System.out.println("primitive: " + message);
+        print(primitivePrefix, String.valueOf(message));
     }
+
     public static void log(char message) {
-        System.out.println("char: " + message);
+        print(charPrefix, String.valueOf(message));
     }
+
     public static void log(String message) {
-        System.out.println("string: " + message);
+        print(stringPrefix, message);
     }
 
     public static void log(boolean message) {
-        System.out.println("primitive: " + message);
+        print(primitivePrefix, String.valueOf(message));
     }
 
     public static void log(Object message) {
-        System.out.println("reference: " + message);
+        print(referencePrefix, message.toString());
     }
 
 }
