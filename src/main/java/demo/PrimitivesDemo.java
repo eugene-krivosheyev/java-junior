@@ -1,10 +1,13 @@
 package demo;
 
-public class PrimitivesDemo {
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
+public strictfp class PrimitivesDemo {
     int iii;
     static int iiii;
 
-    public static void main(String[] args) {
+    public static strictfp void main(String[] args) {
         //region целочисленные
         byte b = 0b10;
         short s = 0;
@@ -30,7 +33,27 @@ public class PrimitivesDemo {
         System.out.println(ii);
         //endregion
 
+        //region Type inference
         var variable = 0;
         var var1 = 'c';
+        //endregion
+
+        //region Type Overflow
+        byte counter = Byte.MAX_VALUE;
+        counter++;
+        counter++;
+        counter++;
+        System.out.println(counter); //???????
+
+        BigInteger bi;
+        //endregion
+
+        //region FP precision loss
+        System.out.println( .02 - .03 );
+        System.out.println( .1 + .2 ); // IEEE 754
+        System.out.println( .1 + .3 );
+
+        BigDecimal bd;
+        //endregion
     }
 }
