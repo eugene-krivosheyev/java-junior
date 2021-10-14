@@ -24,7 +24,12 @@ public class Logger {
         print(BOOLEAN.getPrefix() + message);
     }
 
+    public static void log(Object message){
+        print(OBJECT.getPrefix() + message);
+    }
+
     private static void print(String message) {
         System.out.println(message);
     }
+
 }

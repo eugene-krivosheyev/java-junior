@@ -5,7 +5,9 @@ public enum Types {
     INTEGER("primitive: "),
     CHAR("char: "),
     STRING("string: "),
-    BOOLEAN("primitive: ");
+    BOOLEAN("primitive: "),
+    OBJECT("reference: ");
+
 
     private final String prefix;
     Types(String prefix) {
