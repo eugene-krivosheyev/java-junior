@@ -12,4 +12,8 @@ public class Logger {
     public static void log(String str) {
         System.out.println("string: " + str);
     }
+
+    public static void log(boolean bool) {
+        System.out.println("primitive: " + bool);
+    }
 }
