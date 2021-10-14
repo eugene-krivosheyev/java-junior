@@ -31,9 +31,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogInteger() throws IOException {
         //region when
-        Logger.log(1);
-        Logger.log(0);
-        Logger.log(-1);
+        Logger.log(1, typePrimitive);
+        Logger.log(0, typePrimitive);
+        Logger.log(-1, typePrimitive);
         //endregion
 
         //region then
@@ -45,9 +45,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogByte() throws IOException {
         //region when
-        Logger.log((byte)1);
-        Logger.log((byte)0);
-        Logger.log((byte)-1);
+        Logger.log((byte)1, typePrimitive);
+        Logger.log((byte)0, typePrimitive);
+        Logger.log((byte)-1, typePrimitive);
         //endregion
 
         //region then
@@ -61,8 +61,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogChar() throws IOException {
         //region when
-        Logger.log('a');
-        Logger.log('b');
+        Logger.log('a', typeChar);
+        Logger.log('b', typeChar);
         //endregion
 
         //region then
@@ -75,8 +75,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogString() throws IOException {
         //region when
-        Logger.log("test string 1");
-        Logger.log("other str");
+        Logger.log("test string 1", typeString);
+        Logger.log("other str", typeString);
         //endregion
 
         //region then
@@ -89,8 +89,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogBoolean() throws IOException {
         //region when
-        Logger.log(true);
-        Logger.log(false);
+        Logger.log(true, typePrimitive);
+        Logger.log(false, typePrimitive);
         //endregion
 
         //region then
@@ -103,7 +103,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogReference() throws IOException {
         //region when
-        Logger.log(new Object());
+        Logger.log(new Object(), typeReference);
         //endregion
 
         //region then
