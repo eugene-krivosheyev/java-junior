@@ -7,7 +7,7 @@ public class Logger {
     public static final String typeString = "string: ";
     public static final String typeReference = "reference: ";
 
-    public static void log(Object message, String prefixType) {
+    public static void log(String prefixType, Object message) {
         printToConsole(prefixType + message);
     }
 

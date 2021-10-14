@@ -9,11 +9,9 @@ import org.junit.Test;
 import java.io.*;
 
 import static com.acme.edu.Logger.*;
-import static java.lang.System.lineSeparator;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
-    public static final String sep = lineSeparator();
     private static String type;
 
     //region given
@@ -104,7 +102,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private void log(Object... valuesToLog) throws IOException {
         for (Object valueToLog : valuesToLog) {
-            Logger.log(valueToLog, type);
+            Logger.log(type, valueToLog);
         }
     }
 
