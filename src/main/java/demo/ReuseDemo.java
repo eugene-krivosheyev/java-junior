@@ -30,7 +30,7 @@ public class ReuseDemo {
         //...
         //...
         if (message > Integer.MAX_VALUE) {
-            setField(mesasge)
+//            setField(mesasge)
         }
 
         //...
@@ -41,13 +41,13 @@ public class ReuseDemo {
         //...
         //...
         if (message > Byte.MAX_VALUE) {
-            setField(mesasge)
+//            setField(mesasge)
         }
         //...
         //...
     }
 
-    setField(int )
-    setField(byte )
+//    setField(int )
+//    setField(byte )
 
 }
