@@ -6,7 +6,8 @@ public class Logger {
     private static final String stringPrefix = "string: ";
     private static final String referencePrefix = "reference: ";
     private static String currentMessage;
-    private static long currentSum = 0;
+    private static long currentIntSum = 0;
+    private static int currentByteSum = 0;
 
     private static String lastSubmittedString;
     private static int sameLastStringCounter = 1;
@@ -20,8 +21,8 @@ public class Logger {
             flush();
             setLastInt();
         }
-        currentSum += message;
-        handleIntOverflow();
+        currentIntSum += message;
+        currentIntSum = handleOverflow(currentIntSum, Integer.MAX_VALUE, Integer.MIN_VALUE);
     }
 
     public static void log(byte message) {
@@ -29,8 +30,8 @@ public class Logger {
             flush();
             setLastByte();
         }
-        currentSum += message;
-        handleByteOverflow();
+        currentByteSum += message;
+        currentByteSum = (int) handleOverflow(currentByteSum, Byte.MAX_VALUE, Byte.MIN_VALUE);
     }
 
     public static void log(char message) {
@@ -61,10 +62,14 @@ public class Logger {
     }
 
     private static boolean handleCurrentMessage() {
-        if (isLastInt || isLastByte) {
-            currentMessage = primitivePrefix + currentSum;
-            currentSum = 0;
+        if (isLastInt) {
+            currentMessage = primitivePrefix + currentIntSum;
+            currentIntSum = 0;
             isLastInt = false;
+            return true;
+        } else if (isLastByte) {
+            currentMessage = primitivePrefix + currentByteSum;
+            currentByteSum = 0;
             isLastByte = false;
             return true;
         } else if (isLastString) {
@@ -85,35 +90,35 @@ public class Logger {
     }
 
     private static void setLastInt() {
+        setStateFalse();
         isLastInt = true;
-        isLastByte = false;
-        isLastString = false;
     }
 
     private static void setLastByte() {
-        isLastInt = false;
+        setStateFalse();
         isLastByte = true;
+    }
+
+    private static void setStateFalse() {
+        isLastInt = false;
+        isLastByte = false;
         isLastString = false;
     }
 
     private static void setLastSubmittedString(String message) {
+        setStateFalse();
         lastSubmittedString = message;
-        isLastInt = false;
-        isLastByte = false;
         isLastString = true;
     }
 
-    private static void handleByteOverflow() {
-        if (currentSum > Byte.MAX_VALUE) {
-            print(String.valueOf(Byte.MAX_VALUE));
-            currentSum = currentSum - Byte.MAX_VALUE;
+    private static long handleOverflow(long current, long positive, long negative) {
+        if (current > positive) {
+            print(String.valueOf(positive));
+            return current - positive;
+        } else if (current < negative) {
+            print(String.valueOf(positive));
+            return current - negative;
         }
-    }
-
-    private static void handleIntOverflow() {
-        if (currentSum > Integer.MAX_VALUE) {
-            print(String.valueOf(Integer.MAX_VALUE));
-            currentSum = currentSum - Integer.MAX_VALUE;
-        }
+        return current;
     }
 }
