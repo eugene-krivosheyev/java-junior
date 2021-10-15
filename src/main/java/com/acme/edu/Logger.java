@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Logger {
 
     public static final String typePrimitive = "pimitive: ";
+    public static final String typeChar = "char: ";
     public static final String typeString = "string: ";
     public static final String typeReference = "reference: ";
 
@@ -47,12 +48,25 @@ public class Logger {
                 byteSum = countSum(byteSum, (byte)message, Byte.MAX_VALUE, Byte.MIN_VALUE);
                 break;
             }
+
             case INTEGER: {
                 integerSum = countSum(integerSum, (int)message, Integer.MAX_VALUE, Integer.MIN_VALUE);
                 break;
             }
-            default: {
-                printToConsole(getPrefixType(typeCode) + message);
+
+            case BOOLEAN: {
+                printToConsole(typePrimitive + message);
+                break;
+            }
+
+            case CHAR: {
+                printToConsole(typeChar + message);
+                break;
+            }
+
+            case OBJECT: {
+                printToConsole(typeReference + message);
+                break;
             }
         }
         prevTypeCode = typeCode;
@@ -63,9 +77,9 @@ public class Logger {
             case STRING: {
                 similarStringCounter++;
                 if(similarStringCounter > 1) {
-                    printToConsole(getPrefixType(prevTypeCode) + prevString + " (x" + similarStringCounter + ")");
+                    printToConsole(typeString + prevString + " (x" + similarStringCounter + ")");
                 } else {
-                    printToConsole(getPrefixType(prevTypeCode) + prevString);
+                    printToConsole(typeString + prevString);
                 }
                 prevString = null;
                 similarStringCounter = 0;
@@ -73,12 +87,12 @@ public class Logger {
             }
 
             case BYTE: {
-                printToConsole(getPrefixType(prevTypeCode) + byteSum);
+                printToConsole(typePrimitive + byteSum);
                 byteSum = 0;
                 break;
             }
             case INTEGER: {
-                printToConsole(getPrefixType(prevTypeCode) + integerSum);
+                printToConsole(typePrimitive + integerSum);
                 integerSum = 0;
                 break;
             }
@@ -112,27 +126,7 @@ public class Logger {
         return TypeCode.NONE;
     }
 
-    private static String getPrefixType(TypeCode typeCode) {
-        switch (typeCode) {
-            case STRING: {
-                return typeString;
-            }
-
-            case BYTE:
-            case CHAR:
-            case BOOLEAN:
-            case INTEGER: {
-                return typePrimitive;
-            }
-
-            case OBJECT: {
-                return typeReference;
-            }
-            default: return null;
-        }
-    }
-
-    private static long checkOverflow(long result, Integer max, Integer min) {
+    private static long checkOverflow(long result, int max, int min) {
         if (result > max) {
             return result - max;
         }
