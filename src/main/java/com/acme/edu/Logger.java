@@ -20,7 +20,7 @@ public class Logger {
 
     private static TypeCode prevTypeCode = TypeCode.NONE;
 
-    private static int counter = 0;
+    private static int similarStringCounter = 0;
     private static int integerSum = 0;
     private static int byteSum = 0;
     private static String prevString = null;
@@ -35,8 +35,8 @@ public class Logger {
         switch (typeCode) {
             case STRING: {
                 if (Objects.equals(prevString, message)) {
-                    counter++;
-                } else {
+                    similarStringCounter++;
+                } else if (prevString != null) {
                     flush();
                 }
                 prevString = (String)message;
@@ -44,11 +44,11 @@ public class Logger {
             }
 
             case BYTE: {
-                byteSum = numberHandler(byteSum, (byte)message, Byte.MAX_VALUE, Byte.MIN_VALUE);
+                byteSum = countSum(byteSum, (byte)message, Byte.MAX_VALUE, Byte.MIN_VALUE);
                 break;
             }
             case INTEGER: {
-                integerSum = numberHandler(integerSum, (int)message, Integer.MAX_VALUE, Integer.MIN_VALUE);
+                integerSum = countSum(integerSum, (int)message, Integer.MAX_VALUE, Integer.MIN_VALUE);
                 break;
             }
             default: {
@@ -61,14 +61,14 @@ public class Logger {
     public static void flush() {
         switch (prevTypeCode) {
             case STRING: {
-                counter++;
-                if(counter > 1) {
-                    printToConsole(getPrefixType(prevTypeCode) + prevString + " (x" + counter + ")");
+                similarStringCounter++;
+                if(similarStringCounter > 1) {
+                    printToConsole(getPrefixType(prevTypeCode) + prevString + " (x" + similarStringCounter + ")");
                 } else {
                     printToConsole(getPrefixType(prevTypeCode) + prevString);
                 }
                 prevString = null;
-                counter = 0;
+                similarStringCounter = 0;
                 break;
             }
 
@@ -142,7 +142,7 @@ public class Logger {
         return result;
     }
 
-    private static int numberHandler(int externalSum, int income, int max, int min) {
+    private static int countSum(int externalSum, int income, int max, int min) {
         long sum = (long)externalSum + (long)income;
         long result = checkOverflow(sum, max, min);
 

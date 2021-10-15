@@ -25,79 +25,60 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
-        Logger.log("str 1");
-        Logger.log(1);
-        Logger.log(2);
-        Logger.log("str 2");
-        Logger.log(0);
+        log("str 1", 1, 2, "str 2", 0);
+        Logger.flush();
         //endregion
 
         //region then
-        assertSysoutContains("str 1");
-        assertSysoutContains("3");
-        assertSysoutContains("str 2");
-        assertSysoutContains("0");
+        checkLog("str 1", "3", "str 2", "0");
         //endregion
     }
 
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
-        Logger.log("str 1");
-        Logger.log(10);
-        Logger.log(Integer.MAX_VALUE);
-        Logger.log("str 2");
-        Logger.log(0);
+        log("str 1", 10, Integer.MAX_VALUE, "str 2", 0);
+        Logger.flush();
         //endregion
 
         //region then
-        assertSysoutContains("str 1");
-        assertSysoutContains(Integer.toString(Integer.MAX_VALUE));
-        assertSysoutContains("10");
-        assertSysoutContains("str 2");
-        assertSysoutContains("0");
+        checkLog("str 1", Integer.toString(Integer.MAX_VALUE), "10", "str 2", "0");
         //endregion
     }
 
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
-        Logger.log("str 1");
-        Logger.log((byte)10);
-        Logger.log((byte)Byte.MAX_VALUE);
-        Logger.log("str 2");
-        Logger.log(0);
+        log("str 1", (byte)10, Byte.MAX_VALUE, "str 2", 0);
+        Logger.flush();
         //endregion
 
         //region then
-        assertSysoutContains("str 1");
-        assertSysoutContains(Byte.toString(Byte.MAX_VALUE));
-        assertSysoutContains("10");
-        assertSysoutContains("str 2");
-        assertSysoutContains("0");
+        checkLog("str 1", Byte.toString(Byte.MAX_VALUE), "10", "str 2", "0");
         //endregion
     }
 
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
         //region when
-        Logger.log("str 1");
-        Logger.log("str 2");
-        Logger.log("str 2");
-        Logger.log(0);
-        Logger.log("str 2");
-        Logger.log("str 3");
-        Logger.log("str 3");
-        Logger.log("str 3");
+        log("str 1", "str 2", "str 2", 0, "str 2", "str 3", "str 3", "str 3");
         Logger.flush();
         //endregion
 
         //region then
-        assertSysoutContains("str 1");
-        assertSysoutContains("str 2 (x2)");
-        assertSysoutContains("0");
-        assertSysoutContains("str 2");
-        assertSysoutContains("str 3 (x3)");
+        checkLog("str 1", "str 2 (x2)", "0", "str 2", "str 3 (x3)");
         //endregion
+    }
+
+    private void checkLog(String... valuesToCheck) {
+        for (String valueToCheck : valuesToCheck) {
+            assertSysoutContains(valueToCheck);
+        }
+    }
+
+    private void log(Object... valuesToLog) {
+        for (Object valueToLog : valuesToLog) {
+            Logger.log(valueToLog);
+        }
     }
 }
