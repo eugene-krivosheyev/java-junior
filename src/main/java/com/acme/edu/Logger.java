@@ -1,9 +1,12 @@
 package com.acme.edu;
 
+import java.sql.SQLOutput;
+
 public class Logger {
 
     private static int state;
-    private static String previous_type;
+    private static String previous_type="start";
+    private static String messagePrefix="";
 
     public static void log(int message) {
         /**
@@ -11,14 +14,16 @@ public class Logger {
          * @param message
          */
         final String type = "int";
-        final String messagePrefix = "primitive: ";
+        messagePrefix = "primitive: ";
         if (type != previous_type) {
+      //      flush();
             previous_type = type;
-            flush();
+            state+=message;
         } else {
-            if (state < Integer.MAX_VALUE) {
+            if ((Long.valueOf(state) + Long.valueOf(message)) < Integer.MAX_VALUE) {
                 state += message;
             } else {
+                System.out.println(state);
                 System.out.println(Integer.MAX_VALUE);
                 state = message - (Integer.MAX_VALUE - state);
             }
@@ -26,33 +31,39 @@ public class Logger {
     }
 
     public static void log(byte message) {
-        final String messagePrefix = "primitive: ";
+        messagePrefix = "primitive: ";
         print(formatMessage(messagePrefix, message));
     }
 
     public static void log(char message) {
-        final String messagePrefix = "char: ";
+        messagePrefix = "char: ";
         print(formatMessage(messagePrefix, message));
     }
 
     public static void log(String message) {
         final String type = "str";
-        final String messagePrefix = "string: ";
+        messagePrefix = "string: ";
+  //      if (type != previous_type) {
+   //         flush();
+            previous_type = type;
+            state = 0;
         print(formatMessage(messagePrefix, message));
     }
 
     public static void log(boolean message) {
-        final String messagePrefix = "primitive: ";
+       messagePrefix = "primitive: ";
         print(formatMessage(messagePrefix, message));
     }
 
     public static void log(Object message) {
-        final String messagePrefix = "reference: ";
+        messagePrefix = "reference: ";
         print(formatMessage(messagePrefix, message));
     }
 
-    public static void flush(){
-        System.out.println(state);
+    public static void flush() {
+        if (previous_type != "start") {
+            print(formatMessage(messagePrefix,state));
+        }
         state = 0;
     }
 
