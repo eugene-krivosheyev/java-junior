@@ -34,9 +34,7 @@ public class Logger {
 
         switch (typeCode) {
             case STRING: {
-                if(prevString == null) {
-                    //counter++;
-                } else if (Objects.equals(prevString, message)) {
+                if (Objects.equals(prevString, message)) {
                     counter++;
                 } else {
                     flush();
@@ -46,8 +44,7 @@ public class Logger {
             }
 
             case BYTE: {
-                byte input = (byte)message;
-                byteSum = numberHandler(byteSum, (int)input, Byte.MAX_VALUE, Byte.MIN_VALUE);
+                byteSum = numberHandler(byteSum, (byte)message, Byte.MAX_VALUE, Byte.MIN_VALUE);
                 break;
             }
             case INTEGER: {
@@ -85,6 +82,7 @@ public class Logger {
                 integerSum = 0;
                 break;
             }
+            default: break;
         }
     }
 
@@ -121,12 +119,9 @@ public class Logger {
             }
 
             case BYTE:
+            case CHAR:
             case BOOLEAN:
             case INTEGER: {
-                return typePrimitive;
-            }
-
-            case CHAR: {
                 return typePrimitive;
             }
 
