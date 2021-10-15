@@ -3,9 +3,6 @@ package com.acme.edu;
 import java.io.PrintStream;
 
 public class Logger {
-    private static String strMessage = "";
-    private static Integer intValue = null;
-
     private static PrintStream out = System.out;
 
     enum Type {
