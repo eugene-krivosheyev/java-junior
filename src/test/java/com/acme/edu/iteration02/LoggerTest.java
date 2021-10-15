@@ -43,7 +43,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //endregion
     }
-
+    //TODO create test case for MIN_VALUE
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
@@ -64,6 +64,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+    //TODO create test case for MIN_VALUE
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when

@@ -3,15 +3,15 @@ package com.acme.edu;
 
 public class Logger {
 
-    private static final String primitivePrefix = "primitive: ";
-    private static final String charPrefix = "char: ";
-    private static final String stringPrefix = "string: ";
-    private static final String referencePrefix = "reference: ";
+    private static final String PRIMITIVE_PREFIX = "primitive: ";
+    private static final String CHAR_PREFIX = "char: ";
+    private static final String STRING_PREFIX = "string: ";
+    private static final String REFERENCE_PREFIX = "reference: ";
 
 
-    private static final String stringType = "string";
-    private static final String intType = "int";
-    private static final String byteType = "byte";
+    private static final String STRING_TYPE = "string";
+    private static final String INT_TYPE = "int";
+    private static final String BYTE_TYPE = "byte";
 
     private static String bufferType = "";
 
@@ -21,21 +21,21 @@ public class Logger {
     private static int stringCount;
 
     public static void log(int message) {
-        checkPreviousType(intType);
+        checkPreviousType(INT_TYPE);
         checkOverflow(Integer.MAX_VALUE, Integer.MIN_VALUE, message);
     }
 
     public static void log(byte message) {
-        checkPreviousType(byteType);
+        checkPreviousType(BYTE_TYPE);
         checkOverflow(Byte.MAX_VALUE, Byte.MIN_VALUE, message);
     }
 
     public static void log(char message) {
-        print(charPrefix + message);
+        print(CHAR_PREFIX + message);
     }
 
     public static void log(String message) {
-        checkPreviousType(stringType);
+        checkPreviousType(STRING_TYPE);
 
         if (stringBuffer.isEmpty()) {
             stringBuffer = message;
@@ -50,28 +50,28 @@ public class Logger {
     }
 
     public static void log(boolean message) {
-        print(primitivePrefix + message);
+        print(PRIMITIVE_PREFIX + message);
     }
 
     public static void log(Object message) {
-        print(referencePrefix + message);
+        print(REFERENCE_PREFIX + message);
     }
 
     public static void flush() {
         switch (bufferType) {
-            case stringType:
+            case STRING_TYPE:
                 if (stringCount > 1) {
-                    print(stringPrefix + stringBuffer + " (x" + stringCount + ")");
+                    print(STRING_PREFIX + stringBuffer + " (x" + stringCount + ")");
                 } else {
-                    print(stringPrefix + stringBuffer);
+                    print(STRING_PREFIX + stringBuffer);
                 }
 
                 stringBuffer = "";
                 stringCount = 0;
                 break;
-            case intType:
-            case byteType:
-                print(primitivePrefix + numBuffer);
+            case INT_TYPE:
+            case BYTE_TYPE:
+                print(PRIMITIVE_PREFIX + numBuffer);
                 numBuffer = 0;
                 break;
         }
