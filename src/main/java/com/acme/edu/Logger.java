@@ -15,19 +15,19 @@ public class Logger {
 
     private static String bufferType = "";
 
-    private static int intBuffer;
+    private static long numBuffer;
 
     private static String stringBuffer = "";
     private static int stringCount;
 
     public static void log(int message) {
         checkPreviousType(intType);
-        checkIntOverflow(Integer.MAX_VALUE, message);
+        checkOverflow(Integer.MAX_VALUE, Integer.MIN_VALUE, message);
     }
 
     public static void log(byte message) {
         checkPreviousType(byteType);
-        checkIntOverflow(Byte.MAX_VALUE, message);
+        checkOverflow(Byte.MAX_VALUE, Byte.MIN_VALUE, message);
     }
 
     public static void log(char message) {
@@ -71,8 +71,8 @@ public class Logger {
                 break;
             case intType:
             case byteType:
-                print(primitivePrefix + intBuffer);
-                intBuffer = 0;
+                print(primitivePrefix + numBuffer);
+                numBuffer = 0;
                 break;
         }
     }
@@ -92,14 +92,18 @@ public class Logger {
         System.out.println(message);
     }
 
-    private static void checkIntOverflow(int limit, int num) {
-        int remainder = limit - intBuffer;
-        if (num >= remainder) {
-            intBuffer = limit;
+    private static void checkOverflow(long maxLimit, long minLimit, long num) {
+        long sum = num + numBuffer;
+        if (sum <= minLimit) {
+            numBuffer = minLimit;
             flush();
-            intBuffer = num - remainder;
+            numBuffer += sum - minLimit;
+        } else if (sum >= maxLimit) {
+            numBuffer = maxLimit;
+            flush();
+            numBuffer = sum - maxLimit;
         } else {
-            intBuffer += num;
+            numBuffer += num;
         }
     }
 }
