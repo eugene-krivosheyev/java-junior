@@ -43,6 +43,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
             "str 2\n" +
             "0\n"
         );
+        assertContains("str 1")
+        assertContains("3")
+        assertContains("str 2")
+        assertContains("0")
         //endregion
     }
 
@@ -59,8 +63,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region then
         assertSysoutEquals(
             "str 1\n" +
-            "10\n" +
             Integer.MAX_VALUE + "\n" +
+            "10\n" +
             "str 2\n" +
             "0\n"
         );
