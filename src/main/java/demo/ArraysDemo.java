@@ -26,6 +26,8 @@ public class ArraysDemo {
         mWithVararg(new int[] {1,3});
         mWithVararg(1,2);
         mWithVararg(1,2,3,4,5,6,7,8);
+
+
     }
 
     private static void m(int[] arg) {
@@ -39,5 +41,9 @@ public class ArraysDemo {
         for (int current : arg) {
             System.out.println(arg);
         }
+    }
+
+    private static void mWithVararg(int arg) {
+
     }
 }
