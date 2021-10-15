@@ -61,5 +61,19 @@ public strictfp class PrimitivesDemo {
         Object iiiii = new Object(); //32 bit
         System.out.println(iiiii.toString());
         //endregion
+
+        //region Wrappers
+        Byte byteRef = 1;
+        byte primitiveByte = byteRef;
+
+        while (true) {
+            byteRef++;
+//            byte b1 = byteRef.byteValue();
+//            b1++;
+//            Byte.valueOf(b1);
+        }
+        //endregion
+
+
     }
 }
