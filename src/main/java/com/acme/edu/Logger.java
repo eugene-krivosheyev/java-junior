@@ -128,13 +128,18 @@ public class Logger {
         }
     }
 
+    private static boolean isMAXMIN(int value, int MAX, int MIN){
+        return (MAX - bufferInteger < value) || (MIN - bufferInteger > value);
+    }
+
     private static void workWithInteger(String message) {
-        if ((Integer.MAX_VALUE - bufferInteger < Integer.valueOf(message).intValue())
-        ||  (Integer.MIN_VALUE - bufferInteger > Integer.valueOf(message).intValue())){
+        int MAXValue = Integer.MAX_VALUE;
+        int MINValue = Integer.MIN_VALUE;
+        if (isMAXMIN(Integer.parseInt(message),MAXValue,MINValue)){
             print(bufferInteger.toString());
             bufferInteger = 0;
         }
-        bufferInteger = (bufferInteger + Integer.valueOf(message).intValue());
+        bufferInteger = (bufferInteger + Integer.parseInt(message));
     }
 
     private static void workWithString(String message) {
