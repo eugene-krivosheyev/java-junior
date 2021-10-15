@@ -11,6 +11,8 @@ public class Logger {
     private static String lastSubmittedString;
     private static int sameLastStringCounter = 1;
 
+    public static void log(int message) {
+        print(primitivePrefix + message);
     private static boolean isLastInt = false;
     private static boolean isLastByte = false;
     private static boolean isLastString = false;
