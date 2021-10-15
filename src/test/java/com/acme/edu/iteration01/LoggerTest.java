@@ -104,7 +104,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private void log(Object... valuesToLog) throws IOException {
         for (Object valueToLog : valuesToLog) {
-            Logger.log(valueToLog, type);
+            Logger.log(valueToLog);
+            Logger.flush();
         }
     }
 
