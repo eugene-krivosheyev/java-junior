@@ -32,8 +32,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogInteger() throws IOException {
         //region when
         Logger.log(1);
+        Logger.flush();
         Logger.log(0);
+        Logger.flush();
         Logger.log(-1);
+        Logger.flush();
         //endregion
 
         //region then
@@ -59,7 +62,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     //TODO: implement Logger solution to match specification as tests
-
 
     @Test
     public void shouldLogChar() throws IOException {
