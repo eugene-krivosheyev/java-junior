@@ -2,6 +2,7 @@ package com.acme.edu.iteration01;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import jdk.internal.net.http.common.Log;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,8 +32,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogInteger() throws IOException {
         //region when
         Logger.log(1);
+        Logger.flash();
         Logger.log(0);
+        Logger.flash();
         Logger.log(-1);
+        Logger.flash();
         //endregion
 
         //region then
@@ -45,8 +49,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogByte() throws IOException {
         //region when
         Logger.log((byte) 1);
+        Logger.flash();
         Logger.log((byte) 0);
+        Logger.flash();
         Logger.log((byte) -1);
+        Logger.flash();
         //endregion
 
         //region then
@@ -65,7 +72,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogChar() throws IOException {
         //region when
         Logger.log('a');
+        Logger.flash();
         Logger.log('b');
+        Logger.flash();
         //endregion
 
         //region then
@@ -79,7 +88,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogString() throws IOException {
         //region when
         Logger.log("test string 1");
+        Logger.flash();
         Logger.log("other str");
+        Logger.flash();
         //endregion
 
         //region then
@@ -93,7 +104,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogBoolean() throws IOException {
         //region when
         Logger.log(true);
+        Logger.flash();
         Logger.log(false);
+        Logger.flash();
         //endregion
 
         //region then
@@ -106,6 +119,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogReference() throws IOException {
         //region when
         Logger.log(new Object());
+        Logger.flash();
         //endregion
 
         //region then
