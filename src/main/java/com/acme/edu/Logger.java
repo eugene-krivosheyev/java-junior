@@ -16,6 +16,7 @@ public class Logger {
     static int counter = 0;
 
 
+    // TODO: flush
     public static void flash() {
         switch (type) {
             case STRING:
@@ -68,6 +69,7 @@ public class Logger {
                 break;
             case BYTE:
                 byte number = Byte.parseByte(value);
+                // TODO make general method for both int and byte
                 if (number + (int)message > Byte.MAX_VALUE) {
                     printToOutput("primitive: " + number);
                     printToOutput("primitive: " + message);
@@ -89,6 +91,7 @@ public class Logger {
     public static void log(String message) {
         switch (type) {
             case STRING:
+                // TODO separate method for unifying level of abstraction
                 if (message.equals(value)) {
                     counter++;
                 } else {
@@ -129,6 +132,7 @@ public class Logger {
         value = newValue;
         counter = 0;
     }
+    //TODO make name more informative
     private static void handlePrimitive(String newValue) {
         printToOutput("primitive: " + value);
         value = newValue;
