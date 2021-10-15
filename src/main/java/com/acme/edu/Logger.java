@@ -11,20 +11,20 @@ public class Logger {
     public static boolean byteAccIsNotEmpty = false;
     private static int byteAccumulator = 0;
     private static String savedString;
-    private static int strRepeatitionCounter = 0;
+    private static int strRepetitionCounter = 0;
 
 
-    public static void log(int message) { output(OUTPUT_METHOD,PRIMITIVE_PREFIX, message); }
+    public static void log(int message) { output(OUTPUT_METHOD, PRIMITIVE_PREFIX, message); }
 
-    public static void log(byte message) { output(OUTPUT_METHOD,PRIMITIVE_PREFIX, message); }
+    public static void log(byte message) { output(OUTPUT_METHOD, PRIMITIVE_PREFIX, message); }
 
     public static void log(char message) { output(OUTPUT_METHOD, CHAR_PREFIX, message); }
 
-    public static void log(String message) { output(OUTPUT_METHOD,STRING_PREFIX, message); }
+    public static void log(String message) { output(OUTPUT_METHOD, STRING_PREFIX, message); }
 
-    public static void log(boolean message) { output(OUTPUT_METHOD,PRIMITIVE_PREFIX, message); }
+    public static void log(boolean message) { output(OUTPUT_METHOD, PRIMITIVE_PREFIX, message); }
 
-    public static void log(Object message) { output(OUTPUT_METHOD,OBJECT_PREFIX, message); }
+    public static void log(Object message) { output(OUTPUT_METHOD, OBJECT_PREFIX, message); }
 
     private static void output(OutputMethod outputMethod, String prefix, Object message) {
         if (outputMethod == OutputMethod.TERMINAL) {
