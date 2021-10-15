@@ -38,11 +38,10 @@ public class Logger {
                     similarStringCounter++;
                 } else if (prevString != null) {
                     flush();
+                    prevString = (String)message;
                 }
-                prevString = (String)message;
                 break;
             }
-
             case BYTE: {
                 byteSum = countSum(byteSum, (byte)message, Byte.MAX_VALUE, Byte.MIN_VALUE);
                 break;
@@ -71,7 +70,6 @@ public class Logger {
                 similarStringCounter = 0;
                 break;
             }
-
             case BYTE: {
                 printToConsole(getPrefixType(prevTypeCode) + byteSum);
                 byteSum = 0;
@@ -117,14 +115,12 @@ public class Logger {
             case STRING: {
                 return typeString;
             }
-
             case BYTE:
             case CHAR:
             case BOOLEAN:
             case INTEGER: {
                 return typePrimitive;
             }
-
             case OBJECT: {
                 return typeReference;
             }
@@ -148,8 +144,7 @@ public class Logger {
 
         if (result > sum) {
             printToConsole(Integer.toString(min));
-        }
-        if (result < sum) {
+        } else if (result < sum) {
             printToConsole(Integer.toString(max));
         }
         return (int)result;
