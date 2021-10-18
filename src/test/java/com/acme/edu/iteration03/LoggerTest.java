@@ -29,30 +29,30 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
-        Logger.log(new int[] {-1, 0, 1});
+        Logger.log(new int[] {-1, 0, 20});
+        Logger.flush();
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "primitives array: {-1, 0, 1}\n"
-        );
+        assertSysoutContains("primitives array: {-1, 0, 20}");
+        assertSysoutContains("19");
         //endregion
     }
 
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
-        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -20}});
+        Logger.flush();
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "primitives matrix: {\n" +
-                "{-1, 0, 1}\n" +
-                "{1, 2, 3}\n" +
-                "{-1, -2, -3}\n" +
-            "}\n"
-        );
+        assertSysoutContains("primitives matrix: {");
+        assertSysoutContains("{-1, 0, 1}");
+        assertSysoutContains("{1, 2, 3}");
+        assertSysoutContains("{-1, -2, -20}");
+        assertSysoutContains("}");
+        assertSysoutContains("-17");
         //endregion
     }
 

@@ -55,14 +55,9 @@ public class Logger {
         Arrays.stream(strings).forEach(Logger::log);
     }
 
-    public static void log(Integer... integers) {
-        Arrays.stream(integers).forEach(Logger::log);
-    }
-
-    public static void log(int[] integers) {
+    public static void log(int... integers) {
         print(PRIMITIVE_ARRAY_PREFIX + makeTheString(integers));
         accumTheSum(integers);
-        flush();
     }
 
     public static void log(int[][] integers) {
@@ -70,7 +65,6 @@ public class Logger {
         for (int i = 0; i < integers.length; i++) {
             accumTheSum(integers[i]);
         }
-        flush();
     }
 
     public static void log(boolean message) {
