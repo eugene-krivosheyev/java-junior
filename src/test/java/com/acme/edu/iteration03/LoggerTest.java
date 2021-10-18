@@ -39,13 +39,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
         Logger.log(1);
+        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -2}});
         Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         Logger.flush();
         //endregion
 
         //region then
         assertSysoutContains("1");
-        assertSysoutContains("0");
+        assertSysoutContains("1");
         //endregion
     }
     /*
