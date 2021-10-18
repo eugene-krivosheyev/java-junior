@@ -1,7 +1,6 @@
 package com.acme.edu;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class Logger {
     private static final String PRIMITIVE_PREFIX = "primitive: ";
@@ -21,7 +20,7 @@ public class Logger {
     private static boolean isLastByte = false;
     private static boolean isLastString = false;
 
-    private static boolean arrayToggle = false;
+    private static boolean printAsArrayToggle = false;
 
     public static void log(int message) {
         if (!isLastInt) {
@@ -57,26 +56,26 @@ public class Logger {
     }
 
     public static void setArrayToggle() {
-        arrayToggle = true;
+        printAsArrayToggle = true;
     }
 
     public static void log(int... integers) {
-        if (!arrayToggle) {
+        if (!printAsArrayToggle) {
             accumTheSum(integers);
         } else {
             print(PRIMITIVE_ARRAY_PREFIX + makeTheString(integers));
-            arrayToggle = false;
+            printAsArrayToggle = false;
         }
     }
 
     public static void log(int[][] integers) {
-        if (!arrayToggle) {
+        if (!printAsArrayToggle) {
             for (int[] row : integers) {
                 accumTheSum(row);
             }
         } else {
             print(PRIMITIVE_ARRAY_MATRIX + make2DString(integers));
-            arrayToggle = false;
+            printAsArrayToggle = false;
         }
     }
 
