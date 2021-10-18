@@ -1,5 +1,8 @@
 package com.acme.edu;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Objects;
 
 import static java.lang.System.lineSeparator;
@@ -20,19 +23,19 @@ public class Logger {
     }
 
     public static void log(int... message) {
-        prepare("int1D",isSumming?Int1DSumMsg(message):Int1DMsg(message));
+        prepare("int1D",isSumming?Int1234DSumMsg((Arrays.asList(message)),1):Int1DMsg(message));
     }
 
     public static void log(int[]... message) {
-        prepare("int2D",isSumming?Int2DSumMsg(message):Int2DMsg(message));
+        prepare("int2D",isSumming?Int1234DSumMsg((Arrays.asList(message)),2):Int2DMsg(message));
     }
 
     public static void log(int[][]... message) {
-        prepare("int3D",isSumming?Int3DSumMsg(message):Int3DMsg(message));
+        prepare("int3D",isSumming?Int1234DSumMsg((Arrays.asList(message)),3):Int3DMsg(message));
     }
 
     public static void log(int[][][]... message) {
-        prepare("int4D",isSumming?Int4DSumMsg(message):Int4DMsg(message));
+        prepare("int4D",isSumming?Int1234DSumMsg((Arrays.asList(message)),4):Int4DMsg(message));
     }
 
     public static void log(char message) {
@@ -67,6 +70,27 @@ public class Logger {
         } else if (int.class.getTypeName() == collectingType){
             print(bufferInteger.toString());
         }
+    }
+
+    private static String IntSumMsg(Collection message, int sum) {
+        for (Object value: message) { sum += Integer.parseInt(value.toString()); }
+        return String.valueOf(sum);
+    }
+
+    private static String Int1234DSumMsg(Collection message, int dim) {
+        int sum = 0;
+        switch (dim){
+            case 1:{
+                sum = Integer.parseInt(IntSumMsg((Collection) message,sum));
+            } break;
+            default:{
+                for (Object value: message) {
+                    sum = Integer.parseInt(Int1234DSumMsg((Collection)value,dim-1));
+                }
+            } break;
+        }
+        for (Object value: message) { sum = Integer.parseInt(IntSumMsg((Collection) value,sum)); }
+        return String.valueOf(sum);
     }
 
     private static String Int1DSumMsg(int[] message) {
