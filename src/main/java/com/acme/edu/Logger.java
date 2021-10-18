@@ -2,7 +2,10 @@ package com.acme.edu;
 
 import java.util.Objects;
 
+import static java.lang.System.lineSeparator;
+
 public class Logger {
+    public static final String sep = lineSeparator();
     private static boolean isSumming = false;
     private static String collectingType = "";
 
@@ -16,6 +19,84 @@ public class Logger {
         prepare(int.class.getTypeName(), String.valueOf(message));
     }
 
+    public static void log(int... message) {
+        prepare("int1D",isSumming?Int1DSumMsg(message):Int1DMsg(message));
+    }
+
+    private static String Int1DSumMsg(int[] message) {
+        int sum = 0;
+        for (int value: message) { sum += value; }
+        return String.valueOf(sum);
+    }
+
+    private static String Int1DMsg(int[] message) {
+        StringBuilder msg = new StringBuilder("{");
+        int len =  message.length;
+        for (int i = 0; i<len; ++i) {
+            msg.append(message[i]);
+            msg.append((i<len-1)?", ":"");
+        }
+        msg.append("}");
+        return  msg.toString();
+    }
+
+    public static void log(int[]... message) {
+        prepare("int2D",isSumming?Int2DSumMsg(message):Int2DMsg(message));
+    }
+
+    private static String Int2DSumMsg(int[][] message) {
+        int sum = 0;
+        for (int[] value: message) { sum += Integer.parseInt(Int1DSumMsg(value)); }
+        return String.valueOf(sum);
+    }
+
+    private static String Int2DMsg(int[][] message) {
+        StringBuilder msg = new StringBuilder("{"+sep);
+        for (int[] intArray : message) {
+            msg.append(Int1DMsg(intArray)).append(sep);
+        }
+        msg.append("}");
+        return msg.toString();
+    }
+
+    public static void log(int[][]... message) {
+        prepare("int3D",isSumming?Int3DSumMsg(message):Int3DMsg(message));
+    }
+
+    private static String Int3DSumMsg(int[][][] message) {
+        int sum = 0;
+        for (int[][] value: message) { sum += Integer.parseInt(Int2DSumMsg(value)); }
+        return String.valueOf(sum);
+    }
+
+    private static String Int3DMsg(int[][]... message) {
+        StringBuilder msg = new StringBuilder("{"+sep);
+        for (int[][] intArray : message) {
+            msg.append(Int2DMsg(intArray)).append(sep);
+        }
+        msg.append("}");
+        return msg.toString();
+    }
+
+    public static void log(int[][][]... message) {
+        prepare("int4D",isSumming?Int4DSumMsg(message):Int4DMsg(message));
+    }
+
+    private static String Int4DSumMsg(int[][][][] message) {
+        int sum = 0;
+        for (int[][][] value: message) { sum += Integer.parseInt(Int3DSumMsg(value)); }
+        return String.valueOf(sum);
+    }
+
+    private static String Int4DMsg(int[][][][] message) {
+        StringBuilder msg = new StringBuilder("{"+sep);
+        for (int[][][] intCube : message) {
+            msg.append(Int3DMsg(intCube)).append(sep);
+        }
+        msg.append("}");
+        return msg.toString();
+    }
+
     public static void log(char message) {
         prepare(char.class.getTypeName(), String.valueOf(message));
     }
@@ -26,6 +107,18 @@ public class Logger {
 
     public static void log(String message) {
         prepare(String.class.getTypeName(), String.valueOf(message));
+    }
+
+    public static void log(String... message) {
+        prepare("stringArray",stringMsg(isSumming?" ":sep, message));
+    }
+
+    private static String stringMsg(String separator, String[] message) {
+        StringBuilder sumMsg = new StringBuilder("");
+        for (String str: message) {
+            sumMsg.append(str).append(separator);
+        }
+        return sumMsg.toString();
     }
 
     public static void log(Boolean message) {
@@ -46,15 +139,11 @@ public class Logger {
         }
     }
 
-    private static String prefix(String type) {
-        if (String.class.getTypeName() == type) {
-            return "string: ";
-        } else if (char.class.getTypeName() == type) {
-            return "char: ";
-        } else if (Object.class.getTypeName() == type) {
-            return "reference: ";
+    private static void prepare(String classType, String message) {
+        if (!isSumming) {
+            print(formatMsg(classType, message));
         } else {
-            return "primitive: ";
+            workWithSumming(classType, message);
         }
     }
 
@@ -62,19 +151,32 @@ public class Logger {
         return prefix(type) + message;
     }
 
-    private static void print(String message){System.out.println(message);}
+    private static String prefix(String type) {
+        if (String.class.getTypeName() == type) {
+            return "string: ";
+        } else if (char.class.getTypeName() == type) {
+            return "char: ";
+        } else if (Object.class.getTypeName() == type) {
+            return "reference: ";
+        } else if (Objects.equals("stringArray",type)) {
+            return "";
+        } else {
+            String extra = "";
+            if (Objects.equals("int1D",type)) extra = "s array";
+            if (Objects.equals("int2D",type)) extra = "s matrix";
+            if (Objects.equals("int3D",type)) extra = "s cube";
+            if (Objects.equals("int4D",type)) extra = "s multimatrix";
+            return String.format("primitive%s: ",extra);
+        }
+    }
+
+    private static void print(String message){
+        System.out.println(message);
+    }
 
     private static String stringMsg(String message, Integer count){
         if (count != 1) {return String.format("%s (x%d)", message,count);}
         return message;
-    }
-
-    private static void prepare(String classType, String message) {
-        if (!isSumming) {
-            print(formatMsg(classType, message));
-        } else {
-            workWithSumming(classType, message);
-        }
     }
 
     private static void workWithSumming(String classType, String message) {
@@ -129,7 +231,7 @@ public class Logger {
     }
 
     private static boolean isMAXMIN(int value, int MAX, int MIN){
-        return (MAX - bufferInteger < value) || (MIN - bufferInteger > value);
+        return (MAX - bufferInteger < value); //|| (MIN - bufferInteger > value);
     }
 
     private static void workWithInteger(String message) {
