@@ -1,10 +1,13 @@
 package com.acme.edu;
 
+import java.util.Arrays;
+
 public class Logger {
-    private static final String primitivePrefix = "primitive: ";
-    private static final String charPrefix = "char: ";
-    private static final String stringPrefix = "string: ";
-    private static final String referencePrefix = "reference: ";
+    private static final String PRIMITIVE_PREFIX = "primitive: ";
+    private static final String CHAR_PREFIX = "char: ";
+    private static final String STRING_PREFIX = "string: ";
+    private static final String REFERENCE_PREFIX = "reference: ";
+    private static final String PRIMITIVE_ARRAY_PREFIX = "primitives array: ";
     private static String currentMessage;
     private static long currentIntSum = 0;
     private static int currentByteSum = 0;
@@ -21,8 +24,7 @@ public class Logger {
             flush();
             setLastInt();
         }
-        currentIntSum += message;
-        currentIntSum = handleOverflow(currentIntSum, Integer.MAX_VALUE, Integer.MIN_VALUE);
+        currentIntSum = handleOverflow(currentIntSum, Integer.MAX_VALUE, Integer.MIN_VALUE, message);
     }
 
     public static void log(byte message) {
@@ -30,12 +32,11 @@ public class Logger {
             flush();
             setLastByte();
         }
-        currentByteSum += message;
-        currentByteSum = (int) handleOverflow(currentByteSum, Byte.MAX_VALUE, Byte.MIN_VALUE);
+        currentByteSum = (int) handleOverflow(currentByteSum, Byte.MAX_VALUE, Byte.MIN_VALUE, message);
     }
 
     public static void log(char message) {
-        print(charPrefix + message);
+        print(CHAR_PREFIX + message);
     }
 
     public static void log(String message) {
@@ -47,12 +48,24 @@ public class Logger {
         }
     }
 
+    public static void log(String... strings) {
+        Arrays.stream(strings).forEach(Logger::log);
+    }
+
+    public static void log(Integer... integers) {
+        Arrays.stream(integers).forEach(Logger::log);
+    }
+
+    public static void log(int[] integers) {
+        print(PRIMITIVE_ARRAY_PREFIX);
+    }
+
     public static void log(boolean message) {
-        print(primitivePrefix + message);
+        print(PRIMITIVE_PREFIX + message);
     }
 
     public static void log(Object message) {
-        print(referencePrefix + message);
+        print(REFERENCE_PREFIX + message);
     }
 
     public static void flush() {
@@ -63,20 +76,20 @@ public class Logger {
 
     private static boolean handleCurrentMessage() {
         if (isLastInt) {
-            currentMessage = primitivePrefix + currentIntSum;
+            currentMessage = PRIMITIVE_PREFIX + currentIntSum;
             currentIntSum = 0;
             isLastInt = false;
             return true;
         } else if (isLastByte) {
-            currentMessage = primitivePrefix + currentByteSum;
+            currentMessage = PRIMITIVE_PREFIX + currentByteSum;
             currentByteSum = 0;
             isLastByte = false;
             return true;
         } else if (isLastString) {
             if (sameLastStringCounter == 1) {
-               currentMessage = stringPrefix + lastSubmittedString;
+               currentMessage = STRING_PREFIX + lastSubmittedString;
             } else {
-                currentMessage = stringPrefix + lastSubmittedString + " (x" + sameLastStringCounter + ")";
+                currentMessage = STRING_PREFIX + lastSubmittedString + " (x" + sameLastStringCounter + ")";
             }
             isLastString = false;
             sameLastStringCounter = 1;
@@ -111,7 +124,8 @@ public class Logger {
         isLastString = true;
     }
 
-    private static long handleOverflow(long current, long positive, long negative) {
+    private static long handleOverflow(long current, long positive, long negative, long addition) {
+        current += addition;
         if (current > positive) {
             print(String.valueOf(positive));
             return current - positive;
