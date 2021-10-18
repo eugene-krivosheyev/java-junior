@@ -8,25 +8,54 @@ public class Logger {
     private static final String STRING_PREFIX = "string: ";
     private static final String REFERENCE_PREFIX = "reference: ";
 
+    enum Type {
+        STRING,
+        INT,
+        BYTE,
+        NONE
+    }
 
-    private static final String STRING_TYPE = "string";
-    private static final String INT_TYPE = "int";
-    private static final String BYTE_TYPE = "byte";
-
-    private static String bufferType = "";
+    private static Type bufferType = Type.NONE;
 
     private static long numBuffer;
 
     private static String stringBuffer = "";
     private static int stringCount;
 
+
+    public static void log(int[][] message) {
+        checkPreviousType(Type.NONE);
+        for (int[] subarray : message) {
+            for (int num : subarray) {
+                log(num);
+            }
+        }
+        flush();
+    }
+
+    public static void log(int... message) {
+        checkPreviousType(Type.NONE);
+        for (int num : message) {
+            log(num);
+        }
+        flush();
+    }
+
+    public static void log(String... message) {
+        checkPreviousType(Type.NONE);
+        for (String str : message) {
+            log(str);
+        }
+        flush();
+    }
+
     public static void log(int message) {
-        checkPreviousType(INT_TYPE);
+        checkPreviousType(Type.INT);
         checkOverflow(Integer.MAX_VALUE, Integer.MIN_VALUE, message);
     }
 
     public static void log(byte message) {
-        checkPreviousType(BYTE_TYPE);
+        checkPreviousType(Type.BYTE);
         checkOverflow(Byte.MAX_VALUE, Byte.MIN_VALUE, message);
     }
 
@@ -35,7 +64,7 @@ public class Logger {
     }
 
     public static void log(String message) {
-        checkPreviousType(STRING_TYPE);
+        checkPreviousType(Type.STRING);
 
         if (stringBuffer.isEmpty()) {
             stringBuffer = message;
@@ -59,7 +88,7 @@ public class Logger {
 
     public static void flush() {
         switch (bufferType) {
-            case STRING_TYPE:
+            case STRING:
                 if (stringCount > 1) {
                     print(STRING_PREFIX + stringBuffer + " (x" + stringCount + ")");
                 } else {
@@ -69,16 +98,16 @@ public class Logger {
                 stringBuffer = "";
                 stringCount = 0;
                 break;
-            case INT_TYPE:
-            case BYTE_TYPE:
+            case INT:
+            case BYTE:
                 print(PRIMITIVE_PREFIX + numBuffer);
                 numBuffer = 0;
                 break;
         }
     }
 
-    private static void checkPreviousType(String currentType) {
-        if (bufferType.isEmpty()) {
+    private static void checkPreviousType(Type currentType) {
+        if (bufferType == Type.NONE) {
             bufferType = currentType;
             return;
         }
