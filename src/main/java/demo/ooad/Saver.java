@@ -1,7 +1,5 @@
 package demo.ooad;
 
-public class Saver {
-    public void save(String message) {
-
-    }
+public interface Saver {
+    void save(String message);
 }
