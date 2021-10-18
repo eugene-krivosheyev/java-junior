@@ -39,8 +39,8 @@ public class Logger {
                     similarStringCounter++;
                 } else if (prevString != null) {
                     flush();
-                    prevString = (String)message;
                 }
+                prevString = (String)message;
                 break;
             }
 
