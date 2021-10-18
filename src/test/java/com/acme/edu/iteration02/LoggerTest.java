@@ -25,8 +25,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
-        Logger.log("str 1", 1, 2, "str 2", 0);
-        Logger.flush();
+        log("str 1", 1, 2, "str 2", 0);
         //endregion
 
         //region then
@@ -37,8 +36,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() throws IOException {
         //region when
-        Logger.log("str 1", 10, Integer.MAX_VALUE, "str 2", 0);
-        Logger.flush();
+        log("str 1", 10, Integer.MAX_VALUE, "str 2", 0);
         //endregion
 
         //region then
@@ -49,8 +47,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() throws IOException {
         //region when
-        Logger.log("str 1", (byte) 10, Byte.MAX_VALUE, "str 2", 0);
-        Logger.flush();
+        log("str 1", (byte) 10, Byte.MAX_VALUE, "str 2", 0);
         //endregion
 
         //region then
@@ -61,8 +58,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
         //region when
-        Logger.log("str 1", "str 2", "str 2", 0, "str 2", "str 3", "str 3", "str 3");
-        Logger.flush();
+        log("str 1", "str 2", "str 2", 0, "str 2", "str 3", "str 3", "str 3");
         //endregion
 
         //region then
@@ -76,4 +72,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         }
     }
 
+    private void log(Object... valuesToLog) throws IOException {
+        for (Object valueToLog : valuesToLog) {
+            Logger.log(valueToLog);
+        }
+        Logger.flush();
+    }
 }

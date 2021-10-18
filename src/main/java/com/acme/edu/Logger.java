@@ -1,6 +1,5 @@
 package com.acme.edu;
 
-import java.io.IOException;
 import java.util.Objects;
 
 public class Logger {
@@ -9,6 +8,9 @@ public class Logger {
     public static final String typeString = "string: ";
     public static final String typeChar = "char: ";
     public static final String typeReference = "reference: ";
+    public static final String typePrimitivesArray = "primitives array: ";
+    public static final String typePrimitivesMatrix = "primitives matrix: ";
+    public static final String typeNone = "";
 
     enum TypeCode {
         STRING,
@@ -17,6 +19,8 @@ public class Logger {
         CHAR,
         OBJECT,
         BOOLEAN,
+        ARRAY_INT,
+        MATRIX_INT,
         NONE
     }
 
@@ -24,23 +28,12 @@ public class Logger {
 
     private static int similarStringCounter = 0;
     private static int integerSum = 0;
+    private static int arrayIntSum = 0;
+    private static int matrixIntSum = 0;
     private static int byteSum = 0;
     private static String prevString = null;
 
-    public static void log(Object... valuesToLog) throws IOException {
-        for (Object valueToLog : valuesToLog) {
-            logOneObject(valueToLog);
-        }
-    }
-
-    public static void logWithFlush(Object... valuesToLog) throws IOException {
-        for (Object valueToLog : valuesToLog) {
-            logOneObject(valueToLog);
-            flush();
-        }
-    }
-
-    private static void logOneObject(Object message) {
+    public static void log(Object message) {
         TypeCode typeCode = getTypeCode(message);
 
         if (prevTypeCode != TypeCode.NONE && typeCode != prevTypeCode) {
@@ -63,6 +56,19 @@ public class Logger {
             }
             case INTEGER: {
                 integerSum = countSum(integerSum, (int) message, Integer.MAX_VALUE, Integer.MIN_VALUE);
+                break;
+            }
+            case ARRAY_INT: {
+                for (int i: (int[]) message) {
+                    arrayIntSum = countSum(arrayIntSum, i, Integer.MAX_VALUE, Integer.MIN_VALUE);
+                }
+                break;
+            }
+            case MATRIX_INT: {
+                for (int[] i: (int[][])message) {
+                    for (int j: i)
+                    matrixIntSum = countSum(matrixIntSum, j, Integer.MAX_VALUE, Integer.MIN_VALUE);
+                }
                 break;
             }
             default: {
@@ -95,6 +101,16 @@ public class Logger {
                 integerSum = 0;
                 break;
             }
+            case ARRAY_INT: {
+                sendToSystemOut(getPrefixType(prevTypeCode) + arrayIntSum);
+                arrayIntSum = 0;
+                break;
+            }
+            case MATRIX_INT: {
+                sendToSystemOut(getPrefixType(prevTypeCode) + matrixIntSum);
+                matrixIntSum = 0;
+                break;
+            }
             default:
                 break;
         }
@@ -119,6 +135,12 @@ public class Logger {
         if (message.getClass() == Character.class) {
             return TypeCode.CHAR;
         }
+        if (message.getClass() == int[].class) {
+            return TypeCode.ARRAY_INT;
+        }
+        if (message.getClass() == int[][].class) {
+            return TypeCode.MATRIX_INT;
+        }
         return TypeCode.NONE;
     }
 
@@ -137,6 +159,12 @@ public class Logger {
             case BOOLEAN:
             case INTEGER: {
                 return typePrimitive;
+            }
+            case MATRIX_INT: {
+                return typePrimitivesMatrix;
+            }
+            case ARRAY_INT: {
+                return typePrimitivesArray;
             }
             default:
                 return null;

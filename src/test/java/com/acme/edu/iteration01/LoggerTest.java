@@ -31,7 +31,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogInteger() throws IOException {
         type = typePrimitive;
         //region when
-        Logger.logWithFlush(1, 0, -1);
+        log(1, 0, -1);
         //endregion
 
         //region then
@@ -43,7 +43,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogByte() throws IOException {
         type = typePrimitive;
         //region when
-        Logger.logWithFlush((byte)1, (byte)0, (byte)-1);
+        log((byte)1, (byte)0, (byte)-1);
         //endregion
 
         //region then
@@ -55,7 +55,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogChar() throws IOException {
         type = typeChar;
         //region when
-        Logger.logWithFlush('a', 'b');
+        log('a', 'b');
         //endregion
 
         //region then
@@ -69,7 +69,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         String str1 = "first string";
         String str2 = "second string";
         //region when
-        Logger.logWithFlush(str1, str2);
+        log(str1, str2);
         //endregion
 
         //region then
@@ -81,7 +81,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogBoolean() throws IOException {
         type = typePrimitive;
         //region when
-        Logger.logWithFlush(true, false);
+        log(true, false);
         //endregion
 
         //region then
@@ -93,7 +93,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogReference() throws IOException {
         type = typeReference;
         //region when
-        Logger.logWithFlush(new Object());
+        log(new Object());
         //endregion
 
         //region then
@@ -105,6 +105,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private void checkLog(String... valuesToCheck) throws IOException {
         for (String valueToCheck : valuesToCheck) {
             assertSysoutContains(type + valueToCheck);
+        }
+    }
+
+    private void log(Object... valuesToLog) throws IOException {
+        for (Object valueToLog : valuesToLog) {
+            Logger.log(valueToLog);
+            Logger.flush();
         }
     }
 }
