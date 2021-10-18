@@ -18,6 +18,7 @@ public class Logger {
         BOOLEAN,
         INT2DARRAY,
         INTARRAY,
+        STRINGARRAY,
         NONE
     }
 
@@ -29,15 +30,17 @@ public class Logger {
     private static String prevString = null;
 
     public static void log(String... messages) {
+        flushOnCondition(notSameTypeCode(TypeCode.STRINGARRAY));
         for (String message : messages) {
-            log(message);
+            logString(message);
         }
+        prevTypeCode = TypeCode.STRINGARRAY;
     }
 
     public static void log(int... messages) {
         flushOnCondition(notSameTypeCode(TypeCode.INTARRAY));
         for (int message : messages) {
-            log(message);
+            logInteger(message);
         }
         prevTypeCode = TypeCode.INTARRAY;
     }
@@ -46,7 +49,7 @@ public class Logger {
         flushOnCondition(notSameTypeCode(TypeCode.INT2DARRAY));
         for (int[] message : messages) {
             for (int element : message) {
-                log(element);
+                logInteger(element);
             }
         }
         prevTypeCode = TypeCode.INT2DARRAY;
@@ -54,13 +57,7 @@ public class Logger {
 
     public static void log(String message) {
         flushOnCondition(notSameTypeCode(TypeCode.STRING));
-
-        if (!Objects.equals(prevString, message) && prevString != null) {
-            flush();
-        }
-        similarStringCounter++;
-        prevString = (String)message;
-        prevTypeCode = TypeCode.STRING;
+        logString(message);
     }
 
     public static void log(byte message) {
@@ -71,8 +68,7 @@ public class Logger {
 
     public static void log(int message) {
         flushOnCondition(notSameTypeCode(TypeCode.INTEGER));
-        integerSum = countSum(integerSum, (int)message, Integer.MAX_VALUE, Integer.MIN_VALUE);
-        prevTypeCode = TypeCode.INTEGER;
+        logInteger(message);
     }
 
     public static void log(boolean message) {
@@ -95,12 +91,9 @@ public class Logger {
 
     public static void flush() {
         switch (prevTypeCode) {
+            case STRINGARRAY:
             case STRING: {
-                if(similarStringCounter > 1) {
-                    printToConsole(typeString + prevString + " (x" + similarStringCounter + ")");
-                } else {
-                    printToConsole(typeString + prevString);
-                }
+                printString();
                 prevString = null;
                 similarStringCounter = 0;
                 break;
@@ -154,6 +147,28 @@ public class Logger {
             printToConsole(Integer.toString(max));
         }
         return (int)result;
+    }
+
+    private static void printString() {
+        if(similarStringCounter > 1) {
+            printToConsole(typeString + prevString + " (x" + similarStringCounter + ")");
+        } else {
+            printToConsole(typeString + prevString);
+        }
+    }
+
+    private static void logString(String message) {
+        if (!Objects.equals(prevString, message) && prevString != null) {
+            flush();
+        }
+        similarStringCounter++;
+        prevString = (String)message;
+        prevTypeCode = TypeCode.STRING;
+    }
+
+    private static void logInteger(int message) {
+        integerSum = countSum(integerSum, (int)message, Integer.MAX_VALUE, Integer.MIN_VALUE);
+        prevTypeCode = TypeCode.INTEGER;
     }
 
     private static void printToConsole(String message) {

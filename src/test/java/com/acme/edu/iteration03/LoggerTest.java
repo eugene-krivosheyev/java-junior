@@ -69,12 +69,18 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
+        Logger.log("str1");
+        Logger.log("abc", "str1");
         Logger.log("str1", "string 2", "str 3");
         Logger.flush();
         //endregion
 
         //region then
-        checkLog("str1", "string 2", "str 3");
+        assertSysoutContains("str1");
+        assertSysoutContains("abc");
+        assertSysoutContains("str1 (x2)");
+        assertSysoutContains("string 2");
+        assertSysoutContains("str 3");
         //endregion
     }
 
@@ -110,9 +116,4 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     */
-    private void checkLog(String... valuesToCheck) {
-        for (String valueToCheck : valuesToCheck) {
-            assertSysoutContains(valueToCheck);
-        }
-    }
 }
