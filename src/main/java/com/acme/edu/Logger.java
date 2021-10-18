@@ -5,7 +5,6 @@ public class Logger {
     public static final String CHAR_PREFIX = "char: ";
     public static final String STRING_PREFIX = "string: ";
     public static final String OBJECT_PREFIX = "reference: ";
-    public static final OutputMethod OUTPUT_METHOD = OutputMethod.TERMINAL;
     public static boolean intAccIsNotEmpty = false;
     private static long intAccumulator = 0;
     public static boolean byteAccIsNotEmpty = false;
@@ -15,37 +14,41 @@ public class Logger {
     private static int strRepeatCounter = 1;
 
 
-    public static void log(int message) { output(OUTPUT_METHOD,PRIMITIVE_PREFIX, message); }
+    public static void log(int message) { output(Type.INTEGER,PRIMITIVE_PREFIX, message); }
 
-    public static void log(byte message) { output(OUTPUT_METHOD,PRIMITIVE_PREFIX, message); }
+    public static void log(byte message) { output(Type.BYTE,PRIMITIVE_PREFIX, message); }
 
-    public static void log(char message) { output(OUTPUT_METHOD, CHAR_PREFIX, message); }
+    public static void log(char message) { output(Type.CHARACTER, CHAR_PREFIX, message); }
 
-    public static void log(String message) { output(OUTPUT_METHOD,STRING_PREFIX, message); }
+    public static void log(String message) { output(Type.STRING,STRING_PREFIX, message); }
 
-    public static void log(boolean message) { output(OUTPUT_METHOD,PRIMITIVE_PREFIX, message); }
+    public static void log(boolean message) { output(Type.BOOLEAN,PRIMITIVE_PREFIX, message); }
 
-    public static void log(Object message) { output(OUTPUT_METHOD,OBJECT_PREFIX, message); }
+    public static void log(Object message) { output(Type.OBJECT,OBJECT_PREFIX, message); }
 
-    private static void output(OutputMethod outputMethod, String prefix, Object message) {
-        if (outputMethod == OutputMethod.TERMINAL) {
-            switch (message.getClass().getSimpleName()) {
-                case ("Integer"):
-                    accumulator((int) message);
-                    break;
-                case ("Byte"):
-                    accumulator((byte) message);
-                    break;
-                case ("String"):
-                    stringHandler((String) message);
-                    break;
-                default:
-                    System.out.println(prefix + message);
-                    break;
-            }
-        }
-        else if(outputMethod == OutputMethod.FILE) {
-            //write to file
+    public static void log(int... message) {
+        output(Type.INTARRAY, PRIMITIVE_PREFIX, message);
+    }
+
+    private static void output(Type type, String prefix, Object message) {
+        switch (type.getValue()) {
+            case ("int"):
+                accumulator((int) message);
+                break;
+            case ("byte"):
+                accumulator((byte) message);
+                break;
+            case ("str"):
+//                stringHandler((String) message);
+                break;
+            case ("intarray"):
+                for (int i : (int[]) message) {
+                    log(i);
+                }
+                break;
+            default:
+                System.out.println(prefix + message);
+                break;
         }
     }
 
@@ -102,8 +105,26 @@ public class Logger {
 //    }
 
 
-    enum OutputMethod {
-        TERMINAL, FILE
+    enum Type {
+        INTEGER("int"),
+        BYTE("byte"),
+        STRING("str"),
+        CHARACTER("char"),
+        OBJECT("object"),
+        BOOLEAN("bool"),
+        INTARRAY("intarray"),
+        INT2DARRAY("int2darray");
+
+
+        private String value;
+
+        Type(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return this.value;
+        }
     }
 }
 
