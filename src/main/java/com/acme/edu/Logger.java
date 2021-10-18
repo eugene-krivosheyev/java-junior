@@ -142,16 +142,20 @@ public class Logger {
             isLastByte = false;
             return true;
         } else if (isLastString) {
-            if (sameLastStringCounter == 1) {
-                currentMessage = STRING_PREFIX + lastSubmittedString;
-            } else {
-                currentMessage = STRING_PREFIX + lastSubmittedString + " (x" + sameLastStringCounter + ")";
-            }
+            handleRepeatingStrings();
             isLastString = false;
             sameLastStringCounter = 1;
             return true;
         }
         return false;
+    }
+
+    private static void handleRepeatingStrings() {
+        if (sameLastStringCounter == 1) {
+            currentMessage = STRING_PREFIX + lastSubmittedString;
+        } else {
+            currentMessage = STRING_PREFIX + lastSubmittedString + " (x" + sameLastStringCounter + ")";
+        }
     }
 
     private static void print(String message) {
