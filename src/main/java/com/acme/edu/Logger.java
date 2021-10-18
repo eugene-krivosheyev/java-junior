@@ -72,34 +72,34 @@ public class Logger {
         }
     }
 
-    public static void stringHandler(String message) { //str 2
-        if (currentString != message && currentString != null) { //
-            if (strRepeatCounter == 1) {
-                System.out.println(currentString);
-
-                currentString = message;
-                strRepeatCounter = 1;
-            } else {
-                if (strRepeatCounter > 1) {
-                    System.out.println(currentString + " (x" + strRepeatCounter + ")");
-                }
-                currentString = message;
-                strRepeatCounter = 1;
-            }
-
-        } else if (currentString == message) {
+//    public static void stringHandler(String message) { //str 2
+//        if (currentString != message && currentString != null) { //
+//            if (strRepeatCounter == 1) {
+//                System.out.println(currentString);
+//
+//                currentString = message;
+//                strRepeatCounter = 1;
+//            } else {
+//                if (strRepeatCounter > 1) {
+//                    System.out.println(currentString + " (x" + strRepeatCounter + ")");
+//                }
+//                currentString = message;
+//                strRepeatCounter = 1;
+//            }
+//
+//        } else if (currentString == message) {
 //            if (strRepeatCounter == 1) {
 //                System.out.println(prevString);
 //            } else {
 //                System.out.println(prevString + " (x" + strRepeatCounter + ")");
 //            }
-            strRepeatCounter += 1;
-        } else if (currentString != message && currentString == null) { //get here on 1st iteration
-            currentString = message;
-        }
-
-
-    }
+//            strRepeatCounter += 1;
+//        } else if (currentString != message && currentString == null) { //get here on 1st iteration
+//            currentString = message;
+//        }
+//
+//
+//    }
 
 
     enum OutputMethod {
