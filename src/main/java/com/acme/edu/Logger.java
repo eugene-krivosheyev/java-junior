@@ -6,6 +6,7 @@ public class Logger {
 
     public static final String typePrimitive = "primitive: ";
     public static final String typeString = "string: ";
+    public static final String typeChar = "char: ";
     public static final String typeReference = "reference: ";
 
     enum TypeCode {
@@ -24,6 +25,7 @@ public class Logger {
     private static int integerSum = 0;
     private static int byteSum = 0;
     private static String prevString = null;
+    //Object .. mesage
 
     public static void log(Object message) {
         TypeCode typeCode = getTypeCode(message);
@@ -119,8 +121,10 @@ public class Logger {
             case OBJECT: {
                 return typeReference;
             }
+            case CHAR: {
+                return typeChar;
+            }
             case BYTE:
-            case CHAR:
             case BOOLEAN:
             case INTEGER: {
                 return typePrimitive;

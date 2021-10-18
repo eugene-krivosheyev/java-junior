@@ -53,7 +53,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogChar() throws IOException {
-        type = typePrimitive;
+        type = typeChar;
         //region when
         log('a', 'b');
         //endregion
