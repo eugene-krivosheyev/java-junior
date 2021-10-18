@@ -26,6 +26,12 @@ public class Logger {
     private static int byteSum = 0;
     private static String prevString = null;
 
+    public static void log(Object... messages) {
+        for (Object message : messages) {
+            log(message);
+        }
+    }
+
     public static void log(Object message) {
         TypeCode typeCode = getTypeCode(message);
 
@@ -35,11 +41,10 @@ public class Logger {
 
         switch (typeCode) {
             case STRING: {
-                if (Objects.equals(prevString, message)) {
-                    similarStringCounter++;
-                } else if (prevString != null) {
+                if (!Objects.equals(prevString, message) && prevString != null) {
                     flush();
                 }
+                similarStringCounter++;
                 prevString = (String)message;
                 break;
             }
@@ -71,7 +76,6 @@ public class Logger {
     public static void flush() {
         switch (prevTypeCode) {
             case STRING: {
-                similarStringCounter++;
                 if(similarStringCounter > 1) {
                     printToConsole(typeString + prevString + " (x" + similarStringCounter + ")");
                 } else {
