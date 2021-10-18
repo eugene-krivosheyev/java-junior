@@ -72,6 +72,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+//    log(int[])
+//    log(int...)
+//    log(Integer[])
+//    log(Integer...)
+
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
