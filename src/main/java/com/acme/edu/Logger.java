@@ -1,5 +1,6 @@
 package com.acme.edu;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class Logger {
@@ -25,9 +26,21 @@ public class Logger {
     private static int integerSum = 0;
     private static int byteSum = 0;
     private static String prevString = null;
-    //Object .. mesage
 
-    public static void log(Object message) {
+    public static void log(Object... valuesToLog) throws IOException {
+        for (Object valueToLog : valuesToLog) {
+            logOneObject(valueToLog);
+        }
+    }
+
+    public static void logWithFlush(Object... valuesToLog) throws IOException {
+        for (Object valueToLog : valuesToLog) {
+            logOneObject(valueToLog);
+            flush();
+        }
+    }
+
+    private static void logOneObject(Object message) {
         TypeCode typeCode = getTypeCode(message);
 
         if (prevTypeCode != TypeCode.NONE && typeCode != prevTypeCode) {
