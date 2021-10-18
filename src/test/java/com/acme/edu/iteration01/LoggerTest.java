@@ -2,7 +2,6 @@ package com.acme.edu.iteration01;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import jdk.internal.net.http.common.Log;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

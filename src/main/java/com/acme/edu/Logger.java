@@ -12,23 +12,41 @@ public class Logger {
         BYTE
     }
     static String value;
+
+    static private String stringValue;
+    static private int intValue;
+    static private byte byteValue;
+
     static Type type = Type.UNDEFINED;
     static int counter = 0;
 
 
     // TODO: flush
     public static void flash() {
+        processPreviousValue(Type.UNDEFINED);
+        stringValue = "";
+        intValue = 0;
+        byteValue = 0;
+    }
+
+    private static boolean processPreviousValue(Type currentType) {
+        if (currentType.equals(type)) {
+            return false;
+        }
         switch (type) {
             case STRING:
-                handleString("");
+                handleString();
                 counter = 0;
                 break;
             case INTEGER:
+                handleInt();
+                break;
             case BYTE:
-                handlePrimitive("");
+                handleByte();
                 break;
         }
-        type = Type.UNDEFINED;
+        type = currentType;
+        return true;
     }
 
     public static void setPrintStream(PrintStream newPrintStream) {
@@ -36,52 +54,28 @@ public class Logger {
     }
 
     public static void log(int message) {
-        switch (type) {
-            case STRING:
-                handleString("" + message);
-                break;
-            case INTEGER:
-                int number = Integer.parseInt(value);
-                if (number + (long)message > Integer.MAX_VALUE) {
-                    printToOutput("primitive: " + number);
-                    printToOutput("primitive: " + message);
-                }
-                number += message;
-                value = String.valueOf(number);
-                break;
-            case BYTE:
-                handlePrimitive("" + message);
-                break;
-            case UNDEFINED:
-                value = "" + message;
-                break;
+        if (processPreviousValue(Type.INTEGER)) {
+            intValue = message;
+        } else {
+            if (intValue + (long)message > Integer.MAX_VALUE) {
+                printToOutput("primitive: " + intValue);
+                printToOutput("primitive: " + message);
+            }
+            intValue += message;
         }
-        type = Type.INTEGER;
     }
 
     public static void log(byte message) {
-        switch (type) {
-            case STRING:
-                handleString("" + message);
-                break;
-            case INTEGER:
-                handlePrimitive("" + value);
-                break;
-            case BYTE:
-                byte number = Byte.parseByte(value);
-                // TODO make general method for both int and byte
-                if (number + (int)message > Byte.MAX_VALUE) {
-                    printToOutput("primitive: " + number);
-                    printToOutput("primitive: " + message);
-                }
-                number += message;
-                value = "" + number;
-                break;
-            case UNDEFINED:
-                value = "" + message;
-                break;
+        if (processPreviousValue(Type.BYTE)) {
+            byteValue = message;
+        } else {
+            // TODO make general method for both int and byte
+            if (byteValue + (int)message > Byte.MAX_VALUE) {
+                printToOutput("primitive: " + byteValue);
+                printToOutput("primitive: " + message);
+            }
+            byteValue += message;
         }
-        type = Type.BYTE;
     }
 
     public static void log(char message) {
@@ -89,26 +83,18 @@ public class Logger {
     }
 
     public static void log(String message) {
-        switch (type) {
-            case STRING:
-                // TODO separate method for unifying level of abstraction
-                if (message.equals(value)) {
-                    counter++;
-                } else {
-                    handleString(message);
-                    counter = 1;
-                }
-                break;
-            case INTEGER:
-            case BYTE:
-                handlePrimitive(message);
+        if (processPreviousValue(Type.STRING)) {
+            stringValue = String.valueOf(message);
+        } else {
+            // TODO separate method for unifying level of abstraction
+            if (message.equals(stringValue)) {
+                counter++;
+            } else {
+                handleString();
+                stringValue = message;
                 counter = 1;
-                break;
-            case UNDEFINED:
-                value = "" + message;
-                break;
+            }
         }
-        type = Type.STRING;
     }
 
     public static void log(boolean message) {
@@ -123,24 +109,20 @@ public class Logger {
         printToOutput("reference: " + message.toString());
     }
 
-    private static void handleString(String newValue) {
+    private static void handleString() {
         if (counter > 1) {
-            printToOutput("string: " + value + " (x" + counter + ")");
+            printToOutput("string: " + stringValue + " (x" + counter + ")");
         } else {
-            printToOutput("string: " + value);
+            printToOutput("string: " + stringValue);
         }
-        value = newValue;
         counter = 0;
     }
     //TODO make name more informative
-    private static void handlePrimitive(String newValue) {
-        printToOutput("primitive: " + value);
-        value = newValue;
+    private static void handleByte() {
+        printToOutput("primitive: " + byteValue);
     }
-
-    private static void handleValue(String newValue) {
-        printToOutput(value);
-        value = newValue;
+    private static void handleInt() {
+        printToOutput("primitive: " + intValue);
     }
 
     private static void printToOutput(String message) {
