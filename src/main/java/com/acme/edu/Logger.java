@@ -10,8 +10,9 @@ public class Logger {
     private static long intAccumulator = 0;
     public static boolean byteAccIsNotEmpty = false;
     private static int byteAccumulator = 0;
-    private static String savedString;
-    private static int strRepeatitionCounter = 0;
+    private static String currentString;
+    private static String prevString;
+    private static int strRepeatCounter = 1;
 
 
     public static void log(int message) { output(OUTPUT_METHOD,PRIMITIVE_PREFIX, message); }
@@ -35,9 +36,9 @@ public class Logger {
                 case ("Byte"):
                     accumulator((byte) message);
                     break;
-//                case ("String"):
-//
-//                    break;
+                case ("String"):
+                    stringHandler((String) message);
+                    break;
                 default:
                     System.out.println(prefix + message);
                     break;
@@ -71,12 +72,69 @@ public class Logger {
         }
     }
 
-//    public static void stringHandler(String message) {
-//
-//    }
+    public static void stringHandler(String message) { //str 2
+        if (currentString != message && currentString != null) { //
+            if (strRepeatCounter == 1) {
+                System.out.println(currentString);
+
+                currentString = message;
+                strRepeatCounter = 1;
+            } else {
+                if (strRepeatCounter > 1) {
+                    System.out.println(currentString + " (x" + strRepeatCounter + ")");
+                }
+                currentString = message;
+                strRepeatCounter = 1;
+            }
+
+        } else if (currentString == message) {
+//            if (strRepeatCounter == 1) {
+//                System.out.println(prevString);
+//            } else {
+//                System.out.println(prevString + " (x" + strRepeatCounter + ")");
+//            }
+            strRepeatCounter += 1;
+        } else if (currentString != message && currentString == null) { //get here on 1st iteration
+            currentString = message;
+        }
+
+
+    }
 
 
     enum OutputMethod {
         TERMINAL, FILE
     }
 }
+
+
+/*
+public static void stringHandler(String message) { //str 2
+        if (currentString != message && currentString != null) { //if str 1 != str 2
+            if (strRepeatCounter == 1) {
+                System.out.println(currentString);
+
+                currentString = message;
+                strRepeatCounter = 1;
+            } else {
+                if (strRepeatCounter > 1) {
+                    System.out.println(currentString + " (x" + strRepeatCounter + ")");
+                }
+                currentString = message;
+                strRepeatCounter = 1;
+            }
+
+        } else if (currentString == message) {
+//            if (strRepeatCounter == 1) {
+//                System.out.println(prevString);
+//            } else {
+//                System.out.println(prevString + " (x" + strRepeatCounter + ")");
+//            }
+            strRepeatCounter += 1;
+        } else if (currentString != message && currentString == null) {
+            currentString = message;
+        }
+
+
+    }
+ */
