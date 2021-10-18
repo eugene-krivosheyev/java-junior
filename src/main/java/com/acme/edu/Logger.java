@@ -12,19 +12,19 @@ public class Logger {
     private static String previous_type = "start";
     private static String messagePrefix = "";
 
-    public static void log(String ... args){
-       for (String arg: args){
-           log(arg);
-       }
-       flush();
+    public static void log(String... args) {
+        for (String arg : args) {
+            log(arg);
+        }
+        flush();
     }
 
-    public static void log(int ... args){
+    public static void log(int... args) {
         messagePrefix = "";
         print(formatMessage(messagePrefix, sumOfArray(args)));
     }
 
-    public static void log  (int[][] arr){
+    public static void log(int[][] arr) {
         messagePrefix = "";
         print(formatMessage(messagePrefix, sumOfArray2D(arr)));
     }
@@ -91,7 +91,7 @@ public class Logger {
     }
 
     public static void log(boolean message) {
-       messagePrefix = "primitive: ";
+        messagePrefix = "primitive: ";
         print(formatMessage(messagePrefix, message));
     }
 
@@ -113,10 +113,10 @@ public class Logger {
         counter = 1;
     }
 
-    public static void mass(int[] a){
-      for(int i = 0; i<a.length; i++){
-               log(i);
-      }
+    public static void mass(int[] a) {
+        for (int i = 0; i < a.length; i++) {
+            log(i);
+        }
     }
 
     private static String formatMessage(String messagePrefix, Object message) {
@@ -127,13 +127,13 @@ public class Logger {
         System.out.println(message);
     }
 
-    private static int sumOfArray(int[] arr){
+    private static int sumOfArray(int[] arr) {
         return Arrays.stream(arr).sum();
     }
 
-    private static int sumOfArray2D(int[][] arr){
+    private static int sumOfArray2D(int[][] arr) {
         int sum = 0;
-        for (int[] array : arr){
+        for (int[] array : arr) {
             sum += sumOfArray(array);
         }
         return sum;
