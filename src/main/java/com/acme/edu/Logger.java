@@ -80,8 +80,9 @@ public class Logger {
         if (previousType != "start" && (previousType == "int" || previousType == "byte")) {
             print(formatMessage(bufferSum));
         } else if (previousType != "start" && previousType == "str") {
-            if (stringCounter == 1) print(formatMessage(bufferString));
-            else {
+            if (stringCounter == 1) {
+                print(formatMessage(bufferString));
+            } else {
                 print(formatMessage(bufferString + " (x" + stringCounter + ")"));
             }
         }
