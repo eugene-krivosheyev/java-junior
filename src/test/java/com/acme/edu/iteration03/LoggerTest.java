@@ -33,7 +33,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "array sum: 0"
+            "arrays's sum: 0\n"
         );
         //endregion
     }
@@ -46,7 +46,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "matrix sum: 0"
+            "matrix sum: 0\n"
         );
         //endregion
     }
@@ -57,6 +57,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
         Logger.log("str1", "string 2", "str 3");
+        Logger.flash();
         //endregion
 
         //region then
@@ -76,7 +77,4 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("3");
         //endregion
     }
-
-
-
 }

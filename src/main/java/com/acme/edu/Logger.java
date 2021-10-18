@@ -109,6 +109,30 @@ public class Logger {
         printToOutput("reference: " + message.toString());
     }
 
+    public static void log(int... array) {
+        printToOutput("arrays's sum: " + getSumOfArray(array));
+    }
+    public static void log(int[]... array) {
+        int sum = 0;
+        for (int[] subArray: array) {
+            sum += getSumOfArray(subArray);
+        }
+        printToOutput("matrix sum: " + sum);
+    }
+    public static void log(String... array) {
+        for (String value: array) {
+            log(value);
+        }
+    }
+
+    private static int getSumOfArray(int... array) {
+        int sum = 0;
+        for (int value: array) {
+            sum += value;
+        }
+        return sum;
+    }
+
     private static void handleString() {
         if (counter > 1) {
             printToOutput("string: " + stringValue + " (x" + counter + ")");
