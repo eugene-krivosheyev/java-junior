@@ -1,6 +1,7 @@
 package com.acme.edu;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class Logger {
     private static final String PRIMITIVE_PREFIX = "primitive: ";
@@ -8,6 +9,7 @@ public class Logger {
     private static final String STRING_PREFIX = "string: ";
     private static final String REFERENCE_PREFIX = "reference: ";
     private static final String PRIMITIVE_ARRAY_PREFIX = "primitives array: ";
+    private static final String PRIMITIVE_ARRAY_MATRIX = "primitives matrix: ";
     private static String currentMessage;
     private static long currentIntSum = 0;
     private static int currentByteSum = 0;
@@ -48,6 +50,7 @@ public class Logger {
         }
     }
 
+
     public static void log(String... strings) {
         Arrays.stream(strings).forEach(Logger::log);
     }
@@ -57,7 +60,17 @@ public class Logger {
     }
 
     public static void log(int[] integers) {
-        print(PRIMITIVE_ARRAY_PREFIX);
+        print(PRIMITIVE_ARRAY_PREFIX + makeTheString(integers));
+        accumTheSum(integers);
+        flush();
+    }
+
+    public static void log(int[][] integers) {
+        print(PRIMITIVE_ARRAY_MATRIX + make2DString(integers));
+        for (int i = 0; i < integers.length; i++) {
+            accumTheSum(integers[i]);
+        }
+        flush();
     }
 
     public static void log(boolean message) {
@@ -74,6 +87,42 @@ public class Logger {
         }
     }
 
+    private static void accumTheSum(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            log(array[i]);
+        }
+    }
+
+    private static String makeTheString(int[] array) {
+        StringBuilder arrayToString = new StringBuilder();
+        for (int i = 0; i < array.length; i++) {
+            if (i == 0) {
+                arrayToString.append("{");
+            }
+            arrayToString.append(array[i]);
+            if (i != array.length - 1) {
+                arrayToString.append(", ");
+            } else {
+                arrayToString.append("}");
+            }
+        }
+        return (arrayToString.toString());
+    }
+
+    private static String make2DString(int[][] array) {
+        StringBuilder arrayTo2DString = new StringBuilder();
+        for (int i = 0; i < array.length; i++) {
+            if (i == 0) {
+                arrayTo2DString.append("{\n");
+            }
+            arrayTo2DString.append(makeTheString(array[i]) + "\n");
+            if (i == array.length - 1) {
+                arrayTo2DString.append("}");
+            }
+        }
+        return arrayTo2DString.toString();
+    }
+
     private static boolean handleCurrentMessage() {
         if (isLastInt) {
             currentMessage = PRIMITIVE_PREFIX + currentIntSum;
@@ -87,7 +136,7 @@ public class Logger {
             return true;
         } else if (isLastString) {
             if (sameLastStringCounter == 1) {
-               currentMessage = STRING_PREFIX + lastSubmittedString;
+                currentMessage = STRING_PREFIX + lastSubmittedString;
             } else {
                 currentMessage = STRING_PREFIX + lastSubmittedString + " (x" + sameLastStringCounter + ")";
             }
