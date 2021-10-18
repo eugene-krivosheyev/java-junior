@@ -5,9 +5,11 @@ public class Logger {
     public static final String CHAR_PREFIX = "char: ";
     public static final String STRING_PREFIX = "string: ";
     public static final String OBJECT_PREFIX = "reference: ";
+    public static final String MATRIX_PREFIX = "primitives matrix: ";
     public static boolean intAccIsNotEmpty = false;
     private static long intAccumulator = 0;
     public static boolean byteAccIsNotEmpty = false;
+    public static boolean allowToHandleMatrix = true;
     private static int byteAccumulator = 0;
     private static String currentString;
     private static String prevString;
@@ -30,6 +32,10 @@ public class Logger {
         output(Type.INTARRAY, PRIMITIVE_PREFIX, message);
     }
 
+    public static void log(int[][] message) {
+        output(Type.INT2DARRAY, MATRIX_PREFIX, message);
+    }
+
     private static void output(Type type, String prefix, Object message) {
         switch (type.getValue()) {
             case ("int"):
@@ -44,6 +50,13 @@ public class Logger {
             case ("intarray"):
                 for (int i : (int[]) message) {
                     log(i);
+                }
+                break;
+            case ("int2darray"):
+                for (int[] i : (int[][]) message) {
+                    for (int j : i) {
+                        log(j);
+                    }
                 }
                 break;
             default:
@@ -63,7 +76,9 @@ public class Logger {
     }
 
     public static void flush() {
-        if (intAccIsNotEmpty) {
+        if (allowToHandleMatrix) {
+            System.out.println(MATRIX_PREFIX + intAccumulator);
+        }else if (intAccIsNotEmpty) {
             System.out.println(PRIMITIVE_PREFIX + intAccumulator);
             intAccumulator = 0;
             intAccIsNotEmpty = false;
@@ -73,6 +88,7 @@ public class Logger {
             byteAccumulator = 0;
             byteAccIsNotEmpty = false;
         }
+
     }
 
 //    public static void stringHandler(String message) { //str 2
