@@ -23,78 +23,16 @@ public class Logger {
         prepare("int1D",isSumming?Int1DSumMsg(message):Int1DMsg(message));
     }
 
-    private static String Int1DSumMsg(int[] message) {
-        int sum = 0;
-        for (int value: message) { sum += value; }
-        return String.valueOf(sum);
-    }
-
-    private static String Int1DMsg(int[] message) {
-        StringBuilder msg = new StringBuilder("{");
-        int len =  message.length;
-        for (int i = 0; i<len; ++i) {
-            msg.append(message[i]);
-            msg.append((i<len-1)?", ":"");
-        }
-        msg.append("}");
-        return  msg.toString();
-    }
-
     public static void log(int[]... message) {
         prepare("int2D",isSumming?Int2DSumMsg(message):Int2DMsg(message));
-    }
-
-    private static String Int2DSumMsg(int[][] message) {
-        int sum = 0;
-        for (int[] value: message) { sum += Integer.parseInt(Int1DSumMsg(value)); }
-        return String.valueOf(sum);
-    }
-
-    private static String Int2DMsg(int[][] message) {
-        StringBuilder msg = new StringBuilder("{"+sep);
-        for (int[] intArray : message) {
-            msg.append(Int1DMsg(intArray)).append(sep);
-        }
-        msg.append("}");
-        return msg.toString();
     }
 
     public static void log(int[][]... message) {
         prepare("int3D",isSumming?Int3DSumMsg(message):Int3DMsg(message));
     }
 
-    private static String Int3DSumMsg(int[][][] message) {
-        int sum = 0;
-        for (int[][] value: message) { sum += Integer.parseInt(Int2DSumMsg(value)); }
-        return String.valueOf(sum);
-    }
-
-    private static String Int3DMsg(int[][]... message) {
-        StringBuilder msg = new StringBuilder("{"+sep);
-        for (int[][] intArray : message) {
-            msg.append(Int2DMsg(intArray)).append(sep);
-        }
-        msg.append("}");
-        return msg.toString();
-    }
-
     public static void log(int[][][]... message) {
         prepare("int4D",isSumming?Int4DSumMsg(message):Int4DMsg(message));
-    }
-
-    private static String Int4DSumMsg(int[][][][] message) {
-        int sum = 0;
-        for (int[][][] value: message) { sum += Integer.parseInt(Int3DSumMsg(value)); }
-        return String.valueOf(sum);
-    }
-
-    private static String Int4DMsg(int[][][][] message) {
-        StringBuilder msg = new StringBuilder("{"+sep);
-        for (int[][][] intCube : message) {
-            msg.append(Int3DMsg(intCube)).append(sep);
-        }
-        msg.append("}");
-        return msg.toString();
     }
 
     public static void log(char message) {
@@ -113,14 +51,6 @@ public class Logger {
         prepare("stringArray",stringMsg(isSumming?" ":sep, message));
     }
 
-    private static String stringMsg(String separator, String[] message) {
-        StringBuilder sumMsg = new StringBuilder("");
-        for (String str: message) {
-            sumMsg.append(str).append(separator);
-        }
-        return sumMsg.toString();
-    }
-
     public static void log(Boolean message) {
         prepare(Boolean.class.getTypeName(), String.valueOf(message));
     }
@@ -137,6 +67,76 @@ public class Logger {
         } else if (int.class.getTypeName() == collectingType){
             print(bufferInteger.toString());
         }
+    }
+
+    private static String Int1DSumMsg(int[] message) {
+        int sum = 0;
+        for (int value: message) { sum += value; }
+        return String.valueOf(sum);
+    }
+
+    private static String Int1DMsg(int[] message) {
+        StringBuilder msg = new StringBuilder("{");
+        int len =  message.length;
+        for (int i = 0; i<len; ++i) {
+            msg.append(message[i]);
+            msg.append((i<len-1)?", ":"");
+        }
+        msg.append("}");
+        return  msg.toString();
+    }
+
+    private static String Int2DSumMsg(int[][] message) {
+        int sum = 0;
+        for (int[] value: message) { sum += Integer.parseInt(Int1DSumMsg(value)); }
+        return String.valueOf(sum);
+    }
+
+    private static String Int2DMsg(int[][] message) {
+        StringBuilder msg = new StringBuilder("{"+sep);
+        for (int[] intArray : message) {
+            msg.append(Int1DMsg(intArray)).append(sep);
+        }
+        msg.append("}");
+        return msg.toString();
+    }
+
+    private static String Int3DSumMsg(int[][][] message) {
+        int sum = 0;
+        for (int[][] value: message) { sum += Integer.parseInt(Int2DSumMsg(value)); }
+        return String.valueOf(sum);
+    }
+
+    private static String Int3DMsg(int[][]... message) {
+        StringBuilder msg = new StringBuilder("{"+sep);
+        for (int[][] intArray : message) {
+            msg.append(Int2DMsg(intArray)).append(sep);
+        }
+        msg.append("}");
+        return msg.toString();
+    }
+
+    private static String Int4DSumMsg(int[][][][] message) {
+        int sum = 0;
+        for (int[][][] value: message) { sum += Integer.parseInt(Int3DSumMsg(value)); }
+        return String.valueOf(sum);
+    }
+
+    private static String Int4DMsg(int[][][][] message) {
+        StringBuilder msg = new StringBuilder("{"+sep);
+        for (int[][][] intCube : message) {
+            msg.append(Int3DMsg(intCube)).append(sep);
+        }
+        msg.append("}");
+        return msg.toString();
+    }
+
+    private static String stringMsg(String separator, String[] message) {
+        StringBuilder sumMsg = new StringBuilder("");
+        for (String str: message) {
+            sumMsg.append(str).append(separator);
+        }
+        return sumMsg.toString();
     }
 
     private static void prepare(String classType, String message) {
