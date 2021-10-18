@@ -16,12 +16,18 @@ public class Logger {
     }
 
     private static Type bufferType = Type.NONE;
-
     private static long numBuffer;
 
-    private static String stringBuffer = "";
+    private static String stringBuffer = null;
     private static int stringCount;
 
+    public static void log(int... message) {
+        checkPreviousType(Type.NONE);
+        for (int num : message) {
+            log(num);
+        }
+        flush();
+    }
 
     public static void log(int[][] message) {
         checkPreviousType(Type.NONE);
@@ -29,14 +35,6 @@ public class Logger {
             for (int num : subarray) {
                 log(num);
             }
-        }
-        flush();
-    }
-
-    public static void log(int... message) {
-        checkPreviousType(Type.NONE);
-        for (int num : message) {
-            log(num);
         }
         flush();
     }
@@ -64,9 +62,10 @@ public class Logger {
     }
 
     public static void log(String message) {
-        checkPreviousType(Type.STRING);
+        if (message == null) throw new NullPointerException("String message can not be null");
 
-        if (stringBuffer.isEmpty()) {
+        checkPreviousType(Type.STRING);
+        if (stringBuffer == null) {
             stringBuffer = message;
             stringCount++;
             return;
