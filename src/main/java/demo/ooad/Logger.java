@@ -1,25 +1,12 @@
 package demo.ooad;
 
 public class Logger {
-    public static void log(String message) {
-        if (!filter(message)) {
-            save(decorate(message));
+    private Saver saver = new Saver();
+    private Filter filter = new Filter(); // Rich Domain Model vs *Anemic Domain Model*
+
+    public void log(Message message) {
+        if (!filter.filter(message)) {
+            saver.save(message.getBody());
         }
-    }
-
-
-    /**
-     * Stub implementations:
-     */
-    private static String decorate(String message) {
-        return "decorated " + message;
-    }
-
-    private static boolean filter(String message) {
-        return false;
-    }
-
-    private static void save(String decorate) {
-
     }
 }
