@@ -1,6 +1,7 @@
 package com.acme.edu;
 
 import java.sql.SQLOutput;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Logger {
@@ -10,6 +11,22 @@ public class Logger {
     private static int counter = 1;
     private static String previous_type = "start";
     private static String messagePrefix = "";
+
+    public static void log(String ... args){
+       for (String arg: args){
+           log(arg);
+       }
+    }
+
+    public static void log(int ... args){
+        messagePrefix = "";
+        print(formatMessage(messagePrefix, sumOfArray(args)));
+    }
+
+    public static void log  (int[][] arr){
+        messagePrefix = "";
+        print(formatMessage(messagePrefix, sumOfArray2D(arr)));
+    }
 
     public static void log(int message) {
         /**
@@ -26,7 +43,6 @@ public class Logger {
             if ((Long.valueOf(state) + Long.valueOf(message)) < Integer.MAX_VALUE) {
                 state += message;
             } else {
-                // System.out.println(state);
                 System.out.println(Integer.MAX_VALUE);
                 state = message - (Integer.MAX_VALUE - state);
             }
@@ -44,7 +60,6 @@ public class Logger {
             if ((Integer.valueOf(state) + Integer.valueOf(message)) < Byte.MAX_VALUE) {
                 state += message;
             } else {
-                // System.out.println(state);
                 System.out.println(Byte.MAX_VALUE);
                 state = message - (Byte.MAX_VALUE - state);
             }
@@ -105,5 +120,16 @@ public class Logger {
         System.out.println(message);
     }
 
+    private static int sumOfArray(int[] arr){
+        return Arrays.stream(arr).sum();
+    }
+
+    private static int sumOfArray2D(int[][] arr){
+        int sum = 0;
+        for (int[] array : arr){
+            sum += sumOfArray(array);
+        }
+        return sum;
+    }
 
 }
