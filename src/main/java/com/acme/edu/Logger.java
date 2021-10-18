@@ -85,10 +85,6 @@ public class Logger {
         }
     }
 
-    private static void sendToSystemOut(Object message) {
-        System.out.println(message);
-    }
-
     private static TypeCode getTypeCode(Object message) {
         if (message.getClass() == String.class) {
             return TypeCode.STRING;
@@ -130,16 +126,6 @@ public class Logger {
         }
     }
 
-    private static long checkOverflow(long result, Integer max, Integer min) {
-        if (result > max) {
-            return result - max;
-        }
-        if (result < min) {
-            return result + min;
-        }
-        return result;
-    }
-
     private static int countSum(int externalSum, int income, int max, int min) {
         long sum = (long) externalSum + (long) income;
         long result = checkOverflow(sum, max, min);
@@ -150,5 +136,19 @@ public class Logger {
             sendToSystemOut(Integer.toString(max));
         }
         return (int) result;
+    }
+
+    private static long checkOverflow(long result, Integer max, Integer min) {
+        if (result > max) {
+            return result - max;
+        }
+        if (result < min) {
+            return result + min;
+        }
+        return result;
+    }
+
+    private static void sendToSystemOut(Object message) {
+        System.out.println(message);
     }
 }
