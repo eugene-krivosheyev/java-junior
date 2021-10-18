@@ -29,19 +29,34 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
+        Logger.setArrayToggle(true);
         Logger.log(new int[] {-1, 0, 20});
         Logger.flush();
         //endregion
 
         //region then
         assertSysoutContains("primitives array: {-1, 0, 20}");
-        assertSysoutContains("19");
         //endregion
     }
 
     @Test
+    public void shouldLogIntegersArraySum() throws IOException {
+        //region when
+        Logger.setArrayToggle(false);
+        Logger.log(new int[] {-1, 0, 20});
+        Logger.flush();
+        //endregion
+
+        //region then
+        assertSysoutContains("19");
+        //endregion
+    }
+
+
+    @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
+        Logger.setArrayToggle(true);
         Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -20}});
         Logger.flush();
         //endregion
@@ -52,6 +67,18 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("{1, 2, 3}");
         assertSysoutContains("{-1, -2, -20}");
         assertSysoutContains("}");
+        //endregion
+    }
+
+    @Test
+    public void shouldLogIntegersMatrixSum() throws IOException {
+        //region when
+        Logger.setArrayToggle(false);
+        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -20}});
+        Logger.flush();
+        //endregion
+
+        //region then
         assertSysoutContains("-17");
         //endregion
     }

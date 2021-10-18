@@ -21,6 +21,8 @@ public class Logger {
     private static boolean isLastByte = false;
     private static boolean isLastString = false;
 
+    private static boolean arrayToggle = false;
+
     public static void log(int message) {
         if (!isLastInt) {
             flush();
@@ -50,20 +52,31 @@ public class Logger {
         }
     }
 
-
     public static void log(String... strings) {
         Arrays.stream(strings).forEach(Logger::log);
     }
 
+    public static void setArrayToggle(boolean toggle) {
+        arrayToggle = toggle;
+    }
+
     public static void log(int... integers) {
-        print(PRIMITIVE_ARRAY_PREFIX + makeTheString(integers));
-        accumTheSum(integers);
+        if (!arrayToggle) {
+            accumTheSum(integers);
+        } else {
+            print(PRIMITIVE_ARRAY_PREFIX + makeTheString(integers));
+            arrayToggle = false;
+        }
     }
 
     public static void log(int[][] integers) {
-        print(PRIMITIVE_ARRAY_MATRIX + make2DString(integers));
-        for (int i = 0; i < integers.length; i++) {
-            accumTheSum(integers[i]);
+        if (!arrayToggle) {
+            for (int[] row : integers) {
+                accumTheSum(row);
+            }
+        } else {
+            print(PRIMITIVE_ARRAY_MATRIX + make2DString(integers));
+            arrayToggle = false;
         }
     }
 
@@ -82,8 +95,8 @@ public class Logger {
     }
 
     private static void accumTheSum(int[] array) {
-        for (int i = 0; i < array.length; i++) {
-            log(array[i]);
+        for (int j : array) {
+            log(j);
         }
     }
 
