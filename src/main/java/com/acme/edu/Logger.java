@@ -23,19 +23,19 @@ public class Logger {
     }
 
     public static void log(int... message) {
-        prepare("int1D",isSumming?Int1234DSumMsg((Arrays.asList(message)),1):Int1DMsg(message));
+        prepare("int1D",isSumming?Int1DSumMsg(message):Int1DMsg(message));
     }
 
     public static void log(int[]... message) {
-        prepare("int2D",isSumming?Int1234DSumMsg((Arrays.asList(message)),2):Int2DMsg(message));
+        prepare("int2D",isSumming?Int2DSumMsg(message):Int2DMsg(message));
     }
 
     public static void log(int[][]... message) {
-        prepare("int3D",isSumming?Int1234DSumMsg((Arrays.asList(message)),3):Int3DMsg(message));
+        prepare("int3D",isSumming?Int3DSumMsg(message):Int3DMsg(message));
     }
 
     public static void log(int[][][]... message) {
-        prepare("int4D",isSumming?Int1234DSumMsg((Arrays.asList(message)),4):Int4DMsg(message));
+        prepare("int4D",isSumming?Int4DSumMsg(message):Int4DMsg(message));
     }
 
     public static void log(char message) {
