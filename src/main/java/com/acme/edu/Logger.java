@@ -121,6 +121,7 @@ public class Logger {
 //    }
 
 
+
     enum Type {
         INTEGER("int"),
         BYTE("byte"),
