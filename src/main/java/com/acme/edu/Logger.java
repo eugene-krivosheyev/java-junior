@@ -56,8 +56,8 @@ public class Logger {
         Arrays.stream(strings).forEach(Logger::log);
     }
 
-    public static void setArrayToggle(boolean toggle) {
-        arrayToggle = toggle;
+    public static void setArrayToggle() {
+        arrayToggle = true;
     }
 
     public static void log(int... integers) {
