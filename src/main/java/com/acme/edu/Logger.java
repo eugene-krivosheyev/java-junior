@@ -16,6 +16,8 @@ public class Logger {
         CHAR,
         OBJECT,
         BOOLEAN,
+        INT2DARRAY,
+        INTARRAY,
         NONE
     }
 
@@ -26,51 +28,69 @@ public class Logger {
     private static int byteSum = 0;
     private static String prevString = null;
 
-    public static void log(Object... messages) {
-        for (Object message : messages) {
+    public static void log(String... messages) {
+        for (String message : messages) {
             log(message);
         }
     }
 
-    public static void log(Object message) {
-        TypeCode typeCode = getTypeCode(message);
+    public static void log(int... messages) {
+        flushOnCondition(notSameTypeCode(TypeCode.INTARRAY));
+        for (int message : messages) {
+            log(message);
+        }
+        prevTypeCode = TypeCode.INTARRAY;
+    }
 
-        if (prevTypeCode != TypeCode.NONE && typeCode != prevTypeCode) {
+    public static void log(int[]... messages) {
+        flushOnCondition(notSameTypeCode(TypeCode.INT2DARRAY));
+        for (int[] message : messages) {
+            for (int element : message) {
+                log(element);
+            }
+        }
+        prevTypeCode = TypeCode.INT2DARRAY;
+    }
+
+    public static void log(String message) {
+        flushOnCondition(notSameTypeCode(TypeCode.STRING));
+
+        if (!Objects.equals(prevString, message) && prevString != null) {
             flush();
         }
+        similarStringCounter++;
+        prevString = (String)message;
+        prevTypeCode = TypeCode.STRING;
+    }
 
-        switch (typeCode) {
-            case STRING: {
-                if (!Objects.equals(prevString, message) && prevString != null) {
-                    flush();
-                }
-                similarStringCounter++;
-                prevString = (String)message;
-                break;
-            }
+    public static void log(byte message) {
+        flushOnCondition(notSameTypeCode(TypeCode.BYTE));
+        byteSum = countSum(byteSum, (byte)message, Byte.MAX_VALUE, Byte.MIN_VALUE);
+        prevTypeCode = TypeCode.BYTE;
+    }
 
-            case BYTE: {
-                byteSum = countSum(byteSum, (byte)message, Byte.MAX_VALUE, Byte.MIN_VALUE);
-                break;
-            }
-            case INTEGER: {
-                integerSum = countSum(integerSum, (int)message, Integer.MAX_VALUE, Integer.MIN_VALUE);
-                break;
-            }
-            case BOOLEAN: {
-                printToConsole(typePrimitive + message);
-                break;
-            }
-            case CHAR: {
-                printToConsole(typeChar + message);
-                break;
-            }
-            case OBJECT: {
-                printToConsole(typeReference + message);
-                break;
-            }
-        }
-        prevTypeCode = typeCode;
+    public static void log(int message) {
+        flushOnCondition(notSameTypeCode(TypeCode.INTEGER));
+        integerSum = countSum(integerSum, (int)message, Integer.MAX_VALUE, Integer.MIN_VALUE);
+        prevTypeCode = TypeCode.INTEGER;
+    }
+
+    public static void log(boolean message) {
+        flushOnCondition(notSameTypeCode(TypeCode.BOOLEAN));
+        printToConsole(typePrimitive + message);
+        prevTypeCode = TypeCode.BOOLEAN;
+    }
+
+    public static void log(char message) {
+        flushOnCondition(notSameTypeCode(TypeCode.CHAR));
+        printToConsole(typeChar + message);
+        prevTypeCode = TypeCode.CHAR;
+    }
+
+    public static void log(Object message) {
+        flushOnCondition(notSameTypeCode(TypeCode.OBJECT));
+        printToConsole(typeReference + message);
+        prevTypeCode = TypeCode.OBJECT;
     }
 
     public static void flush() {
@@ -90,6 +110,8 @@ public class Logger {
                 byteSum = 0;
                 break;
             }
+            case INTARRAY:
+            case INT2DARRAY:
             case INTEGER: {
                 printToConsole(typePrimitive + integerSum);
                 integerSum = 0;
@@ -99,30 +121,17 @@ public class Logger {
         }
     }
 
-    private static void printToConsole(String message) {
-        System.out.println(message);
+    private static boolean notSameTypeCode (TypeCode typeCode) {
+        if (prevTypeCode == TypeCode.NONE) {
+            prevTypeCode = typeCode;
+        }
+        return typeCode != prevTypeCode;
     }
 
-    private static TypeCode getTypeCode(Object message) {
-        if (message.getClass() == String.class) {
-            return TypeCode.STRING;
+    private static void flushOnCondition(boolean notSameType) {
+        if (notSameType) {
+            flush();
         }
-        if (message.getClass() == Byte.class) {
-            return TypeCode.BYTE;
-        }
-        if (message.getClass() == Integer.class) {
-            return TypeCode.INTEGER;
-        }
-        if (message.getClass() == Object.class) {
-            return TypeCode.OBJECT;
-        }
-        if (message.getClass() == Boolean.class) {
-            return TypeCode.BOOLEAN;
-        }
-        if (message.getClass() == Character.class) {
-            return TypeCode.CHAR;
-        }
-        return TypeCode.NONE;
     }
 
     private static long checkOverflow(long result, int max, int min) {
@@ -145,5 +154,9 @@ public class Logger {
             printToConsole(Integer.toString(max));
         }
         return (int)result;
+    }
+
+    private static void printToConsole(String message) {
+        System.out.println(message);
     }
 }

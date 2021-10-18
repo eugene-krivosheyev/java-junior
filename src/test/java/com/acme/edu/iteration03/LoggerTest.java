@@ -38,11 +38,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
+        Logger.log(1);
         Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         Logger.flush();
         //endregion
 
         //region then
+        assertSysoutContains("1");
         assertSysoutContains("0");
         //endregion
     }
@@ -79,11 +81,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
+        Logger.log(1);
         Logger.log(-1, 0, 1, 3);
         Logger.flush();
         //endregion
 
         //region then
+        assertSysoutContains("1");
         assertSysoutContains("3");
         //endregion
     }
