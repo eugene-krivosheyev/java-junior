@@ -16,6 +16,7 @@ public class Logger {
        for (String arg: args){
            log(arg);
        }
+       flush();
     }
 
     public static void log(int ... args){
@@ -110,6 +111,12 @@ public class Logger {
         }
         state = 0;
         counter = 1;
+    }
+
+    public static void mass(int[] a){
+      for(int i = 0; i<a.length; i++){
+               log(i);
+      }
     }
 
     private static String formatMessage(String messagePrefix, Object message) {

@@ -33,7 +33,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "0"
+            "0\r\n"
         );
         //endregion
     }
@@ -46,7 +46,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "0\n"
+            "0\r\n"
         );
         //endregion
     }
@@ -71,12 +71,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
-        Logger.log("str1", "str1", "string 2", "str 3");
+        Logger.log("str1", "string 2", "str 3");
         //endregion
 
         //region then
-//        assertSysoutContains("str1 \nstring 2\nstr 3");
-        assertSysoutEquals("str1 \nstring 2\nstr 3");
+        assertSysoutContains("string: str1\r\nstring: string 2\r\nstring: str 3\r\n");
+
         //endregion
     }
 
