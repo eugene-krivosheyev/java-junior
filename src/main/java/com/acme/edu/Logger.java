@@ -21,6 +21,7 @@ public class Logger {
     private static boolean isLastString = false;
 
     private static boolean printAsArrayToggle = false;
+    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     public static void log(int message) {
         if (!isLastInt) {
@@ -119,11 +120,11 @@ public class Logger {
         StringBuilder arrayTo2DString = new StringBuilder();
         for (int i = 0; i < array.length; i++) {
             if (i == 0) {
-                arrayTo2DString.append("{\n");
+                arrayTo2DString.append("{" + LINE_SEPARATOR);
             }
-            arrayTo2DString.append(makeTheString(array[i]) + "\n");
+            arrayTo2DString.append(makeTheString(array[i]) + LINE_SEPARATOR);
             if (i == array.length - 1) {
-                arrayTo2DString.append("}");
+                arrayTo2DString.append("}" + LINE_SEPARATOR);
             }
         }
         return arrayTo2DString.toString();
