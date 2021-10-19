@@ -2,7 +2,7 @@ package demo.ooad;
 
 public class Logger {
     private Saver saver = new FileSaver("operations.log"); // [GRASP] Creator
-    private Filter filter = FilterFactory.get(); // [GoF] Factory Method
+    private Filter filter = new HardcodedFilterFactory().get(); // [GoF] Abstract Factory -> Registry
 
     /**
      * 1 MSLoC
