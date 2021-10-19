@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static com.acme.edu.Logger.dropContainerType;
 import static com.acme.edu.Logger.sep;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
@@ -31,7 +30,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
-        Logger.dropContainerType();
         Logger.asArrayCall(true);
         Logger.log(new int[] {-1, 0, 1});
         Logger.flush();
@@ -47,7 +45,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
-        Logger.dropContainerType();
         Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         Logger.flush();
         //endregion

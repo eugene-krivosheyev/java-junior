@@ -94,25 +94,30 @@ public class Logger {
                 else getPrintln (STR_PREFIX + stringContainer);
                 stringContainer="";
                 stringsCount=0;
+                containerType="";
                 break;
             case INT_TYPE:
             case BYTE_TYPE:
                 getPrintln(PRIM_PREFIX + intContainer);
                 intContainer = 0;
+                containerType="";
                 break;
             case INT_ARRAY_TYPE:
                 if (arraySwitch) {
                     getPrintln(ARRAY_PREFIX + "{" + arrayPrint() + "}");
                 }else getPrintln("" + sumArray());
                 intArrayContainer =null;
+                containerType="";
                 break;
             case MATRIX_ARRAY_TYPE:
                 System.out.print(MATRIX_PREFIX + array2dsum());
                 array2dsum=0;
+                containerType="";
                 break;
             case STR_ARRAY_TYPE:
                 stringArrayOut();
                 strArrayContainer=null;
+                containerType="";
                 break;
         }
     }
