@@ -10,7 +10,7 @@ public class EnumsDemo {
         LoggerState.DEFAULT_STATE.name();
         LoggerState.DEFAULT_STATE.ordinal();
 
-        LoggerState.DEFAULT_STATE.getProperty();
+//        LoggerState.DEFAULT_STATE.getProperty();
 
         final Singleton instance = Singleton.getInstance();
         instance.doSmth();
@@ -22,9 +22,9 @@ enum LoggerState {
 }
 
 final class LoggerStateClass {
-    public static LoggerStateClass INT_STATE = new LoggerStateClass("p1");
-    public static LoggerStateClass STRING_STATE = new LoggerStateClass("p2");
-    public static LoggerStateClass DEFAULT_STATE = new LoggerStateClass("p3")];
+    public static final LoggerStateClass INT_STATE = new LoggerStateClass("p1");
+    public static final LoggerStateClass STRING_STATE = new LoggerStateClass("p2");
+    public static final LoggerStateClass DEFAULT_STATE = new LoggerStateClass("p3");
 
     //==============
 
