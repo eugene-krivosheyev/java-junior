@@ -1,8 +1,16 @@
 package demo.ooad;
 
 public class Logger {
-    private Saver saver = new FileSaver("operations.log"); // [GRASP] Creator
-    private Filter filter = new HardcodedFilterFactory().get(); // [GoF] Abstract Factory -> Registry
+    private Saver saver;
+    private Filter filter;
+
+    /**
+     * Dependency Injection: constructor
+     */
+    public Logger(Saver saver, Filter filter) {
+        this.saver = saver;
+        this.filter = filter;
+    }
 
     /**
      * 1 MSLoC
