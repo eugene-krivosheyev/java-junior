@@ -1,14 +1,17 @@
 package demo;
 
+import static demo.LoggerState.DEFAULT_STATE;
+import static demo.LoggerState.valueOf;
+
 public class EnumsDemo {
     public static void main(String[] args) {
-        LoggerState state = LoggerState.DEFAULT_STATE;
+        LoggerState state = DEFAULT_STATE;
 
-        LoggerState.valueOf("DEFAULT_STATE");
+        valueOf("DEFAULT_STATE");
         LoggerState[] values = LoggerState.values();
 
-        LoggerState.DEFAULT_STATE.name();
-        LoggerState.DEFAULT_STATE.ordinal();
+        DEFAULT_STATE.name();
+        DEFAULT_STATE.ordinal();
 
 //        LoggerState.DEFAULT_STATE.getProperty();
 
