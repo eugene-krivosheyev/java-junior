@@ -11,10 +11,6 @@ public class Logger {
     public void log(Message message) {
         if (!filter.filter(message)) {
             saver.save(message.getBody());
-            if (saver instanceof FileSaver) {
-                final FileSaver fileSaver = (FileSaver) saver;
-                fileSaver.close();
-            }
         }
     }
 }

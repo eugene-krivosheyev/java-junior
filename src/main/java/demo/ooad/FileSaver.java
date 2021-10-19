@@ -11,6 +11,7 @@ public class FileSaver implements Saver {
         System.out.println("write " + message + " to file " + FILE_NAME);
     }
 
+    @Override
     public void close() {
 
     }
