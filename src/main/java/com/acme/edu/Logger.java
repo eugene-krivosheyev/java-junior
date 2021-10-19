@@ -12,6 +12,8 @@ public class Logger {
         STRING,
         INT,
         BYTE,
+        INT_ARRAY,
+        INT_MATRIX,
         NONE
     }
 
@@ -22,39 +24,35 @@ public class Logger {
     private static int stringCount;
 
     public static void log(int... message) {
-        checkPreviousType(Type.NONE);
+        checkPreviousType(Type.INT_ARRAY);
         for (int num : message) {
-            log(num);
+            addNumber(Integer.MAX_VALUE, Integer.MIN_VALUE, num);
         }
-        flush();
     }
 
     public static void log(int[][] message) {
-        checkPreviousType(Type.NONE);
+        checkPreviousType(Type.INT_MATRIX);
         for (int[] subarray : message) {
             for (int num : subarray) {
-                log(num);
+                addNumber(Integer.MAX_VALUE, Integer.MIN_VALUE, num);
             }
         }
-        flush();
     }
 
     public static void log(String... message) {
-        checkPreviousType(Type.NONE);
         for (String str : message) {
             log(str);
         }
-        flush();
     }
 
     public static void log(int message) {
         checkPreviousType(Type.INT);
-        checkOverflow(Integer.MAX_VALUE, Integer.MIN_VALUE, message);
+        addNumber(Integer.MAX_VALUE, Integer.MIN_VALUE, message);
     }
 
     public static void log(byte message) {
         checkPreviousType(Type.BYTE);
-        checkOverflow(Byte.MAX_VALUE, Byte.MIN_VALUE, message);
+        addNumber(Byte.MAX_VALUE, Byte.MIN_VALUE, message);
     }
 
     public static void log(char message) {
@@ -99,6 +97,8 @@ public class Logger {
                 break;
             case INT:
             case BYTE:
+            case INT_ARRAY:
+            case INT_MATRIX:
                 print(PRIMITIVE_PREFIX + numBuffer);
                 numBuffer = 0;
                 break;
@@ -120,12 +120,12 @@ public class Logger {
         System.out.println(message);
     }
 
-    private static void checkOverflow(long maxLimit, long minLimit, long num) {
+    private static void addNumber(long maxLimit, long minLimit, long num) {
         long sum = num + numBuffer;
         if (sum <= minLimit) {
             numBuffer = minLimit;
             flush();
-            numBuffer += sum - minLimit;
+            numBuffer = sum - minLimit;
         } else if (sum >= maxLimit) {
             numBuffer = maxLimit;
             flush();
