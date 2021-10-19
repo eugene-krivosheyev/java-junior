@@ -11,7 +11,6 @@ public class Logger {
         INTEGER,
         BYTE
     }
-    static String value;
 
     static private String stringValue;
     static private int intValue;
@@ -21,8 +20,7 @@ public class Logger {
     static int counter = 0;
 
 
-    // TODO: flush
-    public static void flash() {
+    public static void flush() {
         processPreviousValue(Type.UNDEFINED);
         stringValue = "";
         intValue = 0;
@@ -35,14 +33,14 @@ public class Logger {
         }
         switch (type) {
             case STRING:
-                handleString();
+                decorateString();
                 counter = 0;
                 break;
             case INTEGER:
-                handleInt();
+                decorateInt();
                 break;
             case BYTE:
-                handleByte();
+                decorateByte();
                 break;
         }
         type = currentType;
@@ -57,10 +55,7 @@ public class Logger {
         if (processPreviousValue(Type.INTEGER)) {
             intValue = message;
         } else {
-            if (intValue + (long)message > Integer.MAX_VALUE) {
-                printToOutput("primitive: " + intValue);
-                printToOutput("primitive: " + message);
-            }
+            handleOverFlow(intValue, message, Integer.MAX_VALUE);
             intValue += message;
         }
     }
@@ -69,11 +64,7 @@ public class Logger {
         if (processPreviousValue(Type.BYTE)) {
             byteValue = message;
         } else {
-            // TODO make general method for both int and byte
-            if (byteValue + (int)message > Byte.MAX_VALUE) {
-                printToOutput("primitive: " + byteValue);
-                printToOutput("primitive: " + message);
-            }
+            handleOverFlow(byteValue, message, Byte.MAX_VALUE);
             byteValue += message;
         }
     }
@@ -84,16 +75,9 @@ public class Logger {
 
     public static void log(String message) {
         if (processPreviousValue(Type.STRING)) {
-            stringValue = String.valueOf(message);
+            stringValue = message;
         } else {
-            // TODO separate method for unifying level of abstraction
-            if (message.equals(stringValue)) {
-                counter++;
-            } else {
-                handleString();
-                stringValue = message;
-                counter = 1;
-            }
+            processRepeatedStringValue(message);
         }
     }
 
@@ -133,7 +117,7 @@ public class Logger {
         return sum;
     }
 
-    private static void handleString() {
+    private static void decorateString() {
         if (counter > 1) {
             printToOutput("string: " + stringValue + " (x" + counter + ")");
         } else {
@@ -141,15 +125,37 @@ public class Logger {
         }
         counter = 0;
     }
-    //TODO make name more informative
-    private static void handleByte() {
+
+    private static void decorateByte() {
         printToOutput("primitive: " + byteValue);
     }
-    private static void handleInt() {
+
+    private static void decorateInt() {
         printToOutput("primitive: " + intValue);
     }
 
     private static void printToOutput(String message) {
         out.println(message);
     }
+
+
+    private static void handleOverFlow(int value, long message, int max) {
+
+        if (value + message > max) {
+            printToOutput("primitive: " + value);
+            printToOutput("primitive: " + max);
+        }
+
+    }
+
+    private static void processRepeatedStringValue(String message) {
+        if (message.equals(stringValue)) {
+            counter++;
+        } else {
+            decorateString();
+            stringValue = message;
+            counter = 1;
+        }
+    }
+
 }

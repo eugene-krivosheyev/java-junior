@@ -8,7 +8,10 @@ import org.junit.Test;
 
 import java.io.IOException;
 
+import static java.lang.System.lineSeparator;
+
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+    public static final String sep = lineSeparator();
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
@@ -33,7 +36,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "arrays's sum: 0\n"
+            "arrays's sum: 0" + sep
         );
         //endregion
     }
@@ -46,8 +49,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "matrix sum: 0\n"
-        );
+            "matrix sum: 0"+ sep);
         //endregion
     }
 
@@ -57,7 +59,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
         Logger.log("str1", "string 2", "str 3");
-        Logger.flash();
+        Logger.flush();
         //endregion
 
         //region then

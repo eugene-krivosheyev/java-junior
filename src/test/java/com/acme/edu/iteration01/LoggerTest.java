@@ -31,11 +31,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogInteger() throws IOException {
         //region when
         Logger.log(1);
-        Logger.flash();
+        Logger.flush();
         Logger.log(0);
-        Logger.flash();
+        Logger.flush();
         Logger.log(-1);
-        Logger.flash();
+        Logger.flush();
         //endregion
 
         //region then
@@ -48,11 +48,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogByte() throws IOException {
         //region when
         Logger.log((byte) 1);
-        Logger.flash();
+        Logger.flush();
         Logger.log((byte) 0);
-        Logger.flash();
+        Logger.flush();
         Logger.log((byte) -1);
-        Logger.flash();
+        Logger.flush();
         //endregion
 
         //region then
@@ -71,9 +71,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogChar() throws IOException {
         //region when
         Logger.log('a');
-        Logger.flash();
+        Logger.flush();
         Logger.log('b');
-        Logger.flash();
+        Logger.flush();
         //endregion
 
         //region then
@@ -87,9 +87,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogString() throws IOException {
         //region when
         Logger.log("test string 1");
-        Logger.flash();
+        Logger.flush();
         Logger.log("other str");
-        Logger.flash();
+        Logger.flush();
         //endregion
 
         //region then
@@ -103,9 +103,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogBoolean() throws IOException {
         //region when
         Logger.log(true);
-        Logger.flash();
+        Logger.flush();
         Logger.log(false);
-        Logger.flash();
+        Logger.flush();
         //endregion
 
         //region then
@@ -118,7 +118,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogReference() throws IOException {
         //region when
         Logger.log(new Object());
-        Logger.flash();
+        Logger.flush();
         //endregion
 
         //region then
