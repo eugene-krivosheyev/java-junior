@@ -10,4 +10,8 @@ public class FileSaver implements Saver {
     public void save(String message) {
         System.out.println("write " + message + " to file " + FILE_NAME);
     }
+
+    public void close() {
+
+    }
 }
