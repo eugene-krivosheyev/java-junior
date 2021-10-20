@@ -1,46 +1,52 @@
 package com.acme.edu.flush;
 
-import com.acme.edu.Printer;
-import com.acme.edu.StatesDTO;
-
-import static com.acme.edu.typemapper.MessageTypeMapper.getPrefixType;
+import com.acme.edu.dto.StatesDTO;
 
 public class Flusher {
+
+    public void flush(String message) {
+        Printer.print(message);
+    }
+
     public void flush(StatesDTO statesDTO) {
         switch (statesDTO.getPrevTypeCodeEnum()) {
             case STRING: {
-                statesDTO.incSimilarStringCounter();
-                if (statesDTO.getSimilarStringCounter() > 1) {
-                    Printer.print(getPrefixType(statesDTO.getPrevTypeCodeEnum()) + statesDTO.getPrevString() + " (x" + statesDTO.getSimilarStringCounter() + ")");
-                } else {
-                    Printer.print(getPrefixType(statesDTO.getPrevTypeCodeEnum()) + statesDTO.getPrevString());
-                }
-                statesDTO.setPrevString(null);
-                statesDTO.clearSimilarStringCounter();
+                stringCase(statesDTO);
                 break;
             }
             case BYTE: {
-                Printer.print(getPrefixType(statesDTO.getPrevTypeCodeEnum()) + statesDTO.getByteSum());
+                Printer.print(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getByteSum());
                 statesDTO.clearByteSum();
                 break;
             }
             case INTEGER: {
-                Printer.print(getPrefixType(statesDTO.getPrevTypeCodeEnum()) + statesDTO.getIntegerSum());
+                Printer.print(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getIntegerSum());
                 statesDTO.clearIntegerSum();
                 break;
             }
             case ARRAY_INT: {
-                Printer.print(getPrefixType(statesDTO.getPrevTypeCodeEnum()) + statesDTO.getArrayIntSum());
+                Printer.print(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getArrayIntSum());
                 statesDTO.clearArrayIntSum();
                 break;
             }
             case MATRIX_INT: {
-                Printer.print(getPrefixType(statesDTO.getPrevTypeCodeEnum()) + statesDTO.getMatrixIntSum());
+                Printer.print(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getMatrixIntSum());
                 statesDTO.clearMatrixIntSum();
                 break;
             }
             default:
                 break;
         }
+    }
+
+    private void stringCase(StatesDTO statesDTO) {
+        statesDTO.incSimilarStringCounter();
+        if (statesDTO.getSimilarStringCounter() > 1) {
+            Printer.print(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getPrevString() + " (x" + statesDTO.getSimilarStringCounter() + ")");
+        } else {
+            Printer.print(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getPrevString());
+        }
+        statesDTO.setPrevString(null);
+        statesDTO.clearSimilarStringCounter();
     }
 }

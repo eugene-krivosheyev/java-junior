@@ -1,16 +1,16 @@
 package com.acme.edu;
 
+import com.acme.edu.dto.StatesDTO;
 import com.acme.edu.flush.Flusher;
 
 import java.util.Objects;
 
 import static com.acme.edu.TypeCodeEnum.NONE;
-import static com.acme.edu.typemapper.MessageTypeMapper.getPrefixType;
 import static com.acme.edu.typemapper.MessageTypeMapper.getType;
 
 public class Logger {
-    private StatesDTO statesDTO;
-    private Flusher flusher;
+    private final StatesDTO statesDTO;
+    private final Flusher flusher;
 
     public Logger(StatesDTO statesDTO) {
         this.statesDTO = statesDTO;
@@ -26,12 +26,7 @@ public class Logger {
 
         switch (typeCodeEnum) {
             case STRING: {
-                if (Objects.equals(statesDTO.getPrevString(), message)) {
-                    statesDTO.incSimilarStringCounter();
-                } else if (statesDTO.getPrevString() != null) {
-                    flusher.flush(statesDTO);
-                }
-                statesDTO.setPrevString((String) message);
+                stringIteration((String) message);
                 break;
             }
             case BYTE: {
@@ -43,22 +38,34 @@ public class Logger {
                 break;
             }
             case ARRAY_INT: {
-                for (int i : (int[]) message) {
-                    statesDTO.setArrayIntSum(i);
-                }
+                arrayIncrementor((int[]) message);
                 break;
             }
             case MATRIX_INT: {
-                for (int[] i : (int[][]) message) {
-                    for (int j : i)
-                        statesDTO.setMatrixIntSum(j);
+                for (int[] row : (int[][]) message) {
+                    arrayIncrementor(row);
                 }
                 break;
             }
             default: {
-                Printer.print(getPrefixType(typeCodeEnum) + message);
+                flusher.flush(typeCodeEnum.getTypeReference() + message);
             }
         }
         statesDTO.setPrevTypeCodeEnum(typeCodeEnum);
+    }
+
+    private void arrayIncrementor(int[] message) {
+        for (int i : message) {
+            statesDTO.setArrayIntSum(i);
+        }
+    }
+
+    private void stringIteration(String message) {
+        if (Objects.equals(statesDTO.getPrevString(), message)) {
+            statesDTO.incSimilarStringCounter();
+        } else if (statesDTO.getPrevString() != null) {
+            flusher.flush(statesDTO);
+        }
+        statesDTO.setPrevString(message);
     }
 }

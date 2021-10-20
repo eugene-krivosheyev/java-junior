@@ -1,4 +1,4 @@
-package com.acme.edu;
+package com.acme.edu.flush;
 
 public class Printer {
     public static void print(Object message) {

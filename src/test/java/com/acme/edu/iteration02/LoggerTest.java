@@ -1,7 +1,7 @@
 package com.acme.edu.iteration02;
 
 import com.acme.edu.Logger;
-import com.acme.edu.StatesDTO;
+import com.acme.edu.dto.StatesDTO;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.flush.Flusher;
 import org.junit.After;
@@ -16,9 +16,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private final StatesDTO statesDTO;
 
     public LoggerTest() {
-        this.statesDTO = new StatesDTO();
-        this.logger = new Logger(statesDTO);
         this.flusher = new Flusher();
+        this.statesDTO = new StatesDTO(flusher);
+        this.logger = new Logger(statesDTO);
     }
 
     //region given

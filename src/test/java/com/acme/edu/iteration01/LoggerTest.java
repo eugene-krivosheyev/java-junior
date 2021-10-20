@@ -1,7 +1,7 @@
 package com.acme.edu.iteration01;
 
 import com.acme.edu.Logger;
-import com.acme.edu.StatesDTO;
+import com.acme.edu.dto.StatesDTO;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.TypeCodeEnum;
 import com.acme.edu.flush.Flusher;
@@ -16,13 +16,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private static String type;
     private final Logger logger;
-    private final Flusher flusher;
     private final StatesDTO statesDTO;
+    private final Flusher flusher;
 
     public LoggerTest() {
-        this.statesDTO = new StatesDTO();
-        this.logger = new Logger(statesDTO);
         this.flusher = new Flusher();
+        this.statesDTO = new StatesDTO(flusher);
+        this.logger = new Logger(statesDTO);
     }
 
     //region given

@@ -1,4 +1,7 @@
-package com.acme.edu;
+package com.acme.edu.dto;
+
+import com.acme.edu.TypeCodeEnum;
+import com.acme.edu.flush.Flusher;
 
 import static com.acme.edu.TypeCodeEnum.NONE;
 
@@ -11,8 +14,10 @@ public class StatesDTO {
     private int byteSum;
     private String prevString;
     private TypeCodeEnum prevTypeCodeEnum = NONE;
+    private final Flusher flusher;
 
-    public StatesDTO() {
+    public StatesDTO(Flusher flusher) {
+        this.flusher = flusher;
         similarStringCounter = 0;
         integerSum = 0;
         arrayIntSum = 0;
@@ -97,14 +102,14 @@ public class StatesDTO {
         this.prevTypeCodeEnum = typeCodeEnum;
     }
 
-    private static int countSum(int externalSum, int income, int max, int min) {
+    private int countSum(int externalSum, int income, int max, int min) {
         long sum = (long) externalSum + (long) income;
         long result = checkOverflow(sum, max, min);
 
         if (result > sum) {
-            Printer.print(Integer.toString(min));
+            flusher.flush(Integer.toString(min));
         } else if (result < sum) {
-            Printer.print(Integer.toString(max));
+            flusher.flush(Integer.toString(max));
         }
         return (int) result;
     }
