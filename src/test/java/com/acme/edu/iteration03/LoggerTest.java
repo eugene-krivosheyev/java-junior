@@ -1,6 +1,6 @@
 package com.acme.edu.iteration03;
 
-import com.acme.edu.Logger;
+import com.acme.edu.LoggerDeprecated;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
@@ -32,7 +32,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test @Ignore
     public void shouldLogIntegersArray() throws IOException {
         //region when
-        Logger.log(new int[] {-1, 0, 1});
+        LoggerDeprecated.log(new int[] {-1, 0, 1});
         //endregion
 
         //region then
@@ -45,8 +45,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
-        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
-        Logger.flush();
+        LoggerDeprecated.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        LoggerDeprecated.flush();
         //endregion
 
         //region then
@@ -59,7 +59,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test @Ignore
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
-        Logger.log(new int[][][][] {{{{0}}}});
+        LoggerDeprecated.log(new int[][][][] {{{{0}}}});
         //endregion
 
         //region then
@@ -87,8 +87,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
-        Logger.log(-1, 0, 1, 3);
-        Logger.flush();
+        LoggerDeprecated.log(-1, 0, 1, 3);
+        LoggerDeprecated.flush();
         //endregion
 
         //region then
@@ -99,10 +99,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test @Ignore
     public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException {
         //region when
-        Logger.log(1);
-        Logger.log("str");
-        Logger.log(Integer.MAX_VALUE - 10);
-        Logger.log(11);
+        LoggerDeprecated.log(1);
+        LoggerDeprecated.log("str");
+        LoggerDeprecated.log(Integer.MAX_VALUE - 10);
+        LoggerDeprecated.log(11);
         //endregion
 
         //region then
