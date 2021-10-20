@@ -2,26 +2,24 @@ package com.acme.edu;
 
 import com.acme.edu.messageOut.Formatter;
 import com.acme.edu.messageOut.Printer;
+import com.acme.edu.processors.ServiceForIntAndByte;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Logger {
 
-    private static int bufferSum;
-    private static String bufferString = null;
-    private static int stringCounter = 1;
-    private static String previousType = "start";
-    //    private static String messagePrefix = "";
-    private static String type = "";
     private static Printer printer = new Printer();
     private static Formatter formatter = new Formatter();
+    private static Stater state = new Stater("", "start", 0, null, 1);
+    private static Flusher flusher = new Flusher(formatter, printer, state);
+    private static ServiceForIntAndByte serviceForIntAndByte = new ServiceForIntAndByte(formatter, printer, state, flusher);
 
     public static void log(String... args) {
         for (String arg : args) {
             log(arg);
         }
-        flush();
+        flusher.flush();
     }
 
     public static void log(int... args) {
@@ -35,13 +33,13 @@ public class Logger {
     }
 
     public static void log(int message) {
-        type = "int";
-        processingForIntAndByte(message);
+        state.setType("int");
+        serviceForIntAndByte.processingForIntAndByte(message);
     }
 
     public static void log(byte message) {
-        type = "byte";
-        processingForIntAndByte(message);
+        state.setType("byte");
+        serviceForIntAndByte.processingForIntAndByte(message);
     }
 
     public static void log(char message) {
@@ -50,21 +48,21 @@ public class Logger {
     }
 
     public static void log(String message) {
-        type = "str";
-        if (type != previousType) {
-            flush();
+        state.setType("str");
+        if (state.getType() != state.getPreviousType()) {
+            flusher.flush();
         } else {
-            if (Objects.equals(message, bufferString)) {
-                stringCounter++;
+            if (Objects.equals(message, state.getBufferString())) {
+                state.setStringCounter(state.getStringCounter() + 1);
             } else {
-                flush();
-                stringCounter = 1;
+                flusher.flush();
+                state.setStringCounter(1);
             }
         }
         formatter.setMessagePrefix("string: ");
-        previousType = type;
-        bufferSum = 0;
-        bufferString = message;
+        state.setPreviousType(state.getType());
+        state.setBufferSum(0);
+        state.setBufferString(message);
     }
 
     public static void log(boolean message) {
@@ -77,20 +75,9 @@ public class Logger {
         printer.print(formatter.formatMessage(message));
     }
 
-    public static void flush() {
-        if (previousType != "start" && (previousType == "int" || previousType == "byte")) {
-            printer.print(formatter.formatMessage(bufferSum));
-        } else if (previousType != "start" && previousType == "str") {
-            if (stringCounter == 1) {
-                printer.print(formatter.formatMessage(bufferString));
-            } else {
-                printer.print(formatter.formatMessage(bufferString + " (x" + stringCounter + ")"));
-            }
-        }
-        bufferSum = 0;
-        stringCounter = 1;
+    public static void flush(){
+        flusher.flush();
     }
-
 
     private static int sumOfArray(int[] arr) {
         return Arrays.stream(arr).sum();

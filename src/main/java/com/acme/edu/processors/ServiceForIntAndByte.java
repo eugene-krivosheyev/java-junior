@@ -1,42 +1,40 @@
 package com.acme.edu.processors;
 
+import com.acme.edu.Flusher;
+import com.acme.edu.Stater;
 import com.acme.edu.messageOut.Formatter;
+import com.acme.edu.messageOut.Printer;
 
 public class ServiceForIntAndByte {
     private Formatter formatter;
-    private String type;
-    private String previousType;
+    private Printer printer;
+    private Stater state;
+    private Flusher flusher;
 
-    public ServiceForIntAndByte(Formatter formatter){
+
+    public ServiceForIntAndByte(Formatter formatter, Printer printer, Stater state, Flusher flusher){
         this.formatter = formatter;
-    }
-    public String getType() {
-        return type;
-    }
-    public void setType(String type){
-        this.type = type;
+        this.printer = printer;
+        this.state = state;
+        this.flusher = flusher;
     }
 
-    public String getPreviousType() {
-        return previousType;
-    }
-    public void setPreviousType(String previousType){
-        this.previousType = previousType;
-    }
     public void processingForIntAndByte(int message) {
         formatter.setMessagePrefix("primitive: ");
-        int maxValue = (type == "int") ? Integer.MAX_VALUE : Byte.MAX_VALUE;
-        if (type != previousType) {
-            flush();
-            previousType = type;
-            bufferSum += message;
+        int maxValue = (state.getType() == "int") ? Integer.MAX_VALUE : Byte.MAX_VALUE;
+        if (state.getType() != state.getPreviousType()) {
+            flusher.flush();
+            state.setPreviousType(state.getType());
+            state.setBufferSum(state.getBufferSum() + message);
+//            bufferSum += message;
         } else {
-            if ((Long.valueOf(bufferSum) + Long.valueOf(message)) < maxValue) {
-                bufferSum += message;
+            if ((Long.valueOf(state.getBufferSum()) + Long.valueOf(message)) < maxValue) {
+                state.setBufferSum(state.getBufferSum() + message);
             } else {
                 printer.print(formatter.formatMessage(maxValue));
-                bufferSum = message - (maxValue - bufferSum);
+                state.setBufferSum(message - (maxValue - state.getBufferSum()));
             }
         }
     }
+
 }
