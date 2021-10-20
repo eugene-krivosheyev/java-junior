@@ -12,7 +12,7 @@ public class ServiceForIntAndByte {
     private Flusher flusher;
 
 
-    public ServiceForIntAndByte(Formatter formatter, Printer printer, Stater state, Flusher flusher){
+    public ServiceForIntAndByte(Formatter formatter, Printer printer, Stater state, Flusher flusher) {
         this.formatter = formatter;
         this.printer = printer;
         this.state = state;
@@ -26,15 +26,17 @@ public class ServiceForIntAndByte {
             flusher.flush();
             state.setPreviousType(state.getType());
             state.setBufferSum(state.getBufferSum() + message);
-//            bufferSum += message;
         } else {
-            if ((Long.valueOf(state.getBufferSum()) + Long.valueOf(message)) < maxValue) {
-                state.setBufferSum(state.getBufferSum() + message);
-            } else {
-                printer.print(formatter.formatMessage(maxValue));
-                state.setBufferSum(message - (maxValue - state.getBufferSum()));
-            }
+            processingForBigValue(message, maxValue);
         }
     }
 
+    private void processingForBigValue(int message, int maxValue) {
+        if ((Long.valueOf(state.getBufferSum()) + Long.valueOf(message)) < maxValue) {
+            state.setBufferSum(state.getBufferSum() + message);
+        } else {
+            printer.print(formatter.formatMessage(maxValue));
+            state.setBufferSum(message - (maxValue - state.getBufferSum()));
+        }
+    }
 }

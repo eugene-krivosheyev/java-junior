@@ -9,7 +9,7 @@ public class Flusher {
     private Printer printer;
     private Stater state;
 
-    public Flusher(Formatter formatter, Printer printer, Stater state){
+    public Flusher(Formatter formatter, Printer printer, Stater state) {
         this.formatter = formatter;
         this.printer = printer;
         this.state = state;
@@ -19,13 +19,18 @@ public class Flusher {
         if (state.getPreviousType() != "start" && (state.getPreviousType() == "int" || state.getPreviousType() == "byte")) {
             printer.print(formatter.formatMessage(state.getBufferSum()));
         } else if (state.getPreviousType() != "start" && state.getPreviousType() == "str") {
-            if (state.getStringCounter() == 1) {
-                printer.print(formatter.formatMessage(state.getBufferString()));
-            } else {
-                printer.print(formatter.formatMessage(state.getBufferString() + " (x" + state.getStringCounter() + ")"));
-            }
+            flushForOneString();
         }
         state.setBufferSum(0);
         state.setStringCounter(1);
     }
+
+    private void flushForOneString() {
+        if (state.getStringCounter() == 1) {
+            printer.print(formatter.formatMessage(state.getBufferString()));
+        } else {
+            printer.print(formatter.formatMessage(state.getBufferString() + " (x" + state.getStringCounter() + ")"));
+        }
+    }
+
 }
