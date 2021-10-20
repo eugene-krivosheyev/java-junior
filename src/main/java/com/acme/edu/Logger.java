@@ -19,12 +19,16 @@ public class Logger {
     static Type type = Type.UNDEFINED;
     static int counter = 0;
 
+    static LoggerController controller = new LoggerController();
+
 
     public static void flush() {
-        processPreviousValue(Type.UNDEFINED);
+        /*processPreviousValue(Type.UNDEFINED);
         stringValue = "";
         intValue = 0;
-        byteValue = 0;
+        byteValue = 0;*/
+        controller.flush();
+
     }
 
     private static boolean processPreviousValue(Type currentType) {
@@ -52,21 +56,23 @@ public class Logger {
     }
 
     public static void log(int message) {
-        if (processPreviousValue(Type.INTEGER)) {
+        /*if (processPreviousValue(Type.INTEGER)) {
             intValue = message;
         } else {
             handleOverFlow(intValue, message, Integer.MAX_VALUE);
             intValue += message;
-        }
+        }*/
+        controller.log(message);
     }
 
     public static void log(byte message) {
-        if (processPreviousValue(Type.BYTE)) {
+        /*if (processPreviousValue(Type.BYTE)) {
             byteValue = message;
         } else {
             handleOverFlow(byteValue, message, Byte.MAX_VALUE);
             byteValue += message;
-        }
+        }*/
+        controller.log(message);
     }
 
     public static void log(char message) {
@@ -74,11 +80,12 @@ public class Logger {
     }
 
     public static void log(String message) {
-        if (processPreviousValue(Type.STRING)) {
+        /*if (processPreviousValue(Type.STRING)) {
             stringValue = message;
         } else {
             processRepeatedStringValue(message);
-        }
+        }*/
+        controller.log(message);
     }
 
     public static void log(boolean message) {
