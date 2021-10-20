@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static com.acme.edu.Logger.sep;
+import static com.acme.edu.iteration01.LoggerTest.sep;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
@@ -30,14 +30,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
-        Logger.asArrayCall(true);
         Logger.log(new int[] {-1, 0, 1});
         Logger.flush();
         //endregion
 
         //region then
         assertSysoutEquals(
-            "primitives array: {-1, 0, 1}" + sep
+            "primitives array: {-1, 0, 1}"
         );
         //endregion
     }
@@ -89,7 +88,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
-        Logger.asArrayCall(false);
         Logger.log(-1, 0, 1, 3);
         Logger.flush();
         //endregion
