@@ -18,9 +18,9 @@ public class StatesDTO {
         arrayIntSum = 0;
         matrixIntSum = 0;
         byteSum = 0;
-        prevString = null;
+        prevString = "";
     }
-    
+
     public int getSimilarStringCounter() {
         return similarStringCounter;
     }
@@ -58,7 +58,7 @@ public class StatesDTO {
     }
 
     public void setIntegerSum(int message) {
-        this.integerSum= countSum(integerSum, message, Integer.MAX_VALUE, Integer.MIN_VALUE);
+        this.integerSum = countSum(integerSum, message, Integer.MAX_VALUE, Integer.MIN_VALUE);
     }
 
     public void clearIntegerSum() {
@@ -74,7 +74,7 @@ public class StatesDTO {
     }
 
     public void setMatrixIntSum(int message) {
-       this.matrixIntSum = countSum(matrixIntSum, message, Integer.MAX_VALUE, Integer.MIN_VALUE);
+        this.matrixIntSum = countSum(matrixIntSum, message, Integer.MAX_VALUE, Integer.MIN_VALUE);
     }
 
     public void clearMatrixIntSum() {
@@ -82,7 +82,7 @@ public class StatesDTO {
     }
 
     public void setByteSum(byte message) {
-       this.byteSum = countSum(byteSum, message, Byte.MAX_VALUE, Byte.MIN_VALUE);
+        this.byteSum = countSum(byteSum, message, Byte.MAX_VALUE, Byte.MIN_VALUE);
     }
 
     public void clearByteSum() {
@@ -90,7 +90,7 @@ public class StatesDTO {
     }
 
     public void setPrevString(String prevString) {
-       this.prevString = prevString;
+        this.prevString = prevString;
     }
 
     public void setPrevTypeCodeEnum(TypeCodeEnum typeCodeEnum) {

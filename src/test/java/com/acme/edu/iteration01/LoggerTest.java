@@ -1,18 +1,29 @@
 package com.acme.edu.iteration01;
 
 import com.acme.edu.Logger;
+import com.acme.edu.StatesDTO;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.TypeCodeEnum;
+import com.acme.edu.flush.Flusher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.IOException;
 
-import static com.acme.edu.Logger.*;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private static String type;
+    private final Logger logger;
+    private final Flusher flusher;
+    private final StatesDTO statesDTO;
+
+    public LoggerTest() {
+        this.statesDTO = new StatesDTO();
+        this.logger = new Logger(statesDTO);
+        this.flusher = new Flusher();
+    }
 
     //region given
     @Before
@@ -26,10 +37,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         resetOut();
     }
     //endregion
-/*
+
     @Test
     public void shouldLogInteger() throws IOException {
-        type = typePrimitive;
+        type = TypeCodeEnum.INTEGER.getTypeReference();
         //region when
         log(1, 0, -1);
         //endregion
@@ -41,9 +52,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogByte() throws IOException {
-        type = typePrimitive;
+        type = TypeCodeEnum.BYTE.getTypeReference();
         //region when
-        log((byte)1, (byte)0, (byte)-1);
+        log((byte) 1, (byte) 0, (byte) -1);
         //endregion
 
         //region then
@@ -53,7 +64,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogChar() throws IOException {
-        type = typeChar;
+        type = TypeCodeEnum.CHAR.getTypeReference();
         //region when
         log('a', 'b');
         //endregion
@@ -65,7 +76,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogString() throws IOException {
-        type = typeString;
+        type = TypeCodeEnum.STRING.getTypeReference();
         String str1 = "first string";
         String str2 = "second string";
         //region when
@@ -79,7 +90,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogBoolean() throws IOException {
-        type = typePrimitive;
+        type = TypeCodeEnum.BOOLEAN.getTypeReference();
         //region when
         log(true, false);
         //endregion
@@ -91,7 +102,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogReference() throws IOException {
-        type = typeReference;
+        type = TypeCodeEnum.NONE.getTypeReference();
         //region when
         log(new Object());
         //endregion
@@ -110,9 +121,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private void log(Object... valuesToLog) throws IOException {
         for (Object valueToLog : valuesToLog) {
-            Logger.log(valueToLog);
-            Logger.flush();
+            logger.log(valueToLog);
+            flusher.flush(statesDTO);
         }
     }
-    */
 }

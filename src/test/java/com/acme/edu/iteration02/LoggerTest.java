@@ -12,8 +12,12 @@ import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private final Flusher flusher;
+    private final Logger logger;
+    private final StatesDTO statesDTO;
 
     public LoggerTest() {
+        this.statesDTO = new StatesDTO();
+        this.logger = new Logger(statesDTO);
         this.flusher = new Flusher();
     }
 
@@ -82,8 +86,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private void log(Object... valuesToLog) throws IOException {
         for (Object valueToLog : valuesToLog) {
-            Logger.log(valueToLog);
+            logger.log(valueToLog);
         }
-        flusher.flush(new StatesDTO());
+        flusher.flush(statesDTO);
     }
 }

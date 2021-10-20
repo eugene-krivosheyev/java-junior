@@ -4,27 +4,27 @@ import com.acme.edu.flush.Flusher;
 
 import java.util.Objects;
 
+import static com.acme.edu.TypeCodeEnum.NONE;
 import static com.acme.edu.typemapper.MessageTypeMapper.getPrefixType;
 import static com.acme.edu.typemapper.MessageTypeMapper.getType;
-import static com.acme.edu.TypeCodeEnum.*;
 
 public class Logger {
-    private static StatesDTO statesDTO;
-    private static Flusher flusher;
+    private StatesDTO statesDTO;
+    private Flusher flusher;
 
-    public Logger() {
-        statesDTO = new StatesDTO();
-        flusher = new Flusher();
+    public Logger(StatesDTO statesDTO) {
+        this.statesDTO = statesDTO;
+        this.flusher = new Flusher();
     }
 
-    public static void log(Object message) {
-        TypeCodeEnum TypeCodeEnum = getType(message);
+    public void log(Object message) {
+        TypeCodeEnum typeCodeEnum = getType(message);
 
-        if (statesDTO.getPrevTypeCodeEnum() != NONE && TypeCodeEnum != statesDTO.getPrevTypeCodeEnum()) {
+        if (statesDTO.getPrevTypeCodeEnum() != NONE && typeCodeEnum != statesDTO.getPrevTypeCodeEnum()) {
             flusher.flush(statesDTO);
         }
 
-        switch (TypeCodeEnum) {
+        switch (typeCodeEnum) {
             case STRING: {
                 if (Objects.equals(statesDTO.getPrevString(), message)) {
                     statesDTO.incSimilarStringCounter();
@@ -43,22 +43,22 @@ public class Logger {
                 break;
             }
             case ARRAY_INT: {
-                for (int i: (int[]) message) {
+                for (int i : (int[]) message) {
                     statesDTO.setArrayIntSum(i);
                 }
                 break;
             }
             case MATRIX_INT: {
-                for (int[] i: (int[][])message) {
-                    for (int j: i)
+                for (int[] i : (int[][]) message) {
+                    for (int j : i)
                         statesDTO.setMatrixIntSum(j);
                 }
                 break;
             }
             default: {
-                Printer.print(getPrefixType(TypeCodeEnum) + message);
+                Printer.print(getPrefixType(typeCodeEnum) + message);
             }
         }
-        statesDTO.setPrevTypeCodeEnum(TypeCodeEnum);
+        statesDTO.setPrevTypeCodeEnum(typeCodeEnum);
     }
 }
