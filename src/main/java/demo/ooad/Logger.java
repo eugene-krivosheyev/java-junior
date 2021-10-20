@@ -18,7 +18,7 @@ public class Logger {
      */
     public void log(Message message) {
         if (!filter.filter(message)) { // [GoF]: Visitor
-            saver.save(message.getBody());
+            Number number = saver.save(message.getBody());
         }
     }
 }

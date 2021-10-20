@@ -30,7 +30,7 @@ class Boy {
 class POJO {
     private int field;
 
-    public int getField() {
+    int getField() {
         return field;
     }
 
@@ -41,7 +41,7 @@ class POJO {
 
 class ValidatingPOJO extends POJO {
     @Override
-    public int getField() {
+    protected int getField() {
         return super.getField();
     }
 

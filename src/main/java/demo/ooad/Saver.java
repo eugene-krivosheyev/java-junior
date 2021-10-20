@@ -1,6 +1,6 @@
 package demo.ooad;
 
 public interface Saver {
-    void save(String message);
+    Number save(String message);
     void close();
 }
