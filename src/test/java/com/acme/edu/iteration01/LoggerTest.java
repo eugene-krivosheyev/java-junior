@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
-import java.util.Locale;
 
 import static java.lang.System.lineSeparator;
 
