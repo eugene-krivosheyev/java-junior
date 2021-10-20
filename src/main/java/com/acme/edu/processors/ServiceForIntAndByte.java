@@ -21,7 +21,7 @@ public class ServiceForIntAndByte {
 
     public void processingForIntAndByte(int message) {
         formatter.setMessagePrefix("primitive: ");
-        int maxValue = (state.getType() == "int") ? Integer.MAX_VALUE : Byte.MAX_VALUE;
+        int maxValue = (state.getType() == Stater.TypeVar.INT_STATE) ? Integer.MAX_VALUE : Byte.MAX_VALUE;
         if (state.getType() != state.getPreviousType()) {
             flusher.flush();
             state.setPreviousType(state.getType());

@@ -2,13 +2,21 @@ package com.acme.edu;
 
 public class Stater {
 
-    private String type;
-    private String previousType;
+    public enum TypeVar {
+        INIT_STATE,
+        INT_STATE,
+        BYTE_STATE,
+        STRING_STATE,
+        DEFAULT_STATE;
+    }
+
+    private TypeVar type;
+    private TypeVar previousType;
     private int bufferSum;
     private String bufferString;
     private int stringCounter;
 
-    public Stater(String type, String previousType, int bufferSum, String bufferString, int stringCounter){
+    public Stater(TypeVar type, TypeVar previousType, int bufferSum, String bufferString, int stringCounter){
         this.type = type;
         this.previousType = previousType;
         this.bufferString = bufferString;
@@ -16,17 +24,17 @@ public class Stater {
         this.stringCounter = stringCounter;
     }
 
-    public String getType() {
+    public TypeVar getType() {
         return type;
     }
-    public void setType(String type){
+    public void setType(TypeVar type){
         this.type = type;
     }
 
-    public String getPreviousType() {
+    public TypeVar getPreviousType() {
         return previousType;
     }
-    public void setPreviousType(String previousType){
+    public void setPreviousType(TypeVar previousType){
         this.previousType = previousType;
     }
 

@@ -16,9 +16,9 @@ public class Flusher {
     }
 
     public void flush() {
-        if (state.getPreviousType() != "start" && (state.getPreviousType() == "int" || state.getPreviousType() == "byte")) {
+        if (state.getPreviousType() != Stater.TypeVar.DEFAULT_STATE && (state.getPreviousType() == Stater.TypeVar.INT_STATE || state.getPreviousType() == Stater.TypeVar.BYTE_STATE)) {
             printer.print(formatter.formatMessage(state.getBufferSum()));
-        } else if (state.getPreviousType() != "start" && state.getPreviousType() == "str") {
+        } else if (state.getPreviousType() != Stater.TypeVar.DEFAULT_STATE && state.getPreviousType() == Stater.TypeVar.STRING_STATE) {
             flushForOneString();
         }
         state.setBufferSum(0);
