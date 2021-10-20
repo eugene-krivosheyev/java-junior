@@ -1,18 +1,23 @@
 package com.acme.edu.iteration03;
 
 import com.acme.edu.Logger;
+import com.acme.edu.StatesDTO;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.TypeCodeEnum;
+import com.acme.edu.flush.Flusher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
 
-import static com.acme.edu.Logger.*;
-
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
-
+    private final Flusher flusher;
     private static String type;
+
+    public LoggerTest() {
+        this.flusher = new Flusher();
+    }
 
     //region given
     @Before
@@ -30,7 +35,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogIntegersArraySum() throws IOException {
-        type = typePrimitivesArray;
+        type = TypeCodeEnum.ARRAY_INT.getTypeReference();
         //region when
         log(new int[]{-1, 0, 1});
         //endregion
@@ -42,7 +47,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogIntegersMatrixSum() throws IOException {
-        type = typePrimitivesMatrix;
+        type = TypeCodeEnum.MATRIX_INT.getTypeReference();
         //region when
         log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         //endregion
@@ -72,7 +77,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
-        type = typeNone;
+        type = TypeCodeEnum.NONE.getTypeReference();
         //region when
         log("str1", "string 2", "str 3");
         //endregion
@@ -84,7 +89,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
-        type = typeNone;
+        type = TypeCodeEnum.NONE.getTypeReference();
         //region when
         log(-1, 0, 1, 3);
         //endregion
@@ -125,16 +130,16 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         for (Object valueToLog : valuesToLog) {
             Logger.log(valueToLog);
         }
-        Logger.flush();
+        flusher.flush(new StatesDTO());
     }
 
     public void log(int[] valuesToLog) throws IOException {
         Logger.log(valuesToLog);
-        flush();
+        flusher.flush(new StatesDTO());
     }
 
     public void log(int[][] valuesToLog) throws IOException {
         Logger.log(valuesToLog);
-        flush();
+        flusher.flush(new StatesDTO());
     }
 }

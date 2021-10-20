@@ -1,7 +1,9 @@
 package com.acme.edu.iteration02;
 
 import com.acme.edu.Logger;
+import com.acme.edu.StatesDTO;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.flush.Flusher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +11,12 @@ import org.junit.Test;
 import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+    private final Flusher flusher;
+
+    public LoggerTest() {
+        this.flusher = new Flusher();
+    }
+
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
@@ -76,6 +84,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         for (Object valueToLog : valuesToLog) {
             Logger.log(valueToLog);
         }
-        Logger.flush();
+        flusher.flush(new StatesDTO());
     }
 }
