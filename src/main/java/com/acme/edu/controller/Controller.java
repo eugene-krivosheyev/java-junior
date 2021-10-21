@@ -1,37 +1,23 @@
 package com.acme.edu.controller;
 
-import com.acme.edu.message.IntMessage;
 import com.acme.edu.message.Message;
-import com.acme.edu.message.StringMessage;
 import com.acme.edu.saver.Saver;
 
 public class Controller {
 
-    private final Saver saver = new Saver();
+    private final Saver saver;
 
     private Message messageBuffer;
 
-    public void perform(IntMessage message) {
-        if (messageBuffer == null) {
-            messageBuffer = message;
-        } else if (messageBuffer.equalsMessage(message)) {
-            IntMessage buffer = (IntMessage) messageBuffer;
-            buffer.addToMessage(message);
-            if (buffer.isOverflow()) {
-                flush();
-            }
-        } else {
-            flush();
-            messageBuffer = message;
-        }
+    public Controller(Saver saver) {
+        this.saver = saver;
     }
 
-    public void perform(StringMessage message) {
+    public void log(Message message) {
         if (messageBuffer == null) {
             messageBuffer = message;
-        } else if (messageBuffer.equalsMessage(message)) {
-            StringMessage buffer = (StringMessage) messageBuffer;
-            buffer.addToMessage(message);
+        } else if (messageBuffer.canAppend(message)) {
+            messageBuffer = messageBuffer.append(message);
         } else {
             flush();
             messageBuffer = message;

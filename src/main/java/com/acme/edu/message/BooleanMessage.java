@@ -1,13 +1,13 @@
 package com.acme.edu.message;
 
-public class CharMessage implements Message {
+public class BooleanMessage implements Message {
 
-    private static final String CHAR_PREFIX = "char: ";
+    private static final String BOOLEAN_PREFIX = "primitive: ";
 
-    private char accumulator;
+    private boolean accumulator;
 
-    public CharMessage(char ch) {
-        this.accumulator = ch;
+    public BooleanMessage(boolean bool) {
+        this.accumulator = bool;
     }
 
     @Override
@@ -17,7 +17,7 @@ public class CharMessage implements Message {
 
     @Override
     public String getBody() {
-        return CHAR_PREFIX + accumulator;
+        return BOOLEAN_PREFIX + accumulator;
     }
 
     @Override

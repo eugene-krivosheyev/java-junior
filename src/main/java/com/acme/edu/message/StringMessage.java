@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-public class StringMessage extends Message {
+public class StringMessage implements Message {
 
     private static final String STRING_PREFIX = "string: ";
 
@@ -8,31 +8,34 @@ public class StringMessage extends Message {
     private int stringCount;
 
     public StringMessage(String str) {
-        super(Type.STRING);
         stringBuffer = str;
         stringCount++;
-        changeBody();
     }
 
-    public void addToMessage(StringMessage message) {
-        addString(message.stringBuffer);
-    }
-
-    public void addString(String str) {
+    @Override
+    public Message append(Message message) {
+        String str = "";
         if (stringBuffer == null) {
             stringBuffer = str;
             stringCount++;
-            return;
+            return this;
         }
         if (!str.equals(stringBuffer)) {
             stringBuffer = str;
             stringCount = 0;
-            changeBody();
         }
         stringCount++;
+        return this;
     }
 
-    private void changeBody() {
-        body += STRING_PREFIX + stringBuffer + System.lineSeparator();
+    @Override
+    public String getBody() {
+        String body = STRING_PREFIX + stringBuffer + System.lineSeparator();
+        return body;
+    }
+
+    @Override
+    public boolean canAppend(Message message) {
+        return false;
     }
 }
