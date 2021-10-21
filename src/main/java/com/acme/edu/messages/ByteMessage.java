@@ -4,19 +4,13 @@ import com.acme.edu.common.Message;
 import com.acme.edu.common.Printer;
 
 public class ByteMessage implements Message {
-    public byte getValue() {
-        return value;
-    }
-
-    public void setValue(byte value) {
-        this.value = value;
-    }
 
     private byte value;
 
     public ByteMessage(byte message) {
         value = message;
     }
+
     @Override
     public String getDecoratedString() {
         return "primitive: " + value;
@@ -33,7 +27,7 @@ public class ByteMessage implements Message {
             throw new IllegalArgumentException("Can not accumulate message which is not type of ByteMessage");
         }
         ByteMessage newMessage = (ByteMessage) message;
-        if (value + (int)newMessage.value > Byte.MAX_VALUE) {
+        if (value + (int) newMessage.value > Byte.MAX_VALUE) {
             // TODO fix overflow logic
             printer.print(this);
             value = Byte.MAX_VALUE;

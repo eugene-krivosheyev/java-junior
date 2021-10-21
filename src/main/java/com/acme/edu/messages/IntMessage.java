@@ -5,19 +5,13 @@ import com.acme.edu.common.Printer;
 
 // TODO make more common NumberMessage class with getNumber method and overflow logic
 public class IntMessage implements Message {
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
 
     private int value;
 
     public IntMessage(int message) {
         value = message;
     }
+
     @Override
     public String getDecoratedString() {
         return "primitive: " + value;
@@ -49,7 +43,7 @@ public class IntMessage implements Message {
             throw new IllegalArgumentException("Can not accumulate message which is not type of IntMessage");
         }
         IntMessage newMessage = (IntMessage) message;
-        if (value + (long)newMessage.value > Integer.MAX_VALUE) {
+        if (value + (long) newMessage.value > Integer.MAX_VALUE) {
             // TODO fix overflow logic
             printer.print(this);
             value = Integer.MAX_VALUE;
