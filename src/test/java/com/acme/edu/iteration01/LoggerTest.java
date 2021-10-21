@@ -1,11 +1,8 @@
 package com.acme.edu.iteration01;
 
-import com.acme.edu.Logger;
-import com.acme.edu.dto.StatesDTO;
+import com.acme.edu.controller.SimpleController;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.TypeCodeEnum;
-import com.acme.edu.flush.Flusher;
-import com.acme.edu.message.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,17 +11,8 @@ import java.io.IOException;
 
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
-
+    private final SimpleController controller = new SimpleController();
     private static String type;
-    private final Logger logger;
-    private final StatesDTO statesDTO;
-    private final Flusher flusher;
-
-    public LoggerTest() {
-        this.flusher = new Flusher();
-        this.statesDTO = new StatesDTO(flusher);
-        this.logger = new Logger(statesDTO);
-    }
 
     //region given
     @Before
@@ -43,7 +31,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogInteger() throws IOException {
         type = TypeCodeEnum.INTEGER.getTypeReference();
         //region when
-        log(1, 0, -1);
+        controller.perform(1, 0, -1);
         //endregion
 
         //region then
@@ -55,7 +43,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogByte() throws IOException {
         type = TypeCodeEnum.BYTE.getTypeReference();
         //region when
-        log((byte) 1, (byte) 0, (byte) -1);
+        controller.perform((byte) 1, (byte) 0, (byte) -1);
         //endregion
 
         //region then
@@ -67,7 +55,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogChar() throws IOException {
         type = TypeCodeEnum.CHAR.getTypeReference();
         //region when
-        log('a', 'b');
+        controller.perform('a', 'b');
         //endregion
 
         //region then
@@ -81,7 +69,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         String str1 = "first string";
         String str2 = "second string";
         //region when
-        log(str1, str2);
+        controller.perform(str1, str2);
         //endregion
 
         //region then
@@ -93,7 +81,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogBoolean() throws IOException {
         type = TypeCodeEnum.BOOLEAN.getTypeReference();
         //region when
-        log(true, false);
+        controller.perform(true, false);
         //endregion
 
         //region then
@@ -105,7 +93,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogReference() throws IOException {
         type = TypeCodeEnum.NONE.getTypeReference();
         //region when
-        log(new Object());
+        controller.perform(new Object());
         //endregion
 
         //region then
@@ -117,25 +105,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private void checkLog(String... valuesToCheck) throws IOException {
         for (String valueToCheck : valuesToCheck) {
             assertSysoutContains(type + valueToCheck);
-        }
-    }
-
-    private void log(Object... valuesToLog) throws IOException {
-        for (Object valueToLog : valuesToLog) {
-            if (valueToLog.getClass() == Integer.class) {
-                logger.log(new IntMessage((int) valueToLog));
-            } else if (valueToLog.getClass() == Byte.class) {
-                logger.log(new ByteMessage((byte) valueToLog));
-            } else if (valueToLog.getClass() == Character.class) {
-                logger.log(new CharMessage((char) valueToLog));
-            } else if (valueToLog.getClass() == String.class) {
-                logger.log(new StringMessage((String) valueToLog));
-            } else if (valueToLog.getClass() == Boolean.class) {
-                logger.log(new BooleanMessage((boolean) valueToLog));
-            } else {
-                logger.log(new ReferenceMessage(valueToLog));
-            }
-            flusher.flush(statesDTO);
         }
     }
 }

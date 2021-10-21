@@ -1,11 +1,8 @@
 package com.acme.edu.iteration03;
 
-import com.acme.edu.Logger;
-import com.acme.edu.dto.StatesDTO;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.TypeCodeEnum;
-import com.acme.edu.flush.Flusher;
-import com.acme.edu.message.*;
+import com.acme.edu.controller.ComplexController;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,17 +10,12 @@ import org.junit.Test;
 import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
-    private final Flusher flusher;
-    private final Logger logger;
-    private final StatesDTO statesDTO;
+    private final ComplexController controller;
 
     private static String type;
 
     public LoggerTest() {
-        this.flusher = new Flusher();
-        this.statesDTO = new StatesDTO(flusher);
-        this.logger = new Logger(statesDTO);
-        type = "";
+        this.controller = new ComplexController();
     }
 
     //region given
@@ -43,7 +35,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersArraySum() throws IOException {
         type = TypeCodeEnum.ARRAY_INT.getTypeReference();
         //region when
-        log(new int[]{-1, 0, 1});
+        controller.perform(new int[]{-1, 0, 1});
         //endregion
 
         //region then
@@ -55,7 +47,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersMatrixSum() throws IOException {
         type = TypeCodeEnum.MATRIX_INT.getTypeReference();
         //region when
-        log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        controller.perform(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         //endregion
 
         //region then
@@ -85,7 +77,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         type = TypeCodeEnum.NONE.getTypeReference();
         //region when
-        log("str1", "string 2", "str 3");
+        controller.perform("str1", "string 2", "str 3");
         //endregion
 
         //region then
@@ -97,7 +89,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         type = TypeCodeEnum.NONE.getTypeReference();
         //region when
-        log(-1, 0, 1, 3);
+        controller.perform(-1, 0, 1, 3);
         //endregion
 
         //region then
@@ -130,28 +122,5 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         for (String valueToCheck : valuesToCheck) {
             assertSysoutContains(type + valueToCheck);
         }
-    }
-
-    private void log(Object... valuesToLog) throws IOException {
-        for (Object valueToLog : valuesToLog) {
-            if (valueToLog.getClass() == Byte.class) {
-                logger.log(new ByteMessage((byte) valueToLog));
-            } else if (valueToLog.getClass() == Integer.class) {
-                logger.log(new IntMessage((int) valueToLog));
-            } else if (valueToLog.getClass() == String.class) {
-                logger.log(new StringMessage((String) valueToLog));
-            }
-        }
-        flusher.flush(statesDTO);
-    }
-
-    public void log(int[] valuesToLog) throws IOException {
-        logger.log(new ArrayMessage(valuesToLog));
-        flusher.flush(statesDTO);
-    }
-
-    public void log(int[][] valuesToLog) throws IOException {
-        logger.log(new MatrixMessage(valuesToLog));
-        flusher.flush(statesDTO);
     }
 }
