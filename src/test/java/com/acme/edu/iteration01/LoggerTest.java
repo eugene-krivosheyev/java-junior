@@ -13,9 +13,7 @@ import static java.lang.System.lineSeparator;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
-    public static final String sep = lineSeparator();
-    private static String type;
-
+    String type = null;
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
@@ -31,7 +29,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogInteger() throws IOException {
-        type = typePrimitive;
+        type = "primitive: ";
         //region when
         Logger.log(1);
         Logger.flush();
@@ -50,7 +48,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogByte() throws IOException {
-        type = typePrimitive;
+        type = "primitive: ";
         //region when
         Logger.log((byte)1);
         Logger.flush();
@@ -69,7 +67,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogChar() throws IOException {
-        type = typeChar;
+        type = "char: ";
         //region when
         Logger.log('a');
         Logger.log('b');
@@ -83,7 +81,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogString() throws IOException {
-        type = typeString;
+        type = "string: ";
         //region when
         Logger.log("test string 1");
         Logger.log("other str");
@@ -98,7 +96,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogBoolean() throws IOException {
-        type = typePrimitive;
+        type = "primitive: ";
         //region when
         Logger.log(true);
         Logger.log(false);
@@ -113,7 +111,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogReference() throws IOException {
-        type = typeReference;
+        type = "reference: ";
         //region when
         Logger.log(new Object());
         //endregion
