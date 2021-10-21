@@ -2,6 +2,7 @@ package com.acme.edu;
 
 import com.acme.edu.messages.ByteMessage;
 import com.acme.edu.messages.IntMessage;
+import com.acme.edu.messages.ObjectMessage;
 import com.acme.edu.messages.StringMessage;
 
 import java.io.PrintStream;
@@ -37,11 +38,7 @@ public class Logger {
     }
 
     public static void log(Object message) {
-        if (message == null) {
-            printToOutput("null");
-            return;
-        }
-        printToOutput("reference: " + message.toString());
+        controller.log(new ObjectMessage(message));
     }
 
     public static void log(int... array) {
