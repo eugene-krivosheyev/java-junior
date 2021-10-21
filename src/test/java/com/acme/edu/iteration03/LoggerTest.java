@@ -12,9 +12,11 @@ import java.io.IOException;
 import static com.acme.edu.iteration01.LoggerTest.sep;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+    private Logger logger;
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
+        logger= new Logger();
         resetOut();
         captureSysout();
     }
@@ -30,8 +32,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
-        Logger.log(new int[] {-1, 0, 1});
-        Logger.flush();
+        logger = new Logger(true);
+        logger.log(new int[] {-1, 0, 1});
+        logger.flush();
         //endregion
 
         //region then
@@ -44,8 +47,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
-        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
-        Logger.flush();
+        logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        logger.flush();
         //endregion
 
         //region then
@@ -58,7 +61,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test @Ignore
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
-        Logger.log(new int[][][][] {{{{0}}}});
+        logger.log(new int[][][][] {{{{0}}}});
         //endregion
 
         //region then
@@ -75,8 +78,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
-        Logger.log("str1", "string 2", "str 3");
-        Logger.flush();
+        logger.log("str1", "string 2", "str 3");
+        logger.flush();
         //endregion
 
         //region then
@@ -88,8 +91,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
-        Logger.log(-1, 0, 1, 3);
-        Logger.flush();
+        logger = new Logger(false);
+        logger.log(-1, 0, 1, 3);
+        logger.flush();
         //endregion
 
         //region then
