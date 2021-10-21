@@ -1,4 +1,4 @@
-package output;
+package printer;
 
 public class ConsolePrinter extends Printer {
     @Override

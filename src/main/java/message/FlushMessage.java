@@ -1,6 +1,6 @@
 package message;
 
-import buffer.FlushBuffer;
+import accumulator.FlushAccumulator;
 
 public class FlushMessage implements Message {
 
@@ -10,7 +10,7 @@ public class FlushMessage implements Message {
     }
 
     @Override
-    public FlushBuffer getBuffer() {
-        return new FlushBuffer();
+    public FlushAccumulator getBuffer() {
+        return new FlushAccumulator();
     }
 }

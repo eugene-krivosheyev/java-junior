@@ -1,7 +1,7 @@
 package message;
 
-import buffer.BoolBuffer;
-import buffer.Buffer;
+import accumulator.BoolAccumulator;
+import accumulator.Accumulator;
 
 public class BooleanMessage implements Message {
 
@@ -17,7 +17,7 @@ public class BooleanMessage implements Message {
     }
 
     @Override
-    public Buffer getBuffer() {
-        return new BoolBuffer();
+    public Accumulator getBuffer() {
+        return new BoolAccumulator();
     }
 }

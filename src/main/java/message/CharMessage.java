@@ -1,7 +1,7 @@
 package message;
 
-import buffer.Buffer;
-import buffer.CharBuffer;
+import accumulator.Accumulator;
+import accumulator.CharAccumulator;
 
 public class CharMessage implements Message {
 
@@ -17,7 +17,7 @@ public class CharMessage implements Message {
     }
 
     @Override
-    public Buffer getBuffer() {
-        return new CharBuffer();
+    public Accumulator getBuffer() {
+        return new CharAccumulator();
     }
 }

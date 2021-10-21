@@ -1,7 +1,7 @@
 package message;
 
-import buffer.Buffer;
-import buffer.ByteBuffer;
+import accumulator.Accumulator;
+import accumulator.ByteAccumulator;
 
 public class ByteMessage implements Message {
 
@@ -17,7 +17,7 @@ public class ByteMessage implements Message {
     }
 
     @Override
-    public Buffer getBuffer() {
-        return new ByteBuffer();
+    public Accumulator getBuffer() {
+        return new ByteAccumulator();
     }
 }

@@ -1,7 +1,7 @@
 package message;
 
-import buffer.Buffer;
-import buffer.Int2dArrayBuffer;
+import accumulator.Accumulator;
+import accumulator.Int2DArrayAccumulator;
 
 public class Int2dArrayMessage implements Message {
 
@@ -17,7 +17,7 @@ public class Int2dArrayMessage implements Message {
     }
 
     @Override
-    public Buffer getBuffer() {
-        return new Int2dArrayBuffer();
+    public Accumulator getBuffer() {
+        return new Int2DArrayAccumulator();
     }
 }

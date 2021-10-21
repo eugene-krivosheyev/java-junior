@@ -1,7 +1,7 @@
 package message;
 
-import buffer.Buffer;
-import buffer.ObjectBuffer;
+import accumulator.Accumulator;
+import accumulator.ObjectAccumulator;
 
 public class ObjectMessage implements Message {
 
@@ -17,7 +17,7 @@ public class ObjectMessage implements Message {
     }
 
     @Override
-    public Buffer getBuffer() {
-        return new ObjectBuffer();
+    public Accumulator getBuffer() {
+        return new ObjectAccumulator();
     }
 }

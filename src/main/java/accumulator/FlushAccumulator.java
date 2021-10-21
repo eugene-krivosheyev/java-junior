@@ -1,17 +1,15 @@
-package buffer;
+package accumulator;
 
 import message.Message;
 
-import java.util.ArrayList;
-
-public class FlushBuffer implements Buffer {
+public class FlushAccumulator implements Accumulator {
     @Override
     public String getBody() {
         return null;
     }
 
     @Override
-    public ArrayList<String> getExtraordinaryBody() {
+    public String[] extractUnpromtLines() {
         return null;
     }
 

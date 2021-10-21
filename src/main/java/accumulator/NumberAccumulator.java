@@ -1,9 +1,9 @@
-package buffer;
+package accumulator;
 
-abstract class NumberBuffer implements Buffer {
+abstract class NumberAccumulator implements Accumulator {
 
     protected final String prefix = "primitive: ";
-    protected OutOfOrderLineKeeper lineKeeper = new OutOfOrderLineKeeper(prefix);
+    protected UnpromptLineKeeper unpromtLineKeeper = new UnpromptLineKeeper(prefix);
 
     public long checkOverflow(long result, int max, int min) {
         if (result > max) {
@@ -20,9 +20,9 @@ abstract class NumberBuffer implements Buffer {
         long result = checkOverflow(sum, max, min);
 
         if (result > sum) {
-            lineKeeper.add(min.toString());
+            unpromtLineKeeper.add(min.toString());
         } else if (result < sum) {
-            lineKeeper.add(max.toString());
+            unpromtLineKeeper.add(max.toString());
         }
         return (int)result;
     }

@@ -1,8 +1,8 @@
 package message;
 
-import buffer.Buffer;
+import accumulator.Accumulator;
 
 public interface Message {
     Object getBody();
-    Buffer getBuffer();
+    Accumulator getBuffer();
 }

@@ -1,12 +1,9 @@
-package buffer;
+package accumulator;
 
 import message.Message;
 import message.StringMessage;
 
-import java.util.ArrayList;
-import java.util.Objects;
-
-public class StrArrayBuffer extends StrBuffer {
+public class StrArrayAccumulator extends StrAccumulator {
 
     @Override
     public void accumulate(Message message) {

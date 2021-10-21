@@ -1,30 +1,31 @@
 package controller;
 
-import buffer.Buffer;
-import buffer.FlushBuffer;
+import accumulator.Accumulator;
+import accumulator.FlushAccumulator;
 import message.Message;
-import output.ConsolePrinter;
-import output.Printer;
+import printer.ConsolePrinter;
+import printer.Printer;
 
 import java.util.ArrayList;
 
 public class Controller {
-    private Buffer buffer = new FlushBuffer();
+    private Accumulator accumulator = new FlushAccumulator();
     private final Printer printer = new ConsolePrinter();
 
     public void log(Message message) {
-        Buffer newBuffer = message.getBuffer();
-        if (Buffer.isNewBufferType(newBuffer.getClass(), this.buffer.getClass())) {
-            printer.print(this.buffer.getBody());
-            this.buffer = newBuffer;
+        Accumulator newAccumulator = message.getBuffer();
+        if (Accumulator.isNewAccumulatorType(newAccumulator.getClass(), this.accumulator.getClass())) {
+            printer.print(this.accumulator.getBody());
+            this.accumulator = newAccumulator;
         }
-        this.buffer.accumulate(message);
-        try {
-            ArrayList<String> result = this.buffer.getExtraordinaryBody();
-            String[] array = new String[result.size()];
-            printer.print(result.toArray(array));
-        } catch (Exception e) {
+        this.accumulator.accumulate(message);
+        printUnpromptLines();
+    }
 
+    private void printUnpromptLines() {
+        String[] result = this.accumulator.extractUnpromtLines();
+        if (result != null) {
+            printer.print(result);
         }
     }
 }

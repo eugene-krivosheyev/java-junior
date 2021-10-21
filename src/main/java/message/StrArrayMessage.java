@@ -1,7 +1,7 @@
 package message;
 
-import buffer.Buffer;
-import buffer.StrArrayBuffer;
+import accumulator.Accumulator;
+import accumulator.StrArrayAccumulator;
 
 public class StrArrayMessage implements Message {
 
@@ -17,7 +17,7 @@ public class StrArrayMessage implements Message {
     }
 
     @Override
-    public Buffer getBuffer() {
-        return new StrArrayBuffer();
+    public Accumulator getBuffer() {
+        return new StrArrayAccumulator();
     }
 }

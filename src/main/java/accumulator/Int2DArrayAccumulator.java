@@ -1,9 +1,9 @@
-package buffer;
+package accumulator;
 
 import message.IntMessage;
 import message.Message;
 
-public class IntArrayBuffer extends IntBuffer {
+public class Int2DArrayAccumulator extends IntArrayAccumulator {
 
     @Override
     public void accumulate(Message integers) {

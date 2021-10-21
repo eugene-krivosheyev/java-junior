@@ -1,10 +1,8 @@
-package buffer;
+package accumulator;
 
 import message.Message;
 
-import java.util.ArrayList;
-
-public class IntBuffer extends NumberBuffer {
+public class IntAccumulator extends NumberAccumulator {
 
     private Integer integer = 0;
 
@@ -14,8 +12,8 @@ public class IntBuffer extends NumberBuffer {
     }
 
     @Override
-    public ArrayList<String> getExtraordinaryBody() {
-        return lineKeeper.getExtraordinaryBody();
+    public String[] extractUnpromtLines() {
+        return unpromtLineKeeper.extract();
     }
 
     @Override
