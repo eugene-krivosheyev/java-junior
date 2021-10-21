@@ -1,19 +1,30 @@
 package com.acme.edu.message;
 
-public class StringMessage implements Message {
+public class StringMessage extends Message {
 
-    private String body;
     private int counter = 1;
 
-    public StringMessage(String body) {
-        this.body = body;
+    private final String value;
+
+    public StringMessage(String value) {
+        this.value = value;
     }
 
-    public void incrementCounter() {
+    @Override
+    public boolean isSameType(Message message) {
+        if (message instanceof  StringMessage) {
+            return ((StringMessage) message).value.equals(this.value);
+        }
+        return false;
+    }
+
+    @Override
+    public void process(Message message) {
         this.counter++;
     }
 
-    public String getBody() {
-        return body;
+    @Override
+    public String decorate() {
+        return "string: " + this.value + " (x" + this.counter + ")";
     }
 }

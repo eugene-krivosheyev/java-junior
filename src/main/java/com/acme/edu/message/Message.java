@@ -1,21 +1,10 @@
 package com.acme.edu.message;
 
-import com.acme.edu.Strategy;
+public abstract class Message {
 
-public class Message {
+    public abstract boolean isSameType(Message message);
 
-    private final Strategy strategy;
+    public abstract void process(Message message);
 
-    public Message(Strategy strategy) {
-        this.strategy = strategy;
-    }
-
-    public Strategy getStrategy() {
-        return strategy;
-    }
-
-    public boolean isSameType(Message message) {
-        return this.strategy.isSameType(message);
-    }
-
+    public abstract String decorate();
 }

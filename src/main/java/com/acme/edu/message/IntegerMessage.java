@@ -1,28 +1,25 @@
 package com.acme.edu.message;
 
-import com.acme.edu.Decorator;
+public class IntegerMessage extends NumberMessage {
 
-public class IntegerMessage extends Message {
+    private Long value;
 
-    private int value;
+    public IntegerMessage(Integer value) {
+        this.value = (long) value;
+    }
 
-    public int getValue() {
+    public Long getValue() {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void accumulate(Message message) {
+        IntegerMessage integerMessage = (IntegerMessage) message;
+        this.value += integerMessage.getValue();
     }
 
-    public void accumulate(int value) {
-        this.value += value;
+    @Override
+    public boolean isSameType(Message message) {
+        return message instanceof IntegerMessage;
     }
 
-    public IntegerMessage(int value) {
-        this.value = value;
-    }
-
-    public String toString() {
-        return new Decorator().decorate(value);
-    }
 }

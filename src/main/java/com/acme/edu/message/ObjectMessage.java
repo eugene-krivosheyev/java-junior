@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-public class ObjectMessage implements Message {
+public class ObjectMessage extends Message {
 
     private Object value;
 
@@ -10,5 +10,20 @@ public class ObjectMessage implements Message {
 
     public ObjectMessage(Object value) {
         this.value = value;
+    }
+
+    @Override
+    public boolean isSameType(Message message) {
+        return false;
+    }
+
+    @Override
+    public void process(Message message) {
+
+    }
+
+    @Override
+    public String decorate() {
+        return null;
     }
 }

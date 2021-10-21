@@ -1,27 +1,24 @@
 package com.acme.edu.message;
 
-import com.acme.edu.Decorator;
+public class ByteMessage extends NumberMessage {
 
-public class ByteMessage implements Message {
-    private byte value;
+    private Integer value;
 
-    public byte getValue() {
+    public ByteMessage(Byte value) {
+        this.value = (int) value;
+    }
+
+    public Integer getValue() {
         return value;
     }
 
-    public void setValue(byte value) {
-        this.value = value;
+    public void accumulate(Message message) {
+        ByteMessage byteMessage = (ByteMessage) message;
+        this.value += byteMessage.getValue();
     }
 
-    public void accumulate(byte value) {
-        this.value += value;
-    }
-
-    public ByteMessage(byte value) {
-        this.value = value;
-    }
-
-    public String toString() {
-        return new Decorator().decorate(value);
+    @Override
+    public boolean isSameType(Message message) {
+        return message instanceof ByteMessage;
     }
 }
