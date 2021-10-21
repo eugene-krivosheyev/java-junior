@@ -4,10 +4,6 @@ import com.acme.edu.common.Message;
 import com.acme.edu.common.Printer;
 
 public class StringMessage implements Message {
-    public void setValue(String value) {
-        this.value = value;
-    }
-
     private String value;
     private int counter;
 
@@ -15,6 +11,7 @@ public class StringMessage implements Message {
         this.value = value;
         counter = 1;
     }
+
     @Override
     public String getDecoratedString() {
         if (counter > 1) {
