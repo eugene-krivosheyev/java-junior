@@ -1,11 +1,10 @@
-package com.acme.edu.control.message.values;
+package com.acme.edu.message.type;
 
-import com.acme.edu.control.message.Message;
+import com.acme.edu.message.Message;
 
 public class BoolMessage extends Message {
 
     private BoolMessage(boolean msg, boolean isSum){
-        type = msgType.BOOL;
         setMsg(msg,isSum);
     }
 
@@ -26,11 +25,21 @@ public class BoolMessage extends Message {
     public Message add(Message msg) {return this;}
 
     @Override
+    public boolean isSameType(Message message) {
+        return message instanceof BoolMessage;
+    }
+
+    @Override
     public String toString() {
         if (isSumming){
            return String.valueOf((boolean) data);
         } else {
             return prefix() + (boolean) data;
         }
+    }
+
+    @Override
+    public String prefix() {
+        return "primitive: ";
     }
 }

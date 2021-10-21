@@ -1,11 +1,10 @@
-package com.acme.edu.control.message.arrays;
+package com.acme.edu.message.type.arrays;
 
-import com.acme.edu.control.message.Message;
+import com.acme.edu.message.Message;
 
 public class StringArrayMessage extends Message {
 
     public StringArrayMessage(String[] msg, boolean isSum){
-        type = msgType.ASTRING;
         setMsg(msg,isSum);
     }
 
@@ -32,12 +31,22 @@ public class StringArrayMessage extends Message {
     public Message add(Message msg) {return this;}
 
     @Override
+    public boolean isSameType(Message message) {
+        return message instanceof StringArrayMessage;
+    }
+
+    @Override
     public String toString() {
         if (isSumming){
            return sumStringArray(" ");
         } else {
-            return prefix() + sumStringArray(sep);
+            return prefix() + sumStringArray(SEP);
         }
+    }
+
+    @Override
+    public String prefix() {
+        return "";
     }
 
     private String sumStringArray(String separator){

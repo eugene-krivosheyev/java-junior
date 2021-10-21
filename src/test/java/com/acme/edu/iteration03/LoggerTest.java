@@ -47,7 +47,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         Logger.setSumming(true);
         Logger.log(0);
-        Logger.endLogging();
+        Logger.log();
         //endregion
 
         //region then
@@ -94,7 +94,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.setSumming(true);
         Logger.log(-1, 0, 1, 3);
-        Logger.endLogging();
+        Logger.log();
         //endregion
 
         //region then

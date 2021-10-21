@@ -1,10 +1,12 @@
-package com.acme.edu.control.printer;
+package com.acme.edu.printer;
 
-import com.acme.edu.control.message.Message;
+import com.acme.edu.message.Message;
 
 public class Printer {
 
-    public void save(Message message){
+    MessageDecorator decorator;
+
+    public void getMessage(Message message){
         print(message.toString());
     }
 

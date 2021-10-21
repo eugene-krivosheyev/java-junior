@@ -1,11 +1,10 @@
-package com.acme.edu.control.message.values;
+package com.acme.edu.message.type;
 
-import com.acme.edu.control.message.Message;
+import com.acme.edu.message.Message;
 
 public class ObjectMessage extends Message {
 
     private ObjectMessage(Object msg, boolean isSum){
-        type = msgType.OBJECT;
         setMsg(msg,isSum);
     }
 
@@ -26,7 +25,17 @@ public class ObjectMessage extends Message {
     public Message add(Message msg) {return this;}
 
     @Override
+    public boolean isSameType(Message message) {
+        return message instanceof ObjectMessage;
+    }
+
+    @Override
     public String toString() {
         return prefix() + data;
+    }
+
+    @Override
+    public String prefix() {
+        return "reference: ";
     }
 }

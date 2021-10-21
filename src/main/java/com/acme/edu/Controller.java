@@ -1,21 +1,19 @@
-package com.acme.edu.control;
+package com.acme.edu;
 
-import com.acme.edu.control.message.EmptyMessage;
-import com.acme.edu.control.message.Message;
-import com.acme.edu.control.printer.Printer;
-
-import java.util.ArrayList;
+import com.acme.edu.message.EmptyMessage;
+import com.acme.edu.message.Message;
+import com.acme.edu.printer.Printer;
 
 public class Controller {
 
-    Printer printer = new Printer();
+    private Printer printer = new Printer();
 
     private Message buffer = new EmptyMessage();
 
-    public void sendMessage(Message message){
+    public void logMessage(Message message){
         if (!message.isSum()) {
             endLogging(buffer.isEndLogging());
-            log(message);
+            sendLogToPrinter(message);
         } else {
             if (buffer.isEmpty()){
                 buffer = message;
@@ -24,27 +22,25 @@ public class Controller {
                     if(!buffer.isMAXMIN(message)) {
                         buffer.add(message);
                     } else {
-                        log(buffer.add(message));
+                        sendLogToPrinter(buffer.add(message));
                         endLogging(buffer.isEndLogging());
                     }
                 } else {
-                    log(buffer);
+                    sendLogToPrinter(buffer);
                     buffer = message;
                 }
             }
         }
     }
 
-    public void log(Message message){
-        printer.save(message);
-    }
-
-
     public void endLogging(boolean isEnd) {
         if (!buffer.isEmpty() & isEnd ) {
-            log(buffer);
+            sendLogToPrinter(buffer);
             buffer = new EmptyMessage();
         }
     }
 
+    private void sendLogToPrinter(Message message){
+        printer.getMessage(message);
+    }
 }

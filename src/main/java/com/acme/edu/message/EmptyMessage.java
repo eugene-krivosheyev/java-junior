@@ -1,9 +1,7 @@
-package com.acme.edu.control.message;
+package com.acme.edu.message;
 
 public class EmptyMessage extends Message {
-    public EmptyMessage(){
-        type = msgType.EMPTY;
-    }
+    public EmptyMessage(){}
 
     public EmptyMessage(boolean isEnd){
         this();
@@ -19,7 +17,17 @@ public class EmptyMessage extends Message {
     public Message add(Message msg) {return this;}
 
     @Override
+    public boolean isSameType(Message message) {
+        return message instanceof EmptyMessage;
+    }
+
+    @Override
     public String toString() {
         return "Empty";
+    }
+
+    @Override
+    public String prefix() {
+        return "";
     }
 }

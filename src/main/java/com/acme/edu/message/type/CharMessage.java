@@ -1,11 +1,10 @@
-package com.acme.edu.control.message.values;
+package com.acme.edu.message.type;
 
-import com.acme.edu.control.message.Message;
+import com.acme.edu.message.Message;
 
 public class CharMessage extends Message {
 
     private CharMessage(char msg, boolean isSum){
-        type = msgType.CHAR;
         setMsg(msg,isSum);
     }
 
@@ -26,11 +25,21 @@ public class CharMessage extends Message {
     public Message add(Message msg) {return this;}
 
     @Override
+    public boolean isSameType(Message message) {
+        return message instanceof CharMessage;
+    }
+
+    @Override
     public String toString() {
         if (isSumming){
            return String.valueOf((char) data);
         } else {
             return prefix() + (char) data;
         }
+    }
+
+    @Override
+    public String prefix() {
+        return "char: ";
     }
 }

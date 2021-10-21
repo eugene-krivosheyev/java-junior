@@ -1,13 +1,12 @@
-package com.acme.edu.control.message.values;
+package com.acme.edu.message.type;
 
-import com.acme.edu.control.message.Message;
+import com.acme.edu.message.Message;
 
 public class IntMessage extends Message {
     static final int MAXVALUE = Integer.MAX_VALUE;
     static final int MINVALUE = Integer.MIN_VALUE;
 
     public IntMessage(int msg, boolean isSum){
-        type = msgType.INT;
         setMsg(msg,isSum);
     }
     public IntMessage(int msg){
@@ -48,6 +47,11 @@ public class IntMessage extends Message {
     }
 
     @Override
+    public boolean isSameType(Message message) {
+        return message instanceof IntMessage;
+    }
+
+    @Override
     public String toString() {
         if (isSumming){
            return String.valueOf(((int) data));
@@ -69,5 +73,10 @@ public class IntMessage extends Message {
     @Override
     public boolean isMIN(Message value) {
         return super.isMIN(value);
+    }
+
+    @Override
+    public String prefix() {
+        return "primitive: ";
     }
 }

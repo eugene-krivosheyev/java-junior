@@ -1,6 +1,6 @@
-package com.acme.edu.control.message.values;
+package com.acme.edu.message.type;
 
-import com.acme.edu.control.message.Message;
+import com.acme.edu.message.Message;
 
 public class ByteMessage extends Message {
 
@@ -8,7 +8,6 @@ public class ByteMessage extends Message {
     static final int MINVALUE = Byte.MIN_VALUE;
 
     public ByteMessage(byte msg, boolean isSum){
-        type = msgType.BYTE;
         setMsg(msg,isSum);
     }
 
@@ -50,6 +49,11 @@ public class ByteMessage extends Message {
     }
 
     @Override
+    public boolean isSameType(Message message) {
+        return message instanceof ByteMessage;
+    }
+
+    @Override
     public String toString() {
         if (isSumming){
            return String.valueOf(data);
@@ -71,5 +75,10 @@ public class ByteMessage extends Message {
     @Override
     public boolean isMIN(Message value) {
         return super.isMIN(value);
+    }
+
+    @Override
+    public String prefix() {
+        return "primitive: ";
     }
 }
