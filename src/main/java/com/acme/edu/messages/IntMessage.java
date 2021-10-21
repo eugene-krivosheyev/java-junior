@@ -22,21 +22,6 @@ public class IntMessage implements Message {
         return (message instanceof IntMessage);
     }
 
-    /*
-    state.setNextType(Type.INTEGER);
-        if (processPreviousMessage()) {
-            intMessage.setValue(message);
-        } else {
-            if (intMessage.getValue() + (long)message > Integer.MAX_VALUE) {
-                // TODO fix overflow logic
-                printer.print(intMessage);
-                intMessage.setValue(Integer.MAX_VALUE);
-                printer.print(intMessage);
-            }
-            intMessage.setValue(intMessage.getValue() + message);
-        }
-    * */
-
     @Override
     public void accumulate(Message message, Printer printer) {
         if (!(message instanceof IntMessage)) {
