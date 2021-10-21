@@ -30,7 +30,7 @@ public abstract class SummableMessage extends Message {
     protected abstract SummableMessage getNewMessageOfMyType(long value);
 
     protected void setOverflows(String overflows) {
-        this.overflows = overflows;
+        this.overflows += overflows;
     }
 
     protected long getCurrentSum() {
