@@ -30,12 +30,22 @@ public class StringMessage implements Message {
         counter = 1;
     }
 
-    public void process(Printer printer, String newValue) {
-        if (value.equals(newValue)) {
+    @Override
+    public boolean isSameType(Message message) {
+        return (message instanceof StringMessage);
+    }
+
+    @Override
+    public void accumulate(Message message, Printer printer) {
+        if (!(message instanceof StringMessage)) {
+            throw new IllegalArgumentException("Can not accumulate message which is not type of StringMessage");
+        }
+        StringMessage stringMessage = (StringMessage) message;
+        if (value.equals(stringMessage.value)) {
             counter++;
         } else {
             printer.print(this);
-            value = newValue;
+            value = stringMessage.value;
             counter = 1;
         }
     }

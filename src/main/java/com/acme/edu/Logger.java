@@ -1,5 +1,9 @@
 package com.acme.edu;
 
+import com.acme.edu.messages.ByteMessage;
+import com.acme.edu.messages.IntMessage;
+import com.acme.edu.messages.StringMessage;
+
 import java.io.PrintStream;
 
 public class Logger {
@@ -13,11 +17,11 @@ public class Logger {
     }
 
     public static void log(int message) {
-        controller.log(message);
+        controller.log(new IntMessage(message));
     }
 
     public static void log(byte message) {
-        controller.log(message);
+        controller.log(new ByteMessage(message));
     }
 
     public static void log(char message) {
@@ -25,7 +29,7 @@ public class Logger {
     }
 
     public static void log(String message) {
-        controller.log(message);
+        controller.log(new StringMessage(message));
     }
 
     public static void log(boolean message) {
