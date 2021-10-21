@@ -1,12 +1,15 @@
 package com.acme.edu.api.message;
 
-public class StringMessage extends Message {
-    private int currentStringCounter = 1;
-    private final String current;
+public class StringMessage extends StringMessageAccumulater {
 
-    public StringMessage(String nameString) {
-        current = nameString;
-        setPrefix("string: ");
+    public StringMessage(String currentString) {
+        super(currentString);
+    }
+
+    @Override
+    public String getMessageAsString() {
+        checkTheStartOfTheQuery();
+        return this.getValue() + getString();
     }
 
     @Override
@@ -17,34 +20,24 @@ public class StringMessage extends Message {
     @Override
     public Message accumulate(Message message) {
         StringMessage stringMessage = (StringMessage) message;
-        StringMessage newMessage = new StringMessage(stringMessage.current);
-        if (previousStringCheck(stringMessage)) {
-            newMessage.setCounter(currentStringCounter + 1);
-            newMessage.setValue(this.getValue());
+        StringMessage currentMessage = new StringMessage(stringMessage.getCurrentString());
+        checkTheStartOfTheQuery();
+        if (!previousStringCheck(stringMessage)) {
+            currentMessage.setValue(makeStringWithRepeat());
         } else {
-            newMessage.setValue((this.getValue() == null ? "" : this.getValue()) + getSingleString());
+            currentMessage.setCurrentStringCounter(getCurrentStringCounter() + 1);
+            currentMessage.setValue(this.getValue());
         }
-        return newMessage;
-    }
-
-    private void setCounter(int value) {
-        currentStringCounter = value;
+        return currentMessage;
     }
 
     private boolean previousStringCheck(StringMessage message) {
-        return message.current.equals(this.current);
+        return (this.currentString.equals(message.getCurrentString()));
     }
 
-    @Override
-    public String getMessageAsString() {
-        return (getValue() == null ? "" : getValue()) + System.lineSeparator() + getSingleString();
-    }
-
-    private String getSingleString() {
-        if (currentStringCounter == 1) {
-            return "string: " + current;
-        } else {
-            return "string: " + current + " (x" + currentStringCounter + ")";
+    private void checkTheStartOfTheQuery() {
+        if (this.getValue() == null) {
+            this.setValue("");
         }
     }
 }
