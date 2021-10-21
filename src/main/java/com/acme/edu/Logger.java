@@ -7,7 +7,7 @@ import java.io.PrintStream;
 public class Logger {
     private static PrintStream out = System.out;
 
-    static LoggerController controller = new LoggerController();
+    private static LoggerController controller = new LoggerController();
 
 
     public static void flush() {
@@ -23,7 +23,7 @@ public class Logger {
     }
 
     public static void log(char message) {
-        printToOutput("char: " + message);
+        controller.log(new CharMessage(message));
     }
 
     public static void log(String message) {
@@ -31,7 +31,7 @@ public class Logger {
     }
 
     public static void log(boolean message) {
-        printToOutput("boolean: " + message);
+        controller.log(new BooleanMessage(message));
     }
 
     public static void log(Object message) {
