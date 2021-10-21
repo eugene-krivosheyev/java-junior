@@ -1,8 +1,9 @@
 package com.acme.edu.message.type;
 
+import com.acme.edu.message.DataEqualMessage;
 import com.acme.edu.message.Message;
 
-public class StringMessage extends Message {
+public class StringMessage extends DataEqualMessage {
 
     private int counter = 1;
 
@@ -30,15 +31,15 @@ public class StringMessage extends Message {
     }
 
     @Override
-    public Message add(Message msg) {
+    public DataEqualMessage add(Message msg) {
         if (isSameType(msg)){
-            if (isSame(msg)){
+            if (isSame((DataEqualMessage) msg)){
                 counter++;
                 setEndLogging(false);
             } else {
                 counter = 1;
                 setEndLogging(false);
-                Message tempMsg = new StringMessage(this);
+                DataEqualMessage tempMsg = new StringMessage(this);
                 data = msg.getData();
                 return tempMsg;
             }
@@ -61,7 +62,7 @@ public class StringMessage extends Message {
     }
 
     @Override
-    public boolean isMAXMIN(Message message){
+    public boolean isMAXMIN(DataEqualMessage message){
         return !isSame(message); //|| (MIN - bufferInteger > value);
     }
 

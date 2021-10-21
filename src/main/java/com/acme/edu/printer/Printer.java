@@ -1,12 +1,12 @@
 package com.acme.edu.printer;
 
-import com.acme.edu.message.Message;
+import com.acme.edu.message.DataEqualMessage;
 
 public class Printer {
 
     MessageDecorator decorator;
 
-    public void getMessage(Message message){
+    public void getMessage(DataEqualMessage message){
         print(message.toString());
     }
 

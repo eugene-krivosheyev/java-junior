@@ -1,21 +1,22 @@
 package com.acme.edu.message.type.arrays;
 
+import com.acme.edu.message.DataEqualMessage;
 import com.acme.edu.message.Message;
 
-public class IntContainerMessage extends Message {
+public class IntContainerMessage extends DataEqualMessage {
     private final int DIM;
 
-    public IntContainerMessage(Object msg, boolean isSum, int dim){
-        setMsg(msg,isSum);
+    public IntContainerMessage(Object msg, boolean isSum, int dim) {
+        setMsg(msg, isSum);
         DIM = dim;
     }
 
-    public IntContainerMessage(Object msg, int dim){
-        this(msg,false, dim);
+    public IntContainerMessage(Object msg, int dim) {
+        this(msg, false, dim);
     }
 
     public IntContainerMessage(IntContainerMessage message) {
-        this(message.getData(), message.isSum(),message.DIM);
+        this(message.getData(), message.isSum(), message.DIM);
     }
 
     @Override
@@ -30,7 +31,9 @@ public class IntContainerMessage extends Message {
     }
 
     @Override
-    public Message add(Message msg) {return this;}
+    public DataEqualMessage add(Message msg) {
+        return this;
+    }
 
     @Override
     public boolean isSameType(Message message) {
@@ -39,17 +42,17 @@ public class IntContainerMessage extends Message {
 
     @Override
     public String toString() {
-        if (isSumming){
-           return String.valueOf(sumContainer( data,DIM));
+        if (isSumming) {
+            return String.valueOf(sumContainer(data, DIM));
         } else {
-            return prefix() + msgContainer(data,DIM);
+            return prefix() + msgContainer(data, DIM);
         }
     }
 
-    private int sumContainer(Object array, int dimension){
+    private int sumContainer(Object array, int dimension) {
         int sum = 0;
         if (dimension == 1) {
-            sum = sumIntArray(sum, (int[])array);
+            sum = sumIntArray(sum, (int[]) array);
         } else {
             for (Object value : (Object[]) array) {
                 sum = sumContainer(value, dimension - 1);
@@ -58,28 +61,30 @@ public class IntContainerMessage extends Message {
         return sum;
     }
 
-    private int sumIntArray(int sum, int[] intArray){
-        for (int value:intArray) { sum += value; }
+    private int sumIntArray(int sum, int[] intArray) {
+        for (int value : intArray) {
+            sum += value;
+        }
         return sum;
     }
 
     private String msgIntArray(int[] message) {
         StringBuilder msg = new StringBuilder("{");
-        int len =  message.length;
-        for (int i = 0; i<len; ++i) {
+        int len = message.length;
+        for (int i = 0; i < len; ++i) {
             msg.append(message[i]);
-            msg.append((i<len-1)?", ":"");
+            msg.append((i < len - 1) ? ", " : "");
         }
         msg.append("}");
-        return  msg.toString();
+        return msg.toString();
     }
 
-    private String msgContainer(Object array, int dimension){
-        StringBuilder message = new StringBuilder("{"+SEP);
+    private String msgContainer(Object array, int dimension) {
+        StringBuilder message = new StringBuilder("{" + SEP);
         if (dimension == 1) {
             message = new StringBuilder(msgIntArray((int[]) array));
         } else {
-            for (Object value : (Object[])array) {
+            for (Object value : (Object[]) array) {
                 message.append(msgContainer(value, dimension - 1)).append(SEP);
             }
             message.append("}");
@@ -90,12 +95,24 @@ public class IntContainerMessage extends Message {
     @Override
     public String prefix() {
         String extra = "";
-        switch (DIM){
-            case 1:{extra = "s array";      }break;
-            case 2:{extra = "s matrix";     }break;
-            case 3:{extra = "s cube";       }break;
-            case 4:{extra = "s multimatrix";}break;
+        switch (DIM) {
+            case 1: {
+                extra = "s array";
+            }
+            break;
+            case 2: {
+                extra = "s matrix";
+            }
+            break;
+            case 3: {
+                extra = "s cube";
+            }
+            break;
+            case 4: {
+                extra = "s multimatrix";
+            }
+            break;
         }
-        return String.format("primitive%s: ",extra);
+        return String.format("primitive%s: ", extra);
     }
 }

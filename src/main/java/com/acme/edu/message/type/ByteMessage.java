@@ -1,8 +1,9 @@
 package com.acme.edu.message.type;
 
+import com.acme.edu.message.DataEqualMessage;
 import com.acme.edu.message.Message;
 
-public class ByteMessage extends Message {
+public class ByteMessage extends DataEqualMessage {
 
     static final int MAXVALUE = Byte.MAX_VALUE;
     static final int MINVALUE = Byte.MIN_VALUE;
@@ -30,16 +31,16 @@ public class ByteMessage extends Message {
     }
 
     @Override
-    public Message add(Message msg) {
+    public DataEqualMessage add(Message msg) {
         if (isSameType(msg)){
-            if (!isMAXMIN(msg)){
+            if (!isMAXMIN((DataEqualMessage) msg)){
                 data = ((byte)data + (byte)msg.getData());
                 setEndLogging(false);
                 return this;
             } else {
-                Message tempMsg = new ByteMessage(this);
-                data = (isMAX(msg))?MAXVALUE:data;
-                data = (isMIN(msg))?MINVALUE:data;
+                DataEqualMessage tempMsg = new ByteMessage(this);
+                data = (isMAX((DataEqualMessage)msg)) ? MAXVALUE : data;
+                data = (isMIN((DataEqualMessage)msg)) ? MINVALUE : data;
                 setEndLogging(true);
                 return tempMsg;
             }
@@ -63,17 +64,17 @@ public class ByteMessage extends Message {
     }
 
     @Override
-    public boolean isMAXMIN(Message value){
+    public boolean isMAXMIN(DataEqualMessage value){
         return isMAX(value); //|| (MIN - bufferInteger > value);
     }
 
     @Override
-    public boolean isMAX(Message value) {
+    public boolean isMAX(DataEqualMessage value) {
         return (MAXVALUE - (byte)data < (byte)value.getData());
     }
 
     @Override
-    public boolean isMIN(Message value) {
+    public boolean isMIN(DataEqualMessage value) {
         return super.isMIN(value);
     }
 

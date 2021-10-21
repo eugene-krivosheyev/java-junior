@@ -1,8 +1,9 @@
 package com.acme.edu.message.type.arrays;
 
+import com.acme.edu.message.DataEqualMessage;
 import com.acme.edu.message.Message;
 
-public class StringArrayMessage extends Message {
+public class StringArrayMessage extends DataEqualMessage {
 
     public StringArrayMessage(String[] msg, boolean isSum){
         setMsg(msg,isSum);
@@ -28,7 +29,7 @@ public class StringArrayMessage extends Message {
     }
 
     @Override
-    public Message add(Message msg) {return this;}
+    public DataEqualMessage add(Message msg) {return this;}
 
     @Override
     public boolean isSameType(Message message) {

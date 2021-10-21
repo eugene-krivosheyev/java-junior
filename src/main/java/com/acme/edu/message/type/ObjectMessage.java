@@ -1,8 +1,9 @@
 package com.acme.edu.message.type;
 
+import com.acme.edu.message.DataEqualMessage;
 import com.acme.edu.message.Message;
 
-public class ObjectMessage extends Message {
+public class ObjectMessage extends DataEqualMessage {
 
     private ObjectMessage(Object msg, boolean isSum){
         setMsg(msg,isSum);
@@ -22,7 +23,7 @@ public class ObjectMessage extends Message {
     }
 
     @Override
-    public Message add(Message msg) {return this;}
+    public DataEqualMessage add(Message msg) {return this;}
 
     @Override
     public boolean isSameType(Message message) {

@@ -1,16 +1,16 @@
 package com.acme.edu;
 
 import com.acme.edu.message.EmptyMessage;
-import com.acme.edu.message.Message;
+import com.acme.edu.message.DataEqualMessage;
 import com.acme.edu.printer.Printer;
 
 public class Controller {
 
     private Printer printer = new Printer();
 
-    private Message buffer = new EmptyMessage();
+    private DataEqualMessage buffer = new EmptyMessage();
 
-    public void logMessage(Message message){
+    public void logMessage(DataEqualMessage message){
         if (!message.isSum()) {
             endLogging(buffer.isEndLogging());
             sendLogToPrinter(message);
@@ -22,7 +22,7 @@ public class Controller {
                     if(!buffer.isMAXMIN(message)) {
                         buffer.add(message);
                     } else {
-                        sendLogToPrinter(buffer.add(message));
+                        sendLogToPrinter((DataEqualMessage) buffer.add(message));
                         endLogging(buffer.isEndLogging());
                     }
                 } else {
@@ -40,7 +40,7 @@ public class Controller {
         }
     }
 
-    private void sendLogToPrinter(Message message){
+    private void sendLogToPrinter(DataEqualMessage message){
         printer.getMessage(message);
     }
 }

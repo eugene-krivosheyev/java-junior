@@ -5,7 +5,7 @@ import com.acme.edu.message.type.arrays.StringArrayMessage;
 import com.acme.edu.message.type.*;
 
 public class Logger {
-    private static Controller logger = new Controller();
+    private static final Controller logger = new Controller();
 
     private static boolean isSumming = false;
 

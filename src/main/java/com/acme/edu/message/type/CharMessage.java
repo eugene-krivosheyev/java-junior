@@ -1,8 +1,9 @@
 package com.acme.edu.message.type;
 
+import com.acme.edu.message.DataEqualMessage;
 import com.acme.edu.message.Message;
 
-public class CharMessage extends Message {
+public class CharMessage extends DataEqualMessage {
 
     private CharMessage(char msg, boolean isSum){
         setMsg(msg,isSum);
@@ -22,7 +23,7 @@ public class CharMessage extends Message {
     }
 
     @Override
-    public Message add(Message msg) {return this;}
+    public DataEqualMessage add(Message msg) {return this;}
 
     @Override
     public boolean isSameType(Message message) {

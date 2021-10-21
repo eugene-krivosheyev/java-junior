@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-public class EmptyMessage extends Message {
+public class EmptyMessage extends DataEqualMessage {
     public EmptyMessage(){}
 
     public EmptyMessage(boolean isEnd){
@@ -14,7 +14,7 @@ public class EmptyMessage extends Message {
     public void setMsg(Object message, boolean isSum) {}
 
     @Override
-    public Message add(Message msg) {return this;}
+    public DataEqualMessage add(Message msg) {return this;}
 
     @Override
     public boolean isSameType(Message message) {

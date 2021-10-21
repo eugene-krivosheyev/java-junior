@@ -1,7 +1,7 @@
 package com.acme.edu.printer;
 
-import com.acme.edu.message.Message;
+import com.acme.edu.message.DataEqualMessage;
 
 public interface MessageDecorator {
-    String decorate(Message message);
+    String decorate(DataEqualMessage message);
 }
