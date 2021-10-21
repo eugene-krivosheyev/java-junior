@@ -2,9 +2,7 @@ package com.acme.edu;
 
 import com.acme.edu.messageOut.Formatter;
 import com.acme.edu.messageOut.Printer;
-import com.acme.edu.processors.ServiceForIntAndByte;
-import com.acme.edu.processors.ServiceForString;
-import com.acme.edu.processors.ServiceForSumOfArray;
+import com.acme.edu.processors.*;
 
 public class Logger {
 
@@ -20,7 +18,6 @@ public class Logger {
         for (String arg : args) {
             log(arg);
         }
-     //   flusher.flush();
     }
 
     public static void log(int... args) {
@@ -34,13 +31,11 @@ public class Logger {
     }
 
     public static void log(int message) {
-        state.setType(Stater.TypeVar.INT_STATE);
-        serviceForIntAndByte.processingForIntAndByte(message);
+        Controller.log(new IntMessage(message));
     }
 
     public static void log(byte message) {
-        state.setType(Stater.TypeVar.BYTE_STATE);
-        serviceForIntAndByte.processingForIntAndByte(message);
+        Controller.log(new ByteMessage(message));
     }
 
     public static void log(char message) {
