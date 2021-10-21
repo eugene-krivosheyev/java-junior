@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class StrArrayBuffer extends StrBuffer {
 
+    @Override
     public void accumulate(Message message) {
         for (String string : (String[])message.getBody()) {
             super.accumulate(new StringMessage(string));

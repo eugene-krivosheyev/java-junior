@@ -8,6 +8,7 @@ public class StrArrayMessage extends Message {
         this.body = body;
     }
 
+    @Override
     public String[] getBody() {
         return body;
     }

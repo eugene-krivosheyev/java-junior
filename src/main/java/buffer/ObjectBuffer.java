@@ -8,6 +8,7 @@ public class ObjectBuffer extends Buffer {
         this.prefix = prefix;
     }
 
+    @Override
     public void accumulate(Message object) {
         extraOrdinary.add(object.getBody().toString());
     }

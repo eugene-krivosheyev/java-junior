@@ -8,6 +8,7 @@ public class BoolBuffer extends Buffer {
         this.prefix = prefix;
     }
 
+    @Override
     public void accumulate(Message bool) {
         extraOrdinary.add(bool.getBody().toString());
     }

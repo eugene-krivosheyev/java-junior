@@ -18,6 +18,7 @@ public class StrBuffer extends Buffer {
         return prefix +result;
     }
 
+    @Override
     public void accumulate(Message message) {
         if (!Objects.equals(message.getBody(), body) && body != null) {
             extraOrdinary.add(getBody());

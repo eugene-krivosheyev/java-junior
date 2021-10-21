@@ -8,6 +8,7 @@ public class CharBuffer extends Buffer {
         this.prefix = prefix;
     }
 
+    @Override
     public void accumulate(Message character) {
         extraOrdinary.add(character.getBody().toString());
     }
