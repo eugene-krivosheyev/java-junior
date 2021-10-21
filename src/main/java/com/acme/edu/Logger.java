@@ -8,19 +8,19 @@ public class Logger {
 
     private static final Controller controller = new Controller(new Saver());
 
+    private static void arrayLog(int message) {
+        controller.log(new ArrayNumberMessage(Integer.MAX_VALUE, Integer.MIN_VALUE, message));
+    }
+
     public static void log(int... message) {
         for (int i : message) {
-            controller.log(new ArrayNumberMessage(Integer.MAX_VALUE, Integer.MIN_VALUE, i));
+            arrayLog(i);
         }
     }
 
     public static void log(int[][] message) {
-
-    }
-
-    public static void log(String... message) {
-        for (String str : message) {
-            log(str);
+        for (int[] arr : message) {
+            log(arr);
         }
     }
 
@@ -36,6 +36,11 @@ public class Logger {
         controller.flush();
     }
 
+    public static void log(String... message) {
+        for (String str : message) {
+            log(str);
+        }
+    }
     public static void log(String message) {
         controller.log(new StringMessage(message));
     }
