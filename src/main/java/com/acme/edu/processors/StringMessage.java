@@ -45,7 +45,7 @@ public class StringMessage implements Message{
 
     @Override
     public void init() {
-      bufferString=messageValue;
+      bufferString = messageValue;
       stringCounter = 1;
 
     }

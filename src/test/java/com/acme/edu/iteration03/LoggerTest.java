@@ -34,7 +34,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "0\r\n"
+            "primitive: 0\r\n"
         );
         //endregion
     }
@@ -48,7 +48,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "0\r\n"
+            "primitive: 0\r\n"
         );
         //endregion
     }
@@ -78,7 +78,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("string: str1\r\nstring: string 2\r\nstring: str 3\r\n");
+        assertSysoutEquals("string: str1\r\nstring: string 2\r\nstring: str 3\r\n");
 
         //endregion
     }

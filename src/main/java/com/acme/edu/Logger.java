@@ -1,33 +1,27 @@
 package com.acme.edu;
 
-import com.acme.edu.messageOut.Formatter;
-import com.acme.edu.messageOut.Printer;
 import com.acme.edu.processors.*;
 
 public class Logger {
 
-    private static Printer printer = new Printer();
-    private static Formatter formatter = new Formatter();
-    private static Stater state = new Stater(Stater.TypeVar.INIT_STATE, Stater.TypeVar.DEFAULT_STATE, 0, null, 1);
-    private static Flusher flusher = new Flusher(formatter, printer, state);
-    private static ServiceForIntAndByte serviceForIntAndByte = new ServiceForIntAndByte(formatter, printer, state, flusher);
-    private static ServiceForString serviceForString = new ServiceForString(formatter, printer, state, flusher);
-
-
     public static void log(String... args) {
         for (String arg : args) {
-            log(arg);
+            Controller.log(new StringMessage(arg));
         }
     }
 
     public static void log(int... args) {
-        formatter.setMessagePrefix("");
-        printer.print(formatter.formatMessage(ServiceForSumOfArray.sumOfArray(args)));
+        for (int arg : args) {
+            Controller.log(new IntMessage(arg));
+        }
     }
 
     public static void log(int[][] arr) {
-        formatter.setMessagePrefix("");
-        printer.print(formatter.formatMessage(ServiceForSumOfArray.sumOfArray2D(arr)));
+        for (int[] args : arr) {
+            for (int arg : args) {
+                Controller.log(new IntMessage(arg));
+            }
+        }
     }
 
     public static void log(int message) {
@@ -39,8 +33,7 @@ public class Logger {
     }
 
     public static void log(char message) {
-        formatter.setMessagePrefix("char: ");
-        printer.print(formatter.formatMessage(message));
+        Controller.log(new CharMessage(message));
     }
 
     public static void log(String message) {
@@ -48,13 +41,11 @@ public class Logger {
     }
 
     public static void log(boolean message) {
-        formatter.setMessagePrefix("primitive: ");
-        printer.print(formatter.formatMessage(message));
+        Controller.log(new BooleanMessage(message));
     }
 
     public static void log(Object message) {
-        formatter.setMessagePrefix("reference: ");
-        printer.print(formatter.formatMessage(message));
+        Controller.log(new ObjectMessage(message));
     }
 
     public static void flush() {
