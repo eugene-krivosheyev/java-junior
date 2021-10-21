@@ -1,13 +1,13 @@
-package com.acme.edu.processors;
+package com.acme.edu.messages;
 
-import com.acme.edu.messageOut.Printer;
+import com.acme.edu.Printer;
 
-public class ObjectMessage implements Message{
+public class BooleanMessage implements Message {
 
-    private static String messagePrefix = "reference: ";
-    private Object messageValue;
+    private static String messagePrefix = "primitive: ";
+    private boolean messageValue;
 
-    public ObjectMessage(Object message){
+    public BooleanMessage(boolean message){
         this.messageValue = message;
     }
 
@@ -18,7 +18,7 @@ public class ObjectMessage implements Message{
 
     @Override
     public boolean isSameType(Message message) {
-        boolean isSameType = message instanceof ObjectMessage;
+        boolean isSameType = message instanceof BooleanMessage;
         return isSameType;
     }
 

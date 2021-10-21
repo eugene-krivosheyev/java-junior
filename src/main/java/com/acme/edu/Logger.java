@@ -1,6 +1,6 @@
 package com.acme.edu;
 
-import com.acme.edu.processors.*;
+import com.acme.edu.messages.*;
 
 public class Logger {
 

@@ -1,10 +1,10 @@
-package com.acme.edu.processors;
+package com.acme.edu.messages;
 
-import com.acme.edu.messageOut.Printer;
+import com.acme.edu.Printer;
 
 import java.util.Objects;
 
-public class StringMessage implements Message{
+public class StringMessage implements Message {
     private static String bufferString;
     private static int stringCounter;
     private static String messagePrefix = "string: ";

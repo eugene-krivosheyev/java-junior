@@ -1,6 +1,6 @@
-package com.acme.edu.processors;
+package com.acme.edu.messages;
 
-import com.acme.edu.messageOut.Printer;
+import com.acme.edu.Printer;
 
 public class ByteMessage implements Message {
     private int messageValue;

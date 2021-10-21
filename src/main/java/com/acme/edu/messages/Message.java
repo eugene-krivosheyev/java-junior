@@ -1,4 +1,4 @@
-package com.acme.edu.processors;
+package com.acme.edu.messages;
 
 public interface Message {
 

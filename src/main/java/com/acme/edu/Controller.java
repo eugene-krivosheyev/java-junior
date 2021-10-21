@@ -1,7 +1,7 @@
 package com.acme.edu;
 
 
-import com.acme.edu.processors.Message;
+import com.acme.edu.messages.Message;
 
 public class Controller {
     private static Message currentState;
