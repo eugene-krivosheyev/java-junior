@@ -44,8 +44,7 @@ public class Logger {
     }
 
     public static void log(String message) {
-        state.setType(Stater.TypeVar.STRING_STATE);
-        serviceForString.serviceForString(message);
+        Controller.log(new StringMessage(message));
     }
 
     public static void log(boolean message) {
@@ -59,7 +58,7 @@ public class Logger {
     }
 
     public static void flush() {
-        flusher.flush();
+        Controller.flush();
     }
 
 }

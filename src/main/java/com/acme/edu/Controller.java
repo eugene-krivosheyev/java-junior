@@ -4,13 +4,27 @@ package com.acme.edu;
 import com.acme.edu.processors.Message;
 
 public class Controller {
-    private Message currentState;
-    public void log(Message message){
-        if(!currentState.isSameType(message)){
-            currentState.flush();
+    private static Message currentState;
+    private static boolean start=true;
+
+    public static void log(Message message){
+        if(start) {
             currentState = message;
-        } else {
-            currentState = currentState.accumulate(message);
+            currentState.init();
+            start = false;
         }
+        else {
+            if (!currentState.isSameType(message)) {
+                currentState.flush();
+                currentState = message;
+                currentState.init();
+            } else {
+                currentState = currentState.accumulate(message);
+            }
+        }
+    }
+
+    public static void flush(){
+        currentState.flush();
     }
 }

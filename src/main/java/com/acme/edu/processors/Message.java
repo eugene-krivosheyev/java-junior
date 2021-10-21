@@ -9,4 +9,6 @@ public interface Message {
     String getBody();
 
     void flush();
+
+    void init();
 }

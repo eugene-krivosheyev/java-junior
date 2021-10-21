@@ -3,7 +3,7 @@ package com.acme.edu.processors;
 import com.acme.edu.messageOut.Printer;
 
 public class ByteMessage implements Message {
-    public int messageValue;
+    private int messageValue;
     private static String messagePrefix = "primitive: ";
     private static int bufferSum;
 
@@ -30,17 +30,18 @@ public class ByteMessage implements Message {
 
     @Override
     public String getBody() {
-        return formatMessage();
+        return messagePrefix + messageValue;
     }
 
     @Override
     public void flush(){
-        Printer.print(formatMessage());
+        Printer.print(messagePrefix + bufferSum);
         bufferSum = 0;
     }
 
-    private String formatMessage() {
-        return messagePrefix + messageValue;
+    @Override
+    public void  init(){
+        bufferSum+=messageValue;
     }
 }
 

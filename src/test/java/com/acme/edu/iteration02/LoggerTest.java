@@ -49,7 +49,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("str 1");
         assertSysoutContains("3");
         assertSysoutContains("str 2");
-       assertSysoutContains("0");
+        assertSysoutContains("0");
 
     }
 
@@ -129,7 +129,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 //            "str 2\n" +
 //            "str 3 (x3)\n"
 //        );
-//        //endregion
+        //endregion
         assertSysoutContains("str 1");
         assertSysoutContains("str 2");
         assertSysoutContains("str 2");
