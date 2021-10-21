@@ -30,7 +30,7 @@ public class ObjectMessage implements Message {
 
     @Override
     public void accumulate(Message message, Printer printer) {
-        if (isSameType(message)) {
+        if (!isSameType(message)) {
             throw new IllegalArgumentException("Can not accumulate message which is not type of ObjectMessage");
         }
         printer.print(this);

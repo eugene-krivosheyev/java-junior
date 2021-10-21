@@ -1,9 +1,6 @@
 package com.acme.edu;
 
-import com.acme.edu.messages.ByteMessage;
-import com.acme.edu.messages.IntMessage;
-import com.acme.edu.messages.ObjectMessage;
-import com.acme.edu.messages.StringMessage;
+import com.acme.edu.messages.*;
 
 import java.io.PrintStream;
 
@@ -42,7 +39,7 @@ public class Logger {
     }
 
     public static void log(int... array) {
-        printToOutput("arrays's sum: " + getSumOfArray(array));
+        controller.log(new IntArrayMessage(array));
     }
     public static void log(int[]... array) {
         int sum = 0;
