@@ -1,21 +1,12 @@
 package com.acme.edu.api.message;
 
-import com.acme.edu.Logger;
-import com.acme.edu.api.LoggerController;
-import com.acme.edu.api.saver.Saver;
-
-import java.io.ObjectStreamException;
-import java.util.Objects;
-
-public class StringMessage extends SummableStringMessage {
-    private static int currentStringCounter = 1;
-    private static String accumString;
-    private String current;
+public class StringMessage extends Message {
+    private int currentStringCounter = 1;
+    private final String current;
 
     public StringMessage(String nameString) {
+        current = nameString;
         setPrefix("string: ");
-        this.setNameString(nameString);
-        //setValue(value);
     }
 
     @Override
@@ -26,28 +17,34 @@ public class StringMessage extends SummableStringMessage {
     @Override
     public Message accumulate(Message message) {
         StringMessage stringMessage = (StringMessage) message;
+        StringMessage newMessage = new StringMessage(stringMessage.current);
         if (previousStringCheck(stringMessage)) {
-            currentStringCounter++;
+            newMessage.setCounter(currentStringCounter + 1);
+            newMessage.setValue(this.getValue());
         } else {
-            stringMessage = getMessage();
-            currentStringCounter = 1;
+            newMessage.setValue((this.getValue() == null ? "" : this.getValue()) + getSingleString());
         }
+        return newMessage;
+    }
 
-        if (stringMessage.getValue().equals(getValue())) {
-
-        }
-        return message;
+    private void setCounter(int value) {
+        currentStringCounter = value;
     }
 
     private boolean previousStringCheck(StringMessage message) {
-        return (this.getNameString().equals(message.getNameString()));
+        return message.current.equals(this.current);
     }
 
-    private StringMessage getMessage() {
+    @Override
+    public String getMessageAsString() {
+        return (getValue() == null ? "" : getValue()) + System.lineSeparator() + getSingleString();
+    }
+
+    private String getSingleString() {
         if (currentStringCounter == 1) {
-            return new StringMessage();
+            return "string: " + current;
         } else {
-            return new StringMessage(lastSubmittedString + " (x" + sameLastStringCounter + ")");
+            return "string: " + current + " (x" + currentStringCounter + ")";
         }
     }
 }
