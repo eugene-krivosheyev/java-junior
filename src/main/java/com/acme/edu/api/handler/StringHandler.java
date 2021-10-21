@@ -1,6 +1,6 @@
-package com.acme.edu.handlers;
+package com.acme.edu.api.handler;
 
-import com.acme.edu.messages.StringMessage;
+import com.acme.edu.api.message.StringMessage;
 
 import java.util.Objects;
 

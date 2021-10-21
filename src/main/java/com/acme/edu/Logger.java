@@ -1,6 +1,10 @@
 package com.acme.edu;
 
-import com.acme.edu.savers.ConsoleSaver;
+import com.acme.edu.api.LoggerController;
+import com.acme.edu.api.message.*;
+import com.acme.edu.api.saver.ConsoleSaver;
+
+import java.util.Arrays;
 
 public class Logger {
    private static final LoggerController service = new LoggerController(new ConsoleSaver());
@@ -10,43 +14,54 @@ public class Logger {
    }
 
     public static void log(int message) {
-        service.log(message);
+        service.log(new IntegerMessage(message));
     }
 
     public static void log(byte message) {
-        service.log(message);
+        service.log(new ByteMessage(message));
     }
 
     public static void log(char message) {
-        service.log(message);
+        service.log(new CharacterMessage(message));
+        flush();
     }
 
     public static void log(String message) {
-        service.log(message);
+        service.log(new StringMessage(message));
     }
 
     public static void log(String... strings) {
-        service.log(strings);
+        Arrays.stream(strings).forEach(str -> service.log(new StringMessage(str)));
     }
 
-    public static void setArrayToggle() {
-        service.setArrayToggle();
+    public static void log(boolean printAsArray, int... integers) {
+        service.log(new PrimitiveArrayMessage(integers, printAsArray));
+        flush();
     }
 
     public static void log(int... integers) {
-        service.log(integers);
+        service.log(new PrimitiveArrayMessage(integers));
+        flush();
+    }
+
+    public static void log(boolean printAsArray, int[][] integers) {
+        service.log(new PrimitiveMatrixMessage(integers, printAsArray));
+        flush();
     }
 
     public static void log(int[][] integers) {
-        service.log(integers);
+        service.log(new PrimitiveMatrixMessage(integers));
+        flush();
     }
 
     public static void log(boolean message) {
-        service.log(message);
+        service.log(new BooleanMessage(message));
+        flush();
     }
 
     public static void log(Object message) {
-        service.log(message);
+        service.log(new ObjectRefMessage(message.toString()));
+        flush();
     }
 
     public static void flush() {

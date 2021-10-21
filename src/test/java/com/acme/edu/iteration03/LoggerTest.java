@@ -29,8 +29,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
-        Logger.setArrayToggle();
-        Logger.log(new int[] {-1, 0, 20});
+        Logger.log(true, new int[] {-1, 0, 20});
         Logger.flush();
         //endregion
 
@@ -55,8 +54,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
-        Logger.setArrayToggle();
-        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -20}});
+        Logger.log(true, new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -20}});
         Logger.flush();
         //endregion
 
