@@ -42,11 +42,7 @@ public class Logger {
         controller.log(new IntArrayMessage(array));
     }
     public static void log(int[]... array) {
-        int sum = 0;
-        for (int[] subArray: array) {
-            sum += getSumOfArray(subArray);
-        }
-        printToOutput("matrix sum: " + sum);
+        controller.log(new IntTwoDimensionalArrayMessage(array));
     }
     public static void log(String... array) {
         for (String value: array) {
