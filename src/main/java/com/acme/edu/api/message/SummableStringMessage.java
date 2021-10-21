@@ -1,10 +1,10 @@
 package com.acme.edu.api.message;
 
-public abstract class StringMessageAccumulater extends Message {
+public abstract class SummableStringMessage extends Message {
     protected int currentStringCounter = 1;
     protected final String currentString;
 
-    public StringMessageAccumulater(String currentString) {
+    public SummableStringMessage(String currentString) {
         setPrefix("string: ");
         this.currentString = currentString;
     }
