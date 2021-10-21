@@ -1,8 +1,11 @@
 package message;
 
-public class IntMessage extends Message
+import buffer.Buffer;
+import buffer.IntBuffer;
+
+public class IntMessage implements Message
 {
-    private Integer body;
+    private final Integer body;
 
     public IntMessage(Integer integer) {
         body = integer;
@@ -11,5 +14,10 @@ public class IntMessage extends Message
     @Override
     public Integer getBody() {
         return body;
+    }
+
+    @Override
+    public Buffer getBuffer() {
+        return new IntBuffer();
     }
 }

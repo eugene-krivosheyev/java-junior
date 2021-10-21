@@ -2,14 +2,24 @@ package buffer;
 
 import message.Message;
 
-public class CharBuffer extends Buffer {
+import java.util.ArrayList;
 
-    public CharBuffer(String prefix) {
-        this.prefix = prefix;
+public class CharBuffer implements Buffer {
+
+    private OutOfOrderLineKeeper lineKeeper = new OutOfOrderLineKeeper("char: ");
+
+    @Override
+    public String getBody() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<String> getExtraordinaryBody() {
+        return lineKeeper.getExtraordinaryBody();
     }
 
     @Override
     public void accumulate(Message character) {
-        extraOrdinary.add(character.getBody().toString());
+        lineKeeper.add(character.getBody().toString());
     }
 }

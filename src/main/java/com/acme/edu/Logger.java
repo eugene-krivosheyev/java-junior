@@ -1,6 +1,5 @@
 package com.acme.edu;
 
-import buffer.*;
 import controller.Controller;
 import message.*;
 
@@ -9,42 +8,42 @@ public class Logger {
     private static Controller controller = new Controller();
 
     public static void flush() {
-        controller.log(null, new Buffer());
+        controller.log(new FlushMessage());
     }
 
     public static void log(int integer) {
-        controller.log(new IntMessage(integer), new IntBuffer());
+        controller.log(new IntMessage(integer));
     }
 
     public static void log(Integer... integer) {
-        controller.log(new IntArrayMessage(integer), new IntArrayBuffer());
+        controller.log(new IntArrayMessage(integer));
     }
 
     public static void log(Integer[]... integer) {
-        controller.log(new Int2dArrayMessage(integer), new Int2dArrayBuffer());
+        controller.log(new Int2dArrayMessage(integer));
     }
 
     public static void log(byte byteValue) {
-        controller.log(new IntMessage((int)byteValue), new ByteBuffer());
+        controller.log(new ByteMessage(byteValue));
     }
 
     public static void log(String string) {
-        controller.log(new StringMessage(string), new StrBuffer());
+        controller.log(new StringMessage(string));
     }
 
     public static void log(String... string) {
-        controller.log(new StrArrayMessage(string), new StrArrayBuffer());
+        controller.log(new StrArrayMessage(string));
     }
 
     public static void log(Boolean bool) {
-        controller.log(new ObjectMessage(bool), new BoolBuffer("primitive: "));
+        controller.log(new BooleanMessage(bool));
     }
 
     public static void log(char symbol) {
-        controller.log(new ObjectMessage(symbol), new CharBuffer("char: "));
+        controller.log(new CharMessage(symbol));
     }
 
     public static void log(Object object) {
-        controller.log(new ObjectMessage(object), new ObjectBuffer("reference: "));
+        controller.log(new ObjectMessage(object));
     }
 }

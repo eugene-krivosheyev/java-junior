@@ -2,14 +2,24 @@ package buffer;
 
 import message.Message;
 
-public class BoolBuffer extends Buffer {
+import java.util.ArrayList;
 
-    public BoolBuffer(String prefix) {
-        this.prefix = prefix;
+public class BoolBuffer implements Buffer {
+
+    private OutOfOrderLineKeeper lineKeeper = new OutOfOrderLineKeeper("primitive: ");
+
+    @Override
+    public String getBody() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<String> getExtraordinaryBody() {
+        return lineKeeper.getExtraordinaryBody();
     }
 
     @Override
     public void accumulate(Message bool) {
-        extraOrdinary.add(bool.getBody().toString());
+        lineKeeper.add(bool.getBody().toString());
     }
 }

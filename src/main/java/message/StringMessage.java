@@ -1,6 +1,9 @@
 package message;
 
-public class StringMessage extends Message {
+import buffer.Buffer;
+import buffer.StrBuffer;
+
+public class StringMessage implements Message {
 
     private String body;
 
@@ -11,5 +14,10 @@ public class StringMessage extends Message {
     @Override
     public String getBody() {
         return body;
+    }
+
+    @Override
+    public Buffer getBuffer() {
+        return new StrBuffer();
     }
 }

@@ -1,12 +1,9 @@
 package buffer;
 
-import message.Message;
+abstract class NumberBuffer implements Buffer {
 
-public class NumberBuffer extends Buffer {
-
-    public NumberBuffer() {
-        prefix = "primitive: ";
-    }
+    protected final String prefix = "primitive: ";
+    protected OutOfOrderLineKeeper lineKeeper = new OutOfOrderLineKeeper(prefix);
 
     public long checkOverflow(long result, int max, int min) {
         if (result > max) {
@@ -23,9 +20,9 @@ public class NumberBuffer extends Buffer {
         long result = checkOverflow(sum, max, min);
 
         if (result > sum) {
-            extraOrdinary.add(min.toString());
+            lineKeeper.add(min.toString());
         } else if (result < sum) {
-            extraOrdinary.add(max.toString());
+            lineKeeper.add(max.toString());
         }
         return (int)result;
     }

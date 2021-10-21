@@ -1,6 +1,9 @@
 package message;
 
-public class IntArrayMessage extends Message {
+import buffer.Buffer;
+import buffer.IntArrayBuffer;
+
+public class IntArrayMessage implements Message {
 
     private Integer[] body;
 
@@ -11,5 +14,10 @@ public class IntArrayMessage extends Message {
     @Override
     public Integer[] getBody() {
         return body;
+    }
+
+    @Override
+    public Buffer getBuffer() {
+        return new IntArrayBuffer();
     }
 }

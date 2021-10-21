@@ -71,6 +71,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region when
         Logger.log('a');
         Logger.log('b');
+        Logger.flush();
         //endregion
 
         //region then
@@ -114,6 +115,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         type = "reference: ";
         //region when
         Logger.log(new Object());
+        Logger.flush();
         //endregion
 
         //region then

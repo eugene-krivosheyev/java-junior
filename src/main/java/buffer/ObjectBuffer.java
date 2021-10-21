@@ -2,15 +2,25 @@ package buffer;
 
 import message.Message;
 
-public class ObjectBuffer extends Buffer {
+import java.util.ArrayList;
 
-    public ObjectBuffer(String prefix) {
-        this.prefix = prefix;
+public class ObjectBuffer implements Buffer {
+
+    private OutOfOrderLineKeeper lineKeeper = new OutOfOrderLineKeeper("reference: ");
+
+    @Override
+    public String getBody() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<String> getExtraordinaryBody() {
+        return lineKeeper.getExtraordinaryBody();
     }
 
     @Override
     public void accumulate(Message object) {
-        extraOrdinary.add(object.getBody().toString());
+        lineKeeper.add(object.getBody().toString());
     }
 
 }

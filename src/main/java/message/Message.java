@@ -1,5 +1,8 @@
 package message;
 
-public abstract class Message {
-    public abstract Object getBody();
+import buffer.Buffer;
+
+public interface Message {
+    Object getBody();
+    Buffer getBuffer();
 }

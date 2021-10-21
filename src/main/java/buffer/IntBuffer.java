@@ -2,6 +2,8 @@ package buffer;
 
 import message.Message;
 
+import java.util.ArrayList;
+
 public class IntBuffer extends NumberBuffer {
 
     private Integer integer = 0;
@@ -9,6 +11,11 @@ public class IntBuffer extends NumberBuffer {
     @Override
     public String getBody() {
         return prefix + integer.toString();
+    }
+
+    @Override
+    public ArrayList<String> getExtraordinaryBody() {
+        return lineKeeper.getExtraordinaryBody();
     }
 
     @Override

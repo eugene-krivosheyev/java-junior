@@ -1,6 +1,9 @@
 package message;
 
-public class Int2dArrayMessage extends Message {
+import buffer.Buffer;
+import buffer.Int2dArrayBuffer;
+
+public class Int2dArrayMessage implements Message {
 
     private Integer[][] body;
 
@@ -11,5 +14,10 @@ public class Int2dArrayMessage extends Message {
     @Override
     public Integer[][] getBody() {
         return body;
+    }
+
+    @Override
+    public Buffer getBuffer() {
+        return new Int2dArrayBuffer();
     }
 }
