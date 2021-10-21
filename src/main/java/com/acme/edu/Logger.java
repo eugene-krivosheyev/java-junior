@@ -1,5 +1,6 @@
 package com.acme.edu;
 
+import com.acme.edu.message.IntegerMessage;
 import com.acme.edu.message.Message;
 
 public class Logger {
@@ -7,7 +8,7 @@ public class Logger {
     private static MessageGenerator generator = new MessageGenerator();
 
     public static void log(int message) {
-        controller.log(message);
+        controller.log(new Message(new IntStrategy(message)));
     }
 
     public static void log(byte message) {

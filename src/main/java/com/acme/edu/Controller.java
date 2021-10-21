@@ -4,15 +4,20 @@ import com.acme.edu.message.*;
 
 public class Controller {
 
-    private IntegerMessage integerMessage;
-    private ByteMessage byteMessage;
-    private CharacterMessage characterMessage;
-    private StringMessage stringMessage;
-    private BooleanMessage booleanMessage;
-    private ObjectMessage objectMessage;
-    private Type type;
+//    private IntegerMessage integerMessage;
+//    private ByteMessage byteMessage;
+//    private CharacterMessage characterMessage;
+//    private StringMessage stringMessage;
+//    private BooleanMessage booleanMessage;
+//    private ObjectMessage objectMessage;
+    private Integer intAccum;
+    private Message type;
 
-    public void log(Integer message) {
+    public void log(Message message) {
+        message.getStrategy()
+    }
+
+   /* public void log(Integer message) {
         if (integerMessage == null) {
             integerMessage = new IntegerMessage(message);
             type = Type.INTEGER;
@@ -64,7 +69,7 @@ public class Controller {
 
     public void log(Object message) {
 
-    }
+    }*/
 
     public void flush() {
         switch (type) {
@@ -79,7 +84,7 @@ public class Controller {
         }
     }
 
-    enum Type {
+/*    enum Type {
         INTEGER,
         BYTE,
         STRING,
@@ -88,5 +93,5 @@ public class Controller {
         BOOLEAN,
         INTARRAY,
         INT2DARRAY;
-    }
+    }*/
 }

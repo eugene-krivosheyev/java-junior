@@ -2,7 +2,7 @@ package com.acme.edu.message;
 
 import com.acme.edu.Decorator;
 
-public class IntegerMessage implements Message {
+public class IntegerMessage extends Message {
 
     private int value;
 
