@@ -16,11 +16,6 @@ public class IntArrayMessage implements Message {
     }
 
     @Override
-    public void clear() {
-
-    }
-
-    @Override
     public boolean isSameType(Message message) {
         return message instanceof IntArrayMessage;
     }

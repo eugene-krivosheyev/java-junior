@@ -19,11 +19,6 @@ public class ObjectMessage implements Message {
     }
 
     @Override
-    public void clear() {
-        value = null;
-    }
-
-    @Override
     public boolean isSameType(Message message) {
         return message instanceof ObjectMessage;
     }

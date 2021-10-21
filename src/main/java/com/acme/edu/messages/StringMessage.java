@@ -25,12 +25,6 @@ public class StringMessage implements Message {
     }
 
     @Override
-    public void clear() {
-        value = "";
-        counter = 1;
-    }
-
-    @Override
     public boolean isSameType(Message message) {
         return (message instanceof StringMessage);
     }

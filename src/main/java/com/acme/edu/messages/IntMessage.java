@@ -24,11 +24,6 @@ public class IntMessage implements Message {
     }
 
     @Override
-    public void clear() {
-        value = 0;
-    }
-
-    @Override
     public boolean isSameType(Message message) {
         return (message instanceof IntMessage);
     }
