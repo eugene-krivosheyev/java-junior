@@ -22,7 +22,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when

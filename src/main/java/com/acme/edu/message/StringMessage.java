@@ -4,6 +4,7 @@ public class StringMessage implements Message {
 
     private static final String STRING_PREFIX = "string: ";
 
+    private String preBody = "";
     private String stringBuffer = "";
     private int stringCount;
 
@@ -14,14 +15,12 @@ public class StringMessage implements Message {
 
     @Override
     public Message append(Message message) {
-        String str = "";
-        if (stringBuffer == null) {
-            stringBuffer = str;
-            stringCount++;
-            return this;
-        }
-        if (!str.equals(stringBuffer)) {
-            stringBuffer = str;
+        if (!canAppend(message)) throw new IllegalArgumentException("Expected StringMessage type");
+        StringMessage stringMessage = (StringMessage) message;
+
+        if (!stringBuffer.equals(stringMessage.stringBuffer)) {
+            preBody += getDecoratedString();
+            stringBuffer = stringMessage.stringBuffer;
             stringCount = 0;
         }
         stringCount++;
@@ -30,12 +29,19 @@ public class StringMessage implements Message {
 
     @Override
     public String getBody() {
-        String body = STRING_PREFIX + stringBuffer + System.lineSeparator();
-        return body;
+        return preBody + getDecoratedString();
     }
 
     @Override
     public boolean canAppend(Message message) {
-        return false;
+        return message instanceof StringMessage;
+    }
+
+    private String getDecoratedString() {
+        if (stringCount == 1) {
+            return STRING_PREFIX + stringBuffer + System.lineSeparator();
+        } else {
+            return STRING_PREFIX + stringBuffer + " (x"+ stringCount + ")" + System.lineSeparator();
+        }
     }
 }
