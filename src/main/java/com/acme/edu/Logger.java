@@ -44,7 +44,9 @@ public class Logger {
     }
 
     public void log(int... message) {
-
+        if (isArray){
+            container.addMessage(new MessageWithArrayValue(message));
+        }
     }
 
     public void log(int[][] message) {
