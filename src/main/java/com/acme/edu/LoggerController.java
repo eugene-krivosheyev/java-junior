@@ -1,16 +1,12 @@
 package com.acme.edu;
 
-import com.acme.edu.common.Message;
 import com.acme.edu.common.Printer;
-import com.acme.edu.loggers.IntLogger;
 import com.acme.edu.messages.ByteMessage;
 import com.acme.edu.messages.IntMessage;
 import com.acme.edu.State.Type;
 import com.acme.edu.messages.StringMessage;
 
 public class LoggerController {
-    IntLogger intLogger = new IntLogger();
-
     IntMessage intMessage = new IntMessage(0);
     ByteMessage byteMessage = new ByteMessage((byte) 0);
     StringMessage stringMessage = new StringMessage("");
