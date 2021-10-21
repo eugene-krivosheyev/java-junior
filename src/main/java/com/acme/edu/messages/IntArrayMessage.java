@@ -28,7 +28,7 @@ public class IntArrayMessage implements Message {
         printer.print(this);
         array = ((IntArrayMessage)message).array;
     }
-    private int getSumOfArray(int... array) {
+    protected int getSumOfArray(int... array) {
         int sum = 0;
         for (int value: array) {
             sum += value;
