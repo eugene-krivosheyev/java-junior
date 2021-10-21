@@ -2,11 +2,11 @@ package com.acme.edu;
 
 import com.acme.edu.dto.StatesDTO;
 import com.acme.edu.flush.Flusher;
+import com.acme.edu.message.*;
 
 import java.util.Objects;
 
 import static com.acme.edu.TypeCodeEnum.NONE;
-import static com.acme.edu.typemapper.MessageTypeMapper.getType;
 
 public class Logger {
     private final StatesDTO statesDTO;
@@ -17,8 +17,8 @@ public class Logger {
         this.flusher = new Flusher();
     }
 
-    public void log(Object message) {
-        TypeCodeEnum typeCodeEnum = getType(message);
+    public void log(Message message) {
+        TypeCodeEnum typeCodeEnum = message.getCode();
 
         if (statesDTO.getPrevTypeCodeEnum() != NONE && typeCodeEnum != statesDTO.getPrevTypeCodeEnum()) {
             flusher.flush(statesDTO);
@@ -26,25 +26,23 @@ public class Logger {
 
         switch (typeCodeEnum) {
             case STRING: {
-                stringIteration((String) message);
+                stringIteration((StringMessage) message);
                 break;
             }
             case BYTE: {
-                statesDTO.setByteSum((byte) message);
+                statesDTO.setByteSum((ByteMessage) message);
                 break;
             }
             case INTEGER: {
-                statesDTO.setIntegerSum((int) message);
+                statesDTO.setIntegerSum((IntMessage) message);
                 break;
             }
             case ARRAY_INT: {
-                arrayIncrementor((int[]) message);
+                statesDTO.arrayIncrementor((ArrayMessage) message);
                 break;
             }
             case MATRIX_INT: {
-                for (int[] row : (int[][]) message) {
-                    arrayIncrementor(row);
-                }
+                statesDTO.matrixIncrementor((MatrixMessage) message);
                 break;
             }
             default: {
@@ -54,18 +52,12 @@ public class Logger {
         statesDTO.setPrevTypeCodeEnum(typeCodeEnum);
     }
 
-    private void arrayIncrementor(int[] message) {
-        for (int i : message) {
-            statesDTO.setArrayIntSum(i);
-        }
-    }
-
-    private void stringIteration(String message) {
-        if (Objects.equals(statesDTO.getPrevString(), message)) {
+    private void stringIteration(StringMessage message) {
+        if (Objects.equals(statesDTO.getPrevString(), message.getMessage())) {
             statesDTO.incSimilarStringCounter();
         } else if (statesDTO.getPrevString() != null) {
             flusher.flush(statesDTO);
         }
-        statesDTO.setPrevString(message);
+        statesDTO.setPrevString(message.getMessage());
     }
 }

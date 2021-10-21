@@ -5,6 +5,7 @@ import com.acme.edu.dto.StatesDTO;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.TypeCodeEnum;
 import com.acme.edu.flush.Flusher;
+import com.acme.edu.message.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +38,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         resetOut();
     }
     //endregion
-
 
     @Test
     public void shouldLogIntegersArraySum() throws IOException {
@@ -134,18 +134,24 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private void log(Object... valuesToLog) throws IOException {
         for (Object valueToLog : valuesToLog) {
-            logger.log(valueToLog);
+            if (valueToLog.getClass() == Byte.class) {
+                logger.log(new ByteMessage((byte) valueToLog));
+            } else if (valueToLog.getClass() == Integer.class) {
+                logger.log(new IntMessage((int) valueToLog));
+            } else if (valueToLog.getClass() == String.class) {
+                logger.log(new StringMessage((String) valueToLog));
+            }
         }
         flusher.flush(statesDTO);
     }
 
     public void log(int[] valuesToLog) throws IOException {
-        logger.log(valuesToLog);
+        logger.log(new ArrayMessage(valuesToLog));
         flusher.flush(statesDTO);
     }
 
     public void log(int[][] valuesToLog) throws IOException {
-        logger.log(valuesToLog);
+        logger.log(new MatrixMessage(valuesToLog));
         flusher.flush(statesDTO);
     }
 }

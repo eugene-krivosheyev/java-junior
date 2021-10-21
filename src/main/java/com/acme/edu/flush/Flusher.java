@@ -1,11 +1,18 @@
 package com.acme.edu.flush;
 
 import com.acme.edu.dto.StatesDTO;
+import com.acme.edu.saver.SystemOutSaver;
 
 public class Flusher {
 
+    private final SystemOutSaver saver;
+
+    public Flusher() {
+        this.saver = new SystemOutSaver();
+    }
+
     public void flush(String message) {
-        Printer.print(message);
+        saver.save(message);
     }
 
     public void flush(StatesDTO statesDTO) {
@@ -15,22 +22,22 @@ public class Flusher {
                 break;
             }
             case BYTE: {
-                Printer.print(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getByteSum());
+                saver.save(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getByteSum());
                 statesDTO.clearByteSum();
                 break;
             }
             case INTEGER: {
-                Printer.print(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getIntegerSum());
+                saver.save(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getIntegerSum());
                 statesDTO.clearIntegerSum();
                 break;
             }
             case ARRAY_INT: {
-                Printer.print(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getArrayIntSum());
+                saver.save(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getArrayIntSum());
                 statesDTO.clearArrayIntSum();
                 break;
             }
             case MATRIX_INT: {
-                Printer.print(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getMatrixIntSum());
+                saver.save(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getMatrixIntSum());
                 statesDTO.clearMatrixIntSum();
                 break;
             }
@@ -42,9 +49,9 @@ public class Flusher {
     private void stringCase(StatesDTO statesDTO) {
         statesDTO.incSimilarStringCounter();
         if (statesDTO.getSimilarStringCounter() > 1) {
-            Printer.print(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getPrevString() + " (x" + statesDTO.getSimilarStringCounter() + ")");
+            saver.save(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getPrevString() + " (x" + statesDTO.getSimilarStringCounter() + ")");
         } else {
-            Printer.print(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getPrevString());
+            saver.save(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getPrevString());
         }
         statesDTO.setPrevString(null);
         statesDTO.clearSimilarStringCounter();

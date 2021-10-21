@@ -4,6 +4,9 @@ import com.acme.edu.Logger;
 import com.acme.edu.dto.StatesDTO;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.flush.Flusher;
+import com.acme.edu.message.ByteMessage;
+import com.acme.edu.message.IntMessage;
+import com.acme.edu.message.StringMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -86,7 +89,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private void log(Object... valuesToLog) throws IOException {
         for (Object valueToLog : valuesToLog) {
-            logger.log(valueToLog);
+            if (valueToLog.getClass() == Byte.class) {
+                logger.log(new ByteMessage((byte) valueToLog));
+            } else if (valueToLog.getClass() == Integer.class) {
+                logger.log(new IntMessage((int) valueToLog));
+            } else if (valueToLog.getClass() == String.class) {
+                logger.log(new StringMessage((String) valueToLog));
+            }
         }
         flusher.flush(statesDTO);
     }

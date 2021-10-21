@@ -2,6 +2,10 @@ package com.acme.edu.dto;
 
 import com.acme.edu.TypeCodeEnum;
 import com.acme.edu.flush.Flusher;
+import com.acme.edu.message.ArrayMessage;
+import com.acme.edu.message.ByteMessage;
+import com.acme.edu.message.IntMessage;
+import com.acme.edu.message.MatrixMessage;
 
 import static com.acme.edu.TypeCodeEnum.NONE;
 
@@ -62,15 +66,15 @@ public class StatesDTO {
         this.similarStringCounter = 0;
     }
 
-    public void setIntegerSum(int message) {
-        this.integerSum = countSum(integerSum, message, Integer.MAX_VALUE, Integer.MIN_VALUE);
+    public void setIntegerSum(IntMessage message) {
+        this.integerSum = countSum(integerSum, message.getMessage(), Integer.MAX_VALUE, Integer.MIN_VALUE);
     }
 
     public void clearIntegerSum() {
         this.integerSum = 0;
     }
 
-    public void setArrayIntSum(int message) {
+    private void setArrayIntSum(int message) {
         this.arrayIntSum = countSum(arrayIntSum, message, Integer.MAX_VALUE, Integer.MIN_VALUE);
     }
 
@@ -78,16 +82,12 @@ public class StatesDTO {
         this.arrayIntSum = 0;
     }
 
-    public void setMatrixIntSum(int message) {
-        this.matrixIntSum = countSum(matrixIntSum, message, Integer.MAX_VALUE, Integer.MIN_VALUE);
-    }
-
     public void clearMatrixIntSum() {
         this.matrixIntSum = 0;
     }
 
-    public void setByteSum(byte message) {
-        this.byteSum = countSum(byteSum, message, Byte.MAX_VALUE, Byte.MIN_VALUE);
+    public void setByteSum(ByteMessage message) {
+        this.byteSum = countSum(byteSum, message.getMessage(), Byte.MAX_VALUE, Byte.MIN_VALUE);
     }
 
     public void clearByteSum() {
@@ -122,5 +122,19 @@ public class StatesDTO {
             return result + min;
         }
         return result;
+    }
+
+    public void arrayIncrementor(ArrayMessage message) {
+        for (int i : message.getMessage()) {
+            this.setArrayIntSum(i);
+        }
+    }
+
+    public void matrixIncrementor(MatrixMessage message) {
+        for (int[] row : message.getMessage()) {
+            for (int i : row) {
+                this.setArrayIntSum(i);
+            }
+        }
     }
 }
