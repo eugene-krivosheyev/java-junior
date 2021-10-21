@@ -2,10 +2,7 @@ package com.acme.edu.dto;
 
 import com.acme.edu.TypeCodeEnum;
 import com.acme.edu.flush.Flusher;
-import com.acme.edu.message.ArrayMessage;
-import com.acme.edu.message.ByteMessage;
-import com.acme.edu.message.IntMessage;
-import com.acme.edu.message.MatrixMessage;
+import com.acme.edu.message.*;
 
 import static com.acme.edu.TypeCodeEnum.NONE;
 
@@ -16,6 +13,8 @@ public class StatesDTO {
     private int arrayIntSum;
     private int matrixIntSum;
     private int byteSum;
+    private char prevChar;
+    private boolean prevBoolean;
     private String prevString;
     private TypeCodeEnum prevTypeCodeEnum = NONE;
     private final Flusher flusher;
@@ -28,6 +27,14 @@ public class StatesDTO {
         matrixIntSum = 0;
         byteSum = 0;
         prevString = "";
+    }
+
+    public char getPrevChar() {
+        return prevChar;
+    }
+
+    public boolean getPrevBoolean() {
+        return prevBoolean;
     }
 
     public int getSimilarStringCounter() {
@@ -92,6 +99,14 @@ public class StatesDTO {
 
     public void clearByteSum() {
         this.byteSum = 0;
+    }
+
+    public void setPrevChar(CharMessage message) {
+        this.prevChar = message.getMessage();
+    }
+
+    public void setPrevBoolean(BooleanMessage message) {
+        this.prevBoolean = message.getMessage();
     }
 
     public void setPrevString(String prevString) {

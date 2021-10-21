@@ -25,6 +25,14 @@ public class Logger {
         }
 
         switch (typeCodeEnum) {
+            case BOOLEAN: {
+                statesDTO.setPrevBoolean((BooleanMessage) message);
+                break;
+            }
+            case CHAR: {
+                statesDTO.setPrevChar((CharMessage) message);
+                break;
+            }
             case STRING: {
                 stringIteration((StringMessage) message);
                 break;

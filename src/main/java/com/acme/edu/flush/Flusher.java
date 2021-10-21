@@ -17,6 +17,14 @@ public class Flusher {
 
     public void flush(StatesDTO statesDTO) {
         switch (statesDTO.getPrevTypeCodeEnum()) {
+            case BOOLEAN: {
+                saver.save(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getPrevBoolean());
+                break;
+            }
+            case CHAR: {
+                saver.save(statesDTO.getPrevTypeCodeEnum().getTypeReference() + statesDTO.getPrevChar());
+                break;
+            }
             case STRING: {
                 stringCase(statesDTO);
                 break;
