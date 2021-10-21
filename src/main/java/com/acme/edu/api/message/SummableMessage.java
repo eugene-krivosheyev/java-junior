@@ -19,6 +19,14 @@ public abstract class SummableMessage extends Message {
         return result;
     }
 
+    protected void setMax(long max) {
+        this.max = max;
+    }
+
+    protected void setMin(long min) {
+        this.min = min;
+    }
+
     protected abstract SummableMessage getNewMessageOfMyType(long value);
 
     protected void setOverflows(String overflows) {
@@ -35,12 +43,12 @@ public abstract class SummableMessage extends Message {
 
     protected long handleOverflows(long add) {
         long result = currentSum + add;
-        if (result > Integer.MAX_VALUE) {
-            setOverflows(Integer.MAX_VALUE + System.lineSeparator());
-            result -= Integer.MAX_VALUE;
-        } else if (result < Integer.MIN_VALUE) {
-            setOverflows(Integer.MIN_VALUE + System.lineSeparator());
-            result -= Integer.MIN_VALUE;
+        if (result > max) {
+            setOverflows(max + System.lineSeparator());
+            result -= max;
+        } else if (result < min) {
+            setOverflows(min + System.lineSeparator());
+            result -= min;
         }
         return result;
     }
