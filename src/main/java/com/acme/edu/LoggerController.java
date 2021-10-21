@@ -2,10 +2,6 @@ package com.acme.edu;
 
 import com.acme.edu.common.Message;
 import com.acme.edu.common.Printer;
-import com.acme.edu.messages.ByteMessage;
-import com.acme.edu.messages.IntMessage;
-import com.acme.edu.State.Type;
-import com.acme.edu.messages.StringMessage;
 
 public class LoggerController {
     Printer printer = new ConsolePrinter();
