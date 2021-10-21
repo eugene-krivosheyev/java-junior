@@ -1,13 +1,20 @@
 package com.acme.edu;
 
+import com.acme.edu.control.Controller;
+import com.acme.edu.control.message.arrays.IntArrayMessage;
+import com.acme.edu.control.message.arrays.StringArrayMessage;
+import com.acme.edu.control.message.values.*;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.Objects;
 
 import static java.lang.System.lineSeparator;
 
 public class Logger {
+    static Controller logger = new Controller();
+
     public static final String sep = lineSeparator();
     private static boolean isSumming = false;
     private static String collectingType = "";
@@ -19,15 +26,21 @@ public class Logger {
     public static void setSumming(boolean isSum){isSumming = isSum;}
 
     public static void log(int message) {
-        prepare(int.class.getTypeName(), String.valueOf(message));
+        logger.sendMessage(new IntMessage(message,isSumming));
+//        prepare(int.class.getTypeName(), String.valueOf(message));
     }
 
-    public static void log(int... message) {
-        prepare("int1D",isSumming?Int1DSumMsg(message):Int1DMsg(message));
+    public static void log(Integer... message) {
+        logger.sendMessage(new IntArrayMessage(new ArrayList<Integer>(Arrays.asList(message)),isSumming,1));
+//        prepare("int1D",isSumming?Int1DSumMsg(message):Int1DMsg(message));
     }
 
-    public static void log(int[]... message) {
-        prepare("int2D",isSumming?Int2DSumMsg(message):Int2DMsg(message));
+    public static void log(Integer[]... message) {
+//        ArrayList <Object> array
+        logger.sendMessage(new IntArrayMessage(new ArrayList<Object>(Arrays.asList(message)),isSumming,1));
+
+
+//        prepare("int2D",isSumming?Int2DSumMsg(message):Int2DMsg(message));
     }
 
     public static void log(int[][]... message) {
@@ -39,37 +52,44 @@ public class Logger {
     }
 
     public static void log(char message) {
-        prepare(char.class.getTypeName(), String.valueOf(message));
+        logger.sendMessage(new CharMessage(message));
+//        prepare(char.class.getTypeName(), String.valueOf(message));
     }
 
     public static void log(byte message) {
-        prepare(byte.class.getTypeName(), String.valueOf(message));
+        logger.sendMessage(new ByteMessage(message,isSumming));
+//        prepare(byte.class.getTypeName(), String.valueOf(message));
     }
 
     public static void log(String message) {
-        prepare(String.class.getTypeName(), String.valueOf(message));
+        logger.sendMessage(new StringMessage(message,isSumming));
+//        prepare(String.class.getTypeName(), String.valueOf(message));
     }
 
     public static void log(String... message) {
-        prepare("stringArray",stringMsg(isSumming?" ":sep, message));
+        logger.sendMessage(new StringArrayMessage(message,isSumming));
+//        prepare("stringArray",stringMsg(isSumming?" ":sep, message));
     }
 
     public static void log(Boolean message) {
-        prepare(Boolean.class.getTypeName(), String.valueOf(message));
+        logger.sendMessage(new BoolMessage(message));
+//        prepare(Boolean.class.getTypeName(), String.valueOf(message));
     }
 
     public static void log(Object message) {
-        prepare(Object.class.getTypeName(), String.valueOf(message));
+        logger.sendMessage(new ObjectMessage(message));
+//        prepare(Object.class.getTypeName(), String.valueOf(message));
     }
 
-    public static void endLog(){
-        if(String.class.getTypeName() == collectingType){
-            if(stringCounter != 0){
-                print(stringMsg(bufferString,stringCounter));
-            }
-        } else if (int.class.getTypeName() == collectingType){
-            print(bufferInteger.toString());
-        }
+    public static void endLogging(){
+        logger.endLogging(true);
+//        if(String.class.getTypeName() == collectingType){
+//            if(stringCounter != 0){
+//                print(stringMsg(bufferString,stringCounter));
+//            }
+//        } else if (int.class.getTypeName() == collectingType){
+//            print(bufferInteger.toString());
+//        }
     }
 
     private static String IntSumMsg(Collection message, int sum) {
