@@ -4,6 +4,10 @@ public abstract class Message {
     private String prefix;
     private String value;
 
+    public String getPrefix() {
+        return prefix;
+    }
+
     protected void setPrefix(String prefix) {
         this.prefix = prefix;
     }
