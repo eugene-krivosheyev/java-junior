@@ -11,6 +11,21 @@ public class StringMessage implements Message {
     public String getBody() {
         return "string: " + this.body;
     }
+
+    @Override
+    public boolean isSameType(Message message) {
+        return message instanceof StringMessage;
+    }
+
+    @Override
+    public Message accumulate(Message message) {
+        if (message instanceof StringMessage) {
+//        StringMessage newMessage = (StringMessage)message; //ClassCastException
+        } else {
+            throw new IllegalArgumentException("");
+        }
+        return null;
+    }
 }
 
 class Girl {

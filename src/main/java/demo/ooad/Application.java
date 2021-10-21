@@ -16,7 +16,7 @@ public class Application {
 
         //region Create objects and link
         //Hand-written Builder:
-        final Logger logger = new Logger(
+        final LoggerController logger = new LoggerController(
                 new FileSaver("operations.log"),
                 new HardcodedFilterFactory().get()
         );
