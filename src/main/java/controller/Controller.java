@@ -2,25 +2,25 @@ package controller;
 
 import buffer.Buffer;
 import message.Message;
-import output.ConsoleOutput;
-import output.Output;
+import output.ConsolePrinter;
+import output.Printer;
 
 import java.util.ArrayList;
 
 public class Controller {
     private Buffer buffer = new Buffer();
-    private Output output = new ConsoleOutput();
+    private Printer printer = new ConsolePrinter();
 
-    public void getRequest(Message message, Buffer buffer) {
+    public void log(Message message, Buffer buffer) {
         if (buffer.isNewBufferType(buffer.getClass(), this.buffer.getClass())) {
-            output.send(this.buffer.getBody());
+            printer.print(this.buffer.getBody());
             this.buffer = buffer;
         }
         this.buffer.accumulate(message);
         try {
             ArrayList<String> result = this.buffer.getExtraordinaryBody();
             String[] array = new String[result.size()];
-            output.send(result.toArray(array));
+            printer.print(result.toArray(array));
         } catch (Exception e) {
 
         }

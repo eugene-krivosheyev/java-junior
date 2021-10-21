@@ -13,8 +13,7 @@ public class Buffer {
     public boolean isNewBufferType (Class<?> c1, Class<?> c2) {
         String name1 = c1.getCanonicalName();
         String name2 = c2.getCanonicalName();
-        boolean a = Objects.equals(name1, name2);
-        return !a;
+        return Objects.equals(name1, name2);
     }
 
     public String getBody() {
