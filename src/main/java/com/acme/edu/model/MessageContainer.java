@@ -1,7 +1,6 @@
 package com.acme.edu.model;
 
 import com.acme.edu.model.message.Message;
-import com.acme.edu.model.message.MessageWithStringValue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,10 @@ public class MessageContainer  {
         } else {
             this.messages.add(message);
         }
+    }
 
+    public List<Message> getMessages() {
+        return messages;
     }
 
     public String getText() {

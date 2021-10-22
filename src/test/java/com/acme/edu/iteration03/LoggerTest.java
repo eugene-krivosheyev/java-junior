@@ -91,7 +91,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
-        logger = new Logger(false);
         logger.log(-1, 0, 1, 3);
         logger.flush();
         //endregion

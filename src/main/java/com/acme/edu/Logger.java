@@ -43,18 +43,24 @@ public class Logger {
         container.addMessage(new ObjectMessageWithStringValue(String.valueOf(message)));
     }
 
-    public void log(int... message) {
-        if (isArray){
-            container.addMessage(new MessageWithArrayValue(message));
+    public void log(int... messages) {
+        if (isArray) {
+            container.addMessage(new MessageWithArrayValue(messages));
+        } else {
+            for (int message : messages) {
+                log(message);
+            }
         }
     }
 
-    public void log(int[][] message) {
-
+    public void log(int[][] messages) {
+        container.addMessage(new MultidimensionalArrayMessage(messages));
     }
 
-    public void log(String... message) {
-
+    public void log(String... messages) {
+        for (String message : messages) {
+            log(message);
+        }
     }
 
     public void flush() {
