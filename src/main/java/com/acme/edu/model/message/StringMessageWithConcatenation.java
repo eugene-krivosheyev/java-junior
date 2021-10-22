@@ -1,17 +1,24 @@
 package com.acme.edu.model.message;
 
-public class StringMessageWithConcatenation extends MessageWithStringValue {
-    public StringMessageWithConcatenation(String stringValue) {
-        super(stringValue);
+public class StringMessageWithConcatenation implements Message {
+    private final String value;
+
+    public StringMessageWithConcatenation(String value) {
+        this.value = value;
     }
 
     @Override
     public Message getJoinedMessage(Message message) {
         if (!canJoinMessage(message)) throw new IllegalStateException();
 
-        return new StringMessageWithConcatenation(getStringValue()
+        return new StringMessageWithConcatenation(value
                 + System.lineSeparator()
-                + ((StringMessageWithConcatenation) message).getStringValue());
+                + ((StringMessageWithConcatenation) message).getValue());
+    }
+
+    @Override
+    public String getValue() {
+        return value;
     }
 
     @Override
@@ -21,6 +28,6 @@ public class StringMessageWithConcatenation extends MessageWithStringValue {
 
     @Override
     public String toString() {
-        return getStringValue();
+        return value;
     }
 }

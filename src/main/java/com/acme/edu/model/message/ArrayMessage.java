@@ -1,16 +1,12 @@
 package com.acme.edu.model.message;
 
-public class MessageWithArrayValue implements Message {
+public class ArrayMessage extends UnableToJoinMessage {
     private final int[] values;
 
-    public MessageWithArrayValue(int[] values) {
+    public ArrayMessage(int[] values) {
         this.values = values;
     }
 
-    @Override
-    public Message getJoinedMessage(Message message) {
-        throw new IllegalStateException();
-    }
 
     @Override
     public String toString() {
@@ -27,8 +23,7 @@ public class MessageWithArrayValue implements Message {
     }
 
     @Override
-    public boolean canJoinMessage(Message message) {
-
-        return false;
+    public int[] getValue() {
+        return values;
     }
 }

@@ -1,7 +1,5 @@
 package com.acme.edu.model.message;
 
-import java.util.Arrays;
-
 public class MatrixMessage implements Message {
     private final int sum;
 
@@ -26,5 +24,10 @@ public class MatrixMessage implements Message {
     @Override
     public boolean canJoinMessage(Message message) {
         return false;
+    }
+
+    @Override
+    public Integer getValue() {
+        return sum;
     }
 }

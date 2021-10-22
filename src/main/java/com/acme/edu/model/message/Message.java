@@ -4,4 +4,6 @@ public interface Message {
     Message getJoinedMessage(Message message);
 
     boolean canJoinMessage(Message message);
+
+    Object getValue();
 }
