@@ -54,12 +54,13 @@ public class Logger {
     }
 
     public void log(int[][] messages) {
-        container.addMessage(new MultidimensionalArrayMessage(messages));
+        int[] formattedMessage = new int[messages.length * messages[0].length];
+        container.addMessage(new MatrixMessage(formattedMessage));
     }
 
     public void log(String... messages) {
         for (String message : messages) {
-            log(message);
+            container.addMessage(new StringMessageWithConcatenation(message));
         }
     }
 

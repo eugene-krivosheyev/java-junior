@@ -13,7 +13,9 @@ public class MessageContainer  {
         if (this.messages.size() == 0) {
             this.messages.add(message);
         } else if (getLastMessage().canJoinMessage(message)) {
-            this.messages.add(getLastMessage().getJoinedMessage(message));
+            Message messageToAdd = getLastMessage().getJoinedMessage(message);
+            messages.remove(getLastMessage());
+            this.messages.add(messageToAdd);
         } else {
             this.messages.add(message);
         }
