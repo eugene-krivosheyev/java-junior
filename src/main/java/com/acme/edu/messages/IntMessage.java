@@ -1,10 +1,8 @@
 package com.acme.edu.messages;
 
 import com.acme.edu.common.Message;
-import com.acme.edu.common.Printer;
 
-// TODO make more common NumberMessage class with getNumber method and overflow logic
-public class IntMessage implements Message {
+public class IntMessage extends NumberMessage {
 
     private int value;
 
@@ -23,18 +21,18 @@ public class IntMessage implements Message {
     }
 
     @Override
-    public void accumulate(Message message, Printer printer) {
-        if (!(message instanceof IntMessage)) {
-            throw new IllegalArgumentException("Can not accumulate message which is not type of IntMessage");
-        }
-        IntMessage newMessage = (IntMessage) message;
-        if (value + (long) newMessage.value > Integer.MAX_VALUE) {
-            // TODO fix overflow logic
-            printer.print(this);
-            value = Integer.MAX_VALUE;
-            printer.print(this);
-        }
-        value += newMessage.value;
+    protected long getValue() {
+        return value;
+    }
+
+    @Override
+    protected void setValue(long value) {
+        this.value = (int) value;
+    }
+
+    @Override
+    protected long getMaxValue() {
+        return Integer.MAX_VALUE;
     }
 
 }

@@ -1,9 +1,8 @@
 package com.acme.edu.messages;
 
 import com.acme.edu.common.Message;
-import com.acme.edu.common.Printer;
 
-public class ByteMessage implements Message {
+public class ByteMessage extends NumberMessage {
 
     private byte value;
 
@@ -22,17 +21,17 @@ public class ByteMessage implements Message {
     }
 
     @Override
-    public void accumulate(Message message, Printer printer) {
-        if (!(message instanceof ByteMessage)) {
-            throw new IllegalArgumentException("Can not accumulate message which is not type of ByteMessage");
-        }
-        ByteMessage newMessage = (ByteMessage) message;
-        if (value + (int) newMessage.value > Byte.MAX_VALUE) {
-            // TODO fix overflow logic
-            printer.print(this);
-            value = Byte.MAX_VALUE;
-            printer.print(this);
-        }
-        value += newMessage.value;
+    protected long getValue() {
+        return value;
+    }
+
+    @Override
+    protected void setValue(long value) {
+        this.value = (byte) value;
+    }
+
+    @Override
+    protected long getMaxValue() {
+        return Byte.MAX_VALUE;
     }
 }
