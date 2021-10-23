@@ -7,7 +7,7 @@ public class CharMessage implements Message {
     private static String messagePrefix = "char: ";
     private char messageValue;
 
-    public CharMessage(char message){
+    public CharMessage(char message) {
         this.messageValue = message;
     }
 

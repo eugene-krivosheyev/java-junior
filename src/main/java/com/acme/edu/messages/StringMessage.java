@@ -10,20 +10,20 @@ public class StringMessage implements Message {
     private static String messagePrefix = "string: ";
     private String messageValue;
 
-    public StringMessage(String message){
+    public StringMessage(String message) {
         this.messageValue = message;
     }
 
     @Override
     public Message accumulate(Message message) {
-        if (Objects.equals(messageValue, ((StringMessage)message).messageValue)) {
-            stringCounter+=1;
+        if (Objects.equals(messageValue, ((StringMessage) message).messageValue)) {
+            stringCounter += 1;
 
         } else {
             flush();
 
         }
-        return  message;
+        return message;
     }
 
     @Override
@@ -40,15 +40,14 @@ public class StringMessage implements Message {
     @Override
     public void flush() {
         Printer.print(stringCounter == 1 ? getBody() : getBody() + " (x" + stringCounter + ")");
-        stringCounter =1;
+        stringCounter = 1;
     }
 
     @Override
     public void init() {
-      bufferString = messageValue;
-      stringCounter = 1;
+        bufferString = messageValue;
+        stringCounter = 1;
 
     }
-
 
 }

@@ -7,7 +7,7 @@ public class ObjectMessage implements Message {
     private static String messagePrefix = "reference: ";
     private Object messageValue;
 
-    public ObjectMessage(Object message){
+    public ObjectMessage(Object message) {
         this.messageValue = message;
     }
 

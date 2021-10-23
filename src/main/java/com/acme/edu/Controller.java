@@ -5,15 +5,14 @@ import com.acme.edu.messages.Message;
 
 public class Controller {
     private static Message currentState;
-    private static boolean start=true;
+    private static boolean start = true;
 
-    public static void log(Message message){
-        if(start) {
+    public static void log(Message message) {
+        if (start) {
             currentState = message;
             currentState.init();
             start = false;
-        }
-        else {
+        } else {
             if (!currentState.isSameType(message)) {
                 currentState.flush();
                 currentState = message;
@@ -24,7 +23,7 @@ public class Controller {
         }
     }
 
-    public static void flush(){
+    public static void flush() {
         currentState.flush();
     }
 }
