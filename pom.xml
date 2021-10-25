@@ -46,6 +46,41 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <version>1.7.2</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-junit5-plugin</artifactId>
+            <version>0.15</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <targetClasses>
+            <param>demo.ooad.*</param>
+          </targetClasses>
+          <targetTests>
+            <param>demo.ooad.*</param>
+          </targetTests>
+          <verbose>true</verbose>
+        </configuration>
+        <executions>
+          <execution>
+            <id>mutation-coverage</id>
+            <goals>
+              <goal>mutationCoverage</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>mutation-report</id>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -53,6 +88,12 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
+      <version>5.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
       <version>5.8.1</version>
       <scope>test</scope>
     </dependency>
