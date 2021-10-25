@@ -1,7 +1,5 @@
 package com.acme.edu;
 
-import com.acme.edu.dto.StatesDTO;
-import com.acme.edu.flush.Flusher;
 import com.acme.edu.message.*;
 
 import java.util.Objects;

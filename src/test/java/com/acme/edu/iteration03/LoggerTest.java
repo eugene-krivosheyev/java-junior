@@ -2,7 +2,7 @@ package com.acme.edu.iteration03;
 
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.TypeCodeEnum;
-import com.acme.edu.controller.ComplexController;
+import com.acme.edu.logger.ComplexLogger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,13 +10,8 @@ import org.junit.Test;
 import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
-    private final ComplexController controller;
-
+    private final ComplexLogger logger = new ComplexLogger();
     private static String type;
-
-    public LoggerTest() {
-        this.controller = new ComplexController();
-    }
 
     //region given
     @Before
@@ -35,7 +30,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersArraySum() throws IOException {
         type = TypeCodeEnum.ARRAY_INT.getTypeReference();
         //region when
-        controller.perform(new int[]{-1, 0, 1});
+        logger.log(new int[]{-1, 0, 1});
         //endregion
 
         //region then
@@ -47,7 +42,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersMatrixSum() throws IOException {
         type = TypeCodeEnum.MATRIX_INT.getTypeReference();
         //region when
-        controller.perform(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        logger.log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         //endregion
 
         //region then
@@ -77,7 +72,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         type = TypeCodeEnum.NONE.getTypeReference();
         //region when
-        controller.perform("str1", "string 2", "str 3");
+        logger.log("str1", "string 2", "str 3");
         //endregion
 
         //region then
@@ -89,7 +84,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         type = TypeCodeEnum.NONE.getTypeReference();
         //region when
-        controller.perform(-1, 0, 1, 3);
+        logger.log(-1, 0, 1, 3);
         //endregion
 
         //region then

@@ -1,6 +1,5 @@
-package com.acme.edu.flush;
+package com.acme.edu;
 
-import com.acme.edu.dto.StatesDTO;
 import com.acme.edu.saver.SystemOutSaver;
 
 public class Flusher {

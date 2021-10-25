@@ -1,57 +1,57 @@
-package com.acme.edu.controller;
+package com.acme.edu.logger;
 
 import com.acme.edu.Logger;
-import com.acme.edu.dto.StatesDTO;
-import com.acme.edu.flush.Flusher;
+import com.acme.edu.StatesDTO;
+import com.acme.edu.Flusher;
 import com.acme.edu.message.*;
 
-public class SimpleController {
+public class SimpleLogger {
     private final Flusher flusher;
     private final StatesDTO statesDTO;
     private final Logger logger;
 
-    public SimpleController() {
+    public SimpleLogger() {
         this.flusher = new Flusher();
         this.statesDTO = new StatesDTO(flusher);
         this.logger = new Logger(statesDTO);
     }
 
-    public void perform(int... ints) {
+    public void log(int... ints) {
         for (int obj : ints) {
             logger.log(new IntMessage(obj));
             flusher.flush(statesDTO);
         }
     }
 
-    public void perform(byte... bytes) {
+    public void log(byte... bytes) {
         for (byte obj : bytes) {
             logger.log(new ByteMessage(obj));
             flusher.flush(statesDTO);
         }
     }
 
-    public void perform(char... characters) {
+    public void log(char... characters) {
         for (char obj : characters) {
             logger.log(new CharMessage(obj));
             flusher.flush(statesDTO);
         }
     }
 
-    public void perform(String... strings) {
+    public void log(String... strings) {
         for (String obj : strings) {
             logger.log(new StringMessage(obj));
             flusher.flush(statesDTO);
         }
     }
 
-    public void perform(boolean... bools) {
+    public void log(boolean... bools) {
         for (boolean obj : bools) {
             logger.log(new BooleanMessage(obj));
             flusher.flush(statesDTO);
         }
     }
 
-    public void perform(Object obj) {
+    public void log(Object obj) {
         logger.log(new ReferenceMessage(obj));
         flusher.flush(statesDTO);
     }

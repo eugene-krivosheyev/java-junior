@@ -1,22 +1,22 @@
-package com.acme.edu.controller;
+package com.acme.edu.logger;
 
 import com.acme.edu.Logger;
-import com.acme.edu.dto.StatesDTO;
-import com.acme.edu.flush.Flusher;
+import com.acme.edu.StatesDTO;
+import com.acme.edu.Flusher;
 import com.acme.edu.message.*;
 
-public class ComplexController {
+public class ComplexLogger {
     private final Flusher flusher;
     private final StatesDTO statesDTO;
     private final Logger logger;
 
-    public ComplexController() {
+    public ComplexLogger() {
         this.flusher = new Flusher();
         this.statesDTO = new StatesDTO(flusher);
         this.logger = new Logger(statesDTO);
     }
 
-    public void perform(Object... objects) {
+    public void log(Object... objects) {
         for (Object obj : objects) {
             if (obj instanceof String) {
                 logger.log(new StringMessage((String) obj));
@@ -29,12 +29,12 @@ public class ComplexController {
         flusher.flush(statesDTO);
     }
 
-    public void perform(int[] array) {
+    public void log(int[] array) {
         logger.log(new ArrayMessage(array));
         flusher.flush(statesDTO);
     }
 
-    public void perform(int[][] matrix) {
+    public void log(int[][] matrix) {
         logger.log(new MatrixMessage(matrix));
         flusher.flush(statesDTO);
     }

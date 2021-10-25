@@ -1,7 +1,5 @@
-package com.acme.edu.dto;
+package com.acme.edu;
 
-import com.acme.edu.TypeCodeEnum;
-import com.acme.edu.flush.Flusher;
 import com.acme.edu.message.*;
 
 import static com.acme.edu.TypeCodeEnum.NONE;

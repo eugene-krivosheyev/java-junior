@@ -1,6 +1,6 @@
 package com.acme.edu.iteration01;
 
-import com.acme.edu.controller.SimpleController;
+import com.acme.edu.logger.SimpleLogger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.TypeCodeEnum;
 import org.junit.After;
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
-    private final SimpleController controller = new SimpleController();
+    private final SimpleLogger logger = new SimpleLogger();
     private static String type;
 
     //region given
@@ -31,7 +31,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogInteger() throws IOException {
         type = TypeCodeEnum.INTEGER.getTypeReference();
         //region when
-        controller.perform(1, 0, -1);
+        logger.log(1, 0, -1);
         //endregion
 
         //region then
@@ -43,7 +43,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogByte() throws IOException {
         type = TypeCodeEnum.BYTE.getTypeReference();
         //region when
-        controller.perform((byte) 1, (byte) 0, (byte) -1);
+        logger.log((byte) 1, (byte) 0, (byte) -1);
         //endregion
 
         //region then
@@ -55,7 +55,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogChar() throws IOException {
         type = TypeCodeEnum.CHAR.getTypeReference();
         //region when
-        controller.perform('a', 'b');
+        logger.log('a', 'b');
         //endregion
 
         //region then
@@ -69,7 +69,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         String str1 = "first string";
         String str2 = "second string";
         //region when
-        controller.perform(str1, str2);
+        logger.log(str1, str2);
         //endregion
 
         //region then
@@ -81,7 +81,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogBoolean() throws IOException {
         type = TypeCodeEnum.BOOLEAN.getTypeReference();
         //region when
-        controller.perform(true, false);
+        logger.log(true, false);
         //endregion
 
         //region then
@@ -93,7 +93,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogReference() throws IOException {
         type = TypeCodeEnum.NONE.getTypeReference();
         //region when
-        controller.perform(new Object());
+        logger.log(new Object());
         //endregion
 
         //region then
