@@ -16,6 +16,8 @@ public class ControllerTest {
 //        when(defaultStateStub.isSameType(any(Message.class))).thenReturn(false);
         when(defaultStateStub.getBody()).thenReturn("current state body");
 
+//        Message messageStub = MessageStubBuilder.withBody(null).withIsSameType(false).build();
+
         final LoggerController controllerSut = new LoggerController(saverStub, filterDummy);
         controllerSut.log(defaultStateStub);
         controllerSut.log(differentTypeMessageStub);

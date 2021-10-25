@@ -22,7 +22,7 @@ public class LoggerController {
      */
     @Deprecated(since = "5.12.9", forRemoval = true)
     public void log(Message message) {
-        if (!currentState.isSameType(message)) {
+        if (!message.isSameType(currentState)) {
             flush();
             currentState = message;
         } else {
