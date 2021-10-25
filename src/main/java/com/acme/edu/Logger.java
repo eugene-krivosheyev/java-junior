@@ -7,7 +7,7 @@ import java.io.PrintStream;
 public class Logger {
     private static PrintStream out = System.out;
 
-    private static LoggerController controller = new LoggerController();
+    private static LoggerController controller = new LoggerController(new ConsolePrinter());
 
 
     public static void flush() {
