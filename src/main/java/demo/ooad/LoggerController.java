@@ -6,9 +6,7 @@ import java.util.Queue;
 public class LoggerController {
     private Saver saver;
     private Filter filter;
-
-    private Message[] array;
-    private Message currentState;
+    private Message currentState = new DefaultMessage();
 
     /**
      * Dependency Injection: constructor
@@ -26,12 +24,30 @@ public class LoggerController {
     public void log(Message message) {
         if (!currentState.isSameType(message)) {
             flush();
+            currentState = message;
         } else {
             currentState = currentState.accumulate(message);
         }
     }
 
     private void flush() {
+        saver.save(currentState.getBody());
+    }
+}
 
+class DefaultMessage implements Message {
+    @Override
+    public String getBody() {
+        return null;
+    }
+
+    @Override
+    public boolean isSameType(Message message) {
+        return true;
+    }
+
+    @Override
+    public Message accumulate(Message message) {
+        return message;
     }
 }
