@@ -2,22 +2,22 @@ package com.acme.edu.iteration03;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
-    @Before
+    @BeforeEach
     public void setUpSystemOut() throws IOException {
         resetOut();
         captureSysout();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         resetOut();
     }
@@ -29,7 +29,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
-        Logger.log(true, new int[] {-1, 0, 20});
+        Logger.log(true, new int[]{-1, 0, 20});
         Logger.flush();
         //endregion
 
@@ -41,7 +41,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersArraySum() throws IOException {
         //region when
-        Logger.log(new int[] {-1, 0, 20});
+        Logger.log(new int[]{-1, 0, 20});
         Logger.flush();
         //endregion
 
@@ -54,7 +54,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
-        Logger.log(true, new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -20}});
+        Logger.log(true, new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -20}});
         Logger.flush();
         //endregion
 
@@ -70,7 +70,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersMatrixSum() throws IOException {
         //region when
-        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -20}});
+        Logger.log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -20}});
         Logger.flush();
         //endregion
 
@@ -79,20 +79,20 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+    @Disabled
     @Test
-    @Ignore
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
-        Logger.log(new int[][][][] {{{{0}}}});
+        Logger.log(new int[][][][]{{{{0}}}});
         //endregion
 
         //region then
         assertSysoutEquals(
-            "primitives multimatrix: {\n" +
-                "{\n" + "{\n" + "{\n" +
-                    "0\n" +
-                "}\n" + "}\n" + "}\n" +
-            "}\n"
+                "primitives multimatrix: {\n" +
+                        "{\n" + "{\n" + "{\n" +
+                        "0\n" +
+                        "}\n" + "}\n" + "}\n" +
+                        "}\n"
         );
         //endregion
     }
@@ -124,8 +124,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     }
 
+    @Disabled
     @Test
-    @Ignore
     public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException {
         //region when
         Logger.log(1);

@@ -2,9 +2,9 @@ package com.acme.edu.iteration01;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.*;
 
@@ -15,13 +15,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private static final String sep = lineSeparator();
 
     //region given
-    @Before
+    @BeforeEach
     public void setUpSystemOut() throws IOException {
         resetOut();
         captureSysout();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         resetOut();
     }
@@ -47,11 +47,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogByte() throws IOException {
         //region when
-        Logger.log((byte)1);
+        Logger.log((byte) 1);
         Logger.flush();
-        Logger.log((byte)0);
+        Logger.log((byte) 0);
         Logger.flush();
-        Logger.log((byte)-1);
+        Logger.log((byte) -1);
         Logger.flush();
         //endregion
 
@@ -109,6 +109,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("false");
         //endregion
     }
+
     @Test
     public void shouldLogReference() throws IOException {
         //region when

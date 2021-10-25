@@ -7,11 +7,11 @@ import com.acme.edu.api.saver.ConsoleSaver;
 import java.util.Arrays;
 
 public class Logger {
-   private static final LoggerController service = new LoggerController(new ConsoleSaver());
+    private static final LoggerController service = new LoggerController(new ConsoleSaver());
 
-   private Logger() {
+    private Logger() {
 
-   }
+    }
 
     public static void log(int message) {
         service.log(new IntegerMessage(message));
@@ -42,7 +42,8 @@ public class Logger {
         flush();
     }
 
-    /** Default way to log array of integers is to log sum
+    /**
+     * Default way to log array of integers is to log sum
      */
     public static void log(int... integers) {
         service.log(new PrimitiveArrayMessage(integers));
@@ -57,7 +58,8 @@ public class Logger {
         flush();
     }
 
-    /** Default way to log 2D array of integers is to log sum
+    /**
+     * Default way to log 2D array of integers is to log sum
      */
     public static void log(int[][] integers) {
         service.log(new PrimitiveMatrixMessage(integers));

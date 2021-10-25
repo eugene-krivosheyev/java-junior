@@ -1,40 +1,56 @@
 package com.acme.edu.api;
-import com.acme.edu.api.message.IntegerMessage;
+
 import com.acme.edu.api.message.Message;
 import com.acme.edu.api.saver.Saver;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Mockito.*;
-
-import java.io.IOException;
 
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
 
 public class LoggerControllerTest {
-    private static LoggerController loggerController;
+    private LoggerController loggerController;
+    private Message initialMessage;
+    private Message secondMessage;
+
     @Mock
     private static Saver saver;
 
 
-    @Before
+    @BeforeEach
     public void setUpLoggerController() {
         saver = mock(Saver.class);
         loggerController = new LoggerController(saver);
+        initialMessage = mock(Message.class);
+        secondMessage = mock(Message.class);
+
     }
 
 
     @Test
     public void shouldFlushWhenLogTwoDifferentTypesOfMessages() {
-        Message initialMessage = mock(Message.class);
-        Message secondMessage = mock(Message.class);
         when(initialMessage.typeEquals(null)).thenReturn(false);
         when(initialMessage.getMessageAsString()).thenReturn("initial message flush");
         when(initialMessage.typeEquals(secondMessage)).thenReturn(false);
 
         loggerController.log(initialMessage);
         loggerController.log(secondMessage);
+
         verify(saver).print("initial message flush");
+    }
+
+
+    @Test
+    public void shouldChangeTheCurrentMessage() {
+        when(secondMessage.typeEquals(initialMessage)).thenReturn(true);
+        when(initialMessage.accumulate(secondMessage)).thenReturn(secondMessage);
+        when(secondMessage.getMessageAsString()).thenReturn("message has been changed");
+
+        loggerController.log(initialMessage);
+        loggerController.log(secondMessage);
+        loggerController.flush();
+
+        verify(saver).print(("message has been changed"));
     }
 }
