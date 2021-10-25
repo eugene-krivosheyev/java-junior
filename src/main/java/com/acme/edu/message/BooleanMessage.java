@@ -2,7 +2,7 @@ package com.acme.edu.message;
 
 import com.acme.edu.TypeCodeEnum;
 
-public class BooleanMessage extends Message{
+public class BooleanMessage extends Message {
     private final boolean message;
 
     public BooleanMessage(boolean message) {

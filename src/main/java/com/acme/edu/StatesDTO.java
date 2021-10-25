@@ -137,13 +137,13 @@ public class StatesDTO {
         return result;
     }
 
-    public void arrayIncrementor(ArrayMessage message) {
+    public void arrayIncrementer(ArrayMessage message) {
         for (int i : message.getMessage()) {
             this.setArrayIntSum(i);
         }
     }
 
-    public void matrixIncrementor(MatrixMessage message) {
+    public void matrixIncrementer(MatrixMessage message) {
         for (int[] row : message.getMessage()) {
             for (int i : row) {
                 this.setArrayIntSum(i);

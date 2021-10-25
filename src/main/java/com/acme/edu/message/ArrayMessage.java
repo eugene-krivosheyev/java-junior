@@ -2,7 +2,7 @@ package com.acme.edu.message;
 
 import com.acme.edu.TypeCodeEnum;
 
-public class ArrayMessage extends Message{
+public class ArrayMessage extends Message {
     private final int[] message;
 
     public ArrayMessage(int[] message) {

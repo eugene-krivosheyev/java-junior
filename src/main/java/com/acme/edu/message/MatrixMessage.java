@@ -2,7 +2,7 @@ package com.acme.edu.message;
 
 import com.acme.edu.TypeCodeEnum;
 
-public class MatrixMessage extends Message{
+public class MatrixMessage extends Message {
     private final int[][] message;
 
     public MatrixMessage(int[][] message) {

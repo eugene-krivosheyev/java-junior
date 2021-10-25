@@ -49,11 +49,11 @@ public class Controller {
                 break;
             }
             case ARRAY_INT: {
-                statesDTO.arrayIncrementor((ArrayMessage) message);
+                statesDTO.arrayIncrementer((ArrayMessage) message);
                 break;
             }
             case MATRIX_INT: {
-                statesDTO.matrixIncrementor((MatrixMessage) message);
+                statesDTO.matrixIncrementer((MatrixMessage) message);
                 break;
             }
             default: {

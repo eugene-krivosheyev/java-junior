@@ -2,7 +2,7 @@ package com.acme.edu.message;
 
 import com.acme.edu.TypeCodeEnum;
 
-public class IntMessage extends Message{
+public class IntMessage extends Message {
     private final int message;
 
     public IntMessage(int message) {

@@ -1,8 +1,8 @@
 package com.acme.edu.logger;
 
 import com.acme.edu.Controller;
-import com.acme.edu.StatesDTO;
 import com.acme.edu.Flusher;
+import com.acme.edu.StatesDTO;
 import com.acme.edu.message.*;
 
 public class SimpleLogger {
