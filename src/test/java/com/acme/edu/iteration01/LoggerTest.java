@@ -2,21 +2,21 @@ package com.acme.edu.iteration01;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.*;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
-    @Before
+    @BeforeEach
     public void setUpSystemOut() throws IOException {
         resetOut();
         captureSysout();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         resetOut();
     }
