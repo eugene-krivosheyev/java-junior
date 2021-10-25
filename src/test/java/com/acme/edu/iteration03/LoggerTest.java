@@ -13,10 +13,11 @@ import static com.acme.edu.iteration01.LoggerTest.sep;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private Logger logger;
+
     //region given
     @Before
     public void setUpSystemOut() throws IOException {
-        logger= new Logger();
+        logger = new Logger();
         resetOut();
         captureSysout();
     }
@@ -28,18 +29,16 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //endregion
 
 
-
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
-        logger = new Logger(true);
-        logger.log(new int[] {-1, 0, 1});
+        logger.log(new int[]{-1, 0, 1});
         logger.flush();
         //endregion
 
         //region then
         assertSysoutContains(
-            "primitives array: {-1, 0, 1}"
+                "primitives array: {-1, 0, 1}"
         );
         //endregion
     }
@@ -47,30 +46,31 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
-        logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        logger.log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         logger.flush();
         //endregion
 
         //region then
         assertSysoutContains(
-            "primitives matrix: 0"
+                "primitives matrix: 0"
         );
         //endregion
     }
 
-    @Test @Ignore
+    @Test
+    @Ignore
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
-        logger.log(new int[][][][] {{{{0}}}});
+        logger.log(new int[][][][]{{{{0}}}});
         //endregion
 
         //region then
         assertSysoutEquals(
-            "primitives multimatrix: {\n" +
-                "{\n" + "{\n" + "{\n" +
-                    "0\n" +
-                "}\n" + "}\n" + "}\n" +
-            "}\n"
+                "primitives multimatrix: {\n" +
+                        "{\n" + "{\n" + "{\n" +
+                        "0\n" +
+                        "}\n" + "}\n" + "}\n" +
+                        "}\n"
         );
         //endregion
     }

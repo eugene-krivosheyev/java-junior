@@ -7,15 +7,9 @@ import com.acme.edu.model.MessageContainer;
 
 public class Logger {
     private MessageContainer container;
-    private final boolean isArray;
-
-    public Logger(boolean isArray) {
-        container = new MessageContainer();
-        this.isArray = isArray;
-    }
 
     public Logger() {
-        this(false);
+        container = new MessageContainer();
     }
 
     public void log(int message) {
@@ -44,13 +38,7 @@ public class Logger {
     }
 
     public void log(int... messages) {
-        if (isArray) {
             container.addMessage(new ArrayMessage(messages));
-        } else {
-            for (int message : messages) {
-                log(message);
-            }
-        }
     }
 
     public void log(int[][] messages) {
