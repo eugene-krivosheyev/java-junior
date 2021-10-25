@@ -34,21 +34,31 @@ public class Logger {
         Arrays.stream(strings).forEach(str -> service.log(new StringMessage(str)));
     }
 
+    /**
+     * @param printAsArray boolean toggle to clarify how integers should be logged
+     */
     public static void log(boolean printAsArray, int... integers) {
         service.log(new PrimitiveArrayMessage(integers, printAsArray));
         flush();
     }
 
+    /** Default way to log array of integers is to log sum
+     */
     public static void log(int... integers) {
         service.log(new PrimitiveArrayMessage(integers));
         flush();
     }
 
+    /**
+     * @param printAsArray boolean toggle to clarify how 2D array of integers should be logged
+     */
     public static void log(boolean printAsArray, int[][] integers) {
         service.log(new PrimitiveMatrixMessage(integers, printAsArray));
         flush();
     }
 
+    /** Default way to log 2D array of integers is to log sum
+     */
     public static void log(int[][] integers) {
         service.log(new PrimitiveMatrixMessage(integers));
         flush();

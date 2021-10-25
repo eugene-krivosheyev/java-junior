@@ -4,9 +4,15 @@ public abstract class Message {
     private String prefix;
     private String value;
 
-    public String getPrefix() {
-        return prefix;
+    public String getMessageAsString() {
+        return prefix + value;
     }
+
+    public Message accumulate(Message message) {
+        return message;
+    }
+
+    abstract public boolean typeEquals(Message message);
 
     protected void setPrefix(String prefix) {
         this.prefix = prefix;
@@ -20,13 +26,7 @@ public abstract class Message {
         return value;
     }
 
-    public String getMessageAsString() {
-        return prefix + value;
+    protected String getPrefix() {
+        return prefix;
     }
-
-    public Message accumulate(Message message) {
-        return message;
-    }
-
-    abstract public boolean typeEquals(Message message);
 }

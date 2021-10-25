@@ -13,9 +13,7 @@ public class LoggerController {
     }
 
     public void log(Message message) {
-        if (currentMessage == null) {
-            currentMessage = message;
-        } else if (!currentMessage.typeEquals(message)) {
+        if (!message.typeEquals(currentMessage)) {
             flush();
             currentMessage = message;
         } else {
