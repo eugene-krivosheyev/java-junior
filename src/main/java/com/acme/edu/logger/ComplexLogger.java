@@ -16,6 +16,12 @@ public class ComplexLogger {
         this.controller = new Controller(statesDTO);
     }
 
+    public ComplexLogger(Flusher flusher, Controller controller) {
+        this.flusher = flusher;
+        this.statesDTO = new StatesDTO(flusher);
+        this.controller = controller;
+    }
+
     public void log(Object... objects) {
         for (Object obj : objects) {
             if (obj instanceof String) {

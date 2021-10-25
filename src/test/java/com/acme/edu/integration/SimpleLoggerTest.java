@@ -5,6 +5,7 @@ import com.acme.edu.Flusher;
 import com.acme.edu.StatesDTO;
 import com.acme.edu.logger.SimpleLogger;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 
@@ -22,55 +23,60 @@ public class SimpleLoggerTest {
         Mockito.doNothing().when(controller).log(any());
     }
 
+    @AfterEach
+    public void resetMocks() {
+        Mockito.reset();
+    }
+
     @Test
-    public void testForInts() {
+    public void testInts() {
         int[] array = {0, 4, 6, -3};
         simpleLogger.log(array);
 
-        Mockito.verify(flusher, times(array.length)).flush((StatesDTO) any());
-        Mockito.verify(controller, times(array.length)).log(any());
+        verifyMocks(array.length);
     }
 
     @Test 
-    public void testForBytes() {
+    public void testBytes() {
         byte[] array = {(byte)2, (byte)-5, (byte)17};
         simpleLogger.log(array);
 
-        Mockito.verify(flusher, times(array.length)).flush((StatesDTO) any());
-        Mockito.verify(controller, times(array.length)).log(any());
+        verifyMocks(array.length);
     }
     
     @Test 
-    public void testForChars() {
+    public void testChars() {
         char[] array = {'a', 'b', 'c'};
         simpleLogger.log(array);
 
-        Mockito.verify(flusher, times(array.length)).flush((StatesDTO) any());
-        Mockito.verify(controller, times(array.length)).log(any());
+        verifyMocks(array.length);
     }
     
     @Test 
-    public void testForStrings() {
+    public void testStrings() {
         String[] array = {"Hello", "world"};
         simpleLogger.log(array);
 
-        Mockito.verify(flusher, times(array.length)).flush((StatesDTO) any());
-        Mockito.verify(controller, times(array.length)).log(any());
+        verifyMocks(array.length);
     }
     
     @Test 
-    public void testForBooleans() {
+    public void testBooleans() {
         boolean[] array = {true, false, true};
         simpleLogger.log(array);
 
-        Mockito.verify(flusher, times(array.length)).flush((StatesDTO) any());
-        Mockito.verify(controller, times(array.length)).log(any());
+        verifyMocks(array.length);
     }
     
     @Test 
-    public void testForObject() {
+    public void testObject() {
         simpleLogger.log(new Object());
 
-        Mockito.verify(controller).log(any());
+        verifyMocks(1);
+    }
+
+    private void verifyMocks(int times) {
+        Mockito.verify(flusher, times(times)).flush((StatesDTO) any());
+        Mockito.verify(controller, times(times)).log(any());
     }
 }
