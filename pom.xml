@@ -60,10 +60,10 @@
         </dependencies>
         <configuration>
           <targetClasses>
-            <param>demo.ooad.*</param>
+            <param>com.acme.edu.*</param>
           </targetClasses>
           <targetTests>
-            <param>demo.ooad.*</param>
+            <param>com.acme.edu.*</param>
           </targetTests>
           <verbose>true</verbose>
         </configuration>
