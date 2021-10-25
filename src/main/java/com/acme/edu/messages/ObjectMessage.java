@@ -1,14 +1,11 @@
 package com.acme.edu.messages;
 
-import com.acme.edu.Printer;
-
 public class ObjectMessage implements Message {
-
     private static String messagePrefix = "reference: ";
-    private Object messageValue;
+    private Object messageBody;
 
     public ObjectMessage(Object message) {
-        this.messageValue = message;
+        this.messageBody = message;
     }
 
     @Override
@@ -24,12 +21,12 @@ public class ObjectMessage implements Message {
 
     @Override
     public String getBody() {
-        return messagePrefix + messageValue;
+        return messagePrefix + messageBody;
     }
 
     @Override
-    public void flush() {
-        Printer.print(getBody());
+    public String flush() {
+        return (getBody());
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.acme.edu.messages;
 
 public class ByteMessage extends IntAndByteMessage implements Message {
-
     public ByteMessage(int message) {
         super(message);
     }

@@ -1,14 +1,11 @@
 package com.acme.edu.messages;
 
-import com.acme.edu.Printer;
-
 public class BooleanMessage implements Message {
-
     private static String messagePrefix = "primitive: ";
-    private boolean messageValue;
+    private boolean messageBody;
 
-    public BooleanMessage(boolean message){
-        this.messageValue = message;
+    public BooleanMessage(boolean message) {
+        this.messageBody = message;
     }
 
     @Override
@@ -24,12 +21,12 @@ public class BooleanMessage implements Message {
 
     @Override
     public String getBody() {
-        return messagePrefix + messageValue;
+        return messagePrefix + messageBody;
     }
 
     @Override
-    public void flush() {
-        Printer.print(getBody());
+    public String flush() {
+        return (getBody());
     }
 
     @Override

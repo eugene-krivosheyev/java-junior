@@ -1,14 +1,11 @@
 package com.acme.edu.messages;
 
-import com.acme.edu.Printer;
-
 public class CharMessage implements Message {
-
     private static String messagePrefix = "char: ";
-    private char messageValue;
+    private char messageBody;
 
     public CharMessage(char message) {
-        this.messageValue = message;
+        this.messageBody = message;
     }
 
     @Override
@@ -24,12 +21,12 @@ public class CharMessage implements Message {
 
     @Override
     public String getBody() {
-        return messagePrefix + messageValue;
+        return messagePrefix + messageBody;
     }
 
     @Override
-    public void flush() {
-        Printer.print(getBody());
+    public String flush() {
+        return (getBody());
     }
 
     @Override

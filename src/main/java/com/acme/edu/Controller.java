@@ -4,17 +4,22 @@ package com.acme.edu;
 import com.acme.edu.messages.Message;
 
 public class Controller {
-    private static Message currentState;
-    private static boolean start = true;
+    private Message currentState;
+    private boolean start = true;
+    private Printer printer;
 
-    public static void log(Message message) {
+    public Controller(Printer printer){
+        this.printer = printer;
+    }
+
+    public void log(Message message) {
         if (start) {
             currentState = message;
             currentState.init();
             start = false;
         } else {
             if (!currentState.isSameType(message)) {
-                currentState.flush();
+                flush();
                 currentState = message;
                 currentState.init();
             } else {
@@ -23,7 +28,7 @@ public class Controller {
         }
     }
 
-    public static void flush() {
-        currentState.flush();
+    public void flush() {
+        printer.print(currentState.flush());
     }
 }

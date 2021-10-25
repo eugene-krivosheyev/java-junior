@@ -3,42 +3,42 @@ package com.acme.edu.messages;
 import com.acme.edu.Printer;
 
 public abstract class IntAndByteMessage implements Message {
-
-    private int messageValue;
+    private int messageBody;
     private static String messagePrefix = "primitive: ";
     private static int bufferSum;
+    private Printer printer = new Printer();
 
     public IntAndByteMessage(int message) {
-        this.messageValue = message;
+        this.messageBody = message;
     }
 
     @Override
     public Message accumulate(Message message) {
         int maxVALUE = maxValueOfThisType();
-        if ((Long.valueOf(bufferSum) + Long.valueOf(((IntAndByteMessage) message).messageValue)) < maxVALUE) {
-            bufferSum += ((IntAndByteMessage) message).messageValue;
+        if ((Long.valueOf(bufferSum) + Long.valueOf(((IntAndByteMessage) message).messageBody)) < maxVALUE) {
+            bufferSum += ((IntAndByteMessage) message).messageBody;
             return message;
         } else {
-            Printer.print(Integer.toString(maxVALUE));
-            bufferSum = ((IntAndByteMessage) message).messageValue - (maxVALUE - bufferSum);
+            printer.print(Integer.toString(maxVALUE));
+            bufferSum = ((IntAndByteMessage) message).messageBody - (maxVALUE - bufferSum);
             return instanceOfThisClass(bufferSum);
         }
     }
 
     @Override
     public String getBody() {
-        return messagePrefix + messageValue;
+        return messagePrefix + messageBody;
     }
 
     @Override
-    public void flush() {
-        Printer.print(messagePrefix + bufferSum);
+    public String flush() {
         bufferSum = 0;
+        return messagePrefix + bufferSum;
     }
 
     @Override
     public void init() {
-        bufferSum += messageValue;
+        bufferSum += messageBody;
     }
 
     protected abstract Message instanceOfThisClass(int bufferSum);

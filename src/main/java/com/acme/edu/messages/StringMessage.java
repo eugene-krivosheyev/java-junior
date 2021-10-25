@@ -1,22 +1,20 @@
 package com.acme.edu.messages;
 
-import com.acme.edu.Printer;
-
 import java.util.Objects;
 
 public class StringMessage implements Message {
     private static String bufferString;
     private static int stringCounter;
     private static String messagePrefix = "string: ";
-    private String messageValue;
+    private String messageBody;
 
     public StringMessage(String message) {
-        this.messageValue = message;
+        this.messageBody = message;
     }
 
     @Override
     public Message accumulate(Message message) {
-        if (Objects.equals(messageValue, ((StringMessage) message).messageValue)) {
+        if (Objects.equals(messageBody, ((StringMessage) message).messageBody)) {
             stringCounter += 1;
 
         } else {
@@ -34,20 +32,20 @@ public class StringMessage implements Message {
 
     @Override
     public String getBody() {
-        return messagePrefix + messageValue;
+        return messagePrefix + messageBody;
     }
 
     @Override
-    public void flush() {
-        Printer.print(stringCounter == 1 ? getBody() : getBody() + " (x" + stringCounter + ")");
+    public String flush() {
+        String OutString = (stringCounter == 1 ? getBody() : getBody() + " (x" + stringCounter + ")");
         stringCounter = 1;
+        return OutString;
     }
 
     @Override
     public void init() {
-        bufferString = messageValue;
+        bufferString = messageBody;
         stringCounter = 1;
-
     }
 
 }
