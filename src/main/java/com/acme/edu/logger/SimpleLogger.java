@@ -16,6 +16,12 @@ public class SimpleLogger {
         this.controller = new Controller(statesDTO);
     }
 
+    public SimpleLogger(Flusher flusher, Controller controller) {
+        this.flusher = flusher;
+        this.statesDTO = new StatesDTO(flusher);
+        this.controller = controller;
+    }
+
     public void log(int... ints) {
         for (int obj : ints) {
             controller.log(new IntMessage(obj));
