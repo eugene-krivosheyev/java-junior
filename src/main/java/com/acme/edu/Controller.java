@@ -6,11 +6,11 @@ import java.util.Objects;
 
 import static com.acme.edu.TypeCodeEnum.NONE;
 
-public class Logger {
+public class Controller {
     private final StatesDTO statesDTO;
     private final Flusher flusher;
 
-    public Logger(StatesDTO statesDTO) {
+    public Controller(StatesDTO statesDTO) {
         this.statesDTO = statesDTO;
         this.flusher = new Flusher();
     }

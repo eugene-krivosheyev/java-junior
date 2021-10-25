@@ -1,6 +1,6 @@
 package com.acme.edu.logger;
 
-import com.acme.edu.Logger;
+import com.acme.edu.Controller;
 import com.acme.edu.StatesDTO;
 import com.acme.edu.Flusher;
 import com.acme.edu.message.*;
@@ -8,12 +8,12 @@ import com.acme.edu.message.*;
 public class SimpleLogger {
     private final Flusher flusher;
     private final StatesDTO statesDTO;
-    private final Logger logger;
+    private final Controller logger;
 
     public SimpleLogger() {
         this.flusher = new Flusher();
         this.statesDTO = new StatesDTO(flusher);
-        this.logger = new Logger(statesDTO);
+        this.logger = new Controller(statesDTO);
     }
 
     public void log(int... ints) {
