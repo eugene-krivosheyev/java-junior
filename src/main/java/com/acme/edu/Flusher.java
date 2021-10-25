@@ -1,13 +1,18 @@
 package com.acme.edu;
 
+import com.acme.edu.saver.Saver;
 import com.acme.edu.saver.SystemOutSaver;
 
 public class Flusher {
 
-    private final SystemOutSaver saver;
+    private final Saver saver;
 
     public Flusher() {
         this.saver = new SystemOutSaver();
+    }
+
+    public Flusher(Saver saver) {
+        this.saver = saver;
     }
 
     public void flush(String message) {

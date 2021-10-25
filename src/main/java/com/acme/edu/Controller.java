@@ -15,6 +15,11 @@ public class Controller {
         this.flusher = new Flusher();
     }
 
+    public Controller(StatesDTO statesDTO, Flusher flusher) {
+        this.statesDTO = statesDTO;
+        this.flusher = flusher;
+    }
+
     public void log(Message message) {
         TypeCodeEnum typeCodeEnum = message.getCode();
 
