@@ -57,10 +57,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals("primitives matrix: {\n" +
-                                    "{-1, 0, 1}\n" +
-                                    "{1, 2, 3}\n" +
-                                    "{-1, -2, -20}\n" +
-                                    "}\n");
+                "{-1, 0, 1}\n" +
+                "{1, 2, 3}\n" +
+                "{-1, -2, -20}\n" +
+                "}\n");
         //endregion
     }
 
@@ -110,7 +110,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersWithOneMethodCallSum() throws IOException {
         //region when
-        Logger.log( -1, 0, 1, 3);
+        Logger.log(-1, 0, 1, 3);
         //endregion
 
         //region then
@@ -122,7 +122,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
-        Logger.log( true, -1, 0, 1, 3);
+        Logger.log(true, -1, 0, 1, 3);
         //endregion
 
         //region then

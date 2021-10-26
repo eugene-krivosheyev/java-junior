@@ -6,6 +6,7 @@ public class PrimitiveMatrixMessage extends ArrayMessage {
     private final int[][] values;
 
     public PrimitiveMatrixMessage(int[][] value, boolean printAsArray) {
+        if (value == null) throw new NullPointerException("You try to write a Null Matrix");
         setPrintAsArray(printAsArray);
         values = value;
         setPrefix("primitives matrix: ");

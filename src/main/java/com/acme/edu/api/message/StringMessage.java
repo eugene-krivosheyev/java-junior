@@ -2,8 +2,8 @@ package com.acme.edu.api.message;
 
 public class StringMessage extends SummableStringMessage {
 
-    public StringMessage(String currentString) {
-        super(currentString);
+    public StringMessage(String currentString) throws NullPointerException{
+            super(currentString);
     }
 
     @Override
@@ -18,7 +18,7 @@ public class StringMessage extends SummableStringMessage {
     }
 
     @Override
-    public Message accumulate(Message message) {
+    public Message accumulate(Message message) throws NullPointerException {
         StringMessage stringMessage = (StringMessage) message;
         StringMessage currentMessage = new StringMessage(stringMessage.getCurrentString());
         checkTheStartOfTheQuery();
