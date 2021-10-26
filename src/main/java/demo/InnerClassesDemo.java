@@ -35,7 +35,7 @@ public class InnerClassesDemo {
         FIMR lambda = arg -> System.out.println(arg); // lambda = System.out.println
         lambda = System.out::println;
 
-        Set.of(1,2,3).stream()
+        Set.of(1,2,3).parallelStream()
                 .map(e -> e + 1)
                 .filter(e -> e < 2)
                 .forEach(System.out::println);
@@ -58,7 +58,7 @@ interface FI {
     void m(String arg1, int arg2);
 }
 
-@FunctionalInterface
+//@FunctionalInterface
 interface ToDo {
     void todo();
 }
