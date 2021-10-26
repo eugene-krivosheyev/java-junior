@@ -2,10 +2,10 @@ package com.acme.edu.iteration03;
 
 import com.acme.edu.LoggerDeprecated;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
@@ -14,13 +14,13 @@ import static java.lang.System.lineSeparator;
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public static final String sep = lineSeparator();
     //region given
-    @Before
+    @BeforeEach
     public void setUpSystemOut() throws IOException {
         resetOut();
         captureSysout();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         resetOut();
     }
@@ -29,7 +29,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     //TODO: implement Logger solution to match specification as tests
 
-    @Test @Ignore
+    @Test
+    @Disabled
     public void shouldLogIntegersArray() throws IOException {
         //region when
         LoggerDeprecated.log(new int[] {-1, 0, 1});
@@ -56,7 +57,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test @Ignore
+    @Test @Disabled
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
         LoggerDeprecated.log(new int[][][][] {{{{0}}}});
@@ -96,7 +97,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test @Ignore
+    @Test @Disabled
     public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException {
         //region when
         LoggerDeprecated.log(1);
