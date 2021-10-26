@@ -30,7 +30,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersArray() throws IOException {
         //region when
         Logger.log(true, new int[]{-1, 0, 20});
-        Logger.flush();
         //endregion
 
         //region then
@@ -42,7 +41,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersArraySum() throws IOException {
         //region when
         Logger.log(new int[]{-1, 0, 20});
-        Logger.flush();
         //endregion
 
         //region then
@@ -55,15 +53,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
         Logger.log(true, new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -20}});
-        Logger.flush();
         //endregion
 
         //region then
-        assertSysoutContains("primitives matrix: {");
-        assertSysoutContains("{-1, 0, 1}");
-        assertSysoutContains("{1, 2, 3}");
-        assertSysoutContains("{-1, -2, -20}");
-        assertSysoutContains("}");
+        assertSysoutEquals("primitives matrix: {\n" +
+                                    "{-1, 0, 1}\n" +
+                                    "{1, 2, 3}\n" +
+                                    "{-1, -2, -20}\n" +
+                                    "}\n");
         //endregion
     }
 
@@ -71,7 +68,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogIntegersMatrixSum() throws IOException {
         //region when
         Logger.log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -20}});
-        Logger.flush();
         //endregion
 
         //region then
@@ -112,16 +108,25 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogIntegersWithOneMethodCall() throws IOException {
+    public void shouldLogIntegersWithOneMethodCallSum() throws IOException {
         //region when
-        Logger.log(-1, 0, 1, 3);
-        Logger.flush();
+        Logger.log( -1, 0, 1, 3);
         //endregion
 
         //region then
         assertSysoutContains("3");
         //endregion
 
+    }
+
+    @Test
+    public void shouldLogIntegersWithOneMethodCall() throws IOException {
+        //region when
+        Logger.log( true, -1, 0, 1, 3);
+        //endregion
+
+        //region then
+        assertSysoutContains("primitives array: {-1, 0, 1, 3}");
     }
 
     @Disabled
@@ -132,7 +137,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str");
         Logger.log(Integer.MAX_VALUE - 10);
         Logger.log(11);
-        Logger.flush();
         //endregion
 
         //region then

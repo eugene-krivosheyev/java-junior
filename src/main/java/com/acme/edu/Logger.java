@@ -10,7 +10,6 @@ public class Logger {
     private static final LoggerController service = new LoggerController(new ConsoleSaver());
 
     private Logger() {
-
     }
 
     public static void log(int message) {

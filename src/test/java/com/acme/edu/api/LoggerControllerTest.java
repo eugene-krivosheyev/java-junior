@@ -42,15 +42,12 @@ public class LoggerControllerTest {
 
 
     @Test
-    public void shouldChangeTheCurrentMessage() {
+    public void shouldAccumulateTheCurrentMessage() {
         when(secondMessage.typeEquals(initialMessage)).thenReturn(true);
-        when(initialMessage.accumulate(secondMessage)).thenReturn(secondMessage);
-        when(secondMessage.getMessageAsString()).thenReturn("message has been changed");
 
         loggerController.log(initialMessage);
         loggerController.log(secondMessage);
-        loggerController.flush();
 
-        verify(saver).print(("message has been changed"));
+        verify(initialMessage).accumulate(secondMessage);
     }
 }
