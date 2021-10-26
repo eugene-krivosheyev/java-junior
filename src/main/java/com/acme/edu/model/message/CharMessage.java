@@ -13,7 +13,7 @@ public class CharMessage extends UnableToJoinMessage {
     }
 
     @Override
-    public Character getValue() {
+    public Character getBody() {
         return value;
     }
 }

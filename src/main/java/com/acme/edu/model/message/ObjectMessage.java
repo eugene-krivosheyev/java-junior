@@ -13,7 +13,7 @@ public class ObjectMessage extends UnableToJoinMessage {
     }
 
     @Override
-    public Object getValue() {
+    public Object getBody() {
         return value;
     }
 }

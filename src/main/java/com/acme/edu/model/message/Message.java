@@ -1,9 +1,11 @@
 package com.acme.edu.model.message;
 
+import com.acme.edu.model.exception.LoggerException;
+
 public interface Message {
-    Message getJoinedMessage(Message message);
+    Message getAccumulatedMessage(Message message) throws LoggerException;
 
-    boolean canJoinMessage(Message message);
+    boolean canAccumulateMessage(Message message);
 
-    Object getValue();
+    Object getBody();
 }

@@ -8,7 +8,7 @@ public class BooleanMessage extends UnableToJoinMessage {
     }
 
     @Override
-    public Boolean getValue() {
+    public Boolean getBody() {
         return value;
     }
 

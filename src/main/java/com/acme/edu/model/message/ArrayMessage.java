@@ -7,7 +7,6 @@ public class ArrayMessage extends UnableToJoinMessage {
         this.values = values;
     }
 
-
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -23,7 +22,7 @@ public class ArrayMessage extends UnableToJoinMessage {
     }
 
     @Override
-    public int[] getValue() {
+    public int[] getBody() {
         return values;
     }
 }

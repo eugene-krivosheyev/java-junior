@@ -2,17 +2,18 @@ package com.acme.edu.model.message;
 
 public class NullMessage implements Message {
     @Override
-    public Message getJoinedMessage(Message message) {
+    public Message getAccumulatedMessage(Message message) {
+
         return message;
     }
 
     @Override
-    public boolean canJoinMessage(Message message) {
+    public boolean canAccumulateMessage(Message message) {
         return true;
     }
 
     @Override
-    public Object getValue() {
+    public Object getBody() {
         throw new IllegalStateException();
     }
 }

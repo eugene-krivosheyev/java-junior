@@ -13,11 +13,11 @@ public class MessageContainerTest {
     public void shouldFlushWhenDifferentTypeMessage(){
         Message lastMessage = Mockito.mock(Message.class);
 
-        when(lastMessage.canJoinMessage(any())).thenReturn(false);
+        when(lastMessage.canAccumulateMessage(any())).thenReturn(false);
 
         final MessageContainer containerSut = new MessageContainer(lastMessage);
         containerSut.addMessage(lastMessage);
 
-        verify(lastMessage).canJoinMessage(any());
+        verify(lastMessage).canAccumulateMessage(any());
     }
 }
