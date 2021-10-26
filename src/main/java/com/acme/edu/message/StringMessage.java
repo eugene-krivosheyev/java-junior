@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import com.acme.edu.exception.IllegalMessageStateException;
+
 public class StringMessage implements Message {
 
     private static final String STRING_PREFIX = "string: ";
@@ -15,7 +17,7 @@ public class StringMessage implements Message {
 
     @Override
     public Message append(Message message) {
-        if (!canAppend(message)) throw new IllegalArgumentException("Expected StringMessage type");
+        if (!(message instanceof StringMessage)) throw new IllegalMessageStateException("Expected StringMessage type");
         StringMessage stringMessage = (StringMessage) message;
 
         if (!stringBuffer.equals(stringMessage.stringBuffer)) {
@@ -38,10 +40,10 @@ public class StringMessage implements Message {
     }
 
     private String getDecoratedString() {
-        if (stringCount == 1) {
-            return STRING_PREFIX + stringBuffer + System.lineSeparator();
-        } else {
-            return STRING_PREFIX + stringBuffer + " (x"+ stringCount + ")" + System.lineSeparator();
+        String result = STRING_PREFIX + stringBuffer;
+        if (stringCount > 1) {
+            result += " (x" + stringCount + ")";
         }
+        return result + System.lineSeparator();
     }
 }

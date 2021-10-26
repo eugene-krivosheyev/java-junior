@@ -28,7 +28,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    @Disabled
     @Test
     public void shouldLogInteger() throws IOException {
         //region when
@@ -46,7 +45,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Disabled
     @Test
     public void shouldLogByte() throws IOException {
         //region when
@@ -66,7 +64,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Disabled
     @Test
     public void shouldLogChar() throws IOException {
         //region when
@@ -83,7 +80,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Disabled
     @Test
     public void shouldLogString() throws IOException {
         //region when
@@ -99,7 +95,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Disabled
     @Test
     public void shouldLogBoolean() throws IOException {
         //region when
@@ -116,7 +111,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Disabled
     @Test
     public void shouldLogReference() throws IOException {
         //region when

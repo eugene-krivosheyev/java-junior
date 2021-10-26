@@ -23,7 +23,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    @Disabled
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
@@ -44,10 +43,27 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //endregion
     }
-    //TODO create test case for MIN_VALUE
-    @Disabled
+
     @Test
-    public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
+    public void shouldLogCorrectlyIntegerOverflowWithMinValueWhenSequentIntegers() {
+        Logger.log("str 1");
+        Logger.log(-10);
+        Logger.log(Integer.MIN_VALUE);
+        Logger.log("str 2");
+        Logger.log(0);
+        Logger.flush();
+        //endregion
+
+        //region then
+        assertSysoutContains("str 1");
+        assertSysoutContains("-10");
+        assertSysoutContains(String.valueOf(Integer.MIN_VALUE));
+        assertSysoutContains("str 2");
+        assertSysoutContains("0");
+    }
+
+    @Test
+    public void shouldLogCorrectlyIntegerOverflowWithMaxValueWhenSequentIntegers() {
         //region when
         Logger.log("str 1");
         Logger.log(10);
@@ -66,10 +82,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    //TODO create test case for MIN_VALUE
-    @Disabled
     @Test
-    public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
+    public void shouldLogCorrectlyByteOverflowWithMaxValueWhenSequentBytes() {
         //region when
         Logger.log("str 1");
         Logger.log((byte) 10);
@@ -88,7 +102,26 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Disabled
+    @Test
+    public void shouldLogCorrectlyByteOverflowWithMinValueWhenSequentBytes() {
+        //region when
+        Logger.log("str 1");
+        Logger.log((byte) -10);
+        Logger.log((byte) Byte.MIN_VALUE);
+        Logger.log("str 2");
+        Logger.log(0);
+        Logger.flush();
+        //endregion
+
+        //region then
+        assertSysoutContains("str 1");
+        assertSysoutContains("-10");
+        assertSysoutContains(String.valueOf(Byte.MIN_VALUE));
+        assertSysoutContains("str 2");
+        assertSysoutContains("0");
+        //endregion
+    }
+
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
         //region when

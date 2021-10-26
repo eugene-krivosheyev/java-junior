@@ -2,11 +2,11 @@ package com.acme.edu;
 
 import com.acme.edu.controller.Controller;
 import com.acme.edu.message.*;
-import com.acme.edu.saver.Saver;
+import com.acme.edu.saver.ConsoleSaver;
 
 public class Logger {
 
-    private static final Controller controller = new Controller(new Saver());
+    private static final Controller controller = new Controller(new ConsoleSaver());
 
     private static void arrayLog(int message) {
         controller.log(new ArrayNumberMessage(Integer.MAX_VALUE, Integer.MIN_VALUE, message));

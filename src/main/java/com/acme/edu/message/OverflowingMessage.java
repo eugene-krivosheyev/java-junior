@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import com.acme.edu.exception.IllegalMessageStateException;
+
 public abstract class OverflowingMessage implements Message {
     private static final String PRIMITIVE_PREFIX = "primitive: ";
 
@@ -51,7 +53,7 @@ public abstract class OverflowingMessage implements Message {
 
     @Override
     public Message append(Message message) {
-        if (!canAppend(message)) throw new IllegalArgumentException("Expected OverflowingMessage type");
+        if (!canAppend(message)) throw new IllegalMessageStateException("Expected same overflowing message type");
         OverflowingMessage numberMessage = (OverflowingMessage) message;
         checkOverflow(numberMessage.getAccumulator());
         return this;

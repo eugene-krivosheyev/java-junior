@@ -36,7 +36,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Disabled
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
         //region when
@@ -67,7 +66,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Disabled
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
@@ -82,7 +80,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Disabled
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
         //region when
