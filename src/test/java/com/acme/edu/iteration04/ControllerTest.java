@@ -68,7 +68,7 @@ public class ControllerTest {
         when(currentStateSub.isSameType(differentTypeMessageSub)).thenReturn(false);
         when(currentStateSub.flush()).thenReturn("");
         controllerSut.log(currentStateSub);
-        final LogException thrown = assertThrows(LogException.class,()->controllerSut.log(sameTypeMessageSub));
+        final LogException thrown = assertThrows(LogException.class,()->controllerSut.log(differentTypeMessageSub));
        assertThat(thrown).hasMessage("Can't print message!");
     }
 
