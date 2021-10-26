@@ -1,5 +1,7 @@
 package demo;
 
+import java.io.Closeable;
+
 public class ExceptionsDemo {
     public static void main(String[] args) {
         final Controller controller = new Controller(new Service(new Repository()));
@@ -29,7 +31,7 @@ class Service {
     }
 
     public void log() {
-        try {
+        try(Repository repository = new Repository()) {
             repository.save();
             //...
         } catch (IllegalStateException | IllegalArgumentException e) {
@@ -38,15 +40,15 @@ class Service {
             throw new LogException("!!!!", e);
         } catch (RuntimeException e) {
 
-        } finally {
-            repository.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         //...
     }
 }
 
 //DAO / Repo
-class Repository {
+class Repository implements AutoCloseable {
     public void save() {
         if (true) {
             throw new IllegalStateException("ERROR #135");
@@ -54,7 +56,8 @@ class Repository {
         //...
     }
 
-    public void close() {
+    @Override
+    public void close() throws Exception {
 
     }
 }
