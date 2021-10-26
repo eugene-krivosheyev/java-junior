@@ -6,7 +6,7 @@ import com.acme.edu.common.Message;
 import com.acme.edu.common.Printer;
 import com.acme.edu.messages.IntMessage;
 import com.acme.edu.messages.StringMessage;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 
