@@ -10,7 +10,7 @@ public class Printer {
         print(message.toString());
     }
 
-    private void print(String message){
+    public void print(String message){
         System.out.println(message);
     }
 }

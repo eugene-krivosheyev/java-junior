@@ -5,10 +5,12 @@ import com.acme.edu.message.DataEqualMessage;
 import com.acme.edu.printer.Printer;
 
 public class Controller {
-
-    private Printer printer = new Printer();
-
+    private Printer printer;
     private DataEqualMessage buffer = new EmptyMessage();
+
+    Controller(Printer newPrinter) {
+        printer = newPrinter;
+    }
 
     public void logMessage(DataEqualMessage message){
         if (!message.isSum()) {

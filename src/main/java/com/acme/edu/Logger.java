@@ -2,9 +2,10 @@ package com.acme.edu;
 
 import com.acme.edu.message.type.arrays.*;
 import com.acme.edu.message.type.*;
+import com.acme.edu.printer.Printer;
 
 public class Logger {
-    private static final Controller logger = new Controller();
+    private static final Controller logger = new Controller(new Printer());
 
     private static boolean isSumming = false;
 
