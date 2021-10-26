@@ -1,13 +1,48 @@
 package demo;
 
+import demo.ooad.Filter;
+import demo.ooad.Saver;
+import demo.ooad.LoggerController;
+import demo.ooad.Message;
+
 public class InnerClassesDemo {
     public static void main(String[] args) {
-        final TopLevel topLevel = new TopLevel();
-        TopLevel.Inner inner = topLevel.new Inner();
+        new LoggerController(
+                new SaverAdapter() {
+                    @Override
+                    public Number save(String message) {
+                        return 0;
+                    }
+                },
+                new Filter() {
+                    @Override
+                    public boolean filter(Message message) {
+                        return false;
+                    }
+                }
+        );
 
-        TopLevel.Inner innerWithOnlyOuter = new TopLevel().new Inner();
-        innerWithOnlyOuter.m();
+        int localVar = 1;
+        //CLOSURE!!!!
+        templateMethod(new ToDo() {
+            @Override
+            public void todo() {
+                System.out.println("look ma, HOF! " + localVar);
+            }
+        });
     }
+
+    public static void templateMethod(ToDo todo) {
+        //....
+        //....
+        todo.todo();
+        //....
+        //....
+    }
+}
+
+interface ToDo {
+    void todo();
 }
 
 class TopLevel {
@@ -20,20 +55,4 @@ class TopLevel {
             TopLevel.this.instanceState = 1;
         }
     }
-
-    public Saver m() {
-        class MethodClass implements Saver {
-            @Override
-            public void save() {
-                //!!!!!!
-            }
-        }
-
-        return new MethodClass();
-    }
-
-}
-
-interface Saver {
-    void save();
 }
