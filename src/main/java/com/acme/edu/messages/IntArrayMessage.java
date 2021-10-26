@@ -21,13 +21,20 @@ public class IntArrayMessage implements Message {
     }
 
     @Override
-    public void accumulate(Message message, Printer printer) {
+    public Message accumulate(Message message) {
         if (!isSameType(message)) {
             throw new IllegalArgumentException("Can not accumulate message which is not type of IntArrayMessage");
         }
-        printer.print(this);
+        IntArrayMessage previousMessage = clone();
         array = ((IntArrayMessage)message).array;
+        return previousMessage;
     }
+
+    @Override
+    public IntArrayMessage clone() {
+        return new IntArrayMessage(array);
+    }
+
     protected int getSumOfArray(int... array) {
         int sum = 0;
         for (int value: array) {

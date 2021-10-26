@@ -24,8 +24,18 @@ public class CharMessage implements Message {
     }
 
     @Override
-    public void accumulate(Message message, Printer printer) {
-        printer.print(this);
+    public Message accumulate(Message message) {
+        if (!isSameType(message)) {
+            throw new IllegalArgumentException("Can not accumulate message which is not type of CharMessage");
+        }
+        CharMessage previousMessage = clone();
+        value = ((CharMessage)message).value;
+        return previousMessage;
 
+    }
+
+    @Override
+    public CharMessage clone() {
+        return new CharMessage(value);
     }
 }

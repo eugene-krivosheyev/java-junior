@@ -18,7 +18,10 @@ public class LoggerController {
             return;
         }
         if (oldMessage.isSameType(message)) {
-            oldMessage.accumulate(message, printer);
+            Message previousMessage = oldMessage.accumulate(message);
+            if (previousMessage != null) {
+                printer.print(previousMessage);
+            }
         } else {
             // TODO do it with using flush()
             printer.print(oldMessage);

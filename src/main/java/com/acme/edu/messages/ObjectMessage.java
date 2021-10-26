@@ -24,11 +24,17 @@ public class ObjectMessage implements Message {
     }
 
     @Override
-    public void accumulate(Message message, Printer printer) {
+    public Message accumulate(Message message) {
         if (!isSameType(message)) {
             throw new IllegalArgumentException("Can not accumulate message which is not type of ObjectMessage");
         }
-        printer.print(this);
-        value = ((ObjectMessage) message).value;
+        ObjectMessage previousMessage = clone();
+        value = ((ObjectMessage)message).value;
+        return previousMessage;
+    }
+
+    @Override
+    public ObjectMessage clone() {
+        return new ObjectMessage(value);
     }
 }

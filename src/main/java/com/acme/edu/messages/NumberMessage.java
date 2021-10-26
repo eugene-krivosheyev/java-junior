@@ -7,17 +7,26 @@ public abstract class NumberMessage implements Message{
     protected abstract long getValue();
     protected abstract void setValue(long value);
     protected abstract long getMaxValue();
-    public void accumulate(Message message, Printer printer) {
+
+    @Override
+    public abstract Message clone();
+
+    @Override
+    public Message accumulate(Message message) {
         if (!isSameType(message)) {
             throw new IllegalArgumentException("Can not accumulate messages with different types");
         }
+        NumberMessage previousMessage = null;
         NumberMessage newMessage = (NumberMessage) message;
         if (getValue() + newMessage.getValue() > getMaxValue()) {
-            // TODO fix overflow logic
-            printer.print(this);
-            setValue(getMaxValue());
-            printer.print(this);
+            previousMessage = createNumberMessage(getMaxValue());
+            setValue(getValue() + newMessage.getValue() - getMaxValue());
         }
-        setValue(getValue() + newMessage.getValue());
+        else {
+            setValue(getValue() + newMessage.getValue());
+        }
+        return previousMessage;
     }
+
+    protected abstract NumberMessage createNumberMessage(long value);
 }

@@ -27,18 +27,26 @@ public class StringMessage implements Message {
     }
 
     @Override
-    public void accumulate(Message message, Printer printer) {
+    public Message accumulate(Message message) {
         if (!(message instanceof StringMessage)) {
             throw new IllegalArgumentException("Can not accumulate message which is not type of StringMessage");
         }
         StringMessage stringMessage = (StringMessage) message;
+        StringMessage previousMessage = null;
         if (value.equals(stringMessage.value)) {
             counter++;
         } else {
-            printer.print(this);
+            previousMessage = clone();
             value = stringMessage.value;
             counter = 1;
+            return previousMessage;
         }
+        return previousMessage;
+    }
+
+    @Override
+    public StringMessage clone() {
+        return new StringMessage(value);
     }
 
 

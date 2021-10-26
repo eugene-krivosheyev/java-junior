@@ -21,6 +21,11 @@ public class IntMessage extends NumberMessage {
     }
 
     @Override
+    public Message clone() {
+        return new IntMessage(value);
+    }
+
+    @Override
     protected long getValue() {
         return value;
     }
@@ -33,6 +38,11 @@ public class IntMessage extends NumberMessage {
     @Override
     protected long getMaxValue() {
         return Integer.MAX_VALUE;
+    }
+
+    @Override
+    protected NumberMessage createNumberMessage(long value) {
+        return new IntMessage((int) value);
     }
 
 }

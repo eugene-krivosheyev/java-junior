@@ -25,11 +25,20 @@ public class IntTwoDimensionalArrayMessage extends IntArrayMessage {
     }
 
     @Override
-    public void accumulate(Message message, Printer printer) {
+    public Message accumulate(Message message) {
         if (!isSameType(message)) {
             throw new IllegalArgumentException("Can not accumulate message which is not type of IntTwoDimensionalArrayMessage");
         }
-        printer.print(this);
-        array = ((IntArrayMessage)message).array;
+        if (!isSameType(message)) {
+            throw new IllegalArgumentException("Can not accumulate message which is not type of Boolean");
+        }
+        IntTwoDimensionalArrayMessage previousMessage = clone();
+        array = ((IntTwoDimensionalArrayMessage)message).array;
+        return previousMessage;
+    }
+
+    @Override
+    public IntTwoDimensionalArrayMessage clone() {
+        return new IntTwoDimensionalArrayMessage(value);
     }
 }

@@ -21,6 +21,11 @@ public class ByteMessage extends NumberMessage {
     }
 
     @Override
+    public Message clone() {
+        return new ByteMessage(value);
+    }
+
+    @Override
     protected long getValue() {
         return value;
     }
@@ -33,5 +38,10 @@ public class ByteMessage extends NumberMessage {
     @Override
     protected long getMaxValue() {
         return Byte.MAX_VALUE;
+    }
+
+    @Override
+    protected NumberMessage createNumberMessage(long value) {
+        return new ByteMessage((byte) value);
     }
 }
