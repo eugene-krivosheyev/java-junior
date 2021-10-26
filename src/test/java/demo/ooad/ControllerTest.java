@@ -1,7 +1,11 @@
 package demo.ooad;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.*;
 
 public class ControllerTest {
@@ -23,5 +27,18 @@ public class ControllerTest {
         controllerSut.log(differentTypeMessageStub);
 
         verify(saverStub).save("current state body");
+    }
+
+    @Test
+    public void shouldNotLogWhenNullMessage() {
+        final Filter filterDummy = mock(Filter.class);
+        final Saver saverDummy = mock(Saver.class);
+        final LoggerController controller = new LoggerController(saverDummy, filterDummy);
+
+        final IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                () -> controller.log(null)
+        );
+        assertThat(thrown).hasMessage("null message!!!");
     }
 }

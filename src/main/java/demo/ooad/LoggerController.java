@@ -18,10 +18,12 @@ public class LoggerController {
 
     /**
      * 1 MSLoC
-     * @param DTO | Command
+     * @param "DTO" | Command
      */
     @Deprecated(since = "5.12.9", forRemoval = true)
     public void log(Message message) {
+        if (message == null) throw new IllegalArgumentException("null message!!!");
+
         if (!message.isSameType(currentState)) {
             flush();
             currentState = message;
