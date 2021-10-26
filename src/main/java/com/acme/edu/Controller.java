@@ -5,6 +5,11 @@ import com.acme.edu.message.*;
 public class Controller {
 
     private Message currentType;
+    private Saver saver;
+
+    public Controller(Saver saver) {
+        this.saver = saver;
+    }
 
     public void log(Message message) {
         if (currentType != null) {
@@ -20,7 +25,7 @@ public class Controller {
     }
 
     public void flush() {
-        System.out.println(currentType.decorate());
+        saver.save(currentType.decorate());
         currentType = null;
     }
 

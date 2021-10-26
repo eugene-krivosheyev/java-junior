@@ -5,7 +5,8 @@ import com.acme.edu.message.IntegerMessage;
 import com.acme.edu.message.StringMessage;
 
 public class Logger {
-    private static final Controller controller = new Controller();
+    private static final Saver saver = new Saver();
+    private static final Controller controller = new Controller(saver);
 
     public static void log(int message) {
         controller.log(new IntegerMessage(message));

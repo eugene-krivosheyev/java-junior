@@ -4,6 +4,7 @@ import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
@@ -11,6 +12,7 @@ import java.io.*;
 
 import static java.lang.System.lineSeparator;
 
+//@Disabled
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     public static final String sep = lineSeparator();
@@ -66,7 +68,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     //TODO: implement Logger solution to match specification as tests
 
-    @Test
+    @Test @Disabled
     public void shouldLogChar() throws IOException {
         //region when
         Logger.log('a');
@@ -96,7 +98,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
 
-    @Test
+    @Test @Disabled
     public void shouldLogBoolean() throws IOException {
         //region when
         Logger.log(true);
@@ -110,7 +112,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test
+    @Test @Disabled
     public void shouldLogReference() throws IOException {
         //region when
         Logger.log(new Object());

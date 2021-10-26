@@ -10,16 +10,23 @@ public class ControllerTest {
     public void shouldFlushWhenLogDifferentTypeMessage(){
         Message defaultStateStub = mock(Message.class);
         Message differentTypeMessageStub = mock(Message.class);
-        Controller controllerStub = mock(Controller.class);
+        Saver saver = mock(Saver.class);
 
         when(defaultStateStub.isSameType(differentTypeMessageStub)).thenReturn(false);
+        when(defaultStateStub.decorate()).thenReturn("current state body");
 
-        final Logger controllerSut = new Logger();
+        final Controller controllerSut = new Controller(saver);
 
-        controllerStub.log(defaultStateStub);
-        controllerStub.log(differentTypeMessageStub);
+        controllerSut.log(defaultStateStub);
+        controllerSut.log(differentTypeMessageStub);
 
-
-        verify(controllerStub).log(defaultStateStub);
+        verify(saver).save("current state body");
     }
+
+//    @Test
+//    public void success() {
+//        Message messageStub = mock(Message.class);
+//        Saver saverStub = mock(Saver.class);
+//        when(new Controller())
+//    }
 }
