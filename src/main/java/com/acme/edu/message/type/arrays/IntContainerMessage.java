@@ -3,7 +3,7 @@ package com.acme.edu.message.type.arrays;
 import com.acme.edu.message.DataEqualMessage;
 import com.acme.edu.message.Message;
 
-public class IntContainerMessage extends DataEqualMessage {
+public abstract class IntContainerMessage extends DataEqualMessage {
     private final int DIM;
 
     public IntContainerMessage(Object msg, boolean isSum, int dim) {
@@ -93,7 +93,7 @@ public class IntContainerMessage extends DataEqualMessage {
     }
 
     @Override
-    public String prefix() {
+    public abstract String prefix(); /*{
         String extra = "";
         switch (DIM) {
             case 1: {
@@ -113,6 +113,6 @@ public class IntContainerMessage extends DataEqualMessage {
             }
             break;
         }
-        return String.format("primitive%s: ", extra);
-    }
+        return String.format("primitive%s: s array", extra);
+    }*/
 }

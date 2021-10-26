@@ -1,7 +1,6 @@
 package com.acme.edu;
 
-import com.acme.edu.message.type.arrays.IntContainerMessage;
-import com.acme.edu.message.type.arrays.StringArrayMessage;
+import com.acme.edu.message.type.arrays.*;
 import com.acme.edu.message.type.*;
 
 public class Logger {
@@ -18,19 +17,19 @@ public class Logger {
     }
 
     public static void log(int... message) {
-        logger.logMessage(new IntContainerMessage(message,isSumming,1));
+        logger.logMessage(new IntArrayMessage(message,isSumming));
     }
 
     public static void log(int[]... message) {
-        logger.logMessage(new IntContainerMessage(message,isSumming,2));
+        logger.logMessage(new IntMatrixMessage(message,isSumming));
     }
 
     public static void log(int[][]... message) {
-        logger.logMessage(new IntContainerMessage(message,isSumming,3));
+        logger.logMessage(new IntCubeMessage(message,isSumming));
     }
 
     public static void log(int[][][]... message) {
-        logger.logMessage(new IntContainerMessage(message,isSumming,4));
+        logger.logMessage(new IntMultiMatrixMessage(message,isSumming));
     }
 
     public static void log(char message) {
