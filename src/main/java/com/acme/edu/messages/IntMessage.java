@@ -18,7 +18,6 @@ public class IntMessage extends IntAndByteMessage implements Message {
 
     @Override
     public boolean isSameType(Message message) {
-        boolean isSameType = message instanceof IntMessage;
-        return isSameType;
+        return message instanceof IntMessage;
     }
 }

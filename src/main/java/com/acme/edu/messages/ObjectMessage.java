@@ -1,7 +1,6 @@
 package com.acme.edu.messages;
 
 public class ObjectMessage implements Message {
-    private static String messagePrefix = "reference: ";
     private Object messageBody;
 
     public ObjectMessage(Object message) {
@@ -15,12 +14,12 @@ public class ObjectMessage implements Message {
 
     @Override
     public boolean isSameType(Message message) {
-        boolean isSameType = message instanceof ObjectMessage;
-        return isSameType;
+        return message instanceof ObjectMessage;
     }
 
     @Override
     public String getBody() {
+        String messagePrefix = "reference: ";
         return messagePrefix + messageBody;
     }
 

@@ -8,11 +8,12 @@ public class Controller {
     private boolean start = true;
     private Printer printer;
 
-    public Controller(Printer printer){
+    public Controller(Printer printer) {
         this.printer = printer;
     }
 
     public void log(Message message) {
+        if (message == null) throw new IllegalArgumentException("null message");
         if (start) {
             currentState = message;
             currentState.init();
@@ -29,6 +30,11 @@ public class Controller {
     }
 
     public void flush() {
-        printer.print(currentState.flush());
+        try {
+            printer.print(currentState.flush());
+        } catch (IllegalStringToPrintExeption e) {
+            throw new LogException("Can't print message!",e);
+        }
     }
-}
+
+  }

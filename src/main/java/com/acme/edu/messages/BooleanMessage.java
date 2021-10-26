@@ -1,7 +1,6 @@
 package com.acme.edu.messages;
 
 public class BooleanMessage implements Message {
-    private static String messagePrefix = "primitive: ";
     private boolean messageBody;
 
     public BooleanMessage(boolean message) {
@@ -15,12 +14,12 @@ public class BooleanMessage implements Message {
 
     @Override
     public boolean isSameType(Message message) {
-        boolean isSameType = message instanceof BooleanMessage;
-        return isSameType;
+        return message instanceof BooleanMessage;
     }
 
     @Override
     public String getBody() {
+        String messagePrefix = "primitive: ";
         return messagePrefix + messageBody;
     }
 

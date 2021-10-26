@@ -1,7 +1,6 @@
 package com.acme.edu.messages;
 
 public class CharMessage implements Message {
-    private static String messagePrefix = "char: ";
     private char messageBody;
 
     public CharMessage(char message) {
@@ -15,12 +14,12 @@ public class CharMessage implements Message {
 
     @Override
     public boolean isSameType(Message message) {
-        boolean isSameType = message instanceof CharMessage;
-        return isSameType;
+        return message instanceof CharMessage;
     }
 
     @Override
     public String getBody() {
+        String messagePrefix = "char: ";
         return messagePrefix + messageBody;
     }
 

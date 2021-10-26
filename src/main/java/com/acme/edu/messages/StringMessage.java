@@ -5,7 +5,6 @@ import java.util.Objects;
 public class StringMessage implements Message {
     private static String bufferString;
     private static int stringCounter;
-    private static String messagePrefix = "string: ";
     private String messageBody;
 
     public StringMessage(String message) {
@@ -14,6 +13,7 @@ public class StringMessage implements Message {
 
     @Override
     public Message accumulate(Message message) {
+        if(! (message instanceof StringMessage)) throw new IllegalArgumentException("Another type of message!");
         if (Objects.equals(messageBody, ((StringMessage) message).messageBody)) {
             stringCounter += 1;
 
@@ -26,12 +26,12 @@ public class StringMessage implements Message {
 
     @Override
     public boolean isSameType(Message message) {
-        boolean isSameType = message instanceof StringMessage;
-        return isSameType;
+        return message instanceof StringMessage;
     }
 
     @Override
     public String getBody() {
+        String messagePrefix = "string: ";
         return messagePrefix + messageBody;
     }
 
