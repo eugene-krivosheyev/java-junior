@@ -4,10 +4,6 @@ public class BooleanMessage extends Message {
 
     private boolean value;
 
-    public boolean isValue() {
-        return value;
-    }
-
     public BooleanMessage(boolean value) {
         this.value = value;
     }
@@ -19,11 +15,11 @@ public class BooleanMessage extends Message {
 
     @Override
     public void process(Message message) {
-
+        System.out.println("Unreachable output ...");
     }
 
     @Override
     public String decorate() {
-        return null;
+        return "primitive: " + value;
     }
 }

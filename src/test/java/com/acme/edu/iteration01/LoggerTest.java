@@ -4,15 +4,13 @@ import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
-
+import java.io.IOException;
 
 import static java.lang.System.lineSeparator;
 
-//@Disabled
+
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     public static final String sep = lineSeparator();
@@ -68,11 +66,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     //TODO: implement Logger solution to match specification as tests
 
-    @Test @Disabled
+    @Test
     public void shouldLogChar() throws IOException {
         //region when
         Logger.log('a');
         Logger.log('b');
+        Logger.flush();
         //endregion
 
         //region then
@@ -98,11 +97,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
 
-    @Test @Disabled
+    @Test
     public void shouldLogBoolean() throws IOException {
         //region when
         Logger.log(true);
         Logger.log(false);
+        Logger.flush();
         //endregion
 
         //region then
@@ -112,10 +112,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test @Disabled
+    @Test
     public void shouldLogReference() throws IOException {
         //region when
         Logger.log(new Object());
+        Logger.flush();
         //endregion
 
         //region then

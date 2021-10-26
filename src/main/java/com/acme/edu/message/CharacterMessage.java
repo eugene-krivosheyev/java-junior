@@ -2,11 +2,7 @@ package com.acme.edu.message;
 
 public class CharacterMessage extends Message {
 
-    private char value;
-
-    public char getValue() {
-        return value;
-    }
+    private final char value;
 
     public CharacterMessage(char value) {
         this.value = value;
@@ -19,11 +15,11 @@ public class CharacterMessage extends Message {
 
     @Override
     public void process(Message message) {
-
+        System.out.println("Unreachable output ...");
     }
 
     @Override
     public String decorate() {
-        return null;
+        return "char: " + value;
     }
 }

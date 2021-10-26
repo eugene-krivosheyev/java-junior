@@ -5,7 +5,7 @@ import com.acme.edu.message.*;
 public class Controller {
 
     private Message currentType;
-    private Saver saver;
+    private final Saver saver;
 
     public Controller(Saver saver) {
         this.saver = saver;

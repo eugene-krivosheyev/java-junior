@@ -25,6 +25,10 @@ public class StringMessage extends Message {
 
     @Override
     public String decorate() {
-        return "string: " + this.value + " (x" + this.counter + ")";
+        if (counter > 1) {
+            return "string: " + this.value + " (x" + this.counter + ")";
+        } else {
+            return "string: " + this.value;
+        }
     }
 }

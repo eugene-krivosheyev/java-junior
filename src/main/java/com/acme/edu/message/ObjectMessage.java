@@ -4,10 +4,6 @@ public class ObjectMessage extends Message {
 
     private Object value;
 
-    public Object getValue() {
-        return value;
-    }
-
     public ObjectMessage(Object value) {
         this.value = value;
     }
@@ -19,11 +15,11 @@ public class ObjectMessage extends Message {
 
     @Override
     public void process(Message message) {
-
+        System.out.println("Unreachable output ...");
     }
 
     @Override
     public String decorate() {
-        return null;
+        return "reference: " + value;
     }
 }
