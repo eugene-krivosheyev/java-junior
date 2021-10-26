@@ -14,7 +14,6 @@ public class ControllerTest {
 
     @BeforeEach
     public void setUp() {
-        System.out.println("hehe))");
         defaultStateStub = mock(Message.class);
         anotherTypeMessageStub = mock(Message.class);
         saver = mock(Saver.class);
