@@ -4,13 +4,11 @@ import com.acme.edu.model.message.Message;
 import com.acme.edu.model.message.NullMessage;
 
 
-public class MessageContainer  {
-    private Message lastMessage;
+public class MessageContainer {
+    private Message lastMessage = new NullMessage();
 
     public void addMessage(Message message) {
-        if (lastMessage == null) {
-            lastMessage = message;
-        } else if (lastMessage.canJoinMessage(message)) {
+        if (lastMessage.canJoinMessage(message)) {
             lastMessage = lastMessage.getJoinedMessage(message);
         } else {
             flush();
