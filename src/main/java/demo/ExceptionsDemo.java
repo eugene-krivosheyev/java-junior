@@ -1,9 +1,12 @@
 package demo;
 
 import java.io.Closeable;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class ExceptionsDemo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws LogException, SQLException {
         final Controller controller = new Controller(new Service(new Repository()));
         controller.log();
         //....
@@ -17,7 +20,7 @@ class Controller {
         this.service = service;
     }
 
-    public void log() {
+    public void log() throws LogException, SQLException {
         service.log();
         //....
     }
@@ -30,7 +33,7 @@ class Service {
         this.repository = repository;
     }
 
-    public void log() {
+    public void log() throws LogException, SQLException {
         try(Repository repository = new Repository()) {
             repository.save();
             //...
@@ -39,7 +42,7 @@ class Service {
 //            e.printStackTrace();
             throw new LogException("!!!!", e);
         } catch (RuntimeException e) {
-
+//
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,21 +51,19 @@ class Service {
 }
 
 //DAO / Repo
-class Repository implements AutoCloseable {
+class Repository implements Closeable {
     public void save() {
-        if (true) {
             throw new IllegalStateException("ERROR #135");
-        }
         //...
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() throws IOException {
 
     }
 }
 
-class LogException extends RuntimeException {
+class LogException extends Exception {
     public LogException() {
         super();
     }
