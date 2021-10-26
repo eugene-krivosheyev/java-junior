@@ -3,21 +3,17 @@ package message;
 import accumulator.BoolAccumulator;
 import accumulator.Accumulator;
 
-public class BooleanMessage implements Message {
+public class BooleanMessage extends Message {
 
     private Boolean body;
 
     public BooleanMessage(Boolean body) {
+        super(new BoolAccumulator());
         this.body = body;
     }
 
     @Override
     public Boolean getBody() {
         return body;
-    }
-
-    @Override
-    public Accumulator getBuffer() {
-        return new BoolAccumulator();
     }
 }

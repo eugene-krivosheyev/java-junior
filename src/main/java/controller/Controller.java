@@ -1,20 +1,22 @@
 package controller;
 
 import accumulator.Accumulator;
-import accumulator.FlushAccumulator;
 import message.Message;
-import printer.ConsolePrinter;
 import printer.Printer;
 
-import java.util.ArrayList;
-
 public class Controller {
-    private Accumulator accumulator = new FlushAccumulator();
-    private final Printer printer = new ConsolePrinter();
+
+    private Accumulator accumulator;
+    private final Printer printer;
+
+    public Controller(Accumulator accumulator, Printer printer) {
+        this.accumulator = accumulator;
+        this.printer = printer;
+    }
 
     public void log(Message message) {
-        Accumulator newAccumulator = message.getBuffer();
-        if (Accumulator.isNewAccumulatorType(newAccumulator.getClass(), this.accumulator.getClass())) {
+        Accumulator newAccumulator = message.getAccumulator();
+        if (newAccumulator.isNewAccumulatorType(this.accumulator.getClass())) {
             printer.print(this.accumulator.getBody());
             this.accumulator = newAccumulator;
         }

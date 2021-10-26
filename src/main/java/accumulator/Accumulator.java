@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public interface Accumulator {
 
-    static boolean isNewAccumulatorType(Class<?> class1, Class<?> class2) {
-        return !Objects.equals(class1.getCanonicalName(), class2.getCanonicalName());
+    default boolean isNewAccumulatorType(Class<?> classEntity) {
+        return !Objects.equals(this.getClass().getCanonicalName(), classEntity.getCanonicalName());
     }
 
     String getBody();

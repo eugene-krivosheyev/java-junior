@@ -3,21 +3,17 @@ package message;
 import accumulator.Accumulator;
 import accumulator.StrArrayAccumulator;
 
-public class StrArrayMessage implements Message {
+public class StrArrayMessage extends Message {
 
     private String[] body;
 
     public StrArrayMessage(String[] body) {
+        super(new StrArrayAccumulator());
         this.body = body;
     }
 
     @Override
     public String[] getBody() {
         return body;
-    }
-
-    @Override
-    public Accumulator getBuffer() {
-        return new StrArrayAccumulator();
     }
 }
