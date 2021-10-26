@@ -4,10 +4,12 @@ import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
 
+@Disabled
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     String type = null;
@@ -24,6 +26,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
     @Test
+    @Disabled
     public void shouldLogInteger() throws IOException {
         type = "primitive: ";
         //region when
@@ -43,6 +46,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
+    @Disabled
     public void shouldLogByte() throws IOException {
         type = "primitive: ";
         //region when
@@ -62,6 +66,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
+    @Disabled
     public void shouldLogChar() throws IOException {
         type = "char: ";
         //region when
@@ -77,6 +82,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
+    @Disabled
     public void shouldLogString() throws IOException {
         type = "string: ";
         //region when
@@ -92,6 +98,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
+    @Disabled
     public void shouldLogBoolean() throws IOException {
         type = "primitive: ";
         //region when
@@ -107,6 +114,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
+    @Disabled
     public void shouldLogReference() throws IOException {
         type = "reference: ";
         //region when

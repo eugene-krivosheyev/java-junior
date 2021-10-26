@@ -39,7 +39,7 @@ class ControllerTest {
 
         controller.log(messageStub);
 
-        verify(printerMock, times(1)).print(any());
+        verify(printerMock).print(testValue1);
     }
 
     @Test
@@ -65,6 +65,6 @@ class ControllerTest {
 
         controller.log(messageStub);
 
-        verify(printerMock, times(1)).print(any());
+        verify(printerMock).print(testValue2[0]);
     }
 }

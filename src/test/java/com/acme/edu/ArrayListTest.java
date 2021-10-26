@@ -1,6 +1,7 @@
 package com.acme.edu;
 
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -8,9 +9,11 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Disabled
 public class ArrayListTest {
 
     @Test
+    @Disabled
     void shouldAddOneStringToArrayList() {
 
         ArrayList<String> stringArrayList = new ArrayList<>();
