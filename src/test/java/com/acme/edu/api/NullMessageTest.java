@@ -1,3 +1,4 @@
+
 package com.acme.edu.api;
 
 
@@ -15,13 +16,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class NullMessageTest {
-    Saver saver = mock(Saver.class);
-    LoggerController service = new LoggerController(saver);
-    Logger logger = mock(Logger.class);
+    final Saver saver = mock(Saver.class);
+    final LoggerController service = new LoggerController(saver);
+    final Logger logger = mock(Logger.class);
 
     @Test
     public void testNullString() {
-        String nullString = null;
+        final String nullString = null;
         final NullPointerException exception = Assertions.assertThrows
                 (NullPointerException.class,
                         () -> service.log(new StringMessage(nullString)));
@@ -32,7 +33,7 @@ public class NullMessageTest {
 
     @Test
     public void testNullStringArray() {
-        String[] nullStringArray = {null, "2"};
+        final String[] nullStringArray = {null, "2"};
         final NullPointerException exception = Assertions.assertThrows
                 (NullPointerException.class,
                         () -> service.log(new StringMessage(nullStringArray[0])));
@@ -42,7 +43,7 @@ public class NullMessageTest {
 
     @Test
     public void testNullArray() {
-        int[] nullArray = null;
+        final int[] nullArray = null;
         final NullPointerException exception = Assertions.assertThrows
                 (NullPointerException.class,
                         () -> service.log(new PrimitiveArrayMessage(nullArray)));
@@ -56,7 +57,7 @@ public class NullMessageTest {
 
     @Test
     public void testNullMatrix() {
-        int[][] nullMatrix = null;
+        final int[][] nullMatrix = null;
         final NullPointerException exception = Assertions.assertThrows
                 (NullPointerException.class,
                         () -> service.log(new PrimitiveMatrixMessage(nullMatrix)));
