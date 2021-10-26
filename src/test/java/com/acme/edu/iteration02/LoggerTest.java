@@ -2,21 +2,22 @@ package com.acme.edu.iteration02;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 
 import java.io.IOException;
 
+@Disabled
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
-    @Before
+    @BeforeEach
     public void setUpSystemOut() throws IOException {
         resetOut();
         captureSysout();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         resetOut();
     }
@@ -43,6 +44,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
             "str 2\n" +
             "0\n"
         );
+        assertContains("str 1")
+        assertContains("3")
+        assertContains("str 2")
+        assertContains("0")
         //endregion
     }
 
@@ -59,8 +64,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //region then
         assertSysoutEquals(
             "str 1\n" +
-            "10\n" +
             Integer.MAX_VALUE + "\n" +
+            "10\n" +
             "str 2\n" +
             "0\n"
         );

@@ -6,6 +6,15 @@ Alexandr Zakaluzhskii and Anna Shipil
 
 # Recordings
 - [11.10](https://us02web.zoom.us/rec/share/4K_bvC_0q8nvkzo26fSbcMVPM2uWzlQ9kqT2BbdbcQe-qeAdinWuF-rPfFBA0Pyp.R2IQ39ujDDEZjv1C)
+- [12.10](https://us02web.zoom.us/rec/share/IwiS9NXzVEhoBHgAwCJX6SIVhnfKfq2YeTctQMByD4n_UrFCdeaEkGXDxzPBgxZy.4wsHSeX8T1s4IYNk)
+- [13.10](https://us02web.zoom.us/rec/share/_OVUvUZVlz2vRyM2nXZKOp9dPsbeEZhevRc1iuU-YMyfIhaAJ_mjjQ8sAcM_P6_V.IsA920-72jNMeF5i)
+- [14.10](https://us02web.zoom.us/rec/share/FLno-ISY6mZZDbzwtfZ0DUWKSlUPNwTOK-hFO5jrd3ed1hSOzGaOHLbl3yFX7yEu.b-uJykoOquFRQCY0)
+- [15.10](https://us02web.zoom.us/rec/share/9ZC-sDNnL9VtDWp6JcfTa0BxeEURuszfEUva7rHm7DEUXgNqy0CHXckKltTQUAyu.iNA5x7BXdlq_VfWc)
+- [18.10](https://us02web.zoom.us/rec/share/vDEjwAr6WHYjPfQZ9q4jpBLogaK4ML-VHq6vnb7T_JpQHalOkYamsv-DOmwOvWRX.cjl637kJkSz_X1Mv)
+- [19.10](https://us02web.zoom.us/rec/share/OE-f1d6QWMZIMmuwvTua_MBqO0NJ3fojy4YCZwfgm87PY10IfaexCFXeiVYWE2a4.x4VkzhZwyk-LDj7y)
+- [20.10](https://us02web.zoom.us/rec/share/pq_85r0rFs7jlHnCLrDwJRlnBjSQ3w_RjrBcM0qRdIqLKo6Sc_qJ78k2d_5sGYyZ.WuZvfJvmrixF3lbC)
+- [21.10](https://us02web.zoom.us/rec/share/mLw8uOZO80b3eh9bDpN2lx5_E1pvVOMEMVnAtULjCC8VJTXxNrCe_rU36E0St7Gk.AVBJzOpsezkCfpYM)
+- [25.10](https://us02web.zoom.us/rec/share/R_7nVT06UdSz84s8dyv-IKxVAU8Xxyjig48_eHRH4iQgGVQoJ0D6m0thtg0SpqgB.Qxb-9qGgDyl00Fvm)
 
 ---
 
