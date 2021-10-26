@@ -8,9 +8,6 @@ import com.acme.edu.messages.Message;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -66,13 +63,13 @@ public class ControllerTest {
 
     @Test
     public void shouldNotPrintWhenMessageIsNullString() {
-        final Controller controllerSut = new Controller(printerStub);
-        when(currentStateSub.isSameType(sameTypeMessageSub)).thenReturn(false);
+        final Printer printerSut = new Printer();
+        final Controller controllerSut = new Controller(printerSut);
+        when(currentStateSub.isSameType(differentTypeMessageSub)).thenReturn(false);
         when(currentStateSub.flush()).thenReturn("");
         controllerSut.log(currentStateSub);
-        System.out.println(currentStateSub.flush());
         final LogException thrown = assertThrows(LogException.class,()->controllerSut.log(sameTypeMessageSub));
-        assertThat(thrown).hasMessage("Can't print message!");
+       assertThat(thrown).hasMessage("Can't print message!");
     }
 
 }
