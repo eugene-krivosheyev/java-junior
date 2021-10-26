@@ -2,9 +2,11 @@ package com.acme.edu.iteration01;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.api.message.ObjectRefMessage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.matchers.Null;
 
 import java.io.*;
 
@@ -112,10 +114,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogReference() throws IOException {
         //region when
-        Logger.log(new Object());
+        ObjectRefMessage nullObject = null;
+        ObjectRefMessage notNullObject = new ObjectRefMessage("@");
+        Logger.log(nullObject);
+        Logger.log(notNullObject);
         //endregion
 
         //region then
+        assertSysoutContains("Insert notNull Object");
         assertSysoutContains("reference: ");
         assertSysoutContains("@");
         //endregion

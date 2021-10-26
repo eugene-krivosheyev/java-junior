@@ -11,10 +11,12 @@ public class MessageTest {
     private Message initialMessage;
     private Message secondMessage;
 
+
     @Test
     public void testReturnValueMethodAccumulate() {
         initialMessage = new CharacterMessage('a');
         secondMessage = new CharacterMessage('b');
+        assertEquals(secondMessage, initialMessage.accumulate(secondMessage));
     }
 
     @Test

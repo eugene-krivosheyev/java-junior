@@ -4,7 +4,6 @@ import com.acme.edu.api.message.Message;
 import com.acme.edu.api.saver.Saver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verify;
@@ -13,10 +12,7 @@ public class LoggerControllerTest {
     private LoggerController loggerController;
     private Message initialMessage;
     private Message secondMessage;
-
-    @Mock
-    private static Saver saver;
-
+    private Saver saver;
 
     @BeforeEach
     public void setUpLoggerController() {
@@ -24,7 +20,6 @@ public class LoggerControllerTest {
         loggerController = new LoggerController(saver);
         initialMessage = mock(Message.class);
         secondMessage = mock(Message.class);
-
     }
 
 
@@ -50,4 +45,5 @@ public class LoggerControllerTest {
 
         verify(initialMessage).accumulate(secondMessage);
     }
+
 }

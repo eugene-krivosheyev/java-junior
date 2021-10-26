@@ -71,8 +71,12 @@ public class Logger {
     }
 
     public static void log(Object message) {
-        service.log(new ObjectRefMessage(message.toString()));
-        flush();
+        try {
+            service.log(new ObjectRefMessage(message.toString()));
+            flush();
+        } catch (NullPointerException exception) {
+            System.out.print("Insert notNull Object");
+        }
     }
 
     public static void flush() {
