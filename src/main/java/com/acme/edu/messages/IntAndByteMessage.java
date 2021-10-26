@@ -32,8 +32,9 @@ public abstract class IntAndByteMessage implements Message {
 
     @Override
     public String flush() {
+        String response = messagePrefix + bufferSum;
         bufferSum = 0;
-        return messagePrefix + bufferSum;
+        return response;
     }
 
     @Override
