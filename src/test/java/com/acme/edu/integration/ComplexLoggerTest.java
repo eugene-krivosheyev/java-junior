@@ -4,9 +4,9 @@ import com.acme.edu.Controller;
 import com.acme.edu.Flusher;
 import com.acme.edu.StatesDTO;
 import com.acme.edu.logger.ComplexLogger;
-import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static org.mockito.Matchers.any;
@@ -30,7 +30,7 @@ public class ComplexLoggerTest {
 
     @Test
     public void testObjects() {
-        Object[] stringsIntsBytes = {"string", (byte)3, 45, 2, (byte)-3, "string", "string"};
+        Object[] stringsIntsBytes = {"string", (byte) 3, 45, 2, (byte) -3, "string", "string"};
         complexLogger.log(stringsIntsBytes);
 
         verifyMocks(stringsIntsBytes.length);

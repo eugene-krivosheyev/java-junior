@@ -6,6 +6,7 @@ import static com.acme.edu.TypeCodeEnum.NONE;
 
 public class StatesDTO {
 
+    private final Flusher flusher;
     private int similarStringCounter;
     private int integerSum;
     private int arrayIntSum;
@@ -15,7 +16,6 @@ public class StatesDTO {
     private boolean prevBoolean;
     private String prevString;
     private TypeCodeEnum prevTypeCodeEnum = NONE;
-    private final Flusher flusher;
 
     public StatesDTO(Flusher flusher) {
         this.flusher = flusher;
@@ -27,12 +27,30 @@ public class StatesDTO {
         prevString = "";
     }
 
+    private static long checkOverflow(long result, Integer max, Integer min) {
+        if (result > max) {
+            return result - max;
+        }
+        if (result < min) {
+            return result + min;
+        }
+        return result;
+    }
+
     public char getPrevChar() {
         return prevChar;
     }
 
+    public void setPrevChar(CharMessage message) {
+        this.prevChar = message.getMessage();
+    }
+
     public boolean getPrevBoolean() {
         return prevBoolean;
+    }
+
+    public void setPrevBoolean(BooleanMessage message) {
+        this.prevBoolean = message.getMessage();
     }
 
     public int getSimilarStringCounter() {
@@ -43,8 +61,16 @@ public class StatesDTO {
         return integerSum;
     }
 
+    public void setIntegerSum(IntMessage message) {
+        this.integerSum = countSum(integerSum, message.getMessage(), Integer.MAX_VALUE, Integer.MIN_VALUE);
+    }
+
     public int getArrayIntSum() {
         return arrayIntSum;
+    }
+
+    private void setArrayIntSum(int message) {
+        this.arrayIntSum = countSum(arrayIntSum, message, Integer.MAX_VALUE, Integer.MIN_VALUE);
     }
 
     public int getMatrixIntSum() {
@@ -55,12 +81,24 @@ public class StatesDTO {
         return byteSum;
     }
 
+    public void setByteSum(ByteMessage message) {
+        this.byteSum = countSum(byteSum, message.getMessage(), Byte.MAX_VALUE, Byte.MIN_VALUE);
+    }
+
     public String getPrevString() {
         return prevString;
     }
 
+    public void setPrevString(String prevString) {
+        this.prevString = prevString;
+    }
+
     public TypeCodeEnum getPrevTypeCodeEnum() {
         return prevTypeCodeEnum;
+    }
+
+    public void setPrevTypeCodeEnum(TypeCodeEnum typeCodeEnum) {
+        this.prevTypeCodeEnum = typeCodeEnum;
     }
 
     public void incSimilarStringCounter() {
@@ -71,16 +109,8 @@ public class StatesDTO {
         this.similarStringCounter = 0;
     }
 
-    public void setIntegerSum(IntMessage message) {
-        this.integerSum = countSum(integerSum, message.getMessage(), Integer.MAX_VALUE, Integer.MIN_VALUE);
-    }
-
     public void clearIntegerSum() {
         this.integerSum = 0;
-    }
-
-    private void setArrayIntSum(int message) {
-        this.arrayIntSum = countSum(arrayIntSum, message, Integer.MAX_VALUE, Integer.MIN_VALUE);
     }
 
     public void clearArrayIntSum() {
@@ -91,28 +121,8 @@ public class StatesDTO {
         this.matrixIntSum = 0;
     }
 
-    public void setByteSum(ByteMessage message) {
-        this.byteSum = countSum(byteSum, message.getMessage(), Byte.MAX_VALUE, Byte.MIN_VALUE);
-    }
-
     public void clearByteSum() {
         this.byteSum = 0;
-    }
-
-    public void setPrevChar(CharMessage message) {
-        this.prevChar = message.getMessage();
-    }
-
-    public void setPrevBoolean(BooleanMessage message) {
-        this.prevBoolean = message.getMessage();
-    }
-
-    public void setPrevString(String prevString) {
-        this.prevString = prevString;
-    }
-
-    public void setPrevTypeCodeEnum(TypeCodeEnum typeCodeEnum) {
-        this.prevTypeCodeEnum = typeCodeEnum;
     }
 
     private int countSum(int externalSum, int income, int max, int min) {
@@ -125,16 +135,6 @@ public class StatesDTO {
             flusher.flush(Integer.toString(max));
         }
         return (int) result;
-    }
-
-    private static long checkOverflow(long result, Integer max, Integer min) {
-        if (result > max) {
-            return result - max;
-        }
-        if (result < min) {
-            return result + min;
-        }
-        return result;
     }
 
     public void arrayIncrementer(ArrayMessage message) {

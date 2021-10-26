@@ -4,9 +4,9 @@ import com.acme.edu.Controller;
 import com.acme.edu.Flusher;
 import com.acme.edu.StatesDTO;
 import com.acme.edu.logger.SimpleLogger;
-import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static org.mockito.Matchers.any;
@@ -36,39 +36,39 @@ public class SimpleLoggerTest {
         verifyMocks(array.length);
     }
 
-    @Test 
+    @Test
     public void testBytes() {
-        byte[] array = {(byte)2, (byte)-5, (byte)17};
+        byte[] array = {(byte) 2, (byte) -5, (byte) 17};
         simpleLogger.log(array);
 
         verifyMocks(array.length);
     }
-    
-    @Test 
+
+    @Test
     public void testChars() {
         char[] array = {'a', 'b', 'c'};
         simpleLogger.log(array);
 
         verifyMocks(array.length);
     }
-    
-    @Test 
+
+    @Test
     public void testStrings() {
         String[] array = {"Hello", "world"};
         simpleLogger.log(array);
 
         verifyMocks(array.length);
     }
-    
-    @Test 
+
+    @Test
     public void testBooleans() {
         boolean[] array = {true, false, true};
         simpleLogger.log(array);
 
         verifyMocks(array.length);
     }
-    
-    @Test 
+
+    @Test
     public void testObject() {
         simpleLogger.log(new Object());
 

@@ -11,11 +11,11 @@ public enum TypeCodeEnum {
     MATRIX_INT("primitives matrix: "),
     NONE("");
 
+    private final String typeReference;
+
     TypeCodeEnum(String typeReference) {
         this.typeReference = typeReference;
     }
-
-    private final String typeReference;
 
     public String getTypeReference() {
         return typeReference;

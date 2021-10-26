@@ -1,10 +1,10 @@
 package com.acme.edu.iteration02;
 
-import com.acme.edu.logger.ComplexLogger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import com.acme.edu.logger.ComplexLogger;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
@@ -12,13 +12,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     private final ComplexLogger logger = new ComplexLogger();
 
     //region given
-    @Before
+    @BeforeEach
     public void setUpSystemOut() throws IOException {
         resetOut();
         captureSysout();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         resetOut();
     }
