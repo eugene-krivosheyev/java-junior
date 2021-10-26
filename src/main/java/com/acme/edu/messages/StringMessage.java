@@ -13,6 +13,16 @@ public class StringMessage implements Message {
     }
 
     @Override
+    public boolean equals(Object message) {
+        if (!(message instanceof StringMessage))
+        {
+            return false;
+        }
+        StringMessage stringMessage = (StringMessage) message;
+        return (value.equals(stringMessage.value) && (counter == stringMessage.counter));
+    }
+
+    @Override
     public String getDecoratedString() {
         if (counter > 1) {
             return "string: " + value + " (x" + counter + ")";
