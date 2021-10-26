@@ -37,7 +37,7 @@ public class Logger {
         container.addMessage(new ObjectMessage(String.valueOf(message)));
     }
 
-    public static void log(int... messages) {
+    public void log(int... messages) {
             container.addMessage(new ArrayMessage(messages));
     }
 
@@ -53,7 +53,6 @@ public class Logger {
     }
 
     public static void flush() {
-        System.out.print(container.getText());
-        container = new MessageContainer();
+        container.flush();
     }
 }

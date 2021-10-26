@@ -1,41 +1,29 @@
 package com.acme.edu.model;
 
+import com.acme.edu.Logger;
 import com.acme.edu.model.message.Message;
+import com.acme.edu.model.message.NullMessage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class MessageContainer  {
-    private final List<Message> messages = new ArrayList<>();
+    private Message lastMessage;
 
     public void addMessage(Message message) {
-        if (this.messages.size() == 0) {
-            this.messages.add(message);
-        } else if (getLastMessage().canJoinMessage(message)) {
-            Message messageToAdd = getLastMessage().getJoinedMessage(message);
-            messages.remove(getLastMessage());
-            this.messages.add(messageToAdd);
+        if (lastMessage == null) {
+            lastMessage = message;
+        } else if (lastMessage.canJoinMessage(message)) {
+            lastMessage = lastMessage.getJoinedMessage(message);
         } else {
-            this.messages.add(message);
+            Logger.flush();
+            lastMessage = message;
         }
     }
 
-    public List<Message> getMessages() {
-        return messages;
+    public void flush() {
+        System.out.println(lastMessage.toString());
+        lastMessage = new NullMessage();
     }
-
-    public String getText() {
-        StringBuilder text = new StringBuilder();
-        for (Message message : messages) {
-            text.append(message.toString()).append(System.lineSeparator());
-        }
-        return text.toString();
-    }
-
-
-    public Message getLastMessage() {
-        return messages.get(messages.size() - 1);
-    }
-
 }
