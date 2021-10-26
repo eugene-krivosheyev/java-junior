@@ -58,7 +58,36 @@ public class LoggerControllerTest {
         controllerSut.log(sameTypeMessage);
         controllerSut.flush();
 
-        verify(printer).print(stringMessage);
+        verify(printer, times(1)).print(stringMessage);
+        verifyNoMoreInteractions(printer);
+    }
+
+    @Test
+    public void shouldNotAccumulateWhenLogDifferentMessages() {
+
+        StringMessage stringMessage = mock(StringMessage.class);
+        StringMessage sameTypeMessage = mock(StringMessage.class);
+        StringMessage thirdTypeMessage = mock(StringMessage.class);
+
+        when(stringMessage.isSameType(sameTypeMessage)).thenReturn(true);
+        when(sameTypeMessage.isSameType(stringMessage)).thenReturn(true);
+
+        when(stringMessage.getDecoratedString()).thenReturn("string: defaultexample1");
+        when(sameTypeMessage.getDecoratedString()).thenReturn("string: tgjjjjjjjjj");
+        when(thirdTypeMessage.getDecoratedString()).thenReturn("string: fdghj");
+
+        Printer printer = mock(Printer.class);
+
+        final LoggerController controllerSut = new LoggerController(printer);
+
+        controllerSut.log(stringMessage);
+        controllerSut.log(sameTypeMessage);
+        controllerSut.log(thirdTypeMessage);
+        controllerSut.flush();
+
+        verify(printer, times( 1)).print(stringMessage);
+        verify(printer, times(1)).print(sameTypeMessage);
+        verify(printer, times(1)).print(thirdTypeMessage);
         verifyNoMoreInteractions(printer);
     }
 }
