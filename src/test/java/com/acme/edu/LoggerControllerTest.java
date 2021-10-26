@@ -1,4 +1,4 @@
-package com.acme.edu.logger.controller;
+package com.acme.edu;
 
 import com.acme.edu.ConsolePrinter;
 import com.acme.edu.LoggerController;
