@@ -20,4 +20,20 @@ class TopLevel {
             TopLevel.this.instanceState = 1;
         }
     }
+
+    public Saver m() {
+        class MethodClass implements Saver {
+            @Override
+            public void save() {
+                //!!!!!!
+            }
+        }
+
+        return new MethodClass();
+    }
+
+}
+
+interface Saver {
+    void save();
 }
