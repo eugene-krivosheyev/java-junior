@@ -11,7 +11,6 @@ import java.io.*;
 
 import static java.lang.System.lineSeparator;
 
-@Disabled
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private final String sep = lineSeparator();
@@ -29,7 +28,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    @Disabled
     @Test
     public void shouldLogInteger() throws IOException {
         //region when
