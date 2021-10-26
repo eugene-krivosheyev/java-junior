@@ -18,7 +18,7 @@ public class StringMessage implements Message {
             stringCounter += 1;
 
         } else {
-            flush();
+            System.out.println(flush());
 
         }
         return message;
