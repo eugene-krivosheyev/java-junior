@@ -1,18 +1,18 @@
 package com.acme.edu;
 
+import com.acme.edu.message.ByteMessage;
 import com.acme.edu.message.IntegerMessage;
-import com.acme.edu.message.Message;
+import com.acme.edu.message.StringMessage;
 
 public class Logger {
-    private static Controller controller = new Controller();
-    private static MessageGenerator generator = new MessageGenerator();
+    private static final Controller controller = new Controller();
 
     public static void log(int message) {
-        controller.log(new Message(new IntStrategy(message)));
+        controller.log(new IntegerMessage(message));
     }
 
     public static void log(byte message) {
-        controller.log(message);
+        controller.log(new ByteMessage(message));
     }
 
     public static void log(char message) {
@@ -20,7 +20,7 @@ public class Logger {
     }
 
     public static void log(String message) {
-
+        controller.log(new StringMessage(message));
     }
 
     public static void log(boolean message) {

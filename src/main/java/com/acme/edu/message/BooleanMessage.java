@@ -1,6 +1,6 @@
 package com.acme.edu.message;
 
-public class BooleanMessage implements Message {
+public class BooleanMessage extends Message {
 
     private boolean value;
 
@@ -10,5 +10,20 @@ public class BooleanMessage implements Message {
 
     public BooleanMessage(boolean value) {
         this.value = value;
+    }
+
+    @Override
+    public boolean isSameType(Message message) {
+        return false;
+    }
+
+    @Override
+    public void process(Message message) {
+
+    }
+
+    @Override
+    public String decorate() {
+        return null;
     }
 }
