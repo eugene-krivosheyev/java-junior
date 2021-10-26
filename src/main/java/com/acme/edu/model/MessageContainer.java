@@ -1,11 +1,7 @@
 package com.acme.edu.model;
 
-import com.acme.edu.Logger;
 import com.acme.edu.model.message.Message;
 import com.acme.edu.model.message.NullMessage;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MessageContainer  {
@@ -17,7 +13,7 @@ public class MessageContainer  {
         } else if (lastMessage.canJoinMessage(message)) {
             lastMessage = lastMessage.getJoinedMessage(message);
         } else {
-            Logger.flush();
+            flush();
             lastMessage = message;
         }
     }
