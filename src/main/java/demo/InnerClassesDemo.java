@@ -5,6 +5,8 @@ import demo.ooad.Saver;
 import demo.ooad.LoggerController;
 import demo.ooad.Message;
 
+import java.util.Set;
+
 public class InnerClassesDemo {
     public static void main(String[] args) {
         new LoggerController(
@@ -14,22 +16,29 @@ public class InnerClassesDemo {
                         return 0;
                     }
                 },
-                new Filter() {
-                    @Override
-                    public boolean filter(Message message) {
-                        return false;
-                    }
-                }
+                message -> message.equals("???")
         );
 
         int localVar = 1;
         //CLOSURE!!!!
-        templateMethod(new ToDo() {
-            @Override
-            public void todo() {
-                System.out.println("look ma, HOF! " + localVar);
-            }
-        });
+        templateMethod(() -> System.out.println("look ma, HOF! " + localVar));
+
+        FI variable = (String arg1, int arg2) -> {
+            //.....
+            //.....
+            //.....
+            //.....
+        };
+
+        variable = (arg1, arg2) -> System.out.println(arg1);
+
+        FIMR lambda = arg -> System.out.println(arg); // lambda = System.out.println
+        lambda = System.out::println;
+
+        Set.of(1,2,3).stream()
+                .map(e -> e + 1)
+                .filter(e -> e < 2)
+                .forEach(System.out::println);
     }
 
     public static void templateMethod(ToDo todo) {
@@ -41,6 +50,15 @@ public class InnerClassesDemo {
     }
 }
 
+interface FIMR {
+    void m(String arg);
+}
+
+interface FI {
+    void m(String arg1, int arg2);
+}
+
+@FunctionalInterface
 interface ToDo {
     void todo();
 }
