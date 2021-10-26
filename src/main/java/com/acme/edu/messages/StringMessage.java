@@ -7,10 +7,6 @@ public class StringMessage implements Message {
     private String value;
     private int counter;
 
-    public boolean hasSameValue(StringMessage message) {
-        return message.getDecoratedString().equals(getDecoratedString());
-    }
-
     public StringMessage(String value) {
         this.value = value;
         counter = 1;
@@ -36,7 +32,7 @@ public class StringMessage implements Message {
             throw new IllegalArgumentException("Can not accumulate message which is not type of StringMessage");
         }
         StringMessage stringMessage = (StringMessage) message;
-        if (this.hasSameValue(stringMessage)) {
+        if (value.equals(stringMessage.value)) {
             counter++;
         } else {
             printer.print(this);

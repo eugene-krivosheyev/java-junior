@@ -50,9 +50,6 @@ public class LoggerControllerTest {
         when(stringMessage.getDecoratedString()).thenReturn("string: defaultexample");
         when(sameTypeMessage.getDecoratedString()).thenReturn("string: defaultexample");
 
-        when(stringMessage.hasSameValue(sameTypeMessage)).thenReturn(true);
-        when(sameTypeMessage.hasSameValue(stringMessage)).thenReturn(true);
-
         Printer printer = mock(Printer.class);
 
         final LoggerController controllerSut = new LoggerController(printer);
