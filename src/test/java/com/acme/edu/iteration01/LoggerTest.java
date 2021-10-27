@@ -5,6 +5,7 @@ import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.api.message.ObjectRefMessage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.internal.matchers.Null;
 
@@ -12,6 +13,7 @@ import java.io.*;
 
 import static java.lang.System.lineSeparator;
 
+@Disabled
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private static final String sep = lineSeparator();
