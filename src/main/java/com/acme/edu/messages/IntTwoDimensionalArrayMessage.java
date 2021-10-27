@@ -1,7 +1,6 @@
 package com.acme.edu.messages;
 
 import com.acme.edu.common.Message;
-import com.acme.edu.common.Printer;
 
 public class IntTwoDimensionalArrayMessage extends IntArrayMessage {
     private final int[][] value;
@@ -29,16 +28,7 @@ public class IntTwoDimensionalArrayMessage extends IntArrayMessage {
         if (!isSameType(message)) {
             throw new IllegalArgumentException("Can not accumulate message which is not type of IntTwoDimensionalArrayMessage");
         }
-        if (!isSameType(message)) {
-            throw new IllegalArgumentException("Can not accumulate message which is not type of Boolean");
-        }
-        IntTwoDimensionalArrayMessage previousMessage = clone();
-        array = ((IntTwoDimensionalArrayMessage)message).array;
-        return previousMessage;
+        return this;
     }
 
-    @Override
-    public IntTwoDimensionalArrayMessage clone() {
-        return new IntTwoDimensionalArrayMessage(value);
-    }
 }

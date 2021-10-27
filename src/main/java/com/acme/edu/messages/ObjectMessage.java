@@ -1,7 +1,6 @@
 package com.acme.edu.messages;
 
 import com.acme.edu.common.Message;
-import com.acme.edu.common.Printer;
 
 public class ObjectMessage implements Message {
     private Object value;
@@ -28,13 +27,6 @@ public class ObjectMessage implements Message {
         if (!isSameType(message)) {
             throw new IllegalArgumentException("Can not accumulate message which is not type of ObjectMessage");
         }
-        ObjectMessage previousMessage = clone();
-        value = ((ObjectMessage)message).value;
-        return previousMessage;
-    }
-
-    @Override
-    public ObjectMessage clone() {
-        return new ObjectMessage(value);
+        return this;
     }
 }

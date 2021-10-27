@@ -21,11 +21,6 @@ public class ByteMessage extends NumberMessage {
     }
 
     @Override
-    public Message clone() {
-        return new ByteMessage(value);
-    }
-
-    @Override
     protected long getValue() {
         return value;
     }

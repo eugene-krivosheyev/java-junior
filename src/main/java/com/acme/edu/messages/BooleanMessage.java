@@ -1,7 +1,6 @@
 package com.acme.edu.messages;
 
 import com.acme.edu.common.Message;
-import com.acme.edu.common.Printer;
 
 public class BooleanMessage implements Message {
 
@@ -28,13 +27,6 @@ public class BooleanMessage implements Message {
         if (!isSameType(message)) {
             throw new IllegalArgumentException("Can not accumulate message which is not type of Boolean");
         }
-        BooleanMessage previousMessage = clone();
-        value = ((BooleanMessage)message).value;
-        return previousMessage;
-    }
-
-    @Override
-    public BooleanMessage clone() {
-        return new BooleanMessage(value);
+        return this;
     }
 }

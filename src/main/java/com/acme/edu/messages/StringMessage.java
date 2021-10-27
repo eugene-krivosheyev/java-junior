@@ -1,7 +1,6 @@
 package com.acme.edu.messages;
 
 import com.acme.edu.common.Message;
-import com.acme.edu.common.Printer;
 
 public class StringMessage implements Message {
     private String value;
@@ -42,22 +41,12 @@ public class StringMessage implements Message {
             throw new IllegalArgumentException("Can not accumulate message which is not type of StringMessage");
         }
         StringMessage stringMessage = (StringMessage) message;
-        StringMessage previousMessage = null;
+        StringMessage newMessage = null;
         if (value.equals(stringMessage.value)) {
             counter++;
         } else {
-            previousMessage = clone();
-            value = stringMessage.value;
-            counter = 1;
-            return previousMessage;
+            newMessage = new StringMessage(stringMessage.value);
         }
-        return previousMessage;
+        return newMessage;
     }
-
-    @Override
-    public StringMessage clone() {
-        return new StringMessage(value);
-    }
-
-
 }

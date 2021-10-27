@@ -18,20 +18,22 @@ public class LoggerController {
             return;
         }
         if (oldMessage.isSameType(message)) {
-            Message previousMessage = oldMessage.accumulate(message);
-            if (previousMessage != null) {
-                printer.print(previousMessage);
+            Message newMessage = oldMessage.accumulate(message);
+            if (newMessage != null) {
+                flush(newMessage);
             }
         } else {
-            // TODO do it with using flush()
-            printer.print(oldMessage);
-            oldMessage = message;
+            flush(message);
         }
     }
     public void flush() {
+        flush(null);
+    }
+
+    private void flush(Message newMessage) {
         if (oldMessage != null) {
             printer.print(oldMessage);
         }
-        oldMessage = null;
+        oldMessage = newMessage;
     }
 }

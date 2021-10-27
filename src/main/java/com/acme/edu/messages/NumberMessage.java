@@ -1,7 +1,6 @@
 package com.acme.edu.messages;
 
 import com.acme.edu.common.Message;
-import com.acme.edu.common.Printer;
 
 public abstract class NumberMessage implements Message{
     protected abstract long getValue();
@@ -9,23 +8,20 @@ public abstract class NumberMessage implements Message{
     protected abstract long getMaxValue();
 
     @Override
-    public abstract Message clone();
-
-    @Override
     public Message accumulate(Message message) {
         if (!isSameType(message)) {
             throw new IllegalArgumentException("Can not accumulate messages with different types");
         }
-        NumberMessage previousMessage = null;
-        NumberMessage newMessage = (NumberMessage) message;
-        if (getValue() + newMessage.getValue() > getMaxValue()) {
-            previousMessage = createNumberMessage(getMaxValue());
-            setValue(getValue() + newMessage.getValue() - getMaxValue());
+        NumberMessage newMessage = null;
+        NumberMessage numberMessage = (NumberMessage) message;
+        if (getValue() + numberMessage.getValue() > getMaxValue()) {
+            newMessage = createNumberMessage(getValue() + numberMessage.getValue() - getMaxValue());
+            setValue(getMaxValue());
         }
         else {
-            setValue(getValue() + newMessage.getValue());
+            setValue(getValue() + numberMessage.getValue());
         }
-        return previousMessage;
+        return newMessage;
     }
 
     protected abstract NumberMessage createNumberMessage(long value);

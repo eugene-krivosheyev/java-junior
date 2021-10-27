@@ -1,7 +1,6 @@
 package com.acme.edu.messages;
 
 import com.acme.edu.common.Message;
-import com.acme.edu.common.Printer;
 
 public class IntArrayMessage implements Message {
     int[] array;
@@ -25,14 +24,7 @@ public class IntArrayMessage implements Message {
         if (!isSameType(message)) {
             throw new IllegalArgumentException("Can not accumulate message which is not type of IntArrayMessage");
         }
-        IntArrayMessage previousMessage = clone();
-        array = ((IntArrayMessage)message).array;
-        return previousMessage;
-    }
-
-    @Override
-    public IntArrayMessage clone() {
-        return new IntArrayMessage(array);
+        return this;
     }
 
     protected int getSumOfArray(int... array) {

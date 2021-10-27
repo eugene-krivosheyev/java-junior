@@ -4,5 +4,4 @@ public interface Message {
     String getDecoratedString();
     boolean isSameType(Message message);
     Message accumulate(Message message);
-    Message clone();
 }

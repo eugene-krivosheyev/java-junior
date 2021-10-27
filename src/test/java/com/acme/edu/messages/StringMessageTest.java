@@ -33,7 +33,7 @@ public class StringMessageTest {
         Message previousMessage = firstMessage.accumulate(secondMessage);
 
         // Then
-        StringMessage expectedMessage = new StringMessage("default str");
+        StringMessage expectedMessage = new StringMessage("another str");
         assertEquals(expectedMessage, previousMessage);
     }
 }

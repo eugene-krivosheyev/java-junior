@@ -21,11 +21,6 @@ public class IntMessage extends NumberMessage {
     }
 
     @Override
-    public Message clone() {
-        return new IntMessage(value);
-    }
-
-    @Override
     protected long getValue() {
         return value;
     }
