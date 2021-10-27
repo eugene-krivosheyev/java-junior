@@ -1,12 +1,10 @@
 package com.acme.edu.message;
 
-import java.util.List;
-
 public class ReferenceMessage implements Message {
 
-    private static final String REFERENCE_PREFIX = "reference: ";
+    protected static final String REFERENCE_PREFIX = "reference: ";
 
-    private Object accumulator;
+    private final Object accumulator;
 
     public ReferenceMessage(Object reference) {
         this.accumulator = reference;
@@ -14,7 +12,7 @@ public class ReferenceMessage implements Message {
 
     @Override
     public Message[] append(Message message) {
-        return new Message[]{ message };
+        return new Message[]{message};
     }
 
     @Override

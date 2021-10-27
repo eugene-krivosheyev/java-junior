@@ -3,12 +3,21 @@ package com.acme.edu.message;
 import com.acme.edu.exception.IllegalMessageStateException;
 
 public abstract class OverflowingMessage implements Message {
-    private static final String PRIMITIVE_PREFIX = "primitive: ";
+    protected static final String PRIMITIVE_PREFIX = "primitive: ";
 
     protected final long maxLimit;
+
+    public long getMaxLimit() {
+        return maxLimit;
+    }
+
+    public long getMinLimit() {
+        return minLimit;
+    }
+
     protected final long minLimit;
 
-    private long accumulator;
+    private final long accumulator;
 
     public OverflowingMessage(long maxLimit, long minLimit, long number) {
         this.maxLimit = maxLimit;
@@ -28,7 +37,7 @@ public abstract class OverflowingMessage implements Message {
     }
 
     protected boolean checkLimits(OverflowingMessage message) {
-        return message.maxLimit == maxLimit && message.minLimit == minLimit;
+        return message.getMaxLimit() == getMaxLimit() && message.getMinLimit() == getMinLimit();
     }
 
     protected Message[] checkOverflow(long num) {

@@ -1,14 +1,10 @@
 package com.acme.edu.message;
 
-import com.acme.edu.exception.IllegalMessageStateException;
-
-import java.util.List;
-
 public class BooleanMessage implements Message {
 
-    private static final String BOOLEAN_PREFIX = "primitive: ";
+    protected static final String BOOLEAN_PREFIX = "primitive: ";
 
-    private boolean accumulator;
+    private final boolean accumulator;
 
     public BooleanMessage(boolean bool) {
         this.accumulator = bool;

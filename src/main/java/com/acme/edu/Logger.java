@@ -41,6 +41,7 @@ public class Logger {
             log(str);
         }
     }
+
     public static void log(String message) {
         controller.log(new StringMessage(message));
     }
@@ -57,5 +58,7 @@ public class Logger {
         controller.log(new ReferenceMessage(message));
     }
 
+    private Logger() {
+    }
 
 }

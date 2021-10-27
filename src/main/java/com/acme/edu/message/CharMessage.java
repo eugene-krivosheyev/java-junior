@@ -1,12 +1,10 @@
 package com.acme.edu.message;
 
-import java.util.List;
-
 public class CharMessage implements Message {
 
-    private static final String CHAR_PREFIX = "char: ";
+    protected static final String CHAR_PREFIX = "char: ";
 
-    private char accumulator;
+    private final char accumulator;
 
     public CharMessage(char ch) {
         this.accumulator = ch;
@@ -14,7 +12,7 @@ public class CharMessage implements Message {
 
     @Override
     public Message[] append(Message message) {
-        return new Message[]{ message };
+        return new Message[]{message};
     }
 
     @Override

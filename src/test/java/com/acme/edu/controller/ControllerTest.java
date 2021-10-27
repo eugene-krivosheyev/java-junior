@@ -8,7 +8,6 @@ import com.acme.edu.saver.Saver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
@@ -33,7 +32,7 @@ public class ControllerTest {
     @Test
     public void shouldAppendWhenSecondLog() {
         when(message.canAppend(any(Message.class))).thenReturn(true);
-
+        when(message.append(any(Message.class))).thenReturn(new Message[]{message});
         controller.log(message);
         controller.log(message);
 
@@ -49,7 +48,24 @@ public class ControllerTest {
         controller.log(message);
 
         verify(message, never()).append(any());
-        verify(saver, times(1)).save(message.getBody());
+        verify(saver).save(message.getBody());
+    }
+
+    @Test
+    public void shouldLogMessageWhenAccumulateSameTypeAndTypeChanged() {
+        Message sameTypeMessage = mock(Message.class);
+        Message anotherTypeMessage = mock(Message.class);
+
+        when(message.canAppend(sameTypeMessage)).thenReturn(true);
+        when(message.append((sameTypeMessage))).thenReturn(new Message[]{message});
+
+        when(message.canAppend(anotherTypeMessage)).thenReturn(false);
+
+        controller.log(message);
+        controller.log(sameTypeMessage);
+        controller.log(anotherTypeMessage);
+
+        verify(saver).save(message.getBody());
     }
 
     @Test
@@ -58,11 +74,11 @@ public class ControllerTest {
         doThrow(new SavingException("This Saver can`t save")).when(saver).save(anyString());
 
         controller.log(message);
-        SavingException thrown = assertThrows(SavingException.class, () -> controller.flush());
+        assertThrows(SavingException.class, () -> controller.flush());
     }
 
     @Test
     public void shouldNotifyWhenReceiveNullMessage() {
-        LogException thrown = assertThrows(LogException.class, () -> controller.log(null));
+        assertThrows(IllegalArgumentException.class, () -> controller.log(null));
     }
 }

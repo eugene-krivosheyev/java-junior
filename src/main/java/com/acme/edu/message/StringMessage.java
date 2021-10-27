@@ -4,9 +4,9 @@ import com.acme.edu.exception.IllegalMessageStateException;
 
 public class StringMessage implements Message {
 
-    private static final String STRING_PREFIX = "string: ";
+    protected static final String STRING_PREFIX = "string: ";
 
-    private String stringBuffer = "";
+    private final String stringBuffer;
     private int stringCount;
 
     public StringMessage(String str) {

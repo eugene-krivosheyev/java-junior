@@ -15,7 +15,7 @@ public class Controller {
     }
 
     public void log(Message message) {
-        if (message == null) throw new LogException("Received message is null");
+        if (message == null) throw new IllegalArgumentException("Received message is null");
 
         if (messageBuffer == null) {
             messageBuffer = message;
