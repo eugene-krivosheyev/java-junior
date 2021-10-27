@@ -2,6 +2,7 @@ package com.acme.edu;
 
 import com.acme.edu.message.EmptyMessage;
 import com.acme.edu.message.DataEqualMessage;
+import com.acme.edu.message.IllegalMessageExeption;
 import com.acme.edu.printer.Printer;
 
 public class Controller {
@@ -20,14 +21,15 @@ public class Controller {
             if (buffer.isEmpty()){
                 buffer = message;
             } else {
-                if (buffer.isSameType(message)) {
+                try {
                     if(!buffer.isMAXMIN(message)) {
                         buffer.add(message);
                     } else {
                         sendLogToPrinter((DataEqualMessage) buffer.add(message));
                         endLogging(buffer.isEndLogging());
                     }
-                } else {
+                } catch (IllegalMessageExeption e){
+                    printer.print(e.getMessage());
                     sendLogToPrinter(buffer);
                     buffer = message;
                 }

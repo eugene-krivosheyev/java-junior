@@ -1,6 +1,7 @@
 package com.acme.edu.message.type.arrays;
 
 import com.acme.edu.message.DataEqualMessage;
+import com.acme.edu.message.IllegalMessageExeption;
 import com.acme.edu.message.Message;
 
 public class StringArrayMessage extends DataEqualMessage {
@@ -29,7 +30,9 @@ public class StringArrayMessage extends DataEqualMessage {
     }
 
     @Override
-    public DataEqualMessage add(Message msg) {return this;}
+    public DataEqualMessage add(Message msg) throws IllegalMessageExeption {
+        throw new IllegalMessageExeption("String array messages impossible to summing");
+    }
 
     @Override
     public boolean isSameType(Message message) {

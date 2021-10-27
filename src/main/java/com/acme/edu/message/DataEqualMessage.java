@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import java.util.Objects;
+
 import static java.lang.System.lineSeparator;
 
 public abstract class DataEqualMessage implements Message {
@@ -25,7 +27,7 @@ public abstract class DataEqualMessage implements Message {
     @Override
     public boolean isSum(){return isSumming;}
     public boolean isSame(DataEqualMessage message){
-        return this.isSameType(message) && (this.data.equals(message.data));
+        return this.isSameType(message) && (Objects.equals(this.getData(),message.getData()));
     }
 
     @Override

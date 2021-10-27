@@ -1,6 +1,7 @@
 package com.acme.edu.message.type;
 
 import com.acme.edu.message.DataEqualMessage;
+import com.acme.edu.message.IllegalMessageExeption;
 import com.acme.edu.message.Message;
 
 public class ObjectMessage extends DataEqualMessage {
@@ -23,7 +24,9 @@ public class ObjectMessage extends DataEqualMessage {
     }
 
     @Override
-    public DataEqualMessage add(Message msg) {return this;}
+    public DataEqualMessage add(Message msg) throws IllegalMessageExeption {
+        throw new IllegalMessageExeption("Object messages impossible to summing");
+    }
 
     @Override
     public boolean isSameType(Message message) {

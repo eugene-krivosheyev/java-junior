@@ -1,6 +1,7 @@
 package com.acme.edu.message.type;
 
 import com.acme.edu.message.DataEqualMessage;
+import com.acme.edu.message.IllegalMessageExeption;
 import com.acme.edu.message.Message;
 
 public class CharMessage extends DataEqualMessage {
@@ -23,7 +24,9 @@ public class CharMessage extends DataEqualMessage {
     }
 
     @Override
-    public DataEqualMessage add(Message msg) {return this;}
+    public DataEqualMessage add(Message msg) throws IllegalMessageExeption {
+        throw new IllegalMessageExeption("Char messages impossible to summing");
+    }
 
     @Override
     public boolean isSameType(Message message) {

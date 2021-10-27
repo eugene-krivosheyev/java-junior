@@ -1,6 +1,7 @@
 package com.acme.edu.message.type;
 
 import com.acme.edu.message.DataEqualMessage;
+import com.acme.edu.message.IllegalMessageExeption;
 import com.acme.edu.message.Message;
 
 public class StringMessage extends DataEqualMessage {
@@ -19,6 +20,11 @@ public class StringMessage extends DataEqualMessage {
         this((String) message.getData(), message.isSum());
     }
 
+    public StringMessage(StringMessage message, int counter) {
+        this((String) message.getData(), message.isSum());
+        this.counter = counter;
+    }
+
     @Override
     public void setMsg(Object message) {
         data = message;
@@ -31,20 +37,19 @@ public class StringMessage extends DataEqualMessage {
     }
 
     @Override
-    public DataEqualMessage add(Message msg) {
-        if (isSameType(msg)){
-            if (isSame((DataEqualMessage) msg)){
-                counter++;
-                setEndLogging(false);
-            } else {
-                counter = 1;
-                setEndLogging(false);
-                DataEqualMessage tempMsg = new StringMessage(this);
-                data = msg.getData();
-                return tempMsg;
-            }
+    public DataEqualMessage add(Message msg) throws IllegalMessageExeption {
+        if (!isSameType(msg)) throw new IllegalMessageExeption("Unexpected different type(String) summing");
+        if (isSame((DataEqualMessage) msg)){
+            counter++;
+            setEndLogging(false);
+            return this;
+        } else {
+            DataEqualMessage tempMsg = new StringMessage(this,counter);
+            setEndLogging(false);
+            counter = 1;
+            data = msg.getData();
+            return tempMsg;
         }
-        return this;
     }
 
     @Override

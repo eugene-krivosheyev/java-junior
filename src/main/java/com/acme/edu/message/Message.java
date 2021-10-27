@@ -15,7 +15,7 @@ public interface Message {
 
     void setMsg(Object message, boolean isSum);
 
-    Message add(Message message);
+    Message add(Message message) throws IllegalMessageExeption;
 
     void setEndLogging(boolean isEnd);
 

@@ -1,6 +1,7 @@
 package com.acme.edu.message.type;
 
 import com.acme.edu.message.DataEqualMessage;
+import com.acme.edu.message.IllegalMessageExeption;
 import com.acme.edu.message.Message;
 
 public class ByteMessage extends DataEqualMessage {
@@ -31,22 +32,19 @@ public class ByteMessage extends DataEqualMessage {
     }
 
     @Override
-    public DataEqualMessage add(Message msg) {
-        if (isSameType(msg)){
-            if (!isMAXMIN((DataEqualMessage) msg)){
-                data = ((byte)data + (byte)msg.getData());
-                setEndLogging(false);
-                return this;
-            } else {
-                DataEqualMessage tempMsg = new ByteMessage(this);
-                data = (isMAX((DataEqualMessage)msg)) ? MAXVALUE : data;
-                data = (isMIN((DataEqualMessage)msg)) ? MINVALUE : data;
-                setEndLogging(true);
-                return tempMsg;
-            }
+    public DataEqualMessage add(Message msg) throws IllegalMessageExeption {
+        if (!isSameType(msg))throw new IllegalMessageExeption("Unexpected different type(Byte) summing");
+        if (!isMAXMIN((DataEqualMessage) msg)){
+            data = ((byte)data + (byte)msg.getData());
+            setEndLogging(false);
+            return this;
+        } else {
+            DataEqualMessage tempMsg = new ByteMessage(this);
+            data = (isMAX((DataEqualMessage)msg)) ? MAXVALUE : data;
+            data = (isMIN((DataEqualMessage)msg)) ? MINVALUE : data;
+            setEndLogging(true);
+            return tempMsg;
         }
-        setEndLogging(false);
-        return this;
     }
 
     @Override

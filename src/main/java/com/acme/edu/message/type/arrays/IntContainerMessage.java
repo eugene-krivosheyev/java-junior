@@ -1,6 +1,7 @@
 package com.acme.edu.message.type.arrays;
 
 import com.acme.edu.message.DataEqualMessage;
+import com.acme.edu.message.IllegalMessageExeption;
 import com.acme.edu.message.Message;
 
 public abstract class IntContainerMessage extends DataEqualMessage {
@@ -31,8 +32,8 @@ public abstract class IntContainerMessage extends DataEqualMessage {
     }
 
     @Override
-    public DataEqualMessage add(Message msg) {
-        return this;
+    public DataEqualMessage add(Message msg) throws IllegalMessageExeption {
+        throw new IllegalMessageExeption("Int containers messages impossible to summing");
     }
 
     @Override
