@@ -14,7 +14,7 @@ public class StringMessage implements Message {
     public Message accumulate(Message message) {
         if(! (message instanceof StringMessage)) throw new IllegalArgumentException("Another type of message!");
         if (Objects.equals(messageBody, ((StringMessage) message).messageBody)) {
-            stringCounter += 1;
+            ((StringMessage) message).stringCounter = stringCounter +1;
 
         } else {
             System.out.println(flush());

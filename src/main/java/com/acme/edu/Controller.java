@@ -16,22 +16,29 @@ public class Controller {
         if (message == null) throw new IllegalArgumentException("null message");
         if (start) {
             currentState = message;
-            currentState.init();
             start = false;
         } else {
             if (!currentState.isSameType(message)) {
-                flush();
-                currentState = message;
-                currentState.init();
+                flush(message);
             } else {
                 currentState = currentState.accumulate(message);
             }
         }
     }
 
+    public void flush(Message message) {
+        try {
+            printer.print(currentState.flush());
+            currentState = message;
+        } catch (IllegalStringToPrintExeption e) {
+            throw new LogException("Can't print message!",e);
+        }
+    }
+
     public void flush() {
         try {
             printer.print(currentState.flush());
+            start = true;
         } catch (IllegalStringToPrintExeption e) {
             throw new LogException("Can't print message!",e);
         }
