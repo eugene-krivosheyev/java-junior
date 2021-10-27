@@ -3,14 +3,11 @@ package com.acme.edu.messages;
 import com.acme.edu.common.Message;
 
 public class CharMessage implements Message {
-
-
     private char value;
 
     public CharMessage(char value) {
         this.value = value;
     }
-
 
     @Override
     public String getDecoratedString() {

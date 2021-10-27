@@ -3,7 +3,6 @@ package com.acme.edu.messages;
 import com.acme.edu.common.Message;
 
 public class IntMessage extends NumberMessage {
-
     private int value;
 
     public IntMessage(int message) {
@@ -39,5 +38,4 @@ public class IntMessage extends NumberMessage {
     protected NumberMessage createNumberMessage(long value) {
         return new IntMessage((int) value);
     }
-
 }

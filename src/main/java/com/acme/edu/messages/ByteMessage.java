@@ -3,7 +3,6 @@ package com.acme.edu.messages;
 import com.acme.edu.common.Message;
 
 public class ByteMessage extends NumberMessage {
-
     private byte value;
 
     public ByteMessage(byte message) {

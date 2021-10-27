@@ -4,6 +4,7 @@ import com.acme.edu.common.Message;
 
 public class IntTwoDimensionalArrayMessage extends IntArrayMessage {
     private final int[][] value;
+
     public IntTwoDimensionalArrayMessage(int[][] array) {
         super(null);
         value = array;
@@ -30,5 +31,4 @@ public class IntTwoDimensionalArrayMessage extends IntArrayMessage {
         }
         return this;
     }
-
 }

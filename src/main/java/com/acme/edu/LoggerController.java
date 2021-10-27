@@ -4,13 +4,12 @@ import com.acme.edu.common.Message;
 import com.acme.edu.common.Printer;
 
 public class LoggerController {
-    Printer printer;
+    private Printer printer;
+    private Message oldMessage;
 
     public LoggerController(Printer printer) {
         this.printer = printer;
     }
-
-    Message oldMessage;
 
     public void log(Message message) {
         if (oldMessage == null) {

@@ -3,7 +3,7 @@ package com.acme.edu.messages;
 import com.acme.edu.common.Message;
 
 public class IntArrayMessage implements Message {
-    int[] array;
+    private int[] array;
 
     public IntArrayMessage(int[] array) {
         this.array = array;

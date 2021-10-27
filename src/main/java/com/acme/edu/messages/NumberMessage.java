@@ -3,10 +3,6 @@ package com.acme.edu.messages;
 import com.acme.edu.common.Message;
 
 public abstract class NumberMessage implements Message{
-    protected abstract long getValue();
-    protected abstract void setValue(long value);
-    protected abstract long getMaxValue();
-
     @Override
     public Message accumulate(Message message) {
         if (!isSameType(message)) {
@@ -24,5 +20,8 @@ public abstract class NumberMessage implements Message{
         return newMessage;
     }
 
+    protected abstract long getValue();
+    protected abstract void setValue(long value);
+    protected abstract long getMaxValue();
     protected abstract NumberMessage createNumberMessage(long value);
 }
