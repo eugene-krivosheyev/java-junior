@@ -3,9 +3,11 @@ package demo.ooad;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import java.util.List;
+import java.util.stream.Stream;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class ControllerTest {
@@ -37,8 +39,22 @@ public class ControllerTest {
 
         final IllegalArgumentException thrown = assertThrows(
                 IllegalArgumentException.class,
-                () -> controller.log(null)
+                () -> {
+                    controller.log(null);
+                    filterDummy.filter(null);
+                }
         );
         assertThat(thrown).hasMessage("null message!!!");
+    }
+
+    @Test
+    public void arrayListShouldSumElements() {
+        final String sum = Stream.of(1, 2, 3)
+//                .reduce((e1, e2) -> Integer.sum(e1, e2)) | (e) -> e.toString()
+                .reduce(Integer::sum)
+                .map(Object::toString)
+                .orElse("");
+
+        assertEquals("6", sum);
     }
 }
