@@ -34,7 +34,7 @@ public class Logger {
     }
 
     /**
-     * @param printAsArray boolean toggle to clarify how integers should be logged
+     * @param printAsArray boolean toggle to clarify how array of integers should be logged
      */
     public static void log(boolean printAsArray, int... integers) {
         service.log(new PrimitiveArrayMessage(integers, printAsArray));

@@ -114,14 +114,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldLogReference() throws IOException {
         //region when
-        ObjectRefMessage nullObject = null;
         ObjectRefMessage notNullObject = new ObjectRefMessage("@");
-        Logger.log(nullObject);
         Logger.log(notNullObject);
         //endregion
 
         //region then
-        assertSysoutContains("Insert notNull Object");
         assertSysoutContains("reference: ");
         assertSysoutContains("@");
         //endregion
