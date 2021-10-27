@@ -1,7 +1,5 @@
 package com.acme.edu;
 
-import com.acme.edu.ConsolePrinter;
-import com.acme.edu.LoggerController;
 import com.acme.edu.common.Message;
 import com.acme.edu.common.Printer;
 import com.acme.edu.messages.IntMessage;
@@ -26,7 +24,6 @@ public class LoggerControllerTest {
         when(intMessage.getDecoratedString()).thenReturn("primitive: 12");
 
         Printer printer = mock(Printer.class);
-        //when(printer.print(stringMessage)).thenReturn()
 
         final LoggerController controllerSut = new LoggerController(printer);
 
@@ -45,10 +42,8 @@ public class LoggerControllerTest {
         StringMessage sameTypeMessage = mock(StringMessage.class);
 
         when(stringMessage.isSameType(sameTypeMessage)).thenReturn(true);
-        when(sameTypeMessage.isSameType(stringMessage)).thenReturn(true);
 
-        when(stringMessage.getDecoratedString()).thenReturn("string: defaultexample");
-        when(sameTypeMessage.getDecoratedString()).thenReturn("string: defaultexample");
+        when(stringMessage.accumulate(sameTypeMessage)).thenReturn(null);
 
         Printer printer = mock(Printer.class);
 
@@ -70,11 +65,10 @@ public class LoggerControllerTest {
         StringMessage thirdTypeMessage = mock(StringMessage.class);
 
         when(stringMessage.isSameType(sameTypeMessage)).thenReturn(true);
-        when(sameTypeMessage.isSameType(stringMessage)).thenReturn(true);
+        when(stringMessage.isSameType(thirdTypeMessage)).thenReturn(true);
 
-        when(stringMessage.getDecoratedString()).thenReturn("string: defaultexample1");
-        when(sameTypeMessage.getDecoratedString()).thenReturn("string: tgjjjjjjjjj");
-        when(thirdTypeMessage.getDecoratedString()).thenReturn("string: fdghj");
+        when(stringMessage.accumulate(sameTypeMessage)).thenReturn(stringMessage);
+        when(stringMessage.accumulate(thirdTypeMessage)).thenReturn(sameTypeMessage);
 
         Printer printer = mock(Printer.class);
 
@@ -85,9 +79,6 @@ public class LoggerControllerTest {
         controllerSut.log(thirdTypeMessage);
         controllerSut.flush();
 
-        verify(printer, times( 1)).print(stringMessage);
-        verify(printer, times(1)).print(sameTypeMessage);
-        verify(printer, times(1)).print(thirdTypeMessage);
-        verifyNoMoreInteractions(printer);
+        verify(printer, times( 3)).print(any(StringMessage.class));
     }
 }
