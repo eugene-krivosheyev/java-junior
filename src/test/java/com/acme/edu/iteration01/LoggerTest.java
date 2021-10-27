@@ -11,6 +11,7 @@ import java.io.*;
 
 import static java.lang.System.lineSeparator;
 
+
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private final String sep = lineSeparator();
@@ -44,7 +45,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutEquals("primitive: 1" + sep + "primitive: 0" + sep + "primitive: -1" + sep);
         //endregion
     }
-    @Disabled
+
     @Test
     public void shouldLogByte() throws IOException {
         //region when
@@ -66,7 +67,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
    // TODO: implement Logger solution to match specification as tests
-   @Disabled
+
     @Test
     public void shouldLogChar() throws IOException {
         //region when
@@ -82,7 +83,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("b");
         //endregion
     }
-    @Disabled
+
     @Test
     public void shouldLogString() throws IOException {
         //region when
@@ -99,7 +100,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //endregion
     }
-    @Disabled
+
     @Test
     public void shouldLogBoolean() throws IOException {
         //region when
@@ -116,7 +117,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("false");
         //endregion
     }
-    @Disabled
+
     @Test
     public void shouldLogReference() throws IOException {
         //region when

@@ -3,8 +3,7 @@ package com.acme.edu.messages;
 import java.util.Objects;
 
 public class StringMessage implements Message {
-    private static String bufferString;
-    private static int stringCounter;
+    private int stringCounter = 1;
     private String messageBody;
 
     public StringMessage(String message) {
@@ -44,7 +43,6 @@ public class StringMessage implements Message {
 
     @Override
     public void init() {
-        bufferString = messageBody;
         stringCounter = 1;
     }
 

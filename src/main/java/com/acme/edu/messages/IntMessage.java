@@ -20,4 +20,6 @@ public class IntMessage extends IntAndByteMessage implements Message {
     public boolean isSameType(Message message) {
         return message instanceof IntMessage;
     }
+
+
 }

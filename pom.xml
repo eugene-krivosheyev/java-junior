@@ -46,41 +46,41 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.pitest</groupId>
-        <artifactId>pitest-maven</artifactId>
-        <version>1.7.2</version>
-        <dependencies>
-          <dependency>
-            <groupId>org.pitest</groupId>
-            <artifactId>pitest-junit5-plugin</artifactId>
-            <version>0.15</version>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <targetClasses>
-            <param>com.acme.edu.*</param>
-          </targetClasses>
-          <targetTests>
-            <param>com.acme.edu.*</param>
-          </targetTests>
-          <verbose>true</verbose>
-        </configuration>
-        <executions>
-          <execution>
-            <id>mutation-coverage</id>
-            <goals>
-              <goal>mutationCoverage</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>mutation-report</id>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.pitest</groupId>-->
+<!--        <artifactId>pitest-maven</artifactId>-->
+<!--        <version>1.7.2</version>-->
+<!--        <dependencies>-->
+<!--          <dependency>-->
+<!--            <groupId>org.pitest</groupId>-->
+<!--            <artifactId>pitest-junit5-plugin</artifactId>-->
+<!--            <version>0.15</version>-->
+<!--          </dependency>-->
+<!--        </dependencies>-->
+<!--        <configuration>-->
+<!--          <targetClasses>-->
+<!--            <param>com.acme.edu.*</param>-->
+<!--          </targetClasses>-->
+<!--          <targetTests>-->
+<!--            <param>com.acme.edu.*</param>-->
+<!--          </targetTests>-->
+<!--          <verbose>true</verbose>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <id>mutation-coverage</id>-->
+<!--            <goals>-->
+<!--              <goal>mutationCoverage</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--          <execution>-->
+<!--            <id>mutation-report</id>-->
+<!--            <goals>-->
+<!--              <goal>report</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
     </plugins>
   </build>
 

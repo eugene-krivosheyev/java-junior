@@ -2,8 +2,8 @@ package com.acme.edu.messages;
 
 public abstract class IntAndByteMessage implements Message {
     private int messageBody;
-    private static final String messagePrefix = "primitive: ";
-    private static int bufferSum;
+    private final String messagePrefix = "primitive: ";
+    private int bufferSum = messageBody;
 
 
     public IntAndByteMessage(int message) {
@@ -31,7 +31,7 @@ public abstract class IntAndByteMessage implements Message {
     @Override
     public String flush() {
         String outString = messagePrefix + bufferSum;
-        bufferSum = 0;
+        bufferSum = messageBody;
         return outString;
     }
 
