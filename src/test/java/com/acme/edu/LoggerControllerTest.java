@@ -60,12 +60,12 @@ public class LoggerControllerTest {
 
         StringMessage stringMessage = mock(StringMessage.class);
         StringMessage anotherStringMessage = mock(StringMessage.class);
-        StringMessage newMessageForAnotherStringMessage = mock(StringMessage.class);
+
         Printer printer = mock(Printer.class);
 
         when(stringMessage.isSameType(anotherStringMessage)).thenReturn(true);
         when(stringMessage.accumulate(anotherStringMessage))
-                .thenReturn(newMessageForAnotherStringMessage);
+                .thenReturn(anotherStringMessage);
 
         final LoggerController controllerSut = new LoggerController(printer);
 
@@ -74,6 +74,6 @@ public class LoggerControllerTest {
         controllerSut.flush();
 
         verify(printer, times( 1)).print(stringMessage);
-        verify(printer, times( 1)).print(newMessageForAnotherStringMessage);
+        verify(printer, times( 1)).print(anotherStringMessage);
     }
 }

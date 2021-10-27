@@ -45,7 +45,8 @@ public class StringMessage implements Message {
         if (value.equals(stringMessage.value)) {
             counter++;
         } else {
-            newMessage = new StringMessage(stringMessage.value);
+            return message;
+            //newMessage = new StringMessage(stringMessage.value);
         }
         return newMessage;
     }
