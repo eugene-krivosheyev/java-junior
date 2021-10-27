@@ -48,8 +48,7 @@ public class Logger {
         try {
             service.log(new PrimitiveArrayMessage(integers, printAsArray));
             flush();
-        }
-        catch (NullPointerException exception){
+        } catch (NullPointerException exception){
             System.out.print(exception.getMessage());
         }
     }
@@ -61,8 +60,7 @@ public class Logger {
         try {
             service.log(new PrimitiveArrayMessage(integers));
             flush();
-        }
-        catch (NullPointerException exception){
+        } catch (NullPointerException exception){
             System.out.print(exception.getMessage());
         }
     }
@@ -86,7 +84,7 @@ public class Logger {
         try {
             service.log(new PrimitiveMatrixMessage(integers));
             flush();
-        }catch (NullPointerException exception){
+        } catch (NullPointerException exception){
             System.out.print(exception.getMessage());
         }
     }
