@@ -7,21 +7,21 @@ import java.util.Optional;
 
 public class GenericsDemo {
     public static void main(String[] args) {
-        final Queue queue = new Queue();
-        queue.add("1");
-        queue.add("2");
-
-        final Object element = queue.get();
-        if (element instanceof String) {
-            final var typedElement = (String) element;
-        }
-
-        Queue<? extends Number> queueOfNumbers = new Queue<Number>();
-        queueOfNumbers.add(new BigDecimal(1));
-
-        Queue.<Integer>m();
-
-        Collection<String> coll = ;
+//        final Queue queue = new Queue();
+//        queue.add("1");
+//        queue.add("2");
+//
+//        final Object element = queue.get();
+//        if (element instanceof String) {
+//            final var typedElement = (String) element;
+//        }
+//
+//        Queue<Number> queueOfNumbers = new Queue<Number>(1);
+//        queueOfNumbers.add(new BigDecimal(1));
+//
+//        Queue.<Integer>m();
+//
+//        Collection<String> coll = ;
     }
 }
 
@@ -50,7 +50,7 @@ interface I<V> {
     V m();
 }
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 class I1 implements I {
     @Override
     public Object m() {
