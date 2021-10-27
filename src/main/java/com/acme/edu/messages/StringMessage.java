@@ -7,9 +7,13 @@ public class StringMessage implements Message {
     private int counter;
 
     public StringMessage(String value) {
-        this.value = value;
-        counter = 1;
+        this(value, 1);
     }
+    public StringMessage(String value, int counter) {
+        this.value = value;
+        this.counter = counter;
+    }
+
 
     @Override
     public boolean equals(Object message) {
@@ -46,7 +50,6 @@ public class StringMessage implements Message {
             counter++;
         } else {
             return message;
-            //newMessage = new StringMessage(stringMessage.value);
         }
         return newMessage;
     }
