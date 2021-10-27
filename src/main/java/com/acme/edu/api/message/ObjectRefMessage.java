@@ -1,9 +1,10 @@
 package com.acme.edu.api.message;
 
 public class ObjectRefMessage extends Message {
-    public ObjectRefMessage(String value) {
+    public ObjectRefMessage(Object value) throws NullPointerException {
+        if (value == null) throw new NullPointerException("You try to write a Null Object");
         setPrefix("reference: ");
-        setValue(value);
+        setValue(value.toString());
     }
 
     @Override

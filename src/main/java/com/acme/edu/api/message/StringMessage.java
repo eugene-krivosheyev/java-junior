@@ -2,7 +2,7 @@ package com.acme.edu.api.message;
 
 public class StringMessage extends SummableStringMessage {
 
-    public StringMessage(String currentString) throws NullPointerException{
+    public StringMessage(String currentString) throws NullPointerException {
             super(currentString);
     }
 

@@ -74,7 +74,7 @@ public class Logger {
         try {
             service.log(new PrimitiveMatrixMessage(integers, printAsArray));
             flush();
-        }catch (NullPointerException exception){
+        } catch (NullPointerException exception){
             System.out.print(exception.getMessage());
         }
     }
@@ -98,7 +98,7 @@ public class Logger {
 
     public static void log(Object message) {
         try {
-            service.log(new ObjectRefMessage(message.toString()));
+            service.log(new ObjectRefMessage(message));
             flush();
         } catch (NullPointerException exception) {
             System.out.print("Insert notNull Object\n");

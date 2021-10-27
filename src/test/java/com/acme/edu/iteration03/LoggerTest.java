@@ -56,11 +56,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutEquals("primitives matrix: {\n" +
-                "{-1, 0, 1}\n" +
-                "{1, 2, 3}\n" +
-                "{-1, -2, -20}\n" +
-                "}\n");
+        String linesep = System.lineSeparator();
+        assertSysoutEquals("primitives matrix: {" + linesep +
+                "{-1, 0, 1}" + linesep +
+                "{1, 2, 3}" + linesep +
+                "{-1, -2, -20}" + linesep +
+                "}" + linesep);
         //endregion
     }
 

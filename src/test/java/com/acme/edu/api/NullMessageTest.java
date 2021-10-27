@@ -3,6 +3,7 @@ package com.acme.edu.api;
 
 
 import com.acme.edu.Logger;
+import com.acme.edu.api.message.ObjectRefMessage;
 import com.acme.edu.api.message.PrimitiveArrayMessage;
 import com.acme.edu.api.message.PrimitiveMatrixMessage;
 import com.acme.edu.api.message.StringMessage;
@@ -66,5 +67,16 @@ public class NullMessageTest {
         logger.log(true, nullMatrix);
         assertThat(exception);
         assertEquals(exception.getMessage(), "You try to write a Null Matrix");
+    }
+
+    @Test
+    public void testNullOject() {
+        final Object object = null;
+        final NullPointerException exception = Assertions.assertThrows
+                (NullPointerException.class,
+                        () -> service.log(new ObjectRefMessage(object)));
+        logger.log(object);
+        assertThat(exception);
+        assertEquals(exception.getMessage(), "You try to write a Null Object");
     }
 }
