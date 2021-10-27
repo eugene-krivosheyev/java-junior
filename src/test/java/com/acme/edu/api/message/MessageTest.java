@@ -1,4 +1,4 @@
-package com.acme.edu.api;
+package com.acme.edu.api.message;
 
 import com.acme.edu.api.message.*;
 

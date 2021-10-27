@@ -1,8 +1,9 @@
 
-package com.acme.edu.api;
+package com.acme.edu.api.message;
 
 
 import com.acme.edu.Logger;
+import com.acme.edu.api.LoggerController;
 import com.acme.edu.api.message.ObjectRefMessage;
 import com.acme.edu.api.message.PrimitiveArrayMessage;
 import com.acme.edu.api.message.PrimitiveMatrixMessage;
