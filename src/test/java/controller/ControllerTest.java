@@ -2,12 +2,16 @@ package controller;
 
 import accumulator.Accumulator;
 import accumulator.FlushAccumulator;
+import exeption.EmptyAccumulatorException;
+import exeption.EmptyMessageException;
 import message.Message;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import printer.ConsolePrinter;
 import printer.Printer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -51,7 +55,7 @@ class ControllerTest {
 
         controller.log(messageStub);
 
-        verify(printerMock, times(0)).print(any());
+        verify(printerMock, never()).print(any());
     }
 
     @Test
@@ -66,5 +70,24 @@ class ControllerTest {
         controller.log(messageStub);
 
         verify(printerMock).print(testValue2[0]);
+    }
+
+    @Test
+    void shouldThrowEmptyMessageException() {
+        final EmptyMessageException thrown = assertThrows(
+                EmptyMessageException.class,
+                () -> controller.log(null)
+        );
+        assertThat(thrown).hasMessage("Attempt to log empty message");
+    }
+
+    @Test
+    void shouldThrowEmptyAccumulatorException() {
+        when(messageStub.getAccumulator()).thenReturn(null);
+        final EmptyAccumulatorException thrown = assertThrows(
+                EmptyAccumulatorException.class,
+                () -> controller.log(messageStub)
+        );
+        assertThat(thrown).hasMessage("Attempt to log message with no accumulator");
     }
 }

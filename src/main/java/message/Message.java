@@ -1,6 +1,7 @@
 package message;
 
 import accumulator.Accumulator;
+import exeption.EmptyAccumulatorException;
 
 public abstract class Message {
     protected Accumulator accumulator;
@@ -10,7 +11,9 @@ public abstract class Message {
     }
 
     public abstract Object getBody();
-    public Accumulator getAccumulator() {
+    public Accumulator getAccumulator() throws EmptyAccumulatorException {
+        if (accumulator == null) throw new EmptyAccumulatorException("Accumulator is empty");
         return accumulator;
     }
 }
+

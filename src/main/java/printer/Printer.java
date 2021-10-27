@@ -1,5 +1,5 @@
 package printer;
 
-public abstract class Printer {
-    public abstract void print(String... strings);
+public interface Printer {
+    void print(String... strings);
 }
