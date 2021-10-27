@@ -6,15 +6,7 @@ import com.acme.edu.model.message.NullMessage;
 
 
 public class MessageContainer {
-    private Message lastMessage;
-
-    public MessageContainer(Message lastMessage) {
-        this.lastMessage = lastMessage;
-    }
-
-    public MessageContainer() {
-        this(new NullMessage());
-    }
+    private Message lastMessage = new NullMessage();
 
     public void addMessage(Message message) {
         try {
