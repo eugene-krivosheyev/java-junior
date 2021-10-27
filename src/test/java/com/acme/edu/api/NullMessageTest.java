@@ -70,7 +70,7 @@ public class NullMessageTest {
     }
 
     @Test
-    public void testNullOject() {
+    public void testNullObject() {
         final Object object = null;
         final NullPointerException exception = Assertions.assertThrows
                 (NullPointerException.class,
