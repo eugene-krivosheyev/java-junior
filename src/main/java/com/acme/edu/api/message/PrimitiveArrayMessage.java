@@ -6,7 +6,7 @@ public class PrimitiveArrayMessage extends ArrayMessage {
     private final int[] values;
 
     public PrimitiveArrayMessage(int[] array, boolean printAsArray) {
-        if (array == null) throw new NullPointerException("You try to write a Null Array");
+        if (array == null) throw new IllegalArgumentException("You try to write a Null Array");
         setPrintAsArray(printAsArray);
         values = array;
         setPrefix("primitives array: ");

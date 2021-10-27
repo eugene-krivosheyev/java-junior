@@ -5,7 +5,7 @@ public abstract class SummableStringMessage extends Message {
     protected final String currentString;
 
     public SummableStringMessage(String currentString) {
-        if (currentString == null) throw new NullPointerException("You try to write a Null String");
+        if (currentString == null) throw new IllegalArgumentException("You try to write a Null String");
         setPrefix("string: ");
         this.currentString = currentString;
     }

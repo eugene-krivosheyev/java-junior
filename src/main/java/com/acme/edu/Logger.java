@@ -26,67 +26,43 @@ public class Logger {
     }
 
     public static void log(String message) {
-        try {
-            service.log(new StringMessage(message));
-        } catch (NullPointerException exception) {
-            System.out.print(exception.getMessage());
-        }
+        service.log(new StringMessage(message));
     }
 
     public static void log(String... strings) {
-        try {
-            Arrays.stream(strings).forEach(str -> service.log(new StringMessage(str)));
-        } catch (NullPointerException exception) {
-            System.out.print(exception.getMessage());
-        }
+        Arrays.stream(strings).forEach(str -> service.log(new StringMessage(str)));
     }
 
     /**
      * @param printAsArray boolean toggle to clarify how integers should be logged
      */
     public static void log(boolean printAsArray, int... integers) {
-        try {
-            service.log(new PrimitiveArrayMessage(integers, printAsArray));
-            flush();
-        } catch (NullPointerException exception){
-            System.out.print(exception.getMessage());
-        }
+        service.log(new PrimitiveArrayMessage(integers, printAsArray));
+        flush();
     }
 
     /**
      * Default way to log array of integers is to log sum
      */
     public static void log(int... integers) {
-        try {
-            service.log(new PrimitiveArrayMessage(integers));
-            flush();
-        } catch (NullPointerException exception){
-            System.out.print(exception.getMessage());
-        }
+        service.log(new PrimitiveArrayMessage(integers));
+        flush();
     }
 
     /**
      * @param printAsArray boolean toggle to clarify how 2D array of integers should be logged
      */
     public static void log(boolean printAsArray, int[][] integers) {
-        try {
-            service.log(new PrimitiveMatrixMessage(integers, printAsArray));
-            flush();
-        } catch (NullPointerException exception){
-            System.out.print(exception.getMessage());
-        }
+        service.log(new PrimitiveMatrixMessage(integers, printAsArray));
+        flush();
     }
 
     /**
      * Default way to log 2D array of integers is to log sum
      */
     public static void log(int[][] integers) {
-        try {
-            service.log(new PrimitiveMatrixMessage(integers));
-            flush();
-        } catch (NullPointerException exception){
-            System.out.print(exception.getMessage());
-        }
+        service.log(new PrimitiveMatrixMessage(integers));
+        flush();
     }
 
     public static void log(boolean message) {
@@ -95,12 +71,8 @@ public class Logger {
     }
 
     public static void log(Object message) {
-        try {
-            service.log(new ObjectRefMessage(message));
-            flush();
-        } catch (NullPointerException exception) {
-            System.out.print("Insert notNull Object\n");
-        }
+        service.log(new ObjectRefMessage(message));
+        flush();
     }
 
     public static void flush() {
