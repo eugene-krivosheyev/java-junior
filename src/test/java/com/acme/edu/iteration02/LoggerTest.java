@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-
+@Disabled
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @BeforeEach
@@ -40,14 +40,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //endregion
 
-//        //region then
+        //region then
 //        assertSysoutEquals(
 //            "str 1\n" +
 //            "3\n" +
 //            "str 2\n" +
 //            "0\n"
 //        );
-//        //endregion
+        //endregion
         assertSysoutContains("str 1");
         assertSysoutContains("3");
         assertSysoutContains("str 2");

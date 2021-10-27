@@ -15,12 +15,10 @@ public abstract class IntAndByteMessage implements Message {
     public Message accumulate(Message message) {
         int maxVALUE = maxValueOfThisType();
         if (((long) bufferSum + (long) ((IntAndByteMessage) message).messageBody) < maxVALUE) {
-            ((IntAndByteMessage) message).bufferSum = ((IntAndByteMessage) message).messageBody + bufferSum;
-            return message;
+            return instanceOfThisClass(bufferSum + ((IntAndByteMessage) message).messageBody);
         } else {
             System.out.println(Integer.toString(maxVALUE));
-            bufferSum = ((IntAndByteMessage) message).messageBody - (maxVALUE - bufferSum);
-            return instanceOfThisClass(bufferSum);
+            return instanceOfThisClass(((IntAndByteMessage) message).messageBody - (maxVALUE - bufferSum));
         }
     }
 

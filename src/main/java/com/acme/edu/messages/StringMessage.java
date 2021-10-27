@@ -10,17 +10,21 @@ public class StringMessage implements Message {
         this.messageBody = message;
     }
 
+    public StringMessage(String message,int stringCounter) {
+        this.messageBody = message;
+        this.stringCounter = stringCounter;
+    }
+
     @Override
     public Message accumulate(Message message) {
         if(! (message instanceof StringMessage)) throw new IllegalArgumentException("Another type of message!");
         if (Objects.equals(messageBody, ((StringMessage) message).messageBody)) {
-            ((StringMessage) message).stringCounter = stringCounter +1;
-
+  //          ((StringMessage) message).stringCounter = stringCounter +1;
+            return new StringMessage(((StringMessage) message).messageBody, stringCounter+1);
         } else {
             System.out.println(flush());
-
+            return message;
         }
-        return message;
     }
 
     @Override
