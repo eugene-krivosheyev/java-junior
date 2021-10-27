@@ -1,9 +1,8 @@
 package message;
 
-import accumulator.Accumulator;
 import accumulator.FlushAccumulator;
 
-public class FlushMessage extends Message {
+public class FlushMessage extends AbstractMessage {
 
     public FlushMessage() {
         super(null);

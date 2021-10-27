@@ -1,9 +1,8 @@
 package message;
 
-import accumulator.Accumulator;
 import accumulator.ObjectAccumulator;
 
-public class ObjectMessage extends Message {
+public class ObjectMessage extends AbstractMessage {
 
     private Object body;
 

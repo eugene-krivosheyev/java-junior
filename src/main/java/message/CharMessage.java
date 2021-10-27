@@ -1,9 +1,8 @@
 package message;
 
-import accumulator.Accumulator;
 import accumulator.CharAccumulator;
 
-public class CharMessage extends Message {
+public class CharMessage extends AbstractMessage {
 
     private Character body;
 

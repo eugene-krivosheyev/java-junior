@@ -1,9 +1,8 @@
 package message;
 
-import accumulator.Accumulator;
 import accumulator.Int2DArrayAccumulator;
 
-public class Int2dArrayMessage extends Message {
+public class Int2dArrayMessage extends AbstractMessage {
 
     private Integer[][] body;
 

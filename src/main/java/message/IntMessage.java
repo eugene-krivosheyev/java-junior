@@ -1,9 +1,8 @@
 package message;
 
-import accumulator.Accumulator;
 import accumulator.IntAccumulator;
 
-public class IntMessage extends Message
+public class IntMessage extends AbstractMessage
 {
     private final Integer body;
 

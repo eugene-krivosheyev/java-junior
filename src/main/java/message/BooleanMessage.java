@@ -1,9 +1,8 @@
 package message;
 
 import accumulator.BoolAccumulator;
-import accumulator.Accumulator;
 
-public class BooleanMessage extends Message {
+public class BooleanMessage extends AbstractMessage {
 
     private Boolean body;
 

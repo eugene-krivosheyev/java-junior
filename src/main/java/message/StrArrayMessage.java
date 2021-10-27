@@ -1,9 +1,8 @@
 package message;
 
-import accumulator.Accumulator;
 import accumulator.StrArrayAccumulator;
 
-public class StrArrayMessage extends Message {
+public class StrArrayMessage extends AbstractMessage {
 
     private String[] body;
 

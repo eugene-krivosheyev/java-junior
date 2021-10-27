@@ -2,8 +2,7 @@ package controller;
 
 import accumulator.Accumulator;
 import accumulator.FlushAccumulator;
-import exeption.EmptyAccumulatorException;
-import exeption.EmptyMessageException;
+import message.AbstractMessage;
 import message.Message;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,7 @@ class ControllerTest {
 
     @BeforeEach
     void init() {
-        messageStub = mock(Message.class);
+        messageStub = mock(AbstractMessage.class);
         accumulatorStub1 = mock(FlushAccumulator.class);
         accumulatorStub2 = mock(Accumulator.class);
         printerMock = mock(ConsolePrinter.class);
@@ -59,6 +58,18 @@ class ControllerTest {
     }
 
     @Test
+    void shouldNoLogAfterAccumulatingAndTypeSwitch() {
+
+        when(messageStub.getAccumulator()).thenReturn(accumulatorStub2);
+        when(accumulatorStub2.isNewAccumulatorType(any())).thenReturn(false);
+        when(accumulatorStub1.extractUnpromtLines()).thenReturn(null);
+
+        controller.log(messageStub);
+
+        verify(printerMock, never()).print(any());
+    }
+
+    @Test
     void shouldLogAfterAccumulatingUnpromtLines() {
 
         final String[] testValue2 = {"TestValue2"};
@@ -74,8 +85,8 @@ class ControllerTest {
 
     @Test
     void shouldThrowEmptyMessageException() {
-        final EmptyMessageException thrown = assertThrows(
-                EmptyMessageException.class,
+        final IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
                 () -> controller.log(null)
         );
         assertThat(thrown).hasMessage("Attempt to log empty message");
@@ -84,8 +95,8 @@ class ControllerTest {
     @Test
     void shouldThrowEmptyAccumulatorException() {
         when(messageStub.getAccumulator()).thenReturn(null);
-        final EmptyAccumulatorException thrown = assertThrows(
-                EmptyAccumulatorException.class,
+        final IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
                 () -> controller.log(messageStub)
         );
         assertThat(thrown).hasMessage("Attempt to log message with no accumulator");

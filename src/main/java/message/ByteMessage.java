@@ -1,9 +1,8 @@
 package message;
 
-import accumulator.Accumulator;
 import accumulator.ByteAccumulator;
 
-public class ByteMessage extends Message {
+public class ByteMessage extends AbstractMessage {
 
     private Byte body;
 

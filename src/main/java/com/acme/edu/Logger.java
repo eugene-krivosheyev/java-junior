@@ -1,13 +1,16 @@
 package com.acme.edu;
 
-import accumulator.*;
 import controller.Controller;
 import message.*;
 import printer.ConsolePrinter;
 
 public class Logger {
 
-    private static Controller controller = new Controller(new FlushAccumulator(), new ConsolePrinter());
+    private static final Controller controller = new Controller(new ConsolePrinter());
+
+    private Logger() {
+
+    }
 
     public static void flush() {
         controller.log(new FlushMessage());
