@@ -40,12 +40,10 @@ public class LoggerControllerTest {
 
         StringMessage stringMessage = mock(StringMessage.class);
         StringMessage sameTypeMessage = mock(StringMessage.class);
+        Printer printer = mock(Printer.class);
 
         when(stringMessage.isSameType(sameTypeMessage)).thenReturn(true);
-
         when(stringMessage.accumulate(sameTypeMessage)).thenReturn(null);
-
-        Printer printer = mock(Printer.class);
 
         final LoggerController controllerSut = new LoggerController(printer);
 
@@ -61,24 +59,21 @@ public class LoggerControllerTest {
     public void shouldNotAccumulateWhenLogDifferentMessages() {
 
         StringMessage stringMessage = mock(StringMessage.class);
-        StringMessage sameTypeMessage = mock(StringMessage.class);
-        StringMessage thirdTypeMessage = mock(StringMessage.class);
-
-        when(stringMessage.isSameType(sameTypeMessage)).thenReturn(true);
-        when(stringMessage.isSameType(thirdTypeMessage)).thenReturn(true);
-
-        when(stringMessage.accumulate(sameTypeMessage)).thenReturn(stringMessage);
-        when(stringMessage.accumulate(thirdTypeMessage)).thenReturn(sameTypeMessage);
-
+        StringMessage anotherStringMessage = mock(StringMessage.class);
+        StringMessage newMessageForAnotherStringMessage = mock(StringMessage.class);
         Printer printer = mock(Printer.class);
+
+        when(stringMessage.isSameType(anotherStringMessage)).thenReturn(true);
+        when(stringMessage.accumulate(anotherStringMessage))
+                .thenReturn(newMessageForAnotherStringMessage);
 
         final LoggerController controllerSut = new LoggerController(printer);
 
         controllerSut.log(stringMessage);
-        controllerSut.log(sameTypeMessage);
-        controllerSut.log(thirdTypeMessage);
+        controllerSut.log(anotherStringMessage);
         controllerSut.flush();
 
-        verify(printer, times( 3)).print(any(StringMessage.class));
+        verify(printer, times( 1)).print(stringMessage);
+        verify(printer, times( 1)).print(newMessageForAnotherStringMessage);
     }
 }
