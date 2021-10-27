@@ -9,8 +9,6 @@ public abstract class OverflowingMessage implements Message {
     protected final long minLimit;
 
     private long accumulator;
-    private boolean minOverflow = false;
-    private boolean maxOverflow = false;
 
     public OverflowingMessage(long maxLimit, long minLimit, long number) {
         this.maxLimit = maxLimit;
@@ -20,15 +18,10 @@ public abstract class OverflowingMessage implements Message {
 
     @Override
     public String getBody() {
-        String body = "";
-        if (minOverflow) {
-            body += PRIMITIVE_PREFIX + minLimit + System.lineSeparator();
-        } else if (maxOverflow) {
-            body += PRIMITIVE_PREFIX + maxLimit + System.lineSeparator();
-        }
-        body += PRIMITIVE_PREFIX + accumulator;
-        return body;
+        return PRIMITIVE_PREFIX + accumulator;
     }
+
+    protected abstract OverflowingMessage createSpecificMessage(long number);
 
     protected long getAccumulator() {
         return accumulator;
@@ -38,24 +31,21 @@ public abstract class OverflowingMessage implements Message {
         return message.maxLimit == maxLimit && message.minLimit == minLimit;
     }
 
-    protected void checkOverflow(long num) {
+    protected Message[] checkOverflow(long num) {
         long sum = num + accumulator;
-        minOverflow = sum <= minLimit;
-        maxOverflow = sum >= maxLimit;
-        if (minOverflow) {
-            accumulator = sum - minLimit;
-        } else if (maxOverflow) {
-            accumulator = sum - maxLimit;
+        if (sum <= minLimit) {
+            return new Message[]{createSpecificMessage(minLimit), createSpecificMessage(sum - minLimit)};
+        } else if (sum >= maxLimit) {
+            return new Message[]{createSpecificMessage(maxLimit), createSpecificMessage(sum - maxLimit)};
         } else {
-            accumulator += num;
+            return new Message[]{createSpecificMessage(accumulator + num)};
         }
     }
 
     @Override
-    public Message append(Message message) {
+    public Message[] append(Message message) {
         if (!canAppend(message)) throw new IllegalMessageStateException("Expected same overflowing message type");
         OverflowingMessage numberMessage = (OverflowingMessage) message;
-        checkOverflow(numberMessage.getAccumulator());
-        return this;
+        return this.checkOverflow(numberMessage.getAccumulator());
     }
 }

@@ -10,4 +10,9 @@ public class SingleNumberMessage extends OverflowingMessage {
     public boolean canAppend(Message message) {
         return message instanceof SingleNumberMessage && checkLimits((SingleNumberMessage) message);
     }
+
+    @Override
+    protected OverflowingMessage createSpecificMessage(long number) {
+        return new SingleNumberMessage(maxLimit, minLimit, number);
+    }
 }

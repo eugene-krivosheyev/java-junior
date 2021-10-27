@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import java.util.List;
+
 public class ReferenceMessage implements Message {
 
     private static final String REFERENCE_PREFIX = "reference: ";
@@ -11,8 +13,8 @@ public class ReferenceMessage implements Message {
     }
 
     @Override
-    public Message append(Message message) {
-        return this;
+    public Message[] append(Message message) {
+        return new Message[]{ message };
     }
 
     @Override

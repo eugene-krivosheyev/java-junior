@@ -6,7 +6,6 @@ public class StringMessage implements Message {
 
     private static final String STRING_PREFIX = "string: ";
 
-    private String preBody = "";
     private String stringBuffer = "";
     private int stringCount;
 
@@ -15,23 +14,31 @@ public class StringMessage implements Message {
         stringCount++;
     }
 
+    public StringMessage(String str, int strCount) {
+        stringBuffer = str;
+        stringCount = strCount;
+    }
+
+    public StringMessage(StringMessage message) {
+        stringBuffer = message.stringBuffer;
+        stringCount = message.stringCount;
+    }
+
     @Override
-    public Message append(Message message) {
+    public Message[] append(Message message) {
         if (!(message instanceof StringMessage)) throw new IllegalMessageStateException("Expected StringMessage type");
         StringMessage stringMessage = (StringMessage) message;
 
         if (!stringBuffer.equals(stringMessage.stringBuffer)) {
-            preBody += getDecoratedString();
-            stringBuffer = stringMessage.stringBuffer;
-            stringCount = 0;
+            return new Message[] { new StringMessage(this), new StringMessage(stringMessage) };
+        } else {
+            return new Message[] { new StringMessage(this.stringBuffer, this.stringCount + 1) };
         }
-        stringCount++;
-        return this;
     }
 
     @Override
     public String getBody() {
-        return preBody + getDecoratedString();
+        return getDecoratedString();
     }
 
     @Override

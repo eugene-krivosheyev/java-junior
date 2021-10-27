@@ -1,5 +1,7 @@
 package com.acme.edu.message;
 
+import java.util.List;
+
 public class CharMessage implements Message {
 
     private static final String CHAR_PREFIX = "char: ";
@@ -11,8 +13,8 @@ public class CharMessage implements Message {
     }
 
     @Override
-    public Message append(Message message) {
-        return null;
+    public Message[] append(Message message) {
+        return new Message[]{ message };
     }
 
     @Override

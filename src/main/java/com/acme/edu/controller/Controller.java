@@ -20,7 +20,9 @@ public class Controller {
         if (messageBuffer == null) {
             messageBuffer = message;
         } else if (messageBuffer.canAppend(message)) {
-            messageBuffer = messageBuffer.append(message);
+            Message[] messageArray = messageBuffer.append(message);
+            flushAllOverflowingMessages(messageArray);
+            messageBuffer = messageArray[messageArray.length - 1];
         } else {
             flush();
             messageBuffer = message;
@@ -30,5 +32,12 @@ public class Controller {
     public void flush() {
         saver.save(messageBuffer.getBody());
         messageBuffer = null;
+    }
+
+    private void flushAllOverflowingMessages(Message[] messageArray) {
+        for (int i = 0; i < messageArray.length - 1; i++) {
+            messageBuffer = messageArray[i];
+            flush();
+        }
     }
 }

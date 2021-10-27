@@ -1,5 +1,9 @@
 package com.acme.edu.message;
 
+import com.acme.edu.exception.IllegalMessageStateException;
+
+import java.util.List;
+
 public class BooleanMessage implements Message {
 
     private static final String BOOLEAN_PREFIX = "primitive: ";
@@ -11,8 +15,8 @@ public class BooleanMessage implements Message {
     }
 
     @Override
-    public Message append(Message message) {
-        return null;
+    public Message[] append(Message message) {
+        return new Message[]{ message };
     }
 
     @Override
