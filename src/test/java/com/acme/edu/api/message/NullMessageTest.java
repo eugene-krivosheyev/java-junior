@@ -1,44 +1,31 @@
 
 package com.acme.edu.api.message;
 
-import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.Logger;
 import com.acme.edu.api.LoggerController;
+import com.acme.edu.api.saver.ConsoleSaver;
 import com.acme.edu.api.saver.Saver;
 import org.junit.jupiter.api.*;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
 
-public class NullMessageTest implements SysoutCaptureAndAssertionAbility {
+public class NullMessageTest{
     private Saver saver;
     private LoggerController service;
 
-
     @BeforeEach
     public void init() {
-        saver = mock(Saver.class);
+        saver = new ConsoleSaver();
         service = new LoggerController(saver);
     }
 
     @Test
-    public void testNullString() throws NullMessageException {
+    public void testNullString() throws NullMessageException{
         final String nullString = null;
         final NullMessageException exception = assertThrows(NullMessageException.class,
-                () -> service.log(new StringMessage(nullString) {
-                }));
+                () -> service.log(new StringMessage(nullString)));
         assertThat(exception.getMessage()).isEqualTo("You try to write a Null String");
-
-    }
-
-    @Test
-    public void testNullStringArray() throws NullMessageException {
-        final String[] nullStringArray = {null, "2"};
-        final NullMessageException exception = assertThrows(NullMessageException.class,
-                () -> service.log(new StringMessage(nullStringArray[0]) {
-                }));
-        assertThat(exception.getMessage()).isEqualTo("You try to write a Null String");
-
     }
 
     @Test
@@ -57,13 +44,11 @@ public class NullMessageTest implements SysoutCaptureAndAssertionAbility {
         assertThat(exception.getMessage()).isEqualTo("You try to write a Null Matrix");
     }
 
-
     @Test
     public void testNullObject() {
         final Object object = null;
         final NullMessageException exception = assertThrows(NullMessageException.class,
                 () -> service.log(new ObjectRefMessage(object)));
         assertThat(exception.getMessage()).isEqualTo("You try to write a Null Object");
-
     }
 }

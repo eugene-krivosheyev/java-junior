@@ -21,11 +21,10 @@ public class LoggerController {
                 currentMessage = currentMessage.accumulate(message);
             }
         } catch (NullMessageException exception){
-            System.out.println(exception.getMessage());
+            print(exception.getMessage());
         }
 
     }
-
     public void flush() {
         if (currentMessage == null) {
             return;

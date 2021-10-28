@@ -1,9 +1,7 @@
 package com.acme.edu.api.message;
 
-import com.acme.edu.api.message.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,13 +9,13 @@ public class MessageTest {
     private Message initialMessage;
     private Message secondMessage;
 
-
     @Test
-    public void testReturnValueMethodAccumulate() throws NullMessageException{
+    public void testReturnValueMethodAccumulate() throws NullMessageException {
         initialMessage = new CharacterMessage('a');
         secondMessage = new CharacterMessage('b');
         assertEquals(secondMessage, initialMessage.accumulate(secondMessage));
     }
+
 
     @Test
     public void testTypeEqualsCharacterMessage() {
@@ -58,7 +56,7 @@ public class MessageTest {
     }
 
     @Test
-    public void testTypeEqualsPrimitiveMatrixMessage() throws NullMessageException{
+    public void testTypeEqualsPrimitiveMatrixMessage() throws NullMessageException {
         initialMessage = new PrimitiveMatrixMessage(new int[0][0], true);
         secondMessage = new PrimitiveMatrixMessage(new int[0][0], true);
     }

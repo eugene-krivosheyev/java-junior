@@ -14,9 +14,11 @@ public class LoggerControllerTest {
     private Message initialMessage;
     private Message secondMessage;
     private Saver saver;
+    private NullMessageException exception;
 
     @BeforeEach
     public void setUpLoggerController() {
+        exception = new NullMessageException("You try to write a Null Message");
         saver = mock(Saver.class);
         loggerController = new LoggerController(saver);
         initialMessage = mock(Message.class);
@@ -36,15 +38,15 @@ public class LoggerControllerTest {
         verify(saver).print("initial message flush");
     }
 
-
     @Test
-    public void shouldChangeTheStateOfAccumulateMessageWhenLogTwoEqualsTypesOfMessages() throws NullMessageException {
+    public void shouldCatchNullMessageException() throws NullMessageException {
         when(secondMessage.typeEquals(initialMessage)).thenReturn(true);
+        when(initialMessage.accumulate(secondMessage)).thenThrow(exception);
 
         loggerController.log(initialMessage);
         loggerController.log(secondMessage);
 
-        verify(initialMessage).accumulate(secondMessage);
+        verify(saver).print(exception.getMessage());
     }
 
 }

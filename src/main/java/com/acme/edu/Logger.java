@@ -3,7 +3,6 @@ package com.acme.edu;
 import com.acme.edu.api.LoggerController;
 import com.acme.edu.api.message.*;
 import com.acme.edu.api.saver.ConsoleSaver;
-
 import java.util.Arrays;
 
 public class Logger {
@@ -34,10 +33,9 @@ public class Logger {
             try {
                 service.log(new StringMessage(str));
             } catch (NullMessageException exception) {
-                System.out.println(exception.getMessage());
+                exception.printStackTrace();
             }
         });
-
     }
 
     /**
