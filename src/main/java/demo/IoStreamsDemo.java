@@ -1,6 +1,7 @@
 package demo;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class IoStreamsDemo {
     public static void main(String[] args) {
@@ -18,5 +19,8 @@ public class IoStreamsDemo {
             e.printStackTrace();
         }
 
+        final Scanner scanner = new Scanner(System.in);
+        scanner.next();
     }
+
 }
