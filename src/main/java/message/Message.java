@@ -2,7 +2,9 @@ package message;
 
 import accumulator.Accumulator;
 
-public interface Message {
+import java.io.Serializable;
+
+public interface Message extends Serializable {
     Object getBody();
 
     Accumulator getAccumulator();

@@ -1,8 +1,9 @@
 package accumulator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class UnpromptLineKeeper {
+public class UnpromptLineKeeper implements Serializable {
     final private ArrayList<String> buffer = new ArrayList<>();
     private final String prefix;
 

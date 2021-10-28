@@ -60,6 +60,11 @@ class ControllerTest {
     @Test
     void shouldNoLogAfterAccumulatingAndTypeSwitch() {
 
+        // int = 1
+        // int = 1
+        // string = "a"
+        // verify(2)
+
         when(messageStub.getAccumulator()).thenReturn(accumulatorStub2);
         when(accumulatorStub2.isNewAccumulatorType(any())).thenReturn(false);
         when(accumulatorStub1.extractUnpromtLines()).thenReturn(null);

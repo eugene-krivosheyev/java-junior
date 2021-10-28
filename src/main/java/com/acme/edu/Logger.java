@@ -1,54 +1,54 @@
 package com.acme.edu;
 
-import controller.Controller;
 import message.*;
-import printer.ConsolePrinter;
+import net.Connector;
+import net.Proxy;
 
 public class Logger {
 
-    private static final Controller controller = new Controller(new ConsolePrinter());
+    private static final Proxy proxy = new Proxy(new Connector());
 
     private Logger() {
 
     }
 
     public static void flush() {
-        controller.log(new FlushMessage());
+        proxy.send(new FlushMessage());
     }
 
     public static void log(int integer) {
-        controller.log(new IntMessage(integer));
+        proxy.send(new IntMessage(integer));
     }
 
     public static void log(Integer... integer) {
-        controller.log(new IntArrayMessage(integer));
+        proxy.send(new IntArrayMessage(integer));
     }
 
     public static void log(Integer[]... integer) {
-        controller.log(new Int2dArrayMessage(integer));
+        proxy.send(new Int2dArrayMessage(integer));
     }
 
     public static void log(byte byteValue) {
-        controller.log(new ByteMessage(byteValue));
+        proxy.send(new ByteMessage(byteValue));
     }
 
     public static void log(String string) {
-        controller.log(new StringMessage(string));
+        proxy.send(new StringMessage(string));
     }
 
     public static void log(String... string) {
-        controller.log(new StrArrayMessage(string));
+        proxy.send(new StrArrayMessage(string));
     }
 
     public static void log(Boolean bool) {
-        controller.log(new BooleanMessage(bool));
+        proxy.send(new BooleanMessage(bool));
     }
 
     public static void log(char symbol) {
-        controller.log(new CharMessage(symbol));
+        proxy.send(new CharMessage(symbol));
     }
 
     public static void log(Object object) {
-        controller.log(new ObjectMessage(object));
+        proxy.send(new ObjectMessage(object));
     }
 }
