@@ -2,6 +2,7 @@ package com.acme.edu.iteration03;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.api.message.NullMessageException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -9,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-@Disabled
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @BeforeEach
@@ -28,7 +28,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //TODO: implement Logger solution to match specification as tests
 
     @Test
-    public void shouldLogIntegersArray() throws IOException {
+    public void shouldLogIntegersArray() throws IOException, NullMessageException {
         //region when
         Logger.log(true, new int[]{-1, 0, 20});
         //endregion
@@ -39,7 +39,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogIntegersArraySum() throws IOException {
+    public void shouldLogIntegersArraySum() throws IOException, NullMessageException {
         //region when
         Logger.log(new int[]{-1, 0, 20});
         //endregion
@@ -51,7 +51,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
     @Test
-    public void shouldLogIntegersMatrix() throws IOException {
+    public void shouldLogIntegersMatrix() throws IOException, NullMessageException {
         //region when
         Logger.log(true, new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -20}});
         //endregion
@@ -67,7 +67,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogIntegersMatrixSum() throws IOException {
+    public void shouldLogIntegersMatrixSum() throws IOException, NullMessageException {
         //region when
         Logger.log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -20}});
         //endregion
@@ -79,7 +79,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Disabled
     @Test
-    public void shouldLogIntegersMulitidimentionalArray() throws IOException {
+    public void shouldLogIntegersMulitidimentionalArray() throws IOException, NullMessageException {
         //region when
         Logger.log(new int[][][][]{{{{0}}}});
         //endregion
@@ -96,7 +96,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogStringsWithOneMethodCall() throws IOException {
+    public void shouldLogStringsWithOneMethodCall() throws IOException, NullMessageException {
         //region when
         Logger.log("str1", "string 2", "str 3");
         Logger.flush();
@@ -110,9 +110,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogIntegersWithOneMethodCallSum() throws IOException {
+    public void shouldLogIntegersWithOneMethodCallSum() throws IOException,NullMessageException {
         //region when
-        Logger.log(-1, 0, 1, 3);
+        Logger.log(-1, 0, 1, 3)  ;
+
         //endregion
 
         //region then
@@ -122,7 +123,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogIntegersWithOneMethodCall() throws IOException {
+    public void shouldLogIntegersWithOneMethodCall() throws IOException, NullMessageException {
         //region when
         Logger.log(true, -1, 0, 1, 3);
         //endregion
@@ -133,7 +134,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Disabled
     @Test
-    public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException {
+    public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException, NullMessageException {
         //region when
         Logger.log(1);
         Logger.log("str");

@@ -1,7 +1,7 @@
 package com.acme.edu.api;
 
 import com.acme.edu.api.message.Message;
-import com.acme.edu.api.message.ObjectRefMessage;
+import com.acme.edu.api.message.NullMessageException;
 import com.acme.edu.api.saver.Saver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,7 +38,7 @@ public class LoggerControllerTest {
 
 
     @Test
-    public void shouldAccumulateTheCurrentMessage() {
+    public void shouldChangeTheStateOfAccumulateMessageWhenLogTwoEqualsTypesOfMessages() throws NullMessageException {
         when(secondMessage.typeEquals(initialMessage)).thenReturn(true);
 
         loggerController.log(initialMessage);

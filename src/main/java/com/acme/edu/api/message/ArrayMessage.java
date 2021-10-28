@@ -11,6 +11,7 @@ public abstract class ArrayMessage extends Message {
         return isPrintAsArray;
     }
 
+
     @Override
     public String getMessageAsString() {
         if (getPrintAsArray()) {

@@ -1,19 +1,24 @@
 package com.acme.edu.api.message;
 
+import org.mockito.internal.matchers.Null;
+
 import java.util.Arrays;
 
 public class PrimitiveMatrixMessage extends ArrayMessage {
-    private final int[][] values;
+    private int[][] values;
 
-    public PrimitiveMatrixMessage(int[][] value, boolean printAsArray) {
-        if (value == null) throw new IllegalArgumentException("You try to write a Null Matrix");
+    public PrimitiveMatrixMessage(int[][] value, boolean printAsArray) throws NullMessageException {
+        if (value == null) {
+            throw new NullMessageException("You try to write a Null Matrix");
+        }
         setPrintAsArray(printAsArray);
         values = value;
         setPrefix("primitives matrix: ");
         setValue(make2DString(value));
     }
 
-    public PrimitiveMatrixMessage(int[][] value) {
+
+    public PrimitiveMatrixMessage(int[][] value) throws NullMessageException {
         this(value, false);
     }
 

@@ -25,34 +25,42 @@ public class Logger {
         flush();
     }
 
-    public static void log(String message) {
+    public static void log(String message) throws NullMessageException {
         service.log(new StringMessage(message));
     }
 
     public static void log(String... strings) {
-        Arrays.stream(strings).forEach(str -> service.log(new StringMessage(str)));
-    }
+        Arrays.stream(strings).forEach(str -> {
+            try {
+                service.log(new StringMessage(str));
+            } catch (NullMessageException exception) {
+                System.out.println(exception.getMessage());
+            }
+        });
 
-    /**
-     * @param printAsArray boolean toggle to clarify how array of integers should be logged
-     */
-    public static void log(boolean printAsArray, int... integers) {
-        service.log(new PrimitiveArrayMessage(integers, printAsArray));
-        flush();
     }
 
     /**
      * Default way to log array of integers is to log sum
      */
-    public static void log(int... integers) {
+    public static void log(int... integers) throws NullMessageException {
         service.log(new PrimitiveArrayMessage(integers));
+        flush();
+    }
+
+    /**
+     * @param printAsArray boolean toggle to clarify how array of integers should be logged
+     */
+    public static void log(boolean printAsArray, int... integers) throws NullMessageException {
+        service.log(new PrimitiveArrayMessage(integers, printAsArray));
         flush();
     }
 
     /**
      * @param printAsArray boolean toggle to clarify how 2D array of integers should be logged
      */
-    public static void log(boolean printAsArray, int[][] integers) {
+    public static void log(boolean printAsArray, int[][] integers) throws NullMessageException {
+
         service.log(new PrimitiveMatrixMessage(integers, printAsArray));
         flush();
     }
@@ -60,7 +68,7 @@ public class Logger {
     /**
      * Default way to log 2D array of integers is to log sum
      */
-    public static void log(int[][] integers) {
+    public static void log(int[][] integers) throws NullMessageException {
         service.log(new PrimitiveMatrixMessage(integers));
         flush();
     }
@@ -70,7 +78,7 @@ public class Logger {
         flush();
     }
 
-    public static void log(Object message) {
+    public static void log(Object message) throws NullMessageException {
         service.log(new ObjectRefMessage(message));
         flush();
     }

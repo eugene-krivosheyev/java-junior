@@ -13,7 +13,7 @@ public class MessageTest {
 
 
     @Test
-    public void testReturnValueMethodAccumulate() {
+    public void testReturnValueMethodAccumulate() throws NullMessageException{
         initialMessage = new CharacterMessage('a');
         secondMessage = new CharacterMessage('b');
         assertEquals(secondMessage, initialMessage.accumulate(secondMessage));
@@ -46,19 +46,19 @@ public class MessageTest {
     }
 
     @Test
-    public void testTypeEqualsObjectRefMessage() {
+    public void testTypeEqualsObjectRefMessage() throws NullMessageException {
         initialMessage = new ObjectRefMessage("1");
         secondMessage = new ObjectRefMessage("2");
     }
 
     @Test
-    public void testTypeEqualsPrimitiveArrayMessage() {
+    public void testTypeEqualsPrimitiveArrayMessage() throws Exception {
         initialMessage = new PrimitiveArrayMessage(new int[0], true);
         secondMessage = new PrimitiveArrayMessage(new int[0], true);
     }
 
     @Test
-    public void testTypeEqualsPrimitiveMatrixMessage() {
+    public void testTypeEqualsPrimitiveMatrixMessage() throws NullMessageException{
         initialMessage = new PrimitiveMatrixMessage(new int[0][0], true);
         secondMessage = new PrimitiveMatrixMessage(new int[0][0], true);
     }

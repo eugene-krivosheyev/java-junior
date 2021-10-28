@@ -13,12 +13,17 @@ public class LoggerController {
     }
 
     public void log(Message message) {
-        if (!message.typeEquals(currentMessage)) {
-            flush();
-            currentMessage = message;
-        } else {
-            currentMessage = currentMessage.accumulate(message);
+        try {
+            if (!message.typeEquals(currentMessage)) {
+                flush();
+                currentMessage = message;
+            } else {
+                currentMessage = currentMessage.accumulate(message);
+            }
+        } catch (NullMessageException exception){
+            System.out.println(exception.getMessage());
         }
+
     }
 
     public void flush() {

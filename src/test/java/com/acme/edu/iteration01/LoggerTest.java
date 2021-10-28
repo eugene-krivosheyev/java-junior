@@ -2,18 +2,16 @@ package com.acme.edu.iteration01;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.api.message.NullMessageException;
 import com.acme.edu.api.message.ObjectRefMessage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Null;
 
 import java.io.*;
 
 import static java.lang.System.lineSeparator;
 
-@Disabled
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     private static final String sep = lineSeparator();
@@ -85,11 +83,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogString() throws IOException {
+    public void shouldLogString() throws IOException, NullMessageException {
         //region when
-        Logger.log("test string 1");
-        Logger.log("other str");
-        Logger.flush();
+       Logger.log("test string 1");
+       Logger.log("other str");
+       Logger.flush();
         //endregion
 
         //region then
@@ -114,7 +112,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldLogReference() throws IOException {
+    public void shouldLogReference() throws IOException, NullMessageException {
         //region when
         ObjectRefMessage notNullObject = new ObjectRefMessage("@");
         Logger.log(notNullObject);

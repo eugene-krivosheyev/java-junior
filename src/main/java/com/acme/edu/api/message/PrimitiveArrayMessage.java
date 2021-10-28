@@ -3,17 +3,19 @@ package com.acme.edu.api.message;
 import java.util.Arrays;
 
 public class PrimitiveArrayMessage extends ArrayMessage {
-    private final int[] values;
+    private int[] values;
 
-    public PrimitiveArrayMessage(int[] array, boolean printAsArray) {
-        if (array == null) throw new IllegalArgumentException("You try to write a Null Array");
+    public PrimitiveArrayMessage(int[] array, boolean printAsArray)throws NullMessageException {
+        if (array == null) {
+            throw new NullMessageException("You try to write a Null Array");
+        }
         setPrintAsArray(printAsArray);
         values = array;
         setPrefix("primitives array: ");
         setValue(makeTheString(array));
     }
 
-    public PrimitiveArrayMessage(int[] array) {
+    public PrimitiveArrayMessage(int[] array) throws NullMessageException{
         this(array, false);
     }
 

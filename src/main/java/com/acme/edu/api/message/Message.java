@@ -8,7 +8,7 @@ public abstract class Message {
         return prefix + value;
     }
 
-    public Message accumulate(Message message) {
+    public Message accumulate(Message message) throws NullMessageException {
         return message;
     }
 

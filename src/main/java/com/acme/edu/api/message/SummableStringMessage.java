@@ -2,12 +2,14 @@ package com.acme.edu.api.message;
 
 public abstract class SummableStringMessage extends Message {
     protected int currentStringCounter = 1;
-    protected final String currentString;
+    protected String currentString;
 
-    public SummableStringMessage(String currentString) {
-        if (currentString == null) throw new IllegalArgumentException("You try to write a Null String");
-        setPrefix("string: ");
-        this.currentString = currentString;
+    public SummableStringMessage(String currentString) throws NullMessageException {
+           if (currentString == null) {
+               throw new NullMessageException("You try to write a Null String");
+           }
+            setPrefix("string: ");
+            this.currentString = currentString;
     }
 
     public String getCurrentString() {
