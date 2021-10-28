@@ -17,7 +17,6 @@ public class Proxy {
                 out.writeUTF(message);
                 out.flush();
 
-
             } catch (IOException e) {
                 e.printStackTrace();
             }

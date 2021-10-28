@@ -53,7 +53,13 @@ public class Logger {
     }
 
     public static void flush() {
-        controller.flush();
+       // controller.flush();
+        proxy.ProxyRequest("flush");
+    }
+
+    public static void exit() {
+        // controller.flush();
+        proxy.ProxyRequest("end session");
     }
 
 }
