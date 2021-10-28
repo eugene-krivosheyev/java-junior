@@ -12,5 +12,7 @@ public class Client {
         Logger.log(1);
         Logger.log("str1");
         Logger.log("str2");
+        Logger.log("str2");
+        Logger.flush();
     }
 }

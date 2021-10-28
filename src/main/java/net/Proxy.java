@@ -2,6 +2,8 @@ package net;
 
 import message.Message;
 
+import java.io.IOException;
+
 public class Proxy {
     private final Connector connector;
 
@@ -10,6 +12,10 @@ public class Proxy {
     }
 
     public void send(Message message) {
-        connector.send(message);
+        try {
+            connector.send(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
