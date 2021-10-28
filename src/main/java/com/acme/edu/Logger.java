@@ -5,6 +5,7 @@ import com.acme.edu.messages.*;
 public class Logger {
     private static Printer printer = new Printer();
     private static Controller controller = new Controller(printer);
+    private static Proxy proxy = new Proxy();
 
     public static void log(String... args) {
         for (String arg : args) {
@@ -27,7 +28,8 @@ public class Logger {
     }
 
     public static void log(int message) {
-        controller.log(new IntMessage(message));
+       // controller.log(new IntMessage(message));
+        proxy.ProxyRequest(String.valueOf(message));
     }
 
     public static void log(byte message) {
