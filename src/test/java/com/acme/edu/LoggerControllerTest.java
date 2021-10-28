@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 public class LoggerControllerTest {
@@ -74,4 +75,12 @@ public class LoggerControllerTest {
         verify(printer, times( 1)).print(stringMessage);
         verify(printer, times( 1)).print(anotherStringMessage);
     }
+
+    @Test
+    public void shouldThrowExceptionWhenMessageIsNull() {
+
+        assertThrows(IllegalArgumentException.class,
+                () -> controllerSut.log(null));
+    }
+
 }

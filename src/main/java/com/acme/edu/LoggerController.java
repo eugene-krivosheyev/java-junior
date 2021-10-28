@@ -11,7 +11,10 @@ public class LoggerController {
         this.printer = printer;
     }
 
-    public void log(Message message) {
+    public void log(Message message){
+        if(message == null)
+            throw new IllegalArgumentException("Given message is null");
+
         if (oldMessage == null) {
             oldMessage = message;
             return;
