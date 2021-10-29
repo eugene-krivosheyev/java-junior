@@ -18,11 +18,16 @@ public class ThreadsDemo {
             }
         });
 
+        threadObject.setDaemon(true);
+        threadObject.setPriority(Thread.MAX_PRIORITY);
+        threadObject.getState(); threadObject.isAlive();
         threadObject.start();
+
 //        threadObject.suspend(); | resume()
 //        threadObject.stop();
 
         Thread.sleep(5_000);
-        threadObject.interrupt();
+//        threadObject.interrupt();
+        threadObject.join(); //
     }
 }
