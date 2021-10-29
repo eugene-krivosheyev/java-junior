@@ -7,10 +7,12 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.stream.IntStream;
+//import java.util.concurrent.Set
 
 public class ConcurrencyDemo {
     public static void main(String[] args) throws InterruptedException {
@@ -25,6 +27,7 @@ public class ConcurrencyDemo {
 }
 
 class Service {
+    private AtomicInteger ai = new AtomicInteger();
     private int state = 1;
 //    private Collection collection = Collections.synchronizedList(new ArrayList<>());
     private Object monitor = new Object();
