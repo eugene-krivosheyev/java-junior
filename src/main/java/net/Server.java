@@ -1,12 +1,12 @@
 package net;
 
 import controller.Controller;
-import printer.ConsolePrinter;
+import printer.FilePrinter;
 
 public class Server {
     public static void main(String... args) {
 
-        final Controller controller = new Controller(new ConsolePrinter());
+        final Controller controller = new Controller(new FilePrinter());
         final Skeleton skeleton = new Skeleton();
 
         while(true) {
