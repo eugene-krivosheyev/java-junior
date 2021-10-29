@@ -5,11 +5,13 @@ public class ThreadsDemo {
         final Thread threadObject = new Thread(new Runnable() {
             public void run() {
                 while (!Thread.interrupted()) {
-                    System.out.println(Thread.currentThread().getName());
                     try {
+                        System.out.println(Thread.currentThread().getName());
                         Thread.sleep(1_000);
-                    } catch (InterruptedException e) {
 
+                    } catch (InterruptedException e) {
+                        System.out.println("INTERRUPTED!!!");
+                        Thread.currentThread().interrupt();
                     }
                     //Thread-1
                 }
