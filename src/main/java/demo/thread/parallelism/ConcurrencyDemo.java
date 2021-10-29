@@ -23,7 +23,8 @@ public class ConcurrencyDemo {
 
 class Service {
     private int state = 1;
-    private Collection collection = Collections.synchronizedList(new ArrayList<>());
+//    private Collection collection = Collections.synchronizedList(new ArrayList<>());
+    private Object monitor = new Object();
 
     /**
      * 1. <read>
@@ -32,14 +33,42 @@ class Service {
      */
     public void inc() {
         //....
-        synchronized(collection) {
-            collection.add(null);
+        synchronized(monitor) {
             state++;
         }
         //.....
     }
 
     public int getState() {
-        return state;
+        synchronized(monitor) {
+            return state;
+        }
+    }
+}
+
+
+class MyWorker extends Thread {
+    private /*volatile*/ boolean stop;
+
+    public synchronized void setStop(boolean stop) {
+        this.stop = stop;
+    }
+
+    @Override
+    public void run() {
+        while (!stop) { //if (!stop) while(true) {
+            synchronized (this) {
+
+            }
+        }
+    }
+}
+
+class WorkerDemo {
+    public static void main(String[] args) throws InterruptedException {
+        final MyWorker myWorker = new MyWorker();
+        myWorker.start();
+        Thread.sleep(1_000);
+        myWorker.setStop(true);
     }
 }
