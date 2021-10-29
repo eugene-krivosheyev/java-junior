@@ -18,6 +18,31 @@
 
 ---
 
+# Teams
+## Team01
+- Прохорова
+- козырева
+- Георгий
+- Мишура
+## Team02
+- Тишина
+- Зарубин
+- Закалужский
+- Маршинин
+- Шипиль
+## Team03
+- Тептин
+- Тимонина
+- Сен
+- Ильиных
+## Team04
+- Макаров
+- Минибаев
+- Иванов
+- Яралиева
+
+---
+
 # Introduction to Java and Java Technology (*1* hour theory / *including 0.5* hour practice)
 - Introduction to Java. Benefits.
 - JDK, JVM.
