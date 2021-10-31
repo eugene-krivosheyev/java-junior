@@ -1,10 +1,13 @@
 package com.acme.edu;
 
+import org.junit.jupiter.api.Disabled;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.fest.assertions.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled
 public interface SysoutCaptureAndAssertionAbility {
     ByteArrayOutputStream OUT = new ByteArrayOutputStream();
 
