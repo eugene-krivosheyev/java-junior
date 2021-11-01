@@ -1,22 +1,27 @@
 package com.acme.edu.iteration01;
 
-import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import com.acme.edu.TypeCodeEnum;
+import com.acme.edu.logger.SimpleLogger;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import java.io.*;
+import java.io.IOException;
+
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+    private static String type;
+    private final SimpleLogger logger = new SimpleLogger();
+
     //region given
-    @Before
+    @BeforeEach
     public void setUpSystemOut() throws IOException {
         resetOut();
         captureSysout();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         resetOut();
     }
@@ -24,90 +29,82 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogInteger() throws IOException {
+        type = TypeCodeEnum.INTEGER.getTypeReference();
         //region when
-        Logger.log(1);
-        Logger.log(0);
-        Logger.log(-1);
+        logger.log(1, 0, -1);
         //endregion
 
         //region then
-        assertSysoutContains("primitive: ");
-        assertSysoutEquals("primitive: 1\nprimitive: 0\nprimitive: -1\n");
+        checkLog("1", "0", "-1");
         //endregion
     }
 
     @Test
     public void shouldLogByte() throws IOException {
+        type = TypeCodeEnum.BYTE.getTypeReference();
         //region when
-        Logger.log((byte)1);
-        Logger.log((byte)0);
-        Logger.log((byte)-1);
+        logger.log((byte) 1, (byte) 0, (byte) -1);
         //endregion
 
         //region then
-        assertSysoutContains("primitive: ");
-        assertSysoutContains("1");
-        assertSysoutContains("0");
-        assertSysoutContains("-1");
+        checkLog("1", "0", "-1");
         //endregion
     }
 
-    /*
-    TODO: implement Logger solution to match specification as tests
-
     @Test
     public void shouldLogChar() throws IOException {
+        type = TypeCodeEnum.CHAR.getTypeReference();
         //region when
-        Logger.log('a');
-        Logger.log('b');
+        logger.log('a', 'b');
         //endregion
 
         //region then
-        assertSysoutContains("char: ");
-        assertSysoutContains("a");
-        assertSysoutContains("b");
+        checkLog("a", "b");
         //endregion
     }
 
     @Test
     public void shouldLogString() throws IOException {
+        type = TypeCodeEnum.STRING.getTypeReference();
+        String str1 = "first string";
+        String str2 = "second string";
         //region when
-        Logger.log("test string 1");
-        Logger.log("other str");
+        logger.log(str1, str2);
         //endregion
 
         //region then
-        assertSysoutContains("string: ");
-        assertSysoutContains("test string 1");
-        assertSysoutContains("other str");
+        checkLog(str1, str2);
         //endregion
     }
 
     @Test
     public void shouldLogBoolean() throws IOException {
+        type = TypeCodeEnum.BOOLEAN.getTypeReference();
         //region when
-        Logger.log(true);
-        Logger.log(false);
+        logger.log(true, false);
         //endregion
 
         //region then
-        assertSysoutContains("primitive: ");
-        assertSysoutContains("true");
-        assertSysoutContains("false");
+        checkLog("true", "false");
         //endregion
     }
 
     @Test
     public void shouldLogReference() throws IOException {
+        type = TypeCodeEnum.NONE.getTypeReference();
         //region when
-        Logger.log(new Object());
+        logger.log(new Object());
         //endregion
 
         //region then
-        assertSysoutContains("reference: ");
+        assertSysoutContains(type);
         assertSysoutContains("@");
         //endregion
     }
 
-    */
+    private void checkLog(String... valuesToCheck) throws IOException {
+        for (String valueToCheck : valuesToCheck) {
+            assertSysoutContains(type + valueToCheck);
+        }
+    }
 }

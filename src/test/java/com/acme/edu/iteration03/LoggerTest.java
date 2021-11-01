@@ -1,61 +1,56 @@
 package com.acme.edu.iteration03;
 
-import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import com.acme.edu.TypeCodeEnum;
+import com.acme.edu.logger.ComplexLogger;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+    private static String type;
+    private final ComplexLogger logger = new ComplexLogger();
+
     //region given
-    @Before
+    @BeforeEach
     public void setUpSystemOut() throws IOException {
         resetOut();
         captureSysout();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         resetOut();
     }
     //endregion
 
-    /*
-    TODO: implement Logger solution to match specification as tests
-
     @Test
-    public void shouldLogIntegersArray() throws IOException {
+    public void shouldLogIntegersArraySum() throws IOException {
+        type = TypeCodeEnum.ARRAY_INT.getTypeReference();
         //region when
-        Logger.log(new int[] {-1, 0, 1});
+        logger.log(new int[]{-1, 0, 1});
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "primitives array: {-1, 0, 1}\n"
-        );
+        checkLog("0");
         //endregion
     }
 
     @Test
-    public void shouldLogIntegersMatrix() throws IOException {
+    public void shouldLogIntegersMatrixSum() throws IOException {
+        type = TypeCodeEnum.MATRIX_INT.getTypeReference();
         //region when
-        Logger.log(new int[][] {{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
+        logger.log(new int[][]{{-1, 0, 1}, {1, 2, 3}, {-1, -2, -3}});
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "primitives matrix: {\n" +
-                "{-1, 0, 1}\n" +
-                "{1, 2, 3}\n" +
-                "{-1, -2, -3}\n" +
-            "}\n"
-        );
+        checkLog("0");
         //endregion
     }
-
-    @Test
+/*
+    @Test @Ignore
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
         Logger.log(new int[][][][] {{{{0}}}});
@@ -71,30 +66,35 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
+    */
 
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
+        type = TypeCodeEnum.NONE.getTypeReference();
         //region when
-        Logger.log("str1", "string 2", "str 3");
+        logger.log("str1", "string 2", "str 3");
         //endregion
 
         //region then
-        assertSysoutContains("str1\nstring 2\nstr 3");
+        checkLog("str1", "string 2", "str 3");
         //endregion
     }
 
     @Test
     public void shouldLogIntegersWithOneMethodCall() throws IOException {
+        type = TypeCodeEnum.NONE.getTypeReference();
         //region when
-        Logger.log(-1, 0, 1, 3);
+        logger.log(-1, 0, 1, 3);
         //endregion
 
         //region then
-        assertSysoutContains("3");
+        checkLog("3");
         //endregion
     }
 
-    @Test
+/*
+
+    @Test @Ignore
     public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException {
         //region when
         Logger.log(1);
@@ -112,4 +112,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     */
+
+    private void checkLog(String... valuesToCheck) throws IOException {
+        for (String valueToCheck : valuesToCheck) {
+            assertSysoutContains(type + valueToCheck);
+        }
+    }
 }
