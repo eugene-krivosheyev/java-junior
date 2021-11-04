@@ -16,6 +16,7 @@
 - [27.10](https://us02web.zoom.us/rec/share/u0btCpspV2oPyT-iiEI5SLw7RqngErGVF26uk0MfmuLQbSYggoN5rKJLF3YB0GUk.hzVAY-4IRTESDMLH)
 - [28.10](https://us02web.zoom.us/rec/share/B1YaNqUb31mg1gY32DUHhhyLds5m8CZoHsVf1YuIb8IYG3tZbauV3bm3DRKLlEzV._3Iha54qWl8NTwii)
 - [29.10](https://us02web.zoom.us/rec/share/MqclB3s5H4zcWG9IpvLS8W8cmXRNvnz5F-cpJ5Qmj8VDRsIf21V9lsbJXTaPZ0lz.X_fLNhcWbi49y2xi)
+- [04.11](https://us02web.zoom.us/rec/share/E_7wnBb8z9k6uyvFf58_Phu7ifrAxbcog-PKZ4hZqGKWHq1vD6MfNxg8Pn-hWdC4.XOnRLJ1kbVtXKKBq)
 
 ---
 
