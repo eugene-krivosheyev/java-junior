@@ -12,4 +12,10 @@ public class Logger {
     private static void save(String message) {
         System.out.println("primitive: " + message);
     }
+    public static void log(char message) {
+        System.out.println("char: " + message);
+    }
+    public static void log(String message) {
+        System.out.println("string: " + message);
+    }
 }
